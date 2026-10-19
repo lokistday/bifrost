@@ -44,14 +44,312 @@
 @media(max-width:600px){.field-guide-grid{grid-template-columns:1fr}.field-guide-card{padding:14px}.field-choice{padding:14px}}
 
 
-.lesson-item{border:1px solid #e7ecf2;border-radius:12px;background:#fff;overflow:hidden}.lesson-item.done{background:#f5fbfa}.lesson-check{display:flex;gap:11px;align-items:flex-start;padding:12px;cursor:pointer}.lesson-check input{width:17px;height:17px;margin-top:3px;accent-color:#7561b8;flex-shrink:0}.lesson-check strong{display:block;font-size:12px}.lesson-check small{display:block;color:var(--muted);font-size:11px;margin-top:2px}.lesson-item.done .lesson-check strong{color:#53716f}.lesson-plan{border-top:1px solid #edf1f5;padding:0 12px 10px;margin:0 12px}.lesson-plan summary{cursor:pointer;color:var(--teal);font-size:11px;font-weight:800;padding:9px 0;list-style-position:inside}.lesson-plan-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding-bottom:3px}.lesson-plan-card{padding:10px;border-radius:9px;background:#f6f8fb}.lesson-plan-card strong{display:block;font-size:11px;color:#33475e;margin-bottom:4px}.lesson-plan-card p{font-size:11px;line-height:1.65;color:#66758a;margin:0;overflow-wrap:anywhere}.lesson-plan-card.wide{grid-column:1/-1}@media(max-width:600px){.lesson-plan-grid{grid-template-columns:1fr}.lesson-plan-card.wide{grid-column:auto}}
+.lesson-goal{display:block;color:#33475e;font-size:11px;line-height:1.55;margin-top:6px}.learning-helper{border:1px solid var(--line);border-radius:12px;background:#f7f8ff;padding:14px 16px;margin:14px 0}.learning-helper strong{display:block;margin-bottom:5px}.learning-helper p{margin:4px 0;font-size:12px;line-height:1.65;color:var(--muted)}.track-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}.track-link{border:1px solid #d9dff0;border-radius:999px;padding:7px 11px;background:#fff;color:#4855a6;font:inherit;font-size:11px;font-weight:700;cursor:pointer}.track-link:hover,.track-link:focus-visible{outline:2px solid #7561b8;outline-offset:2px}.lesson-item{border:1px solid #e7ecf2;border-radius:12px;background:#fff;overflow:hidden}.lesson-item.done{background:#f5fbfa}.lesson-check{display:flex;gap:11px;align-items:flex-start;padding:12px;cursor:pointer}.lesson-check input{width:17px;height:17px;margin-top:3px;accent-color:#7561b8;flex-shrink:0}.lesson-check strong{display:block;font-size:12px}.lesson-check small{display:block;color:var(--muted);font-size:11px;margin-top:2px}.lesson-item.done .lesson-check strong{color:#53716f}.lesson-plan{border-top:1px solid #edf1f5;padding:0 12px 10px;margin:0 12px}.lesson-plan summary{cursor:pointer;color:var(--teal);font-size:11px;font-weight:800;padding:9px 0;list-style-position:inside}.lesson-plan-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding-bottom:3px}.lesson-plan-card{padding:10px;border-radius:9px;background:#f6f8fb}.lesson-plan-card strong{display:block;font-size:11px;color:#33475e;margin-bottom:4px}.lesson-plan-card p{font-size:11px;line-height:1.65;color:#66758a;margin:0;overflow-wrap:anywhere}.lesson-plan-card.wide{grid-column:1/-1}@media(max-width:600px){.lesson-plan-grid{grid-template-columns:1fr}.lesson-plan-card.wide{grid-column:auto}}
 .inline-guide-link{display:inline-block;color:var(--teal,#087f8c);font-weight:700;text-decoration:underline;text-underline-offset:3px;margin:3px 0}.inline-guide-link:hover{opacity:.8}
+
+/* Bifrost theme toggle */
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--white);color:var(--ink);font:700 12px inherit;cursor:pointer;white-space:nowrap}
+.theme-toggle:hover{border-color:var(--purple)}.theme-toggle:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
+html[data-theme="dark"]{color-scheme:dark;--ink:#e7edf7;--muted:#a5b2c5;--line:#344257;--paper:#0d1421;--white:#151f2e;--teal:#62d5dc;--teal-soft:#16383f;--blue-soft:#282849;--amber-soft:#3c3020;--purple-soft:#302747;--shadow:0 12px 35px rgba(0,0,0,.22)}
+html[data-theme="dark"] body{background:var(--paper);color:var(--ink)}
+html[data-theme="dark"] .topbar{background:rgba(13,20,33,.94)}
+html[data-theme="dark"] .brand{color:var(--ink)}
+html[data-theme="dark"] .nav-cta{background:#dce8f7;color:#101a30}
+html[data-theme="dark"] .theme-toggle{background:#1a2638;color:var(--ink);border-color:#43536b}
+html[data-theme="dark"] .phase,html[data-theme="dark"] .track-button,html[data-theme="dark"] .track-detail,html[data-theme="dark"] .card,html[data-theme="dark"] .learning-helper,html[data-theme="dark"] .lesson,html[data-theme="dark"] .track-foot{background:#151f2e;border-color:var(--line);color:var(--ink);box-shadow:none}
+html[data-theme="dark"] .track-button.active{background:#242443;border-color:#9288e8}
+html[data-theme="dark"] .track-symbol,html[data-theme="dark"] .meta-chip{background:#253349;color:#cbd8e9}
+html[data-theme="dark"] .phase-content li{background:#202d40;border-color:#344257;color:#c7d3e3}
+html[data-theme="dark"] .lesson.done{background:#17302f}
+html[data-theme="dark"] .progress{background:#2a3547}
+html[data-theme="dark"] .outcome{background:#25223b;color:#d2d8e7}
+html[data-theme="dark"] .outcome strong{color:#72dce1}
+html[data-theme="dark"] .track-link{background:#1b293b;color:#c7caff;border-color:#46536b}
+html[data-theme="dark"] .learning-helper p{color:var(--muted)}
+html[data-theme="dark"] .resource-card,html[data-theme="dark"] .practice-card{background:#151f2e;border-color:var(--line)}
+html[data-theme="dark"] .section-desc,html[data-theme="dark"] .card p,html[data-theme="dark"] .card ul{color:var(--muted)}
+html[data-theme="dark"] .p0{background:#253347;color:#cbdcf3}html[data-theme="dark"] .p1{background:#16383f;color:#8de5e6}html[data-theme="dark"] .p2{background:#242c4c;color:#b8c7ff}html[data-theme="dark"] .p3{background:#3b3020;color:#f1cd8d}html[data-theme="dark"] .p4{background:#302747;color:#d3b6ff}
+html[data-theme="dark"] .route-card{background:#ffffff0b}
+html[data-theme="dark"] #learning-practices .card{background:#151f2e}
+html[data-theme="dark"] #linuxGuideOverlay{background:#0d1421}
+@media(max-width:600px){.theme-toggle{padding:8px 9px;font-size:11px;gap:5px}.theme-label{display:none}}
+
+
+/* Dark mode coverage: keep roadmap/field exploration cards from retaining light surfaces. */
+html[data-theme="dark"] .field-guide-card,
+html[data-theme="dark"] .field-guide-intro,
+html[data-theme="dark"] .field-path,
+html[data-theme="dark"] .route-card,
+html[data-theme="dark"] .route-step,
+html[data-theme="dark"] .route-num,
+html[data-theme="dark"] .field-index,
+html[data-theme="dark"] .hero-note,
+html[data-theme="dark"] .btn,
+html[data-theme="dark"] .pill,
+html[data-theme="dark"] .field-guide-grid > *,
+html[data-theme="dark"] .resource-card,
+html[data-theme="dark"] .practice-card {
+  background-color: #151f2e;
+  border-color: #344257;
+  color: #e7edf7;
+  box-shadow: none;
+}
+html[data-theme="dark"] .field-guide-intro { background-color: #172b36; }
+html[data-theme="dark"] .field-guide-intro strong,
+html[data-theme="dark"] .field-guide-card dt,
+html[data-theme="dark"] .field-path b { color: #62d5dc; }
+html[data-theme="dark"] .field-guide-card p,
+html[data-theme="dark"] .field-guide-card dd,
+html[data-theme="dark"] .field-guide-card span,
+html[data-theme="dark"] .field-guide-intro span,
+html[data-theme="dark"] .route-card p,
+html[data-theme="dark"] .route-step small,
+html[data-theme="dark"] .hero-note { color: #a5b2c5; }
+html[data-theme="dark"] .field-guide-card h3,
+html[data-theme="dark"] .field-guide-card h4,
+html[data-theme="dark"] .route-card h2,
+html[data-theme="dark"] .route-step strong { color: #e7edf7; }
+html[data-theme="dark"] .field-index,
+html[data-theme="dark"] .route-num { background-color: #183c43; color: #75e0e4; }
+html[data-theme="dark"] .field-path { background-color: #202d40; }
+html[data-theme="dark"] .btn.primary { background-color: #62d5dc; color: #0d1421; border-color: #62d5dc; }
+html[data-theme="dark"] .pill { background-color: #202d40; color: #c7d3e3; }
+html[data-theme="dark"] .field-guide-card a,
+html[data-theme="dark"] .resource-card a,
+html[data-theme="dark"] .practice-card a { color: #75e0e4; }
+html[data-theme="dark"] .field-guide-card *,
+html[data-theme="dark"] .route-card * { border-color: #344257; }
+
 </style>
+<style id="dark-mode-comprehensive-fix">
+
+/* Comprehensive dark theme coverage: all content surfaces, including legacy hard-coded light cards. */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --ink:#e7edf7; --muted:#a9b8cc; --line:#344257; --paper:#0b1220; --white:#151f2e;
+  --teal:#69dce2; --teal-soft:#17363d; --blue-soft:#252b49; --amber-soft:#382d1f;
+  --purple-soft:#302747; --shadow:0 12px 35px rgba(0,0,0,.28);
+}
+html[data-theme="dark"] body,
+html[data-theme="dark"] main { background:#0b1220; color:#e7edf7; }
+html[data-theme="dark"] main section,
+html[data-theme="dark"] main article,
+html[data-theme="dark"] main aside { color:inherit; }
+html[data-theme="dark"] .phase,
+html[data-theme="dark"] .field-guide-card,
+html[data-theme="dark"] .field-guide-intro,
+html[data-theme="dark"] .field-path,
+html[data-theme="dark"] .field-choice,
+html[data-theme="dark"] .track-button,
+html[data-theme="dark"] .track-detail,
+html[data-theme="dark"] .track-foot,
+html[data-theme="dark"] .lesson,
+html[data-theme="dark"] .lesson-item,
+html[data-theme="dark"] .lesson-plan,
+html[data-theme="dark"] .lesson-plan-card,
+html[data-theme="dark"] .learning-helper,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .resource-card,
+html[data-theme="dark"] .practice-card,
+html[data-theme="dark"] .practice-habits .card,
+html[data-theme="dark"] .field-guide-grid > *,
+html[data-theme="dark"] .table-wrap,
+html[data-theme="dark"] .content-panel,
+html[data-theme="dark"] .panel,
+html[data-theme="dark"] .info-card,
+html[data-theme="dark"] .step-card {
+  background-color:#151f2e !important;
+  color:#e7edf7 !important;
+  border-color:#344257 !important;
+  box-shadow:none;
+}
+html[data-theme="dark"] .field-guide-intro,
+html[data-theme="dark"] .learning-helper,
+html[data-theme="dark"] .outcome,
+html[data-theme="dark"] .field-safety {
+  background-color:#1b2938 !important;
+  color:#c8d5e6 !important;
+  border-color:#3b4c61 !important;
+}
+html[data-theme="dark"] .phase-content li,
+html[data-theme="dark"] .track-symbol,
+html[data-theme="dark"] .meta-chip,
+html[data-theme="dark"] .lesson-goal,
+html[data-theme="dark"] .lesson-plan-card,
+html[data-theme="dark"] .track-links .track-link,
+html[data-theme="dark"] .track-button.active {
+  background-color:#202d40 !important;
+  color:#d7e2f1 !important;
+  border-color:#3b4c61 !important;
+}
+html[data-theme="dark"] .p0, html[data-theme="dark"] .p1,
+html[data-theme="dark"] .p2, html[data-theme="dark"] .p3,
+html[data-theme="dark"] .p4,
+html[data-theme="dark"] .field-index,
+html[data-theme="dark"] .route-num {
+  background-color:#1c3040 !important; color:#83e4e7 !important;
+}
+html[data-theme="dark"] .field-guide-card h1,
+html[data-theme="dark"] .field-guide-card h2,
+html[data-theme="dark"] .field-guide-card h3,
+html[data-theme="dark"] .field-guide-card h4,
+html[data-theme="dark"] .field-guide-card h5,
+html[data-theme="dark"] .field-guide-card strong,
+html[data-theme="dark"] .field-choice h3,
+html[data-theme="dark"] .lesson-item strong,
+html[data-theme="dark"] .lesson-item label,
+html[data-theme="dark"] .lesson-plan summary,
+html[data-theme="dark"] .resource-card h3,
+html[data-theme="dark"] .practice-card h3,
+html[data-theme="dark"] .card h3,
+html[data-theme="dark"] .card h4,
+html[data-theme="dark"] .track-detail h3,
+html[data-theme="dark"] .phase-content h3 {
+  color:#e7edf7 !important;
+}
+html[data-theme="dark"] .field-guide-card p,
+html[data-theme="dark"] .field-guide-card dd,
+html[data-theme="dark"] .field-guide-card span,
+html[data-theme="dark"] .field-choice p,
+html[data-theme="dark"] .field-choice li,
+html[data-theme="dark"] .lesson-item small,
+html[data-theme="dark"] .lesson-plan-card p,
+html[data-theme="dark"] .lesson-goal,
+html[data-theme="dark"] .card p,
+html[data-theme="dark"] .card li,
+html[data-theme="dark"] .resource-card p,
+html[data-theme="dark"] .practice-card p,
+html[data-theme="dark"] .track-button small,
+html[data-theme="dark"] .track-detail p,
+html[data-theme="dark"] .phase-content p,
+html[data-theme="dark"] .section-desc {
+  color:#a9b8cc !important;
+}
+html[data-theme="dark"] a,
+html[data-theme="dark"] .card a,
+html[data-theme="dark"] .resource-card a,
+html[data-theme="dark"] .practice-card a,
+html[data-theme="dark"] .inline-guide-link {
+  color:#72e0e5 !important;
+}
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select,
+html[data-theme="dark"] option,
+html[data-theme="dark"] pre,
+html[data-theme="dark"] code {
+  background-color:#101a2a; color:#e7edf7; border-color:#344257;
+}
+html[data-theme="dark"] table th,
+html[data-theme="dark"] table td { background-color:#151f2e !important; color:#d7e2f1 !important; border-color:#344257 !important; }
+html[data-theme="dark"] .lesson.done { background-color:#17302f !important; }
+html[data-theme="dark"] .lesson-plan-card strong { color:#e7edf7 !important; }
+html[data-theme="dark"] .lesson-plan summary { border-color:#344257 !important; }
+html[data-theme="dark"] .track-links .track-link:hover,
+html[data-theme="dark"] button:hover { filter:brightness(1.12); }
+html[data-theme="dark"] .theme-toggle { background:#1a2638 !important; color:#e7edf7 !important; border-color:#43536b !important; }
+html[data-theme="dark"] .topbar { background:rgba(11,18,32,.96) !important; border-color:#344257 !important; }
+/* Override older inline/light declarations on lesson and resource panels without touching the Linux guide iframe. */
+html[data-theme="dark"] main [style*="background:#fff"],
+html[data-theme="dark"] main [style*="background: #fff"],
+html[data-theme="dark"] main [style*="background-color: white"],
+html[data-theme="dark"] main [style*="background-color:#fff"],
+html[data-theme="dark"] main [style*="background-color: #fff"] {
+  background-color:#151f2e !important; color:#e7edf7 !important; border-color:#344257 !important;
+}
+
+</style>
+
+<style id="dark-mode-final-contrast-fix">
+/* Final contrast fixes for controls and resource cards that use legacy class names. */
+html[data-theme="dark"] .resource-grid .resource,
+html[data-theme="dark"] .resource-grid > *,
+html[data-theme="dark"] .resource,
+html[data-theme="dark"] .resource-grid .resource-card {
+  background: #151f2e !important;
+  background-color: #151f2e !important;
+  color: #e7edf7 !important;
+  border: 1px solid #344257 !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .resource strong,
+html[data-theme="dark"] .resource-grid .resource strong,
+html[data-theme="dark"] .resource small,
+html[data-theme="dark"] .resource-grid .resource small {
+  color: #e7edf7 !important;
+}
+html[data-theme="dark"] .resource a,
+html[data-theme="dark"] .resource-grid .resource a {
+  color: #69dce2 !important;
+}
+html[data-theme="dark"] .hero-actions .btn.primary,
+html[data-theme="dark"] .hero-actions a.btn.primary,
+html[data-theme="dark"] .btn.primary {
+  background: #5ce1e6 !important;
+  background-image: none !important;
+  color: #081521 !important;
+  -webkit-text-fill-color: #081521 !important;
+  border-color: #5ce1e6 !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+html[data-theme="dark"] .hero-actions .btn:not(.primary),
+html[data-theme="dark"] .hero-actions a.btn:not(.primary) {
+  background: #151f2e !important;
+  background-image: none !important;
+  color: #e7edf7 !important;
+  -webkit-text-fill-color: #e7edf7 !important;
+  border-color: #344257 !important;
+}
+html[data-theme="dark"] .hero-actions .btn span,
+html[data-theme="dark"] .hero-actions .btn.primary span {
+  color: inherit !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+html[data-theme="dark"] .phase,
+html[data-theme="dark"] .phase-content li,
+html[data-theme="dark"] .outcome,
+html[data-theme="dark"] .notice,
+html[data-theme="dark"] .deliverable,
+html[data-theme="dark"] .practice-card,
+html[data-theme="dark"] .field-guide-card,
+html[data-theme="dark"] .field-guide-grid .card {
+  background-color: #151f2e !important;
+  color: #e7edf7 !important;
+  border-color: #344257 !important;
+}
+html[data-theme="dark"] .phase-content li,
+html[data-theme="dark"] .outcome,
+html[data-theme="dark"] .deliverable {
+  background-color: #1b2938 !important;
+  color: #c8d5e6 !important;
+}
+html[data-theme="dark"] .phase-content p,
+html[data-theme="dark"] .phase-content li,
+html[data-theme="dark"] .outcome,
+html[data-theme="dark"] .notice,
+html[data-theme="dark"] .practice-card p,
+html[data-theme="dark"] .practice-card small {
+  color: #b7c6d9 !important;
+}
+html[data-theme="dark"] .phase-content h3,
+html[data-theme="dark"] .practice-card h3,
+html[data-theme="dark"] .field-guide-card h3 {
+  color: #e7edf7 !important;
+}
+html[data-theme="dark"] .theme-toggle {
+  background: #151f2e !important;
+  color: #e7edf7 !important;
+  border-color: #344257 !important;
+}
+</style>
+
 </head>
 <body>
 <header class="topbar"><div class="wrap nav">
 <a class="brand" href="#home"><span class="brand-mark">⌁</span><span>Bifrost</span></a>
 <nav class="navlinks"><a href="#roadmap">ROADMAP</a><a href="#study">STUDY</a><a href="#practice">PRACTICE</a><a href="#career">CAREER</a></nav>
+<button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">다크 모드</span></button>
 <a class="nav-cta" href="#study">학습 시작하기 ↗</a>
 </div></header>
 <main id="home">
@@ -139,6 +437,20 @@
 <div class="notice"><span>↗</span><div><strong>진로와 병역 관련 선택은 별도로 확인하세요</strong>군 복무 경로는 개인 상황에 따라 달라지는 선택지 중 하나입니다. 필요해지는 시점에 공식 모집·편입 요건을 확인하고, 학습 로드맵과는 별도로 판단하세요.</div></div>
 </section>
 </main>
+
+<section class="wrap section" id="learning-practices">
+  <div class="section-head"><div><span class="kicker">05 / LEARNING PRACTICES</span><h2>커리큘럼을 더 탄탄하게 만드는 공통 습관</h2></div><p class="section-desc">기술 지식과 함께 조사·검증·실습·기록 습관을 익히면 어떤 트랙에서도 학습을 이어가기 쉬워집니다.</p></div>
+  <div class="cards practice-habits">
+    <article class="card"><div class="icon">⌕</div><h3>학습 습관</h3><p>모르는 개념을 검색하고 출처를 검증하는 방법을 연습합니다.</p><ul><li>공식 문서와 신뢰할 수 있는 자료를 우선 확인</li><li>서로 다른 출처를 비교하고 게시 날짜·버전을 확인</li><li>확인한 사실과 불확실한 내용을 구분</li></ul><div class="outcome"><strong>기대 효과:</strong> 초보자의 막힘을 줄이고 잘못된 정보에 의존할 가능성을 낮춥니다.</div></article>
+    <article class="card"><div class="icon">⌘</div><h3>공통 기초</h3><p>Git 기초와 명령어 사용 연습을 작은 결과물로 연결합니다.</p><ul><li><code>status</code>, <code>diff</code>, <code>log</code>로 변경 내역 확인</li><li>작은 단위로 커밋하고 README에 실행법 기록</li><li>반복 실습에 쓸 명령어와 스크립트를 정리</li></ul><div class="outcome"><strong>기대 효과:</strong> 이후 모든 트랙에서 학습 기록과 실습 결과를 재사용할 수 있습니다.</div></article>
+    <article class="card"><div class="icon">◇</div><h3>보안 사고방식</h3><p>기능이 동작하는지만 보지 말고 위험 모델과 신뢰 경계를 함께 생각합니다.</p><ul><li>위험 모델과 공격 표면을 간단히 적기</li><li>최소 권한 원칙을 적용할 위치 찾기</li><li>사용자 입력과 신뢰 경계를 구분</li></ul><div class="outcome"><strong>기대 효과:</strong> 도구 사용을 넘어 보안 원리와 설계 이유를 이해하게 됩니다.</div></article>
+    <article class="card"><div class="icon">▣</div><h3>실습 안전</h3><p>실습 전에 환경·권한·데이터·복구 방법을 확인합니다.</p><ul><li>가상 머신 또는 로컬 랩 사용</li><li>샘플 데이터와 허가된 대상만 사용</li><li>실습 범위와 중단·복구 방법 확인</li></ul><div class="outcome"><strong>기대 효과:</strong> 안전하고 반복 가능한 실습 환경을 만들 수 있습니다.</div></article>
+    <article class="card"><div class="icon">⌁</div><h3>분석 능력</h3><p>관찰한 사실·추론·미확인 사항을 구분해 결론의 품질을 높입니다.</p><ul><li>원본 증거와 재현 절차를 보존</li><li>사실과 가설을 분리하고 대안 설명 고려</li><li>결론을 뒷받침하는 근거를 명시</li></ul><div class="outcome"><strong>기대 효과:</strong> 분석의 정확성과 보고서 품질을 높일 수 있습니다.</div></article>
+    <article class="card"><div class="icon">↗</div><h3>결과물 관리</h3><p>학습 결과를 다른 사람이 따라 할 수 있는 작은 포트폴리오로 바꿉니다.</p><ul><li>README에 목표·환경·재현 절차 작성</li><li>결과뿐 아니라 한계와 방어 방법 기록</li><li>민감 정보·토큰·개인 데이터를 제거</li></ul><div class="outcome"><strong>기대 효과:</strong> 학습 결과를 포트폴리오로 전환하고 나중에 다시 활용할 수 있습니다.</div></article>
+  </div>
+</section>
+<style>.practice-habits .card{display:flex;flex-direction:column;gap:8px}.practice-habits .card h3{margin:4px 0 0}.practice-habits .card p{margin:0}.practice-habits .outcome{margin-top:auto}@media(max-width:800px){.practice-habits{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.practice-habits{grid-template-columns:1fr}}</style>
+
 <footer class="footer"><div class="wrap footer-inner"><div><strong>Bifrost</strong><br><small>Learn the concept. Practice with intent. Document what you discover.</small><br><small class="credit">by. Loki</small></div><div><small>학습과 실습은 본인이 소유하거나 명시적으로 허가받은 환경에서 진행하세요.<br>진도는 현재 브라우저에 저장되며, 계정 동기화는 아직 지원하지 않습니다.</small></div></div></footer>
 <script>
 const tracks={
@@ -151,6 +463,18 @@ crypto:{title:"Crypto / Misc",subtitle:"암호학 기초와 CTF의 다양한 문
 };
 const lessonPlans={"foundation":[{"goal":"설치된 도구와 작업 디렉터리를 확인하고 파일·폴더를 명령어로 다룬다.","prereq":"운영체제의 파일·폴더 개념만 알면 된다.","practice":"작업 폴더를 만들고 파일 2개를 생성·이동·복사·삭제한다. `pwd`, `ls`/`dir`, `cd`, `mkdir`, `cp`/`copy`, `mv`/`move`, `--help`를 사용해 본다.","done":"작업 폴더를 만들고 경로를 설명하며 도움말로 명령어 옵션을 찾을 수 있다.","record":"사용한 명령어, 현재 경로, 예상과 달랐던 결과와 해결 방법을 기록한다.","next":"Python을 설치하거나 실행해 간단한 스크립트를 실행한다."},{"goal":"입력값을 처리하는 짧은 프로그램을 작성하고 함수로 나눈다.","prereq":"변수와 기본적인 수식 이해.","practice":"숫자 두 개를 입력받아 사칙연산을 출력하는 프로그램을 만든 뒤 조건문, 반복문, 함수로 확장한다. 파일 읽기/쓰기 예제도 실행한다.","done":"잘못된 입력을 적절히 처리하고, 각 함수의 역할을 설명할 수 있다.","record":"실행 예시, 입력·출력, 오류 메시지, 수정한 이유를 남긴다.","next":"문자열·바이트를 다루는 기초를 익히고 C 차시와 연결한다."},{"goal":"C 코드를 컴파일하고 자료형·주소·포인터의 기초를 관찰한다.","prereq":"Python 변수와 함수, 기본적인 터미널 사용.","practice":"정수·문자열 배열을 출력하는 작은 프로그램을 작성한다. 컴파일러로 빌드하고 주소 연산자와 포인터를 출력해 값과 주소를 비교한다.","done":"컴파일과 실행의 차이를 말하고 변수·주소·포인터의 관계를 작은 예제로 설명한다.","record":"소스 코드, 컴파일 명령, 출력, 경고 및 해결 방법을 기록한다.","next":"Pwn/System 또는 Reverse Engineering 트랙의 메모리·실행 파일 학습으로 이동한다."},{"goal":"파일 권한, 프로세스, 파이프와 리다이렉션의 용도를 익힌다.","prereq":"경로와 기본 명령어 사용.","practice":"자신의 실습 디렉터리에서 `ls -l`, `chmod`(가능한 환경에서), `ps`, `cat`, `grep`, `>`와 `|`를 사용해 파일과 프로세스를 관찰한다.","done":"읽기·쓰기·실행 권한 차이와 파이프/리다이렉션 결과를 설명한다.","record":"실행한 명령, 파일 권한 전후, 파이프 출력 결과를 남긴다.","next":"네트워크 기초를 익히고 Linux 도구로 연결 상태를 관찰한다."},{"goal":"IP, TCP/UDP, DNS, 포트가 통신에서 맡는 역할을 설명한다.","prereq":"클라이언트와 서버라는 개념.","practice":"자신의 장치에서 DNS 조회와 로컬 연결 정보를 확인한다. 브라우저로 한 사이트를 열고 도메인→IP→포트의 흐름을 그림으로 표현한다.","done":"IP 주소, 포트, DNS, TCP와 UDP를 서로 구분해 설명한다.","record":"조회한 도메인/IP, 사용 도구, 관찰 결과와 환경 차이를 기록한다.","next":"HTTP 요청과 응답을 개발자 도구에서 관찰한다."},{"goal":"HTTP 메서드·헤더·상태 코드·쿠키를 실제 요청과 연결한다.","prereq":"네트워크 기초와 브라우저 사용.","practice":"자신이 접속한 페이지에서 개발자 도구 Network 탭을 열고 요청 하나를 골라 메서드, 상태 코드, 요청/응답 헤더를 확인한다.","done":"요청과 응답의 주요 요소를 가리키고 상태 코드가 의미하는 바를 설명한다.","record":"민감한 쿠키 값은 저장하지 말고, URL·메서드·상태 코드·관찰한 헤더 이름만 기록한다.","next":"Web Security 트랙의 웹 구조와 세션 학습으로 이동한다."},{"goal":"변경 사항을 버전 관리하고 재현 가능한 README를 작성한다.","prereq":"파일 편집과 터미널 기본 사용.","practice":"학습 노트 폴더를 Git 저장소로 만들고 README를 작성한 뒤 파일 변경을 커밋한다. `status`, `diff`, `log`를 확인한다.","done":"커밋이 무엇을 기록하는지 설명하고 새 환경에서 README만 보고 실습을 재현할 수 있다.","record":"목표, 환경, 실행 명령, 결과, 배운 점, 다음 질문을 README에 남긴다.","next":"관심 트랙의 첫 차시를 시작하고 모든 실습을 같은 형식으로 기록한다."}],"web":[{"goal":"브라우저·서버·API·데이터 저장소 사이의 요청 흐름을 설명한다.","prereq":"URL과 네트워크의 기본 개념.","practice":"로컬에서 정적 페이지를 열거나 간단한 로컬 웹 앱을 실행한다. 개발자 도구 Network 탭에서 문서와 리소스 요청을 구분한다.","done":"브라우저가 요청하고 서버가 응답하는 흐름을 4~6단계로 그릴 수 있다.","record":"사용한 로컬 앱, 요청 종류, 상태 코드, 흐름도를 기록한다.","next":"HTTP·쿠키·세션에서 상태가 유지되는 방식을 살펴본다."},{"goal":"요청/응답과 쿠키·세션이 상태 유지에 쓰이는 방식을 이해한다.","prereq":"웹 요청의 기본 구조.","practice":"로컬 데모 앱 또는 자신의 계정에서 민감한 값 없이 개발자 도구를 관찰한다. 쿠키가 설정되는 응답과 이후 요청을 비교한다.","done":"쿠키와 서버 측 세션의 차이, 주요 HTTP 헤더의 역할을 설명한다.","record":"관찰한 헤더 이름과 요청 순서만 기록하고 토큰·세션 값은 저장하지 않는다.","next":"인증과 인가의 차이를 사례로 구분한다."},{"goal":"사용자 신원 확인과 리소스 접근 권한 검사를 구분한다.","prereq":"HTTP·쿠키·세션 개념.","practice":"가상의 역할 2개(일반 사용자·관리자)를 정하고 각 역할이 읽고/수정할 수 있는 리소스 표를 작성한다. 로컬 데모의 권한 검사를 확인한다.","done":"인증 성공만으로 모든 리소스 접근이 허용되어서는 안 되는 이유를 설명한다.","record":"역할-리소스 권한표, 허용/거부 테스트, 누락된 검사를 기록한다.","next":"SQL Injection의 입력 처리와 쿼리 구조를 안전한 로컬 예제로 살펴본다."},{"goal":"문자열 결합 쿼리와 매개변수화 쿼리의 차이를 설명한다.","prereq":"SQL의 SELECT와 WHERE, 입력값 처리 기초.","practice":"로컬 전용 교육용 앱 또는 모의 데이터베이스에서 동일한 검색 기능을 문자열 결합 방식과 prepared statement 방식으로 비교한다. 외부 서비스에는 테스트하지 않는다.","done":"입력값이 쿼리 구조로 해석되는 원인과 매개변수화가 이를 막는 원리를 설명한다.","record":"취약/수정 코드의 차이, 로컬 테스트 입력, 기대/실제 결과를 기록한다.","next":"브라우저 출력 문맥과 인코딩을 XSS 차시에서 확인한다."},{"goal":"입력값이 브라우저에서 실행 가능한 코드로 해석되는 조건과 방어를 이해한다.","prereq":"HTML 요소와 기본적인 JavaScript 개념.","practice":"로컬 교육용 페이지에서 텍스트 출력과 HTML 삽입의 차이를 확인한다. 고정된 안전 샘플 문자열을 사용하고 출력 인코딩 전후를 비교한다.","done":"문맥에 맞는 출력 인코딩과 안전한 DOM API의 필요성을 설명한다.","record":"입력 샘플, 출력 위치, 수정 방법, 회귀 테스트 결과를 기록한다.","next":"사용자별 데이터 접근 권한 검증으로 이어진다."},{"goal":"서버가 매 요청마다 객체 접근 권한을 확인해야 함을 이해한다.","prereq":"인증·인가 개념과 HTTP 요청.","practice":"로컬 모의 앱에서 테스트 계정 A/B를 사용해 각 계정의 데이터가 분리되는지 확인한다. URL의 식별자를 바꾸는 테스트는 본인 소유 교육 환경에서만 수행한다.","done":"식별자를 추측하기 어렵게 만드는 것과 서버 권한 검증이 다른 이유를 설명한다.","record":"역할별 허용/거부 행렬, 재현 단계, 영향 범위와 수정안을 기록한다.","next":"수정 후 동일한 케이스를 회귀 테스트로 자동화한다."},{"goal":"취약점 수정이 기존 기능을 깨뜨리지 않았는지 테스트로 확인한다.","prereq":"앞선 입력 처리와 접근 제어 차시 중 하나 이상.","practice":"로컬 샘플 앱에 정상/비정상 입력, 권한 허용/거부 테스트를 작성한다. 수정 전후 결과를 비교하고 README에 실행법을 적는다.","done":"각 테스트가 검증하는 보안 속성과 실패 시 의미를 설명할 수 있다.","record":"테스트 케이스, 기대 결과, 실제 결과, 수정 커밋과 남은 한계를 기록한다.","next":"관심 취약점 하나를 골라 재현·수정·검증을 포함한 작은 프로젝트를 만든다."}],"pwn":[{"goal":"소스 코드가 컴파일·링크되어 실행 파일이 되는 과정을 이해한다.","prereq":"C 자료형과 함수 기초.","practice":"작은 `main` 프로그램을 작성하고 컴파일러의 빌드 명령과 실행 결과를 확인한다. 소스 변경 전후 바이너리/출력 차이를 비교한다.","done":"컴파일, 링크, 실행의 역할을 순서대로 설명한다.","record":"소스, 컴파일 명령, 경고, 실행 결과와 환경을 기록한다.","next":"프로세스의 스택과 힙이 어떤 데이터를 담는지 학습한다."},{"goal":"지역 변수와 동적 메모리의 수명 및 관리 차이를 이해한다.","prereq":"C 변수·함수와 기본 포인터.","practice":"교육용 프로그램에서 지역 변수와 동적 할당 메모리를 생성하고 주소를 출력한다. 할당과 해제를 코드로 표시하고 수명 범위를 그림으로 그린다.","done":"스택/힙은 단순한 용어 암기가 아니라 메모리 수명과 할당 방식의 차이임을 설명한다.","record":"변수의 선언·할당·해제 시점, 주소 관찰, 주의점을 기록한다.","next":"포인터와 배열에서 주소·경계 조건을 연습한다."},{"goal":"포인터 연산과 배열 경계가 프로그램 동작에 미치는 영향을 이해한다.","prereq":"C 자료형, 배열, 주소 연산자.","practice":"안전한 작은 배열을 만들고 인덱스와 포인터 표기 결과를 비교한다. 경계 조건은 코드 리뷰와 정적 검사로 확인하며 임의 메모리 접근은 피한다.","done":"배열 길이와 유효 인덱스 범위를 설명하고 경계 검사를 추가한다.","record":"배열 크기, 유효 범위, 테스트 케이스, 컴파일러 경고를 기록한다.","next":"디버거에서 변수와 주소가 실행 중 어떻게 보이는지 관찰한다."},{"goal":"중단점과 단계 실행으로 변수·레지스터·호출 흐름을 관찰한다.","prereq":"컴파일 가능한 C 프로그램, 함수와 포인터 기초.","practice":"자신이 작성한 프로그램을 디버그 빌드로 만들고 main과 함수 호출에 중단점을 둔다. 단계 실행하며 변수 값을 비교한다.","done":"중단점, step over/into, 호출 스택의 역할을 설명할 수 있다.","record":"디버거 명령, 멈춘 위치, 변수 값 변화, 예상과 실제의 차이를 기록한다.","next":"메모리 오류 유형을 원인·증상·방지 방법으로 분류한다."},{"goal":"경계 초과, 초기화 누락, 잘못된 해제와 해제 후 사용의 원인을 이해한다.","prereq":"배열 경계와 메모리 수명.","practice":"제공된 안전한 교육 예제의 코드를 읽고 문제가 될 수 있는 줄을 표시한다. 정적 분석기나 컴파일러 경고를 실행하고 수정 후 테스트한다.","done":"오류 유형별 원인과 안전한 수정 원칙을 설명한다.","record":"문제 코드 위치, 도구 경고, 수정 diff, 정상 입력 테스트 결과를 기록한다.","next":"완화 기법이 오류 자체를 없애는 것과 악용을 어렵게 하는 것을 구분한다."},{"goal":"ASLR, NX/DEP, stack canary의 목적과 한계를 설명한다.","prereq":"프로세스 메모리와 메모리 오류의 기본 개념.","practice":"로컬 교육용 바이너리의 빌드 설정과 시스템 문서를 확인한다. 각 완화 기법이 보호하는 영역과 막지 못하는 문제를 표로 비교한다.","done":"완화 기법이 단독으로 모든 메모리 오류를 해결하지 않는 이유를 설명한다.","record":"기법별 목적, 적용 위치, 한계와 확인한 설정을 기록한다.","next":"분석 결과를 재현 조건·영향·완화로 정리한다."},{"goal":"허가된 로컬 프로그램의 오류를 재현 가능하고 책임 있게 문서화한다.","prereq":"디버거와 메모리 오류의 기본 개념.","practice":"자신의 예제 또는 허가된 워게임 문제 하나를 선택해 환경, 재현 절차, 관찰, 수정, 재검증을 작성한다.","done":"다른 사람이 문서만 보고 안전하게 재현·검증할 수 있다.","record":"환경 버전, 최소 재현 코드, 영향, 수정 diff, 테스트, 한계를 기록한다.","next":"다음 로컬 워게임 문제를 풀되 동일한 기록 템플릿을 재사용한다."}],"rev":[{"goal":"소스 코드와 실행 파일의 차이 및 빌드 결과물을 이해한다.","prereq":"C 함수와 터미널 기본 사용.","practice":"작은 C 프로그램을 컴파일하고 파일 형식 정보와 문자열 목록을 확인한다. 디버그 심볼 포함/제외 빌드의 차이를 관찰한다.","done":"소스·오브젝트·실행 파일의 역할을 설명할 수 있다.","record":"컴파일 옵션, 파일 형식, 문자열 결과, 빌드 간 차이를 기록한다.","next":"어셈블리 명령과 레지스터를 읽는 기초로 이동한다."},{"goal":"레지스터, 산술·비교·분기 명령의 기본 역할을 파악한다.","prereq":"2진수/16진수 개념과 C의 조건문.","practice":"자신이 작성한 간단한 if/loop 프로그램을 컴파일하고 교육용 디스어셈블러에서 비교·분기 명령을 찾는다.","done":"조건문이 비교와 분기로 표현되는 방식을 예제로 설명한다.","record":"명령어, 관련 레지스터, 원본 코드와 대응 관계를 기록한다.","next":"함수 호출 시 인자·반환값이 전달되는 방식을 살펴본다."},{"goal":"함수 인자, 반환값, 호출 스택의 일반적 역할을 이해한다.","prereq":"레지스터와 어셈블리 기초.","practice":"함수 두 개가 있는 작은 프로그램을 만들고 디버거로 호출 전후 레지스터와 스택 프레임 변화를 관찰한다. 사용 플랫폼의 호출 규약 문서를 참고한다.","done":"함수 호출 전후의 흐름과 반환값 전달 방식을 설명한다.","record":"플랫폼/아키텍처, 함수 인자, 반환값, 관찰한 명령어를 기록한다.","next":"정적 분석에서 문자열과 함수 후보를 찾아본다."},{"goal":"실행하지 않고 문자열·함수·제어 흐름에서 단서를 수집한다.","prereq":"실행 파일과 어셈블리 기초.","practice":"자신이 만든 샘플 바이너리에서 문자열, 함수 목록, 참조 위치를 확인한다. 관찰한 단서를 바탕으로 함수 역할을 가설로 적는다.","done":"직접 관찰한 사실과 기능에 대한 추론을 구분한다.","record":"도구와 버전, 문자열/함수 근거, 가설과 확신 수준을 기록한다.","next":"동적 분석으로 가설을 확인한다."},{"goal":"실행을 관찰해 정적 분석에서 세운 가설을 검증한다.","prereq":"디버거의 중단점과 호출 흐름 이해.","practice":"자신의 샘플 프로그램을 격리된 로컬 환경에서 실행하고 입력값별 분기와 함수 호출을 관찰한다. 외부/출처 불명 바이너리는 실행하지 않는다.","done":"관찰 결과가 가설을 지지하는지 또는 반박하는지 근거와 함께 설명한다.","record":"실행 환경, 입력, 중단점, 관찰된 경로, 제한 사항을 기록한다.","next":"디컴파일 결과를 원본 코드와 비교해 해석의 한계를 이해한다."},{"goal":"디컴파일러가 만든 의사 코드와 원본 소스의 차이를 이해한다.","prereq":"함수·분기·자료형 기초.","practice":"자신이 작성한 작은 프로그램을 디컴파일하고 원본과 나란히 비교한다. 변수 이름, 타입, 루프 형태가 달라질 수 있는 지점을 표시한다.","done":"디컴파일 결과를 원본 코드 그대로로 취급하면 안 되는 이유를 설명한다.","record":"원본/의사 코드 비교, 확실한 근거, 불확실한 해석을 기록한다.","next":"분석 노트에서 사실과 추론을 분리해 최종 정리한다."},{"goal":"분석의 근거·가설·검증·한계를 재현 가능하게 정리한다.","prereq":"정적 분석과 동적 분석 중 하나 이상 수행.","practice":"작은 허가된 샘플을 선택해 파일 정보, 핵심 함수, 관찰 절차, 가설 검증, 결론을 README 형식으로 정리한다.","done":"다른 사람이 동일한 샘플과 도구로 주요 관찰을 재현할 수 있다.","record":"파일 해시, 도구 버전, 근거 위치, 가설, 결론, 한계를 남긴다.","next":"다른 샘플에 같은 분석 템플릿을 적용해 비교한다."}],"forensic":[{"goal":"프레임·패킷·포트·세션의 관계를 이해한다.","prereq":"IP와 TCP/UDP의 기본 개념.","practice":"제공된 공개 교육용 PCAP 파일을 열어 패킷 목록과 출발지/목적지, 프로토콜, 시간 열을 확인한다.","done":"패킷과 세션의 차이를 설명하고 캡처에서 기본 필드를 찾을 수 있다.","record":"PCAP 출처, 필터, 주요 주소/프로토콜, 분석 범위를 기록한다.","next":"Wireshark에서 필터와 스트림 추적을 연습한다."},{"goal":"캡처 파일을 열고 표시 필터로 관심 트래픽을 좁힌다.","prereq":"패킷 필드와 프로토콜 기초.","practice":"교육용 PCAP에서 `dns`, `tcp`, `http` 같은 표시 필터를 적용하고 패킷 하나의 상세 필드를 펼친다. 스트림 추적 결과를 원본 패킷과 대조한다.","done":"캡처 필터와 표시 필터의 차이를 설명하고 필터를 재현할 수 있다.","record":"사용한 필터, 패킷 번호, 관찰한 필드와 해석의 한계를 기록한다.","next":"DNS와 HTTP 요청의 정상 흐름을 확인한다."},{"goal":"도메인 조회와 웹 요청이 캡처에 어떻게 나타나는지 설명한다.","prereq":"Wireshark 필터와 기본 DNS/HTTP 개념.","practice":"샘플 PCAP에서 DNS 질의/응답과 HTTP 요청/응답을 찾아 시간 순서로 연결한다. TLS 암호화 등으로 보이지 않는 정보는 추정하지 않는다.","done":"질의와 응답의 짝을 찾고 관찰 가능한 사실과 추측을 구분한다.","record":"패킷 번호, 시간, 질의/응답, 상태 코드와 보이지 않는 정보의 한계를 기록한다.","next":"로그의 시간·출처·이벤트 필드를 함께 읽는다."},{"goal":"로그의 시간·출처·이벤트·사용자 필드를 연결해 패턴을 찾는다.","prereq":"날짜/시간과 기본 텍스트 검색.","practice":"제공된 샘플 로그에서 시간대, 이벤트 ID, 출처, 계정 필드를 추출하고 동일 시간대의 관련 이벤트를 검색한다.","done":"하나의 로그 줄이 입증하는 사실과 추가 검증이 필요한 가설을 구분한다.","record":"로그 파일 출처, 시간대, 필터 조건, 관련/무관 이벤트를 기록한다.","next":"파일 해시와 메타데이터로 증거 파일의 무결성을 확인한다."},{"goal":"해시를 이용해 파일 변경 여부를 확인하고 기본 메타데이터를 해석한다.","prereq":"파일 경로와 명령어 기본 사용.","practice":"교육용 파일의 SHA-256 해시를 계산하고 복사본과 비교한다. 수정한 사본의 해시가 달라지는지 확인하고 파일 크기·시간 정보도 살펴본다.","done":"해시 일치가 동일한 바이트를 강하게 시사하지만 파일의 안전성을 증명하지는 않음을 설명한다.","record":"파일 출처, 해시 알고리즘과 값, 파일 크기, 수정 전후 차이를 기록한다.","next":"여러 증거의 시간 순서를 타임라인으로 정리한다."},{"goal":"여러 로그와 네트워크 흔적을 시간 순서로 연결한다.","prereq":"로그 필드와 패킷 시간 정보.","practice":"샘플 로그와 PCAP에서 핵심 이벤트를 5개 이상 골라 하나의 시간표에 정리한다. 시간대 차이와 시계 오차 가능성을 표시한다.","done":"시간 순서의 연결 근거와 불확실성을 명시할 수 있다.","record":"원본 파일, 타임스탬프, 시간대 변환, 증거 참조와 신뢰도를 기록한다.","next":"증거와 해석을 분리한 분석 보고서를 작성한다."},{"goal":"증거·해석·한계·후속 확인을 구분한 간결한 보고서를 완성한다.","prereq":"패킷, 로그, 해시 중 2종 이상 관찰.","practice":"교육용 사건 시나리오에서 질문을 정하고 근거 3개 이상을 연결해 요약, 타임라인, 대안 가설, 후속 확인을 작성한다.","done":"다른 사람이 증거 위치를 확인할 수 있고 단정적인 추측을 사실처럼 쓰지 않는다.","record":"요약, 범위, 도구, 증거 번호, 결론, 한계, 권고 사항을 기록한다.","next":"다른 샘플 사건에 같은 절차를 적용하고 분석 품질을 비교한다."}],"crypto":[{"goal":"인코딩·해시·암호화가 해결하는 서로 다른 문제를 설명한다.","prereq":"문자열과 바이트의 기본 개념.","practice":"짧은 문자열을 Base64로 인코딩/디코딩하고, 같은 문자열의 해시를 계산한다. 암호화와 달리 인코딩은 비밀을 보호하지 않음을 예시로 설명한다.","done":"세 개념의 목적과 역변환 가능성 차이를 구분한다.","record":"입력과 출력, 사용 도구, 각 방식의 목적과 한계를 기록한다.","next":"모듈러 연산과 작은 수학적 성질을 연습한다."},{"goal":"나머지 연산과 모듈러 산술의 기본 규칙을 작은 예제로 적용한다.","prereq":"정수 나눗셈과 나머지.","practice":"몇 가지 정수에 대해 나머지를 손으로 계산하고 Python `%` 결과와 비교한다. 덧셈·곱셈의 모듈러 성질을 작은 값으로 검증한다.","done":"모듈러 연산을 말로 설명하고 계산 결과를 직접 검산할 수 있다.","record":"계산 예시, 적용한 규칙, 실수한 부분과 검산 과정을 기록한다.","next":"치환 암호와 빈도 분석의 기초를 살펴본다."},{"goal":"치환 암호의 구조와 빈도 분석의 기본 아이디어를 이해한다.","prereq":"문자열 처리와 빈도 세기.","practice":"교육용 짧은 암호문에 Caesar shift를 적용해 모든 이동값을 시험하고, 문자 빈도를 표로 만든다. 실제 계정이나 데이터는 사용하지 않는다.","done":"키 공간이 작은 고전 암호의 한계와 빈도 분석의 가정을 설명한다.","record":"암호문, 시도한 이동값, 관찰한 빈도, 정답을 판단한 근거를 기록한다.","next":"해시의 목적과 암호학적 해시의 성질을 구분한다."},{"goal":"해시의 고정 길이 출력과 무결성 확인의 목적을 이해한다.","prereq":"파일 읽기와 문자열/바이트 개념.","practice":"같은 파일의 해시를 두 번 계산해 비교하고, 한 바이트만 바꾼 복사본의 해시를 비교한다. 비밀번호 저장은 전용 느린 해시 함수가 필요함을 조사한다.","done":"해시와 암호화의 차이, 해시만으로 원본을 복원할 수 없다는 점을 설명한다.","record":"알고리즘, 파일 버전, 해시 비교, 해시 사용 시 주의점을 기록한다.","next":"Python으로 바이트와 파일을 처리하는 작은 도구를 만든다."},{"goal":"입력 파일을 읽고 변환 또는 분석 결과를 재현 가능하게 출력한다.","prereq":"Python 함수, 파일 입출력, 문자열·바이트 기초.","practice":"로컬 텍스트 파일의 줄 수와 SHA-256 해시를 출력하는 스크립트를 작성한다. 파일 없음/빈 파일 같은 오류를 처리한다.","done":"스크립트가 입력을 검증하고 결과를 일관된 형식으로 출력한다.","record":"사용법, 입력 예시, 출력 예시, 예외 처리와 테스트를 README에 남긴다.","next":"CTF 문제 설명에서 유형·제약·단서를 추출한다."},{"goal":"문제 설명의 단서로 분야와 접근 전략을 정하고 작은 실험을 설계한다.","prereq":"기초 Python과 인코딩·정수 연산 개념.","practice":"허가된 초급 CTF 문제 하나를 골라 요구사항, 제공 파일, 단서, 가능한 분야를 표로 정리한다. 풀이 전 첫 가설과 검증할 실험을 적는다.","done":"왜 그 분야로 분류했는지 근거를 설명하고 무작정 도구를 돌리지 않는다.","record":"문제 원문 요약, 단서, 가설, 첫 실험, 결과와 다음 질문을 기록한다.","next":"풀이를 재현 가능한 단계와 검증 근거로 정리한다."},{"goal":"풀이 과정을 재현하고 실패한 접근도 학습 자료로 정리한다.","prereq":"초급 CTF 문제를 한 번 시도한 경험.","practice":"자신이 푼 문제 하나를 깨끗한 환경에서 다시 풀고, 풀이 단계를 명령/코드와 함께 정리한다. 가능하면 입력 검증이나 대체 방법으로 결과를 확인한다.","done":"다른 사람이 기록을 따라 같은 결과를 얻고, 핵심 아이디어를 이해할 수 있다.","record":"문제 유형, 가설, 재현 절차, 코드, 결과, 실패한 접근, 남은 의문을 기록한다.","next":"흥미가 가장 컸던 유형을 골라 다음 심화 주제를 정한다."}]};
 const STORAGE_KEY="whl_progress_v1";
+// 연결 트랙은 기존 진도 저장 형식과 차시 수를 변경하지 않는 안내용 메타데이터입니다.
+const relatedTracks={foundation:["web","pwn","rev","forensic","crypto"],web:["foundation","forensic"],pwn:["foundation","rev"],rev:["foundation","pwn"],forensic:["foundation","web","crypto"],crypto:["foundation","forensic"]};
+const trackLabels={foundation:"기초 역량",web:"Web Security",pwn:"Pwn / System",rev:"Reverse Engineering",forensic:"Forensic / Network",crypto:"Crypto / Misc"};
+function completedCount(key){return tracks[key].lessons.filter((_,i)=>(progress[key]||[]).includes(i)).length}
+function nextLearningSuggestion(key){
+ const done=progress[key]||[], total=tracks[key].lessons.length;
+ const incomplete=tracks[key].lessons.findIndex((_,i)=>!done.includes(i));
+ if(incomplete>=0) return {title:`다음 추천: ${incomplete+1}차시 · ${tracks[key].lessons[incomplete][0]}`,body:done.length?`현재 ${done.length}/${total}차시를 완료했습니다. 이 차시의 목표와 완료 기준을 확인하고 실습을 진행하세요.`:"아직 완료 표시된 차시가 없습니다. 첫 차시부터 목표와 완료 기준을 확인하며 시작하세요.",lesson:incomplete};
+ const related=(relatedTracks[key]||[]).find(k=>completedCount(k)<tracks[k].lessons.length);
+ if(related) return {title:"다음 추천: 연결 트랙으로 확장하기",body:`현재 트랙을 모두 완료했습니다. ${trackLabels[related]} 트랙에서 다음 학습을 이어가거나, 아래 연결 트랙을 선택하세요.`,track:related};
+ return {title:"다음 추천: 작은 포트폴리오 프로젝트",body:"모든 트랙을 완료했습니다. 관심 주제 하나를 골라 목표·환경·재현 절차·결과·한계를 README로 정리하는 작은 프로젝트를 만들어 보세요."};
+}
 let progress={};
 try{progress=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")||{}}catch(e){progress={}}
 let activeTrack="foundation";
@@ -163,14 +487,43 @@ function renderTrack(key){
  el.innerHTML=`<div class="track-detail-head"><div><div class="kicker mono">LEARNING TRACK</div><h3>${t.title}</h3><p>${t.subtitle}</p></div><span class="pill" style="background:#e5f6f4;color:#087f8c;border-color:#c9eae7">${t.level}</span></div>
  <div class="track-meta"><span class="meta-chip">◷ ${t.time}</span><span class="meta-chip">${t.lessons.length}개 차시</span><span class="meta-chip">개념 + 실습 + 기록</span></div>
  <div class="progress-label"><span>나의 학습 진도</span><strong id="progressText">${completed} / ${t.lessons.length} 완료 · ${percent}%</strong></div><div class="progress"><div id="progressFill" style="width:${percent}%"></div></div>
- <div class="lesson-list">${t.lessons.map((lesson,i)=>{const p=lessonPlans[key][i];return `<article class="lesson-item ${done.includes(i)?"done":""}"><label class="lesson-check"><input type="checkbox" data-lesson="${i}" ${done.includes(i)?"checked":""}><span><strong>${i+1}. ${lesson[0]}</strong><small>${lesson[1]}</small></span></label><details class="lesson-plan"><summary>학습 계획 펼치기 · 목표 / 실습 / 완료 기준</summary><div class="lesson-plan-grid"><div class="lesson-plan-card"><strong>학습 목표</strong><p>${p.goal}</p></div><div class="lesson-plan-card"><strong>선행 지식</strong><p>${p.prereq}</p></div><div class="lesson-plan-card wide"><strong>구체적인 실습 방법</strong><p>${p.practice}${key==="foundation"&&i===3?' <a class="inline-guide-link" href="#linux-guide" onclick="openLinuxGuide(); return false;">Windows에서 Linux 환경 준비하기 가이드 ↗</a>':""}</p></div><div class="lesson-plan-card"><strong>완료 기준</strong><p>${p.done}</p></div><div class="lesson-plan-card"><strong>기록할 내용</strong><p>${p.record}</p></div><div class="lesson-plan-card wide"><strong>다음 단계</strong><p>${p.next}</p></div></div></details></article>`}).join("")}</div>
+ <section class="learning-helper" aria-label="다음 학습 추천"><strong>${nextLearningSuggestion(key).title}</strong><p>${nextLearningSuggestion(key).body}</p>${nextLearningSuggestion(key).lesson!==undefined?`<p>추천 차시의 완료 기준: ${lessonPlans[key][nextLearningSuggestion(key).lesson].done}</p>`:""}</section>
+ <section class="learning-helper" aria-label="연결된 학습 트랙"><strong>함께 보면 좋은 트랙</strong><p>현재 주제와 연결되는 분야입니다. 관심에 따라 자유롭게 이동할 수 있습니다.</p><div class="track-links">${(relatedTracks[key]||[]).map(r=>`<button type="button" class="track-link" data-related-track="${r}">${trackLabels[r]} · ${completedCount(r)}/${tracks[r].lessons.length}</button>`).join("")}</div></section>
+ <div class="lesson-list">${t.lessons.map((lesson,i)=>{const p=lessonPlans[key][i];return `<article class="lesson-item ${done.includes(i)?"done":""}"><label class="lesson-check"><input type="checkbox" data-lesson="${i}" ${done.includes(i)?"checked":""}><span><strong>${i+1}. ${lesson[0]}</strong><small>${lesson[1]}</small><small class="lesson-goal">목표: ${p.goal}</small></span></label><details class="lesson-plan"><summary>학습 계획 펼치기 · 목표 / 실습 / 완료 기준</summary><div class="lesson-plan-grid"><div class="lesson-plan-card"><strong>학습 목표</strong><p>${p.goal}</p></div><div class="lesson-plan-card"><strong>선행 지식</strong><p>${p.prereq}</p></div><div class="lesson-plan-card wide"><strong>구체적인 실습 방법</strong><p>${p.practice}${key==="foundation"&&i===3?' <a class="inline-guide-link" href="#linux-guide" onclick="openLinuxGuide(); return false;">Windows에서 Linux 환경 준비하기 가이드 ↗</a>':""}</p></div><div class="lesson-plan-card"><strong>완료 기준</strong><p>${p.done}</p></div><div class="lesson-plan-card"><strong>기록할 내용</strong><p>${p.record}</p></div><div class="lesson-plan-card wide"><strong>다음 단계</strong><p>${p.next}</p></div></div></details></article>`}).join("")}</div>
  <div class="track-foot"><strong>이 가이드의 목표</strong><br>${t.goal}<br><br><strong>다음 단계</strong><br>${t.next}</div>`;
  el.querySelectorAll('input[type="checkbox"]').forEach(box=>box.addEventListener("change",()=>{
    const arr=new Set(progress[key]||[]);const i=Number(box.dataset.lesson);if(box.checked)arr.add(i);else arr.delete(i);progress[key]=[...arr].sort((a,b)=>a-b);saveProgress();renderTrack(key);
  }));
+ el.querySelectorAll("[data-related-track]").forEach(button=>button.addEventListener("click",()=>renderTrack(button.dataset.relatedTrack)));
 }
 document.querySelectorAll(".track-button").forEach(b=>b.addEventListener("click",()=>renderTrack(b.dataset.track)));
 renderTrack(activeTrack);
+
+// Theme preference is independent of learning progress and persists across visits.
+(function initThemeToggle(){
+ const root=document.documentElement;
+ const button=document.getElementById('themeToggle');
+ if(!button)return;
+ let saved=null;
+ try{saved=localStorage.getItem('bifrost_theme_v1')}catch(_e){}
+ const preferred=saved==='dark'||saved==='light'?saved:(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+ function applyTheme(theme){
+  root.dataset.theme=theme;
+  const dark=theme==='dark';
+  button.setAttribute('aria-pressed',String(dark));
+  button.setAttribute('aria-label',dark?'라이트 모드로 전환':'다크 모드로 전환');
+  button.innerHTML=dark?'<span class="theme-icon" aria-hidden="true">☀</span><span class="theme-label">라이트 모드</span>':'<span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">다크 모드</span>';
+  const meta=document.querySelector('meta[name="theme-color"]');
+  if(meta)meta.content=dark?'#0d1421':'#101a30';
+ }
+ applyTheme(preferred);
+ button.addEventListener('click',()=>{
+  const next=root.dataset.theme==='dark'?'light':'dark';
+  applyTheme(next);
+  try{localStorage.setItem('bifrost_theme_v1',next)}catch(_e){}
+ });
+})();
+
 </script>
 
 <style>
@@ -181,38 +534,55 @@ renderTrack(activeTrack);
 #linuxGuideClose:hover{filter:brightness(1.15)}
 body.guide-open{overflow:hidden}
 </style>
-<div id="linuxGuideOverlay" aria-hidden="true">
+<div id="linuxGuideOverlay" role="dialog" aria-modal="true" aria-label="Windows에서 Linux 시작하기" aria-hidden="true">
   <button id="linuxGuideClose" type="button" onclick="showMainGuide()">← 학습 로드맵</button>
   <iframe id="linuxGuideFrame" title="Windows에서 Linux 시작하기" loading="lazy"></iframe>
 </div>
 <script>
 const linuxGuideHTML = "<!doctype html>\n<html lang=\"ko\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<meta name=\"theme-color\" content=\"#101a2b\">\n<title>Windows에서 Linux 시작하기 | Bifrost</title>\n<style>\n:root{--navy:#101a2b;--navy2:#17263d;--teal:#087f8c;--teal-soft:#e5f6f4;--ink:#182337;--muted:#637086;--line:#e1e7ee;--paper:#f5f7fa;--white:#fff;--blue-soft:#eaf1ff;--radius:18px;--shadow:0 10px 30px rgba(16,26,43,.07)}\n*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:\"Noto Sans KR\",-apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;line-height:1.75}a{color:var(--teal);font-weight:700;text-underline-offset:3px}.wrap{width:min(100% - 36px,1000px);margin-inline:auto}.hero{background:radial-gradient(ellipse at 90% 8%,#9b8cff2b 0%,transparent 36%),linear-gradient(120deg,var(--navy),#1b2a47 72%,#203954);color:#fff;padding:34px 0 42px}.brand{font-size:13px;letter-spacing:.14em;font-weight:800;color:#9b8cff}.eyebrow{margin:26px 0 8px;color:#9b8cff;font-size:12px;font-weight:800;letter-spacing:.14em}.hero h1{font-size:clamp(30px,5vw,46px);line-height:1.2;letter-spacing:-.04em;margin:0 0 14px}.hero p{max-width:760px;color:#d6e1ed;margin:0;font-size:16px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 15px;border-radius:11px;background:#fff;color:var(--navy);text-decoration:none;font-weight:800}.btn.secondary{background:linear-gradient(110deg,#5ce1e61a,#9b8cff24);border:1px solid #9b8cff66;color:#fff}.section{padding:28px 0}.section-head{margin-bottom:18px}.kicker{font-size:11px;letter-spacing:.13em;font-weight:800;color:var(--teal)}h2{font-size:25px;letter-spacing:-.03em;margin:3px 0 7px}h3{font-size:18px;margin:0 0 8px}p{margin:8px 0}.muted{color:var(--muted)}.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);margin:14px 0}.tag{display:inline-block;border-radius:999px;padding:3px 9px;background:var(--teal-soft);color:var(--teal);font-size:12px;font-weight:800;margin-bottom:9px}.steps{counter-reset:step;display:grid;gap:12px}.step{counter-increment:step;display:grid;grid-template-columns:42px 1fr;gap:13px;align-items:start;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.step:before{content:counter(step,decimal-leading-zero);display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:#eeedff;color:#5b63c7;font-weight:900}.step p{margin:3px 0}.code{position:relative;background:#101a2b;color:#e8f0fa;padding:15px 16px;border-radius:12px;overflow:auto;font:14px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre}.copy-note{font-size:12px;color:var(--muted);margin-top:5px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid .card{margin:0;box-shadow:none}.callout{border-left:4px solid var(--teal);background:var(--teal-soft);padding:15px 17px;border-radius:0 12px 12px 0;margin:16px 0}.warning{border-left-color:#d38b25;background:#fff6e8}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden}th,td{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid var(--line)}th{background:#edf2f7;font-size:13px}td{font-size:14px}.footer{padding:25px 0;background:var(--navy);color:#d6e1ed;font-size:12px;margin-top:25px}.footer a{color:#9b8cff}@media(max-width:650px){.wrap{width:min(100% - 24px,1000px)}.hero{padding:26px 0 32px}.grid{grid-template-columns:1fr}.card{padding:17px}.step{grid-template-columns:36px 1fr;padding:13px}.step:before{width:34px;height:34px}th,td{padding:9px}}\n</style>\n</head>\n<body>\n<header class=\"hero\"><div class=\"wrap\"><div class=\"brand\">Bifrost</div><div class=\"eyebrow\">WINDOWS → LINUX · BEGINNER GUIDE</div><h1>Windows에서 Linux 시작하기</h1><p>Windows를 지우거나 컴퓨터를 새로 설치할 필요 없이 Linux 명령어와 보안 학습 도구를 익힐 수 있습니다. 처음 시작한다면 대부분의 경우 WSL 2와 Ubuntu 조합이 가장 간단합니다.</p><div class=\"hero-actions\"><a class=\"btn\" href=\"#\" onclick=\"parent.showMainGuide(); return false;\">← 학습 로드맵으로 돌아가기</a><a class=\"btn secondary\" href=\"#wsl-install\" onclick=\"event.preventDefault(); document.getElementById('wsl-install').scrollIntoView({behavior:'smooth', block:'start'}); return false;\">WSL 설치 단계 보기 ↓</a></div></div></header>\n<main class=\"wrap\">\n<section class=\"section\"><div class=\"section-head\"><div class=\"kicker\">01 / CHOOSE YOUR ENVIRONMENT</div><h2>어떤 방법으로 시작하면 좋을까?</h2><p class=\"muted\">처음에는 복잡한 구성을 만들기보다, 터미널을 열고 기본 명령어를 실행할 수 있는 환경부터 준비하세요.</p></div>\n<div class=\"grid\"><article class=\"card\"><span class=\"tag\">초보자 추천</span><h3>WSL 2 + Ubuntu</h3><p>Windows 안에서 Linux 환경을 실행합니다. Windows와 Linux 도구를 함께 사용하기 편하고, 기초 터미널·Python·Git·네트워크 학습에 적합합니다.</p><p><b>추천 상황:</b> Windows를 주 운영체제로 유지하면서 Linux 명령어부터 배우고 싶을 때.</p></article><article class=\"card\"><span class=\"tag\" style=\"background:var(--blue-soft);color:#2859a8\">별도 환경 필요</span><h3>가상 머신(Virtual Machine)</h3><p>VirtualBox 같은 프로그램 안에 Ubuntu 전체 운영체제를 설치합니다. 데스크톱 환경이나 가상 네트워크 구성이 필요한 실습에 유용하지만 메모리와 디스크 공간이 더 필요합니다.</p><p><b>추천 상황:</b> 별도 Linux 데스크톱이나 격리된 실습용 VM이 필요할 때.</p></article></div>\n<div class=\"callout\"><b>추천 경로:</b> WSL 2 설치 → Ubuntu 터미널 익숙해지기 → Python/Git → 필요해질 때 가상 머신 추가. 처음부터 듀얼 부팅을 구성할 필요는 없습니다.</div></section>\n<section class=\"section\" id=\"wsl-install\"><div class=\"section-head\"><div class=\"kicker\">02 / WSL 2 SETUP</div><h2>WSL 2와 Ubuntu 설치하기</h2><p class=\"muted\">아래 단계는 지원되는 Windows 10/11 환경을 기준으로 합니다. Windows 버전과 장치 정책에 따라 메뉴나 안내 문구가 조금 다를 수 있습니다.</p></div>\n<div class=\"steps\"><article class=\"step\"><div><h3>Windows 버전 확인</h3><p>Windows Update를 열어 가능한 최신 업데이트를 적용합니다. 회사·학교에서 관리하는 PC라면 WSL 설치 권한이 제한될 수 있습니다.</p><p>시작 메뉴에서 <b>PowerShell</b>을 검색합니다. 설치 명령을 실행할 때는 관리자 권한이 필요할 수 있습니다.</p></div></article><article class=\"step\"><div><h3>WSL 설치 명령 실행</h3><p>PowerShell을 관리자 권한으로 열고 아래 명령을 실행합니다.</p><pre class=\"code\">wsl --install</pre><p>기본 Linux 배포판으로 Ubuntu가 설치되는 경우가 많습니다. 다른 배포판을 선택할 수 있는 환경이라면 설치 가능한 배포판을 먼저 확인할 수도 있습니다.</p><pre class=\"code\">wsl --list --online</pre></div></article><article class=\"step\"><div><h3>재시작하고 Ubuntu 첫 실행</h3><p>Windows가 재시작을 요청하면 재시작합니다. 시작 메뉴에서 <b>Ubuntu</b>를 실행하고, 첫 설정에서 Linux 사용자 이름과 비밀번호를 만듭니다.</p><p>Linux 비밀번호 입력 중에는 화면에 글자가 표시되지 않는 것이 정상입니다. Windows 계정 비밀번호와 별개로 설정할 수 있습니다.</p></div></article><article class=\"step\"><div><h3>설치 상태와 버전 확인</h3><p>PowerShell에서 WSL 상태와 배포판을 확인합니다.</p><pre class=\"code\">wsl --status\nwsl --list --verbose</pre><p>배포판의 VERSION이 2인지 확인합니다. 필요할 때는 설치된 배포판 이름을 확인한 뒤 아래 형식으로 버전을 지정할 수 있습니다.</p><pre class=\"code\">wsl --set-version Ubuntu 2</pre><p class=\"copy-note\">배포판 이름은 장치에 표시된 실제 이름을 사용하세요.</p></div></article><article class=\"step\"><div><h3>Ubuntu 패키지 목록 업데이트</h3><p>Ubuntu 터미널에서 다음 명령을 실행합니다.</p><pre class=\"code\">sudo apt update\nsudo apt upgrade</pre><p><code>sudo</code>는 관리자 권한으로 명령을 실행할 때 사용합니다. 비밀번호를 묻는 경우 Ubuntu를 처음 설정할 때 만든 Linux 비밀번호를 입력합니다.</p></div></article></div></section>\n<section class=\"section\"><div class=\"section-head\"><div class=\"kicker\">03 / FIRST COMMANDS</div><h2>처음 연습할 Linux 명령어</h2><p class=\"muted\">명령어를 한 줄씩 입력하고, 출력이 무엇을 뜻하는지 직접 설명해 보세요.</p></div><div class=\"table-wrap\"><table><thead><tr><th>명령어</th><th>역할</th><th>연습 예시</th></tr></thead><tbody><tr><td><code>pwd</code></td><td>현재 위치 표시</td><td>지금 어느 디렉터리에 있는지 확인</td></tr><tr><td><code>ls</code></td><td>파일·폴더 목록 보기</td><td>현재 폴더의 항목 확인</td></tr><tr><td><code>cd</code></td><td>디렉터리 이동</td><td><code>cd ~</code>로 Linux 홈으로 이동</td></tr><tr><td><code>mkdir</code></td><td>폴더 만들기</td><td><code>mkdir bifrost-practice</code></td></tr><tr><td><code>cp</code> / <code>mv</code></td><td>복사 / 이동·이름 변경</td><td>연습용 텍스트 파일 복사해 보기</td></tr><tr><td><code>cat</code></td><td>파일 내용 출력</td><td>작은 텍스트 파일 읽기</td></tr><tr><td><code>grep</code></td><td>텍스트에서 패턴 찾기</td><td><code>grep \"hello\" sample.txt</code></td></tr><tr><td><code>man</code> / <code>--help</code></td><td>도움말 확인</td><td><code>ls --help</code></td></tr></tbody></table></div><div class=\"card\"><h3>첫 번째 미니 실습</h3><pre class=\"code\">mkdir -p ~/bifrost-practice\ncd ~/bifrost-practice\nprintf 'Bifrost\\nLinux practice\\n' > notes.txt\npwd\nls -l\ncat notes.txt\ngrep 'Linux' notes.txt</pre><p>완료 기준: 폴더를 만들고 파일을 작성한 뒤 내용을 확인하고, 각 명령어가 한 일을 자신의 말로 설명할 수 있습니다.</p></div></section>\n<section class=\"section\"><div class=\"section-head\"><div class=\"kicker\">04 / WINDOWS & LINUX FILES</div><h2>Windows 파일과 Linux 파일은 어디에 있을까?</h2></div><div class=\"card\"><p>WSL 안에서는 Linux 홈 디렉터리인 <code>~</code> 아래에 학습 폴더를 만드는 것을 권장합니다.</p><pre class=\"code\">mkdir -p ~/projects/bifrost</pre><p>Windows 드라이브는 일반적으로 Linux에서 <code>/mnt/c/</code> 같은 경로로 접근할 수 있습니다. 예를 들어 C 드라이브의 파일은 <code>/mnt/c/Users/Windows사용자이름/</code> 아래에 있을 수 있습니다.</p><div class=\"callout warning\"><b>초보자 팁:</b> Linux 명령어를 많이 사용하는 프로젝트는 Linux 홈 디렉터리 안에 두면 편리합니다. Windows 앱에서 파일을 직접 편집할 때는 WSL의 파일 접근 방식과 권한 차이를 이해하고 사용하세요. 경로의 대소문자와 슬래시 방향도 Windows와 다를 수 있습니다.</div></div></section>\n<section class=\"section\"><div class=\"section-head\"><div class=\"kicker\">05 / TROUBLESHOOTING</div><h2>설치가 안 될 때 확인할 것</h2></div><div class=\"card\"><ul><li><b>`wsl` 명령을 찾을 수 없음:</b> Windows 업데이트 상태와 WSL 설치 여부를 확인하고, 설치 후 재시작합니다.</li><li><b>가상화 관련 오류:</b> 장치의 가상화 기능이 활성화되어 있는지 확인합니다. BIOS/UEFI 설정 변경은 장치 제조사 안내를 따릅니다.</li><li><b>회사·학교 PC에서 권한 오류:</b> 관리자 정책으로 설치가 제한됐을 수 있으므로 관리자에게 문의합니다.</li><li><b>배포판 실행 오류:</b> `wsl --list --verbose`로 배포판 이름과 상태를 확인하고, Windows와 WSL 업데이트를 점검합니다.</li><li><b>공간이 부족함:</b> 불필요한 패키지와 파일을 정리하고, 가상 머신을 사용한다면 디스크 크기와 메모리를 확인합니다.</li></ul></div><div class=\"callout\"><b>다음 단계:</b> 이 환경에서 Foundation 트랙의 「개발 환경과 터미널」과 「Linux와 권한」 차시를 진행한 뒤, 네트워크 기초와 관심 분야 실습으로 넘어가세요.</div></section>\n<section class=\"section\"><div class=\"section-head\"><div class=\"kicker\">06 / OFFICIAL RESOURCES</div><h2>공식 안내와 참고 자료</h2></div><div class=\"grid\"><article class=\"card\"><h3>Microsoft WSL 안내</h3><p class=\"muted\">WSL 설치와 기본 사용법</p><a href=\"https://learn.microsoft.com/windows/wsl/install\" target=\"_blank\" rel=\"noopener noreferrer\">공식 설치 가이드 열기 ↗</a></article><article class=\"card\"><h3>Ubuntu 공식 문서</h3><p class=\"muted\">Ubuntu 사용과 패키지 관리</p><a href=\"https://documentation.ubuntu.com/\" target=\"_blank\" rel=\"noopener noreferrer\">공식 문서 열기 ↗</a></article></div></section>\n<div class=\"callout warning\"><b>보안 실습 원칙:</b> WSL이나 가상 머신을 설치했다고 모든 실습이 자동으로 안전해지는 것은 아닙니다. 본인 소유 또는 명시적으로 허가된 시스템, 로컬 샘플, 교육용 랩에서만 실습하세요. 출처를 모르는 실행 파일은 실행하지 마세요.</div>\n</main><footer class=\"footer\"><div class=\"wrap\"><b>Bifrost</b><br>Learn the concept. Practice with intent. Document what you discover.<br><a href=\"#\" onclick=\"parent.showMainGuide(); return false;\">학습 로드맵으로 돌아가기 ↗</a></div></footer>\n</body></html>";
-function openLinuxGuide() {
+let guideReturnFocus = null;
+function revealLinuxGuide({pushHistory=false}={}) {
   const overlay = document.getElementById("linuxGuideOverlay");
   const frame = document.getElementById("linuxGuideFrame");
-  if (!frame.dataset.loaded) {
-    frame.srcdoc = linuxGuideHTML;
-    frame.dataset.loaded = "true";
-  }
+  if (!frame.dataset.loaded) { frame.srcdoc = linuxGuideHTML; frame.dataset.loaded = "true"; }
+  guideReturnFocus = guideReturnFocus || document.activeElement;
   overlay.classList.add("active");
   overlay.setAttribute("aria-hidden", "false");
   document.body.classList.add("guide-open");
-  if (location.hash !== "#linux-guide") history.pushState({guide:"linux"}, "", "#linux-guide");
+  document.querySelectorAll("body > header, body > main, body > footer").forEach(node=>{node.inert=true;});
+  if (pushHistory && location.hash !== "#linux-guide") {
+    history.pushState({...((history.state && typeof history.state==="object")?history.state:{}), bifrostGuide:"linux"}, "", "#linux-guide");
+  }
+  document.getElementById("linuxGuideClose").focus({preventScroll:true});
   window.scrollTo(0,0);
 }
-function showMainGuide() {
+function openLinuxGuide() {
+  revealLinuxGuide({pushHistory:location.hash !== "#linux-guide"});
+}
+function hideLinuxGuide({restoreFocus=true, clearHash=false}={}) {
   const overlay = document.getElementById("linuxGuideOverlay");
   overlay.classList.remove("active");
   overlay.setAttribute("aria-hidden", "true");
   document.body.classList.remove("guide-open");
-  if (location.hash === "#linux-guide") history.replaceState({}, "", location.pathname + location.search);
+  document.querySelectorAll("body > header, body > main, body > footer").forEach(node=>{node.inert=false;});
+  if (clearHash && location.hash === "#linux-guide") history.replaceState((history.state && typeof history.state==="object")?history.state:{}, "", location.pathname + location.search);
+  if (restoreFocus && guideReturnFocus && typeof guideReturnFocus.focus === "function") guideReturnFocus.focus({preventScroll:true});
+  guideReturnFocus = null;
+}
+function showMainGuide() {
+  // 앱에서 연 가이드는 뒤로 가기와 같은 동작으로 닫아 앞으로 가기로 다시 열 수 있게 합니다.
+  if (location.hash === "#linux-guide" && history.state && history.state.bifrostGuide === "linux") { history.back(); return; }
+  hideLinuxGuide({clearHash:true});
   window.scrollTo(0,0);
 }
-window.addEventListener("popstate", () => {
-  if (location.hash === "#linux-guide") openLinuxGuide();
-  else showMainGuide();
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && document.getElementById("linuxGuideOverlay").classList.contains("active")) { event.preventDefault(); showMainGuide(); }
 });
-if (location.hash === "#linux-guide") openLinuxGuide();
+window.addEventListener("popstate", () => {
+  if (location.hash === "#linux-guide") revealLinuxGuide();
+  else hideLinuxGuide({restoreFocus:true});
+});
+if (location.hash === "#linux-guide") revealLinuxGuide();
 </script>
 
 </body>
