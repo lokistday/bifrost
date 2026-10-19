@@ -1,2 +1,0 @@
-/* Linux guide overlay and iframe sizing. */
-.practice-habits .card{display:flex;flex-direction:column;gap:8px}.practice-habits .card h3{margin:4px 0 0}.practice-habits .card p{margin:0}.practice-habits .outcome{margin-top:auto}@media(max-width:800px){.practice-habits{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.practice-habits{grid-template-columns:1fr}}
