@@ -22,7 +22,7 @@
 .core-orbit{position:absolute;inset:-13px;border:1px solid #5ce1e62b;border-radius:42% 58% 52% 48%;pointer-events:none}
 .orbit-one{transform:rotate(32deg);animation:orbit 18s linear infinite}.orbit-two{inset:-22px;border-color:#9b8cff2b;border-radius:58% 42% 47% 53%;transform:rotate(-25deg);animation:orbit 24s linear infinite reverse}
 @keyframes orbit{to{rotate:360deg}}
-.core-mark{display:grid;place-items:center;width:39px;height:39px;border-radius:13px;background:#5ce1e61a;border:1px solid #5ce1e655;color:#70e8ec;font-size:27px;line-height:1;margin-bottom:9px}
+.core-mark{display:grid;place-items:center;width:39px;height:39px;border-radius:13px;background:#5ce1e61a;border:1px solid #5ce1e655;color:#70e8ec;line-height:1;margin-bottom:9px}.core-mark .bifrost-star{width:24px;height:24px;display:block;filter:drop-shadow(0 0 7px #5ce1e666)}
 .map-core strong{font-size:14px;letter-spacing:.2em;color:#f1f6ff}.map-core>small{font:9px "DM Mono",monospace;letter-spacing:.12em;color:#8ba5c1;margin-top:4px}
 .core-status{display:flex;align-items:center;gap:7px;margin-top:13px;color:#77b6c2;font:8px "DM Mono",monospace;letter-spacing:.09em}
 .core-status b{width:5px;height:5px}
