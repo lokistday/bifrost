@@ -30,6 +30,7 @@
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/overlays.css">
+<link rel="stylesheet" href="css/mindmap.css">
 </head>
 <body>
 <header class="topbar"><div class="wrap nav">
@@ -38,26 +39,44 @@
 <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">다크 모드</span></button>
 <a class="nav-cta" href="#study">학습 시작하기 ↗</a>
 </div></header>
-<main id="home">
-<section class="hero-shell"><div class="wrap hero">
-<div>
-<div class="eyebrow"><span class="dot"></span> A CLEAR PATH INTO CYBERSECURITY</div>
-<h1>보안 공부,<br><span>어디서부터</span><br>시작할까?</h1>
-<p class="lead">공부할 것은 많은데 순서가 막막하다면, 여기서 시작하세요. 기초부터 분야 탐색, 실습과 결과물까지 다음 단계가 보이는 보안 학습 가이드입니다.</p>
-<div class="hero-actions"><a class="btn primary" href="#roadmap">로드맵 살펴보기 <span>→</span></a><a class="btn" href="#study">분야별 학습 시작</a></div>
-<div class="hero-note">초보자도 시작할 수 있도록 · 단계별 학습 · 직접 해보는 실습</div>
-</div>
-<aside class="route-card">
-<div class="route-top"><span class="mono">YOUR LEARNING ROUTE</span><span class="pill">START HERE</span></div>
-<h2>막막함을 작은 단계로 나누기</h2><p>모든 분야를 한 번에 잘할 필요는 없습니다. 기초를 익히고, 직접 시도하고, 나에게 맞는 분야를 찾아가세요.</p>
-<div class="route-list">
-<div class="route-step"><span class="route-num">01</span><div><strong>관심 분야 먼저 정하기</strong><small>잘 몰라도 괜찮아요 · 방향부터 탐색</small></div></div>
-<div class="route-step"><span class="route-num">02</span><div><strong>공통 기초와 선택 분야 병행</strong><small>프로그래밍 · Linux · 네트워크</small></div></div>
-<div class="route-step"><span class="route-num">03</span><div><strong>분야별 입문 실습하기</strong><small>Web · Pwn · Rev · Forensic · Crypto</small></div></div>
-<div class="route-step"><span class="route-num">04</span><div><strong>경험을 바탕으로 방향 조정</strong><small>작은 프로젝트 · 기록 · 분야 재선택</small></div></div>
-</div>
-</aside>
-</div></section>
+<main id="home">\n
+<section class="mindmap-shell" id="mindmap" aria-labelledby="mindmap-title">
+  <div class="mindmap-wrap">
+    <div class="mindmap-intro">
+      <div class="eyebrow"><span class="dot"></span> EXPLORE YOUR SECURITY PATH</div>
+      <h1 id="mindmap-title">보안의 세계를<br><span>연결해서 탐험하다.</span></h1>
+      <p>하나의 기초에서 시작해, 호기심이 향하는 분야로 뻗어 나가세요.<br>노드를 선택하면 해당 학습 트랙으로 이동합니다.</p>
+      <div class="mindmap-hint"><span class="hint-pulse"></span> 노드를 선택해 탐험 시작하기</div>
+    </div>
+    <div class="mindmap-stage" role="group" aria-label="Bifrost 보안 학습 분야 마인드맵">
+      <svg class="mindmap-lines" viewBox="0 0 900 590" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <linearGradient id="line-cyan"><stop stop-color="#5ce1e6" stop-opacity=".16"/><stop offset="1" stop-color="#5ce1e6" stop-opacity=".9"/></linearGradient>
+          <linearGradient id="line-violet"><stop stop-color="#9b8cff" stop-opacity=".12"/><stop offset="1" stop-color="#9b8cff" stop-opacity=".9"/></linearGradient>
+          <linearGradient id="line-pink"><stop stop-color="#f28ccb" stop-opacity=".12"/><stop offset="1" stop-color="#f28ccb" stop-opacity=".85"/></linearGradient>
+        </defs>
+        <path class="synapse cyan" d="M450 295 C365 255 344 160 245 145 S145 112 115 90"/>
+        <path class="synapse violet" d="M450 295 C510 245 530 160 650 145 S735 110 785 92"/>
+        <path class="synapse pink" d="M450 295 C345 305 310 340 230 350 S140 385 100 420"/>
+        <path class="synapse cyan" d="M450 295 C550 300 590 330 675 350 S755 390 800 430"/>
+        <path class="synapse violet" d="M450 295 C405 375 400 425 355 470 S325 515 300 545"/>
+        <path class="synapse pink" d="M450 295 C510 375 535 420 570 465 S605 515 635 545"/>
+        <path class="synapse faint" d="M115 90 C180 205 150 285 230 350"/>
+        <path class="synapse faint" d="M785 92 C710 190 755 285 675 350"/>
+        <circle class="junction" cx="245" cy="145" r="3"/><circle class="junction" cx="650" cy="145" r="3"/>
+        <circle class="junction" cx="230" cy="350" r="3"/><circle class="junction" cx="675" cy="350" r="3"/>
+      </svg>
+      <button class="map-node node-foundation" data-map-track="foundation"><span class="node-number">00 / CORE</span><strong>Foundation</strong><small>기초 역량</small><i>터미널 · 코드 · 네트워크</i></button>
+      <button class="map-node node-web" data-map-track="web"><span class="node-number">01 / WEB</span><strong>Web Security</strong><small>웹 보안</small><i>요청 · 인증 · 취약점</i></button>
+      <button class="map-node node-pwn" data-map-track="pwn"><span class="node-number">02 / SYSTEM</span><strong>Pwn / System</strong><small>시스템 보안</small><i>메모리 · 디버깅</i></button>
+      <button class="map-node node-rev" data-map-track="rev"><span class="node-number">03 / REVERSE</span><strong>Reverse Engineering</strong><small>리버싱</small><i>분석 · 실행 흐름</i></button>
+      <button class="map-node node-forensic" data-map-track="forensic"><span class="node-number">04 / FORENSIC</span><strong>Forensic / Network</strong><small>포렌식 · 네트워크</small><i>흔적 · 패킷 · 로그</i></button>
+      <button class="map-node node-crypto" data-map-track="crypto"><span class="node-number">05 / CRYPTO</span><strong>Crypto / Misc</strong><small>암호 · 문제 해결</small><i>수학 · 규칙 · 퍼즐</i></button>
+      <div class="map-core"><span class="core-orbit orbit-one"></span><span class="core-orbit orbit-two"></span><div class="core-mark">⌁</div><strong>BIFROST</strong><small>SECURITY LEARNING MAP</small><span class="core-status"><b></b> PATHS CONNECTED</span></div>
+      <div class="map-caption">ONE FOUNDATION <span>·</span> SIX DIRECTIONS <span>·</span> YOUR JOURNEY</div>
+    </div>
+  </div>
+</section>
 
 <section class="wrap section" id="roadmap">
 <div class="section-head"><div><div class="kicker mono">01 / ROADMAP</div><h2>방향은 일찍 정하고, 경험으로 다듬기</h2></div><p class="section-desc">분야 선택을 기초 학습이 끝날 때까지 미루지 않습니다. 초반에 관심 방향을 정하고, 공통 기초와 분야 입문 실습을 병행하면서 경험에 따라 조정하세요.</p></div>
@@ -148,6 +167,20 @@
 
 
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('[data-map-track]').forEach(function (node) {
+    node.addEventListener('click', function () {
+      var track = node.getAttribute('data-map-track');
+      var target = document.querySelector('.track-button[data-track="' + track + '"]');
+      if (target) {
+        target.click();
+        document.getElementById('study')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+});
+</script>
 <script src="js/theme.js" defer></script>
 <script src="js/app.js" defer></script>
 <script src="js/linux-guide.js" defer></script>
