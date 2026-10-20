@@ -30,6 +30,7 @@
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/overlays.css">
+<link rel="stylesheet" href="css/mindmap.css">
 </head>
 <body>
 <header class="topbar"><div class="wrap nav">
@@ -38,7 +39,45 @@
 <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">다크 모드</span></button>
 <a class="nav-cta" href="#study">학습 시작하기 ↗</a>
 </div></header>
-<main id="home">
+<main id="home">\n
+<section class="mindmap-shell" id="mindmap" aria-labelledby="mindmap-title">
+  <div class="mindmap-wrap">
+    <div class="mindmap-intro">
+      <div class="eyebrow"><span class="dot"></span> EXPLORE YOUR SECURITY PATH</div>
+      <h1 id="mindmap-title">보안의 세계를<br><span>연결해서 탐험하다.</span></h1>
+      <p>하나의 기초에서 시작해, 호기심이 향하는 분야로 뻗어 나가세요.<br>노드를 선택하면 해당 학습 트랙으로 이동합니다.</p>
+      <div class="mindmap-hint"><span class="hint-pulse"></span> 노드를 선택해 탐험 시작하기</div>
+    </div>
+    <div class="mindmap-stage" role="group" aria-label="Bifrost 보안 학습 분야 마인드맵">
+      <svg class="mindmap-lines" viewBox="0 0 900 590" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <linearGradient id="line-cyan"><stop stop-color="#5ce1e6" stop-opacity=".16"/><stop offset="1" stop-color="#5ce1e6" stop-opacity=".9"/></linearGradient>
+          <linearGradient id="line-violet"><stop stop-color="#9b8cff" stop-opacity=".12"/><stop offset="1" stop-color="#9b8cff" stop-opacity=".9"/></linearGradient>
+          <linearGradient id="line-pink"><stop stop-color="#f28ccb" stop-opacity=".12"/><stop offset="1" stop-color="#f28ccb" stop-opacity=".85"/></linearGradient>
+        </defs>
+        <path class="synapse cyan" d="M450 295 C365 255 344 160 245 145 S145 112 115 90"/>
+        <path class="synapse violet" d="M450 295 C510 245 530 160 650 145 S735 110 785 92"/>
+        <path class="synapse pink" d="M450 295 C345 305 310 340 230 350 S140 385 100 420"/>
+        <path class="synapse cyan" d="M450 295 C550 300 590 330 675 350 S755 390 800 430"/>
+        <path class="synapse violet" d="M450 295 C405 375 400 425 355 470 S325 515 300 545"/>
+        <path class="synapse pink" d="M450 295 C510 375 535 420 570 465 S605 515 635 545"/>
+        <path class="synapse faint" d="M115 90 C180 205 150 285 230 350"/>
+        <path class="synapse faint" d="M785 92 C710 190 755 285 675 350"/>
+        <circle class="junction" cx="245" cy="145" r="3"/><circle class="junction" cx="650" cy="145" r="3"/>
+        <circle class="junction" cx="230" cy="350" r="3"/><circle class="junction" cx="675" cy="350" r="3"/>
+      </svg>
+      <button class="map-node node-foundation" data-map-track="foundation"><span class="node-number">00 / CORE</span><strong>Foundation</strong><small>기초 역량</small><i>터미널 · 코드 · 네트워크</i></button>
+      <button class="map-node node-web" data-map-track="web"><span class="node-number">01 / WEB</span><strong>Web Security</strong><small>웹 보안</small><i>요청 · 인증 · 취약점</i></button>
+      <button class="map-node node-pwn" data-map-track="pwn"><span class="node-number">02 / SYSTEM</span><strong>Pwn / System</strong><small>시스템 보안</small><i>메모리 · 디버깅</i></button>
+      <button class="map-node node-rev" data-map-track="rev"><span class="node-number">03 / REVERSE</span><strong>Reverse Engineering</strong><small>리버싱</small><i>분석 · 실행 흐름</i></button>
+      <button class="map-node node-forensic" data-map-track="forensic"><span class="node-number">04 / FORENSIC</span><strong>Forensic / Network</strong><small>포렌식 · 네트워크</small><i>흔적 · 패킷 · 로그</i></button>
+      <button class="map-node node-crypto" data-map-track="crypto"><span class="node-number">05 / CRYPTO</span><strong>Crypto / Misc</strong><small>암호 · 문제 해결</small><i>수학 · 규칙 · 퍼즐</i></button>
+      <div class="map-core"><span class="core-orbit orbit-one"></span><span class="core-orbit orbit-two"></span><div class="core-mark">⌁</div><strong>BIFROST</strong><small>SECURITY LEARNING MAP</small><span class="core-status"><b></b> PATHS CONNECTED</span></div>
+      <div class="map-caption">ONE FOUNDATION <span>·</span> SIX DIRECTIONS <span>·</span> YOUR JOURNEY</div>
+    </div>
+  </div>
+</section>
+
 <section class="hero-shell"><div class="wrap hero">
 <div>
 <div class="eyebrow"><span class="dot"></span> A CLEAR PATH INTO CYBERSECURITY</div>
