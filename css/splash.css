@@ -1,0 +1,218 @@
+/* Bifrost: a rainbow bridge descends, then resolves into the brand mark. */
+.startup-splash[hidden] { display: none; }
+.splash-active .startup-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #050912;
+  color: #edf7ff;
+  font-family: Manrope, "Noto Sans KR", system-ui, sans-serif;
+  isolation: isolate;
+  touch-action: none;
+  transition: opacity 400ms ease, visibility 400ms ease;
+}
+.startup-splash__scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.startup-splash__horizon {
+  position: absolute;
+  top: -28%;
+  left: 50%;
+  width: min(1000px, 160vw);
+  height: 75%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at 50% 30%, #d0b9ff58, #5ce1e628 34%, transparent 68%);
+  animation: splash-horizon 2200ms ease both;
+}
+.startup-splash__bridge {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 112%;
+  overflow: visible;
+  filter: drop-shadow(0 0 12px #83bfff55);
+  transform-origin: 50% 0;
+  animation: splash-bridge 2400ms cubic-bezier(.2,.55,.25,1) both;
+}
+.startup-splash__road { opacity: .8; }
+.startup-splash__road > path {
+  stroke: var(--lane-color);
+  stroke-width: 1.5;
+  stroke-opacity: .95;
+  vector-effect: non-scaling-stroke;
+  paint-order: stroke fill;
+  animation: splash-lane-descent var(--splash-lane-duration, 900ms) cubic-bezier(.2,.55,.25,1) var(--lane-delay, 0ms) both;
+}
+.startup-splash__road > path:nth-child(1) { --lane-delay: var(--splash-lane-0-delay, 0ms); --lane-color: #ff5c79; }
+.startup-splash__road > path:nth-child(2) { --lane-delay: var(--splash-lane-1-delay, 90ms); --lane-color: #ffb65c; }
+.startup-splash__road > path:nth-child(3) { --lane-delay: var(--splash-lane-2-delay, 180ms); --lane-color: #f5ee8a; }
+.startup-splash__road > path:nth-child(4) { --lane-delay: var(--splash-lane-3-delay, 270ms); --lane-color: #7cf1b2; }
+.startup-splash__road > path:nth-child(5) { --lane-delay: var(--splash-lane-4-delay, 360ms); --lane-color: #5ce1e6; }
+.startup-splash__road > path:nth-child(6) { --lane-delay: var(--splash-lane-5-delay, 450ms); --lane-color: #8390ff; }
+.startup-splash__road > path:nth-child(7) { --lane-delay: var(--splash-lane-6-delay, 540ms); --lane-color: #c381ff; }
+.startup-splash__road > path:nth-child(8) { --lane-delay: var(--splash-lane-7-delay, 630ms); --lane-color: #f28ccb; }
+.startup-splash__threads, .startup-splash__crossings, .startup-splash__rails {
+  animation: splash-detail-reveal 1ms step-end var(--splash-bridge-complete, 1530ms) both;
+}
+.startup-splash__threads { stroke-width: 1.15; opacity: .9; }
+.startup-splash__currents {
+  stroke-width: 3.5;
+  filter: drop-shadow(0 0 5px #c2f9ff88);
+  stroke-dasharray: 12 100 190 300;
+  animation: splash-current 750ms linear 3, splash-detail-reveal 1ms step-end var(--splash-bridge-complete, 1530ms) both;
+}
+.startup-splash__crossings { stroke-width: .7; opacity: .12; }
+.startup-splash__rails { stroke-width: 2.2; opacity: .95; filter: drop-shadow(0 0 7px #b4faff99); }
+.startup-splash__arrival {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(680px, 150vw);
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #f28ccb55, #d8fdff, #9b8cff55, transparent);
+  box-shadow: 0 0 14px #d8fdff99, 0 0 38px #5ce1e685;
+  animation: splash-arrival 800ms ease-out calc(var(--splash-bridge-complete, 1530ms) - 100ms) both;
+}
+.startup-splash__glow {
+  position: absolute;
+  width: min(680px, 130vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, #5ce1e61c 0, #9b8cff0c 36%, transparent 67%);
+  pointer-events: none;
+  animation: splash-bloom 1400ms ease-out calc(var(--splash-bridge-complete, 1530ms) - 400ms) both;
+}
+.startup-splash__identity {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+  animation: splash-arrive 850ms cubic-bezier(.2,.7,.3,1) calc(var(--splash-bridge-complete, 1530ms) + 70ms) both;
+}
+.startup-splash__emblem {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 130px;
+  height: 130px;
+  margin-bottom: 29px;
+}
+.startup-splash__ring {
+  position: absolute;
+  inset: 0;
+  border: 1px solid #5ce1e624;
+  border-radius: 50%;
+  box-shadow: 0 0 36px #5ce1e608, inset 0 0 28px #5ce1e606;
+}
+.startup-splash__ring::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border: 1px solid #9b8cff12;
+  border-radius: inherit;
+}
+.startup-splash__star {
+  width: 76px;
+  height: 76px;
+  color: #5ce1e6;
+  filter: drop-shadow(0 0 16px #5ce1e654);
+  animation: splash-star 850ms ease-out calc(var(--splash-bridge-complete, 1530ms) + 70ms) both;
+}
+.startup-splash__name {
+  padding-left: .29em;
+  font-size: clamp(25px, 6vw, 31px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: .29em;
+  text-shadow: 0 0 25px #b7c5ff20;
+}
+.startup-splash__tagline {
+  margin-top: 13px;
+  padding-left: .18em;
+  color: #91a9bf;
+  font: 500 9px/1.6 system-ui, sans-serif;
+  letter-spacing: .18em;
+  text-align: center;
+}
+.startup-splash__line {
+  width: 100px;
+  height: 2px;
+  margin-top: 34px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #c0e4ff12;
+}
+.startup-splash__line span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ffb65c, #7cf1b2, #5ce1e6, #9b8cff, #f28ccb);
+  transform-origin: left;
+  animation: splash-line 650ms cubic-bezier(.2,.65,.35,1) calc(var(--splash-bridge-complete, 1530ms) + 300ms) both;
+}
+.splash-leaving .startup-splash { opacity: 0; visibility: hidden; }
+@keyframes splash-horizon {
+  0% { opacity: 0; }
+  25%, 60% { opacity: 1; }
+  100% { opacity: .15; }
+}
+@keyframes splash-bridge {
+  0% { opacity: 0; transform: scaleX(.72); }
+  8% { opacity: 1; }
+  65% { opacity: 1; transform: scaleX(1); }
+  78% { opacity: .4; }
+  100% { opacity: 0; transform: scaleX(1.12); }
+}
+@keyframes splash-lane-descent {
+  0% {
+    clip-path: inset(0 0 100%);
+    filter: brightness(1.65) drop-shadow(0 0 9px var(--lane-color));
+  }
+  65% { filter: brightness(1.65) drop-shadow(0 0 9px var(--lane-color)); }
+  100% {
+    clip-path: inset(0 0 0);
+    filter: brightness(1.1) drop-shadow(0 0 5px var(--lane-color));
+  }
+}
+@keyframes splash-detail-reveal {
+  from { visibility: hidden; }
+  to { visibility: visible; }
+}
+@keyframes splash-current { to { stroke-dashoffset: -602; } }
+@keyframes splash-arrival {
+  0% { opacity: 0; transform: translate(-50%, -50%) scaleX(.1); }
+  30% { opacity: .8; }
+  100% { opacity: 0; transform: translate(-50%, -50%) scaleX(1.3); }
+}
+@keyframes splash-bloom {
+  0% { opacity: 0; transform: scale(.45); }
+  45% { opacity: 1; }
+  100% { opacity: .65; transform: scale(1); }
+}
+@keyframes splash-arrive {
+  from { opacity: 0; transform: translateY(8px) scale(.96); filter: blur(6px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+@keyframes splash-star {
+  0% { transform: scale(.85); filter: drop-shadow(0 0 3px #5ce1e620); }
+  40% { filter: drop-shadow(0 0 28px #c5faffb0); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 16px #5ce1e654); }
+}
+@keyframes splash-line {
+  from { transform: scaleX(0); opacity: .5; }
+  to { transform: scaleX(1); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .splash-active .startup-splash { transition: none; }
+  .startup-splash__scene { display: none; }
+  .startup-splash__identity, .startup-splash__star,
+  .startup-splash__glow, .startup-splash__line span { animation: none; }
+}

@@ -2,7 +2,7 @@
 (() => {
   const STORAGE_KEY = 'bifrost_theme_v1';
   const root = document.documentElement;
-  const button = document.getElementById('themeToggle');
+  let button = null;
   const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 
   function readSavedTheme() {
@@ -25,7 +25,7 @@
         ? '<span class="theme-icon" aria-hidden="true">☀</span><span class="theme-label">라이트 모드</span>'
         : '<span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">다크 모드</span>';
     }
-    if (metaThemeColor) metaThemeColor.content = selected === 'dark' ? '#0b1220' : '#101a30';
+    if (metaThemeColor) metaThemeColor.content = selected === 'dark' ? '#0b1220' : '#f6f8fb';
     if (persist) {
       try { localStorage.setItem(STORAGE_KEY, selected); } catch (_) { /* Theme still applies for this visit. */ }
     }
@@ -39,9 +39,19 @@
 
   updateTheme(readSavedTheme());
 
-  if (button) button.addEventListener('click', () => {
-    updateTheme(root.dataset.theme === 'dark' ? 'light' : 'dark', { persist: true, notifyParent: true });
-  });
+  // Apply the saved palette in the head, then bind controls after they exist.
+  function bindThemeToggle() {
+    button = document.getElementById('themeToggle');
+    updateTheme(root.dataset.theme || readSavedTheme());
+    if (button) button.addEventListener('click', () => {
+      updateTheme(root.dataset.theme === 'dark' ? 'light' : 'dark', { persist: true, notifyParent: true });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindThemeToggle, { once: true });
+  } else {
+    bindThemeToggle();
+  }
 
   /* Keep a page or iframe in sync if another same-origin Bifrost page changes the saved preference. */
   window.addEventListener('storage', event => {

@@ -22,6 +22,16 @@
   --white: #ffffff;
   --radius: 18px;
   --shadow: 0 12px 35px rgba(25,43,70,.07);
+  --map-node-surface: #ffffff;
+  --map-core-surface: #f0f7fa;
+  --map-muted: #5b6b80;
+  --map-cyan: #066e77;
+  --map-blue: #275eac;
+  --map-green: #217448;
+  --map-violet: #7151b3;
+  --map-red: #bb3651;
+  --map-pink: #a73780;
+  --map-amber: #865507;
 }
 html[data-theme="dark"] {
   color-scheme: dark;
@@ -46,6 +56,16 @@ html[data-theme="dark"] {
   --white: #151f2e;
   --radius: 18px;
   --shadow: 0 12px 35px rgba(0,0,0,.28);
+  --map-node-surface: #101c2d;
+  --map-core-surface: #0e1b2c;
+  --map-muted: #a9b8cc;
+  --map-cyan: #5ce1e6;
+  --map-blue: #73b5ff;
+  --map-green: #67d6a0;
+  --map-violet: #9b8cff;
+  --map-red: #ff526d;
+  --map-pink: #ff4db8;
+  --map-amber: #ffc247;
 }
 html { background: var(--paper); color: var(--ink); }
 body { background: var(--paper); color: var(--ink); }
@@ -217,9 +237,9 @@ html[data-theme="dark"] .footer a { color: #9bdbff; }
 
 /* Native controls, selection, and transitions follow the selected theme. */
 html { transition: background-color .18s ease, color .18s ease; }
-body, .topbar, .card, .phase, .track-button, .track-detail, .lesson-item, .resource, .practice-card,
+body, .learning-canvas, .topbar, .card, .phase, .track-button, .track-detail, .lesson-item, .resource, .practice-card,
 #linuxGuideOverlay { transition: background-color .18s ease, color .18s ease, border-color .18s ease; }
 ::selection { background: var(--teal-soft); color: var(--ink); }
 @media (prefers-reduced-motion: reduce) {
-  html, body, .topbar, .card, .phase, .track-button, .track-detail, .lesson-item, .resource, .practice-card, #linuxGuideOverlay { transition: none; }
+  html, body, .learning-canvas, .topbar, .card, .phase, .track-button, .track-detail, .lesson-item, .resource, .practice-card, #linuxGuideOverlay { transition: none; }
 }

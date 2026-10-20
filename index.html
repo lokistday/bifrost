@@ -21,6 +21,9 @@
 <meta name="twitter:description" content="관심 분야 탐색부터 실습, 결과물까지 이어지는 보안 학습 로드맵.">
 <meta name="twitter:image" content="https://lokistday.github.io/bifrost/og-image.png">
 <title>Bifrost — 보안 학습 가이드</title>
+<script src="js/theme.js"></script>
+<link rel="stylesheet" href="css/splash.css">
+<script src="js/splash.js"></script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Crect width=%2240%22 height=%2240%22 rx=%2211%22 fill=%22%23101a30%22/%3E%3Cpath d=%22M20 4 23.8 15.2 36 20 23.8 23.8 20 36 16.2 23.8 4 20 16.2 15.2Z%22 fill=%22%235ce1e6%22/%3E%3Cpath d=%22M31 5 32.5 9.5 37 11 32.5 12.5 31 17 29.5 12.5 25 11 29.5 9.5Z%22 fill=%22%239cf7ff%22/%3E%3C/svg%3E">
 
 
@@ -34,13 +37,80 @@
 <link rel="stylesheet" href="css/mindmap.css">
 </head>
 <body>
+<div class="startup-splash" id="startupSplash" hidden aria-hidden="true">
+  <div class="startup-splash__scene">
+    <div class="startup-splash__horizon"></div>
+    <svg class="startup-splash__bridge" viewBox="0 0 1000 1000" preserveAspectRatio="none" focusable="false">
+      <defs>
+        <linearGradient id="splash-spectrum" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1000" y2="0">
+          <stop stop-color="#ff5c79"/>
+          <stop offset=".16" stop-color="#ffb65c"/>
+          <stop offset=".31" stop-color="#f5ee8a"/>
+          <stop offset=".46" stop-color="#7cf1b2"/>
+          <stop offset=".60" stop-color="#5ce1e6"/>
+          <stop offset=".76" stop-color="#8390ff"/>
+          <stop offset=".90" stop-color="#c381ff"/>
+          <stop offset="1" stop-color="#f28ccb"/>
+        </linearGradient>
+        <linearGradient id="splash-depth" x1="0" y1="0" x2="0" y2="1">
+          <stop stop-color="white" stop-opacity=".38"/>
+          <stop offset=".4" stop-color="white" stop-opacity=".82"/>
+          <stop offset="1" stop-color="white"/>
+        </linearGradient>
+        <linearGradient id="splash-thread" x1="0" y1="0" x2="0" y2="1">
+          <stop stop-color="#fff" stop-opacity="0"/>
+          <stop offset=".4" stop-color="#fff" stop-opacity=".16"/>
+          <stop offset="1" stop-color="#fff" stop-opacity=".65"/>
+        </linearGradient>
+        <clipPath id="splash-road"><path d="M486 -80H514L970 1080H30Z"/></clipPath>
+        <mask id="splash-road-depth"><path fill="url(#splash-depth)" d="M0 0H1000V1000H0Z"/></mask>
+      </defs>
+      <g clip-path="url(#splash-road)" mask="url(#splash-road-depth)">
+        <g class="startup-splash__road">
+          <path fill="#ff5c79" d="M486 -80H489.5L147.5 1080H30Z"/>
+          <path fill="#ffb65c" d="M489.5 -80H493L265 1080H147.5Z"/>
+          <path fill="#f5ee8a" d="M493 -80H496.5L382.5 1080H265Z"/>
+          <path fill="#7cf1b2" d="M496.5 -80H500L500 1080H382.5Z"/>
+          <path fill="#5ce1e6" d="M500 -80H503.5L617.5 1080H500Z"/>
+          <path fill="#8390ff" d="M503.5 -80H507L735 1080H617.5Z"/>
+          <path fill="#c381ff" d="M507 -80H510.5L852.5 1080H735Z"/>
+          <path fill="#f28ccb" d="M510.5 -80H514L970 1080H852.5Z"/>
+        </g>
+        <g class="startup-splash__threads" fill="none" stroke="url(#splash-thread)">
+          <path d="M487 -80 55 1080M489 -80 117 1080M491 -80 178 1080M493 -80 240 1080M495 -80 302 1080M497 -80 364 1080M499 -80 426 1080M501 -80 488 1080M503 -80 550 1080M505 -80 612 1080M507 -80 674 1080M509 -80 736 1080M511 -80 798 1080M513 -80 860 1080M515 -80 922 1080"/>
+        </g>
+        <g class="startup-splash__currents" fill="none" stroke="url(#splash-spectrum)">
+          <path d="M489 -80 120 1080M493 -80 245 1080M497 -80 370 1080M501 -80 495 1080M505 -80 620 1080M509 -80 745 1080M513 -80 870 1080"/>
+        </g>
+        <g class="startup-splash__crossings" fill="none" stroke="#e7f9ff">
+          <path d="M0 255Q500 285 1000 255M0 340Q500 380 1000 340M0 450Q500 505 1000 450M0 600Q500 670 1000 600M0 795Q500 885 1000 795"/>
+        </g>
+      </g>
+      <path class="startup-splash__rails" d="M486 -80 30 1080M514 -80 970 1080" fill="none" stroke="url(#splash-thread)"/>
+    </svg>
+    <div class="startup-splash__arrival"></div>
+  </div>
+  <div class="startup-splash__glow"></div>
+  <div class="startup-splash__identity">
+    <div class="startup-splash__emblem">
+      <span class="startup-splash__ring"></span>
+      <svg class="startup-splash__star" viewBox="0 0 40 40" focusable="false">
+        <path d="M20 2.8 23.8 15.2 36.2 19 23.8 22.8 20 35.2 16.2 22.8 3.8 19 16.2 15.2Z" fill="currentColor"/>
+        <path d="M31.1 4.7 32.5 9.1 36.9 10.5 32.5 11.9 31.1 16.3 29.7 11.9 25.3 10.5 29.7 9.1Z" fill="#b4faff"/>
+      </svg>
+    </div>
+    <div class="startup-splash__name">BIFROST</div>
+    <div class="startup-splash__tagline">EXPLORE YOUR SECURITY PATH</div>
+    <div class="startup-splash__line"><span></span></div>
+  </div>
+</div>
 <header class="topbar"><div class="wrap nav">
 <a class="brand" href="#home"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M20 2.8 23.8 15.2 36.2 19 23.8 22.8 20 35.2 16.2 22.8 3.8 19 16.2 15.2Z" fill="currentColor"/><path d="M31.1 4.7 32.5 9.1 36.9 10.5 32.5 11.9 31.1 16.3 29.7 11.9 25.3 10.5 29.7 9.1Z" fill="#9cf7ff"/></svg></span><span>Bifrost</span></a>
 <nav class="navlinks"><a href="#roadmap">ROADMAP</a><a href="#study">STUDY</a><a href="#practice">PRACTICE</a><a href="#career">CAREER</a></nav>
 <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">다크 모드</span></button>
 <a class="nav-cta" href="#study">학습 시작하기 ↗</a>
 </div></header>
-<main id="home">
+<main id="home" class="learning-canvas">
 
 <section class="mindmap-shell" id="mindmap" aria-labelledby="mindmap-title">
   <div class="mindmap-wrap">
@@ -51,30 +121,34 @@
       <div class="mindmap-hint"><span class="hint-pulse"></span> 노드를 선택해 탐험 시작하기</div>
     </div>
     <div class="mindmap-stage" role="group" aria-label="Bifrost 보안 학습 분야 마인드맵">
-      <svg class="mindmap-lines" viewBox="0 0 900 590" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <svg class="mindmap-lines" viewBox="0 0 1000 590" aria-hidden="true">
         <defs>
-          <linearGradient id="line-cyan"><stop stop-color="#5ce1e6" stop-opacity=".16"/><stop offset="1" stop-color="#5ce1e6" stop-opacity=".9"/></linearGradient>
-          <linearGradient id="line-violet"><stop stop-color="#9b8cff" stop-opacity=".12"/><stop offset="1" stop-color="#9b8cff" stop-opacity=".9"/></linearGradient>
-          <linearGradient id="line-pink"><stop stop-color="#f28ccb" stop-opacity=".12"/><stop offset="1" stop-color="#f28ccb" stop-opacity=".85"/></linearGradient>
+          <linearGradient id="line-cyan"><stop style="stop-color:var(--map-cyan)" stop-opacity=".16"/><stop offset="1" style="stop-color:var(--map-cyan)" stop-opacity=".9"/></linearGradient>
+          <linearGradient id="line-blue"><stop style="stop-color:var(--map-blue)" stop-opacity=".16"/><stop offset="1" style="stop-color:var(--map-blue)" stop-opacity=".9"/></linearGradient>
+          <linearGradient id="line-green"><stop style="stop-color:var(--map-green)" stop-opacity=".16"/><stop offset="1" style="stop-color:var(--map-green)" stop-opacity=".9"/></linearGradient>
+          <linearGradient id="line-violet"><stop style="stop-color:var(--map-violet)" stop-opacity=".12"/><stop offset="1" style="stop-color:var(--map-violet)" stop-opacity=".9"/></linearGradient>
+          <linearGradient id="line-pink"><stop style="stop-color:var(--map-pink)" stop-opacity=".12"/><stop offset="1" style="stop-color:var(--map-pink)" stop-opacity=".85"/></linearGradient>
+          <linearGradient id="line-red"><stop style="stop-color:var(--map-red)" stop-opacity=".16"/><stop offset="1" style="stop-color:var(--map-red)" stop-opacity=".9"/></linearGradient>
+          <linearGradient id="line-amber"><stop style="stop-color:var(--map-amber)" stop-opacity=".16"/><stop offset="1" style="stop-color:var(--map-amber)" stop-opacity=".9"/></linearGradient>
         </defs>
-        <path class="synapse cyan" d="M410 270 C365 235 325 190 285 165 S260 150 246 140"/>
-        <path class="synapse violet" d="M490 270 C535 235 575 190 615 165 S640 150 599 140"/>
-        <path class="synapse pink" d="M450 210 C450 185 450 160 450 138"/>
-        <path class="synapse cyan" d="M410 315 C355 330 300 355 260 365 S235 370 221 370"/>
-        <path class="synapse violet" d="M490 315 C545 330 600 355 640 365 S655 370 669 370"/>
-        <path class="synapse pink" d="M435 360 C425 390 415 420 400 446"/><path class="synapse cyan" d="M465 360 C475 390 485 420 495 446"/>
+        <path class="synapse blue" d="M440 235 C416 214 392 182 366 171"/>
+        <path class="synapse violet" d="M560 235 C584 214 608 182 634 171"/>
+        <path class="synapse cyan" d="M500 210V136"/>
+        <path class="synapse red" d="M416 310 C378 314 334 348 286 354"/>
+        <path class="synapse green" d="M584 310 C622 314 666 348 714 354"/>
+        <path class="synapse pink" d="M475 376 C462 406 420 430 390 450"/><path class="synapse amber" d="M525 376 C538 406 580 430 610 450"/>
         <path class="synapse faint" d="M115 90 C180 205 150 285 230 350"/>
         <path class="synapse faint" d="M785 92 C710 190 755 285 675 350"/>
-        <circle class="junction" cx="245" cy="145" r="3"/><circle class="junction" cx="650" cy="145" r="3"/>
-        <circle class="junction" cx="230" cy="350" r="3"/><circle class="junction" cx="675" cy="350" r="3"/>
+        <circle class="junction blue" cx="366" cy="171" r="3"/><circle class="junction violet" cx="634" cy="171" r="3"/>
+        <circle class="junction red" cx="286" cy="354" r="3"/><circle class="junction green" cx="714" cy="354" r="3"/>
       </svg>
-      <button class="map-node node-foundation" data-map-track="foundation"><span class="node-number">00 / CORE</span><strong>Foundation</strong><small>기초 역량</small><i>터미널 · 코드 · 네트워크</i></button>
-      <button class="map-node node-web" data-map-track="web"><span class="node-number">01 / WEB</span><strong>Web Hacking</strong><small>웹 보안</small><i>요청 · 인증 · 취약점</i></button>
-      <button class="map-node node-pwn" data-map-track="pwn"><span class="node-number">02 / SYSTEM</span><strong>Pwn / System</strong><small>시스템 보안</small><i>메모리 · 디버깅</i></button>
-      <button class="map-node node-rev" data-map-track="rev"><span class="node-number">03 / REVERSE</span><strong>Reverse Engineering</strong><small>리버싱</small><i>분석 · 실행 흐름</i></button>
-      <button class="map-node node-forensic" data-map-track="forensic"><span class="node-number">04 / FORENSIC</span><strong>Forensic</strong><small>디지털 포렌식</small><i>흔적 · 증거 · 타임라인</i></button>
-      <button class="map-node node-crypto" data-map-track="crypto"><span class="node-number">06 / CRYPTO</span><strong>Crypto / Misc</strong><small>암호 · 문제 해결</small><i>수학 · 규칙 · 퍼즐</i></button>
-      <button class="map-node node-network" data-map-track="network"><span class="node-number">05 / NETWORK</span><strong>Network Security</strong><small>네트워크 보안</small><i>프로토콜 · 트래픽 · 방어</i></button>
+      <button class="map-node node-foundation" data-map-track="foundation"><span class="node-number">00 / CORE</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Foundation</strong><small>기초 역량</small><i>터미널 · 코드 · 네트워크</i></button>
+      <button class="map-node node-web" data-map-track="web"><span class="node-number">01 / WEB</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Web Hacking</strong><small>웹 보안</small><i>요청 · 인증 · 취약점</i></button>
+      <button class="map-node node-pwn" data-map-track="pwn"><span class="node-number">02 / SYSTEM</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Pwn / System</strong><small>시스템 보안</small><i>메모리 · 디버깅</i></button>
+      <button class="map-node node-rev" data-map-track="rev"><span class="node-number">03 / REVERSE</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Reverse Engineering</strong><small>리버싱</small><i>분석 · 실행 흐름</i></button>
+      <button class="map-node node-forensic" data-map-track="forensic"><span class="node-number">04 / FORENSIC</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Forensic</strong><small>디지털 포렌식</small><i>흔적 · 증거 · 타임라인</i></button>
+      <button class="map-node node-crypto" data-map-track="crypto"><span class="node-number">06 / CRYPTO</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Crypto / Misc</strong><small>암호 · 문제 해결</small><i>수학 · 규칙 · 퍼즐</i></button>
+      <button class="map-node node-network" data-map-track="network"><span class="node-number">05 / NETWORK</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Network Security</strong><small>네트워크 보안</small><i>프로토콜 · 트래픽 · 방어</i></button>
       <div class="map-core"><span class="core-orbit orbit-one"></span><span class="core-orbit orbit-two"></span><div class="core-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M20 2.8 23.8 15.2 36.2 19 23.8 22.8 20 35.2 16.2 22.8 3.8 19 16.2 15.2Z" fill="currentColor"/><path d="M31.1 4.7 32.5 9.1 36.9 10.5 32.5 11.9 31.1 16.3 29.7 11.9 25.3 10.5 29.7 9.1Z" fill="#9cf7ff"/></svg></div><strong>BIFROST</strong><small>SECURITY LEARNING MAP</small><span class="core-status"><b></b> PATHS CONNECTED</span></div>
       <div class="map-caption">ONE FOUNDATION <span>·</span> SIX DIRECTIONS <span>·</span> YOUR JOURNEY</div>
     </div>
@@ -186,7 +260,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
-<script src="js/theme.js" defer></script>
 <script src="js/app.js" defer></script>
 <script src="js/linux-guide.js" defer></script>
 </body>
