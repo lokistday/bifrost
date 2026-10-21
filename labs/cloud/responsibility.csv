@@ -1,0 +1,6 @@
+control,IaaS_customer,SaaS_customer
+physical_datacenter,no,no
+guest_os_patch,yes,usually_no
+data_classification,yes,yes
+identity_access,yes,yes
+application_config,yes,service_dependent

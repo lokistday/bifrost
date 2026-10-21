@@ -1,0 +1,10 @@
+<!doctype html><html lang="ko"><meta charset="utf-8">
+<title>Bifrost DOM 실습</title><h1>텍스트와 HTML</h1>
+<p>왼쪽은 텍스트 노드, 오른쪽은 코드에 고정된 HTML입니다.</p>
+<p id="text"></p><p id="markup"></p>
+<script>
+const sample = '<b>Bifrost</b>';
+document.querySelector('#text').textContent = sample;
+// Only a fixed, authored literal is used here. Do not insert untrusted data this way.
+document.querySelector('#markup').innerHTML = sample;
+</script></html>

@@ -1,0 +1,12 @@
+{
+  "name": "bifrost-learning",
+  "private": true,
+  "description": "Static GitHub Pages learning site; dependencies are for development tests only.",
+  "scripts": {
+    "test": "node tests/learning.test.cjs",
+    "test:labs": "python tests/labs_test.py"
+  },
+  "devDependencies": {
+    "linkedom": "0.18.12"
+  }
+}

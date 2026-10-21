@@ -1,0 +1,4 @@
+This PCAP contains DNS and plaintext HTTP only; no TLS handshake.
+With ordinary HTTPS, packet metadata remains visible but HTTP paths/bodies are encrypted.
+DNS/SNI visibility depends on the actual encryption and client/server configuration.
+Do not infer absence of activity from a missing capture location or decrypted payload.

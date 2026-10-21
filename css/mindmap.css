@@ -67,3 +67,21 @@ html[data-theme="dark"] .mindmap-shell:after{opacity:1}
 .node-foundation{--node-accent:var(--map-cyan);--flame-color:var(--map-cyan)}.node-web{--node-accent:var(--map-blue);--flame-color:var(--map-blue)}.node-forensic{--node-accent:var(--map-green);--flame-color:var(--map-green)}.node-pwn{--node-accent:var(--map-violet);--flame-color:var(--map-violet)}.node-rev{--node-accent:var(--map-red);--flame-color:var(--map-red)}.node-crypto{--node-accent:var(--map-pink);--flame-color:var(--map-pink)}.node-network{--node-accent:var(--map-amber);--flame-color:var(--map-amber)}
 @keyframes edgeEmber{0%{opacity:.14;filter:blur(3px)}100%{opacity:.28;filter:blur(4px)}}
 @media(prefers-reduced-motion:reduce){.map-node:before{animation:none;opacity:.2}.node-arrow{transition:none}}
+/* Nine paths share the existing animated core and flowing connectors. */
+.map-node:hover{text-decoration:none}
+.node-misc{--node-accent:var(--map-orange);--flame-color:var(--map-orange)}
+.node-cloud{--node-accent:var(--map-sky);--flame-color:var(--map-sky)}
+.synapse.orange{stroke:url(#line-orange)}.synapse.sky{stroke:url(#line-sky)}
+@media(min-width:901px){
+  .mindmap-stage{height:760px}
+  .mindmap-lines{height:760px}
+  .node-foundation{top:10px}
+  .node-web{left:calc(50% - 353px);top:100px}
+  .node-pwn{right:calc(50% - 353px);top:100px}
+  .node-rev{left:calc(50% - 420px);top:285px}
+  .node-forensic{right:calc(50% - 420px);top:285px}
+  .node-crypto{left:calc(50% - 388px);top:455px}
+  .node-misc{left:calc(50% + 172px);top:455px}
+  .node-network{left:calc(50% - 238px);right:auto;top:600px}
+  .node-cloud{left:calc(50% + 22px);top:600px}
+}

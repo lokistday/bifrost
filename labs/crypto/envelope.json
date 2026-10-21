@@ -1,0 +1,8 @@
+{
+  "algorithm": "AES-GCM",
+  "key_id": "training-key-01",
+  "nonce": "unique-per-key",
+  "ciphertext": "NOT-A-REAL-CIPHERTEXT",
+  "tag": "REQUIRED",
+  "aad": "record-id=17"
+}
