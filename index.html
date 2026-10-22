@@ -107,17 +107,16 @@
 </div>
 <header class="topbar"><div class="wrap nav">
 <a class="brand" href="#home"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M20 2.8 23.8 15.2 36.2 19 23.8 22.8 20 35.2 16.2 22.8 3.8 19 16.2 15.2Z" fill="currentColor"/><path d="M31.1 4.7 32.5 9.1 36.9 10.5 32.5 11.9 31.1 16.3 29.7 11.9 25.3 10.5 29.7 9.1Z" fill="#9cf7ff"/></svg></span><span>Bifrost</span></a>
-<nav class="navlinks"><a href="#roadmap">ROADMAP</a><a href="#study">STUDY</a><a href="#practice">PRACTICE</a><a href="#career">CAREER</a></nav>
+<nav class="navlinks"><a href="#mindmap">LEARNING MAP</a><a href="#practice">LEARNING GUIDE</a><a href="#resources">RESOURCES</a></nav>
 <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">다크 모드</span></button>
-<a class="nav-cta" href="#study">학습 시작하기 ↗</a>
+<a class="nav-cta" href="#mindmap">학습 시작하기 ↗</a>
 </div></header>
 <main id="home" class="learning-canvas">
 
-<section class="mindmap-shell" id="mindmap" aria-labelledby="mindmap-title">
+<section class="mindmap-shell" id="mindmap" aria-label="보안 학습 분야 지도">
   <div class="mindmap-wrap">
     <div class="mindmap-intro">
       <div class="eyebrow"><span class="dot"></span> EXPLORE YOUR SECURITY PATH</div>
-      <h1 id="mindmap-title">보안의 세계를<br><span>연결해서 탐험하다.</span></h1>
       <p>하나의 기초에서 시작해, 호기심이 향하는 분야로 뻗어 나가세요.<br>노드를 선택하면 분야별 목차와 강의 페이지로 이동합니다.</p>
       <div class="mindmap-hint"><span class="hint-pulse"></span> 노드를 선택해 탐험 시작하기</div>
     </div>
@@ -149,76 +148,29 @@
         <circle class="junction red" cx="296" cy="343" r="3"/><circle class="junction green" cx="704" cy="343" r="3"/>
       </svg>
       <a class="map-node node-foundation" data-map-track="foundation" href="tracks/foundation/"><span class="node-number">00 / CORE</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Foundation</strong><small>공통 기초</small><i>터미널 · 코드 · 네트워크</i></a>
-      <a class="map-node node-web" data-map-track="web" href="tracks/web/"><span class="node-number">01 / WEB</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Web Hacking</strong><small>웹 보안</small><i>요청 · 인증 · 취약점</i></a>
-      <a class="map-node node-pwn" data-map-track="pwn" href="tracks/pwn/"><span class="node-number">02 / SYSTEM</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Pwn / System</strong><small>시스템 보안</small><i>메모리 · 디버깅</i></a>
-      <a class="map-node node-rev" data-map-track="rev" href="tracks/rev/"><span class="node-number">03 / REVERSE</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Reverse Engineering</strong><small>리버싱</small><i>분석 · 실행 흐름</i></a>
-      <a class="map-node node-forensic" data-map-track="forensic" href="tracks/forensic/"><span class="node-number">04 / FORENSIC</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Forensic</strong><small>디지털 포렌식</small><i>흔적 · 증거 · 타임라인</i></a>
+      <a class="map-node node-pwn" data-map-track="pwn" href="tracks/pwn/"><span class="node-number">01 / SYSTEM</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Pwn / System</strong><small>시스템 보안</small><i>메모리 · 디버깅</i></a>
+      <a class="map-node node-forensic" data-map-track="forensic" href="tracks/forensic/"><span class="node-number">02 / FORENSIC</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Forensic</strong><small>디지털 포렌식</small><i>흔적 · 증거 · 타임라인</i></a>
+      <a class="map-node node-misc" data-map-track="misc" href="tracks/misc/"><span class="node-number">03 / MISC</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Misc</strong><small>문제 해결 · 자동화</small><i>단서 · 데이터 · 도구</i></a>
+      <a class="map-node node-cloud" data-map-track="cloud" href="tracks/cloud/"><span class="node-number">04 / CLOUD</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Cloud Security</strong><small>클라우드 보안</small><i>신원 · 구성 · 감사</i></a>
       <a class="map-node node-network" data-map-track="network" href="tracks/network/"><span class="node-number">05 / NETWORK</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Network Security</strong><small>네트워크 보안 · 통합</small><i>망 설계 · 정책 · 탐지</i></a>
       <a class="map-node node-crypto" data-map-track="crypto" href="tracks/crypto/"><span class="node-number">06 / CRYPTO</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Cryptography</strong><small>암호학</small><i>수학 · 무결성 · 키 관리</i></a>
-      <a class="map-node node-misc" data-map-track="misc" href="tracks/misc/"><span class="node-number">07 / MISC</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Misc</strong><small>문제 해결 · 자동화</small><i>단서 · 데이터 · 도구</i></a>
-      <a class="map-node node-cloud" data-map-track="cloud" href="tracks/cloud/"><span class="node-number">08 / CLOUD</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Cloud Security</strong><small>클라우드 보안</small><i>신원 · 구성 · 감사</i></a>
+      <a class="map-node node-rev" data-map-track="rev" href="tracks/rev/"><span class="node-number">07 / REVERSE</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Reverse Engineering</strong><small>리버싱</small><i>분석 · 실행 흐름</i></a>
+      <a class="map-node node-web" data-map-track="web" href="tracks/web/"><span class="node-number">08 / WEB</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Web Hacking</strong><small>웹 보안</small><i>요청 · 인증 · 취약점</i></a>
       <div class="map-core"><span class="core-orbit orbit-one"></span><span class="core-orbit orbit-two"></span><div class="core-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M20 2.8 23.8 15.2 36.2 19 23.8 22.8 20 35.2 16.2 22.8 3.8 19 16.2 15.2Z" fill="currentColor"/><path d="M31.1 4.7 32.5 9.1 36.9 10.5 32.5 11.9 31.1 16.3 29.7 11.9 25.3 10.5 29.7 9.1Z" fill="#9cf7ff"/></svg></div><strong>BIFROST</strong><small>SECURITY LEARNING MAP</small><span class="core-status"><b></b> PATHS CONNECTED</span></div>
       <div class="map-caption">ONE FOUNDATION <span>·</span> EIGHT DIRECTIONS <span>·</span> YOUR JOURNEY</div>
     </div>
   </div>
 </section>
 
-<section class="wrap section" id="roadmap">
-<div class="section-head"><div><div class="kicker mono">01 / ROADMAP</div><h2>방향은 일찍 정하고, 경험으로 다듬기</h2></div><p class="section-desc">분야 선택을 기초 학습이 끝날 때까지 미루지 않습니다. 초반에 관심 방향을 정하고, 공통 기초와 분야 입문 실습을 병행하면서 경험에 따라 조정하세요.</p></div>
-<div class="roadmap">
-<article class="phase"><div class="phase-label p0"><strong>STEP 00</strong><b>분야 탐색</b><small>처음부터 시작</small></div><div class="phase-content"><h3>실력을 갖추기 전에도 관심 분야부터 정하기</h3><p>지금 잘하는 분야를 고르는 단계가 아닙니다. 어떤 문제를 풀 때 궁금증이 생기는지 살펴보고, 우선 공부할 방향을 정합니다. 아래 설명은 직무를 확정하는 검사가 아니라 작은 실습을 고르기 위한 지도입니다. 경험이 쌓이면 분야를 바꾸거나 두 분야를 함께 탐색해도 괜찮습니다.</p>
-<div class="field-guide-intro"><strong>먼저 구분하기</strong><span>기초 역량(Foundation)은 특정 전문 분야가 아니라 모든 트랙을 받쳐주는 공통 기반입니다. 전문 분야를 고르더라도 Python/C, Linux, 네트워크, Git과 기록 습관을 관심 분야에 맞춰 병행하세요.</span></div>
-<div class="field-guide-grid">
-<div class="field-guide-card"><div class="field-guide-top"><span class="field-index">01</span><h4>Web Hacking</h4></div><p class="field-question">웹 서비스가 왜 안전하지 않게 동작할까?</p><dl><dt>주로 다루는 문제</dt><dd>로그인·권한 오류, 입력값 처리, 데이터 노출, 웹/API 요청 흐름</dd><dt>만나는 개념</dt><dd>HTTP, 쿠키·세션, 인증·인가, SQL, 출력 인코딩, API</dd><dt>잘 맞을 수 있는 관심</dt><dd>웹사이트가 동작하는 방식, 사용자와 서버 사이의 흐름, 문제를 수정해 확인하는 과정이 재미있다.</dd><dt>도움 되는 기초</dt><dd>HTTP 기초와 Python 또는 JavaScript 입문. 처음부터 고급 코딩을 알 필요는 없다.</dd><dt>첫 실습</dt><dd>로컬 데모 앱이나 허가된 교육 랩에서 요청·응답을 살펴보고, 취약한 입력 처리와 안전한 수정의 차이를 기록한다.</dd></dl><div class="field-path"><b>학습 경로</b> 공통 기초 → Web Hacking 차시 → 안전한 수정·회귀 테스트 프로젝트</div></div>
-<div class="field-guide-card"><div class="field-guide-top"><span class="field-index">02</span><h4>Pwn / System</h4></div><p class="field-question">프로그램과 운영체제 내부에서 무슨 일이 일어날까?</p><dl><dt>주로 다루는 문제</dt><dd>메모리 오류, 프로그램 실행 흐름, 권한 경계, 시스템 수준의 취약점</dd><dt>만나는 개념</dt><dd>C, 포인터, 스택·힙, 프로세스, 디버거, 완화 기법</dd><dt>잘 맞을 수 있는 관심</dt><dd>낮은 수준의 동작을 파고들고, 오류가 발생하는 정확한 조건을 추적하는 것이 좋다.</dd><dt>도움 되는 기초</dt><dd>C 문법, 주소·메모리 개념, Linux 터미널. 생소하면 C 기초부터 천천히 시작한다.</dd><dt>첫 실습</dt><dd>자신이 만든 작은 C 프로그램을 디버거로 실행하고 변수·주소·실행 흐름이 어떻게 바뀌는지 관찰한다.</dd></dl><div class="field-path"><b>학습 경로</b> C·Linux 기초 → 로컬 교육용 바이너리 → 오류 원인과 방어 방법 기록</div></div>
-<div class="field-guide-card"><div class="field-guide-top"><span class="field-index">03</span><h4>Reverse Engineering</h4></div><p class="field-question">소스 코드가 없어도 실행 파일의 동작을 알아낼 수 있을까?</p><dl><dt>주로 다루는 문제</dt><dd>실행 파일의 동작 파악, 함수·조건 분기 추론, 의심스러운 프로그램 분석</dd><dt>만나는 개념</dt><dd>어셈블리, 레지스터, 함수 호출, 정적·동적 분석, 디컴파일</dd><dt>잘 맞을 수 있는 관심</dt><dd>퍼즐처럼 단서를 연결하고, 관찰 근거를 바탕으로 동작을 추론하는 일을 즐긴다.</dd><dt>도움 되는 기초</dt><dd>C 기초와 함수·조건문 이해가 도움이 된다. 어셈블리는 작은 예제부터 익힌다.</dd><dt>첫 실습</dt><dd>직접 컴파일한 짧은 프로그램이나 공개 교육용 바이너리에서 문자열·함수·분기 흐름을 확인하고 추론을 기록한다.</dd></dl><div class="field-path"><b>학습 경로</b> C 기초 → 어셈블리·디버거 → 분석 근거와 추론을 구분한 보고서</div></div>
-<div class="field-guide-card"><div class="field-guide-top"><span class="field-index">04</span><h4>Forensic</h4></div><p class="field-question">남아 있는 디지털 흔적으로 어떤 일이 있었는지 설명할 수 있을까?</p><dl><dt>주로 다루는 문제</dt><dd>로그와 이벤트 분석, 파일 흔적 보존, 증거 상관관계와 사건 시간순서 재구성</dd><dt>만나는 개념</dt><dd>로그 필드, 파일 시스템, 해시, 메타데이터, 타임라인, 증거 보존</dd><dt>잘 맞을 수 있는 관심</dt><dd>관찰한 사실을 꼼꼼히 비교하고, 증거와 추측을 구분해 설명하는 것이 좋다.</dd><dt>도움 되는 기초</dt><dd>파일 시스템, 타임스탬프, 로그 형식과 증거 보존의 기초가 도움이 된다. 네트워크 분석은 별도 Network Security 트랙에서 깊게 다룬다.</dd><dt>첫 실습</dt><dd>교육용 샘플 로그와 파일 메타데이터를 분석해 사건 타임라인을 만들고, 증거와 추론 및 한계를 구분해 기록한다.</dd></dl><div class="field-path"><b>학습 경로</b> 증거 수집·보존 → 로그·파일 분석 → 타임라인과 근거 중심 보고서</div></div>
-<div class="field-guide-card"><div class="field-guide-top"><span class="field-index">05</span><h4>Network Security</h4></div><p class="field-question">네트워크 통신을 관찰하고 위협을 찾아 방어할 수 있을까?</p><dl><dt>주로 다루는 문제</dt><dd>프로토콜 이해, 트래픽 분석, 서비스 노출과 통신 보안, 네트워크 방어</dd><dt>만나는 개념</dt><dd>TCP/IP, DNS, HTTP/TLS, 포트, Wireshark, 방화벽과 세그먼테이션</dd><dt>잘 맞을 수 있는 관심</dt><dd>통신이 오가는 과정을 추적하고, 시스템 간 연결과 방어 방법을 이해하는 일이 흥미롭다.</dd><dt>도움 되는 기초</dt><dd>IP·HTTP·Linux 기초에서 시작해 웹 인가·클라우드 네트워크를 연결한다. 설계 모듈은 여러 분야를 함께 보는 중급 과정이다.</dd><dt>첫 실습</dt><dd>교육용 PCAP에서 DNS 질의와 TCP 연결을 찾아 흐름을 정리하고, 관찰 가능한 정보와 암호화로 보이지 않는 정보를 구분한다.</dd></dl><div class="field-path"><b>학습 경로</b> 패킷·TLS 관찰 → 망 분리·최소 허용 → 탐지·Zero Trust → 통합 설계</div></div>
-<div class="field-guide-card"><div class="field-guide-top"><span class="field-index">06</span><h4>Cryptography</h4></div><p class="field-question">데이터의 비밀과 진위를 어떤 보장으로 지킬 수 있을까?</p><dl><dt>주로 다루는 문제</dt><dd>기밀성·무결성·인증, 암호 프로토콜과 키 관리</dd><dt>만나는 개념</dt><dd>정수·모듈러 연산, 대칭키·공개키, 해시·MAC, nonce와 키 수명</dd><dt>잘 맞을 수 있는 관심</dt><dd>규칙을 찾고 가설을 시험하거나, 작은 도구를 만들어 문제를 해결하는 것이 재미있다.</dd><dt>도움 되는 기초</dt><dd>기초 수학과 Python이 유용하지만, 처음에는 Base64와 간단한 치환 문제부터 시작할 수 있다.</dd><dt>첫 실습</dt><dd>인코딩과 암호화의 차이를 확인하고, 쉬운 교육용 문제 하나를 풀이 과정과 검증 방법까지 기록한다.</dd></dl><div class="field-path"><b>학습 경로</b> 표현·수학 → 무결성·인증 → 현대 암호와 키 관리</div></div>
-<div class="field-guide-card"><div class="field-guide-top"><span class="field-index">07</span><h4>Misc</h4></div><p class="field-question">낯선 데이터를 나누고 작은 도구로 검증할 수 있을까?</p><dl><dt>주로 다루는 문제</dt><dd>단서 추출, 바이트 변환, 자동화, 재현 가능한 풀이</dd><dt>도움 되는 기초</dt><dd>Python·파일 처리와 데이터 표현</dd><dt>첫 실습</dt><dd>제공된 텍스트에서 필드를 추출하고 두 단계 변환을 검증합니다.</dd></dl><div class="field-path"><a href="tracks/misc/">Misc 과정 열기 ↗</a></div></div>
-<div class="field-guide-card"><div class="field-guide-top"><span class="field-index">08</span><h4>Cloud Security</h4></div><p class="field-question">누가 어떤 자원에 접근하고, 누가 설정을 책임질까?</p><dl><dt>주로 다루는 문제</dt><dd>공동 책임, IAM, 네트워크, 데이터 공개, 비밀 관리와 감사</dd><dt>도움 되는 기초</dt><dd>네트워크·웹 인가·JSON 읽기</dd><dt>첫 실습</dt><dd>계정과 결제 없이 로컬 구성 파일을 검토하고 수정안을 작성합니다.</dd></dl><div class="field-path"><a href="tracks/cloud/">Cloud Security 과정 열기 ↗</a></div></div>
-</div>
-<div class="field-choice"><h4>아직 무엇을 고를지 모르겠다면</h4><ol><li><b>문제 유형으로 고르기:</b> 웹 요청과 권한은 Web, 메모리와 실행 흐름은 Pwn/System, 실행 파일의 내부 동작은 Reverse Engineering, 디지털 증거와 로그는 Forensic, 프로토콜과 트래픽 방어는 Network Security, 암호 원리·키 관리는 Cryptography, 단서·자동화는 Misc, 클라우드 신원·구성은 Cloud Security를 먼저 살펴보세요. Network Security는 이 지식을 연결해 통합 방어로 확장합니다.</li><li><b>작게 시험하기:</b> 관심 분야 2개를 골라 각각 30–60분짜리 입문 실습을 하나씩 해봅니다. 어려웠는지보다 과정이 궁금했는지, 더 알아보고 싶은지가 중요한 신호입니다.</li><li><b>임시 선택하기:</b> 주 관심 분야 1개와 보조 분야 1개를 정하고, 공통 기초와 함께 2–3주 경험해 봅니다. 마음이 바뀌면 선택을 업데이트하세요.</li><li><b>기록으로 비교하기:</b> 흥미도, 막힌 개념, 실습 후 새로 생긴 질문, 결과를 설명할 수 있는 정도를 짧게 적어 다음 선택에 활용합니다.</li></ol><p class="field-safety">안전 원칙: 실습은 직접 만든 환경, 본인이 소유한 시스템, 또는 명시적으로 허가된 교육용 랩과 샘플 데이터에서만 진행하세요. 실제 서비스나 타인의 장비를 대상으로 시험하지 않습니다.</p></div>
-<div class="outcome"><strong>다음 단계 기준</strong> — 완벽한 확신 대신 관심 분야 1개와 보조 분야 1개를 임시로 고르고, 첫 입문 실습과 함께 배울 공통 기초를 말할 수 있다.</div></div></article>
-<article class="phase"><div class="phase-label p1"><strong>STEP 01</strong><b>공통 기초 + 분야 입문</b><small>병행해서 진행</small></div><div class="phase-content"><h3>공통 기초를 배우면서 선택 분야도 조금씩 경험하기</h3><p>모든 기초를 끝낼 때까지 기다리지 않습니다. C/Python, Linux, 네트워크를 학습하면서 선택한 분야의 아주 쉬운 입문 실습을 함께 진행합니다.</p><ul><li>C / Python 기초</li><li><a class="inline-guide-link" href="guides/linux.html" onclick="openLinuxGuide(); return false;">Linux / Shell — Windows에서 시작하는 방법 ↗</a></li><li>TCP/IP · DNS · HTTP</li><li>선택 분야의 첫 실습</li><li>Git · 학습 기록</li></ul><div class="outcome"><strong>진행 기준</strong> — 기초를 계속 쌓으면서 선택한 분야의 실습을 조금씩 시도하고, 막히는 기초 개념을 확인한다.</div></div></article>
-<article class="phase"><div class="phase-label p2"><strong>STEP 02</strong><b>보안 공통 개념</b><small>기초에서 보안으로</small></div><div class="phase-content"><h3>취약점이 생기는 이유와 방어 원리 익히기</h3><p>인증·인가, 입력 검증, 메모리, 권한, 암호화의 기본 개념을 실습과 함께 학습합니다.</p><ul><li>웹 보안 기초</li><li>운영체제와 권한</li><li>암호학 기초</li><li>로그와 트래픽</li></ul><div class="outcome"><strong>다음 단계 기준</strong> — 취약점의 원인, 재현 조건, 방어 방법을 자신의 말로 설명할 수 있다.</div></div></article>
-<article class="phase"><div class="phase-label p3"><strong>STEP 03</strong><b>집중 학습</b><small>선택 분야 심화</small></div><div class="phase-content"><h3>기초와 실습 경험을 연결해 깊이 파고들기</h3><p>선택 분야의 핵심 개념과 도구를 체계적으로 익히고, 난도를 조금씩 높여 갑니다. 필요하면 처음 선택한 분야를 조정해도 됩니다.</p><ul><li>분야별 핵심 개념</li><li>중급 실습과 워게임</li><li>도구 사용과 분석 방법</li><li>취약점 원리와 방어 관점</li></ul><div class="outcome"><strong>다음 단계 기준</strong> — 단순히 따라 하는 수준을 넘어 문제의 원인과 해결 과정을 설명할 수 있다.</div></div></article>
-<article class="phase"><div class="phase-label p4"><strong>STEP 04–05</strong><b>프로젝트와 결과물</b><small>연구 · 포트폴리오</small></div><div class="phase-content"><h3>재현 가능한 실습과 프로젝트로 역량 증명하기</h3><p>선택한 분야의 난도를 높이고, 풀이를 넘어 도구·분석 보고서·검증 프로젝트로 발전시킵니다.</p><ul><li>심화 실습과 CTF</li><li>코드 분석과 자동화</li><li>기술 보고서</li><li>GitHub 포트폴리오</li></ul><div class="outcome"><strong>도달 목표</strong> — 결과를 재현하고, 선택한 기술과 판단 근거를 다른 사람에게 설명할 수 있다.</div></div></article>
-</div>
-</section>
-
-<section class="wrap section" id="study">
-<div class="section-head"><div><div class="kicker mono">02 / STUDY TRACKS</div><h2>지도를 고르고, 강의 안으로</h2></div><p class="section-desc">공통 기초와 8개 전문 분야를 별도 과정으로 나눴습니다. 분야별 모듈에서 설명과 예제를 배우고, 파일 실습과 결과 검증으로 이어갑니다. 네트워크 보안은 여러 분야를 연결하는 통합 과정입니다.</p></div>
-<div class="catalog-summary" id="catalogSummary"><div><strong>관심 분야에서 시작하세요</strong>공통 기초와 분야 입문을 함께 배울 수 있습니다.</div><a class="learning-button" href="tracks/foundation/">공통 기초 시작하기 →</a></div>
-<div class="course-catalog" id="courseCatalog"><a class="track-button" href="tracks/foundation/"><span class="track-symbol">00</span><span><strong>Foundation</strong><small>터미널 · 코드 · 네트워크</small></span><span class="track-arrow">→</span></a>
-<a class="track-button" href="tracks/web/"><span class="track-symbol">01</span><span><strong>Web Hacking</strong><small>요청 · 인증 · 취약점</small></span><span class="track-arrow">→</span></a>
-<a class="track-button" href="tracks/pwn/"><span class="track-symbol">02</span><span><strong>Pwn / System</strong><small>메모리 · 디버깅</small></span><span class="track-arrow">→</span></a>
-<a class="track-button" href="tracks/rev/"><span class="track-symbol">03</span><span><strong>Reverse Engineering</strong><small>분석 · 실행 흐름</small></span><span class="track-arrow">→</span></a>
-<a class="track-button" href="tracks/forensic/"><span class="track-symbol">04</span><span><strong>Forensic</strong><small>흔적 · 증거 · 타임라인</small></span><span class="track-arrow">→</span></a>
-<a class="track-button" href="tracks/network/"><span class="track-symbol">05</span><span><strong>Network Security</strong><small>망 설계 · 정책 · 탐지</small></span><span class="track-arrow">→</span></a>
-<a class="track-button" href="tracks/crypto/"><span class="track-symbol">06</span><span><strong>Cryptography</strong><small>수학 · 무결성 · 키 관리</small></span><span class="track-arrow">→</span></a>
-<a class="track-button" href="tracks/misc/"><span class="track-symbol">07</span><span><strong>Misc</strong><small>단서 · 데이터 · 도구</small></span><span class="track-arrow">→</span></a>
-<a class="track-button" href="tracks/cloud/"><span class="track-symbol">08</span><span><strong>Cloud Security</strong><small>신원 · 구성 · 감사</small></span><span class="track-arrow">→</span></a></div>
-<div class="notice"><span>ⓘ</span><div><strong>진도 저장 안내</strong><span id="homeStorageNotice">차시별 완료 기록은 이 브라우저에 저장됩니다. 분야 페이지에서 JSON 백업을 받아 다른 브라우저로 옮길 수 있습니다. 계정·자동 동기화는 사용하지 않습니다.</span></div></div>
-</section>
-
-<section class="wrap section" id="practice">
-<div class="section-head"><div><div class="kicker mono">03 / PRACTICE LOOP</div><h2>읽고 끝내지 말고, 직접 확인하기</h2></div><p class="section-desc">각 학습은 이해 → 실습 → 기록 → 다음 단계의 흐름으로 이어집니다. 정답 맞히기 퀴즈 대신 직접 실행하고 설명할 수 있는 결과물을 만듭니다.</p></div>
+<section class="wrap section" id="practice" aria-labelledby="learning-guide-title">
+<div class="section-head"><div><div class="kicker mono">01 / LEARNING GUIDE</div><h2 id="learning-guide-title">이해하고, 실행하고, 근거로 남기기</h2></div><p class="section-desc">어떤 분야를 선택하든 같은 흐름으로 학습합니다. 개념과 위험을 파악하고, 실습으로 확인한 뒤 다른 사람도 재현할 수 있는 결과물로 정리하세요.</p></div>
 <div class="practice-grid">
-<article class="practice-card"><div class="practice-top"><span>01 / UNDERSTAND</span><div class="icon">⌕</div></div><h3>개념 이해하기</h3><p>왜 필요한 개념인지, 어떤 상황에서 쓰이는지, 무엇과 연결되는지 먼저 파악합니다.</p><div class="deliverable"><b>남길 것</b><br>핵심 개념 3~5줄과 간단한 그림 또는 흐름도</div></article>
-<article class="practice-card"><div class="practice-top"><span>02 / TRY IT</span><div class="icon" style="background:var(--blue-soft);color:var(--blue)">⌘</div></div><h3>안전한 환경에서 실습하기</h3><p>로컬 환경이나 허가된 학습 플랫폼에서 동작을 재현하고, 결과를 관찰합니다.</p><div class="deliverable"><b>남길 것</b><br>실행 명령, 입력값, 관찰 결과, 실패 원인</div></article>
-<article class="practice-card"><div class="practice-top"><span>03 / DOCUMENT</span><div class="icon" style="background:var(--purple-soft);color:var(--purple)">↗</div></div><h3>기록하고 다음으로 이동하기</h3><p>무엇을 배웠는지와 아직 모르는 점을 정리하고, 다음 차시로 넘어갈 준비를 합니다.</p><div class="deliverable"><b>남길 것</b><br>README 또는 Write-up, 후속 학습 질문</div></article>
+<article class="practice-card"><div class="practice-top"><span>01 / UNDERSTAND</span><div class="icon">⌕</div></div><h3>이해하고 범위 정하기</h3><p>배울 개념의 목적과 데이터 흐름을 파악하고, 무엇을 확인할지 정합니다.</p><ul><li>공식 문서를 우선 읽고 출처·날짜·버전을 비교하기</li><li>보호할 대상, 사용자 입력, 권한과 신뢰 경계 표시하기</li><li>실습할 대상과 허용 범위, 중단·복구 방법 정하기</li></ul><div class="deliverable"><b>남길 것</b><br>핵심 개념 요약, 간단한 흐름도, 실습 목표와 범위</div></article>
+<article class="practice-card"><div class="practice-top"><span>02 / PRACTICE &amp; VERIFY</span><div class="icon" style="background:var(--blue-soft);color:var(--blue)">⌘</div></div><h3>실행하고 검증하기</h3><p>허가된 로컬 환경과 샘플 데이터로 동작을 재현하고, 원인과 수정 효과를 확인합니다.</p><ul><li>명령·입력·원본 증거와 실제 출력 보관하기</li><li>예상과 다른 결과, 실패 원인과 대안 가설 비교하기</li><li>수정 후 정상 동작과 거부해야 할 입력을 함께 테스트하기</li></ul><div class="deliverable"><b>남길 것</b><br>실행 가능한 코드와 입력, 수정 전·후 결과, 검증 근거</div></article>
+<article class="practice-card"><div class="practice-top"><span>03 / DOCUMENT &amp; BUILD</span><div class="icon" style="background:var(--purple-soft);color:var(--purple)">↗</div></div><h3>기록하고 결과물로 묶기</h3><p>풀이와 코드를 작은 프로젝트로 정리해, 나중에도 같은 과정을 따라 할 수 있게 만듭니다.</p><ul><li>README에 목표·환경·실행법·결과를 적고 Git으로 변경 관리하기</li><li>관찰한 사실·추론·미확인 사항과 방어 방법을 구분하기</li><li>공유 전 비밀번호·토큰·개인 데이터를 제거하기</li></ul><div class="deliverable"><b>남길 것</b><br>README 또는 Write-up, 재현 절차, 배운 점과 남은 한계</div></article>
 </div>
-</section>
-
-<section class="wrap section" id="career">
-<div class="section-head"><div><div class="kicker mono">04 / CAREER & RESOURCES</div><h2>학습을 실제 결과물로 연결하기</h2></div><p class="section-desc">자격증이나 도구의 개수보다, 무엇을 이해했고 직접 무엇을 만들고 검증했는지 보여주는 것이 중요합니다.</p></div>
-<div class="cards">
-<article class="card"><div class="icon">01</div><h3>분석 Write-up</h3><p>문제의 핵심, 접근 과정, 막힌 지점, 해결 원리, 재발 방지 관점을 정리합니다.</p><ul><li>풀이만 복사하지 않기</li><li>핵심 코드와 패킷 설명</li><li>배운 점과 한계 기록</li></ul></article>
-<article class="card"><div class="icon" style="background:var(--blue-soft);color:var(--blue)">02</div><h3>작은 보안 프로젝트</h3><p>취약점 재현, 안전한 수정, 회귀 테스트까지 연결해 하나의 완성된 결과물로 만듭니다.</p><ul><li>실행 가능한 코드</li><li>명확한 README</li><li>재현 및 검증 절차</li></ul></article>
-<article class="card"><div class="icon" style="background:var(--purple-soft);color:var(--purple)">03</div><h3>진로 탐색</h3><p>웹 모의해킹, 시스템 보안, 리버싱, 보안관제 등 관심 직무의 실제 업무와 요구 역량을 비교합니다.</p><ul><li>공개 채용 공고 읽기</li><li>관심 분야 프로젝트 연결</li><li>부족한 역량 목록화</li></ul></article>
-</div>
-<div class="section" style="padding-top:24px">
+<div class="learning-next"><strong>다음 학습 정하기</strong><p>완성한 결과물을 관심 직무의 실제 업무·요구 역량과 비교하고, 부족한 개념이나 새로 생긴 질문을 다음 차시와 프로젝트로 연결하세요.</p></div>
+<div class="learning-resources" id="resources" aria-labelledby="resources-title"><h3 id="resources-title">학습을 이어갈 외부 자료</h3>
 <div class="resource-grid">
 <div class="resource"><strong>Dreamhack</strong><small>웹·시스템 보안 실습</small><a href="https://dreamhack.io/" target="_blank" rel="noopener">학습 플랫폼 ↗</a></div>
 <div class="resource"><strong>CTFtime</strong><small>대회 일정과 정보</small><a href="https://ctftime.org/" target="_blank" rel="noopener">대회 찾아보기 ↗</a></div>
@@ -226,37 +178,20 @@
 <div class="resource"><strong>OWASP</strong><small>웹 보안 지식과 자료</small><a href="https://owasp.org/" target="_blank" rel="noopener">공식 자료 ↗</a></div>
 </div>
 </div>
-<div class="notice"><span>↗</span><div><strong>진로와 병역 관련 선택은 별도로 확인하세요</strong>군 복무 경로는 개인 상황에 따라 달라지는 선택지 중 하나입니다. 필요해지는 시점에 공식 모집·편입 요건을 확인하고, 학습 로드맵과는 별도로 판단하세요.</div></div>
 </section>
 </main>
-
-<section class="wrap section" id="learning-practices">
-  <div class="section-head"><div><span class="kicker">05 / LEARNING PRACTICES</span><h2>커리큘럼을 더 탄탄하게 만드는 공통 습관</h2></div><p class="section-desc">기술 지식과 함께 조사·검증·실습·기록 습관을 익히면 어떤 트랙에서도 학습을 이어가기 쉬워집니다.</p></div>
-  <div class="cards practice-habits">
-    <article class="card"><div class="icon">⌕</div><h3>학습 습관</h3><p>모르는 개념을 검색하고 출처를 검증하는 방법을 연습합니다.</p><ul><li>공식 문서와 신뢰할 수 있는 자료를 우선 확인</li><li>서로 다른 출처를 비교하고 게시 날짜·버전을 확인</li><li>확인한 사실과 불확실한 내용을 구분</li></ul><div class="outcome"><strong>기대 효과:</strong> 초보자의 막힘을 줄이고 잘못된 정보에 의존할 가능성을 낮춥니다.</div></article>
-    <article class="card"><div class="icon">⌘</div><h3>공통 기초</h3><p>Git 기초와 명령어 사용 연습을 작은 결과물로 연결합니다.</p><ul><li><code>status</code>, <code>diff</code>, <code>log</code>로 변경 내역 확인</li><li>작은 단위로 커밋하고 README에 실행법 기록</li><li>반복 실습에 쓸 명령어와 스크립트를 정리</li></ul><div class="outcome"><strong>기대 효과:</strong> 이후 모든 트랙에서 학습 기록과 실습 결과를 재사용할 수 있습니다.</div></article>
-    <article class="card"><div class="icon">◇</div><h3>보안 사고방식</h3><p>기능이 동작하는지만 보지 말고 위험 모델과 신뢰 경계를 함께 생각합니다.</p><ul><li>위험 모델과 공격 표면을 간단히 적기</li><li>최소 권한 원칙을 적용할 위치 찾기</li><li>사용자 입력과 신뢰 경계를 구분</li></ul><div class="outcome"><strong>기대 효과:</strong> 도구 사용을 넘어 보안 원리와 설계 이유를 이해하게 됩니다.</div></article>
-    <article class="card"><div class="icon">▣</div><h3>실습 안전</h3><p>실습 전에 환경·권한·데이터·복구 방법을 확인합니다.</p><ul><li>가상 머신 또는 로컬 랩 사용</li><li>샘플 데이터와 허가된 대상만 사용</li><li>실습 범위와 중단·복구 방법 확인</li></ul><div class="outcome"><strong>기대 효과:</strong> 안전하고 반복 가능한 실습 환경을 만들 수 있습니다.</div></article>
-    <article class="card"><div class="icon">⌁</div><h3>분석 능력</h3><p>관찰한 사실·추론·미확인 사항을 구분해 결론의 품질을 높입니다.</p><ul><li>원본 증거와 재현 절차를 보존</li><li>사실과 가설을 분리하고 대안 설명 고려</li><li>결론을 뒷받침하는 근거를 명시</li></ul><div class="outcome"><strong>기대 효과:</strong> 분석의 정확성과 보고서 품질을 높일 수 있습니다.</div></article>
-    <article class="card"><div class="icon">↗</div><h3>결과물 관리</h3><p>학습 결과를 다른 사람이 따라 할 수 있는 작은 포트폴리오로 바꿉니다.</p><ul><li>README에 목표·환경·재현 절차 작성</li><li>결과뿐 아니라 한계와 방어 방법 기록</li><li>민감 정보·토큰·개인 데이터를 제거</li></ul><div class="outcome"><strong>기대 효과:</strong> 학습 결과를 포트폴리오로 전환하고 나중에 다시 활용할 수 있습니다.</div></article>
-  </div>
-</section>
-
 
 <footer class="footer"><div class="wrap footer-inner"><div><strong>Bifrost</strong><br><small>Learn the concept. Practice with intent. Document what you discover.</small><br><small class="credit">by. Loki</small></div><div><small>학습과 실습은 본인이 소유하거나 명시적으로 허가받은 환경에서 진행하세요.<br>진도는 현재 브라우저에 저장되며, 계정 동기화는 아직 지원하지 않습니다.</small></div></div></footer>
 
 
 
 <div id="linuxGuideOverlay" role="dialog" aria-modal="true" aria-label="Windows에서 Linux 시작하기" aria-hidden="true">
-  <button id="linuxGuideClose" type="button" onclick="showMainGuide()">← 학습 로드맵</button>
+  <button id="linuxGuideClose" type="button" onclick="showMainGuide()">← 학습 지도</button>
   <iframe id="linuxGuideFrame" title="Windows에서 Linux 시작하기" loading="lazy"></iframe>
 </div>
 
 
 
-<script src="js/curriculum.js" defer></script>
-<script src="js/progress.js" defer></script>
-<script src="js/app.js" defer></script>
 <script src="js/linux-guide.js" defer></script>
 </body>
 </html>

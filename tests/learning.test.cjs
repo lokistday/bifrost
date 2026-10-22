@@ -24,7 +24,7 @@ function openPage(relative, search = '', storage = new Storage()) {
   };
   window.parent = window;
   const context = vm.createContext({ window, document, localStorage: storage, location: { search, origin: 'https://example.test' }, Event, CustomEvent, URLSearchParams, URL, Blob, console, setTimeout: () => 0, navigator: { clipboard: { writeText: async () => {} } } });
-  for (const file of ['theme.js', 'curriculum.js', 'progress.js', relative === 'index.html' ? 'app.js' : 'learning.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, 'js', file), 'utf8'), context, { filename: file });
+  for (const file of ['theme.js', 'curriculum.js', 'progress.js', ...(relative === 'index.html' ? [] : ['visual-data.js', 'visuals.js', 'learning.js'])]) vm.runInContext(fs.readFileSync(path.join(ROOT, 'js', file), 'utf8'), context, { filename: file });
   return { document, window, storage, context, Event, progress: window.BifrostProgress, courses: window.BifrostCourses, relative };
 }
 function verifyLocalLinks(page) {
@@ -36,7 +36,11 @@ function verifyLocalLinks(page) {
     let relative = decodeURIComponent(url.pathname.slice('/bifrost/'.length));
     if (relative.endsWith('/')) relative += 'index.html';
     check(fs.existsSync(path.join(ROOT, relative)), `Missing local asset: ${relative}`);
-    if (url.hash && relative === page.relative) check(!!page.document.getElementById(url.hash.slice(1)), `Missing anchor ${value}`);
+    if (url.hash) {
+      const target = relative === page.relative ? page.document : parseHTML(fs.readFileSync(path.join(ROOT, relative), 'utf8')).document;
+      const dynamicCourseOutline = relative !== page.relative && relative.startsWith('tracks/') && relative.endsWith('/index.html') && url.hash === '#courseModules';
+      check(!!target.getElementById(url.hash.slice(1)) || dynamicCourseOutline, `Missing anchor ${value}`);
+    }
     if (url.searchParams.has('id')) {
       const track = relative.split('/')[1];
       check(page.courses[track].modules.some(m => m.lessons.some(l => l.id === url.searchParams.get('id'))), `Unknown lesson link: ${value}`);
@@ -47,13 +51,33 @@ const home = openPage('index.html');
 const courses = Object.values(home.courses);
 check(courses.length === 9, 'Nine courses');
 check(home.document.querySelectorAll('a[data-map-track]').length === 9, 'Nine semantic map links');
-check(home.document.querySelectorAll('.catalog-card').length === 9, 'Nine catalogue cards');
+check(!home.document.getElementById('roadmap') && !home.document.getElementById('study'), 'Homepage has no Roadmap or Study Tracks sections');
+check(!home.document.querySelector('.catalog-card') && !home.document.getElementById('catalogSummary'), 'Duplicate field catalogue and summary removed');
+check(!home.document.querySelector('script[src="js/app.js"]'), 'Removed catalogue controller is not loaded');
+check(home.document.querySelector('#mindmap').nextElementSibling.id === 'practice', 'Radial map leads directly to practice guidance');
 verifyLocalLinks(home);
+const fieldGuides = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/field-guides.json'), 'utf8'));
+const clockwise = ['foundation', 'pwn', 'forensic', 'misc', 'cloud', 'network', 'crypto', 'rev', 'web'];
+clockwise.forEach((key, index) => {
+  const number = String(index).padStart(2, '0');
+  check(home.document.querySelector(`[data-map-track="${key}"] .node-number`).textContent.startsWith(`${number} /`), 'Map numbering runs clockwise');
+});
 const ids = new Set();
 let lessonCount = 0;
 for (const course of courses) {
   const overview = openPage(`tracks/${course.id}/index.html`);
+  const number = String(clockwise.indexOf(course.id)).padStart(2, '0');
+  check(overview.document.querySelector('.course-hero .overline').textContent === `${number} / LEARNING PATH`, 'Course heading matches map number');
+  check(overview.document.querySelector('.field-index').textContent === number, 'Field introduction matches map number');
+  check(overview.document.querySelectorAll('.course-visual').length === 1, 'One course-specific visual learning path');
   check(overview.document.querySelectorAll('.module-card').length === course.modules.length, 'All modules render');
+  check(!overview.document.querySelector('#roadmap, .phase, .field-choice, .field-guide-intro'), 'Common roadmap stages and field selection advice removed');
+  check(overview.document.querySelectorAll('#courseIntroduction .field-guide-card').length === 1, 'Exactly one field introduction card appears');
+  const original = parseHTML(`<html><body>${fieldGuides.fields[course.id]}</body></html>`).document;
+  check(overview.document.querySelector('.field-question').textContent === original.querySelector('.field-question').textContent, 'Field introduction preserved');
+  check(overview.document.querySelector('.field-guide-card h4').textContent === course.title, 'Correct field description on course');
+  check(!overview.document.querySelector('#courseIntroduction [onclick]'), 'Field introduction uses working standalone links');
+  check(!!overview.document.getElementById('courseModules'), 'Direct jump to teaching modules');
   verifyLocalLinks(overview);
   for (const lesson of course.modules.flatMap(m => m.lessons)) {
     check(!ids.has(lesson.id), `Unique ID ${lesson.id}`); ids.add(lesson.id);
@@ -61,8 +85,11 @@ for (const course of courses) {
     check(lesson.concepts.length >= 2 && lesson.checks.length >= 2 && lesson.task && lesson.hint, 'Teaching + task + verification');
     const page = openPage(`tracks/${course.id}/lesson.html`, `?id=${encodeURIComponent(lesson.id)}`);
     check(page.document.querySelector('.lesson-heading h1').textContent === lesson.title, 'Deep link renders correct lesson');
+    check(page.document.querySelectorAll('#concept .learning-visual').length === 1, 'Every lesson has its own concept graphic');
+    check(page.document.querySelector('#concept > p').nextElementSibling.dataset.visualId === lesson.id, 'Visual separates the first and second explanation paragraphs');
     check(page.document.querySelector('#exampleCode').textContent === lesson.code, 'Code escaped without corruption');
     check(page.document.querySelectorAll('.side-lesson[aria-current="page"]').length === 1, 'Current lesson accessible');
+    check(!page.document.querySelector('#roadmap, #courseIntroduction'), 'Field introduction does not repeat inside each lesson');
     const elements = [...page.document.querySelectorAll('[id]')].map(el => el.id);
     check(new Set(elements).size === elements.length, 'No duplicate DOM IDs');
     verifyLocalLinks(page);
@@ -125,7 +152,8 @@ const reload = openPage('tracks/foundation/index.html', '', store);
 check(reload.document.querySelector('[data-count]').textContent.includes('1 / 10'), 'Reload retains completion');
 check(reload.document.querySelector('#continueLearning').getAttribute('href').includes('foundation.environment'), 'Completed last lesson does not skip first missing lesson');
 const homepage = openPage('index.html', '', store);
-check(homepage.document.querySelector('#catalogSummary').textContent.includes('1 / 62'), 'Homepage aggregate');
+check(!homepage.document.querySelector('#catalogSummary'), 'Homepage stays focused on the radial map after progress changes');
+check(homepage.progress.has('foundation.python-values'), 'Removing homepage summary does not reset stored progress');
 
 const legacyState = { foundation: [0, 1, 2, 3, 4, 5, 6, 6, 999, -1, '1'], crypto: [0, 1, 2, 3, 4, 5, 6], network: [0, 1, 2] };
 const oldStore = new Storage({ [LEGACY]: JSON.stringify(legacyState) });
@@ -186,7 +214,7 @@ const theme = openPage('tracks/cloud/index.html');
 theme.document.getElementById('themeToggle').click();
 check(theme.document.documentElement.dataset.theme === 'dark', 'Shared theme works on course pages');
 const guide = parseHTML(fs.readFileSync(path.join(ROOT, 'guides/linux.html'), 'utf8')).document;
-const returns = guide.querySelectorAll('a[href="../index.html#study"]');
+const returns = guide.querySelectorAll('a[href="../index.html#mindmap"]');
 check(returns.length === 2, 'Standalone Linux guide has working return links');
 for (const a of returns) {
   const standalone = { window: {} }; standalone.window.parent = standalone.window;

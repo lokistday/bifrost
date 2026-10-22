@@ -141,7 +141,7 @@ class LabsTest(unittest.TestCase):
                 self.assertEqual(hashlib.sha256((folder / filename).read_bytes()).hexdigest(), expected)
 
     def test_generators_are_repeatable(self):
-        paths = [ROOT/'index.html', *ROOT.glob('tracks/*/*.html'), *LABS.glob('*/*'), *LABS.glob('*.zip')]
+        paths = [ROOT/'index.html', ROOT/'js/visual-data.js', *ROOT.glob('tracks/*/*.html'), *LABS.glob('*/*'), *LABS.glob('*.zip')]
         before = {p: p.read_bytes() for p in paths if p.is_file()}
         subprocess.run([sys.executable, str(ROOT/'scripts/build_pages.py')], check=True, capture_output=True)
         subprocess.run([sys.executable, str(ROOT/'scripts/build_labs.py')], check=True, capture_output=True)

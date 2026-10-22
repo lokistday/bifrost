@@ -1,5 +1,15 @@
 /* Runs in the head so the intro is ready before the first page paint. */
 (() => {
+  // Keep the full intro for the first visit in this tab, including across reloads.
+  // If session storage is unavailable, leave the page usable without the intro.
+  try {
+    const seenKey = 'bifrost_splash_seen_v1';
+    if (sessionStorage.getItem(seenKey) === '1') return;
+    sessionStorage.setItem(seenKey, '1');
+  } catch {
+    return;
+  }
+
   const root = document.documentElement;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const startedAt = performance.now();

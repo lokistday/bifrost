@@ -3,7 +3,8 @@
   "private": true,
   "description": "Static GitHub Pages learning site; dependencies are for development tests only.",
   "scripts": {
-    "test": "node tests/learning.test.cjs",
+    "test": "node tests/learning.test.cjs && node tests/visuals.test.cjs && node tests/splash.test.cjs",
+    "test:visuals": "node tests/visuals.test.cjs",
     "test:labs": "python tests/labs_test.py"
   },
   "devDependencies": {

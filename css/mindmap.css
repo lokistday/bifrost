@@ -9,9 +9,7 @@ html[data-theme="dark"] .mindmap-shell:before{opacity:0}
 html[data-theme="dark"] .mindmap-shell:after{opacity:1}
 .mindmap-wrap{width:min(1240px,calc(100% - 48px));margin:auto;padding:64px 0 46px}
 .mindmap-intro{text-align:center;position:relative;z-index:2}
-.mindmap-intro .eyebrow{justify-content:center;color:var(--map-cyan)}
-.mindmap-intro h1{font-size:clamp(36px,5vw,58px);line-height:1.13;letter-spacing:-.055em;margin:17px 0 13px}
-.mindmap-intro h1 span{background:linear-gradient(100deg,var(--map-cyan),var(--map-violet) 55%,var(--map-pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.mindmap-intro .eyebrow{justify-content:center;color:var(--map-cyan);margin-bottom:12px}
 .mindmap-intro p{font-size:14px;color:var(--map-muted);line-height:1.9;margin:0}
 .mindmap-hint{display:inline-flex;align-items:center;gap:9px;margin-top:18px;border:1px solid color-mix(in srgb,var(--map-cyan) 24%,transparent);background:color-mix(in srgb,var(--map-cyan) 5%,transparent);border-radius:999px;padding:7px 12px;color:var(--ink-soft);font-size:11px}
 .hint-pulse,.core-status b{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--map-cyan);box-shadow:0 0 12px var(--map-cyan)}
@@ -57,7 +55,7 @@ html[data-theme="dark"] .mindmap-shell:after{opacity:1}
 .map-caption{position:absolute;bottom:2px;left:0;right:0;text-align:center;font:9px "DM Mono",monospace;letter-spacing:.18em;color:var(--map-muted)}
 .map-caption span{color:var(--map-cyan);margin:0 7px}
 @media(max-width:900px){.mindmap-wrap{width:min(720px,calc(100% - 32px));padding-top:52px}.mindmap-stage{height:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:20px 0 38px}.mindmap-lines{display:none}.map-core{position:relative;left:auto;top:auto;transform:none;grid-column:1/-1;grid-row:1;width:145px;height:145px;margin:0 auto 14px}.map-node,.node-foundation,.node-web,.node-pwn,.node-rev,.node-forensic,.node-crypto,.node-network{position:relative;left:auto;right:auto;top:auto;transform:none;width:100%;min-height:110px;text-align:left;align-items:flex-start}.node-foundation,.node-crypto{text-align:left;align-items:flex-start}.map-node:hover,.map-node:focus-visible,.node-foundation:hover,.node-foundation:focus-visible,.node-crypto:hover,.node-crypto:focus-visible{transform:translateY(-3px)}.map-caption{bottom:4px}}
-@media(max-width:520px){.mindmap-wrap{width:calc(100% - 26px);padding-top:40px}.mindmap-intro h1{font-size:37px}.mindmap-intro p{font-size:12px}.mindmap-stage{gap:9px}.map-node{padding:12px 10px;min-height:104px;border-radius:12px}.map-node strong{font-size:12px;overflow-wrap:anywhere}.map-node small{font-size:10px}.map-node i{font-size:9px}.node-number{font-size:8px}.map-caption{font-size:8px;letter-spacing:.1em}}
+@media(max-width:520px){.mindmap-wrap{width:calc(100% - 26px);padding-top:40px}.mindmap-intro p{font-size:12px}.mindmap-stage{gap:9px}.map-node{padding:12px 10px;min-height:104px;border-radius:12px}.map-node strong{font-size:12px;overflow-wrap:anywhere}.map-node small{font-size:10px}.map-node i{font-size:9px}.node-number{font-size:8px}.map-caption{font-size:8px;letter-spacing:.1em}}
 @media(prefers-reduced-motion:reduce){.synapse,.orbit-one,.orbit-two{animation:none}.map-node,.map-core,.mindmap-shell:before,.mindmap-shell:after{transition:none}}
 
 /* Keep the color identity, with a quieter frame around readable card content. */

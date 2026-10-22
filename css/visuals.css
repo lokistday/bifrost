@@ -1,0 +1,48 @@
+/* Educational SVGs share theme tokens with the surrounding lesson. */
+.learning-visual{--visual-edge:#687d94;--visual-muted:#586b82;--visual-accent:var(--course-accent,var(--teal));--visual-danger:#a82c47;--visual-positive:#19724a;--visual-warning:#895b14;margin:28px 0 30px;border:1px solid var(--line);border-radius:16px;background:var(--surface);overflow:hidden}
+html[data-theme="dark"] .learning-visual{--visual-edge:#91a6bd;--visual-muted:#b3c2d5;--visual-danger:#ff9bac;--visual-positive:#86dfb0;--visual-warning:#f0c579}
+.visual-heading{padding:22px 24px 0}
+.visual-kicker{display:block;color:var(--muted);font-size:11px;letter-spacing:.04em;line-height:1.8}
+.visual-heading h3{margin:7px 0 0;font-size:18px;line-height:1.65;letter-spacing:-.02em;color:var(--ink)}
+.visual-viewport{overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;padding:6px 0;background:var(--surface);-webkit-overflow-scrolling:touch}
+.visual-viewport:focus-visible{outline:2px solid var(--course-accent);outline-offset:-3px}
+.teaching-diagram{display:block;width:100%;min-width:760px;height:auto;font-family:"Malgun Gothic","Noto Sans KR",sans-serif}
+.v-text{fill:var(--ink);font-weight:400}
+.v-heading{font-weight:700}
+.v-secondary{fill:var(--visual-muted)}
+.v-tone{--v-tone:var(--visual-accent)}
+.v-tone.positive{--v-tone:var(--visual-positive)}
+.v-tone.danger{--v-tone:var(--visual-danger)}
+.v-tone.warning{--v-tone:var(--visual-warning)}
+.v-node{fill:var(--surface-soft);stroke:var(--line);stroke-width:1}
+.v-tone.danger .v-node{stroke:var(--visual-danger);stroke-width:1.5}
+.v-outside{stroke-dasharray:5 4}
+.v-accent{fill:var(--v-tone,var(--visual-accent))}
+.v-edge{fill:none;stroke:var(--visual-edge);stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.v-edge.danger{stroke:var(--visual-danger)}
+.v-edge.positive{stroke:var(--visual-positive)}
+.v-dashed{stroke-dasharray:5 5}
+.v-arrow-head{fill:var(--visual-edge)}
+.v-lifeline{fill:none;stroke:var(--line);stroke-width:1.5;stroke-dasharray:4 6}
+.v-label-bg{fill:var(--surface)}
+.v-edge-label{fill:var(--ink-soft)}
+.v-step-circle{fill:var(--surface-soft);stroke:var(--line);stroke-width:1}
+.v-step-number{fill:var(--ink);font-size:11px;font-weight:700}
+.v-wheel-number{fill:var(--ink);font-size:14px;font-weight:700}
+.v-zone{fill:var(--surface-soft);fill-opacity:.45;stroke:var(--line);stroke-width:1;stroke-dasharray:5 5}
+.v-point{fill:var(--visual-accent);stroke:var(--surface);stroke-width:2}
+.v-highlight-circle{fill:var(--surface-soft);stroke:var(--visual-accent);stroke-width:2.5}
+.v-table-cell{fill:var(--surface);stroke:var(--line);stroke-width:1}
+.v-tone.positive .v-table-cell,.v-tone.danger .v-table-cell,.v-tone.warning .v-table-cell{fill:var(--surface-soft)}
+.v-table-head{fill:var(--surface-soft);stroke:var(--line);stroke-width:1}
+.v-separator{stroke:var(--line);stroke-width:1}
+.learning-visual figcaption{padding:16px 24px 17px;border-top:1px solid var(--line);background:var(--surface-soft);font-size:13px;line-height:1.85;color:var(--ink-soft)}
+.visual-takeaway{display:block}
+.visual-note{display:block;font-size:11px;line-height:1.8;color:var(--muted);margin-top:6px}
+.visual-description{padding:0 24px 17px;background:var(--surface-soft);font-size:12px;color:var(--muted)}
+.visual-description summary{cursor:pointer;width:fit-content;text-underline-offset:3px}
+.visual-description summary:focus-visible{outline:2px solid var(--course-accent);outline-offset:4px}
+.visual-description p{margin:12px 0 0;line-height:1.95;color:var(--ink-soft)}
+.course-visual{margin:0 0 36px;max-width:100%}
+.course-visual .visual-viewport{max-width:960px;margin-inline:auto}
+@media print{.visual-viewport{overflow:visible}.teaching-diagram{min-width:0}.learning-visual{break-inside:avoid}.visual-description{display:none}}

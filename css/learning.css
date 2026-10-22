@@ -26,6 +26,13 @@ html[data-theme="dark"]{--map-orange:#f5a875;--map-sky:#85d2ff}
 .learning-page :is(a,button,input,summary):focus-visible,.course-catalog a:focus-visible{outline:2px solid var(--course-accent,var(--teal));outline-offset:4px}
 .caption{font-size:11px;line-height:1.75;color:var(--muted);font-weight:400}
 .overview-layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:28px;align-items:start}
+.course-jump-links{display:flex;flex-wrap:wrap;gap:12px 24px;margin:-8px 0 32px;font-size:12px}
+.course-jump-links a{color:var(--course-accent)}
+.course-introduction{margin:0 0 36px;scroll-margin-top:96px}
+.course-introduction .field-guide-card{margin:0;padding:22px 24px}
+.course-introduction .field-guide-card h4{font-size:17px}
+.course-introduction .field-guide-card dd{font-size:12px}
+.module-list{scroll-margin-top:96px}
 .overview-aside{display:grid;gap:18px}
 .prereq-panel h2,.outcome-panel h2,.reference-panel h2{font-size:17px;margin:8px 0 12px}
 .prereq-panel p,.outcome-panel p{font-size:13px;color:var(--muted)}
