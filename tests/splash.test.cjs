@@ -7,12 +7,18 @@ const { parseHTML } = require('linkedom');
 const source = fs.readFileSync(path.join(__dirname, '../js/splash.js'), 'utf8');
 const storage = () => {
   const values = new Map();
-  return { getItem: key => values.get(key) ?? null, setItem: (key, value) => values.set(key, value) };
+  return { getItem: key => values.get(key) ?? null, setItem: (key, value) => values.set(key, value), removeItem: key => values.delete(key) };
 };
-function visit(sessionStorage, reduced = false) {
+function visit(sessionStorage, reduced = false, { navigation = 'navigate', now = 100000, pathname = '/bifrost/', search = '' } = {}) {
   const { document, Event } = parseHTML('<html><body><div id="startupSplash" hidden></div><main></main></body></html>');
   const timers = new Map();
   const events = new Map();
+  const shortcuts = [];
+  const addEventListener = document.addEventListener.bind(document);
+  document.addEventListener = (name, fn, options) => {
+    if (name === 'keydown' && options?.capture) shortcuts.push(fn);
+    addEventListener(name, fn, options);
+  };
   let nextTimer = 0;
   const window = {
     matchMedia: () => ({ matches: reduced }),
@@ -20,7 +26,8 @@ function visit(sessionStorage, reduced = false) {
     removeEventListener: name => events.delete(name)
   };
   vm.runInNewContext(source, {
-    document, window, sessionStorage, performance: { now: () => 0 },
+    document, window, sessionStorage, location: { pathname, search }, Date: { now: () => now },
+    performance: { now: () => 0, getEntriesByType: () => [{ type: navigation }] },
     setTimeout: (fn, delay) => { timers.set(++nextTimer, { fn, delay }); return nextTimer; },
     clearTimeout: id => timers.delete(id)
   });
@@ -29,7 +36,14 @@ function visit(sessionStorage, reduced = false) {
     timers.delete(id);
     timer.fn();
   };
-  return { document, Event, timers, events, runAfter, active: () => document.documentElement.classList.contains('splash-active') };
+  // Trusted keyboard input is simulated at the registered handler boundary; no browser is launched.
+  const keydown = overrides => {
+    const event = { key: 'F5', ctrlKey: false, shiftKey: false, metaKey: false, altKey: false,
+      isTrusted: true, defaultPrevented: false, repeat: false, ...overrides };
+    shortcuts.forEach(fn => fn(event));
+    return event;
+  };
+  return { document, Event, timers, events, runAfter, keydown, active: () => document.documentElement.classList.contains('splash-active') };
 }
 const session = storage();
 const first = visit(session);
@@ -63,5 +77,58 @@ for (const sessionStorage of [
   const unavailable = visit(sessionStorage);
   assert.equal(unavailable.active(), false, 'Unavailable storage does not block the page');
   assert.equal(unavailable.timers.size, 0);
+  assert.doesNotThrow(() => unavailable.keydown({ ctrlKey: true }), 'Storage errors never interfere with native refresh');
 }
 console.log('PASS: intro first visit, repeat visits, fresh session, back/forward cache, reduced motion and unavailable storage.');
+
+const replayKey = 'bifrost_splash_replay_v1';
+first.keydown({ ctrlKey: true });
+assert.equal(visit(session, false, { navigation: 'reload', now: 101000 }).active(), true,
+  'Shortcut listener remains installed after the finished intro removes its dismissal listeners');
+for (const shortcut of [
+  { ctrlKey: true }, { shiftKey: true }, { ctrlKey: true, shiftKey: true },
+  { key: 'R', ctrlKey: true, shiftKey: true }, { key: 'r', metaKey: true, shiftKey: true }
+]) {
+  const data = storage();
+  visit(data);
+  const page = visit(data);
+  assert.equal(page.active(), false, 'Previously seen intro stays skipped before the shortcut');
+  const event = page.keydown(shortcut);
+  assert.equal(event.defaultPrevented, false, 'Native hard reload is not intercepted');
+  assert.ok(data.getItem(replayKey), 'Replay is armed even after the session guard skipped the intro');
+  const replay = visit(data, false, { navigation: 'reload', now: 101000 });
+  assert.equal(replay.active(), true, 'Hard-reload shortcut replays the intro');
+  assert.equal(data.getItem(replayKey), null, 'Replay request is consumed once');
+  assert.equal(visit(data, false, { navigation: 'reload' }).active(), false, 'Following normal reload skips again');
+}
+for (const key of [{}, { key: 'r', ctrlKey: true }, { key: 'r', metaKey: true }]) {
+  const data = storage(); visit(data); visit(data).keydown(key);
+  assert.equal(visit(data, false, { navigation: 'reload' }).active(), false, 'Normal F5/Ctrl+R does not replay');
+}
+for (const override of [{ isTrusted: false }, { defaultPrevented: true }, { repeat: true }, { altKey: true }]) {
+  const data = storage(); visit(data); visit(data).keydown({ ctrlKey: true, ...override });
+  assert.equal(data.getItem(replayKey), null, 'Synthetic, cancelled, repeated or unrelated shortcut does not arm replay');
+}
+for (const options of [
+  { navigation: 'navigate' }, { navigation: 'back_forward' },
+  { navigation: 'reload', pathname: '/bifrost/index.html' },
+  { navigation: 'reload', now: 131000 }, { navigation: 'reload', now: 99000 }
+]) {
+  const data = storage(); visit(data); visit(data).keydown({ ctrlKey: true });
+  assert.equal(visit(data, false, options).active(), false, 'Stale, different-page or non-reload requests are ignored');
+  assert.equal(data.getItem(replayKey), null);
+}
+const cancelledReplay = storage(); visit(cancelledReplay);
+const page = visit(cancelledReplay);
+page.keydown({ ctrlKey: true });
+page.keydown({});
+assert.equal(cancelledReplay.getItem(replayKey), null, 'Normal refresh cancels a pending shortcut marker');
+const brokenReplay = storage(); visit(brokenReplay); brokenReplay.setItem(replayKey, '{broken');
+assert.equal(visit(brokenReplay, false, { navigation: 'reload' }).active(), false, 'Corrupt replay data is harmless');
+const reducedReplay = storage(); visit(reducedReplay); visit(reducedReplay).keydown({ ctrlKey: true });
+const reducedHard = visit(reducedReplay, true, { navigation: 'reload' });
+assert.equal(reducedHard.active(), true);
+reducedHard.document.dispatchEvent(new reducedHard.Event('DOMContentLoaded'));
+reducedHard.runAfter(150); reducedHard.runAfter(0);
+assert.equal(reducedHard.active(), false, 'Replayed intro respects reduced motion');
+console.log('PASS: trusted hard-reload shortcuts, one-shot replay, normal refresh, invalid/stale markers and reduced motion.');
