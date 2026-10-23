@@ -81,7 +81,10 @@
 .startup-splash__road > path {
   stroke: var(--lane-color);
   stroke-width: .5;
-  stroke-opacity: .32;
+  stroke-opacity: 0;
+  mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+  mask-repeat: no-repeat;
+  mask-position: top;
   vector-effect: non-scaling-stroke;
   animation: splash-lane-descent var(--splash-lane-duration, 900ms) cubic-bezier(.2,.55,.25,1) var(--lane-delay, 0ms) both;
 }
@@ -94,11 +97,11 @@
 .startup-splash__road > path:nth-child(7) { --lane-delay: var(--splash-lane-6-delay, 540ms); --lane-color: #c381ff; }
 .startup-splash__road > path:nth-child(8) { --lane-delay: var(--splash-lane-7-delay, 630ms); --lane-color: #f28ccb; }
 .startup-splash__filaments {
-  stroke-width: .65;
+  stroke-width: .95;
   animation: splash-strands-in 700ms ease-out 420ms both;
 }
 .startup-splash__filaments path {
-  opacity: .5;
+  opacity: .75;
   stroke-dasharray: 70 9 2 18 250 6;
   stroke-dashoffset: calc(var(--strand) * 89);
   animation: splash-flow 1300ms linear calc(var(--strand) * -110ms) 3;
@@ -229,9 +232,9 @@
   100% { opacity: 0; transform: scaleX(1.14); }
 }
 @keyframes splash-lane-descent {
-  0% { clip-path: inset(0 0 100%); filter: brightness(2) drop-shadow(0 0 9px var(--lane-color)); }
+  0% { mask-size: 100% 0%; filter: brightness(2) drop-shadow(0 0 9px var(--lane-color)); }
   65% { filter: brightness(1.8) drop-shadow(0 0 9px var(--lane-color)); }
-  100% { clip-path: inset(0 0 0); filter: brightness(1.2) drop-shadow(0 0 7px var(--lane-color)); }
+  100% { mask-size: 100% 140%; filter: brightness(1.2) drop-shadow(0 0 7px var(--lane-color)); }
 }
 @keyframes splash-strands-in { from { opacity: 0; } to { opacity: .7; } }
 @keyframes splash-flow { to { stroke-dashoffset: -355; } }
