@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="표현을 바꾸는 인코딩과 비밀을 지키는 암호화를 구분합니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="바이트·Hex·Base64 — Cryptography · Bifrost">
+<meta property="og:description" content="표현을 바꾸는 인코딩과 비밀을 지키는 암호화를 구분합니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/tracks/crypto/representation.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/crypto/representation.html">
+<title>바이트·Hex·Base64 — Cryptography · Bifrost</title>
+<script src="../../js/theme.js"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/learning.css">
+<link rel="stylesheet" href="../../css/visuals.css">
+<script src="../../js/catalog.js" defer></script>
+<script src="../../js/courses/crypto.js" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-view.js" defer></script>
+<script src="../../js/learning.js" defer></script>
+</head>
+<body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.representation" style="--course-accent:var(--map-pink)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">암호학 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="crypto.representation">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../index.html#mindmap">학습 지도</a><span aria-hidden="true">/</span><a href="./">Cryptography</a><span aria-hidden="true">/</span><span aria-current="page">1차시</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar"><a class="back-link" href="./">← Cryptography 전체 과정</a><div class="course-stats"><span data-count="crypto"></span>
+        <div class="course-meter" role="progressbar" aria-label="Cryptography 완료 진도" aria-valuemin="0" aria-valuemax="100" data-meter="crypto"><span></span></div>
+      </div>
+        <nav aria-label="차시 목차">
+          <details open>
+            <summary>01 · 표현·수학·고전 암호<span class="caption" data-module-count="0"></span></summary>
+            <ol><li><a class="side-lesson" href="representation.html" aria-current="page">
+              <span class="lesson-dot" data-dot="crypto.representation" aria-hidden="true"></span><span>바이트·Hex·Base64<small class="completion-label" data-completion="crypto.representation"></small></span></a></li><li><a class="side-lesson" href="modular.html" >
+              <span class="lesson-dot" data-dot="crypto.modular" aria-hidden="true"></span><span>나머지와 모듈러 역원<small class="completion-label" data-completion="crypto.modular"></small></span></a></li><li><a class="side-lesson" href="classical.html" >
+              <span class="lesson-dot" data-dot="crypto.classical" aria-hidden="true"></span><span>치환과 작은 키 공간<small class="completion-label" data-completion="crypto.classical"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>02 · 무결성과 진위<span class="caption" data-module-count="1"></span></summary>
+            <ol><li><a class="side-lesson" href="hash.html" >
+              <span class="lesson-dot" data-dot="crypto.hash" aria-hidden="true"></span><span>SHA-256과 파일 무결성<small class="completion-label" data-completion="crypto.hash"></small></span></a></li><li><a class="side-lesson" href="mac.html" >
+              <span class="lesson-dot" data-dot="crypto.mac" aria-hidden="true"></span><span>HMAC과 태그 검증<small class="completion-label" data-completion="crypto.mac"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>03 · 현대 암호 설계와 키 수명<span class="caption" data-module-count="2"></span></summary>
+            <ol><li><a class="side-lesson" href="symmetric.html" >
+              <span class="lesson-dot" data-dot="crypto.symmetric" aria-hidden="true"></span><span>대칭키·AEAD·인증 태그<small class="completion-label" data-completion="crypto.symmetric"></small></span></a></li><li><a class="side-lesson" href="public-key.html" >
+              <span class="lesson-dot" data-dot="crypto.public-key" aria-hidden="true"></span><span>공개키 암호화와 서명<small class="completion-label" data-completion="crypto.public-key"></small></span></a></li><li><a class="side-lesson" href="nonce.html" >
+              <span class="lesson-dot" data-dot="crypto.nonce" aria-hidden="true"></span><span>난수·nonce와 재사용<small class="completion-label" data-completion="crypto.nonce"></small></span></a></li><li><a class="side-lesson" href="password.html" >
+              <span class="lesson-dot" data-dot="crypto.password" aria-hidden="true"></span><span>비밀번호 KDF·salt·비용<small class="completion-label" data-completion="crypto.password"></small></span></a></li></ol>
+          </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
+      </aside><article class="lesson-article">
+          <header class="lesson-heading"><div class="overline">01 · 표현·수학·고전 암호 · 1 / 9</div><h1>바이트·Hex·Base64</h1><p class="lesson-objective">표현을 바꾸는 인코딩과 비밀을 지키는 암호화를 구분합니다.</p></header>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
+          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>바이트 표현 실험 · Python 3</strong></p><ul><li>crypto 폴더에서 lab.py를 실행합니다. 이 차시는 표준 라이브러리만 사용합니다.</li><li>문자열은 str, 바이너리는 bytes로 구분합니다. Windows에서는 python3 대신 py -3을 사용할 수 있습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="../foundation/python-values.html">공통 기초 · 변수·문자열·자료형 ↗</a></li><li><a href="../foundation/python-files.html">공통 기초 · CSV 읽기와 오류 좁히기 ↗</a></li></ul>
+            </section>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>문자열은 인코딩을 통해 바이트로 변환됩니다. Hex는 바이트를 16진수 문자로, Base64는 64개 문자 집합으로 표현합니다. 누구나 규칙으로 되돌릴 수 있고 비밀키가 없으므로 Base64를 암호화라고 부르지 않습니다.</p><figure class="learning-visual" data-visual-id="crypto.representation"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 데이터 모형</span><h3>문자·바이트·Hex·Base64는 같은 내용을 다르게 표현합니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="문자·바이트·Hex·Base64는 같은 내용을 다르게 표현합니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 450" width="760" height="450" role="img" aria-labelledby="visual-crypto-representation-title visual-crypto-representation-desc" focusable="false"><title id="visual-crypto-representation-title">문자·바이트·Hex·Base64는 같은 내용을 다르게 표현합니다</title><desc id="visual-crypto-representation-desc">Bifrost는 이 예시에서 일곱 바이트입니다. 각 바이트를 16진수로 쓰면 42 69 66 72 6f 73 74가 됩니다. 같은 바이트를 Base64로 표현하면 Qmlmcm9zdA==이며 디코딩하면 다시 Bifrost입니다. 표현을 바꿔도 비밀키 없이 되돌릴 수 있으므로 암호화가 아닙니다.</desc><defs><marker id="visual-crypto-representation-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="28" y="30">문자 · UTF-8 바이트와 대응</tspan></text><g class="v-tone "><rect class="v-node" x="28" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="75.78571428571428" y="54">0</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="75.78571428571428" y="102">B</tspan></text></g><g class="v-tone "><rect class="v-node" x="128.57142857142856" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="176.35714285714283" y="54">1</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="176.35714285714283" y="102">i</tspan></text></g><g class="v-tone "><rect class="v-node" x="229.14285714285714" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="276.92857142857144" y="54">2</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="276.92857142857144" y="102">f</tspan></text></g><g class="v-tone "><rect class="v-node" x="329.7142857142857" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="377.5" y="54">3</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="377.5" y="102">r</tspan></text></g><g class="v-tone "><rect class="v-node" x="430.2857142857143" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="478.07142857142856" y="54">4</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="478.07142857142856" y="102">o</tspan></text></g><g class="v-tone "><rect class="v-node" x="530.8571428571429" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="578.6428571428572" y="54">5</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="578.6428571428572" y="102">s</tspan></text></g><g class="v-tone "><rect class="v-node" x="631.4285714285714" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="679.2142857142858" y="54">6</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="679.2142857142858" y="102">t</tspan></text></g><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="28" y="175">같은 7바이트의 Hex · 426966726f7374</tspan></text><g class="v-tone "><rect class="v-node" x="28" y="210" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="75.78571428571428" y="199">byte 0</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="75.78571428571428" y="247">42</tspan></text></g><g class="v-tone "><rect class="v-node" x="128.57142857142856" y="210" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="176.35714285714283" y="199">byte 1</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="176.35714285714283" y="247">69</tspan></text></g><g class="v-tone "><rect class="v-node" x="229.14285714285714" y="210" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="276.92857142857144" y="199">byte 2</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="276.92857142857144" y="247">66</tspan></text></g><g class="v-tone "><rect class="v-node" x="329.7142857142857" y="210" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="377.5" y="199">byte 3</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="377.5" y="247">72</tspan></text></g><g class="v-tone "><rect class="v-node" x="430.2857142857143" y="210" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="478.07142857142856" y="199">byte 4</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="478.07142857142856" y="247">6f</tspan></text></g><g class="v-tone "><rect class="v-node" x="530.8571428571429" y="210" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="578.6428571428572" y="199">byte 5</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="578.6428571428572" y="247">73</tspan></text></g><g class="v-tone "><rect class="v-node" x="631.4285714285714" y="210" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="679.2142857142858" y="199">byte 6</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="679.2142857142858" y="247">74</tspan></text></g><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="28" y="320">같은 바이트의 Base64 · Qmlmcm9zdA==</tspan></text><g class="v-tone "><rect class="v-node" x="28" y="355" width="53.666666666666664" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="54.83333333333333" y="344"></tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="54.83333333333333" y="392">Q</tspan></text></g><g class="v-tone "><rect class="v-node" x="86.66666666666666" y="355" width="53.666666666666664" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="113.49999999999999" y="344"></tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="113.49999999999999" y="392">m</tspan></text></g><g class="v-tone "><rect class="v-node" x="145.33333333333331" y="355" width="53.666666666666664" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="172.16666666666666" y="344"></tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="172.16666666666666" y="392">l</tspan></text></g><g class="v-tone "><rect class="v-node" x="204" y="355" width="53.666666666666664" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="230.83333333333334" y="344"></tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="230.83333333333334" y="392">m</tspan></text></g><g class="v-tone "><rect class="v-node" x="262.66666666666663" y="355" width="53.666666666666664" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="289.49999999999994" y="344"></tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="289.49999999999994" y="392">c</tspan></text></g><g class="v-tone "><rect class="v-node" x="321.3333333333333" y="355" width="53.666666666666664" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="348.16666666666663" y="344"></tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="348.16666666666663" y="392">m</tspan></text></g><g class="v-tone "><rect class="v-node" x="380" y="355" width="53.666666666666664" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="406.8333333333333" y="344"></tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="406.8333333333333" y="392">9</tspan></text></g><g class="v-tone "><rect class="v-node" x="438.66666666666663" y="355" width="53.666666666666664" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="465.49999999999994" y="344"></tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="465.49999999999994" y="392">z</tspan></text></g><g class="v-tone "><rect class="v-node" x="497.3333333333333" y="355" width="53.666666666666664" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="524.1666666666666" y="344"></tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="524.1666666666666" y="392">d</tspan></text></g><g class="v-tone "><rect class="v-node" x="556" y="355" width="53.666666666666664" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="582.8333333333334" y="344"></tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="582.8333333333334" y="392">A</tspan></text></g><g class="v-tone "><rect class="v-node" x="614.6666666666666" y="355" width="53.666666666666664" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="641.5" y="344"></tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="641.5" y="392">=</tspan></text></g><g class="v-tone "><rect class="v-node" x="673.3333333333333" y="355" width="53.666666666666664" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="700.1666666666666" y="344"></tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="700.1666666666666" y="392">=</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">Hex나 Base64를 해독했다고 곧바로 암호를 풀었다고 부르지 마세요. 인코딩과 암호화의 목적은 다릅니다.</span><small class="visual-note">이 ASCII 문자들은 UTF-8에서도 각각 1바이트입니다. 한글 등 다른 문자는 여러 바이트일 수 있습니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>Bifrost는 이 예시에서 일곱 바이트입니다. 각 바이트를 16진수로 쓰면 42 69 66 72 6f 73 74가 됩니다. 같은 바이트를 Base64로 표현하면 Qmlmcm9zdA==이며 디코딩하면 다시 Bifrost입니다. 표현을 바꿔도 비밀키 없이 되돌릴 수 있으므로 암호화가 아닙니다.</p></details></figure><p>Bifrost의 UTF-8 바이트는 ASCII 영역이라 각 글자가 한 바이트이지만 한글은 다를 수 있습니다. .encode()와 .decode()의 경계를 명확히 하고 이미 인코딩된 문자열을 몇 번 처리했는지 기록합니다.</p><p>Hex는 한 바이트를 두 개의 16진수 문자로 표현합니다. 예를 들어 문자 B의 UTF-8 바이트는 0x42입니다. 따라서 Bifrost의 7바이트는 Hex 14문자로 표시되며 표현이 길어졌어도 정보가 암호화된 것은 아닙니다.</p><p>Base64는 바이너리를 문자 전송 경로에 넣기 위한 표현입니다. 보통 3바이트를 4문자로 나타내며 끝의 =는 패딩입니다. Base64 문자열의 길이와 원본 바이트 길이를 같은 수치로 비교하지 않습니다.</p><p>한글을 UTF-8로 인코딩할 때는 한 글자가 여러 바이트일 수 있습니다. 먼저 문자열을 bytes로 만들고 Hex·Base64를 적용한 뒤, 역변환한 바이트를 올바른 문자 인코딩으로 해석합니다. 잘못된 인코딩은 글자가 깨지거나 예외를 만들 수 있습니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>Base64 값 끝의 =를 불필요한 기호라고 지운다.</dt><dd>패딩 규칙과 해당 인코딩 형식을 지키고 검증된 디코더로 처리합니다.</dd><dt>Hex 문자열을 다시 Hex로 바꾸면서 원본 바이트라고 생각한다.</dt><dd>각 단계의 타입·길이를 적고 bytes.fromhex 또는 Base64 디코딩으로 역변환합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/crypto.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/crypto/lab.py" download>lab.py ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2><ol class="walkthrough"><li><h3>바이트 길이와 Hex 길이 비교</h3><p>같은 데이터가 바이트와 Hex에서 어떻게 보이는지 계산합니다. Hex 문자열의 글자 수는 바이트 수의 두 배입니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>data = b&quot;Bifrost&quot;
+print(len(data), len(data.hex()))
+print(data.hex())</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>7 14
+426966726f7374</pre></div></li><li><h3>왕복으로 표현 검증</h3><p>Base64로 인코딩한 바이트를 다시 디코딩하고 원본과 비교합니다. 비밀키 없이 누구나 이 변환을 수행할 수 있습니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>import base64
+encoded = base64.b64encode(data)
+print(encoded.decode(&quot;ascii&quot;))
+print(base64.b64decode(encoded, validate=True) == data)</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>Qmlmcm9zdA==
+True</pre></div></li><li><h3>느낌표와 한글의 차이 관찰</h3><p>Bifrost!은 8바이트이고 비프로스트는 UTF-8에서 15바이트입니다. 문자 수·바이트 수·표현 문자 수를 표의 다른 열로 둡니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>print(len(b&quot;Bifrost!&quot;))
+s = &quot;비프로스트&quot;
+print(len(s), len(s.encode(&quot;utf-8&quot;)))</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>8
+5 15</pre></div></li></ol>
+            <h3>전체 예제 연결하기</h3><div class="code-shell"><div class="code-toolbar"><span>예제 · 명령 또는 관찰 절차</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 lab.py representation</code></pre></div><div class="expected-output"><h3>예상 결과와 해석</h3><pre>426966726f7374
+Qmlmcm9zdA==
+Bifrost</pre></div></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>data를 b&quot;Bifrost!&quot;로 바꿔 길이와 결과를 비교하세요. 한글 문자열은 &quot;비프로스트&quot;.encode(&quot;utf-8&quot;)로 만들어 바이트 길이를 확인합니다.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>Base64 끝의 =는 패딩일 수 있으며 무조건 지우는 규칙을 만들면 안 됩니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>data=b&quot;Bifrost!&quot;로 바꾸고 len(data), data.hex(), Base64 결과를 각각 기록합니다.</li><li>한글은 문자열을 먼저 UTF-8로 encode하고 바이트 길이를 측정합니다.</li><li>디코딩을 거꾸로 수행해 원본 bytes가 복원되는지 검증하고 이를 암호화라고 부르지 않습니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>Bifrost! 8바이트, 비프로스트 5문자/UTF-8 15바이트입니다. 표현 길이가 변해도 데이터의 기밀성을 제공하지 않습니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">04 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. Base64를 비밀 저장에 쓸 수 없는 가장 직접적인 이유는?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>문자열이 항상 짧기 때문에</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>비밀키 없이 정해진 규칙으로 누구나 원문 바이트를 복원할 수 있어서</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>UTF-8과 함께 쓸 수 없어서</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 비밀키 없이 정해진 규칙으로 누구나 원문 바이트를 복원할 수 있어서</strong></p><p>Base64는 전송용 표현입니다. 데이터를 숨기려면 별도의 암호화와 키 관리가 필요합니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. UTF-8 한글 문자열의 len(str)과 len(str.encode(&quot;utf-8&quot;))는?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>항상 같다.</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>앞쪽은 비트 수, 뒤쪽은 포트 수다.</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>문자 수와 바이트 수를 세므로 다를 수 있다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 문자 수와 바이트 수를 세므로 다를 수 있다.</strong></p><p>문자와 바이트는 다른 단위입니다. 비프로스트는 5문자지만 UTF-8 인코딩은 15바이트입니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>인코딩에 비밀키가 없다는 점을 설명했다.</li><li>문자 수와 바이트 수의 차이를 확인했다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="./"><small>← 전체 과정</small>분야 목차로</a>
+            <a href="modular.html"><small>다음 차시 →</small>나머지와 모듈러 역원</a></nav>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://docs.python.org/3/library/base64.html" target="_blank" rel="noopener noreferrer">Python base64 · 인코딩과 검증 ↗</a></li>
+        <li><a href="https://www.rfc-editor.org/rfc/rfc4648.html" target="_blank" rel="noopener noreferrer">RFC 4648 · Base64와 Base16 ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

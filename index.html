@@ -15,7 +15,8 @@
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Bifrost — 보안 공부, 어디서부터 시작할까?">
+<meta property="og:image:alt" content="Bifrost 보안 학습 지도 — 9개 분야와 62개 차시">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Bifrost — 보안 학습 가이드">
 <meta name="twitter:description" content="관심 분야 탐색부터 실습, 결과물까지 이어지는 보안 학습 로드맵.">
@@ -25,11 +26,6 @@
 <link rel="stylesheet" href="css/splash.css">
 <script src="js/splash.js"></script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Crect width=%2240%22 height=%2240%22 rx=%2211%22 fill=%22%23101a30%22/%3E%3Cpath d=%22M20 4 23.8 15.2 36 20 23.8 23.8 20 36 16.2 23.8 4 20 16.2 15.2Z%22 fill=%22%235ce1e6%22/%3E%3Cpath d=%22M31 5 32.5 9.5 37 11 32.5 12.5 31 17 29.5 12.5 25 11 29.5 9.5Z%22 fill=%22%239cf7ff%22/%3E%3C/svg%3E">
-
-
-
-
-
 
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/theme.css">
@@ -150,9 +146,9 @@
       <a class="map-node node-foundation" data-map-track="foundation" href="tracks/foundation/"><span class="node-number">00 / CORE</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Foundation</strong><small>공통 기초</small><i>터미널 · 코드 · 네트워크</i></a>
       <a class="map-node node-pwn" data-map-track="pwn" href="tracks/pwn/"><span class="node-number">01 / SYSTEM</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Pwn / System</strong><small>시스템 보안</small><i>메모리 · 디버깅</i></a>
       <a class="map-node node-forensic" data-map-track="forensic" href="tracks/forensic/"><span class="node-number">02 / FORENSIC</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Forensic</strong><small>디지털 포렌식</small><i>흔적 · 증거 · 타임라인</i></a>
-      <a class="map-node node-misc" data-map-track="misc" href="tracks/misc/"><span class="node-number">03 / MISC</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Misc</strong><small>문제 해결 · 자동화</small><i>단서 · 데이터 · 도구</i></a>
+      <a class="map-node node-misc" data-map-track="misc" href="tracks/misc/"><span class="node-number">03 / MISC</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Misc</strong><small>문제 해결·자동화</small><i>단서 · 데이터 · 도구</i></a>
       <a class="map-node node-cloud" data-map-track="cloud" href="tracks/cloud/"><span class="node-number">04 / CLOUD</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Cloud Security</strong><small>클라우드 보안</small><i>신원 · 구성 · 감사</i></a>
-      <a class="map-node node-network" data-map-track="network" href="tracks/network/"><span class="node-number">05 / NETWORK</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Network Security</strong><small>네트워크 보안 · 통합</small><i>망 설계 · 정책 · 탐지</i></a>
+      <a class="map-node node-network" data-map-track="network" href="tracks/network/"><span class="node-number">05 / NETWORK</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Network Security</strong><small>네트워크 보안</small><i>망 설계 · 정책 · 탐지</i></a>
       <a class="map-node node-crypto" data-map-track="crypto" href="tracks/crypto/"><span class="node-number">06 / CRYPTO</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Cryptography</strong><small>암호학</small><i>수학 · 무결성 · 키 관리</i></a>
       <a class="map-node node-rev" data-map-track="rev" href="tracks/rev/"><span class="node-number">07 / REVERSE</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Reverse Engineering</strong><small>리버싱</small><i>분석 · 실행 흐름</i></a>
       <a class="map-node node-web" data-map-track="web" href="tracks/web/"><span class="node-number">08 / WEB</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Web Hacking</strong><small>웹 보안</small><i>요청 · 인증 · 취약점</i></a>
@@ -183,14 +179,10 @@
 
 <footer class="footer"><div class="wrap footer-inner"><div><strong>Bifrost</strong><br><small>Learn the concept. Practice with intent. Document what you discover.</small><br><small class="credit">by. Loki</small></div><div><small>학습과 실습은 본인이 소유하거나 명시적으로 허가받은 환경에서 진행하세요.<br>진도는 현재 브라우저에 저장되며, 계정 동기화는 아직 지원하지 않습니다.</small></div></div></footer>
 
-
-
 <div id="linuxGuideOverlay" role="dialog" aria-modal="true" aria-label="Windows에서 Linux 시작하기" aria-hidden="true">
   <button id="linuxGuideClose" type="button" onclick="showMainGuide()">← 학습 지도</button>
   <iframe id="linuxGuideFrame" title="Windows에서 Linux 시작하기" loading="lazy"></iframe>
 </div>
-
-
 
 <script src="js/linux-guide.js" defer></script>
 </body>

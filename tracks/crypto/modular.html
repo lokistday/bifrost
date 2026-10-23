@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="순환하는 값의 연산과 역원이 존재하는 조건을 확인합니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="나머지와 모듈러 역원 — Cryptography · Bifrost">
+<meta property="og:description" content="순환하는 값의 연산과 역원이 존재하는 조건을 확인합니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/tracks/crypto/modular.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/crypto/modular.html">
+<title>나머지와 모듈러 역원 — Cryptography · Bifrost</title>
+<script src="../../js/theme.js"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/learning.css">
+<link rel="stylesheet" href="../../css/visuals.css">
+<script src="../../js/catalog.js" defer></script>
+<script src="../../js/courses/crypto.js" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-view.js" defer></script>
+<script src="../../js/learning.js" defer></script>
+</head>
+<body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.modular" style="--course-accent:var(--map-pink)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">암호학 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="crypto.modular">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../index.html#mindmap">학습 지도</a><span aria-hidden="true">/</span><a href="./">Cryptography</a><span aria-hidden="true">/</span><span aria-current="page">2차시</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar"><a class="back-link" href="./">← Cryptography 전체 과정</a><div class="course-stats"><span data-count="crypto"></span>
+        <div class="course-meter" role="progressbar" aria-label="Cryptography 완료 진도" aria-valuemin="0" aria-valuemax="100" data-meter="crypto"><span></span></div>
+      </div>
+        <nav aria-label="차시 목차">
+          <details open>
+            <summary>01 · 표현·수학·고전 암호<span class="caption" data-module-count="0"></span></summary>
+            <ol><li><a class="side-lesson" href="representation.html" >
+              <span class="lesson-dot" data-dot="crypto.representation" aria-hidden="true"></span><span>바이트·Hex·Base64<small class="completion-label" data-completion="crypto.representation"></small></span></a></li><li><a class="side-lesson" href="modular.html" aria-current="page">
+              <span class="lesson-dot" data-dot="crypto.modular" aria-hidden="true"></span><span>나머지와 모듈러 역원<small class="completion-label" data-completion="crypto.modular"></small></span></a></li><li><a class="side-lesson" href="classical.html" >
+              <span class="lesson-dot" data-dot="crypto.classical" aria-hidden="true"></span><span>치환과 작은 키 공간<small class="completion-label" data-completion="crypto.classical"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>02 · 무결성과 진위<span class="caption" data-module-count="1"></span></summary>
+            <ol><li><a class="side-lesson" href="hash.html" >
+              <span class="lesson-dot" data-dot="crypto.hash" aria-hidden="true"></span><span>SHA-256과 파일 무결성<small class="completion-label" data-completion="crypto.hash"></small></span></a></li><li><a class="side-lesson" href="mac.html" >
+              <span class="lesson-dot" data-dot="crypto.mac" aria-hidden="true"></span><span>HMAC과 태그 검증<small class="completion-label" data-completion="crypto.mac"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>03 · 현대 암호 설계와 키 수명<span class="caption" data-module-count="2"></span></summary>
+            <ol><li><a class="side-lesson" href="symmetric.html" >
+              <span class="lesson-dot" data-dot="crypto.symmetric" aria-hidden="true"></span><span>대칭키·AEAD·인증 태그<small class="completion-label" data-completion="crypto.symmetric"></small></span></a></li><li><a class="side-lesson" href="public-key.html" >
+              <span class="lesson-dot" data-dot="crypto.public-key" aria-hidden="true"></span><span>공개키 암호화와 서명<small class="completion-label" data-completion="crypto.public-key"></small></span></a></li><li><a class="side-lesson" href="nonce.html" >
+              <span class="lesson-dot" data-dot="crypto.nonce" aria-hidden="true"></span><span>난수·nonce와 재사용<small class="completion-label" data-completion="crypto.nonce"></small></span></a></li><li><a class="side-lesson" href="password.html" >
+              <span class="lesson-dot" data-dot="crypto.password" aria-hidden="true"></span><span>비밀번호 KDF·salt·비용<small class="completion-label" data-completion="crypto.password"></small></span></a></li></ol>
+          </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
+      </aside><article class="lesson-article">
+          <header class="lesson-heading"><div class="overline">01 · 표현·수학·고전 암호 · 2 / 9</div><h1>나머지와 모듈러 역원</h1><p class="lesson-objective">순환하는 값의 연산과 역원이 존재하는 조건을 확인합니다.</p></header>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
+          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>나머지·역원 · Python 3.8 이상</strong></p><ul><li>음수 지수 pow(a, -1, n)은 Python 3.8 이상에서 모듈러 역원을 계산합니다.</li><li>작은 정수로 수학 구조를 배우는 차시이며 실제 공개키 암호 구현을 직접 작성하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="../foundation/python-values.html">공통 기초 · 변수·문자열·자료형 ↗</a></li></ul>
+            </section>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>a mod n은 n으로 나눈 나머지입니다. 알파벳 26개에서 이동하면 25 다음에 0으로 돌아가는 계산을 모듈러로 표현할 수 있습니다. 덧셈 이동을 되돌리는 것과 곱셈을 되돌리는 역원은 다른 연산입니다.</p><figure class="learning-visual" data-visual-id="crypto.modular"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 연산 모형</span><h3>한 바퀴를 돌고 남은 값과, 곱해서 1이 되는 수</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="한 바퀴를 돌고 남은 값과, 곱해서 1이 되는 수 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" width="760" height="320" role="img" aria-labelledby="visual-crypto-modular-title visual-crypto-modular-desc" focusable="false"><title id="visual-crypto-modular-title">한 바퀴를 돌고 남은 값과, 곱해서 1이 되는 수</title><desc id="visual-crypto-modular-desc">17을 5로 나누면 세 바퀴인 15를 지나 나머지 2가 됩니다. 모듈러 역원은 다른 질문입니다. 3 곱하기 9는 27이고 26으로 나눈 나머지가 1이므로 26을 기준으로 3의 역원은 9입니다. 두 수가 서로소일 때 곱셈 역원이 존재합니다.</desc><defs><marker id="visual-crypto-modular-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><circle class="v-zone" cx="190" cy="160" r="113"/><circle class="v-step-circle" cx="190" cy="69" r="19"/><text class="v-wheel-number" x="190" y="74" text-anchor="middle">0</text><circle class="v-step-circle" cx="276.54614298285895" cy="131.87945351187977" r="19"/><text class="v-wheel-number" x="276.54614298285895" y="136.87945351187977" text-anchor="middle">1</text><circle class="v-highlight-circle" cx="243.48845795861507" cy="233.62054648812023" r="19"/><text class="v-wheel-number" x="243.48845795861507" y="238.62054648812023" text-anchor="middle">2</text><circle class="v-step-circle" cx="136.51154204138496" cy="233.62054648812023" r="19"/><text class="v-wheel-number" x="136.51154204138496" y="238.62054648812023" text-anchor="middle">3</text><circle class="v-step-circle" cx="103.45385701714102" cy="131.8794535118798" r="19"/><text class="v-wheel-number" x="103.45385701714102" y="136.8794535118798" text-anchor="middle">4</text><path class="v-edge " d="M195 91Q203 170 235 214" marker-end="url(#visual-crypto-modular-arrow)"/><rect class="v-label-bg" x="188.76" y="151" width="72.47999999999999" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="225" y="165">17칸 → 2</tspan></text><text class="v-text v-heading" font-size="14" text-anchor="middle"><tspan x="190" y="303">17 = 5 × 3 + 2</tspan></text><g class="v-tone "><rect class="v-node" x="355" y="48" width="377" height="232" rx="12"/><rect class="v-accent" x="356" y="61" width="3" height="206" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="372" y="76">역원은 곱한 나머지가 1</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="372" y="107">기준: mod 26</tspan><tspan x="372" y="127">3 × 9 = 27 → 나머지 1</tspan><tspan x="372" y="147">따라서 3의 역원은 9</tspan><tspan x="372" y="167">존재 조건: gcd(3, 26) = 1</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">나머지 연산의 기준값을 먼저 읽으세요. 17 % 5와 3의 mod 26 역원은 서로 다른 계산입니다.</span><small class="visual-note">실습 출력 2 9는 차례대로 나머지 2와 역원 9입니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>17을 5로 나누면 세 바퀴인 15를 지나 나머지 2가 됩니다. 모듈러 역원은 다른 질문입니다. 3 곱하기 9는 27이고 26으로 나눈 나머지가 1이므로 26을 기준으로 3의 역원은 9입니다. 두 수가 서로소일 때 곱셈 역원이 존재합니다.</p></details></figure><p>3의 mod 26 역원은 9입니다. 3×9=27이므로 26으로 나눈 나머지가 1입니다. 두 수가 서로소일 때 역원이 존재하며, 2와 26처럼 공약수가 있으면 곱셈 역원이 없습니다.</p><p>17 % 5가 2인 이유는 17=3×5+2이기 때문입니다. mod n에서는 n만큼 떨어진 수를 같은 나머지로 봅니다. 알파벳 이동이나 시계처럼 경계에서 처음으로 돌아오는 계산을 표현하기 좋습니다.</p><p>덧셈 이동을 되돌리려면 이동량을 빼면 됩니다. 곱셈을 되돌리려면 a×b≡1 (mod n)을 만족하는 b가 필요합니다. 이 b가 역원이며 일반적인 실수 나눗셈 1/a와 다릅니다.</p><p>a와 n의 최대공약수가 1일 때만 곱셈 역원이 존재합니다. 2와 26은 공약수 2가 있어 어떤 정수를 곱해도 나머지 1을 만들 수 없습니다. Python이 ValueError를 내는 것은 코드 오타가 아니라 수학적 조건 불충족일 수 있습니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>역원을 일반 나눗셈의 소수 결과로 계산한다.</dt><dd>정수 모듈러의 곱셈 관계 a*b % n == 1로 검증합니다.</dd><dt>작은 모듈러 예제를 그대로 현대 암호 구현으로 확장한다.</dt><dd>이 차시는 수학 기초입니다. 실제 알고리즘·난수·검증·부채널 처리는 검증된 라이브러리의 영역입니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/crypto.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/crypto/lab.py" download>lab.py ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2><ol class="walkthrough"><li><h3>나머지의 정의 확인</h3><p>몫과 나머지를 함께 계산해 원래 수가 재구성되는지 확인합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>q, r = divmod(17, 5)
+print(q, r, q * 5 + r)</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>3 2 17</pre></div></li><li><h3>곱셈 역원 검증</h3><p>역원 계산 결과를 믿기 전에 곱한 뒤 mod를 취해 1이 되는지 확인합니다. 5의 mod 26 역원은 21입니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>inverse = pow(5, -1, 26)
+print(inverse, (5 * inverse) % 26)</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>21 1</pre></div></li><li><h3>역원이 없는 입력 처리</h3><p>최대공약수와 예외를 연결합니다. 실패 사례도 알고리즘이 요구하는 조건을 이해하는 증거입니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>import math
+print(math.gcd(2, 26))
+try:
+    print(pow(2, -1, 26))
+except ValueError:
+    print(&quot;inverse does not exist&quot;)</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>2
+inverse does not exist</pre></div></li></ol>
+            <h3>전체 예제 연결하기</h3><div class="code-shell"><div class="code-toolbar"><span>예제 · 명령 또는 관찰 절차</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 lab.py modular
+python3 -c &quot;print((3 * 9) % 26)&quot;</code></pre></div><div class="expected-output"><h3>예상 결과와 해석</h3><pre>2 9
+1</pre></div></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>pow(5, -1, 26)을 계산해 검증하세요. pow(2, -1, 26)이 실패하는 이유도 적습니다.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>Python 3.8 이상에서 pow(a, -1, n)으로 역원을 구할 수 있습니다. 존재 조건을 먼저 생각하세요.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>pow(5,-1,26)의 결과 21을 계산하고 5×21=105, 105%26=1을 검증합니다.</li><li>2와 26의 최대공약수가 2임을 계산합니다.</li><li>역원이 없는 경우를 ValueError로 처리하고 입력 조건과 실패 이유를 적습니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>5의 역원은 21입니다. 모든 수에 역원이 있다는 가정 없이 존재 조건과 검증식을 설명합니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">04 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. 5의 mod 26 역원이 21인지 확인하는 식은?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>5 + 21 == 26</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>(5 * 21) % 26 == 1</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>21 / 5 == 1</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: (5 * 21) % 26 == 1</strong></p><p>곱셈 역원은 곱했을 때 해당 모듈러에서 1이 되는 수입니다. 단순 덧셈이나 실수 나눗셈과 다릅니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. pow(2,-1,26)이 실패하는 이유는?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>2와 26이 서로소가 아니어서</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>26이 알파벳 수라서 모든 역원이 금지되어</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>Python은 정수 곱셈을 지원하지 않아서</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 2와 26이 서로소가 아니어서</strong></p><p>최대공약수가 2라서 곱셈 역원이 존재하지 않습니다. 예외는 수학적 조건을 반영합니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>역원을 곱해서 나머지 1로 검증했다.</li><li>역원이 없는 경우의 원인을 설명했다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="representation.html"><small>← 이전 차시</small>바이트·Hex·Base64</a>
+            <a href="classical.html"><small>다음 차시 →</small>치환과 작은 키 공간</a></nav>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://docs.python.org/3/library/functions.html#pow" target="_blank" rel="noopener noreferrer">Python pow · 모듈러 역원 ↗</a></li>
+        <li><a href="https://docs.python.org/3/library/math.html#math.gcd" target="_blank" rel="noopener noreferrer">Python math.gcd ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

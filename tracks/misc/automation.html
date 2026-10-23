@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="파일 경로를 입력으로 받아 반복 가능한 처리를 만듭니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="작은 CLI와 입력 검증 — Misc · Bifrost">
+<meta property="og:description" content="파일 경로를 입력으로 받아 반복 가능한 처리를 만듭니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/tracks/misc/automation.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/misc/automation.html">
+<title>작은 CLI와 입력 검증 — Misc · Bifrost</title>
+<script src="../../js/theme.js"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/learning.css">
+<link rel="stylesheet" href="../../css/visuals.css">
+<script src="../../js/catalog.js" defer></script>
+<script src="../../js/courses/misc.js" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-view.js" defer></script>
+<script src="../../js/learning.js" defer></script>
+</head>
+<body class="learning-page" data-course="misc" data-course-number="03" data-view="lesson" data-lesson-id="misc.automation" style="--course-accent:var(--map-orange)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">문제 해결·자동화 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="misc.automation">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../index.html#mindmap">학습 지도</a><span aria-hidden="true">/</span><a href="./">Misc</a><span aria-hidden="true">/</span><span aria-current="page">3차시</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar"><a class="back-link" href="./">← Misc 전체 과정</a><div class="course-stats"><span data-count="misc"></span>
+        <div class="course-meter" role="progressbar" aria-label="Misc 완료 진도" aria-valuemin="0" aria-valuemax="100" data-meter="misc"><span></span></div>
+      </div>
+        <nav aria-label="차시 목차">
+          <details >
+            <summary>01 · 단서와 데이터 파이프라인<span class="caption" data-module-count="0"></span></summary>
+            <ol><li><a class="side-lesson" href="triage.html" >
+              <span class="lesson-dot" data-dot="misc.triage" aria-hidden="true"></span><span>문제 분류와 가설 세우기<small class="completion-label" data-completion="misc.triage"></small></span></a></li><li><a class="side-lesson" href="pipeline.html" >
+              <span class="lesson-dot" data-dot="misc.pipeline" aria-hidden="true"></span><span>바이트 변환과 중간 검증<small class="completion-label" data-completion="misc.pipeline"></small></span></a></li></ol>
+          </details>
+          <details open>
+            <summary>02 · 도구와 재현<span class="caption" data-module-count="1"></span></summary>
+            <ol><li><a class="side-lesson" href="automation.html" aria-current="page">
+              <span class="lesson-dot" data-dot="misc.automation" aria-hidden="true"></span><span>작은 CLI와 입력 검증<small class="completion-label" data-completion="misc.automation"></small></span></a></li><li><a class="side-lesson" href="writeup.html" >
+              <span class="lesson-dot" data-dot="misc.writeup" aria-hidden="true"></span><span>풀이 기록과 역변환 검증<small class="completion-label" data-completion="misc.writeup"></small></span></a></li></ol>
+          </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
+      </aside><article class="lesson-article">
+          <header class="lesson-heading"><div class="overline">02 · 도구와 재현 · 3 / 4</div><h1>작은 CLI와 입력 검증</h1><p class="lesson-objective">파일 경로를 입력으로 받아 반복 가능한 처리를 만듭니다.</p></header>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
+          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>입력 오류 처리 CLI · Python 3</strong></p><ul><li>solve.py의 작업 사본을 solve_checked.py로 저장하고 정상·오류 파일을 각각 인자로 넘깁니다.</li><li>예시 해설은 입력 크기 제한과 중복 키 정책을 포함합니다. 읽은 파일은 데이터로만 처리하고 실행하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="pipeline.html">문제 해결·자동화 · 바이트 변환과 중간 검증 ↗</a></li><li><a href="../foundation/python-flow.html">공통 기초 · 조건·반복·함수 ↗</a></li><li><a href="../foundation/python-files.html">공통 기초 · CSV 읽기와 오류 좁히기 ↗</a></li></ul>
+            </section>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>solve.py는 인자가 있으면 그 경로, 없으면 스크립트 옆 puzzle.txt를 읽습니다. 임의 파일을 실행하지 않고 텍스트로만 처리합니다. 경로·문자 인코딩·필수 필드·디코딩 실패는 서로 다른 오류 원인입니다.</p><figure class="learning-visual" data-visual-id="misc.automation"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 구조도</span><h3>성공 경로와 잘못된 입력의 경로를 같이 만듭니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="성공 경로와 잘못된 입력의 경로를 같이 만듭니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 408" width="760" height="408" role="img" aria-labelledby="visual-misc-automation-title visual-misc-automation-desc" focusable="false"><title id="visual-misc-automation-title">성공 경로와 잘못된 입력의 경로를 같이 만듭니다</title><desc id="visual-misc-automation-desc">CLI에서 입력 파일 경로를 받습니다. puzzle.txt가 존재하고 기대한 형식이면 읽고 검증하여 두 번 디코딩합니다. missing.txt처럼 없는 경로는 오류로 처리해야 합니다. 파일 존재와 데이터 형식은 서로 다른 검사이므로 실패 원인을 구분해서 기록합니다.</desc><defs><marker id="visual-misc-automation-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><path class="v-edge " d="M380 130C380 185 186 185 186 240" marker-end="url(#visual-misc-automation-arrow)"/><path class="v-edge  v-dashed" d="M380 130C380 185 574 185 574 240" marker-end="url(#visual-misc-automation-arrow)"/><g class="v-tone "><rect class="v-node" x="244" y="20" width="272" height="110" rx="12"/><rect class="v-accent" x="245" y="33" width="3" height="84" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="261" y="48">CLI 입력 경로</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="261" y="79">python3 solve.py 파일이름</tspan></text></g><g class="v-tone positive"><rect class="v-node" x="28" y="240" width="316" height="140" rx="12"/><rect class="v-accent" x="29" y="253" width="3" height="114" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="268">존재하는 올바른 파일</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="299">puzzle.txt 읽기·형식 검증</tspan><tspan x="45" y="319">디코딩 → Bifrost</tspan></text></g><g class="v-tone danger"><rect class="v-node" x="416" y="240" width="316" height="140" rx="12"/><rect class="v-accent" x="417" y="253" width="3" height="114" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="433" y="268">없는 파일 또는 잘못된 형식</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="433" y="299">missing.txt는 읽기 오류</tspan><tspan x="433" y="319">단계와 원인을 구분</tspan></text></g><rect class="v-label-bg" x="157.96" y="178" width="70.08" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="193" y="192">성공 조건</tspan></text><rect class="v-label-bg" x="532.96" y="178" width="70.08" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="568" y="192">실패 조건</tspan></text></svg></div><figcaption><span class="visual-takeaway">작업 폴더가 달라지는 경우와 없는 파일·잘못된 형식도 시험해보세요.</span><small class="visual-note">단순화한 CLI 처리 흐름입니다. 구체적 오류 문구와 종료 코드는 실행 환경에 따라 달라질 수 있습니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>CLI에서 입력 파일 경로를 받습니다. puzzle.txt가 존재하고 기대한 형식이면 읽고 검증하여 두 번 디코딩합니다. missing.txt처럼 없는 경로는 오류로 처리해야 합니다. 파일 존재와 데이터 형식은 서로 다른 검사이므로 실패 원인을 구분해서 기록합니다.</p></details></figure><p>예제의 dict 생성은 중복 키가 있으면 마지막 값을 남깁니다. 실제 도구로 발전시키려면 중복 필드 정책, 최대 입력 크기, 오류 메시지와 종료 코드를 정해야 합니다. 정상 입력 하나만 작동하는 것은 충분한 검증이 아닙니다.</p><p>CLI 도구는 정상 출력과 오류 출력을 구분하면 자동화에 연결하기 쉽습니다. 성공 결과는 stdout, 사용 오류·입력 오류는 stderr, 실패는 0이 아닌 종료 코드로 내보내는 방식을 정합니다. 오류 메시지에는 실패한 조건을 적되 불필요한 내부 정보는 줄입니다.</p><p>argparse는 파일 경로와 도움말 같은 실행 인터페이스를 정합니다. 실제 읽기·필드 검증·변환은 함수로 나누면 파일 없음과 Base64 오류를 각각 시험하기 쉽습니다. 예외를 잡은 뒤 성공 코드로 종료하면 상위 자동화가 실패를 놓칠 수 있습니다.</p><p>중복 payload를 마지막 값으로 덮어쓸지 거부할지 명확히 선택해야 합니다. 이 해설은 모호함을 줄이기 위해 중복 키를 거부하고 입력을 64 KiB로 제한합니다. 크기 제한은 변환 비용을 제한하는 조건이며 모든 파일 형식 공격을 해결하는 통제는 아닙니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>except Exception 뒤 아무 동작 없이 넘긴다.</dt><dd>예상한 입력 오류를 구체적으로 처리하고 실패를 호출자에게 전달합니다.</dd><dt>한 번 성공했으니 입력 검증도 완료됐다고 한다.</dt><dd>누락·중복·잘못된 문자·잘못된 인코딩·크기 경계를 별도 시험합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/misc.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/misc/solve.py" download>solve.py ↓</a></li><li><a href="../../labs/misc/puzzle.txt" download>puzzle.txt ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2><ol class="walkthrough"><li><h3>정상과 세 실패를 나누기</h3><p>정상, 파일 없음, payload 누락, 잘못된 Base64의 네 파일/경로를 준비합니다. 각 경우의 기대 메시지와 종료 코드를 먼저 정합니다.</p>
+        <div class="step-observation"><strong>관찰할 결과</strong><pre>정상은 0, 입력 오류는 2로 반환하는 검증표입니다.</pre></div></li><li><h3>경계에서 구체적 예외 처리</h3><p>파일 읽기는 OSError/UnicodeError, 필드 누락·중복은 ValueError, Base64는 binascii.Error로 나누어 생각합니다. 코드에서는 입력 오류를 하나의 일관된 CLI 오류 형식으로 안내할 수 있습니다.</p>
+        <div class="step-observation"><strong>관찰할 결과</strong><pre>실패를 숨기지 않고 어느 입력 조건을 고쳐야 하는지 설명합니다.</pre></div></li><li><h3>종료 코드까지 검사</h3><p>명령 뒤 Linux/WSL은 echo $?, PowerShell은 $LASTEXITCODE로 코드를 봅니다. 메시지가 예뻐도 실패 코드가 0이면 자동화 관점에서는 오답입니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>python3 solve_checked.py puzzle.txt
+python3 solve_checked.py missing.txt</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>정상은 결과와 코드 0, 없는 경로는 오류와 코드 2입니다.</pre></div></li></ol>
+            <h3>전체 예제 연결하기</h3><div class="code-shell"><div class="code-toolbar"><span>예제 · 명령 또는 관찰 절차</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 solve.py puzzle.txt
+python3 solve.py missing.txt</code></pre></div><div class="expected-output"><h3>예상 결과와 해석</h3><pre>첫 실행은 Bifrost까지 출력하고, 두 번째는 파일을 찾지 못하는 오류를 냅니다.</pre></div></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>try/except를 추가해 파일 없음, payload 누락, 잘못된 Base64를 각각 설명하는 메시지와 0이 아닌 종료 코드로 처리하세요.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>모든 예외를 무시하지 말고 실패 원인을 구분합니다. 학습용 원본과 수정본을 따로 보관하세요.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>경로를 argparse로 받고 최대 크기·UTF-8·키=값·중복·payload 존재를 검사합니다.</li><li>두 단계 엄격 디코딩 뒤 중간 출력을 표시합니다.</li><li>입력 관련 예외는 stderr와 코드 2로 보고 정상 입력은 0으로 마칩니다. 아래 코드를 별도 파일로 저장해 정상/오류 표로 검증합니다.</li></ol>
+        <div class="code-shell"><div class="code-toolbar"><span>예시 답안</span></div><pre><code>import argparse
+import base64
+import binascii
+from pathlib import Path
+import sys
+
+def solve(path):
+    with path.open(&quot;rb&quot;) as f:
+        data = f.read(65537)
+    if len(data) &gt; 65536:
+        raise ValueError(&quot;input exceeds 64 KiB&quot;)
+    fields = {}
+    for line in data.decode(&quot;utf-8&quot;).splitlines():
+        if not line.strip():
+            continue
+        if &quot;=&quot; not in line:
+            raise ValueError(&quot;expected key=value&quot;)
+        key, value = line.split(&quot;=&quot;, 1)
+        if not key or key in fields:
+            raise ValueError(&quot;empty or duplicate field&quot;)
+        fields[key] = value
+    if &quot;payload&quot; not in fields:
+        raise ValueError(&quot;payload is required&quot;)
+    value = fields[&quot;payload&quot;].encode(&quot;ascii&quot;)
+    outputs = []
+    for step in range(1, 3):
+        value = base64.b64decode(value, validate=True)
+        outputs.append(f&quot;step={step}: {value.decode(&#39;ascii&#39;)}&quot;)
+    return outputs
+
+parser = argparse.ArgumentParser()
+parser.add_argument(&quot;path&quot;, type=Path)
+args = parser.parse_args()
+try:
+    outputs = solve(args.path)
+except (OSError, UnicodeError, ValueError, binascii.Error) as exc:
+    print(f&quot;input error: {exc}&quot;, file=sys.stderr)
+    raise SystemExit(2)
+print(&quot;\n&quot;.join(outputs))</code></pre></div>
+        <h3>결과를 판단하는 기준</h3><pre>정상은 step=1: Qmlmcm9zdA== / step=2: Bifrost와 종료 코드 0입니다. 파일 없음·payload 누락·중복 키·잘못된 Base64는 stderr 안내와 코드 2입니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">04 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. 오류 안내를 출력했지만 종료 코드가 0이면 생길 수 있는 문제는?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>상위 자동화가 실패를 성공으로 판단할 수 있다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>Base64가 자동으로 복구된다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>파일 확장자가 바뀐다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 상위 자동화가 실패를 성공으로 판단할 수 있다.</strong></p><p>CLI 계약에는 메시지뿐 아니라 종료 코드가 포함됩니다. 오류를 잡고 정상 종료하면 파이프라인이 실패를 놓칠 수 있습니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. payload가 두 번 나온 입력에 가장 필요한 것은?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>무조건 마지막 값을 조용히 사용한다.</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>중복을 허용·거부할 정책을 정하고 시험한다.</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>키 이름을 모두 삭제한다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 중복을 허용·거부할 정책을 정하고 시험한다.</strong></p><p>파서의 모호함은 입력 해석을 바꿀 수 있습니다. 이 해설은 중복을 오류로 처리하지만 어떤 정책이든 명확히 정하고 검증해야 합니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>정상·파일 없음·필드 누락·형식 오류를 시험했다.</li><li>오류를 삼키지 않고 원인을 출력했다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="pipeline.html"><small>← 이전 차시</small>바이트 변환과 중간 검증</a>
+            <a href="writeup.html"><small>다음 차시 →</small>풀이 기록과 역변환 검증</a></nav>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://docs.python.org/3/library/argparse.html" target="_blank" rel="noopener noreferrer">Python argparse · CLI 인터페이스 ↗</a></li>
+        <li><a href="https://docs.python.org/3/tutorial/errors.html#handling-exceptions" target="_blank" rel="noopener noreferrer">Python 예외 처리 ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

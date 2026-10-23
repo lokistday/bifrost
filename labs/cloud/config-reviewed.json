@@ -1,0 +1,22 @@
+{
+  "workload": "training-notes",
+  "provider": "fictional",
+  "storage": {
+    "name": "training-notes",
+    "public": false,
+    "encrypted": true
+  },
+  "identity": {
+    "action": "ReadObject",
+    "resource": "training-notes",
+    "long_lived_key": false
+  },
+  "network": {
+    "database_public": false,
+    "admin_source": "192.0.2.0/24"
+  },
+  "audit": {
+    "enabled": true,
+    "retention_days": 30
+  }
+}

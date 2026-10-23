@@ -9,6 +9,8 @@ import struct
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1] / 'labs'
+SOURCES = Path(__file__).resolve().parent / 'lab_sources'
+FIXTURES = Path(__file__).resolve().parents[1] / 'content' / 'lab-fixtures'
 
 def write(track, name, content):
     folder = ROOT / track
@@ -59,7 +61,9 @@ print(f"unsafe_rows={len(unsafe)} safe_rows={len(safe)}")
 print("alice_rows=" + str(len(db.execute("SELECT name FROM users WHERE name = ?", ("alice",)).fetchall())))
 print(html.escape('<b>hello</b>'))
 def can_read(user, owner):
-    return user == owner
+    return (isinstance(user, str) and bool(user.strip())
+            and isinstance(owner, str) and bool(owner.strip())
+            and user == owner)
 print(f"own={can_read('alice', 'alice')} other={can_read('alice', 'bob')}")
 assert len(unsafe) == 2 and len(safe) == 0
 assert can_read("alice", "alice") and not can_read("alice", "bob")
@@ -235,6 +239,35 @@ for i, frame in enumerate(frames):
     pcap += struct.pack('<IIII', 1792454400 + i, 0, len(frame), len(frame)) + frame
 (ROOT / 'network' / 'traffic.pcap').write_bytes(pcap)
 
+# The frozen TLS bytes came from an actual local OpenSSL MemoryBIO exchange.
+# Only Ethernet/IP/TCP headers, sequencing and timestamps are constructed here.
+# Keeping the transcript as source makes ordinary builds byte-for-byte stable.
+tls_fixture = json.loads((FIXTURES / 'tls13.json').read_text(encoding='utf-8'))
+tls_frames = [tcp(client, server, 50001, 443, 1000, 0, 2),
+              tcp(server, client, 443, 50001, 9000, 1001, 18),
+              tcp(client, server, 50001, 443, 1001, 9001, 16)]
+client_seq, server_seq = 1001, 9001
+for chunk in tls_fixture['chunks']:
+    payload = bytes.fromhex(chunk['hex'])
+    for offset in range(0, len(payload), 1200):
+        data = payload[offset:offset + 1200]
+        if chunk['direction'] == 'client_to_server':
+            tls_frames.append(tcp(client, server, 50001, 443, client_seq, server_seq, 24, data))
+            client_seq += len(data)
+        else:
+            tls_frames.append(tcp(server, client, 443, 50001, server_seq, client_seq, 24, data))
+            server_seq += len(data)
+tls_frames.extend([tcp(client, server, 50001, 443, client_seq, server_seq, 17),
+                   tcp(server, client, 443, 50001, server_seq, client_seq + 1, 17),
+                   tcp(client, server, 50001, 443, client_seq + 1, server_seq + 1, 16)])
+tls_pcap = struct.pack('<IHHIIII', 0xa1b2c3d4, 2, 4, 0, 0, 65535, 1)
+for i, frame in enumerate(tls_frames):
+    tls_pcap += struct.pack('<IIII', 1792454500 + i, 0, len(frame), len(frame)) + frame
+(ROOT / 'network' / 'tls13.pcap').write_bytes(tls_pcap)
+write('network', 'tls13.keys', tls_fixture['keylog'])
+write('network', 'tls13-provenance.json', json.dumps({key: value for key, value in tls_fixture.items()
+      if key not in ('chunks', 'keylog')}, ensure_ascii=False, indent=2))
+
 write('crypto', 'lab.py', '''import base64
 import hashlib
 import hmac
@@ -273,7 +306,6 @@ elif mode == "password":
     print("other_salt=", derive(b"teaching-salt-A") == derive(b"teaching-salt-B"))
 else:
     raise SystemExit("mode: representation modular classical hash mac nonce password")''')
-write('crypto', 'envelope.json', json.dumps({'algorithm': 'AES-GCM', 'key_id': 'training-key-01', 'nonce': 'unique-per-key', 'ciphertext': 'NOT-A-REAL-CIPHERTEXT', 'tag': 'REQUIRED', 'aad': 'record-id=17'}, indent=2))
 write('crypto', 'protocol.md', '''# Bifrost: 키 역할 설계 (실제 암호문이나 키가 아닙니다)
 - Alice의 서명 개인키: Alice만 보유
 - Alice의 검증 공개키: Bob이 신뢰할 수 있는 경로로 확보
@@ -302,25 +334,11 @@ write('misc', 'writeup.md', '''# 문제 해결 기록
 ## 다른 입력에서의 한계''')
 
 write('cloud', 'config.json', json.dumps({'workload': 'training-notes', 'provider': 'fictional', 'storage': {'name': 'training-notes', 'public': True, 'encrypted': False}, 'identity': {'action': '*', 'resource': '*', 'long_lived_key': True}, 'network': {'database_public': True, 'admin_source': '0.0.0.0/0'}, 'audit': {'enabled': False, 'retention_days': 0}}, indent=2))
-write('cloud', 'review.py', '''from pathlib import Path
-import json
-import sys
-path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).with_name("config.json")
-c = json.loads(path.read_text(encoding="utf-8"))
-checks = {
-    "storage.public": not c["storage"]["public"],
-    "storage.encrypted": c["storage"]["encrypted"],
-    "identity.scope": c["identity"]["action"] != "*" and c["identity"]["resource"] != "*",
-    "identity.temporary": not c["identity"]["long_lived_key"],
-    "network.database": not c["network"]["database_public"],
-    "network.admin": c["network"]["admin_source"] != "0.0.0.0/0",
-    "audit.enabled": c["audit"]["enabled"],
-    "audit.retention": c["audit"]["retention_days"] >= 30,
-}
-for name, passed in checks.items():
-    print("PASS" if passed else "REVIEW", name)
-print(f"passed={sum(checks.values())}/{len(checks)}")
-# A fixture checker only; not an IAM evaluator or a cloud security scanner.''')
+write('cloud', 'config-reviewed.json', json.dumps({'workload': 'training-notes', 'provider': 'fictional',
+    'storage': {'name': 'training-notes', 'public': False, 'encrypted': True},
+    'identity': {'action': 'ReadObject', 'resource': 'training-notes', 'long_lived_key': False},
+    'network': {'database_public': False, 'admin_source': '192.0.2.0/24'},
+    'audit': {'enabled': True, 'retention_days': 30}}, indent=2))
 write('cloud', 'audit.csv', '''id,time,actor,action,resource,result
 C01,2026-10-20T00:00:00Z,reader,ReadObject,training-notes,Allow
 C02,2026-10-20T00:01:00Z,reader,ChangePolicy,training-notes,Deny
@@ -333,32 +351,46 @@ data_classification,yes,yes
 identity_access,yes,yes
 application_config,yes,service_dependent''')
 
-write('network', 'tls-notes.txt', '''This PCAP contains DNS and plaintext HTTP only; no TLS handshake.
-With ordinary HTTPS, packet metadata remains visible but HTTP paths/bodies are encrypted.
-DNS/SNI visibility depends on the actual encryption and client/server configuration.
-Do not infer absence of activity from a missing capture location or decrypted payload.''')
+# Readable authored sources for the expanded labs. Keep these outside generated
+# labs/: rebuilding copies the originals before calculating checksums and ZIPs.
+for folder in sorted(SOURCES.iterdir()):
+    if folder.is_dir():
+        for source in sorted(folder.iterdir()):
+            if source.is_file():
+                write(folder.name, source.name, source.read_text(encoding='utf-8'))
 
 for folder in sorted(ROOT.iterdir()):
     if not folder.is_dir(): continue
     write(folder.name, 'README.md', f'''# Bifrost · {folder.name}
 이 묶음은 Bifrost가 직접 만든 교육용 자료입니다. 실제 개인정보·접속 키·운영 로그가 아닙니다.
 
-ZIP을 먼저 풀고 파일을 확인하세요. Python 예제는 Python 3.10 이상과 표준 라이브러리만 사용합니다.
+ZIP을 먼저 풀고 파일을 확인하세요. Python 예제의 기본 환경은 Python 3.10 이상입니다.
+기본 예제는 표준 라이브러리만 사용하며, crypto의 aead.py·signature.py만 선택 패키지가 필요합니다.
 Linux/WSL/macOS에서는 python3, Windows PowerShell에서는 py -3 명령으로 실행합니다.
 C 예제는 Ubuntu/WSL의 gcc, gdb, binutils를 기준으로 합니다. 바이너리를 제공하지 않고 소스를 제공합니다.
 명령은 각 차시를 따라 실행하세요. 스크립트가 외부 서비스에 접속하거나 클라우드 자원을 만들지는 않습니다.
 
 각 폴더의 모든 파일을 함께 유지하세요. 수정할 때 원본은 보관하고 작업용 사본을 만드세요.
-network PCAP은 합성한 DNS 2개와 TCP/HTTP 6개, 총 8프레임입니다. 실제 캡처나 TLS 표본이 아닙니다.
+network의 traffic.pcap은 합성 DNS 2개와 TCP/HTTP 6개, 총 8프레임입니다.
+별도 tls13.pcap은 메모리 안에서 실제 TLS 1.3 교환을 생성하고 합성 네트워크 헤더를 붙인 표본입니다.
 network 정책·cloud 구성은 단순화한 교육 모델입니다. 실제 장비나 공급자에 그대로 적용할 형식이 아닙니다.
 crypto의 고전 암호와 XOR 예제는 원리 관찰용이며 실제 보안에 사용하지 않습니다.
+자세한 준비·예상 결과·한계·풀이가 제공된 묶음은 LAB-GUIDE.md를 먼저 읽으세요.
 ''')
-    hashes = '\n'.join(f'{hashlib.sha256(file.read_bytes()).hexdigest()}  {file.name}' for file in sorted(folder.iterdir()) if file.name != 'SHA256SUMS.txt')
+    hashes = '\n'.join(f'{hashlib.sha256(file.read_bytes()).hexdigest()}  {file.name}'
+                       for file in sorted(folder.iterdir(), key=lambda path: path.name)
+                       if file.is_file() and file.name != 'SHA256SUMS.txt')
     write(folder.name, 'SHA256SUMS.txt', hashes)
-    with zipfile.ZipFile(ROOT / f'{folder.name}.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
-        for file in sorted(folder.iterdir()):
+    # Store these small bundles without zlib-version differences. Set metadata
+    # explicitly because ZipInfo otherwise differs between Windows and Linux.
+    with zipfile.ZipFile(ROOT / f'{folder.name}.zip', 'w', zipfile.ZIP_STORED) as archive:
+        for file in sorted(folder.iterdir(), key=lambda path: path.name):
+            if not file.is_file():
+                continue
             info = zipfile.ZipInfo(f'{folder.name}/{file.name}', (2026, 10, 21, 0, 0, 0))
-            info.compress_type = zipfile.ZIP_DEFLATED
+            info.compress_type = zipfile.ZIP_STORED
+            info.create_system = 3
+            info.external_attr = 0o100644 << 16
             archive.writestr(info, file.read_bytes())
 
 print('Rebuilt 9 offline lab bundles.')

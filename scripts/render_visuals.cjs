@@ -12,8 +12,8 @@ for (const file of ['visual-data.js', 'visuals.js']) vm.runInNewContext(fs.readF
 const data = context.window.BifrostVisualData, renderer = context.window.BifrostVisuals;
 const css = ['theme.css', 'learning.css', 'visuals.css'].map(file => fs.readFileSync(path.join(ROOT, 'css', file), 'utf8').split('@media print')[0]).join('\n');
 // Use the same course accent mapping as the actual lesson page.
-const colorsSource = fs.readFileSync(path.join(ROOT, 'js/learning.js'), 'utf8').match(/const colors = (\{[^;]+\});/)[1];
-const colors = vm.runInNewContext(`(${colorsSource})`);
+const site = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/site.json'), 'utf8'));
+const colors = Object.fromEntries(site.courses.map(course => [course.id, course.accent]));
 const rules = [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)].map(m => ({
   selector: m[1].replace(/\/\*[\s\S]*?\*\//g, '').trim(),
   declarations: [...m[2].matchAll(/([\w-]+)\s*:\s*([^;]+)(?:;|$)/g)].map(m => [m[1], m[2].trim()])

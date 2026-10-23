@@ -1,0 +1,5 @@
+# Optional AES-GCM / Ed25519 lessons; standard-library lab.py does not need this.
+# Reproducible teaching environment, reviewed 2026-10-23.
+cryptography==50.0.2
+cffi==2.1.1; platform_python_implementation == "CPython"
+pycparser==3.11; platform_python_implementation == "CPython"

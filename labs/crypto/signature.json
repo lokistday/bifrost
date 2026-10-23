@@ -1,0 +1,7 @@
+{
+  "provenance": "Bifrost original Ed25519 signature; public deterministic teaching seed bytes(range(32)), not a real identity.",
+  "algorithm": "Ed25519",
+  "message_utf8": "Bifrost lesson 17",
+  "public_key_base64": "A6EHv/POEL4dcN0Y50vAmWfk1jCbpQ1fHdyGZBJVMbg=",
+  "signature_base64": "alyk2fulP/IqyxTTI3Qz10g7z7nWAbdT2maSql7hqyuJLmOpwYk6ZSxoV/qPqLKSxtdclixDUS/shObfDCd/AQ=="
+}

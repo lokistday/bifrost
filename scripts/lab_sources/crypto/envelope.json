@@ -1,0 +1,9 @@
+{
+  "provenance": "Bifrost original, real AES-256-GCM output; fixed public training key/nonce, one message only.",
+  "algorithm": "AES-256-GCM",
+  "key_id": "PUBLIC-TEACHING-KEY-DO-NOT-USE",
+  "nonce_base64": "AAECAwQFBgcICQoL",
+  "ciphertext_base64": "BWuwaaqWtjvhJOT43odYXLQ=",
+  "tag_base64": "lByMVRCDsYDgtFIWim+7tw==",
+  "aad_utf8": "record-id=17"
+}

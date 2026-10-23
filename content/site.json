@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "url": "https://lokistday.github.io/bifrost/",
+  "courses": [
+    {"id":"foundation","mapLabel":"CORE","teaser":"터미널 · 코드 · 네트워크","accent":"cyan"},
+    {"id":"pwn","mapLabel":"SYSTEM","teaser":"메모리 · 디버깅","accent":"violet"},
+    {"id":"forensic","mapLabel":"FORENSIC","teaser":"흔적 · 증거 · 타임라인","accent":"green"},
+    {"id":"misc","mapLabel":"MISC","teaser":"단서 · 데이터 · 도구","accent":"orange"},
+    {"id":"cloud","mapLabel":"CLOUD","teaser":"신원 · 구성 · 감사","accent":"sky"},
+    {"id":"network","mapLabel":"NETWORK","teaser":"망 설계 · 정책 · 탐지","accent":"amber"},
+    {"id":"crypto","mapLabel":"CRYPTO","teaser":"수학 · 무결성 · 키 관리","accent":"pink"},
+    {"id":"rev","mapLabel":"REVERSE","teaser":"분석 · 실행 흐름","accent":"red"},
+    {"id":"web","mapLabel":"WEB","teaser":"요청 · 인증 · 취약점","accent":"blue"}
+  ]
+}

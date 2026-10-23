@@ -99,6 +99,9 @@ check(auth.includes('09:00:00+09:00') && flat('forensic.timeline').includes('00:
 check(data.lessons['network.transport'].messages.length === 8 && data.lessons['network.pcap'].rows[0].values.length === 8, 'Packet diagrams cover the eight-frame fixture');
 check(flat('network.policy').includes('DENY · MISMATCH') && flat('network.policy').includes('N06'), 'Missing egress rule is visibly distinguished');
 check(flat('pwn.bounds').includes('index 3 · 금지') && data.lessons['pwn.bounds'].rows[0].validCount === 3, 'Invalid element is outside the valid array range');
+check(flat('network.tls').includes('15프레임') && flat('network.tls').includes('레코드 9개') && flat('network.tls').includes('tls13.pcap'), 'TLS visual names the actual separate encrypted fixture');
+check(flat('crypto.symmetric').includes('aead.py') && !flat('crypto.symmetric').includes('실행하지 않습니다'), 'AEAD visual matches the executable authenticated encryption lab');
+check(flat('crypto.public-key').includes('Ed25519') && flat('cloud.capstone').includes('INVALID'), 'Signature and cloud visual notes match improved labs');
 
 const originalTitle = data.lessons['web.flow'].title;
 data.lessons['web.flow'].title = '<img src=x onerror=alert(1)> & "test"';

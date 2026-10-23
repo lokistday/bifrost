@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101a30">
+<meta name="description" content="Bifrost는 초반에 관심 분야를 탐색하고 공통 기초와 분야별 실습을 병행하도록 돕는 보안 학습 로드맵입니다.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="Bifrost — 보안 학습 가이드">
+<meta property="og:description" content="관심 분야를 일찍 탐색하고, 공통 기초와 입문 실습을 병행하는 보안 학습 가이드.">
+<meta property="og:url" content="{{SITE_URL}}">
+<meta property="og:image" content="{{SITE_URL}}og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Bifrost 보안 학습 지도 — 9개 분야와 62개 차시">
+<link rel="canonical" href="{{SITE_URL}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bifrost — 보안 학습 가이드">
+<meta name="twitter:description" content="관심 분야 탐색부터 실습, 결과물까지 이어지는 보안 학습 로드맵.">
+<meta name="twitter:image" content="{{SITE_URL}}og-image.png">
+<title>Bifrost — 보안 학습 가이드</title>
+<script src="js/theme.js"></script>
+<link rel="stylesheet" href="css/splash.css">
+<script src="js/splash.js"></script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Crect width=%2240%22 height=%2240%22 rx=%2211%22 fill=%22%23101a30%22/%3E%3Cpath d=%22M20 4 23.8 15.2 36 20 23.8 23.8 20 36 16.2 23.8 4 20 16.2 15.2Z%22 fill=%22%235ce1e6%22/%3E%3Cpath d=%22M31 5 32.5 9.5 37 11 32.5 12.5 31 17 29.5 12.5 25 11 29.5 9.5Z%22 fill=%22%239cf7ff%22/%3E%3C/svg%3E">
+
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/overlays.css">
+<link rel="stylesheet" href="css/mindmap.css">
+<link rel="stylesheet" href="css/learning.css">
+</head>
+<body>
+<div class="startup-splash" id="startupSplash" hidden aria-hidden="true">
+  <div class="startup-splash__scene">
+    <div class="startup-splash__horizon"></div>
+    <svg class="startup-splash__bridge" viewBox="0 0 1000 1000" preserveAspectRatio="none" focusable="false">
+      <defs>
+        <linearGradient id="splash-spectrum" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1000" y2="0">
+          <stop stop-color="#ff5c79"/>
+          <stop offset=".16" stop-color="#ffb65c"/>
+          <stop offset=".31" stop-color="#f5ee8a"/>
+          <stop offset=".46" stop-color="#7cf1b2"/>
+          <stop offset=".60" stop-color="#5ce1e6"/>
+          <stop offset=".76" stop-color="#8390ff"/>
+          <stop offset=".90" stop-color="#c381ff"/>
+          <stop offset="1" stop-color="#f28ccb"/>
+        </linearGradient>
+        <linearGradient id="splash-depth" x1="0" y1="0" x2="0" y2="1">
+          <stop stop-color="white" stop-opacity=".38"/>
+          <stop offset=".4" stop-color="white" stop-opacity=".82"/>
+          <stop offset="1" stop-color="white"/>
+        </linearGradient>
+        <linearGradient id="splash-thread" x1="0" y1="0" x2="0" y2="1">
+          <stop stop-color="#fff" stop-opacity="0"/>
+          <stop offset=".4" stop-color="#fff" stop-opacity=".16"/>
+          <stop offset="1" stop-color="#fff" stop-opacity=".65"/>
+        </linearGradient>
+        <clipPath id="splash-road"><path d="M486 -80H514L970 1080H30Z"/></clipPath>
+        <mask id="splash-road-depth"><path fill="url(#splash-depth)" d="M0 0H1000V1000H0Z"/></mask>
+      </defs>
+      <g clip-path="url(#splash-road)" mask="url(#splash-road-depth)">
+        <g class="startup-splash__road">
+          <path fill="#ff5c79" d="M486 -80H489.5L147.5 1080H30Z"/>
+          <path fill="#ffb65c" d="M489.5 -80H493L265 1080H147.5Z"/>
+          <path fill="#f5ee8a" d="M493 -80H496.5L382.5 1080H265Z"/>
+          <path fill="#7cf1b2" d="M496.5 -80H500L500 1080H382.5Z"/>
+          <path fill="#5ce1e6" d="M500 -80H503.5L617.5 1080H500Z"/>
+          <path fill="#8390ff" d="M503.5 -80H507L735 1080H617.5Z"/>
+          <path fill="#c381ff" d="M507 -80H510.5L852.5 1080H735Z"/>
+          <path fill="#f28ccb" d="M510.5 -80H514L970 1080H852.5Z"/>
+        </g>
+        <g class="startup-splash__threads" fill="none" stroke="url(#splash-thread)">
+          <path d="M487 -80 55 1080M489 -80 117 1080M491 -80 178 1080M493 -80 240 1080M495 -80 302 1080M497 -80 364 1080M499 -80 426 1080M501 -80 488 1080M503 -80 550 1080M505 -80 612 1080M507 -80 674 1080M509 -80 736 1080M511 -80 798 1080M513 -80 860 1080M515 -80 922 1080"/>
+        </g>
+        <g class="startup-splash__currents" fill="none" stroke="url(#splash-spectrum)">
+          <path d="M489 -80 120 1080M493 -80 245 1080M497 -80 370 1080M501 -80 495 1080M505 -80 620 1080M509 -80 745 1080M513 -80 870 1080"/>
+        </g>
+        <g class="startup-splash__crossings" fill="none" stroke="#e7f9ff">
+          <path d="M0 255Q500 285 1000 255M0 340Q500 380 1000 340M0 450Q500 505 1000 450M0 600Q500 670 1000 600M0 795Q500 885 1000 795"/>
+        </g>
+      </g>
+      <path class="startup-splash__rails" d="M486 -80 30 1080M514 -80 970 1080" fill="none" stroke="url(#splash-thread)"/>
+    </svg>
+    <div class="startup-splash__arrival"></div>
+  </div>
+  <div class="startup-splash__glow"></div>
+  <div class="startup-splash__identity">
+    <div class="startup-splash__emblem">
+      <span class="startup-splash__ring"></span>
+      <svg class="startup-splash__star" viewBox="0 0 40 40" focusable="false">
+        <path d="M20 2.8 23.8 15.2 36.2 19 23.8 22.8 20 35.2 16.2 22.8 3.8 19 16.2 15.2Z" fill="currentColor"/>
+        <path d="M31.1 4.7 32.5 9.1 36.9 10.5 32.5 11.9 31.1 16.3 29.7 11.9 25.3 10.5 29.7 9.1Z" fill="#b4faff"/>
+      </svg>
+    </div>
+    <div class="startup-splash__name">BIFROST</div>
+    <div class="startup-splash__tagline">EXPLORE YOUR SECURITY PATH</div>
+    <div class="startup-splash__line"><span></span></div>
+  </div>
+</div>
+<header class="topbar"><div class="wrap nav">
+<a class="brand" href="#home"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M20 2.8 23.8 15.2 36.2 19 23.8 22.8 20 35.2 16.2 22.8 3.8 19 16.2 15.2Z" fill="currentColor"/><path d="M31.1 4.7 32.5 9.1 36.9 10.5 32.5 11.9 31.1 16.3 29.7 11.9 25.3 10.5 29.7 9.1Z" fill="#9cf7ff"/></svg></span><span>Bifrost</span></a>
+<nav class="navlinks"><a href="#mindmap">LEARNING MAP</a><a href="#practice">LEARNING GUIDE</a><a href="#resources">RESOURCES</a></nav>
+<button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">다크 모드</span></button>
+<a class="nav-cta" href="#mindmap">학습 시작하기 ↗</a>
+</div></header>
+<main id="home" class="learning-canvas">
+
+<section class="mindmap-shell" id="mindmap" aria-label="보안 학습 분야 지도">
+  <div class="mindmap-wrap">
+    <div class="mindmap-intro">
+      <div class="eyebrow"><span class="dot"></span> EXPLORE YOUR SECURITY PATH</div>
+      <p>하나의 기초에서 시작해, 호기심이 향하는 분야로 뻗어 나가세요.<br>노드를 선택하면 분야별 목차와 강의 페이지로 이동합니다.</p>
+      <div class="mindmap-hint"><span class="hint-pulse"></span> 노드를 선택해 탐험 시작하기</div>
+    </div>
+    <div class="mindmap-stage" role="group" aria-label="Bifrost 보안 학습 분야 마인드맵">
+      <svg class="mindmap-lines" viewBox="0 0 1000 760" aria-hidden="true">
+        <defs>
+          <linearGradient id="line-cyan"><stop style="stop-color:var(--map-cyan)" stop-opacity=".16"/><stop offset="1" style="stop-color:var(--map-cyan)" stop-opacity=".9"/></linearGradient>
+          <linearGradient id="line-blue"><stop style="stop-color:var(--map-blue)" stop-opacity=".16"/><stop offset="1" style="stop-color:var(--map-blue)" stop-opacity=".9"/></linearGradient>
+          <linearGradient id="line-green"><stop style="stop-color:var(--map-green)" stop-opacity=".16"/><stop offset="1" style="stop-color:var(--map-green)" stop-opacity=".9"/></linearGradient>
+          <linearGradient id="line-violet"><stop style="stop-color:var(--map-violet)" stop-opacity=".12"/><stop offset="1" style="stop-color:var(--map-violet)" stop-opacity=".9"/></linearGradient>
+          <linearGradient id="line-pink"><stop style="stop-color:var(--map-pink)" stop-opacity=".12"/><stop offset="1" style="stop-color:var(--map-pink)" stop-opacity=".85"/></linearGradient>
+          <linearGradient id="line-red"><stop style="stop-color:var(--map-red)" stop-opacity=".16"/><stop offset="1" style="stop-color:var(--map-red)" stop-opacity=".9"/></linearGradient>
+          <linearGradient id="line-amber"><stop style="stop-color:var(--map-amber)" stop-opacity=".16"/><stop offset="1" style="stop-color:var(--map-amber)" stop-opacity=".9"/></linearGradient>
+          <linearGradient id="line-orange"><stop style="stop-color:var(--map-orange)" stop-opacity=".16"/><stop offset="1" style="stop-color:var(--map-orange)" stop-opacity=".9"/></linearGradient>
+          <linearGradient id="line-sky"><stop style="stop-color:var(--map-sky)" stop-opacity=".16"/><stop offset="1" style="stop-color:var(--map-sky)" stop-opacity=".9"/></linearGradient>
+        </defs>
+        <path class="synapse cyan" d="M500 295V126"/>
+        <path class="synapse blue" d="M440 320C415 275 380 230 350 216"/>
+        <path class="synapse violet" d="M560 320C585 275 620 230 650 216"/>
+        <path class="synapse red" d="M415 370C370 370 335 343 296 343"/>
+        <path class="synapse green" d="M585 370C630 370 665 343 704 343"/>
+        <path class="synapse pink" d="M430 430C400 470 360 510 328 513"/>
+        <path class="synapse orange" d="M570 430C600 470 640 510 672 513"/>
+        <path class="synapse amber" d="M475 460C450 510 430 565 400 600"/>
+        <path class="synapse sky" d="M525 460C550 510 570 565 600 600"/>
+        <path class="synapse faint" d="M245 210C175 235 180 405 220 445"/>
+        <path class="synapse faint" d="M755 210C825 235 820 405 780 445"/>
+        <circle class="junction blue" cx="350" cy="216" r="3"/><circle class="junction violet" cx="650" cy="216" r="3"/>
+        <circle class="junction red" cx="296" cy="343" r="3"/><circle class="junction green" cx="704" cy="343" r="3"/>
+      </svg>
+{{MAP_NODES}}
+      <div class="map-core"><span class="core-orbit orbit-one"></span><span class="core-orbit orbit-two"></span><div class="core-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M20 2.8 23.8 15.2 36.2 19 23.8 22.8 20 35.2 16.2 22.8 3.8 19 16.2 15.2Z" fill="currentColor"/><path d="M31.1 4.7 32.5 9.1 36.9 10.5 32.5 11.9 31.1 16.3 29.7 11.9 25.3 10.5 29.7 9.1Z" fill="#9cf7ff"/></svg></div><strong>BIFROST</strong><small>SECURITY LEARNING MAP</small><span class="core-status"><b></b> PATHS CONNECTED</span></div>
+      <div class="map-caption">ONE FOUNDATION <span>·</span> EIGHT DIRECTIONS <span>·</span> YOUR JOURNEY</div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section" id="practice" aria-labelledby="learning-guide-title">
+<div class="section-head"><div><div class="kicker mono">01 / LEARNING GUIDE</div><h2 id="learning-guide-title">이해하고, 실행하고, 근거로 남기기</h2></div><p class="section-desc">어떤 분야를 선택하든 같은 흐름으로 학습합니다. 개념과 위험을 파악하고, 실습으로 확인한 뒤 다른 사람도 재현할 수 있는 결과물로 정리하세요.</p></div>
+<div class="practice-grid">
+<article class="practice-card"><div class="practice-top"><span>01 / UNDERSTAND</span><div class="icon">⌕</div></div><h3>이해하고 범위 정하기</h3><p>배울 개념의 목적과 데이터 흐름을 파악하고, 무엇을 확인할지 정합니다.</p><ul><li>공식 문서를 우선 읽고 출처·날짜·버전을 비교하기</li><li>보호할 대상, 사용자 입력, 권한과 신뢰 경계 표시하기</li><li>실습할 대상과 허용 범위, 중단·복구 방법 정하기</li></ul><div class="deliverable"><b>남길 것</b><br>핵심 개념 요약, 간단한 흐름도, 실습 목표와 범위</div></article>
+<article class="practice-card"><div class="practice-top"><span>02 / PRACTICE &amp; VERIFY</span><div class="icon" style="background:var(--blue-soft);color:var(--blue)">⌘</div></div><h3>실행하고 검증하기</h3><p>허가된 로컬 환경과 샘플 데이터로 동작을 재현하고, 원인과 수정 효과를 확인합니다.</p><ul><li>명령·입력·원본 증거와 실제 출력 보관하기</li><li>예상과 다른 결과, 실패 원인과 대안 가설 비교하기</li><li>수정 후 정상 동작과 거부해야 할 입력을 함께 테스트하기</li></ul><div class="deliverable"><b>남길 것</b><br>실행 가능한 코드와 입력, 수정 전·후 결과, 검증 근거</div></article>
+<article class="practice-card"><div class="practice-top"><span>03 / DOCUMENT &amp; BUILD</span><div class="icon" style="background:var(--purple-soft);color:var(--purple)">↗</div></div><h3>기록하고 결과물로 묶기</h3><p>풀이와 코드를 작은 프로젝트로 정리해, 나중에도 같은 과정을 따라 할 수 있게 만듭니다.</p><ul><li>README에 목표·환경·실행법·결과를 적고 Git으로 변경 관리하기</li><li>관찰한 사실·추론·미확인 사항과 방어 방법을 구분하기</li><li>공유 전 비밀번호·토큰·개인 데이터를 제거하기</li></ul><div class="deliverable"><b>남길 것</b><br>README 또는 Write-up, 재현 절차, 배운 점과 남은 한계</div></article>
+</div>
+<div class="learning-next"><strong>다음 학습 정하기</strong><p>완성한 결과물을 관심 직무의 실제 업무·요구 역량과 비교하고, 부족한 개념이나 새로 생긴 질문을 다음 차시와 프로젝트로 연결하세요.</p></div>
+<div class="learning-resources" id="resources" aria-labelledby="resources-title"><h3 id="resources-title">학습을 이어갈 외부 자료</h3>
+<div class="resource-grid">
+<div class="resource"><strong>Dreamhack</strong><small>웹·시스템 보안 실습</small><a href="https://dreamhack.io/" target="_blank" rel="noopener">학습 플랫폼 ↗</a></div>
+<div class="resource"><strong>CTFtime</strong><small>대회 일정과 정보</small><a href="https://ctftime.org/" target="_blank" rel="noopener">대회 찾아보기 ↗</a></div>
+<div class="resource"><strong>GitHub</strong><small>코드와 학습 기록</small><a href="https://github.com/" target="_blank" rel="noopener">저장소 만들기 ↗</a></div>
+<div class="resource"><strong>OWASP</strong><small>웹 보안 지식과 자료</small><a href="https://owasp.org/" target="_blank" rel="noopener">공식 자료 ↗</a></div>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="footer"><div class="wrap footer-inner"><div><strong>Bifrost</strong><br><small>Learn the concept. Practice with intent. Document what you discover.</small><br><small class="credit">by. Loki</small></div><div><small>학습과 실습은 본인이 소유하거나 명시적으로 허가받은 환경에서 진행하세요.<br>진도는 현재 브라우저에 저장되며, 계정 동기화는 아직 지원하지 않습니다.</small></div></div></footer>
+
+<div id="linuxGuideOverlay" role="dialog" aria-modal="true" aria-label="Windows에서 Linux 시작하기" aria-hidden="true">
+  <button id="linuxGuideClose" type="button" onclick="showMainGuide()">← 학습 지도</button>
+  <iframe id="linuxGuideFrame" title="Windows에서 Linux 시작하기" loading="lazy"></iframe>
+</div>
+
+<script src="js/linux-guide.js" defer></script>
+</body>
+</html>

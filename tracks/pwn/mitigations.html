@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="메모리 오류 수정과 악용 완화의 차이를 설명합니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="ASLR·NX·Canary의 역할과 한계 — Pwn / System · Bifrost">
+<meta property="og:description" content="메모리 오류 수정과 악용 완화의 차이를 설명합니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/tracks/pwn/mitigations.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/pwn/mitigations.html">
+<title>ASLR·NX·Canary의 역할과 한계 — Pwn / System · Bifrost</title>
+<script src="../../js/theme.js"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/learning.css">
+<link rel="stylesheet" href="../../css/visuals.css">
+<script src="../../js/catalog.js" defer></script>
+<script src="../../js/courses/pwn.js" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-view.js" defer></script>
+<script src="../../js/learning.js" defer></script>
+</head>
+<body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="pwn.mitigations" style="--course-accent:var(--map-violet)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">시스템 보안 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="pwn.mitigations">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../index.html#mindmap">학습 지도</a><span aria-hidden="true">/</span><a href="./">Pwn / System</a><span aria-hidden="true">/</span><span aria-current="page">6차시</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar"><a class="back-link" href="./">← Pwn / System 전체 과정</a><div class="course-stats"><span data-count="pwn"></span>
+        <div class="course-meter" role="progressbar" aria-label="Pwn / System 완료 진도" aria-valuemin="0" aria-valuemax="100" data-meter="pwn"><span></span></div>
+      </div>
+        <nav aria-label="차시 목차">
+          <details >
+            <summary>01 · 실행과 메모리 모델<span class="caption" data-module-count="0"></span></summary>
+            <ol><li><a class="side-lesson" href="build.html" >
+              <span class="lesson-dot" data-dot="pwn.build" aria-hidden="true"></span><span>소스·컴파일·실행 파일<small class="completion-label" data-completion="pwn.build"></small></span></a></li><li><a class="side-lesson" href="lifetime.html" >
+              <span class="lesson-dot" data-dot="pwn.lifetime" aria-hidden="true"></span><span>스택·힙과 수명<small class="completion-label" data-completion="pwn.lifetime"></small></span></a></li><li><a class="side-lesson" href="bounds.html" >
+              <span class="lesson-dot" data-dot="pwn.bounds" aria-hidden="true"></span><span>배열 경계와 길이<small class="completion-label" data-completion="pwn.bounds"></small></span></a></li></ol>
+          </details>
+          <details open>
+            <summary>02 · 관찰·진단·완화<span class="caption" data-module-count="1"></span></summary>
+            <ol><li><a class="side-lesson" href="debugger.html" >
+              <span class="lesson-dot" data-dot="pwn.debugger" aria-hidden="true"></span><span>GDB 중단점과 변수<small class="completion-label" data-completion="pwn.debugger"></small></span></a></li><li><a class="side-lesson" href="errors.html" >
+              <span class="lesson-dot" data-dot="pwn.errors" aria-hidden="true"></span><span>Sanitizer로 경계 오류 찾기<small class="completion-label" data-completion="pwn.errors"></small></span></a></li><li><a class="side-lesson" href="mitigations.html" aria-current="page">
+              <span class="lesson-dot" data-dot="pwn.mitigations" aria-hidden="true"></span><span>ASLR·NX·Canary의 역할과 한계<small class="completion-label" data-completion="pwn.mitigations"></small></span></a></li></ol>
+          </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
+      </aside><article class="lesson-article">
+          <header class="lesson-heading"><div class="overline">02 · 관찰·진단·완화 · 6 / 6</div><h1>ASLR·NX·Canary의 역할과 한계</h1><p class="lesson-objective">메모리 오류 수정과 악용 완화의 차이를 설명합니다.</p></header>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
+          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Ubuntu/WSL · GNU readelf · 정상 memory 실행 파일</strong></p><ul><li>memory.c를 기본 학습 옵션으로 빌드한 실행 파일에서 readelf를 실행합니다.</li><li>시스템 보호 설정을 끄거나 변경하지 않습니다. 이 차시는 읽기 관찰과 보호 역할 분류입니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="errors.html">시스템 보안 · Sanitizer로 경계 오류 찾기 ↗</a></li></ul>
+            </section>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>ASLR은 주소 배치를 바꾸고 NX는 실행 불가능한 메모리 영역의 코드 실행을 제한하며 스택 Canary는 일부 스택 손상을 함수 반환 전에 탐지합니다. 각각 다른 지점을 보호하며 입력 검증이나 수명 오류를 고쳐 주지는 않습니다.</p><figure class="learning-visual" data-visual-id="pwn.mitigations"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교표</span><h3>각 보호 기법이 바꾸는 지점은 서로 다릅니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="각 보호 기법이 바꾸는 지점은 서로 다릅니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 330" width="760" height="330" role="img" aria-labelledby="visual-pwn-mitigations-title visual-pwn-mitigations-desc" focusable="false"><title id="visual-pwn-mitigations-title">각 보호 기법이 바꾸는 지점은 서로 다릅니다</title><desc id="visual-pwn-mitigations-desc">ASLR은 메모리 배치의 예측을 어렵게 하고 NX는 실행 권한이 없는 영역에서의 코드 실행을 제한합니다. Stack Canary는 특정 스택 손상을 탐지할 수 있습니다. 이 기법들은 배열 경계를 자동으로 고치지 않으며 각각 적용과 한계가 다릅니다.</desc><defs><marker id="visual-pwn-mitigations-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone "><rect class="v-table-head" x="28" y="20" width="144" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="41" y="47">기법</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="172" y="20" width="264" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="185" y="47">주로 바꾸는 지점</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="436" y="20" width="296" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="449" y="47">이것만으로 알 수 없는 것</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="78" width="144" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="105">ASLR</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="172" y="78" width="264" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="185" y="105">주소 배치의 예측 가능성</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="436" y="78" width="296" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="449" y="105">프로그램의 경계 오류 유무</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="136" width="144" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="163">NX</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="172" y="136" width="264" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="185" y="163">메모리 영역의 실행 권한</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="436" y="136" width="296" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="449" y="163">다른 코드 재사용 경로의 차단</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="194" width="144" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="221">Stack Canary</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="172" y="194" width="264" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="185" y="221">특정 스택 손상의 탐지</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="436" y="194" width="296" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="449" y="221">힙·모든 스택 오류의 제거</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="252" width="144" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="279">GNU_STACK 항목</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="172" y="252" width="264" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="185" y="279">스택 관련 실행 플래그</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="436" y="252" width="296" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="449" y="279">ASLR·Canary 전체 적용 여부</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">GNU_STACK 한 항목에서 확인한 실행 권한으로 ASLR·Canary까지 활성화됐다고 판단하지 마세요.</span><small class="visual-note">보호 기법은 피해 완화 수단입니다. 실제 적용 여부와 대상은 운영체제·빌드·실행 환경에서 따로 확인합니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>ASLR은 메모리 배치의 예측을 어렵게 하고 NX는 실행 권한이 없는 영역에서의 코드 실행을 제한합니다. Stack Canary는 특정 스택 손상을 탐지할 수 있습니다. 이 기법들은 배열 경계를 자동으로 고치지 않으며 각각 적용과 한계가 다릅니다.</p></details></figure><p>완화 기법이 켜져 있어도 경계 밖 읽기 같은 오류는 남을 수 있습니다. 이 과정에서는 보호를 끄거나 우회하는 대신 진단한 원인, 안전한 수정, 빌드 보호, 재검증을 층으로 구분합니다. 보호 옵션은 컴파일러와 플랫폼에 따라 달라집니다.</p><p>ASLR은 주소 배치, NX는 메모리 영역의 실행 권한, Canary는 일부 스택 손상 탐지라는 서로 다른 지점에 관련됩니다. 배열 밖 읽기, 해제 후 접근 등 원인을 직접 제거하는 경계·수명 관리와는 역할이 다릅니다. 완화 하나가 다른 종류의 오류까지 자동으로 막는다고 연결하지 않습니다.</p><p>readelf -W -l은 ELF의 프로그램 헤더를 보여 줍니다. GNU_STACK의 플래그를 볼 때 R은 읽기, W는 쓰기, E는 실행입니다. 이 항목은 요청된 스택 실행 권한의 단서이며 실제 프로세스의 모든 메모리 권한·주소 랜덤화·모든 함수의 Canary 적용을 한꺼번에 증명하지 않습니다.</p><p>빌드 옵션과 실행 환경은 보호 결과에 함께 영향을 줍니다. 배포 환경의 보호를 평가하려면 컴파일·링크 옵션, 바이너리 특징, 운영체제 설정과 실제 실행을 각각 확인해야 합니다. 이 입문 실습은 관찰한 항목의 범위를 넘겨 전체 안전 판정을 하지 않는 것을 완료 기준으로 삼습니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>보호 기법 이름이 많으면 분석이 완성됐다고 생각한다.</dt><dd>각 보호 대상·관찰 근거·막지 못하는 오류를 함께 적습니다.</dd><dt>ELF 헤더만 보고 실제 모든 런타임 매핑을 단정한다.</dt><dd>정적 요청 정보와 실행 시 운영체제가 적용한 상태를 구분합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/pwn.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/pwn/memory.c" download>memory.c ↓</a></li><li><a href="../../labs/pwn/bounds.c" download>bounds.c ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2><ol class="walkthrough"><li><h3>보호 이름을 대상과 연결하기</h3><p>ASLR → 주소 배치 예측 감소, NX → 비실행 영역의 실행 제한, Canary → 일부 스택 덮어쓰기 탐지로 연결합니다. 각 칸 아래에 배열 경계 조건을 직접 고치는 것은 아님을 적습니다.</p>
+        </li><li><h3>GNU_STACK 한 항목 읽기</h3><p>readelf 출력의 GNU_STACK 행에서 권한 문자를 찾습니다. RW이며 E가 없으면 이 헤더가 스택 실행을 요청하지 않는다는 관찰로 기록합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>readelf -W -l memory</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>실제 GNU_STACK 플래그를 적습니다. 환경에 따라 출력과 항목 존재 여부가 다를 수 있습니다.</pre></div></li><li><h3>수정·완화·관찰을 세 칸으로 정리하기</h3><p>bounds.c의 i&lt;=3을 i&lt;3으로 고친 것은 원인 수정입니다. 빌드 보호는 악용 영향 완화의 층이고 Sanitizer 전후 비교는 오류를 관찰하는 방법입니다. 세 칸을 같은 성공 주장으로 합치지 않습니다.</p>
+        </li></ol>
+            <h3>전체 예제 연결하기</h3><div class="code-shell"><div class="code-toolbar"><span>예제 · 명령 또는 관찰 절차</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">readelf -W -l memory
+# GNU_STACK 항목이 있으면 권한 플래그를 관찰합니다.
+# 이 출력 하나로 모든 보호 기법의 활성 여부를 판정하지 않습니다.</code></pre></div><div class="expected-output"><h3>예상 결과와 해석</h3><pre>일반적인 Ubuntu 빌드에서 GNU_STACK은 RW이고 E가 없을 수 있습니다. 실제 결과를 기록하며 ASLR·Canary 여부는 이 항목으로 알 수 없습니다.</pre></div></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>bounds.c 사례를 원인 수정, 빌드 완화, 런타임 관찰 세 칸으로 정리하세요. 각 수단이 막지 못하는 것도 하나씩 적습니다.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>완화 기법의 이름보다 적용 대상과 검증 근거를 연결하세요.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>원인 수정: 유효 인덱스만 읽도록 반복 조건을 바꾸고 정상 원소 출력과 경계 조건을 검사합니다.</li><li>빌드 완화: ASLR·NX·Canary가 다루는 지점을 구분하고 이번 GNU_STACK 결과로 확인할 수 없는 항목도 적습니다.</li><li>런타임 관찰: 같은 입력·계측 옵션에서 오류 전후를 비교하고 검사한 범위의 한계를 남깁니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>보고서는 원인 수정 / 보호 완화 / 진단 관찰을 구분하고 각 근거와 한계를 포함해야 합니다. GNU_STACK 한 줄로 ASLR·Canary까지 활성이라고 결론 내리면 미완성입니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">04 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. GNU_STACK 플래그에 E가 없었습니다. 이 한 줄로 함께 증명되는 것은?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>ASLR과 모든 Canary가 활성이다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>모든 메모리 오류가 수정되었다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>이 항목의 스택 실행 요청 여부에 대한 단서이며 다른 보호는 별도 확인이 필요하다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 이 항목의 스택 실행 요청 여부에 대한 단서이며 다른 보호는 별도 확인이 필요하다.</strong></p><p>헤더 항목마다 의미와 범위가 다릅니다. 스택 권한 단서가 주소 배치나 함수별 계측 상태까지 말해 주지는 않습니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. 배열 밖 읽기를 발견했습니다. 완화 기법을 켜는 것과 별도로 필요한 핵심 조치는?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>유효 범위만 접근하도록 원인을 고치고 동일 조건에서 재검증한다.</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>출력 메시지에서 오류 이름을 지운다.</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>주소가 매번 달라지는지만 본다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 유효 범위만 접근하도록 원인을 고치고 동일 조건에서 재검증한다.</strong></p><p>완화는 원인 수정을 대체하지 않습니다. 잘못된 접근 자체를 제거하고 정상 기능과 경계 사례를 다시 확인해야 합니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>각 기법의 보호 대상과 한계를 설명했다.</li><li>원인 수정과 완화를 구분한 보고서를 만들었다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="errors.html"><small>← 이전 차시</small>Sanitizer로 경계 오류 찾기</a>
+            <a href="./"><small>과정 돌아보기 →</small>Pwn / System 목차</a></nav>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://sourceware.org/binutils/docs/binutils/readelf.html" target="_blank" rel="noopener noreferrer">GNU Binutils · readelf ↗</a></li>
+        <li><a href="https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html" target="_blank" rel="noopener noreferrer">GCC · 스택 보호 옵션 ↗</a></li>
+        <li><a href="https://docs.kernel.org/admin-guide/sysctl/kernel.html#randomize-va-space" target="_blank" rel="noopener noreferrer">Linux 커널 · randomize_va_space ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

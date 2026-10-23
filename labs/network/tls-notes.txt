@@ -1,4 +1,42 @@
-This PCAP contains DNS and plaintext HTTP only; no TLS handshake.
-With ordinary HTTPS, packet metadata remains visible but HTTP paths/bodies are encrypted.
-DNS/SNI visibility depends on the actual encryption and client/server configuration.
-Do not infer absence of activity from a missing capture location or decrypted payload.
+Bifrost 원본 TLS 비교 자료
+
+1. traffic.pcap: DNS 2개 + TCP/평문 HTTP 6개, 총 8프레임.
+   Wireshark에서 http.request를 적용하면 GET /lesson을 읽을 수 있습니다.
+   tls 필터 결과는 0입니다. HTTP가 없어졌다는 뜻이 아니라 이 파일에 TLS가 없다는 뜻입니다.
+
+2. tls13.pcap: Python ssl.MemoryBIO/OpenSSL로 실제 TLS 1.3 연결과 HTTP 요청/응답을
+   메모리 안에서 생성했습니다. 실제 인터넷 캡처가 아니며 소켓을 열지 않았습니다.
+   Ethernet/IPv4/TCP 헤더, 순서 번호와 시간은 교육용으로 합성했습니다.
+   양쪽 주소는 문서용 192.0.2.10, 192.0.2.20이며 서버 포트는 443입니다.
+   생성 정보와 공개 교육 인증서는 tls13-provenance.json에 있습니다.
+
+3. 키 로그를 설정하지 않은 새 Wireshark 프로필에서 tls13.pcap을 엽니다.
+   - tls.handshake.type == 1 : ClientHello 1개, 이 표본의 SNI는 bifrost.test입니다.
+   - tls.handshake.type == 2 : ServerHello 1개, supported_versions는 TLS 1.3입니다.
+   - tcp.port == 443 : 패킷 크기·방향·IP·포트·시간은 관측할 수 있습니다.
+   - http.request : 0개입니다. 원래 요청은 존재하지만 TLS 레코드 안에 암호화돼 있습니다.
+   - TLS 1.3의 인증서 메시지도 ServerHello 이후 암호화됩니다.
+   - 바깥쪽 Application Data(유형 23)는 암호화된 핸드셰이크/종료 알림도 담을 수 있습니다.
+     따라서 그 레코드 수를 HTTP 요청 수라고 세면 안 됩니다.
+   - legacy_version 0x0303만 보고 TLS 1.2라고 판단하지 마세요. 협상 확장을 확인합니다.
+
+4. 설치 없이 Python 요약: python3 analyze_tls.py
+   Windows: py -3 analyze_tls.py
+   이 파서는 이 순서가 고정된 표본의 두 TCP 바이트 스트림만 다룹니다.
+   재전송·IP 단편화·임의 캡처를 처리하는 범용 Wireshark 대체품이 아닙니다.
+
+5. 선택 비교: Wireshark 설정 → Protocols → TLS → (Pre)-Master-Secret log filename에
+   이 묶음의 tls13.keys만 지정하고 다시 엽니다. http.request와 복호화된 인증서를 확인합니다.
+   요청: GET /lesson HTTP/1.1, 응답 본문: Bifrost + 줄바꿈.
+   이 키 로그는 이 합성 교육 연결만 복호화하는 공개 자료입니다. 실제 연결의 키 로그는 비밀입니다.
+   관찰 뒤 경로를 지우거나 별도 프로필을 닫아 키 없이 관찰한 결과와 혼동하지 마세요.
+
+6. 한계: 이 표본에는 ECH, 암호화 DNS, QUIC, 프록시, 재전송이 없습니다.
+   따라서 모든 HTTPS에서 DNS/SNI가 항상 평문이라고 일반화하면 안 됩니다.
+   이 교육용 자체 서명 인증서는 이 메모리 연결에만 명시적으로 신뢰시켰습니다.
+   암호화 트래픽 존재나 인증서 표시만으로 실제 운영 서버의 신원·설정 안전성을 보장하지 않습니다.
+
+참고:
+https://www.rfc-editor.org/rfc/rfc8446.html#section-4.1.3
+https://www.rfc-editor.org/rfc/rfc8446.html#section-5.2
+https://wiki.wireshark.org/TLS/

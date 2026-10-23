@@ -1,7 +1,7 @@
 """Validate authored diagrams and bundle them for static, offline-friendly pages."""
 from pathlib import Path
 import json
-import re
+from build_courses import load_courses
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -9,9 +9,9 @@ ROOT = Path(__file__).resolve().parents[1]
 def build():
     source = ROOT / 'content' / 'visuals.json'
     data = json.loads(source.read_text(encoding='utf-8'))
-    curriculum = (ROOT / 'js' / 'curriculum.js').read_text(encoding='utf-8')
-    lessons = set(re.findall(r"\bL\('([^']+)'", curriculum))
-    courses = set(re.findall(r"\badd\('([^']+)'", curriculum))
+    _, authored = load_courses(strict=False)
+    lessons = {l['id'] for c in authored.values() for m in c['modules'] for l in m['lessons']}
+    courses = set(authored)
     assert data['version'] == 1, 'Unknown diagram format'
     assert set(data['lessons']) == lessons, 'Lesson diagram coverage differs from curriculum'
     assert set(data['courses']) == courses, 'Course diagram coverage differs from curriculum'

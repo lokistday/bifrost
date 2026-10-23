@@ -24,7 +24,7 @@ function openPage(relative, search = '', storage = new Storage()) {
   };
   window.parent = window;
   const context = vm.createContext({ window, document, localStorage: storage, location: { search, origin: 'https://example.test' }, Event, CustomEvent, URLSearchParams, URL, Blob, console, setTimeout: () => 0, navigator: { clipboard: { writeText: async () => {} } } });
-  for (const file of ['theme.js', 'curriculum.js', 'progress.js', ...(relative === 'index.html' ? [] : ['visual-data.js', 'visuals.js', 'learning.js'])]) vm.runInContext(fs.readFileSync(path.join(ROOT, 'js', file), 'utf8'), context, { filename: file });
+  for (const file of ['theme.js', 'curriculum.js', 'progress.js', ...(relative === 'index.html' ? [] : ['visual-data.js', 'visuals.js', 'learning-view.js', 'learning.js'])]) vm.runInContext(fs.readFileSync(path.join(ROOT, 'js', file), 'utf8'), context, { filename: file });
   return { document, window, storage, context, Event, progress: window.BifrostProgress, courses: window.BifrostCourses, relative };
 }
 function verifyLocalLinks(page) {
@@ -56,7 +56,7 @@ check(!home.document.querySelector('.catalog-card') && !home.document.getElement
 check(!home.document.querySelector('script[src="js/app.js"]'), 'Removed catalogue controller is not loaded');
 check(home.document.querySelector('#mindmap').nextElementSibling.id === 'practice', 'Radial map leads directly to practice guidance');
 verifyLocalLinks(home);
-const fieldGuides = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/field-guides.json'), 'utf8'));
+const fieldGuides = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/fields.json'), 'utf8'));
 const clockwise = ['foundation', 'pwn', 'forensic', 'misc', 'cloud', 'network', 'crypto', 'rev', 'web'];
 clockwise.forEach((key, index) => {
   const number = String(index).padStart(2, '0');
@@ -73,9 +73,8 @@ for (const course of courses) {
   check(overview.document.querySelectorAll('.module-card').length === course.modules.length, 'All modules render');
   check(!overview.document.querySelector('#roadmap, .phase, .field-choice, .field-guide-intro'), 'Common roadmap stages and field selection advice removed');
   check(overview.document.querySelectorAll('#courseIntroduction .field-guide-card').length === 1, 'Exactly one field introduction card appears');
-  const original = parseHTML(`<html><body>${fieldGuides.fields[course.id]}</body></html>`).document;
-  check(overview.document.querySelector('.field-question').textContent === original.querySelector('.field-question').textContent, 'Field introduction preserved');
-  check(overview.document.querySelector('.field-guide-card h4').textContent === course.title, 'Correct field description on course');
+  check(overview.document.querySelector('.field-question').textContent === fieldGuides[course.id].question, 'Structured field introduction preserved');
+  check(overview.document.querySelector('.field-guide-card h2').textContent === course.title, 'Correct field description on course');
   check(!overview.document.querySelector('#courseIntroduction [onclick]'), 'Field introduction uses working standalone links');
   check(!!overview.document.getElementById('courseModules'), 'Direct jump to teaching modules');
   verifyLocalLinks(overview);
@@ -99,15 +98,15 @@ for (const course of courses) {
 check(lessonCount === 62, '62 authored lessons');
 
 // Evaluate the real desktop CSS coordinates and real SVG endpoints, not a second layout fixture.
-const desktopCSS = fs.readFileSync(path.join(ROOT, 'css/mindmap.css'), 'utf8').split('@media(min-width:901px){')[1].split('\n}')[0];
+const desktopCSS = fs.readFileSync(path.join(ROOT, 'css/mindmap.css'), 'utf8').split('@media (min-width:901px) {')[1].split('\n}')[0];
 const widthOfCard = 216, heightOfCard = 116;
 function rectangles(width) {
   const stageWidth = Math.min(1000, width - 48);
   return Object.fromEntries(courses.map(c => {
-    const rule = desktopCSS.match(new RegExp(`\\.node-${c.id}\\{([^}]+)\\}`))[1];
-    const top = Number(rule.match(/top:(\d+)px/)[1]);
+    const rule = desktopCSS.match(new RegExp(`\\.node-${c.id}\\s*\\{([^}]+)\\}`))[1];
+    const top = Number(rule.match(/top:\s*(\d+)px/)[1]);
     let left = stageWidth / 2 - widthOfCard / 2;
-    const offset = rule.match(/(left|right):calc\(50% ([+-]) (\d+)px\)/);
+    const offset = rule.match(/(left|right):\s*calc\(50% ([+-]) (\d+)px\)/);
     if (offset) {
       const value = stageWidth / 2 + (offset[2] === '+' ? 1 : -1) * Number(offset[3]);
       left = offset[1] === 'left' ? value : stageWidth - value - widthOfCard;
@@ -150,7 +149,7 @@ check(hint.hasAttribute('open') && button === lesson.document.getElementById('co
 check(lesson.document.querySelector('[data-count]').textContent.includes('1 / 10'), 'Course total updates');
 const reload = openPage('tracks/foundation/index.html', '', store);
 check(reload.document.querySelector('[data-count]').textContent.includes('1 / 10'), 'Reload retains completion');
-check(reload.document.querySelector('#continueLearning').getAttribute('href').includes('foundation.environment'), 'Completed last lesson does not skip first missing lesson');
+check(reload.document.querySelector('#continueLearning').getAttribute('href').includes('environment.html'), 'Completed last lesson does not skip first missing lesson');
 const homepage = openPage('index.html', '', store);
 check(!homepage.document.querySelector('#catalogSummary'), 'Homepage stays focused on the radial map after progress changes');
 check(homepage.progress.has('foundation.python-values'), 'Removing homepage summary does not reset stored progress');

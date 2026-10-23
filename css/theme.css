@@ -1,4 +1,4 @@
-/* Shared design tokens and theme rules. Any page using this file can use the same theme. */
+/* Single shared light/dark palette for homepage, courses and Linux guide. */
 :root {
   color-scheme: light;
   --ink: #172235;
@@ -9,7 +9,7 @@
   --surface-raised: #ffffff;
   --surface-soft: #f0f4f8;
   --ink-soft: #344b61;
-  --teal: #168f9a;
+  --teal: #087f8c;
   --teal-soft: #e3f7f8;
   --blue: #5b63c7;
   --blue-soft: #eeedff;
@@ -32,7 +32,10 @@
   --map-red: #bb3651;
   --map-pink: #a73780;
   --map-amber: #865507;
+  --map-orange: #9a4b21;
+  --map-sky: #176a91;
 }
+
 html[data-theme="dark"] {
   color-scheme: dark;
   --ink: #e7edf7;
@@ -66,180 +69,172 @@ html[data-theme="dark"] {
   --map-red: #ff526d;
   --map-pink: #ff4db8;
   --map-amber: #ffc247;
+  --map-orange: #f5a875;
+  --map-sky: #85d2ff;
 }
-html { background: var(--paper); color: var(--ink); }
-body { background: var(--paper); color: var(--ink); }
 
-/* Main Bifrost page: keep hero/footer brand areas intentionally dark. */
+html {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
 html[data-theme="dark"] .topbar {
   background: rgba(11,18,32,.96);
   border-color: var(--line);
 }
-html[data-theme="dark"] .brand,
-html[data-theme="dark"] .navlinks a { color: var(--ink); }
-html[data-theme="dark"] .nav-cta { background: var(--surface-soft); color: var(--ink); }
-html[data-theme="dark"] .hero-shell,
-html[data-theme="dark"] .footer { background-color: var(--navy); }
-html[data-theme="dark"] .hero-shell { color: #fff; }
-html[data-theme="dark"] .hero-shell .lead,
-html[data-theme="dark"] .hero-shell .hero-note { color: #d6e1ed; }
-html[data-theme="dark"] .route-card,
-html[data-theme="dark"] .card,
-html[data-theme="dark"] .phase,
-html[data-theme="dark"] .field-guide-card,
-html[data-theme="dark"] .field-choice,
-html[data-theme="dark"] .field-path,
-html[data-theme="dark"] .track-button,
-html[data-theme="dark"] .track-detail,
-html[data-theme="dark"] .track-foot,
-html[data-theme="dark"] .lesson-item,
-html[data-theme="dark"] .lesson-plan,
-html[data-theme="dark"] .lesson-plan-card,
-html[data-theme="dark"] .resource,
-html[data-theme="dark"] .resource-card,
-html[data-theme="dark"] .practice-card,
-html[data-theme="dark"] .table-wrap,
-html[data-theme="dark"] .notice,
-html[data-theme="dark"] .field-guide-grid > * {
+
+html[data-theme="dark"] .brand, html[data-theme="dark"] .navlinks a {
+  color: var(--ink);
+}
+
+html[data-theme="dark"] .nav-cta {
+  background: var(--surface-soft);
+  color: var(--ink);
+}
+
+html[data-theme="dark"] .footer {
+  background-color: var(--navy);
+}
+
+html[data-theme="dark"] .card, html[data-theme="dark"] .field-guide-card, html[data-theme="dark"] .field-path, html[data-theme="dark"] .resource, html[data-theme="dark"] .practice-card, html[data-theme="dark"] .table-wrap {
   background: var(--surface);
   color: var(--ink);
   border-color: var(--line);
   box-shadow: none;
 }
-html[data-theme="dark"] .field-guide-intro,
-html[data-theme="dark"] .field-safety,
-html[data-theme="dark"] .learning-helper,
-html[data-theme="dark"] .phase-content li,
-html[data-theme="dark"] .meta-chip,
-html[data-theme="dark"] .lesson-goal,
-html[data-theme="dark"] .track-links .track-link,
-html[data-theme="dark"] .track-button.active,
-html[data-theme="dark"] .outcome,
+
 html[data-theme="dark"] .deliverable {
   background: var(--surface-soft);
   color: var(--ink-soft);
   border-color: var(--line);
 }
-.level-pill { background: var(--teal-soft); color: var(--teal); border-color: var(--line); }
-html[data-theme="dark"] .level-pill { background: var(--surface-soft); color: var(--teal); border-color: var(--line); }
-html[data-theme="dark"] .field-index,
-html[data-theme="dark"] .route-num,
-html[data-theme="dark"] .track-symbol,
-html[data-theme="dark"] .p0,
-html[data-theme="dark"] .p1,
-html[data-theme="dark"] .p2,
-html[data-theme="dark"] .p3,
-html[data-theme="dark"] .p4 {
+
+html[data-theme="dark"] .field-index {
   background: var(--teal-soft);
   color: var(--teal);
 }
-html[data-theme="dark"] h2,
-html[data-theme="dark"] h3,
-html[data-theme="dark"] h4,
-html[data-theme="dark"] .field-guide-card strong,
-html[data-theme="dark"] .lesson-item strong,
-html[data-theme="dark"] .lesson-plan summary,
-html[data-theme="dark"] .resource strong,
-html[data-theme="dark"] .practice-card strong,
-html[data-theme="dark"] .track-detail h3,
-html[data-theme="dark"] .phase-content h3 { color: var(--ink); }
-html[data-theme="dark"] p,
-html[data-theme="dark"] li,
-html[data-theme="dark"] dd,
-html[data-theme="dark"] small,
-html[data-theme="dark"] .section-desc,
-html[data-theme="dark"] .field-question,
-html[data-theme="dark"] .track-detail p,
-html[data-theme="dark"] .phase-content p { color: var(--muted); }
-html[data-theme="dark"] a,
-html[data-theme="dark"] .inline-guide-link { color: var(--teal); }
-html[data-theme="dark"] .hero-shell a,
-html[data-theme="dark"] .footer a { color: #9bdbff; }
-html[data-theme="dark"] input,
-html[data-theme="dark"] textarea,
-html[data-theme="dark"] select,
-html[data-theme="dark"] option,
-html[data-theme="dark"] pre,
-html[data-theme="dark"] code {
+
+html[data-theme="dark"] h2, html[data-theme="dark"] h3, html[data-theme="dark"] h4, html[data-theme="dark"] .field-guide-card strong, html[data-theme="dark"] .resource strong, html[data-theme="dark"] .practice-card strong {
+  color: var(--ink);
+}
+
+html[data-theme="dark"] p, html[data-theme="dark"] li, html[data-theme="dark"] dd, html[data-theme="dark"] small, html[data-theme="dark"] .section-desc, html[data-theme="dark"] .field-question {
+  color: var(--muted);
+}
+
+html[data-theme="dark"] a {
+  color: var(--teal);
+}
+
+html[data-theme="dark"] .footer a {
+  color: #9bdbff;
+}
+
+html[data-theme="dark"] input, html[data-theme="dark"] textarea, html[data-theme="dark"] select, html[data-theme="dark"] option, html[data-theme="dark"] pre, html[data-theme="dark"] code {
   background-color: #101a2a;
   color: var(--ink);
   border-color: var(--line);
 }
-html[data-theme="dark"] table,
-html[data-theme="dark"] table th,
-html[data-theme="dark"] table td { background: var(--surface); color: var(--ink-soft); border-color: var(--line); }
-html[data-theme="dark"] table th { background: var(--surface-soft); }
-html[data-theme="dark"] .lesson.done { background: #17302f; }
+
+html[data-theme="dark"] table, html[data-theme="dark"] table th, html[data-theme="dark"] table td {
+  background: var(--surface);
+  color: var(--ink-soft);
+  border-color: var(--line);
+}
+
+html[data-theme="dark"] table th {
+  background: var(--surface-soft);
+}
+
 html[data-theme="dark"] .theme-toggle {
   background: var(--surface-soft);
   color: var(--ink);
   border-color: #43536b;
 }
-html[data-theme="dark"] .btn.primary,
-html[data-theme="dark"] .hero-actions .btn.primary {
+
+html[data-theme="dark"] .btn.primary, html[data-theme="dark"] .hero-actions .btn.primary {
   background: #5ce1e6;
   color: #081521;
   border-color: #5ce1e6;
 }
+
 html[data-theme="dark"] .hero-actions .btn:not(.primary) {
   background: var(--surface);
   color: var(--ink);
   border-color: var(--line);
 }
-html[data-theme="dark"] [style*="background:#fff"],
-html[data-theme="dark"] [style*="background: #fff"],
-html[data-theme="dark"] [style*="background-color: white"],
-html[data-theme="dark"] [style*="background-color:#fff"],
-html[data-theme="dark"] [style*="background-color: #fff"] {
+
+html[data-theme="dark"] [style*="background:#fff"], html[data-theme="dark"] [style*="background: #fff"], html[data-theme="dark"] [style*="background-color: white"], html[data-theme="dark"] [style*="background-color:#fff"], html[data-theme="dark"] [style*="background-color: #fff"] {
   background-color: var(--surface) !important;
   color: var(--ink) !important;
   border-color: var(--line) !important;
 }
 
-/* Linux guide: the same tokens and dark-mode contract, including its standalone page. */
-html[data-theme="dark"] body:has(.hero .eyebrow),
-html[data-theme="dark"] .hero ~ main,
-html[data-theme="dark"] .hero ~ main .section { background: var(--paper); color: var(--ink); }
-html[data-theme="dark"] .hero ~ main .card,
-html[data-theme="dark"] .hero ~ main .step,
-html[data-theme="dark"] .hero ~ main table,
-html[data-theme="dark"] .hero ~ main th,
-html[data-theme="dark"] .hero ~ main td,
-html[data-theme="dark"] .hero ~ main .table-wrap {
+html[data-theme="dark"] body:has(.hero .eyebrow), html[data-theme="dark"] .hero ~ main, html[data-theme="dark"] .hero ~ main .section {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+html[data-theme="dark"] .hero ~ main .card, html[data-theme="dark"] .hero ~ main .step, html[data-theme="dark"] .hero ~ main table, html[data-theme="dark"] .hero ~ main th, html[data-theme="dark"] .hero ~ main td, html[data-theme="dark"] .hero ~ main .table-wrap {
   background: var(--surface);
   color: var(--ink);
   border-color: var(--line);
   box-shadow: none;
 }
-html[data-theme="dark"] .hero ~ main .tag,
-html[data-theme="dark"] .hero ~ main .callout,
-html[data-theme="dark"] .hero ~ main th,
-html[data-theme="dark"] .hero ~ main .step:before {
+
+html[data-theme="dark"] .hero ~ main .tag, html[data-theme="dark"] .hero ~ main .callout, html[data-theme="dark"] .hero ~ main th, html[data-theme="dark"] .hero ~ main .step:before {
   background: var(--surface-soft);
   color: var(--ink-soft);
   border-color: var(--line);
 }
-html[data-theme="dark"] .hero ~ main .muted,
-html[data-theme="dark"] .hero ~ main p,
-html[data-theme="dark"] .hero ~ main li { color: var(--muted); }
-html[data-theme="dark"] .hero ~ main h2,
-html[data-theme="dark"] .hero ~ main h3,
-html[data-theme="dark"] .hero ~ main b { color: var(--ink); }
-html[data-theme="dark"] .hero ~ main a { color: var(--teal); }
-html[data-theme="dark"] .hero ~ main pre.code,
-html[data-theme="dark"] .hero ~ main pre.code code {
+
+html[data-theme="dark"] .hero ~ main .muted, html[data-theme="dark"] .hero ~ main p, html[data-theme="dark"] .hero ~ main li {
+  color: var(--muted);
+}
+
+html[data-theme="dark"] .hero ~ main h2, html[data-theme="dark"] .hero ~ main h3, html[data-theme="dark"] .hero ~ main b {
+  color: var(--ink);
+}
+
+html[data-theme="dark"] .hero ~ main a {
+  color: var(--teal);
+}
+
+html[data-theme="dark"] .hero ~ main pre.code, html[data-theme="dark"] .hero ~ main pre.code code {
   background: #0a111d;
   color: #e7edf7;
   border-color: #344257;
 }
-html[data-theme="dark"] .footer { background: var(--navy); color: #d6e1ed; }
-html[data-theme="dark"] .footer a { color: #9bdbff; }
 
-/* Native controls, selection, and transitions follow the selected theme. */
-html { transition: background-color .18s ease, color .18s ease; }
-body, .learning-canvas, .topbar, .card, .phase, .track-button, .track-detail, .lesson-item, .resource, .practice-card,
-#linuxGuideOverlay { transition: background-color .18s ease, color .18s ease, border-color .18s ease; }
-::selection { background: var(--teal-soft); color: var(--ink); }
+html[data-theme="dark"] .footer {
+  background: var(--navy);
+  color: #d6e1ed;
+}
+
+html[data-theme="dark"] .footer a {
+  color: #9bdbff;
+}
+
+html {
+  transition: background-color .18s ease, color .18s ease;
+}
+
+body, .learning-canvas, .topbar, .card, .resource, .practice-card, #linuxGuideOverlay {
+  transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+}
+
+::selection {
+  background: var(--teal-soft);
+  color: var(--ink);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  html, body, .learning-canvas, .topbar, .card, .phase, .track-button, .track-detail, .lesson-item, .resource, .practice-card, #linuxGuideOverlay { transition: none; }
+  html, body, .learning-canvas, .topbar, .card, .resource, .practice-card, #linuxGuideOverlay {
+    transition: none;
+  }
 }

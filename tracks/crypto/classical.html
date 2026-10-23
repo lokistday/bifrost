@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="시저 이동의 암·복호를 구현하고 실제 보호에 부적합한 이유를 설명합니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="치환과 작은 키 공간 — Cryptography · Bifrost">
+<meta property="og:description" content="시저 이동의 암·복호를 구현하고 실제 보호에 부적합한 이유를 설명합니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/tracks/crypto/classical.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/crypto/classical.html">
+<title>치환과 작은 키 공간 — Cryptography · Bifrost</title>
+<script src="../../js/theme.js"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/learning.css">
+<link rel="stylesheet" href="../../css/visuals.css">
+<script src="../../js/catalog.js" defer></script>
+<script src="../../js/courses/crypto.js" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-view.js" defer></script>
+<script src="../../js/learning.js" defer></script>
+</head>
+<body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.classical" style="--course-accent:var(--map-pink)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">암호학 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="crypto.classical">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../index.html#mindmap">학습 지도</a><span aria-hidden="true">/</span><a href="./">Cryptography</a><span aria-hidden="true">/</span><span aria-current="page">3차시</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar"><a class="back-link" href="./">← Cryptography 전체 과정</a><div class="course-stats"><span data-count="crypto"></span>
+        <div class="course-meter" role="progressbar" aria-label="Cryptography 완료 진도" aria-valuemin="0" aria-valuemax="100" data-meter="crypto"><span></span></div>
+      </div>
+        <nav aria-label="차시 목차">
+          <details open>
+            <summary>01 · 표현·수학·고전 암호<span class="caption" data-module-count="0"></span></summary>
+            <ol><li><a class="side-lesson" href="representation.html" >
+              <span class="lesson-dot" data-dot="crypto.representation" aria-hidden="true"></span><span>바이트·Hex·Base64<small class="completion-label" data-completion="crypto.representation"></small></span></a></li><li><a class="side-lesson" href="modular.html" >
+              <span class="lesson-dot" data-dot="crypto.modular" aria-hidden="true"></span><span>나머지와 모듈러 역원<small class="completion-label" data-completion="crypto.modular"></small></span></a></li><li><a class="side-lesson" href="classical.html" aria-current="page">
+              <span class="lesson-dot" data-dot="crypto.classical" aria-hidden="true"></span><span>치환과 작은 키 공간<small class="completion-label" data-completion="crypto.classical"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>02 · 무결성과 진위<span class="caption" data-module-count="1"></span></summary>
+            <ol><li><a class="side-lesson" href="hash.html" >
+              <span class="lesson-dot" data-dot="crypto.hash" aria-hidden="true"></span><span>SHA-256과 파일 무결성<small class="completion-label" data-completion="crypto.hash"></small></span></a></li><li><a class="side-lesson" href="mac.html" >
+              <span class="lesson-dot" data-dot="crypto.mac" aria-hidden="true"></span><span>HMAC과 태그 검증<small class="completion-label" data-completion="crypto.mac"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>03 · 현대 암호 설계와 키 수명<span class="caption" data-module-count="2"></span></summary>
+            <ol><li><a class="side-lesson" href="symmetric.html" >
+              <span class="lesson-dot" data-dot="crypto.symmetric" aria-hidden="true"></span><span>대칭키·AEAD·인증 태그<small class="completion-label" data-completion="crypto.symmetric"></small></span></a></li><li><a class="side-lesson" href="public-key.html" >
+              <span class="lesson-dot" data-dot="crypto.public-key" aria-hidden="true"></span><span>공개키 암호화와 서명<small class="completion-label" data-completion="crypto.public-key"></small></span></a></li><li><a class="side-lesson" href="nonce.html" >
+              <span class="lesson-dot" data-dot="crypto.nonce" aria-hidden="true"></span><span>난수·nonce와 재사용<small class="completion-label" data-completion="crypto.nonce"></small></span></a></li><li><a class="side-lesson" href="password.html" >
+              <span class="lesson-dot" data-dot="crypto.password" aria-hidden="true"></span><span>비밀번호 KDF·salt·비용<small class="completion-label" data-completion="crypto.password"></small></span></a></li></ol>
+          </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
+      </aside><article class="lesson-article">
+          <header class="lesson-heading"><div class="overline">01 · 표현·수학·고전 암호 · 3 / 9</div><h1>치환과 작은 키 공간</h1><p class="lesson-objective">시저 이동의 암·복호를 구현하고 실제 보호에 부적합한 이유를 설명합니다.</p></header>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
+          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>고전 치환 관찰 · Python 3</strong></p><ul><li>lab.py classical 모드는 대문자 A~Z만 대상으로 합니다.</li><li>과제는 고정된 교육 문자열에 한정하며 실제 데이터 보호 용도로 사용하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="modular.html">암호학 · 나머지와 모듈러 역원 ↗</a></li><li><a href="representation.html">암호학 · 바이트·Hex·Base64 ↗</a></li><li><a href="../foundation/python-flow.html">공통 기초 · 조건·반복·함수 ↗</a></li></ul>
+            </section>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>시저 암호는 각 문자를 고정된 수만큼 이동시킵니다. 이 예제는 대문자 A~Z만 다루므로 공백·한글·기호가 있는 입력에 그대로 적용할 수 없습니다. 입력 범위를 먼저 정하는 것도 알고리즘 설명의 일부입니다.</p><figure class="learning-visual" data-visual-id="crypto.classical"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 데이터 모형</span><h3>시저 이동은 문자마다 같은 칸 수를 옮깁니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="시저 이동은 문자마다 같은 칸 수를 옮깁니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 305" width="760" height="305" role="img" aria-labelledby="visual-crypto-classical-title visual-crypto-classical-desc" focusable="false"><title id="visual-crypto-classical-title">시저 이동은 문자마다 같은 칸 수를 옮깁니다</title><desc id="visual-crypto-classical-desc">대문자 알파벳 26개를 원형으로 생각하고 각 문자를 세 칸 옮깁니다. BIFROST는 ELIURVW가 됩니다. 세 칸을 반대로 옮기면 원문으로 돌아옵니다. 가능한 이동 수가 매우 작고 언어 패턴도 남으므로 실제 비밀 보호에 적합하지 않습니다.</desc><defs><marker id="visual-crypto-classical-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="28" y="30">평문 · BIFROST</tspan></text><g class="v-tone "><rect class="v-node" x="28" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="75.78571428571428" y="54">0</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="75.78571428571428" y="102">B</tspan></text></g><g class="v-tone "><rect class="v-node" x="128.57142857142856" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="176.35714285714283" y="54">1</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="176.35714285714283" y="102">I</tspan></text></g><g class="v-tone "><rect class="v-node" x="229.14285714285714" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="276.92857142857144" y="54">2</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="276.92857142857144" y="102">F</tspan></text></g><g class="v-tone "><rect class="v-node" x="329.7142857142857" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="377.5" y="54">3</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="377.5" y="102">R</tspan></text></g><g class="v-tone "><rect class="v-node" x="430.2857142857143" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="478.07142857142856" y="54">4</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="478.07142857142856" y="102">O</tspan></text></g><g class="v-tone "><rect class="v-node" x="530.8571428571429" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="578.6428571428572" y="54">5</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="578.6428571428572" y="102">S</tspan></text></g><g class="v-tone "><rect class="v-node" x="631.4285714285714" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="679.2142857142858" y="54">6</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="679.2142857142858" y="102">T</tspan></text></g><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="28" y="175">+3 이동 · ELIURVW · 복원할 때는 -3</tspan></text><g class="v-tone "><rect class="v-node" x="28" y="210" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="75.78571428571428" y="199">B → E</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="75.78571428571428" y="247">E</tspan></text></g><g class="v-tone "><rect class="v-node" x="128.57142857142856" y="210" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="176.35714285714283" y="199">I → L</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="176.35714285714283" y="247">L</tspan></text></g><g class="v-tone "><rect class="v-node" x="229.14285714285714" y="210" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="276.92857142857144" y="199">F → I</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="276.92857142857144" y="247">I</tspan></text></g><g class="v-tone "><rect class="v-node" x="329.7142857142857" y="210" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="377.5" y="199">R → U</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="377.5" y="247">U</tspan></text></g><g class="v-tone "><rect class="v-node" x="430.2857142857143" y="210" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="478.07142857142856" y="199">O → R</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="478.07142857142856" y="247">R</tspan></text></g><g class="v-tone "><rect class="v-node" x="530.8571428571429" y="210" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="578.6428571428572" y="199">S → V</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="578.6428571428572" y="247">V</tspan></text></g><g class="v-tone "><rect class="v-node" x="631.4285714285714" y="210" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="679.2142857142858" y="199">T → W</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="679.2142857142858" y="247">W</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">암·복호가 된다는 사실과 실제 공격을 견딘다는 보장은 다릅니다.</span><small class="visual-note">영문 대문자만 다루는 교육용 +3 이동입니다. 실제 데이터 보호에 사용하지 않습니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>대문자 알파벳 26개를 원형으로 생각하고 각 문자를 세 칸 옮깁니다. BIFROST는 ELIURVW가 됩니다. 세 칸을 반대로 옮기면 원문으로 돌아옵니다. 가능한 이동 수가 매우 작고 언어 패턴도 남으므로 실제 비밀 보호에 적합하지 않습니다.</p></details></figure><p>가능한 이동량이 26개뿐이라 모두 시도할 수 있습니다. 암호문을 잘 숨긴다고 키 공간이 커지는 것도 아닙니다. 현대 암호의 안전성을 고전 치환 예제의 난도나 눈에 복잡해 보이는 정도로 판단하지 않습니다.</p><p>문자를 숫자로 바꾸면 A=0, B=1, …, Z=25입니다. 이동량 k로 암호화할 때 (x+k)%26을 계산하고 복호할 때 (y-k)%26을 계산합니다. ord와 chr는 문자 코드와 문자를 오가는 함수입니다.</p><p>여기서 키 후보는 0~25 총 26개입니다. 키를 모르는 사람이 전부 시도해도 작아서 전수 탐색이 쉽습니다. 출력이 읽히는지 확인할 수 있는 자연어·문맥은 올바른 후보를 고르는 추가 단서입니다.</p><p>키 공간의 크기와 알고리즘 구조는 별개 조건입니다. 단순 치환의 키 후보를 늘려도 통계적 구조가 남을 수 있습니다. 고전 예제는 원리와 한계를 배우기 위한 것이며 현대 암호의 안전성을 보기 복잡한 문자 배열로 판단하지 않습니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>공백·한글에도 ord(c)-65 공식을 그대로 적용한다.</dt><dd>지원 입력을 검증하거나 알파벳 외 문자를 어떻게 처리할지 명시적으로 정합니다.</dd><dt>알고리즘을 숨기면 작은 키 공간이 안전해진다고 생각한다.</dt><dd>분석자가 구조를 안다고 가정하고 키 후보·통계 구조 등 실제 한계를 평가합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/crypto.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/crypto/lab.py" download>lab.py ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2><ol class="walkthrough"><li><h3>한 문자로 경계 이해</h3><p>Z를 3만큼 이동하면 25+3을 26으로 나눈 나머지 2가 되어 C입니다. 경계 처리 없이 문자 코드에 3만 더하면 알파벳 밖으로 나갑니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>print(chr((ord(&quot;Z&quot;) - ord(&quot;A&quot;) + 3) % 26 + ord(&quot;A&quot;)))</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>C</pre></div></li><li><h3>이동량을 일관되게 변경</h3><p>k=5로 바꾼 뒤 복호에서도 같은 k를 뺍니다. 한쪽만 바꾸면 원문이 복원되지 않습니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>text, k = &quot;BIFROST&quot;, 5
+enc = lambda s, step: &quot;&quot;.join(chr((ord(c)-65+step)%26+65) for c in s)
+cipher = enc(text, k)
+print(cipher)
+print(enc(cipher, -k))</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>GNKWTXY
+BIFROST</pre></div></li><li><h3>작은 키 공간 전수 검사</h3><p>생성한 암호문에 26개 복호 이동량을 적용합니다. 정답 후보를 고른 근거와 입력 범위를 기록합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>for candidate in range(26):
+    print(candidate, enc(cipher, -candidate))</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>candidate=5일 때 BIFROST가 나옵니다.</pre></div></li></ol>
+            <h3>전체 예제 연결하기</h3><div class="code-shell"><div class="code-toolbar"><span>예제 · 명령 또는 관찰 절차</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 lab.py classical</code></pre></div><div class="expected-output"><h3>예상 결과와 해석</h3><pre>ELIURVW
+BIFROST</pre></div></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>이동량 3을 5로 바꾸고 복호 이동도 맞추세요. 가능한 이동 26개를 출력해 원문 후보를 확인합니다.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>ord(c)-65로 0~25에 맞춘 뒤 나머지 연산을 합니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>암호/복호에 같은 이동량 5를 사용해 GNKWTXY와 BIFROST 왕복을 확인합니다.</li><li>0~25 모든 이동량을 출력하고 5번 후보를 찾습니다.</li><li>대문자 A~Z 입력 조건과 전수 탐색이 쉬운 이유를 풀이에 적습니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>숫자 매핑·모듈러·역변환을 설명하고 26개 키 후보를 재현할 수 있습니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">04 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. 시저 암호의 이동량을 3에서 5로 바꾸면 전수 탐색이 어려워지나요?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>키 후보가 여전히 26개라 큰 방어가 되지 않는다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>키 후보가 256비트가 된다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>암호문만 숨기면 키 공간이 무한해진다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 키 후보가 여전히 26개라 큰 방어가 되지 않는다.</strong></p><p>선택한 키 값과 가능한 키 개수는 다릅니다. 이 모델은 이동량이 0~25라 전체 후보를 쉽게 검사할 수 있습니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. Z에 이동량 3을 적용했을 때 C가 되는 이유는?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>Z는 항상 삭제되기 때문에</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>대문자만 쓰면 숫자 변환이 필요 없어서</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>26개 알파벳 범위를 모듈러로 순환하기 때문에</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 26개 알파벳 범위를 모듈러로 순환하기 때문에</strong></p><p>Z=25에 3을 더해 28%26=2, 즉 C가 됩니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>암호화와 역이동을 검증했다.</li><li>작은 키 공간이 약점인 이유를 설명했다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="modular.html"><small>← 이전 차시</small>나머지와 모듈러 역원</a>
+            <a href="hash.html"><small>다음 차시 →</small>SHA-256과 파일 무결성</a></nav>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://docs.python.org/3/library/functions.html#ord" target="_blank" rel="noopener noreferrer">Python ord와 chr ↗</a></li>
+        <li><a href="https://docs.python.org/3/tutorial/controlflow.html#for-statements" target="_blank" rel="noopener noreferrer">Python 제어 흐름 · for ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

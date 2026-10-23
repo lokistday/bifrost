@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="기본 거부 정책에서 정상·거부·누락된 egress 사례를 테스트합니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="방화벽 정책과 회귀 검증 — Network Security · Bifrost">
+<meta property="og:description" content="기본 거부 정책에서 정상·거부·누락된 egress 사례를 테스트합니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/tracks/network/policy.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/network/policy.html">
+<title>방화벽 정책과 회귀 검증 — Network Security · Bifrost</title>
+<script src="../../js/theme.js"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css">
+<link rel="stylesheet" href="../../css/theme.css">
+<link rel="stylesheet" href="../../css/learning.css">
+<link rel="stylesheet" href="../../css/visuals.css">
+<script src="../../js/catalog.js" defer></script>
+<script src="../../js/courses/network.js" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-view.js" defer></script>
+<script src="../../js/learning.js" defer></script>
+</head>
+<body class="learning-page" data-course="network" data-course-number="05" data-view="lesson" data-lesson-id="network.policy" style="--course-accent:var(--map-amber)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">네트워크 보안 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="network.policy">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../index.html#mindmap">학습 지도</a><span aria-hidden="true">/</span><a href="./">Network Security</a><span aria-hidden="true">/</span><span aria-current="page">6차시</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar"><a class="back-link" href="./">← Network Security 전체 과정</a><div class="course-stats"><span data-count="network"></span>
+        <div class="course-meter" role="progressbar" aria-label="Network Security 완료 진도" aria-valuemin="0" aria-valuemax="100" data-meter="network"><span></span></div>
+      </div>
+        <nav aria-label="차시 목차">
+          <details >
+            <summary>01 · 분석을 위한 프로토콜<span class="caption" data-module-count="0"></span></summary>
+            <ol><li><a class="side-lesson" href="addressing.html" >
+              <span class="lesson-dot" data-dot="network.addressing" aria-hidden="true"></span><span>계층·CIDR·관측 위치<small class="completion-label" data-completion="network.addressing"></small></span></a></li><li><a class="side-lesson" href="pcap.html" >
+              <span class="lesson-dot" data-dot="network.pcap" aria-hidden="true"></span><span>PCAP·필터·스트림<small class="completion-label" data-completion="network.pcap"></small></span></a></li><li><a class="side-lesson" href="transport.html" >
+              <span class="lesson-dot" data-dot="network.transport" aria-hidden="true"></span><span>DNS·TCP 연결과 실패 분류<small class="completion-label" data-completion="network.transport"></small></span></a></li></ol>
+          </details>
+          <details open>
+            <summary>02 · 경계와 정책 설계<span class="caption" data-module-count="1"></span></summary>
+            <ol><li><a class="side-lesson" href="tls.html" >
+              <span class="lesson-dot" data-dot="network.tls" aria-hidden="true"></span><span>TLS와 보이는 정보의 경계<small class="completion-label" data-completion="network.tls"></small></span></a></li><li><a class="side-lesson" href="segmentation.html" >
+              <span class="lesson-dot" data-dot="network.segmentation" aria-hidden="true"></span><span>망 분리·신뢰 경계·관리 경로<small class="completion-label" data-completion="network.segmentation"></small></span></a></li><li><a class="side-lesson" href="policy.html" aria-current="page">
+              <span class="lesson-dot" data-dot="network.policy" aria-hidden="true"></span><span>방화벽 정책과 회귀 검증<small class="completion-label" data-completion="network.policy"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>03 · 탐지와 통합 방어<span class="caption" data-module-count="2"></span></summary>
+            <ol><li><a class="side-lesson" href="detection.html" >
+              <span class="lesson-dot" data-dot="network.detection" aria-hidden="true"></span><span>탐지 기준·오탐·추가 증거<small class="completion-label" data-completion="network.detection"></small></span></a></li><li><a class="side-lesson" href="zero-trust.html" >
+              <span class="lesson-dot" data-dot="network.zero-trust" aria-hidden="true"></span><span>신원과 자산 중심의 Zero Trust<small class="completion-label" data-completion="network.zero-trust"></small></span></a></li><li><a class="side-lesson" href="capstone.html" >
+              <span class="lesson-dot" data-dot="network.capstone" aria-hidden="true"></span><span>종합: 작은 서비스 방어 설계<small class="completion-label" data-completion="network.capstone"></small></span></a></li></ol>
+          </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
+      </aside><article class="lesson-article">
+          <header class="lesson-heading"><div class="overline">02 · 경계와 정책 설계 · 6 / 9</div><h1>방화벽 정책과 회귀 검증</h1><p class="lesson-objective">기본 거부 정책에서 정상·거부·누락된 egress 사례를 테스트합니다.</p></header>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
+          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>정책 모델 실행 · Python 3</strong></p><ul><li>network 폴더 전체를 별도 작업 폴더로 복사한 뒤 그 안의 policy.json을 수정합니다. evaluate.py는 자기 폴더의 policy.json·flows.csv를 읽습니다.</li><li>규칙 파일 이름만 policy-work.json으로 바꾸어도 검사기가 자동으로 읽지는 않습니다. 원본 폴더는 보존하세요.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="segmentation.html">네트워크 보안 · 망 분리·신뢰 경계·관리 경로 ↗</a></li><li><a href="../foundation/python-flow.html">공통 기초 · 조건·반복·함수 ↗</a></li><li><a href="../foundation/python-files.html">공통 기초 · CSV 읽기와 오류 좁히기 ↗</a></li></ul>
+            </section>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>evaluate.py는 JSON 규칙을 위에서 아래로 확인해 처음 일치하는 action을 고르고, 없으면 DENY로 판정하는 단순 모델입니다. 실제 stateful 방화벽의 연결 추적, 반환 트래픽, IPv6, 공급자별 규칙은 구현하지 않습니다.</p><figure class="learning-visual" data-visual-id="network.policy"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교표</span><h3>기본 거부라도 필요한 흐름을 빠뜨릴 수 있습니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="기본 거부라도 필요한 흐름을 빠뜨릴 수 있습니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 330" width="760" height="330" role="img" aria-labelledby="visual-network-policy-title visual-network-policy-desc" focusable="false"><title id="visual-network-policy-title">기본 거부라도 필요한 흐름을 빠뜨릴 수 있습니다</title><desc id="visual-network-policy-desc">초기 정책에서는 N01 공개 Web과 N02 Web→DB가 ALLOW로 일치합니다. N03~N05는 DENY로 일치합니다. N06은 업무 표에 ALLOW가 기대되지만 규칙이 없어 DENY MISMATCH가 됩니다. 이 불일치는 출발지·목적지·업무 근거를 검토할 지점이지 모든 외부 통신을 허용하라는 뜻은 아닙니다.</desc><defs><marker id="visual-network-policy-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone "><rect class="v-table-head" x="28" y="20" width="230" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="41" y="47">사례 · 흐름</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="258" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="271" y="47">업무 기대</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="495" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="508" y="47">초기 정책 결과</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="78" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="105">N01 · Internet → Web:443</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="105">ALLOW</tspan></text></g><g class="v-tone positive"><rect class="v-table-cell" x="495" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="105">ALLOW · MATCH</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="136" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="163">N02 · Web → DB:5432</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="163">ALLOW</tspan></text></g><g class="v-tone positive"><rect class="v-table-cell" x="495" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="163">ALLOW · MATCH</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="194" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="221">N03~N05 · DB/SSH 접근</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="221">DENY</tspan></text></g><g class="v-tone positive"><rect class="v-table-cell" x="495" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="221">DENY · MATCH</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="252" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="279">N06 · Web → 외부:443</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="252" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="279">ALLOW</tspan></text></g><g class="v-tone warning"><rect class="v-table-cell" x="495" y="252" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="279">DENY · MISMATCH</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">허용해야 할 업무와 거부해야 할 입력을 함께 놓아야 누락된 egress 정책을 찾을 수 있습니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>초기 정책에서는 N01 공개 Web과 N02 Web→DB가 ALLOW로 일치합니다. N03~N05는 DENY로 일치합니다. N06은 업무 표에 ALLOW가 기대되지만 규칙이 없어 DENY MISMATCH가 됩니다. 이 불일치는 출발지·목적지·업무 근거를 검토할 지점이지 모든 외부 통신을 허용하라는 뜻은 아닙니다.</p></details></figure><p>N06은 Web의 외부 443 연결이 실제 로그에서는 ALLOW인데 현재 기준 정책에서는 DENY입니다. 이것은 정해진 기준과 관찰이 다르다는 뜻이지 즉시 악성 확정은 아닙니다. 승인된 업데이트·API인지 확인한 뒤 좁은 목적지 규칙 또는 차단을 선택해야 합니다.</p><p>first-match 모델은 규칙 순서가 결과를 바꿀 수 있습니다. 넓은 허용이 앞에 있으면 뒤의 좁은 거부가 적용되지 않을 수 있으므로 각 입력이 처음 맞는 규칙을 추적해야 합니다. 이 모델은 src·dst·port 세 항목만 비교합니다.</p><p>출력의 첫 action은 정책이 계산한 판단이고 MATCH/MISMATCH는 그 판단과 flows.csv에 적힌 관찰 action의 일치 여부입니다. MATCH는 보안상 올바름을 보증하는 점수가 아니라 주어진 두 데이터의 비교 결과입니다.</p><p>N06에 203.0.113.9:443만 허용하는 변경은 모든 외부 443 허용보다 범위가 좁습니다. 그러나 목적지의 소유자·업무 필요·이름 변경·프록시 사용 등은 이 모델 밖입니다. 실제 정책 변경 전 담당 승인과 정상/거부 회귀 검증이 필요합니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>MATCH 개수를 늘리려고 관찰 로그를 바꾼다.</dt><dd>관찰 자료는 보존하고 정책 판단의 차이를 업무 근거와 추가 조사로 해소합니다.</dd><dt>실제 방화벽도 모두 이 순서·기본값으로 동작한다고 생각한다.</dt><dd>공급자별 평가·stateful 반환 트래픽·IPv6 등 실제 동작을 별도로 확인합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/network.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/network/policy.json" download>policy.json ↓</a></li><li><a href="../../labs/network/evaluate.py" download>evaluate.py ↓</a></li><li><a href="../../labs/network/flows.csv" download>flows.csv ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2><ol class="walkthrough"><li><h3>변경 전 기준 기록</h3><p>원본 폴더에서 evaluate.py를 실행하고 N01~N05의 MATCH와 N06의 MISMATCH를 저장합니다. 관찰 action과 계산 action을 별도 열로 적습니다.</p>
+        <div class="step-observation"><strong>관찰할 결과</strong><pre>N06 DENY MISMATCH</pre></div></li><li><h3>사본에서 좁은 규칙 추가</h3><p>network 작업 폴더 안 policy.json의 rules에 아래 규칙을 추가합니다. 현재 두 규칙과 겹치지 않는 승인된 예시이며 임의 외부 전체를 허용하지 않습니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>{&quot;src&quot;:&quot;10.10.10.20/32&quot;,&quot;dst&quot;:&quot;203.0.113.9/32&quot;,&quot;port&quot;:443,&quot;action&quot;:&quot;ALLOW&quot;}</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>작업 폴더에서 다시 실행하면 N06 ALLOW MATCH입니다.</pre></div></li><li><h3>변경 영향 회귀 확인</h3><p>N01·N02는 그대로 허용되고 N03~N05는 계속 거부되는지 비교합니다. N06이 불필요한 흐름이라면 허용 대신 차단 계획과 관찰 후속 확인을 씁니다.</p>
+        <div class="step-observation"><strong>관찰할 결과</strong><pre>관련 없는 정상·거부 흐름의 결과가 바뀌지 않습니다.</pre></div></li></ol>
+            <h3>전체 예제 연결하기</h3><div class="code-shell"><div class="code-toolbar"><span>예제 · 명령 또는 관찰 절차</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 evaluate.py</code></pre></div><div class="expected-output"><h3>예상 결과와 해석</h3><pre>N01 ALLOW MATCH
+N02 ALLOW MATCH
+N03 DENY MATCH
+N04 DENY MATCH
+N05 DENY MATCH
+N06 DENY MISMATCH</pre></div></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>network 폴더 전체를 작업 사본으로 만들고 그 안의 policy.json에 승인된 N06 목적지만 허용하는 규칙을 추가해 evaluate.py를 실행하세요. 불필요한 연결로 판단했다면 DENY 유지 근거와 실제 ALLOW 관찰의 조사·차단 계획을 적습니다.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>0.0.0.0/0으로 모든 egress를 허용하면 예제는 통과해도 정책의 범위가 커집니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>실행 파일이 있는 폴더 기준으로 입력 파일을 읽는다는 점을 확인합니다.</li><li>업무상 승인된 경우에만 N06의 출발지/목적지/포트를 정확히 좁힌 규칙을 작업 사본에 추가합니다.</li><li>변경 전후 N01~N06 결과를 비교하고 모델이 없는 연결 추적·IPv6·신원은 미검증으로 적습니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>승인 시 N06 ALLOW MATCH, 나머지 결과 유지가 기대됩니다. 비승인 시 N06 DENY를 유지하고 실제 ALLOW 관찰을 조사할 근거를 남깁니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">04 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. N06 DENY MISMATCH의 정확한 의미는?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>정책 계산은 DENY인데 로그 action은 달라서 추가 확인이 필요하다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>해당 IP가 공격자라고 확정됐다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>방화벽이 이미 N06을 차단했다고 확인됐다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 정책 계산은 DENY인데 로그 action은 달라서 추가 확인이 필요하다.</strong></p><p>이 출력은 교육 정책과 주어진 관찰 로그의 차이입니다. 악성 의도나 실제 장비 동작을 자동 확정하지 않습니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. evaluate.py가 작업 사본의 규칙을 읽게 하려면?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>아무 폴더에서 policy-work.json만 만들면 된다.</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>복사한 폴더의 policy.json을 수정하고 그 폴더의 evaluate.py를 실행한다.</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>flows.csv의 action을 전부 DENY로 바꾼다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 복사한 폴더의 policy.json을 수정하고 그 폴더의 evaluate.py를 실행한다.</strong></p><p>스크립트는 자신의 경로를 기준으로 policy.json과 flows.csv를 읽습니다. 파일 이름과 실행 대상 폴더가 맞아야 합니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>정상 허용과 비인가 거부를 함께 검증했다.</li><li>N06의 처리 결정과 업무 근거를 남겼다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="segmentation.html"><small>← 이전 차시</small>망 분리·신뢰 경계·관리 경로</a>
+            <a href="detection.html"><small>다음 차시 →</small>탐지 기준·오탐·추가 증거</a></nav>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://docs.python.org/3/library/ipaddress.html" target="_blank" rel="noopener noreferrer">Python ipaddress · 포함 검사 ↗</a></li>
+        <li><a href="https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html" target="_blank" rel="noopener noreferrer">AWS VPC · 보안 그룹 규칙의 실제 모델 예 ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>
