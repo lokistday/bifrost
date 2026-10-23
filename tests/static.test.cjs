@@ -42,6 +42,41 @@ const png = fs.readFileSync(path.join(ROOT, 'og-image.png'));
 check(png.subarray(0, 8).equals(Buffer.from([137,80,78,71,13,10,26,10])), 'Sharing image is a PNG');
 check(png.readUInt32BE(16) === 1200 && png.readUInt32BE(20) === 630, 'Sharing image has promised dimensions');
 const home = documents.get(path.join(ROOT, 'index.html'));
+// Evaluate matching display declarations, including !important and specificity.
+// A class-only splash test misses an overlay hidden by another stylesheet.
+function displayFromStyles(element, files) {
+  let winner = { important: 0, specificity: -1, order: -1, value: element.hasAttribute('hidden') ? 'none' : 'block' };
+  let order = 0;
+  for (const file of files) {
+    const sheet = CSSOM.parse(fs.readFileSync(path.join(ROOT, file), 'utf8'));
+    for (const rule of sheet.cssRules) {
+      if (!rule.selectorText || !rule.style?.getPropertyValue('display')) continue;
+      for (const selector of rule.selectorText.split(',')) {
+        let matches = false;
+        try { matches = element.matches(selector.trim()); } catch { continue; }
+        if (!matches) continue;
+        const ids = (selector.match(/#[\w-]+/g) || []).length;
+        const classes = (selector.match(/\.[\w-]+|\[[^\]]+\]/g) || []).length;
+        const tags = selector.replace(/#[\w-]+|\.[\w-]+|\[[^\]]+\]/g, '').trim().split(/\s+/).filter(s => /^[a-z][\w-]*$/i.test(s)).length;
+        const candidate = { important: Number(rule.style.getPropertyPriority('display') === 'important'),
+          specificity: ids * 10000 + classes * 100 + tags, order: order++, value: rule.style.getPropertyValue('display') };
+        if (candidate.important > winner.important || (candidate.important === winner.important &&
+          (candidate.specificity > winner.specificity || (candidate.specificity === winner.specificity && candidate.order > winner.order)))) winner = candidate;
+      }
+    }
+  }
+  return winner.value;
+}
+const homeStyles = [...home.querySelectorAll('link[rel="stylesheet"]')].map(link => link.getAttribute('href'));
+const splash = home.getElementById('startupSplash');
+check(displayFromStyles(splash, homeStyles) === 'none', 'Skipped intro is actually hidden');
+home.documentElement.classList.add('splash-active');
+check(displayFromStyles(splash, homeStyles) === 'grid', 'Active intro is actually displayed by the complete homepage stylesheet stack');
+check(displayFromStyles(splash, [...homeStyles, 'css/learning.css']) === 'grid', 'Course hidden rules cannot hide the homepage intro even if loaded again');
+home.documentElement.classList.remove('splash-active');
+const courseDocument = documents.get(path.join(ROOT, 'tracks/web/sessions.html'));
+const courseStyles = [...courseDocument.querySelectorAll('link[rel="stylesheet"]')].map(link => path.join('tracks/web', link.getAttribute('href')));
+check(displayFromStyles(courseDocument.getElementById('completeLesson'), courseStyles) === 'none', 'Learning controls remain hidden before JavaScript enhancement');
 check(home.querySelector('meta[property="og:image"]').content.endsWith('/bifrost/og-image.png'), 'Sharing image URL matches published path');
 const sitemap = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
 check((sitemap.match(/<loc>/g) || []).length === 73, 'Sitemap includes home, Linux guide, 9 courses and 62 lessons');

@@ -1,5 +1,5 @@
 /* Course and lesson layouts inherit shared theme tokens. */
-[hidden] {
+.learning-page [hidden] {
   display: none !important;
 }
 
