@@ -48,7 +48,7 @@ function displayFromStyles(element, files) {
   let winner = { important: 0, specificity: -1, order: -1, value: element.hasAttribute('hidden') ? 'none' : 'block' };
   let order = 0;
   for (const file of files) {
-    const sheet = CSSOM.parse(fs.readFileSync(path.join(ROOT, file), 'utf8'));
+    const sheet = CSSOM.parse(fs.readFileSync(path.join(ROOT, file.split(/[?#]/)[0]), 'utf8'));
     for (const rule of sheet.cssRules) {
       if (!rule.selectorText || !rule.style?.getPropertyValue('display')) continue;
       for (const selector of rule.selectorText.split(',')) {
