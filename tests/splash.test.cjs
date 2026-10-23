@@ -9,7 +9,10 @@ const storage = () => {
   const values = new Map();
   return { getItem: key => values.get(key) ?? null, setItem: (key, value) => values.set(key, value), removeItem: key => values.delete(key) };
 };
-function visit(sessionStorage, reduced = false, { navigation = 'navigate', now = 100000, pathname = '/bifrost/', search = '' } = {}) {
+function visit(sessionStorage, reduced = false, {
+  navigation = 'navigate', now = 100000, pathname = '/bifrost/', search = '',
+  navTiming = {}, resourceTiming = null, timingReady = true, readyState = 'loading'
+} = {}) {
   const { document, Event } = parseHTML('<html><body><div id="startupSplash" hidden></div><main></main></body></html>');
   const timers = new Map();
   const events = new Map();
@@ -20,14 +23,24 @@ function visit(sessionStorage, reduced = false, { navigation = 'navigate', now =
     addEventListener(name, fn, options);
   };
   let nextTimer = 0;
+  let ready = readyState;
+  let url = new URL(`https://example.test${pathname}${search}`);
+  const location = { get href() { return url.href; }, get pathname() { return url.pathname; }, get search() { return url.search; } };
+  const history = { state: null, replaceState(state, _, value) { this.state = state; url = new URL(value, url); } };
+  const scriptURL = 'https://example.test/bifrost/js/splash.js?v=20261023-replay3';
+  Object.defineProperty(document, 'currentScript', { value: { src: scriptURL } });
+  Object.defineProperty(document, 'readyState', { get: () => ready });
+  const timing = { available: timingReady, nav: { type: navigation, ...navTiming }, resource: resourceTiming };
   const window = {
     matchMedia: () => ({ matches: reduced }),
     addEventListener: (name, handler) => events.set(name, handler),
     removeEventListener: name => events.delete(name)
   };
   vm.runInNewContext(source, {
-    document, window, sessionStorage, location: { pathname, search }, Date: { now: () => now },
-    performance: { now: () => 0, getEntriesByType: () => [{ type: navigation }] },
+    document, window, sessionStorage, location, history, URL, Date: { now: () => now },
+    performance: { now: () => 0,
+      getEntriesByType: () => timing.available ? [timing.nav] : [],
+      getEntriesByName: name => timing.available && name === scriptURL && timing.resource ? [timing.resource] : [] },
     setTimeout: (fn, delay) => { timers.set(++nextTimer, { fn, delay }); return nextTimer; },
     clearTimeout: id => timers.delete(id)
   });
@@ -43,7 +56,9 @@ function visit(sessionStorage, reduced = false, { navigation = 'navigate', now =
     shortcuts.forEach(fn => fn(event));
     return event;
   };
-  return { document, Event, timers, events, runAfter, keydown, active: () => document.documentElement.classList.contains('splash-active') };
+  const domReady = () => { ready = 'interactive'; document.dispatchEvent(new Event('DOMContentLoaded')); };
+  return { document, Event, timers, events, runAfter, keydown, timing, domReady, location,
+    active: () => document.documentElement.classList.contains('splash-active') };
 }
 const session = storage();
 const first = visit(session);
@@ -132,3 +147,65 @@ reducedHard.document.dispatchEvent(new reducedHard.Event('DOMContentLoaded'));
 reducedHard.runAfter(150); reducedHard.runAfter(0);
 assert.equal(reducedHard.active(), false, 'Replayed intro respects reduced motion');
 console.log('PASS: trusted hard-reload shortcuts, one-shot replay, normal refresh, invalid/stale markers and reduced motion.');
+
+const fullHTML = { responseEnd: 50, encodedBodySize: 12000, transferSize: 12300 };
+const fullScript = { responseEnd: 90, encodedBodySize: 6000, transferSize: 6300 };
+const warmed = () => { const data = storage(); data.setItem('bifrost_splash_seen_v1', '1'); return data; };
+const networkReload = visit(warmed(), false, { navigation: 'reload', navTiming: fullHTML, resourceTiming: fullScript });
+assert.equal(networkReload.active(), true, 'A full network reload can replay without any keyboard event');
+assert.equal(networkReload.document.documentElement.dataset.introReason, 'network-reload');
+for (const config of [
+  { navTiming: { ...fullHTML, transferSize: 300 }, resourceTiming: fullScript },
+  { navTiming: fullHTML, resourceTiming: { ...fullScript, transferSize: 0 } },
+  { navTiming: fullHTML, resourceTiming: { ...fullScript, transferSize: 300 } },
+  { navTiming: fullHTML, resourceTiming: { ...fullScript, responseStatus: 304 } },
+  { navTiming: fullHTML, resourceTiming: { ...fullScript, deliveryType: 'cache' } },
+  { navTiming: fullHTML, resourceTiming: { ...fullScript, workerStart: 1 } },
+  { navTiming: fullHTML, resourceTiming: { ...fullScript, encodedBodySize: 0 } },
+  { navTiming: { ...fullHTML, responseEnd: 0 }, resourceTiming: fullScript },
+  { navTiming: fullHTML, resourceTiming: null },
+]) {
+  const page = visit(warmed(), false, { navigation: 'reload', ...config });
+  assert.equal(page.active(), false, 'Cached, validated, incomplete or unknown transfers do not trigger a replay');
+  assert.equal(page.document.querySelector('main').inert, undefined, 'Timing checks do not block the ordinary page');
+  assert.equal(page.timers.size, 0, 'No artificial loading delay while checking timing');
+}
+for (const navigation of ['navigate', 'back_forward']) {
+  assert.equal(visit(warmed(), false, { navigation, navTiming: fullHTML, resourceTiming: fullScript }).active(), false,
+    'A normal visit/return never replays just because its files came from the network');
+}
+const delayed = visit(warmed(), false, { navigation: 'reload', timingReady: false });
+assert.equal(delayed.active(), false);
+delayed.timing.available = true;
+delayed.timing.nav = { type: 'reload', ...fullHTML };
+delayed.timing.resource = fullScript;
+delayed.domReady();
+assert.equal(delayed.active(), true, 'Missing head-time timing is rechecked after parsing');
+assert.equal(delayed.document.querySelector('main').inert, true, 'Late replay still prepares the overlay');
+delayed.runAfter(2600); delayed.runAfter(400);
+assert.equal(delayed.active(), false, 'Late replay dismisses normally, without waiting for the safety timeout');
+const atLoad = visit(warmed(), false, { navigation: 'reload' });
+atLoad.domReady();
+atLoad.timing.nav = { type: 'reload', ...fullHTML }; atLoad.timing.resource = fullScript;
+atLoad.events.get('load')();
+assert.equal(atLoad.active(), true, 'Completed timing arriving at load is handled');
+assert.equal(atLoad.events.has('load'), false, 'Timing listener is removed after a decision');
+atLoad.runAfter(2600); atLoad.runAfter(400);
+
+const missingNavStore = warmed();
+visit(missingNavStore).keydown({ ctrlKey: true });
+assert.equal(visit(missingNavStore, false, { timingReady: false }).active(), true,
+  'A trusted same-page request does not disappear merely because Navigation Timing is not ready');
+
+const directStore = warmed();
+const direct = visit(directStore, false, { search: '?other=value&intro=1', readyState: 'complete' });
+assert.equal(direct.active(), true, 'Replay link works after this tab has already seen the intro');
+assert.equal(direct.location.search, '?other=value', 'Replay parameter is consumed while preserving other parameters');
+assert.equal(direct.document.documentElement.dataset.introReason, 'replay-link');
+direct.runAfter(2600); direct.runAfter(400);
+assert.equal(visit(directStore, false, { search: direct.location.search, navigation: 'reload' }).active(), false,
+  'Ordinary reload after using the replay link skips again');
+const blockedDirect = visit({ getItem() { throw new Error('blocked'); }, setItem() { throw new Error('blocked'); } },
+  false, { search: '?intro=1' });
+assert.equal(blockedDirect.active(), true, 'An explicit replay works even when automatic session storage is blocked');
+console.log('PASS: full-transfer reload fallback, 304/cache exclusion, late timing, ready-state cleanup and one-shot replay URL.');
