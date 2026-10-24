@@ -104,28 +104,12 @@
     const root = document.documentElement;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const startedAt = performance.now();
-    const minimumDuration = reducedMotion ? 150 : 2600;
-    const fadeDuration = reducedMotion ? 0 : 400;
+    const minimumDuration = reducedMotion ? 150 : 1400;
+    const fadeDuration = reducedMotion ? 0 : 600;
     const background = [];
     let dismissed = false;
     let readyTimer;
     let removeTimer;
-  
-    // Assign shuffled ribbon delays before the scene renderer starts.
-    if (!reducedMotion) {
-      const laneOrder = Array.from({ length: 8 }, (_, index) => index);
-      const laneDuration = 900;
-      const stagger = 90;
-      for (let index = laneOrder.length - 1; index > 0; index--) {
-        const other = Math.floor(Math.random() * (index + 1));
-        [laneOrder[index], laneOrder[other]] = [laneOrder[other], laneOrder[index]];
-      }
-      laneOrder.forEach((lane, order) => {
-        root.style.setProperty(`--splash-lane-${lane}-delay`, `${order * stagger}ms`);
-      });
-      root.style.setProperty('--splash-lane-duration', `${laneDuration}ms`);
-      root.style.setProperty('--splash-bridge-complete', `${laneDuration + (laneOrder.length - 1) * stagger}ms`);
-    }
   
     root.classList.add('splash-active');
   

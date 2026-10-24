@@ -1,5 +1,6 @@
-/* A prismatic energy column arrives through mist, then resolves into the brand mark. */
+/* Brand entrance: a large mark and wordmark, followed by a shared zoom. */
 .startup-splash[hidden] { display: none; }
+html.splash-active { overflow: hidden; }
 .splash-active .startup-splash {
   position: fixed;
   inset: 0;
@@ -12,146 +13,44 @@
   font-family: Manrope, "Noto Sans KR", system-ui, sans-serif;
   isolation: isolate;
   touch-action: none;
-  transition: opacity 400ms ease, visibility 400ms ease;
+  transition: opacity 600ms ease;
 }
-.startup-splash__scene {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-/* The shader paints turbulent light rather than eight flat colored surfaces. */
-html.splash-active { overflow: hidden; }
-.startup-splash__energy { position: absolute; inset: 0; width: 100%; height: 100%; }
-.startup-splash__fallback {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 72%, #efbc5838, transparent 36%), radial-gradient(ellipse at 50% 20%, #839ad52b, transparent 65%);
-}
-.startup-splash__fallback::before {
-  content: "";
-  position: absolute;
-  left: 50%; top: -15%; width: 24%; height: 90%;
-  transform: translateX(-50%);
-  background: linear-gradient(90deg, transparent, #b45b9a38 10%, #eabc8155 30%, #d9ffed88 44%, #fff9e8bb 50%, #8ce8f588 56%, #9c82da55 75%, transparent);
-  filter: blur(14px);
-  mask-image: linear-gradient(#000 55%, transparent);
-  animation: splash-fallback 2400ms ease both;
-}
-.startup-splash__fallback span {
-  position: absolute;
-  left: 50%; top: 72%; width: min(52vw, 520px); height: 15%;
-  border: 1px solid #e9c88288; border-radius: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 32px #eab36c30, inset 0 0 30px #eab36c20;
-  animation: splash-fallback 2400ms ease both;
-}
-@keyframes splash-fallback {
-  0% { opacity: 0; }
-  35%, 60% { opacity: 1; }
-  100% { opacity: 0; }
-}
-.startup-splash__glow {
-  position: absolute;
-  width: min(720px, 130vw);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, #d4e8ff19 0, #7689df10 35%, transparent 65%);
-  pointer-events: none;
-  animation: splash-bloom 1400ms ease-out calc(var(--splash-bridge-complete, 1530ms) - 400ms) both;
+.startup-splash__zoom {
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform 600ms cubic-bezier(.65, 0, .35, 1);
+  will-change: transform;
 }
 .startup-splash__identity {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 32px;
-  animation: splash-arrive 850ms cubic-bezier(.2,.7,.3,1) calc(var(--splash-bridge-complete, 1530ms) + 70ms) both;
-}
-.startup-splash__emblem {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 130px;
-  height: 130px;
-  margin-bottom: 29px;
-}
-.startup-splash__ring {
-  position: absolute;
-  inset: 0;
-  border: 1px solid #c4e6f04a;
-  border-radius: 50%;
-  box-shadow: 0 0 36px #5ce1e608, inset 0 0 28px #5ce1e606;
-}
-.startup-splash__ring::after {
-  content: "";
-  position: absolute;
-  inset: -8px;
-  border: 1px solid #d3bbf52b;
-  border-radius: inherit;
+  gap: clamp(22px, 4vh, 38px);
+  padding: 24px;
+  animation: splash-brand-arrive 800ms cubic-bezier(.2, .65, .3, 1) both;
 }
 .startup-splash__star {
-  width: 76px;
-  height: 76px;
-  color: #c4f7ff;
-  filter: drop-shadow(0 0 16px #5ce1e654);
-  animation: splash-star 850ms ease-out calc(var(--splash-bridge-complete, 1530ms) + 70ms) both;
+  width: clamp(112px, 15vw, 176px);
+  height: clamp(112px, 15vw, 176px);
+  color: #5ce1e6;
+  filter: drop-shadow(0 0 22px #5ce1e62e);
 }
 .startup-splash__name {
-  padding-left: .29em;
-  font-size: clamp(25px, 6vw, 31px);
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: .29em;
-  text-shadow: 0 0 22px #b7dcff60;
+  padding-left: .16em;
+  font-size: clamp(42px, 8vw, 88px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .16em;
+  text-shadow: 0 0 30px #b7dcff15;
 }
-.startup-splash__tagline {
-  margin-top: 13px;
-  padding-left: .18em;
-  color: #91a9bf;
-  font: 500 9px/1.6 system-ui, sans-serif;
-  letter-spacing: .18em;
-  text-align: center;
-}
-.startup-splash__line {
-  width: 100px;
-  height: 2px;
-  margin-top: 34px;
-  overflow: hidden;
-  border-radius: 2px;
-  background: #c0e4ff12;
-}
-.startup-splash__line span {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #ffb65c, #7cf1b2, #5ce1e6, #9b8cff, #f28ccb);
-  transform-origin: left;
-  animation: splash-line 650ms cubic-bezier(.2,.65,.35,1) calc(var(--splash-bridge-complete, 1530ms) + 300ms) both;
-}
-.splash-leaving .startup-splash { opacity: 0; visibility: hidden; }
-@keyframes splash-bloom {
-  0% { opacity: 0; transform: scale(.45); }
-  45% { opacity: 1; }
-  100% { opacity: .65; transform: scale(1); }
-}
-@keyframes splash-arrive {
-  from { opacity: 0; transform: translateY(8px) scale(.96); filter: blur(6px); }
-  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-}
-@keyframes splash-star {
-  0% { transform: scale(.85); filter: drop-shadow(0 0 3px #5ce1e620); }
-  40% { filter: drop-shadow(0 0 28px #c5faffb0); }
-  100% { transform: scale(1); filter: drop-shadow(0 0 16px #5ce1e654); }
-}
-@keyframes splash-line {
-  from { transform: scaleX(0); opacity: .5; }
-  to { transform: scaleX(1); opacity: 1; }
+.splash-leaving .startup-splash { opacity: 0; }
+.splash-leaving .startup-splash__zoom { transform: scale(4.5); }
+@keyframes splash-brand-arrive {
+  from { opacity: 0; transform: scale(.86); }
+  to { opacity: 1; transform: scale(1); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .splash-active .startup-splash { transition: none; }
-  .startup-splash__scene { display: none; }
-  .startup-splash__identity, .startup-splash__star,
-  .startup-splash__glow, .startup-splash__line span { animation: none; }
+  .splash-active .startup-splash, .startup-splash__zoom { transition: none; }
+  .startup-splash__identity { animation: none; }
+  .splash-leaving .startup-splash__zoom { transform: none; }
 }

@@ -65,8 +65,8 @@ const first = visit(session);
 assert.equal(first.active(), true, 'First visit plays the intro');
 first.document.dispatchEvent(new first.Event('DOMContentLoaded'));
 assert.equal(first.document.querySelector('main').inert, true);
-first.runAfter(2600);
-first.runAfter(400);
+first.runAfter(1400);
+first.runAfter(600);
 assert.equal(first.active(), false);
 assert.equal(first.document.querySelector('main').inert, undefined, 'Original interaction state is restored');
 assert.equal(first.document.getElementById('startupSplash'), null);
@@ -182,7 +182,7 @@ delayed.timing.resource = fullScript;
 delayed.domReady();
 assert.equal(delayed.active(), true, 'Missing head-time timing is rechecked after parsing');
 assert.equal(delayed.document.querySelector('main').inert, true, 'Late replay still prepares the overlay');
-delayed.runAfter(2600); delayed.runAfter(400);
+delayed.runAfter(1400); delayed.runAfter(600);
 assert.equal(delayed.active(), false, 'Late replay dismisses normally, without waiting for the safety timeout');
 const atLoad = visit(warmed(), false, { navigation: 'reload' });
 atLoad.domReady();
@@ -190,7 +190,7 @@ atLoad.timing.nav = { type: 'reload', ...fullHTML }; atLoad.timing.resource = fu
 atLoad.events.get('load')();
 assert.equal(atLoad.active(), true, 'Completed timing arriving at load is handled');
 assert.equal(atLoad.events.has('load'), false, 'Timing listener is removed after a decision');
-atLoad.runAfter(2600); atLoad.runAfter(400);
+atLoad.runAfter(1400); atLoad.runAfter(600);
 
 const missingNavStore = warmed();
 visit(missingNavStore).keydown({ ctrlKey: true });
@@ -202,7 +202,7 @@ const direct = visit(directStore, false, { search: '?other=value&intro=1', ready
 assert.equal(direct.active(), true, 'Replay link works after this tab has already seen the intro');
 assert.equal(direct.location.search, '?other=value', 'Replay parameter is consumed while preserving other parameters');
 assert.equal(direct.document.documentElement.dataset.introReason, 'replay-link');
-direct.runAfter(2600); direct.runAfter(400);
+direct.runAfter(1400); direct.runAfter(600);
 assert.equal(visit(directStore, false, { search: direct.location.search, navigation: 'reload' }).active(), false,
   'Ordinary reload after using the replay link skips again');
 const blockedDirect = visit({ getItem() { throw new Error('blocked'); }, setItem() { throw new Error('blocked'); } },
