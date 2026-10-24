@@ -111,7 +111,7 @@
     let readyTimer;
     let removeTimer;
   
-    // Assign delays before the SVG is parsed so no lanes start in unison.
+    // Assign shuffled ribbon delays before the scene renderer starts.
     if (!reducedMotion) {
       const laneOrder = Array.from({ length: 8 }, (_, index) => index);
       const laneDuration = 900;

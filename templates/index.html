@@ -23,8 +23,9 @@
 <meta name="twitter:image" content="{{SITE_URL}}og-image.png">
 <title>Bifrost — 보안 학습 가이드</title>
 <script src="js/theme.js"></script>
-<link rel="stylesheet" href="css/splash.css?v=20261023-prism2">
+<link rel="stylesheet" href="css/splash.css?v=20261024-energy1">
 <script src="js/splash.js?v=20261023-replay3"></script>
+<script src="js/splash-scene.js?v=20261024-energy1" defer></script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Crect width=%2240%22 height=%2240%22 rx=%2211%22 fill=%22%23101a30%22/%3E%3Cpath d=%22M20 4 23.8 15.2 36 20 23.8 23.8 20 36 16.2 23.8 4 20 16.2 15.2Z%22 fill=%22%235ce1e6%22/%3E%3Cpath d=%22M31 5 32.5 9.5 37 11 32.5 12.5 31 17 29.5 12.5 25 11 29.5 9.5Z%22 fill=%22%239cf7ff%22/%3E%3C/svg%3E">
 
 <link rel="stylesheet" href="css/main.css">
@@ -35,111 +36,8 @@
 <body>
 <div class="startup-splash" id="startupSplash" hidden aria-hidden="true">
   <div class="startup-splash__scene">
-    <div class="startup-splash__stars"></div>
-    <div class="startup-splash__horizon"></div>
-    <div class="startup-splash__gate"><span></span></div>
-    <svg class="startup-splash__bridge" viewBox="0 0 1000 1000" preserveAspectRatio="none" focusable="false">
-      <defs>
-        <linearGradient id="splash-spectrum"><stop stop-color="#ff668b"/><stop offset=".25" stop-color="#ffde97"/><stop offset=".5" stop-color="#96fff0"/><stop offset=".75" stop-color="#91a5ff"/><stop offset="1" stop-color="#e8abff"/></linearGradient>
-        <linearGradient id="splash-thread" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff7dc" stop-opacity=".95"/><stop offset=".3" stop-color="#e2faff" stop-opacity=".7"/><stop offset="1" stop-color="#b1cfff" stop-opacity="0"/></linearGradient>
-        <linearGradient id="splash-depth" x1="0" y1="0" x2="0" y2="1"><stop stop-color="white"/><stop offset=".5" stop-color="white" stop-opacity=".9"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient>
-        <clipPath id="splash-road"><path d="M486 -80H514L970 1080H30Z"/></clipPath>
-        <mask id="splash-road-depth"><path fill="url(#splash-depth)" d="M0 0H1000V1080H0Z"/></mask>
-        <linearGradient id="splash-lane-0" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#ff476e" stop-opacity="0"/><stop offset=".28" stop-color="#ff476e" stop-opacity=".12"/><stop offset=".57" stop-color="#ff476e" stop-opacity=".22"/><stop offset=".63" stop-color="#f3faff" stop-opacity=".4"/><stop offset=".7" stop-color="#ff476e" stop-opacity=".4"/><stop offset="1" stop-color="#ff476e" stop-opacity="0"/></linearGradient>
-        <linearGradient id="splash-lane-1" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#ffac54" stop-opacity="0"/><stop offset=".28" stop-color="#ffac54" stop-opacity=".12"/><stop offset=".57" stop-color="#ffac54" stop-opacity=".22"/><stop offset=".63" stop-color="#f3faff" stop-opacity=".4"/><stop offset=".7" stop-color="#ffac54" stop-opacity=".4"/><stop offset="1" stop-color="#ffac54" stop-opacity="0"/></linearGradient>
-        <linearGradient id="splash-lane-2" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#ffe6a1" stop-opacity="0"/><stop offset=".28" stop-color="#ffe6a1" stop-opacity=".12"/><stop offset=".57" stop-color="#ffe6a1" stop-opacity=".22"/><stop offset=".63" stop-color="#f3faff" stop-opacity=".4"/><stop offset=".7" stop-color="#ffe6a1" stop-opacity=".4"/><stop offset="1" stop-color="#ffe6a1" stop-opacity="0"/></linearGradient>
-        <linearGradient id="splash-lane-3" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#82efbb" stop-opacity="0"/><stop offset=".28" stop-color="#82efbb" stop-opacity=".12"/><stop offset=".57" stop-color="#82efbb" stop-opacity=".22"/><stop offset=".63" stop-color="#f3faff" stop-opacity=".4"/><stop offset=".7" stop-color="#82efbb" stop-opacity=".4"/><stop offset="1" stop-color="#82efbb" stop-opacity="0"/></linearGradient>
-        <linearGradient id="splash-lane-4" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#7bf3ff" stop-opacity="0"/><stop offset=".28" stop-color="#7bf3ff" stop-opacity=".12"/><stop offset=".57" stop-color="#7bf3ff" stop-opacity=".22"/><stop offset=".63" stop-color="#f3faff" stop-opacity=".4"/><stop offset=".7" stop-color="#7bf3ff" stop-opacity=".4"/><stop offset="1" stop-color="#7bf3ff" stop-opacity="0"/></linearGradient>
-        <linearGradient id="splash-lane-5" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#758dff" stop-opacity="0"/><stop offset=".28" stop-color="#758dff" stop-opacity=".12"/><stop offset=".57" stop-color="#758dff" stop-opacity=".22"/><stop offset=".63" stop-color="#f3faff" stop-opacity=".4"/><stop offset=".7" stop-color="#758dff" stop-opacity=".4"/><stop offset="1" stop-color="#758dff" stop-opacity="0"/></linearGradient>
-        <linearGradient id="splash-lane-6" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#b88aff" stop-opacity="0"/><stop offset=".28" stop-color="#b88aff" stop-opacity=".12"/><stop offset=".57" stop-color="#b88aff" stop-opacity=".22"/><stop offset=".63" stop-color="#f3faff" stop-opacity=".4"/><stop offset=".7" stop-color="#b88aff" stop-opacity=".4"/><stop offset="1" stop-color="#b88aff" stop-opacity="0"/></linearGradient>
-        <linearGradient id="splash-lane-7" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#f29ad5" stop-opacity="0"/><stop offset=".28" stop-color="#f29ad5" stop-opacity=".12"/><stop offset=".57" stop-color="#f29ad5" stop-opacity=".22"/><stop offset=".63" stop-color="#f3faff" stop-opacity=".4"/><stop offset=".7" stop-color="#f29ad5" stop-opacity=".4"/><stop offset="1" stop-color="#f29ad5" stop-opacity="0"/></linearGradient>
-      </defs>
-      <g clip-path="url(#splash-road)" mask="url(#splash-road-depth)">
-        <g class="startup-splash__road">
-          <path fill="url(#splash-lane-0)" d="M486 -80H489.5L147.5 1080H30Z"/>
-          <path fill="url(#splash-lane-1)" d="M489.5 -80H493L265 1080H147.5Z"/>
-          <path fill="url(#splash-lane-2)" d="M493 -80H496.5L382.5 1080H265Z"/>
-          <path fill="url(#splash-lane-3)" d="M496.5 -80H500L500 1080H382.5Z"/>
-          <path fill="url(#splash-lane-4)" d="M500 -80H503.5L617.5 1080H500Z"/>
-          <path fill="url(#splash-lane-5)" d="M503.5 -80H507L735 1080H617.5Z"/>
-          <path fill="url(#splash-lane-6)" d="M507 -80H510.5L852.5 1080H735Z"/>
-          <path fill="url(#splash-lane-7)" d="M510.5 -80H514L970 1080H852.5Z"/>
-        </g>
-        <g class="startup-splash__filaments" fill="none">
-          <path style="--strand:0;--strand-color:#ff476e" stroke="#ff476e" d="M486.24 -80L38.00 1080"/>
-          <path style="--strand:1;--strand-color:#ff476e" stroke="#ff476e" d="M486.82 -80L57.40 1080"/>
-          <path style="--strand:2;--strand-color:#ff476e" stroke="#ff476e" d="M487.39 -80L76.80 1080"/>
-          <path style="--strand:3;--strand-color:#ff476e" stroke="#ff476e" d="M487.97 -80L96.20 1080"/>
-          <path style="--strand:4;--strand-color:#ff476e" stroke="#ff476e" d="M488.55 -80L115.60 1080"/>
-          <path style="--strand:5;--strand-color:#ff476e" stroke="#ff476e" d="M489.13 -80L135.00 1080"/>
-          <path style="--strand:6;--strand-color:#ffac54" stroke="#ffac54" d="M489.71 -80L154.40 1080"/>
-          <path style="--strand:0;--strand-color:#ffac54" stroke="#ffac54" d="M490.28 -80L173.80 1080"/>
-          <path style="--strand:1;--strand-color:#ffac54" stroke="#ffac54" d="M490.86 -80L193.20 1080"/>
-          <path style="--strand:2;--strand-color:#ffac54" stroke="#ffac54" d="M491.44 -80L212.60 1080"/>
-          <path style="--strand:3;--strand-color:#ffac54" stroke="#ffac54" d="M492.02 -80L232.00 1080"/>
-          <path style="--strand:4;--strand-color:#ffac54" stroke="#ffac54" d="M492.59 -80L251.40 1080"/>
-          <path style="--strand:5;--strand-color:#ffe6a1" stroke="#ffe6a1" d="M493.17 -80L270.80 1080"/>
-          <path style="--strand:6;--strand-color:#ffe6a1" stroke="#ffe6a1" d="M493.75 -80L290.20 1080"/>
-          <path style="--strand:0;--strand-color:#ffe6a1" stroke="#ffe6a1" d="M494.33 -80L309.60 1080"/>
-          <path style="--strand:1;--strand-color:#ffe6a1" stroke="#ffe6a1" d="M494.91 -80L329.00 1080"/>
-          <path style="--strand:2;--strand-color:#ffe6a1" stroke="#ffe6a1" d="M495.48 -80L348.40 1080"/>
-          <path style="--strand:3;--strand-color:#ffe6a1" stroke="#ffe6a1" d="M496.06 -80L367.80 1080"/>
-          <path style="--strand:4;--strand-color:#82efbb" stroke="#82efbb" d="M496.64 -80L387.20 1080"/>
-          <path style="--strand:5;--strand-color:#82efbb" stroke="#82efbb" d="M497.22 -80L406.60 1080"/>
-          <path style="--strand:6;--strand-color:#82efbb" stroke="#82efbb" d="M497.80 -80L426.00 1080"/>
-          <path style="--strand:0;--strand-color:#82efbb" stroke="#82efbb" d="M498.37 -80L445.40 1080"/>
-          <path style="--strand:1;--strand-color:#82efbb" stroke="#82efbb" d="M498.95 -80L464.80 1080"/>
-          <path style="--strand:2;--strand-color:#82efbb" stroke="#82efbb" d="M499.53 -80L484.20 1080"/>
-          <path style="--strand:3;--strand-color:#7bf3ff" stroke="#7bf3ff" d="M500.11 -80L503.60 1080"/>
-          <path style="--strand:4;--strand-color:#7bf3ff" stroke="#7bf3ff" d="M500.69 -80L523.00 1080"/>
-          <path style="--strand:5;--strand-color:#7bf3ff" stroke="#7bf3ff" d="M501.26 -80L542.40 1080"/>
-          <path style="--strand:6;--strand-color:#7bf3ff" stroke="#7bf3ff" d="M501.84 -80L561.80 1080"/>
-          <path style="--strand:0;--strand-color:#7bf3ff" stroke="#7bf3ff" d="M502.42 -80L581.20 1080"/>
-          <path style="--strand:1;--strand-color:#7bf3ff" stroke="#7bf3ff" d="M503.00 -80L600.60 1080"/>
-          <path style="--strand:2;--strand-color:#758dff" stroke="#758dff" d="M503.57 -80L620.00 1080"/>
-          <path style="--strand:3;--strand-color:#758dff" stroke="#758dff" d="M504.15 -80L639.40 1080"/>
-          <path style="--strand:4;--strand-color:#758dff" stroke="#758dff" d="M504.73 -80L658.80 1080"/>
-          <path style="--strand:5;--strand-color:#758dff" stroke="#758dff" d="M505.31 -80L678.20 1080"/>
-          <path style="--strand:6;--strand-color:#758dff" stroke="#758dff" d="M505.89 -80L697.60 1080"/>
-          <path style="--strand:0;--strand-color:#758dff" stroke="#758dff" d="M506.46 -80L717.00 1080"/>
-          <path style="--strand:1;--strand-color:#b88aff" stroke="#b88aff" d="M507.04 -80L736.40 1080"/>
-          <path style="--strand:2;--strand-color:#b88aff" stroke="#b88aff" d="M507.62 -80L755.80 1080"/>
-          <path style="--strand:3;--strand-color:#b88aff" stroke="#b88aff" d="M508.20 -80L775.20 1080"/>
-          <path style="--strand:4;--strand-color:#b88aff" stroke="#b88aff" d="M508.78 -80L794.60 1080"/>
-          <path style="--strand:5;--strand-color:#b88aff" stroke="#b88aff" d="M509.35 -80L814.00 1080"/>
-          <path style="--strand:6;--strand-color:#b88aff" stroke="#b88aff" d="M509.93 -80L833.40 1080"/>
-          <path style="--strand:0;--strand-color:#f29ad5" stroke="#f29ad5" d="M510.51 -80L852.80 1080"/>
-          <path style="--strand:1;--strand-color:#f29ad5" stroke="#f29ad5" d="M511.09 -80L872.20 1080"/>
-          <path style="--strand:2;--strand-color:#f29ad5" stroke="#f29ad5" d="M511.66 -80L891.60 1080"/>
-          <path style="--strand:3;--strand-color:#f29ad5" stroke="#f29ad5" d="M512.24 -80L911.00 1080"/>
-          <path style="--strand:4;--strand-color:#f29ad5" stroke="#f29ad5" d="M512.82 -80L930.40 1080"/>
-          <path style="--strand:5;--strand-color:#f29ad5" stroke="#f29ad5" d="M513.40 -80L949.80 1080"/>
-        </g>
-        <g class="startup-splash__currents" fill="none" stroke="url(#splash-thread)">
-          <path style="--spark:0" d="M487.04 -80L65.00 1080"/>
-          <path style="--spark:1" d="M488.56 -80L116.00 1080"/>
-          <path style="--spark:2" d="M490.08 -80L167.00 1080"/>
-          <path style="--spark:3" d="M491.60 -80L218.00 1080"/>
-          <path style="--spark:4" d="M493.12 -80L269.00 1080"/>
-          <path style="--spark:5" d="M494.64 -80L320.00 1080"/>
-          <path style="--spark:6" d="M496.16 -80L371.00 1080"/>
-          <path style="--spark:7" d="M497.68 -80L422.00 1080"/>
-          <path style="--spark:8" d="M499.20 -80L473.00 1080"/>
-          <path style="--spark:9" d="M500.71 -80L524.00 1080"/>
-          <path style="--spark:10" d="M502.23 -80L575.00 1080"/>
-          <path style="--spark:11" d="M503.75 -80L626.00 1080"/>
-          <path style="--spark:12" d="M505.27 -80L677.00 1080"/>
-          <path style="--spark:13" d="M506.79 -80L728.00 1080"/>
-          <path style="--spark:14" d="M508.31 -80L779.00 1080"/>
-          <path style="--spark:15" d="M509.83 -80L830.00 1080"/>
-          <path style="--spark:16" d="M511.35 -80L881.00 1080"/>
-          <path style="--spark:17" d="M512.87 -80L932.00 1080"/>
-        </g>
-      </g>
-      <path class="startup-splash__rails" d="M486 -80 30 1080M514 -80 970 1080" fill="none" stroke="url(#splash-thread)"/>
-    </svg>
-    <div class="startup-splash__mist"></div>
-    <div class="startup-splash__arrival"></div>
+    <div class="startup-splash__fallback"><span></span></div>
+    <canvas class="startup-splash__energy" id="bifrostEnergy" aria-hidden="true"></canvas>
   </div>
   <div class="startup-splash__glow"></div>
   <div class="startup-splash__identity">
