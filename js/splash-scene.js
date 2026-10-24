@@ -118,8 +118,8 @@
           float energy = smoothstep(.02, .3, t) * depart;
           float ground = .76;
           float head = mix(-.1, ground, smoothstep(.05, 1.05, t));
-          float descent = 1. - smoothstep(head - .08, head + .06, p.y);
-          float width = .065 + .028 * p.y;
+          float descent = (1. - smoothstep(head - .08, head + .06, p.y)) * (1. - smoothstep(.72, .79, p.y));
+          float width = .13 + .025 * p.y;
           float warp = (cloud(vec2(p.y * 7. - t * .8, t * .6)) - .5) * .05;
           float x = p.x + warp * smoothstep(.0, .3, p.y);
           float side = abs(x) / width;
@@ -135,26 +135,28 @@
           float scatter = exp(-abs(x) * 3.7) * (.15 + .85 * arrival) * depart;
           vec3 color = vec3(.008, .013, .028);
           color += mix(vec3(.035, .055, .13), vec3(.16, .10, .16), wisps) * fog * scatter * 1.2;
-          color += spectrum * column * (.16 + fine * .6) * energy;
-          color += spectrum * exp(-side * 1.1) * .12 * energy * descent;
+          color += spectrum * column * (.35 + fine * 1.8) * energy;
+          color += spectrum * exp(-side * 1.1) * .2 * energy * descent;
+          float fibers = pow(max(0., sin(x * 730. + turbulence * 10. + sin(p.y * 14. - t * 3.))), 16.);
+          color += mix(spectrum, vec3(1., .94, .82), .4) * fibers * fine * column * 1.2 * energy;
 
           // Eight irregular ribbons descend in shuffled order and wind around the core.
           for (int i = 0; i < 8; i++) {
             float f = float(i);
             float h = (t - lanes[i]) * 1.65;
-            float reveal = 1. - smoothstep(h - .12, h + .02, p.y);
-            float spiral = sin(p.y * (12. + f * .8) - t * (2. + f * .05) + f * 2.4);
-            float branch = cos(p.y * 32. + t * 4. + f) * .008;
-            float ribbonX = spiral * width * (.45 + f * .055) + branch;
+            float reveal = (1. - smoothstep(h - .12, h + .02, p.y)) * (1. - smoothstep(.72, .78, p.y));
+            float drift = noise(vec2(p.y * 13. - t * 1.2, f * 6.7 + t * .3)) - .5;
+            float branch = sin(p.y * 57. + t * 4. + f) * .004;
+            float ribbonX = (f / 7. - .5) * width * 1.7 + drift * width * .9 + branch;
             float thread = exp(-abs(x - ribbonX) / (.0015 + .003 * fine));
-            vec3 hue = prism(f * .77 + .35 * p.y);
-            color += hue * thread * reveal * (1.2 + fine) * energy;
+            vec3 hue = mix(prism(f * .77 + .35 * p.y), vec3(1., .88, .69), .25);
+            color += hue * thread * reveal * (.55 + fine) * energy;
             color += hue * exp(-abs(x - ribbonX) / .016) * reveal * .12 * energy;
           }
 
           // A hot, turbulent white center and narrow lightning-like fractures.
-          float core = exp(-abs(x + (fine - .5) * .012) / .008);
-          color += vec3(1., .96, .83) * core * column * arrival * 1.8 * depart;
+          float core = exp(-abs(x + (fine - .5) * .025) / (.018 + fine * .014));
+          color += vec3(1., .96, .83) * core * column * arrival * 2.4 * depart;
           float fracture = abs(x + sin(p.y * 57. + turbulence * 9. - t * 4.) * width * .65);
           color += vec3(.65, .84, 1.) * exp(-fracture / .0016) * column * fine * .8 * energy;
 
@@ -171,6 +173,8 @@
           pattern += rays * smoothstep(.10, .12, radius) * (1. - smoothstep(.22, .225, radius)) * .6;
           color += vec3(1., .57, .20) * pattern * sealOn;
           color += vec3(.85, .40, .12) * exp(-radius * 8.) * .4 * sealOn;
+          float groundMist = exp(-length(vec2(p.x * 1.4, (p.y - ground) * 2.3)) * 5.);
+          color += mix(vec3(.22, .30, .44), vec3(.56, .33, .18), wisps) * groundMist * fog * sealOn;
           float impact = exp(-length(vec2(p.x * 1.3, (p.y - ground) * 10.)) * 16.);
           color += vec3(1., .85, .58) * impact * arrival * 1.7 * depart;
 
@@ -178,7 +182,7 @@
           color += vec3(.45, .56, .8) * exp(-abs(p.x) * 7.) * exp(-p.y * 7.) * .25 * energy;
           color += vec3(.45, .55, .85) * exp(-abs(p.y - ground) * 260.) * exp(-abs(p.x) * 2.5) * .12 * sealOn;
           float grain = hash(gl_FragCoord.xy + floor(t * 24.)) - .5;
-          color += grain * .013;
+          color += grain * .006;
           color *= 1. - smoothstep(.35, 1.2, length(vec2(p.x * .65, p.y - .45))) * .55;
           color = 1. - exp(-color * 1.45);
           gl_FragColor = vec4(pow(max(color, 0.), vec3(.88)), 1.);
