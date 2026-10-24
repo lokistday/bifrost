@@ -22,6 +22,8 @@ html.splash-active { overflow: hidden; }
   will-change: transform;
 }
 .startup-splash__identity {
+  position: relative;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,18 +31,32 @@ html.splash-active { overflow: hidden; }
   padding: 24px;
   animation: splash-brand-arrive 800ms cubic-bezier(.2, .65, .3, 1) both;
 }
+.startup-splash__identity::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: calc(24px + clamp(56px, 7.5vw, 88px));
+  width: clamp(230px, 30vw, 340px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #b9b8ff26, #8ebaff10 38%, transparent 68%);
+  pointer-events: none;
+}
 .startup-splash__star {
   width: clamp(112px, 15vw, 176px);
   height: clamp(112px, 15vw, 176px);
-  filter: drop-shadow(0 0 24px #a3a9ff36);
+  overflow: visible;
+  filter: drop-shadow(0 0 3px #e1eaffad) drop-shadow(0 0 13px #aab5ffad) drop-shadow(0 0 34px #8e9cff70);
 }
+.startup-splash__star path { stroke: #eef2ff99; stroke-width: .12; paint-order: stroke fill; }
 .startup-splash__name {
   padding-left: .16em;
   font-size: clamp(42px, 8vw, 88px);
   font-weight: 800;
   line-height: 1;
   letter-spacing: .16em;
-  text-shadow: 0 0 30px #b7dcff15;
+  text-shadow: 0 0 12px #c5d5ff45, 0 0 36px #9eb5ff26;
 }
 .splash-leaving .startup-splash { opacity: 0; }
 .splash-leaving .startup-splash__zoom { transform: scale(4.5); }
