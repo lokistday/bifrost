@@ -17,21 +17,21 @@
 <title>ELF·심볼·컴파일 옵션 — Reverse Engineering · Bifrost</title>
 <script src="../../js/theme.js"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css">
-<link rel="stylesheet" href="../../css/theme.css">
-<link rel="stylesheet" href="../../css/learning.css">
-<link rel="stylesheet" href="../../css/visuals.css">
+<link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/visuals.css?v=20261024-atlas1">
 <script src="../../js/catalog.js" defer></script>
 <script src="../../js/courses/rev.js" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js" defer></script>
+<script src="../../js/learning-view.js?v=20261024-atlas1" defer></script>
 <script src="../../js/learning.js" defer></script>
 </head>
 <body class="learning-page" data-course="rev" data-course-number="07" data-view="lesson" data-lesson-id="rev.binary" style="--course-accent:var(--map-red)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/></svg></span><span>BIFROST</span></a>
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
   <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">리버싱 목차</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
@@ -56,7 +56,7 @@
               <span class="lesson-dot" data-dot="rev.report" aria-hidden="true"></span><span>최적화 비교와 분석 보고서<small class="completion-label" data-completion="rev.report"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
-          <header class="lesson-heading"><div class="overline">01 · 바이너리와 정적 관찰 · 1 / 5</div><h1>ELF·심볼·컴파일 옵션</h1><p class="lesson-objective">실행 파일의 정보와 분석 환경을 식별합니다.</p></header>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/rev.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">01 · 바이너리와 정적 관찰 · 1 / 5</div><h1>ELF·심볼·컴파일 옵션</h1><p class="lesson-objective">실행 파일의 정보와 분석 환경을 식별합니다.</p></div></header>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
           <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Ubuntu/WSL · GCC · GNU nm · file</strong></p><ul><li>내려받은 check.c를 직접 빌드한 실행 파일만 사용합니다. 타인의 미확인 바이너리를 실행하지 않습니다.</li><li>같은 디렉터리에서 check.c와 생성한 check를 구분하고 GCC·CPU·빌드 옵션을 기록합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="../foundation/c-memory.html">공통 기초 · C 컴파일과 주소·포인터 ↗</a></li><li><a href="../pwn/build.html">시스템 보안 · 소스·컴파일·실행 파일 ↗</a></li></ul>

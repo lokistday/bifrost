@@ -27,7 +27,7 @@ function enhance(relative, search = '') {
     location: { search, origin: 'https://lokistday.github.io' }, URL, URLSearchParams, Blob,
     setTimeout: () => 0, navigator: { clipboard: { writeText: async () => {} } }, console });
   for (const script of document.querySelectorAll('script[src]')) {
-    const file = path.resolve(ROOT, path.dirname(relative), script.getAttribute('src'));
+    const file = path.resolve(ROOT, path.dirname(relative), script.getAttribute('src').split(/[?#]/)[0]);
     vm.runInContext(fs.readFileSync(file, 'utf8'), context, { filename: file });
   }
   return { document, window, saved, originalArticle, Event };
@@ -108,5 +108,5 @@ const dataCourses = dataContext.window.BifrostCourses;
 dataCourses.misc = course;
 const markup = create(dataCourses, { renderLesson: () => '', renderCourse: () => '' }).lesson('misc', sample.id);
 const doc = parseHTML(`<html><body>${markup}</body></html>`).document;
-check(!doc.querySelector('img') && doc.body.textContent.includes(attack), 'Content cannot create executable HTML');
+check(!doc.querySelector('[onerror], img[src="x"]') && doc.body.textContent.includes(attack), 'Content cannot create executable HTML');
 console.log(`PASS: ${checks} static teaching, production hydration and self-check assertions across 62 lessons.`);

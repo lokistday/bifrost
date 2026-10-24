@@ -72,8 +72,8 @@
     function overview(key) {
       const course = courses[key], lessons = all(course);
       return `<nav class="breadcrumb" aria-label="현재 위치"><a href="../../index.html#mindmap">학습 지도</a><span aria-hidden="true">/</span><span aria-current="page">${esc(course.title)}</span></nav>
-        <section class="course-hero"><div><div class="overline">${course.number} / LEARNING PATH</div><h1>${esc(course.title)}</h1>
-          <p class="course-lead">${esc(course.subtitle)}</p><div class="course-chips"><span>${esc(course.level)}</span><span>${course.modules.length}개 모듈 · ${lessons.length}개 차시</span><span>설명 → 실습 → 검증</span></div></div>
+        <section class="course-hero"><div class="course-hero-intro"><div class="course-hero-copy"><div class="overline">${course.number} / LEARNING PATH</div><h1>${esc(course.title)}</h1>
+          <p class="course-lead">${esc(course.subtitle)}</p><div class="course-chips"><span>${esc(course.level)}</span><span>${course.modules.length}개 모듈 · ${lessons.length}개 차시</span><span>설명 → 실습 → 검증</span></div></div><img class="course-hero-art" src="../../assets/illustrations/${key}.webp" width="480" height="480" alt="" decoding="async"></div>
           <div class="continue-panel"><div class="overline">YOUR PROGRESS</div>${stats(course)}<a class="learning-button primary" id="continueLearning" href="${lessonHref(lessons[0].id, key)}">첫 차시 시작하기 →</a><p class="caption">완료 표시는 직접 합니다. 학습 속도와 설치 시간은 환경에 따라 다릅니다.</p></div>
         </section>
         <nav class="course-jump-links" aria-label="과정 안내 바로가기"><a href="#courseIntroduction">분야 소개 ↓</a><a href="#courseModules">강의 목차 바로 보기 ↓</a></nav>
@@ -128,7 +128,7 @@
       const index = lessons.indexOf(lesson), module = course.modules.find(item => item.lessons.includes(lesson));
       return `<nav class="breadcrumb" aria-label="현재 위치"><a href="../../index.html#mindmap">학습 지도</a><span aria-hidden="true">/</span><a href="./">${esc(course.title)}</a><span aria-hidden="true">/</span><span aria-current="page">${index + 1}차시</span></nav>
         <div class="lesson-layout">${outline(course, id)}<article class="lesson-article">
-          <header class="lesson-heading"><div class="overline">${esc(module.title)} · ${index + 1} / ${lessons.length}</div><h1>${esc(lesson.title)}</h1><p class="lesson-objective">${esc(lesson.goal)}</p></header>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/${key}.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">${esc(module.title)} · ${index + 1} / ${lessons.length}</div><h1>${esc(lesson.title)}</h1><p class="lesson-objective">${esc(lesson.goal)}</p></div></header>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
           ${lesson.environment ? `<section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>${esc(lesson.environment.label)}</strong></p><ul>${lesson.environment.details.map(detail => `<li>${esc(detail)}</li>`).join('')}</ul>${prerequisites(lesson.prerequisites || [], key, true)}
             ${id === 'foundation.environment' ? '<a href="../../guides/linux.html">Windows에서 Linux 시작하기 ↗</a>' : ''}</section>` : ''}

@@ -72,7 +72,7 @@ a:hover {
   place-items: center;
   border-radius: 11px;
   background: var(--navy);
-  color: #5ce1e6;
+  color: #afbaff;
   overflow: hidden;
 }
 
@@ -80,7 +80,7 @@ a:hover {
   width: 19px;
   height: 19px;
   display: block;
-  filter: drop-shadow(0 0 5px #5ce1e655);
+  filter: drop-shadow(0 0 5px #a0b4ff22);
 }
 
 .navlinks {
@@ -195,8 +195,8 @@ h1 span {
   row-gap: 0;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 21px;
+  border-radius: 20px;
+  padding: 24px;
 }
 
 .practice-top {
@@ -205,16 +205,18 @@ h1 span {
   justify-content: space-between;
 }
 
+.practice-art { width: 156px; height: 156px; object-fit: contain; flex: 0 0 auto; }
+
 .practice-top span {
   font-size: 10px;
   font-weight: 800;
-  color: var(--teal);
+  color: var(--blue);
   letter-spacing: .1em;
 }
 
 .practice-card h3 {
-  font-size: 16px;
-  margin: 13px 0 7px;
+  font-size: 18px;
+  margin: 12px 0 9px;
 }
 
 .practice-card p {

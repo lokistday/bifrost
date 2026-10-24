@@ -13,7 +13,7 @@ for (const file of ['curriculum.js', 'visual-data.js', 'visuals.js']) {
 }
 const courses = context.window.BifrostCourses;
 const view = create(courses, context.window.BifrostVisuals);
-const star = '<svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/></svg>';
+const star = '<svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg>';
 const template = read('templates/learning.html');
 function fill(source, values) {
   return source.replace(/\{\{([A-Z_]+)\}\}/g, (_, key) => {
@@ -53,7 +53,7 @@ for (const course of Object.values(courses)) {
 }
 const nodes = site.courses.map(item => {
   const course = courses[item.id];
-  return `      <a class="map-node node-${course.id}" data-map-track="${course.id}" href="tracks/${course.id}/"><span class="node-number">${course.number} / ${item.mapLabel}</span><span class="node-arrow" aria-hidden="true">↗</span><strong>${esc(course.title)}</strong><small>${esc(course.label)}</small><i>${esc(item.teaser)}</i></a>`;
+  return `      <a class="map-node node-${course.id}" data-map-track="${course.id}" href="tracks/${course.id}/"><img class="node-art" src="assets/illustrations/${course.id}.webp" width="480" height="480" alt="" decoding="async"><span class="node-copy"><span class="node-number">${course.number} / ${item.mapLabel}</span><strong>${esc(course.title)}</strong><small>${esc(course.label)}</small><i>${esc(item.teaser)}</i></span><span class="node-arrow" aria-hidden="true">↗</span></a>`;
 }).join('\n');
 write('index.html', fill(read('templates/index.html'), { MAP_NODES: nodes, SITE_URL: esc(site.url) }));
 write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +

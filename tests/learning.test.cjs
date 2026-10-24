@@ -97,42 +97,76 @@ for (const course of courses) {
 }
 check(lessonCount === 62, '62 authored lessons');
 
-// Evaluate the real desktop CSS coordinates and real SVG endpoints, not a second layout fixture.
-const desktopCSS = fs.readFileSync(path.join(ROOT, 'css/mindmap.css'), 'utf8').split('@media (min-width:901px) {')[1].split('\n}')[0];
-const widthOfCard = 216, heightOfCard = 116;
-function rectangles(width) {
-  const stageWidth = Math.min(1000, width - 48);
-  return Object.fromEntries(courses.map(c => {
-    const rule = desktopCSS.match(new RegExp(`\\.node-${c.id}\\s*\\{([^}]+)\\}`))[1];
-    const top = Number(rule.match(/top:\s*(\d+)px/)[1]);
-    let left = stageWidth / 2 - widthOfCard / 2;
-    const offset = rule.match(/(left|right):\s*calc\(50% ([+-]) (\d+)px\)/);
-    if (offset) {
-      const value = stageWidth / 2 + (offset[2] === '+' ? 1 : -1) * Number(offset[3]);
-      left = offset[1] === 'left' ? value : stageWidth - value - widthOfCard;
+// Resolve the authored CSS, including responsive overrides, rather than copying a layout fixture.
+const CSSOM = require(require.resolve('cssom', { paths: [path.dirname(require.resolve('linkedom'))] }));
+const mapRules = CSSOM.parse(fs.readFileSync(path.join(ROOT, 'css/mindmap.css'), 'utf8')).cssRules;
+function cssFor(selectors, viewport) {
+  const result = {};
+  function visit(rules) {
+    for (const rule of rules) {
+      if (rule.cssRules) {
+        const query = rule.media?.mediaText || '';
+        if (!query || query.includes('prefers-reduced-motion')) continue;
+        const min = query.match(/min-width:\s*(\d+)px/), max = query.match(/max-width:\s*(\d+)px/);
+        if ((!min || viewport >= Number(min[1])) && (!max || viewport <= Number(max[1]))) visit(rule.cssRules);
+      } else if (rule.selectorText?.split(',').some(selector => selectors.includes(selector.trim()))) {
+        for (let i = 0; i < rule.style.length; i++) result[rule.style[i]] = rule.style.getPropertyValue(rule.style[i]);
+      }
     }
-    return [c.id, { left, right: left + widthOfCard, top, bottom: top + heightOfCard, stageWidth }];
+  }
+  visit(mapRules);
+  return result;
+}
+function length(value, base) {
+  value = value.trim();
+  if (value === '0') return 0;
+  if (/^-?[\d.]+px$/.test(value)) return parseFloat(value);
+  if (/^-?[\d.]+%$/.test(value)) return parseFloat(value) * base / 100;
+  const calc = value.match(/^calc\(([\d.]+)% ([+-]) ([\d.]+)px\)$/);
+  if (calc) return Number(calc[1]) * base / 100 + (calc[2] === '+' ? 1 : -1) * Number(calc[3]);
+  const fn = value.match(/^(min|max)\((.*)\)$/);
+  if (fn) {
+    const parts = []; let start = 0, depth = 0;
+    for (let i = 0; i < fn[2].length; i++) {
+      if (fn[2][i] === '(') depth++;
+      if (fn[2][i] === ')') depth--;
+      if (fn[2][i] === ',' && depth === 0) { parts.push(fn[2].slice(start, i)); start = i + 1; }
+    }
+    parts.push(fn[2].slice(start));
+    return Math[fn[1]](...parts.map(part => length(part, base)));
+  }
+  throw new Error(`Unsupported layout length: ${value}`);
+}
+function rectangles(width) {
+  const container = Math.min(1240, width - 48);
+  const stage = cssFor(['.mindmap-stage'], width);
+  const stageWidth = Math.min(length(stage.width, container), container);
+  return Object.fromEntries(courses.map(c => {
+    const rule = cssFor(['.map-node', `.node-${c.id}`], width);
+    const left = length(rule.left, stageWidth), top = length(rule.top, 640);
+    return [c.id, { left, right: left + length(rule.width, stageWidth), top, bottom: top + length(rule['min-height'], 640), stageWidth }];
   }));
 }
+const core = cssFor(['.map-core'], 1440), coreY = length(core.top, 640), coreRadius = length(core.width, 1140) / 2;
 for (const width of [901, 1024, 1440, 1885]) {
   const rects = Object.values(rectangles(width));
   for (let i = 0; i < rects.length; i++) {
     const a = rects[i];
-    check(a.left >= 0 && a.right <= a.stageWidth && a.bottom <= 760, `Card visible at ${width}`);
+    check(a.left >= 0 && a.right <= a.stageWidth && a.bottom <= 640, `Card visible at ${width}`);
     const closestX = Math.max(a.left, Math.min(a.right, a.stageWidth / 2));
-    const closestY = Math.max(a.top, Math.min(a.bottom, 380));
-    check(Math.hypot(closestX - a.stageWidth / 2, closestY - 380) > 85, `Core clear at ${width}`);
+    const closestY = Math.max(a.top, Math.min(a.bottom, coreY));
+    check(Math.hypot(closestX - a.stageWidth / 2, closestY - coreY) > coreRadius, `Core clear at ${width}`);
     for (const b of rects.slice(i + 1)) check(a.right <= b.left || b.right <= a.left || a.bottom <= b.top || b.bottom <= a.top, `Cards do not overlap at ${width}`);
   }
 }
 const lineOwners = { cyan: 'foundation', blue: 'web', violet: 'pwn', red: 'rev', green: 'forensic', pink: 'crypto', orange: 'misc', amber: 'network', sky: 'cloud' };
-const rects = rectangles(1048); // full 1000px stage, matching SVG viewBox
+const rects = rectangles(1440);
 for (const line of home.document.querySelectorAll('.synapse:not(.faint)')) {
   const color = [...line.classList].find(name => lineOwners[name]);
   const coordinates = line.getAttribute('d').match(/\d+(?:\.\d+)?/g).map(Number);
   const [startX, startY] = coordinates;
   const endX = coordinates.length === 3 ? startX : coordinates.at(-2), endY = coordinates.at(-1);
-  check(Math.abs(Math.hypot(startX - 500, startY - 380) - 85) < 3, 'Connector starts at core');
+  check(Math.abs(Math.hypot(startX - 570, startY - coreY) - coreRadius) < 3, 'Connector starts at core');
   const r = rects[lineOwners[color]];
   check(endX >= r.left && endX <= r.right && endY >= r.top && endY <= r.bottom && Math.min(Math.abs(endX-r.left), Math.abs(endX-r.right), Math.abs(endY-r.top), Math.abs(endY-r.bottom)) < 0.1, `Connector touches ${color} card`);
 }

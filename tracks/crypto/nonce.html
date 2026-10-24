@@ -17,21 +17,21 @@
 <title>난수·nonce와 재사용 — Cryptography · Bifrost</title>
 <script src="../../js/theme.js"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css">
-<link rel="stylesheet" href="../../css/theme.css">
-<link rel="stylesheet" href="../../css/learning.css">
-<link rel="stylesheet" href="../../css/visuals.css">
+<link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/visuals.css?v=20261024-atlas1">
 <script src="../../js/catalog.js" defer></script>
 <script src="../../js/courses/crypto.js" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js" defer></script>
+<script src="../../js/learning-view.js?v=20261024-atlas1" defer></script>
 <script src="../../js/learning.js" defer></script>
 </head>
 <body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.nonce" style="--course-accent:var(--map-pink)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/></svg></span><span>BIFROST</span></a>
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
   <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">암호학 목차</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
@@ -64,7 +64,7 @@
               <span class="lesson-dot" data-dot="crypto.password" aria-hidden="true"></span><span>비밀번호 KDF·salt·비용<small class="completion-label" data-completion="crypto.password"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
-          <header class="lesson-heading"><div class="overline">03 · 현대 암호 설계와 키 수명 · 8 / 9</div><h1>난수·nonce와 재사용</h1><p class="lesson-objective">같은 키 아래 nonce 제약을 어겼을 때 보장이 깨질 수 있음을 설명합니다.</p></header>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/crypto.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">03 · 현대 암호 설계와 키 수명 · 8 / 9</div><h1>난수·nonce와 재사용</h1><p class="lesson-objective">같은 키 아래 nonce 제약을 어겼을 때 보장이 깨질 수 있음을 설명합니다.</p></div></header>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
           <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>재사용 원리 · Python 3</strong></p><ul><li>기본 lab.py nonce는 표준 라이브러리로 실행하는 장난감 XOR 모델입니다. AES-GCM 구현이 아닙니다.</li><li>실제 AEAD의 변조·nonce 불일치 검증은 aead.py를 비교 참고합니다. 공개 교육 키로 새 데이터를 보호하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="symmetric.html">암호학 · 대칭키·AEAD·인증 태그 ↗</a></li><li><a href="../foundation/python-flow.html">공통 기초 · 조건·반복·함수 ↗</a></li></ul>

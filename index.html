@@ -25,12 +25,12 @@
 <script src="js/theme.js"></script>
 <link rel="stylesheet" href="css/splash.css?v=20261024-glow-logo">
 <script src="js/splash.js?v=20261024-logo1"></script>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Crect width=%2240%22 height=%2240%22 rx=%2211%22 fill=%22%23101a30%22/%3E%3Cpath d=%22M20 4 23.8 15.2 36 20 23.8 23.8 20 36 16.2 23.8 4 20 16.2 15.2Z%22 fill=%22%235ce1e6%22/%3E%3Cpath d=%22M31 5 32.5 9.5 37 11 32.5 12.5 31 17 29.5 12.5 25 11 29.5 9.5Z%22 fill=%22%239cf7ff%22/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
 
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/main.css?v=20261024-atlas1">
+<link rel="stylesheet" href="css/theme.css?v=20261024-atlas1">
 <link rel="stylesheet" href="css/overlays.css">
-<link rel="stylesheet" href="css/mindmap.css">
+<link rel="stylesheet" href="css/mindmap.css?v=20261024-atlas1">
 </head>
 <body>
 <div class="startup-splash" id="startupSplash" hidden aria-hidden="true">
@@ -53,7 +53,7 @@
 </div>
 <header class="topbar"><div class="wrap nav">
 <a class="brand" href="#home"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M20 2.8 23.8 15.2 36.2 19 23.8 22.8 20 35.2 16.2 22.8 3.8 19 16.2 15.2Z" fill="currentColor"/><path d="M31.1 4.7 32.5 9.1 36.9 10.5 32.5 11.9 31.1 16.3 29.7 11.9 25.3 10.5 29.7 9.1Z" fill="#9cf7ff"/></svg></span><span>Bifrost</span></a>
-<nav class="navlinks"><a href="#mindmap">LEARNING MAP</a><a href="#practice">LEARNING GUIDE</a><a href="#resources">RESOURCES</a></nav>
+<nav class="navlinks"><a href="#mindmap">학습 지도</a><a href="#practice">학습 가이드</a><a href="#resources">자료실</a></nav>
 <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">다크 모드</span></button>
 <a class="nav-cta" href="#mindmap">학습 시작하기 ↗</a>
 </div></header>
@@ -62,12 +62,13 @@
 <section class="mindmap-shell" id="mindmap" aria-label="보안 학습 분야 지도">
   <div class="mindmap-wrap">
     <div class="mindmap-intro">
-      <div class="eyebrow"><span class="dot"></span> EXPLORE YOUR SECURITY PATH</div>
-      <p>하나의 기초에서 시작해, 호기심이 향하는 분야로 뻗어 나가세요.<br>노드를 선택하면 분야별 목차와 강의 페이지로 이동합니다.</p>
-      <div class="mindmap-hint"><span class="hint-pulse"></span> 노드를 선택해 탐험 시작하기</div>
+      <div class="eyebrow">BIFROST LEARNING ATLAS</div>
+      <h1>보안 학습 지도</h1>
+      <p>관심 있는 분야를 선택하고, 개념부터 실습까지 연결해 보세요.</p>
+      <div class="mindmap-hint"><span class="hint-pulse"></span> 9개 분야 <span aria-hidden="true">·</span> 62개 차시</div>
     </div>
     <div class="mindmap-stage" role="group" aria-label="Bifrost 보안 학습 분야 마인드맵">
-      <svg class="mindmap-lines" viewBox="0 0 1000 760" aria-hidden="true">
+      <svg class="mindmap-lines" viewBox="0 0 1140 640" preserveAspectRatio="none" aria-hidden="true">
         <defs>
           <linearGradient id="line-cyan"><stop style="stop-color:var(--map-cyan)" stop-opacity=".16"/><stop offset="1" style="stop-color:var(--map-cyan)" stop-opacity=".9"/></linearGradient>
           <linearGradient id="line-blue"><stop style="stop-color:var(--map-blue)" stop-opacity=".16"/><stop offset="1" style="stop-color:var(--map-blue)" stop-opacity=".9"/></linearGradient>
@@ -79,41 +80,39 @@
           <linearGradient id="line-orange"><stop style="stop-color:var(--map-orange)" stop-opacity=".16"/><stop offset="1" style="stop-color:var(--map-orange)" stop-opacity=".9"/></linearGradient>
           <linearGradient id="line-sky"><stop style="stop-color:var(--map-sky)" stop-opacity=".16"/><stop offset="1" style="stop-color:var(--map-sky)" stop-opacity=".9"/></linearGradient>
         </defs>
-        <path class="synapse cyan" d="M500 295V126"/>
-        <path class="synapse blue" d="M440 320C415 275 380 230 350 216"/>
-        <path class="synapse violet" d="M560 320C585 275 620 230 650 216"/>
-        <path class="synapse red" d="M415 370C370 370 335 343 296 343"/>
-        <path class="synapse green" d="M585 370C630 370 665 343 704 343"/>
-        <path class="synapse pink" d="M430 430C400 470 360 510 328 513"/>
-        <path class="synapse orange" d="M570 430C600 470 640 510 672 513"/>
-        <path class="synapse amber" d="M475 460C450 510 430 565 400 600"/>
-        <path class="synapse sky" d="M525 460C550 510 570 565 600 600"/>
-        <path class="synapse faint" d="M245 210C175 235 180 405 220 445"/>
-        <path class="synapse faint" d="M755 210C825 235 820 405 780 445"/>
-        <circle class="junction blue" cx="350" cy="216" r="3"/><circle class="junction violet" cx="650" cy="216" r="3"/>
-        <circle class="junction red" cx="296" cy="343" r="3"/><circle class="junction green" cx="704" cy="343" r="3"/>
+        <path class="synapse cyan" d="M570 225V104"/>
+        <path class="synapse blue" d="M488 272C450 228 415 160 389 137"/>
+        <path class="synapse violet" d="M652 272C690 228 725 160 751 137"/>
+        <path class="synapse red" d="M475 320C390 320 335 277 284 277"/>
+        <path class="synapse green" d="M665 320C750 320 805 277 856 277"/>
+        <path class="synapse pink" d="M492.5 375C440 410 375 417 324 417"/>
+        <path class="synapse orange" d="M647.5 375C700 410 765 417 816 417"/>
+        <path class="synapse amber" d="M535 408C500 445 435 475 372 495"/>
+        <path class="synapse sky" d="M605 408C640 445 705 475 768 495"/>
+        <circle class="junction blue" cx="389" cy="137" r="3"/><circle class="junction violet" cx="751" cy="137" r="3"/>
+        <circle class="junction red" cx="284" cy="277" r="3"/><circle class="junction green" cx="856" cy="277" r="3"/>
       </svg>
-      <a class="map-node node-foundation" data-map-track="foundation" href="tracks/foundation/"><span class="node-number">00 / CORE</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Foundation</strong><small>공통 기초</small><i>터미널 · 코드 · 네트워크</i></a>
-      <a class="map-node node-pwn" data-map-track="pwn" href="tracks/pwn/"><span class="node-number">01 / SYSTEM</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Pwn / System</strong><small>시스템 보안</small><i>메모리 · 디버깅</i></a>
-      <a class="map-node node-forensic" data-map-track="forensic" href="tracks/forensic/"><span class="node-number">02 / FORENSIC</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Forensic</strong><small>디지털 포렌식</small><i>흔적 · 증거 · 타임라인</i></a>
-      <a class="map-node node-misc" data-map-track="misc" href="tracks/misc/"><span class="node-number">03 / MISC</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Misc</strong><small>문제 해결·자동화</small><i>단서 · 데이터 · 도구</i></a>
-      <a class="map-node node-cloud" data-map-track="cloud" href="tracks/cloud/"><span class="node-number">04 / CLOUD</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Cloud Security</strong><small>클라우드 보안</small><i>신원 · 구성 · 감사</i></a>
-      <a class="map-node node-network" data-map-track="network" href="tracks/network/"><span class="node-number">05 / NETWORK</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Network Security</strong><small>네트워크 보안</small><i>망 설계 · 정책 · 탐지</i></a>
-      <a class="map-node node-crypto" data-map-track="crypto" href="tracks/crypto/"><span class="node-number">06 / CRYPTO</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Cryptography</strong><small>암호학</small><i>수학 · 무결성 · 키 관리</i></a>
-      <a class="map-node node-rev" data-map-track="rev" href="tracks/rev/"><span class="node-number">07 / REVERSE</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Reverse Engineering</strong><small>리버싱</small><i>분석 · 실행 흐름</i></a>
-      <a class="map-node node-web" data-map-track="web" href="tracks/web/"><span class="node-number">08 / WEB</span><span class="node-arrow" aria-hidden="true">↗</span><strong>Web Hacking</strong><small>웹 보안</small><i>요청 · 인증 · 취약점</i></a>
-      <div class="map-core"><span class="core-orbit orbit-one"></span><span class="core-orbit orbit-two"></span><div class="core-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M20 2.8 23.8 15.2 36.2 19 23.8 22.8 20 35.2 16.2 22.8 3.8 19 16.2 15.2Z" fill="currentColor"/><path d="M31.1 4.7 32.5 9.1 36.9 10.5 32.5 11.9 31.1 16.3 29.7 11.9 25.3 10.5 29.7 9.1Z" fill="#9cf7ff"/></svg></div><strong>BIFROST</strong><small>SECURITY LEARNING MAP</small><span class="core-status"><b></b> PATHS CONNECTED</span></div>
+      <a class="map-node node-foundation" data-map-track="foundation" href="tracks/foundation/"><img class="node-art" src="assets/illustrations/foundation.webp" width="480" height="480" alt="" decoding="async"><span class="node-copy"><span class="node-number">00 / CORE</span><strong>Foundation</strong><small>공통 기초</small><i>터미널 · 코드 · 네트워크</i></span><span class="node-arrow" aria-hidden="true">↗</span></a>
+      <a class="map-node node-pwn" data-map-track="pwn" href="tracks/pwn/"><img class="node-art" src="assets/illustrations/pwn.webp" width="480" height="480" alt="" decoding="async"><span class="node-copy"><span class="node-number">01 / SYSTEM</span><strong>Pwn / System</strong><small>시스템 보안</small><i>메모리 · 디버깅</i></span><span class="node-arrow" aria-hidden="true">↗</span></a>
+      <a class="map-node node-forensic" data-map-track="forensic" href="tracks/forensic/"><img class="node-art" src="assets/illustrations/forensic.webp" width="480" height="480" alt="" decoding="async"><span class="node-copy"><span class="node-number">02 / FORENSIC</span><strong>Forensic</strong><small>디지털 포렌식</small><i>흔적 · 증거 · 타임라인</i></span><span class="node-arrow" aria-hidden="true">↗</span></a>
+      <a class="map-node node-misc" data-map-track="misc" href="tracks/misc/"><img class="node-art" src="assets/illustrations/misc.webp" width="480" height="480" alt="" decoding="async"><span class="node-copy"><span class="node-number">03 / MISC</span><strong>Misc</strong><small>문제 해결·자동화</small><i>단서 · 데이터 · 도구</i></span><span class="node-arrow" aria-hidden="true">↗</span></a>
+      <a class="map-node node-cloud" data-map-track="cloud" href="tracks/cloud/"><img class="node-art" src="assets/illustrations/cloud.webp" width="480" height="480" alt="" decoding="async"><span class="node-copy"><span class="node-number">04 / CLOUD</span><strong>Cloud Security</strong><small>클라우드 보안</small><i>신원 · 구성 · 감사</i></span><span class="node-arrow" aria-hidden="true">↗</span></a>
+      <a class="map-node node-network" data-map-track="network" href="tracks/network/"><img class="node-art" src="assets/illustrations/network.webp" width="480" height="480" alt="" decoding="async"><span class="node-copy"><span class="node-number">05 / NETWORK</span><strong>Network Security</strong><small>네트워크 보안</small><i>망 설계 · 정책 · 탐지</i></span><span class="node-arrow" aria-hidden="true">↗</span></a>
+      <a class="map-node node-crypto" data-map-track="crypto" href="tracks/crypto/"><img class="node-art" src="assets/illustrations/crypto.webp" width="480" height="480" alt="" decoding="async"><span class="node-copy"><span class="node-number">06 / CRYPTO</span><strong>Cryptography</strong><small>암호학</small><i>수학 · 무결성 · 키 관리</i></span><span class="node-arrow" aria-hidden="true">↗</span></a>
+      <a class="map-node node-rev" data-map-track="rev" href="tracks/rev/"><img class="node-art" src="assets/illustrations/rev.webp" width="480" height="480" alt="" decoding="async"><span class="node-copy"><span class="node-number">07 / REVERSE</span><strong>Reverse Engineering</strong><small>리버싱</small><i>분석 · 실행 흐름</i></span><span class="node-arrow" aria-hidden="true">↗</span></a>
+      <a class="map-node node-web" data-map-track="web" href="tracks/web/"><img class="node-art" src="assets/illustrations/web.webp" width="480" height="480" alt="" decoding="async"><span class="node-copy"><span class="node-number">08 / WEB</span><strong>Web Hacking</strong><small>웹 보안</small><i>요청 · 인증 · 취약점</i></span><span class="node-arrow" aria-hidden="true">↗</span></a>
+      <div class="map-core"><span class="core-orbit orbit-one"></span><span class="core-orbit orbit-two"></span><div class="core-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><defs><linearGradient id="atlas-brand" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c9b1ff"/><stop offset=".55" stop-color="#97b7ff"/><stop offset="1" stop-color="#8ae3e8"/></linearGradient></defs><path d="M20 2.8 23.8 15.2 36.2 19 23.8 22.8 20 35.2 16.2 22.8 3.8 19 16.2 15.2Z" fill="url(#atlas-brand)"/><path d="M31.1 4.7 32.5 9.1 36.9 10.5 32.5 11.9 31.1 16.3 29.7 11.9 25.3 10.5 29.7 9.1Z" fill="#d3e3ff"/></svg></div><strong>BIFROST</strong><small>SECURITY LEARNING MAP</small><span class="core-status"><b></b> PATHS CONNECTED</span></div>
       <div class="map-caption">ONE FOUNDATION <span>·</span> EIGHT DIRECTIONS <span>·</span> YOUR JOURNEY</div>
     </div>
   </div>
 </section>
 
 <section class="wrap section" id="practice" aria-labelledby="learning-guide-title">
-<div class="section-head"><div><div class="kicker mono">01 / LEARNING GUIDE</div><h2 id="learning-guide-title">이해하고, 실행하고, 근거로 남기기</h2></div><p class="section-desc">어떤 분야를 선택하든 같은 흐름으로 학습합니다. 개념과 위험을 파악하고, 실습으로 확인한 뒤 다른 사람도 재현할 수 있는 결과물로 정리하세요.</p></div>
+<div class="section-head"><div><div class="kicker mono">01 / LEARNING GUIDE</div><h2 id="learning-guide-title">배운 내용을 실력으로</h2></div><p class="section-desc">어떤 분야를 선택하든 같은 흐름으로 학습합니다. 개념과 위험을 파악하고, 실습으로 확인한 뒤 다른 사람도 재현할 수 있는 결과물로 정리하세요.</p></div>
 <div class="practice-grid">
-<article class="practice-card"><div class="practice-top"><span>01 / UNDERSTAND</span><div class="icon">⌕</div></div><h3>이해하고 범위 정하기</h3><p>배울 개념의 목적과 데이터 흐름을 파악하고, 무엇을 확인할지 정합니다.</p><ul><li>공식 문서를 우선 읽고 출처·날짜·버전을 비교하기</li><li>보호할 대상, 사용자 입력, 권한과 신뢰 경계 표시하기</li><li>실습할 대상과 허용 범위, 중단·복구 방법 정하기</li></ul><div class="deliverable"><b>남길 것</b><br>핵심 개념 요약, 간단한 흐름도, 실습 목표와 범위</div></article>
-<article class="practice-card"><div class="practice-top"><span>02 / PRACTICE &amp; VERIFY</span><div class="icon" style="background:var(--blue-soft);color:var(--blue)">⌘</div></div><h3>실행하고 검증하기</h3><p>허가된 로컬 환경과 샘플 데이터로 동작을 재현하고, 원인과 수정 효과를 확인합니다.</p><ul><li>명령·입력·원본 증거와 실제 출력 보관하기</li><li>예상과 다른 결과, 실패 원인과 대안 가설 비교하기</li><li>수정 후 정상 동작과 거부해야 할 입력을 함께 테스트하기</li></ul><div class="deliverable"><b>남길 것</b><br>실행 가능한 코드와 입력, 수정 전·후 결과, 검증 근거</div></article>
-<article class="practice-card"><div class="practice-top"><span>03 / DOCUMENT &amp; BUILD</span><div class="icon" style="background:var(--purple-soft);color:var(--purple)">↗</div></div><h3>기록하고 결과물로 묶기</h3><p>풀이와 코드를 작은 프로젝트로 정리해, 나중에도 같은 과정을 따라 할 수 있게 만듭니다.</p><ul><li>README에 목표·환경·실행법·결과를 적고 Git으로 변경 관리하기</li><li>관찰한 사실·추론·미확인 사항과 방어 방법을 구분하기</li><li>공유 전 비밀번호·토큰·개인 데이터를 제거하기</li></ul><div class="deliverable"><b>남길 것</b><br>README 또는 Write-up, 재현 절차, 배운 점과 남은 한계</div></article>
+<article class="practice-card"><div class="practice-top"><span>01 / UNDERSTAND</span><img class="practice-art" src="assets/illustrations/understand.webp" width="480" height="480" alt="" loading="lazy" decoding="async"></div><h3>이해하고 범위 정하기</h3><p>배울 개념의 목적과 데이터 흐름을 파악하고, 무엇을 확인할지 정합니다.</p><ul><li>공식 문서를 우선 읽고 출처·날짜·버전을 비교하기</li><li>보호할 대상, 사용자 입력, 권한과 신뢰 경계 표시하기</li><li>실습할 대상과 허용 범위, 중단·복구 방법 정하기</li></ul><div class="deliverable"><b>남길 것</b><br>핵심 개념 요약, 간단한 흐름도, 실습 목표와 범위</div></article>
+<article class="practice-card"><div class="practice-top"><span>02 / PRACTICE &amp; VERIFY</span><img class="practice-art" src="assets/illustrations/practice.webp" width="480" height="480" alt="" loading="lazy" decoding="async"></div><h3>실행하고 검증하기</h3><p>허가된 로컬 환경과 샘플 데이터로 동작을 재현하고, 원인과 수정 효과를 확인합니다.</p><ul><li>명령·입력·원본 증거와 실제 출력 보관하기</li><li>예상과 다른 결과, 실패 원인과 대안 가설 비교하기</li><li>수정 후 정상 동작과 거부해야 할 입력을 함께 테스트하기</li></ul><div class="deliverable"><b>남길 것</b><br>실행 가능한 코드와 입력, 수정 전·후 결과, 검증 근거</div></article>
+<article class="practice-card"><div class="practice-top"><span>03 / DOCUMENT &amp; BUILD</span><img class="practice-art" src="assets/illustrations/document.webp" width="480" height="480" alt="" loading="lazy" decoding="async"></div><h3>기록하고 결과물로 묶기</h3><p>풀이와 코드를 작은 프로젝트로 정리해, 나중에도 같은 과정을 따라 할 수 있게 만듭니다.</p><ul><li>README에 목표·환경·실행법·결과를 적고 Git으로 변경 관리하기</li><li>관찰한 사실·추론·미확인 사항과 방어 방법을 구분하기</li><li>공유 전 비밀번호·토큰·개인 데이터를 제거하기</li></ul><div class="deliverable"><b>남길 것</b><br>README 또는 Write-up, 재현 절차, 배운 점과 남은 한계</div></article>
 </div>
 <div class="learning-next"><strong>다음 학습 정하기</strong><p>완성한 결과물을 관심 직무의 실제 업무·요구 역량과 비교하고, 부족한 개념이나 새로 생긴 질문을 다음 차시와 프로젝트로 연결하세요.</p></div>
 <div class="learning-resources" id="resources" aria-labelledby="resources-title"><h3 id="resources-title">학습을 이어갈 외부 자료</h3>

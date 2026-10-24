@@ -11,6 +11,7 @@ const walk = directory => fs.readdirSync(directory, { withFileTypes: true }).fla
   item.isDirectory() ? walk(path.join(directory, item.name)) : [path.join(directory, item.name)]);
 const htmlFiles = ['index.html', ...walk(path.join(ROOT, 'tracks')).filter(file => file.endsWith('.html')).map(file => path.relative(ROOT, file)), 'guides/linux.html'];
 const documents = new Map(htmlFiles.map(file => [path.resolve(ROOT, file), parseHTML(fs.readFileSync(path.join(ROOT, file), 'utf8')).document]));
+const illustratedAssets = new Set();
 for (const [file, doc] of documents) {
   for (const element of doc.querySelectorAll('[href],[src]')) {
     const value = element.getAttribute('href') || element.getAttribute('src');
@@ -25,7 +26,22 @@ for (const [file, doc] of documents) {
       check(documents.get(target).getElementById(decodeURIComponent(url.hash.slice(1))), `Static anchor exists: ${value} in ${file}`);
     }
   }
+  for (const img of doc.querySelectorAll('img')) {
+    check(img.hasAttribute('alt'), `Image has an explicit text alternative: ${file}`);
+    check(Number(img.getAttribute('width')) > 0 && Number(img.getAttribute('height')) > 0, `Image reserves its layout dimensions: ${file}`);
+    if (img.getAttribute('src').includes('/illustrations/')) {
+      illustratedAssets.add(path.resolve(path.dirname(file), img.getAttribute('src')));
+    }
+  }
 }
+let artBytes = 0;
+for (const file of illustratedAssets) {
+  const bytes = fs.readFileSync(file);
+  check(bytes.toString('ascii', 0, 4) === 'RIFF' && bytes.toString('ascii', 8, 12) === 'WEBP', 'Illustrations are encoded WebP assets');
+  check(bytes.length < 120000, 'Each illustration stays within the web image budget');
+  artBytes += bytes.length;
+}
+check(artBytes < 1000000, 'The complete illustration collection stays under 1 MB');
 for (const file of ['main.css', 'theme.css', 'mindmap.css', 'learning.css', 'visuals.css', 'linux-guide.css', 'splash.css', 'overlays.css']) {
   const source = fs.readFileSync(path.join(ROOT, 'css', file), 'utf8');
   check(!/var\([^)]*\)[\da-f]{2,}/i.test(source), `No malformed color suffix: ${file}`);
