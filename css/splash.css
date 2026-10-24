@@ -32,8 +32,7 @@ html.splash-active { overflow: hidden; }
 .startup-splash__star {
   width: clamp(112px, 15vw, 176px);
   height: clamp(112px, 15vw, 176px);
-  color: #5ce1e6;
-  filter: drop-shadow(0 0 22px #5ce1e62e);
+  filter: drop-shadow(0 0 24px #a3a9ff36);
 }
 .startup-splash__name {
   padding-left: .16em;
