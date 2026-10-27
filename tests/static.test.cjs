@@ -9,7 +9,7 @@ let checks = 0;
 const check = (value, message) => { assert.ok(value, message); checks++; };
 const walk = directory => fs.readdirSync(directory, { withFileTypes: true }).flatMap(item =>
   item.isDirectory() ? walk(path.join(directory, item.name)) : [path.join(directory, item.name)]);
-const htmlFiles = ['index.html', ...walk(path.join(ROOT, 'tracks')).filter(file => file.endsWith('.html')).map(file => path.relative(ROOT, file)), 'guides/linux.html'];
+const htmlFiles = ['index.html', ...['tracks','guides','learn','projects'].flatMap(folder => walk(path.join(ROOT, folder))).filter(file => file.endsWith('.html')).map(file => path.relative(ROOT, file))];
 const documents = new Map(htmlFiles.map(file => [path.resolve(ROOT, file), parseHTML(fs.readFileSync(path.join(ROOT, file), 'utf8')).document]));
 const illustratedAssets = new Set();
 for (const [file, doc] of documents) {
@@ -42,7 +42,7 @@ for (const file of illustratedAssets) {
   artBytes += bytes.length;
 }
 check(artBytes < 1000000, 'The complete illustration collection stays under 1 MB');
-for (const file of ['main.css', 'theme.css', 'mindmap.css', 'learning.css', 'visuals.css', 'linux-guide.css', 'splash.css', 'overlays.css']) {
+for (const file of ['main.css', 'theme.css', 'mindmap.css', 'learning.css', 'visuals.css', 'linux-guide.css', 'splash.css', 'overlays.css', 'study.css']) {
   const source = fs.readFileSync(path.join(ROOT, 'css', file), 'utf8');
   check(!/var\([^)]*\)[\da-f]{2,}/i.test(source), `No malformed color suffix: ${file}`);
   check(CSSOM.parse(source).cssRules.length > 0, `Stylesheet parses: ${file}`);
@@ -95,7 +95,9 @@ const courseStyles = [...courseDocument.querySelectorAll('link[rel="stylesheet"]
 check(displayFromStyles(courseDocument.getElementById('completeLesson'), courseStyles) === 'none', 'Learning controls remain hidden before JavaScript enhancement');
 check(home.querySelector('meta[property="og:image"]').content.endsWith('/bifrost/og-image.png'), 'Sharing image URL matches published path');
 const sitemap = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
-check((sitemap.match(/<loc>/g) || []).length === 73, 'Sitemap includes home, Linux guide, 9 courses and 62 lessons');
+const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/site.json'), 'utf8'));
+const lessonRegistry = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/lesson-ids.json'), 'utf8'));
+check((sitemap.match(/<loc>/g) || []).length === 4 + 2 * manifest.courses.length + lessonRegistry.length, 'Sitemap includes home, two guides, library, every project/course and permanent lesson');
 check(!sitemap.includes('lesson.html?id='), 'Sitemap uses permanent static pages');
 
 const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/pages.yml'), 'utf8');

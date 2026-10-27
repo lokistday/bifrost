@@ -1,0 +1,11 @@
+{
+  "start": "start",
+  "goal": "report",
+  "edges": {
+    "start": ["decode", "inspect"],
+    "decode": ["parse", "start"],
+    "inspect": ["report"],
+    "parse": ["report"],
+    "report": []
+  }
+}

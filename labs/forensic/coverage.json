@@ -1,0 +1,10 @@
+{
+  "events": [
+    {"id": "E31", "host": "host-a", "recorded": 100, "clock_ahead": 8, "uncertainty": 2, "event": "download"},
+    {"id": "E32", "host": "host-b", "recorded": 96, "clock_ahead": 0, "uncertainty": 3, "event": "execute"}
+  ],
+  "coverage": [
+    {"source": "auth", "enabled": true, "start": 80, "end": 120},
+    {"source": "process", "enabled": false, "start": 80, "end": 120}
+  ]
+}

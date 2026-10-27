@@ -1,0 +1,1698 @@
+[
+  {
+    "url": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+    "status": 200,
+    "final": "https://aws.amazon.com/compliance/shared-responsibility-model/",
+    "lessons": [
+      "cloud.responsibility"
+    ]
+  },
+  {
+    "url": "https://csrc.nist.gov/pubs/sp/800/145/final",
+    "status": 200,
+    "final": "https://csrc.nist.gov/pubs/sp/800/145/final",
+    "lessons": [
+      "cloud.responsibility"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html",
+    "lessons": [
+      "cloud.capstone",
+      "cloud.effective-permissions",
+      "cloud.iam"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+    "lessons": [
+      "cloud.iam",
+      "cloud.secrets"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html",
+    "lessons": [
+      "cloud.vpc",
+      "network.segmentation"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html",
+    "lessons": [
+      "cloud.vpc"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/ipaddress.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/ipaddress.html",
+    "lessons": [
+      "cloud.vpc",
+      "network.addressing",
+      "network.policy",
+      "network.routing"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html",
+    "lessons": [
+      "cloud.capstone",
+      "cloud.storage"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html",
+    "lessons": [
+      "cloud.storage"
+    ]
+  },
+  {
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
+    "status": 200,
+    "final": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html",
+    "lessons": [
+      "cloud.secrets"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html",
+    "lessons": [
+      "cloud.audit",
+      "cloud.capstone"
+    ]
+  },
+  {
+    "url": "https://csrc.nist.gov/pubs/sp/800/92/final",
+    "status": 200,
+    "final": "https://csrc.nist.gov/pubs/sp/800/92/final",
+    "lessons": [
+      "cloud.audit",
+      "forensic.logs",
+      "forensic.report",
+      "network.detection"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html",
+    "lessons": [
+      "cloud.workload-trust"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html",
+    "lessons": [
+      "cloud.workload-trust"
+    ]
+  },
+  {
+    "url": "https://developer.hashicorp.com/terraform/tutorials/cli/plan",
+    "status": 200,
+    "final": "https://developer.hashicorp.com/terraform/tutorials/cli/plan",
+    "lessons": [
+      "cloud.iac-review"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/plan-for-disaster-recovery-dr.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/plan-for-disaster-recovery-dr.html",
+    "lessons": [
+      "cloud.iac-review",
+      "cloud.recovery-exercise"
+    ]
+  },
+  {
+    "url": "https://docs.docker.com/dhi/explore/security-concepts/digests/",
+    "status": 200,
+    "final": "https://docs.docker.com/dhi/explore/security-concepts/digests/",
+    "lessons": [
+      "cloud.container-supply-chain"
+    ]
+  },
+  {
+    "url": "https://slsa.dev/spec/v1.2/provenance",
+    "status": 200,
+    "final": "https://slsa.dev/spec/v1.2/provenance",
+    "lessons": [
+      "cloud.container-supply-chain"
+    ]
+  },
+  {
+    "url": "https://docs.docker.com/engine/security/",
+    "status": 200,
+    "final": "https://docs.docker.com/engine/security/",
+    "lessons": [
+      "cloud.container-supply-chain"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html",
+    "lessons": [
+      "cloud.audit-coverage"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-log-file-validation-intro.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-log-file-validation-intro.html",
+    "lessons": [
+      "cloud.audit-coverage"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/hashlib.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/hashlib.html",
+    "lessons": [
+      "cloud.recovery-exercise",
+      "crypto.hash",
+      "crypto.password",
+      "crypto.verifier-migration",
+      "forensic.integrity",
+      "misc.reproducible-results",
+      "misc.resumable-batch"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html",
+    "lessons": [
+      "cloud.effective-permissions"
+    ]
+  },
+  {
+    "url": "https://kubernetes.io/docs/reference/access-authn-authz/rbac/",
+    "status": 200,
+    "final": "https://kubernetes.io/docs/reference/access-authn-authz/rbac/",
+    "lessons": [
+      "cloud.kubernetes-rbac"
+    ]
+  },
+  {
+    "url": "https://kubernetes.io/docs/concepts/security/service-accounts/",
+    "status": 200,
+    "final": "https://kubernetes.io/docs/concepts/security/service-accounts/",
+    "lessons": [
+      "cloud.kubernetes-rbac"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html",
+    "lessons": [
+      "cloud.metadata-credentials"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-metadata-security-credentials.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-metadata-security-credentials.html",
+    "lessons": [
+      "cloud.metadata-credentials"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/privatelink-access-aws-services.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/vpc/latest/privatelink/privatelink-access-aws-services.html",
+    "lessons": [
+      "cloud.private-endpoint-paths"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-access.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-access.html",
+    "lessons": [
+      "cloud.private-endpoint-paths"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_disable-perms.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_disable-perms.html",
+    "lessons": [
+      "cloud.breakglass-access"
+    ]
+  },
+  {
+    "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+    "status": 200,
+    "final": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+    "lessons": [
+      "cloud.breakglass-access",
+      "forensic.collection-plan",
+      "forensic.incident-response",
+      "network.detection-metrics",
+      "network.incident-correlation"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/base64.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/base64.html",
+    "lessons": [
+      "crypto.representation",
+      "misc.pipeline",
+      "misc.triage",
+      "misc.writeup"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc4648.html",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/rfc/rfc4648.html",
+    "lessons": [
+      "crypto.representation"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/functions.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/builtins/functions.html",
+    "lessons": [
+      "crypto.classical",
+      "crypto.modular",
+      "misc.constraint-solving"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/math.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/math.html",
+    "lessons": [
+      "crypto.modular",
+      "misc.byte-statistics"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/tutorial/controlflow.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/tutorial/controlflow.html",
+    "lessons": [
+      "crypto.classical",
+      "foundation.python-flow"
+    ]
+  },
+  {
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html",
+    "status": 200,
+    "final": "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html",
+    "lessons": [
+      "crypto.hash",
+      "crypto.password",
+      "crypto.verifier-migration"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/hmac.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/hmac.html",
+    "lessons": [
+      "crypto.hkdf-context",
+      "crypto.mac",
+      "crypto.replay-protection",
+      "web.csrf",
+      "web.reset-tokens"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc2104.html",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/rfc/rfc2104.html",
+    "lessons": [
+      "crypto.mac"
+    ]
+  },
+  {
+    "url": "https://cryptography.io/en/stable/hazmat/primitives/aead/",
+    "status": 200,
+    "final": "https://cryptography.io/en/stable/hazmat/primitives/aead/",
+    "lessons": [
+      "crypto.nonce",
+      "crypto.symmetric"
+    ]
+  },
+  {
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html",
+    "status": 200,
+    "final": "https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html",
+    "lessons": [
+      "crypto.symmetric"
+    ]
+  },
+  {
+    "url": "https://cryptography.io/en/stable/hazmat/primitives/asymmetric/ed25519/",
+    "status": 200,
+    "final": "https://cryptography.io/en/stable/hazmat/primitives/asymmetric/ed25519/",
+    "lessons": [
+      "crypto.public-key"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc8032.html",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/rfc/rfc8032.html",
+    "lessons": [
+      "crypto.public-key"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/secrets.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/secrets.html",
+    "lessons": [
+      "crypto.nonce",
+      "crypto.unbiased-randomness",
+      "web.reset-tokens",
+      "web.session-lifecycle"
+    ]
+  },
+  {
+    "url": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final",
+    "status": 200,
+    "final": "https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final",
+    "lessons": [
+      "crypto.key-lifecycle"
+    ]
+  },
+  {
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/Key_Management_Cheat_Sheet.html",
+    "status": 200,
+    "final": "https://cheatsheetseries.owasp.org/cheatsheets/Key_Management_Cheat_Sheet.html",
+    "lessons": [
+      "crypto.key-lifecycle"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc5869",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/info/rfc5869/",
+    "lessons": [
+      "crypto.hkdf-context"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc5280",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/info/rfc5280/",
+    "lessons": [
+      "crypto.certificate-trust"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc9525",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/info/rfc9525/",
+    "lessons": [
+      "crypto.certificate-trust"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc9421",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/info/rfc9421/",
+    "lessons": [
+      "crypto.message-encoding",
+      "crypto.replay-protection",
+      "crypto.signature-authorization"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/struct.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/struct.html",
+    "lessons": [
+      "crypto.message-encoding",
+      "forensic.file-signatures",
+      "rev.byte-order",
+      "rev.differential",
+      "rev.integer-views"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc2104",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/info/rfc2104/",
+    "lessons": [
+      "crypto.message-encoding"
+    ]
+  },
+  {
+    "url": "https://cryptography.io/en/latest/hazmat/primitives/aead/",
+    "status": 200,
+    "final": "https://cryptography.io/en/latest/hazmat/primitives/aead/",
+    "lessons": [
+      "crypto.aad-record-binding"
+    ]
+  },
+  {
+    "url": "https://csrc.nist.gov/pubs/sp/800/38/d/final",
+    "status": 200,
+    "final": "https://csrc.nist.gov/pubs/sp/800/38/d/final",
+    "lessons": [
+      "crypto.aad-record-binding"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc3394",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/info/rfc3394/",
+    "lessons": [
+      "crypto.envelope-keywrap"
+    ]
+  },
+  {
+    "url": "https://cryptography.io/en/latest/hazmat/primitives/keywrap/",
+    "status": 200,
+    "final": "https://cryptography.io/en/latest/hazmat/primitives/keywrap/",
+    "lessons": [
+      "crypto.envelope-keywrap"
+    ]
+  },
+  {
+    "url": "https://cryptography.io/en/latest/hazmat/primitives/asymmetric/ed25519/",
+    "status": 200,
+    "final": "https://cryptography.io/en/latest/hazmat/primitives/asymmetric/ed25519/",
+    "lessons": [
+      "crypto.signature-authorization"
+    ]
+  },
+  {
+    "url": "https://peps.python.org/pep-0506/",
+    "status": 200,
+    "final": "https://peps.python.org/pep-0506/",
+    "lessons": [
+      "crypto.unbiased-randomness"
+    ]
+  },
+  {
+    "url": "https://csrc.nist.gov/pubs/sp/800/86/final",
+    "status": 200,
+    "final": "https://csrc.nist.gov/pubs/sp/800/86/final",
+    "lessons": [
+      "forensic.collection-plan",
+      "forensic.evidence-coverage",
+      "forensic.file-signatures",
+      "forensic.host-triage",
+      "forensic.incident-response",
+      "forensic.integrity",
+      "forensic.linux-auth",
+      "forensic.log-correlation",
+      "forensic.memory-triage",
+      "forensic.report"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/csv.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/csv.html",
+    "lessons": [
+      "forensic.logs",
+      "foundation.python-files",
+      "misc.structured-parsing"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/os.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/os.html",
+    "lessons": [
+      "forensic.metadata",
+      "foundation.atomic-output",
+      "foundation.config-precedence"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/pathlib.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/pathlib.html",
+    "lessons": [
+      "forensic.metadata",
+      "foundation.python-files",
+      "misc.archive-inspection",
+      "misc.pixel-data",
+      "misc.resumable-batch",
+      "web.file-boundary"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/datetime.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/datetime.html",
+    "lessons": [
+      "forensic.evidence-coverage",
+      "forensic.log-correlation",
+      "forensic.timeline"
+    ]
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-process",
+    "status": 200,
+    "final": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-process",
+    "lessons": [
+      "forensic.host-triage"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/sqlite3.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/sqlite3.html",
+    "lessons": [
+      "forensic.browser-sqlite",
+      "web.idempotency",
+      "web.sql",
+      "web.sql-injection"
+    ]
+  },
+  {
+    "url": "https://sqlite.org/wal.html",
+    "status": 200,
+    "final": "https://sqlite.org/wal.html",
+    "lessons": [
+      "forensic.browser-sqlite"
+    ]
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/windows/win32/wes/eventschema-schema",
+    "status": 200,
+    "final": "https://learn.microsoft.com/en-us/windows/win32/wes/eventschema-schema",
+    "lessons": [
+      "forensic.windows-events"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/xml.etree.elementtree.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/xml.etree.elementtree.html",
+    "lessons": [
+      "forensic.windows-events"
+    ]
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4624",
+    "status": 200,
+    "final": "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4624",
+    "lessons": [
+      "forensic.windows-events"
+    ]
+  },
+  {
+    "url": "https://www.freedesktop.org/software/systemd/man/latest/systemd.journal-fields.html",
+    "status": 200,
+    "final": "https://www.freedesktop.org/software/systemd/man/latest/systemd.journal-fields.html",
+    "lessons": [
+      "forensic.linux-auth"
+    ]
+  },
+  {
+    "url": "https://man7.org/linux/man-pages/man2/stat.2.html",
+    "status": 200,
+    "final": "https://man7.org/linux/man-pages/man2/stat.2.html",
+    "lessons": [
+      "forensic.filesystem-records",
+      "pwn.atomic-open"
+    ]
+  },
+  {
+    "url": "https://man7.org/linux/man-pages/man2/link.2.html",
+    "status": 200,
+    "final": "https://man7.org/linux/man-pages/man2/link.2.html",
+    "lessons": [
+      "forensic.filesystem-records"
+    ]
+  },
+  {
+    "url": "https://learn.microsoft.com/en-us/windows/win32/memory/memory-protection-constants",
+    "status": 200,
+    "final": "https://learn.microsoft.com/en-us/windows/win32/memory/memory-protection-constants",
+    "lessons": [
+      "forensic.memory-triage"
+    ]
+  },
+  {
+    "url": "https://learn.microsoft.com/ko-kr/windows/wsl/setup/environment",
+    "status": 200,
+    "final": "https://learn.microsoft.com/ko-kr/windows/wsl/setup/environment",
+    "lessons": [
+      "foundation.environment"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/tutorial/interpreter.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/tutorial/interpreter.html",
+    "lessons": [
+      "foundation.environment"
+    ]
+  },
+  {
+    "url": "https://man7.org/linux/man-pages/man7/path_resolution.7.html",
+    "status": 200,
+    "final": "https://man7.org/linux/man-pages/man7/path_resolution.7.html",
+    "lessons": [
+      "foundation.paths"
+    ]
+  },
+  {
+    "url": "https://www.gnu.org/software/bash/manual/html_node/Redirections.html",
+    "status": "unverified",
+    "error": "<urlopen error timed out>",
+    "lessons": [
+      "foundation.paths"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/tutorial/introduction.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/tutorial/introduction.html",
+    "lessons": [
+      "foundation.python-values"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/tutorial/inputoutput.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/tutorial/inputoutput.html",
+    "lessons": [
+      "foundation.python-values",
+      "misc.writeup"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/reference/simple_stmts.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/reference/simple_stmts.html",
+    "lessons": [
+      "foundation.python-flow",
+      "foundation.unit-tests",
+      "web.regression"
+    ]
+  },
+  {
+    "url": "https://www.gnu.org/software/c-intro-and-ref/manual/html_node/Pointers.html",
+    "status": "unverified",
+    "error": "<urlopen error timed out>",
+    "lessons": [
+      "foundation.c-memory"
+    ]
+  },
+  {
+    "url": "https://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html",
+    "status": 200,
+    "final": "https://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html",
+    "lessons": [
+      "foundation.c-memory",
+      "pwn.build",
+      "rev.binary",
+      "rev.report"
+    ]
+  },
+  {
+    "url": "https://man7.org/linux/man-pages/man2/chmod.2.html",
+    "status": 200,
+    "final": "https://man7.org/linux/man-pages/man2/chmod.2.html",
+    "lessons": [
+      "foundation.permissions"
+    ]
+  },
+  {
+    "url": "https://www.gnu.org/software/bash/manual/html_node/Pipelines.html",
+    "status": "unverified",
+    "error": "<urlopen error timed out>",
+    "lessons": [
+      "foundation.permissions"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc9293.html",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/rfc/rfc9293.html",
+    "lessons": [
+      "foundation.network",
+      "network.transport"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc9110.html",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/rfc/rfc9110.html",
+    "lessons": [
+      "foundation.http",
+      "foundation.network",
+      "network.transport"
+    ]
+  },
+  {
+    "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Messages",
+    "status": 200,
+    "final": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Messages",
+    "lessons": [
+      "foundation.http"
+    ]
+  },
+  {
+    "url": "https://git-scm.com/docs/git-diff",
+    "status": 200,
+    "final": "https://git-scm.com/docs/git-diff",
+    "lessons": [
+      "foundation.git"
+    ]
+  },
+  {
+    "url": "https://git-scm.com/docs/git-add",
+    "status": 200,
+    "final": "https://git-scm.com/docs/git-add",
+    "lessons": [
+      "foundation.git"
+    ]
+  },
+  {
+    "url": "https://git-scm.com/docs/git-commit",
+    "status": 200,
+    "final": "https://git-scm.com/docs/git-commit",
+    "lessons": [
+      "foundation.git"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/howto/unicode.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/howto/unicode.html",
+    "lessons": [
+      "foundation.text-bytes"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/stdtypes.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/builtins/stdtypes.html",
+    "lessons": [
+      "foundation.mutable-data",
+      "foundation.structured-data",
+      "foundation.text-bytes",
+      "misc.graph-search",
+      "misc.pipeline",
+      "misc.triage",
+      "rev.byte-order",
+      "rev.data-flow",
+      "rev.integer-views"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/json.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/json.html",
+    "lessons": [
+      "foundation.structured-data",
+      "foundation.structured-logging",
+      "misc.reproducible-results",
+      "misc.resumable-batch"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/tutorial/errors.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/tutorial/errors.html",
+    "lessons": [
+      "foundation.exceptions",
+      "misc.automation"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/exceptions.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/builtins/exceptions.html",
+    "lessons": [
+      "foundation.exceptions"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/sys.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/sys.html",
+    "lessons": [
+      "foundation.cli",
+      "foundation.exceptions"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/argparse.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/argparse.html",
+    "lessons": [
+      "foundation.cli",
+      "foundation.config-precedence",
+      "misc.automation",
+      "rev.state-machine"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/unittest.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/unittest.html",
+    "lessons": [
+      "foundation.unit-tests",
+      "rev.differential",
+      "rev.state-machine"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/copy.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/copy.html",
+    "lessons": [
+      "foundation.mutable-data"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/reference/compound_stmts.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/reference/compound_stmts.html",
+    "lessons": [
+      "foundation.atomic-output"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/tempfile.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/tempfile.html",
+    "lessons": [
+      "foundation.atomic-output"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/subprocess.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/subprocess.html",
+    "lessons": [
+      "foundation.subprocess"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/shlex.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/shlex.html",
+    "lessons": [
+      "foundation.subprocess"
+    ]
+  },
+  {
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html",
+    "status": 200,
+    "final": "https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html",
+    "lessons": [
+      "foundation.structured-logging"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/howto/logging.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/howto/logging.html",
+    "lessons": [
+      "foundation.structured-logging"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/re.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/re.html",
+    "lessons": [
+      "misc.structured-parsing"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/zipfile.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/zipfile.html",
+    "lessons": [
+      "misc.archive-inspection"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/collections.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/collections.html",
+    "lessons": [
+      "misc.byte-statistics",
+      "misc.graph-search",
+      "network.detection"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/itertools.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/itertools.html",
+    "lessons": [
+      "misc.constraint-solving"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/gzip.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/gzip.html",
+    "lessons": [
+      "misc.bounded-decompression",
+      "misc.container-identification"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/zlib.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/zlib.html",
+    "lessons": [
+      "misc.bounded-decompression",
+      "misc.container-identification"
+    ]
+  },
+  {
+    "url": "https://netpbm.sourceforge.net/doc/ppm.html",
+    "status": 200,
+    "final": "https://netpbm.sourceforge.net/doc/ppm.html",
+    "lessons": [
+      "misc.pixel-data"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc5737.html",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/rfc/rfc5737.html",
+    "lessons": [
+      "network.addressing"
+    ]
+  },
+  {
+    "url": "https://www.wireshark.org/docs/wsug_html_chunked/ChWorkDisplayFilterSection.html",
+    "status": 200,
+    "final": "https://www.wireshark.org/docs/wsug_html_chunked/ChWorkDisplayFilterSection.html",
+    "lessons": [
+      "network.pcap"
+    ]
+  },
+  {
+    "url": "https://www.wireshark.org/docs/wsug_html_chunked/ChAdvFollowStreamSection.html",
+    "status": 200,
+    "final": "https://www.wireshark.org/docs/wsug_html_chunked/ChAdvFollowStreamSection.html",
+    "lessons": [
+      "network.capstone",
+      "network.pcap"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc8446.html",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/rfc/rfc8446.html",
+    "lessons": [
+      "network.tls"
+    ]
+  },
+  {
+    "url": "https://wiki.wireshark.org/TLS/",
+    "status": 200,
+    "final": "https://wiki.wireshark.org/TLS/",
+    "lessons": [
+      "network.tls"
+    ]
+  },
+  {
+    "url": "https://csrc.nist.gov/pubs/sp/800/207/final",
+    "status": 200,
+    "final": "https://csrc.nist.gov/pubs/sp/800/207/final",
+    "lessons": [
+      "network.capstone",
+      "network.segmentation",
+      "network.zero-trust"
+    ]
+  },
+  {
+    "url": "https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html",
+    "status": 200,
+    "final": "https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html",
+    "lessons": [
+      "network.policy"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc1812",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/info/rfc1812/",
+    "lessons": [
+      "network.routing"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc3022",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/info/rfc3022/",
+    "lessons": [
+      "network.nat-correlation"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc5382",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/info/rfc5382/",
+    "lessons": [
+      "network.nat-correlation"
+    ]
+  },
+  {
+    "url": "https://csrc.nist.gov/pubs/sp/800/41/r1/final",
+    "status": 200,
+    "final": "https://csrc.nist.gov/pubs/sp/800/41/r1/final",
+    "lessons": [
+      "network.connection-state",
+      "network.incident-correlation"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc9293",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/info/rfc9293/",
+    "lessons": [
+      "network.connection-state",
+      "network.stream-reassembly"
+    ]
+  },
+  {
+    "url": "https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall",
+    "status": 200,
+    "final": "https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall",
+    "lessons": [
+      "network.detection-metrics"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc4291",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/info/rfc4291/",
+    "lessons": [
+      "network.ipv6-boundaries"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc4890",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/info/rfc4890/",
+    "lessons": [
+      "network.ipv6-boundaries",
+      "network.path-mtu"
+    ]
+  },
+  {
+    "url": "https://www.wireshark.org/docs/wsug_html_chunked/ChAdvReassemblySection.html",
+    "status": 200,
+    "final": "https://www.wireshark.org/docs/wsug_html_chunked/ChAdvReassemblySection.html",
+    "lessons": [
+      "network.stream-reassembly"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc1035",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/info/rfc1035/",
+    "lessons": [
+      "network.dns-cache"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc2308",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/info/rfc2308/",
+    "lessons": [
+      "network.dns-cache"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc8201",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/info/rfc8201/",
+    "lessons": [
+      "network.path-mtu"
+    ]
+  },
+  {
+    "url": "https://nightlies.apache.org/flink/flink-docs-stable/docs/concepts/time/",
+    "status": 200,
+    "final": "https://nightlies.apache.org/flink/flink-docs-stable/docs/concepts/time/",
+    "lessons": [
+      "network.event-time-windows"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/howto/sorting.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/howto/sorting.html",
+    "lessons": [
+      "network.event-time-windows"
+    ]
+  },
+  {
+    "url": "https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html",
+    "status": 200,
+    "final": "https://gcc.gnu.org/onlinedocs/gcc/Overall-Options.html",
+    "lessons": [
+      "pwn.build"
+    ]
+  },
+  {
+    "url": "https://man7.org/linux/man-pages/man3/malloc.3.html",
+    "status": 200,
+    "final": "https://man7.org/linux/man-pages/man3/malloc.3.html",
+    "lessons": [
+      "pwn.lifetime"
+    ]
+  },
+  {
+    "url": "https://www.gnu.org/software/c-intro-and-ref/manual/html_node/Dynamic-Memory-Allocation.html",
+    "status": "unverified",
+    "error": "<urlopen error timed out>",
+    "lessons": [
+      "pwn.lifetime"
+    ]
+  },
+  {
+    "url": "https://www.gnu.org/software/c-intro-and-ref/manual/html_node/Arrays.html",
+    "status": "unverified",
+    "error": "<urlopen error timed out>",
+    "lessons": [
+      "pwn.bounds"
+    ]
+  },
+  {
+    "url": "https://www.gnu.org/software/c-intro-and-ref/manual/html_node/Type-Size.html",
+    "status": "unverified",
+    "error": "<urlopen error timed out>",
+    "lessons": [
+      "pwn.bounds"
+    ]
+  },
+  {
+    "url": "https://sourceware.org/gdb/current/onlinedocs/gdb.html/Continuing-and-Stepping.html",
+    "status": 200,
+    "final": "https://sourceware.org/gdb/current/onlinedocs/gdb.html/Continuing-and-Stepping.html",
+    "lessons": [
+      "pwn.debugger",
+      "rev.control-flow",
+      "rev.dynamic"
+    ]
+  },
+  {
+    "url": "https://sourceware.org/gdb/current/onlinedocs/gdb.html/Variables.html",
+    "status": 200,
+    "final": "https://sourceware.org/gdb/current/onlinedocs/gdb.html/Variables.html",
+    "lessons": [
+      "pwn.debugger"
+    ]
+  },
+  {
+    "url": "https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html",
+    "status": 200,
+    "final": "https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html",
+    "lessons": [
+      "pwn.binary-parser",
+      "pwn.errors",
+      "pwn.mitigations",
+      "pwn.ownership"
+    ]
+  },
+  {
+    "url": "https://clang.llvm.org/docs/AddressSanitizer.html",
+    "status": 200,
+    "final": "https://clang.llvm.org/docs/AddressSanitizer.html",
+    "lessons": [
+      "pwn.errors"
+    ]
+  },
+  {
+    "url": "https://sourceware.org/binutils/docs/binutils/readelf.html",
+    "status": 200,
+    "final": "https://sourceware.org/binutils/docs/binutils/readelf.html",
+    "lessons": [
+      "pwn.mitigations",
+      "rev.elf-layout",
+      "rev.relocation"
+    ]
+  },
+  {
+    "url": "https://docs.kernel.org/admin-guide/sysctl/kernel.html",
+    "status": 200,
+    "final": "https://docs.kernel.org/admin-guide/sysctl/kernel.html",
+    "lessons": [
+      "pwn.mitigations"
+    ]
+  },
+  {
+    "url": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/error-handling-err/err34-c/",
+    "status": 200,
+    "final": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/error-handling-err/err34-c/",
+    "lessons": [
+      "pwn.integer-input"
+    ]
+  },
+  {
+    "url": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/integers-int/int30-c/",
+    "status": 200,
+    "final": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/integers-int/int30-c/",
+    "lessons": [
+      "pwn.allocation-size",
+      "pwn.binary-parser",
+      "pwn.integer-input"
+    ]
+  },
+  {
+    "url": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/arrays-arr/arr30-c/",
+    "status": 200,
+    "final": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/arrays-arr/arr30-c/",
+    "lessons": [
+      "pwn.allocation-size",
+      "pwn.binary-parser"
+    ]
+  },
+  {
+    "url": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/input-output-fio/fio30-c/",
+    "status": 200,
+    "final": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/input-output-fio/fio30-c/",
+    "lessons": [
+      "pwn.format-strings"
+    ]
+  },
+  {
+    "url": "https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html",
+    "status": 200,
+    "final": "https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html",
+    "lessons": [
+      "pwn.format-strings"
+    ]
+  },
+  {
+    "url": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/memory-management-mem/mem31-c/",
+    "status": 200,
+    "final": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/memory-management-mem/mem31-c/",
+    "lessons": [
+      "pwn.ownership"
+    ]
+  },
+  {
+    "url": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/memory-management-mem/mem30-c/",
+    "status": 200,
+    "final": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/memory-management-mem/mem30-c/",
+    "lessons": [
+      "pwn.ownership"
+    ]
+  },
+  {
+    "url": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/declarations-and-initialization-dcl/dcl39-c/",
+    "status": 200,
+    "final": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/declarations-and-initialization-dcl/dcl39-c/",
+    "lessons": [
+      "pwn.struct-layout"
+    ]
+  },
+  {
+    "url": "https://man7.org/linux/man-pages/man3/offsetof.3.html",
+    "status": 200,
+    "final": "https://man7.org/linux/man-pages/man3/offsetof.3.html",
+    "lessons": [
+      "pwn.struct-layout"
+    ]
+  },
+  {
+    "url": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/characters-and-strings-str/str32-c/",
+    "status": 200,
+    "final": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/characters-and-strings-str/str32-c/",
+    "lessons": [
+      "pwn.binary-strings"
+    ]
+  },
+  {
+    "url": "https://man7.org/linux/man-pages/man3/strlen.3.html",
+    "status": 200,
+    "final": "https://man7.org/linux/man-pages/man3/strlen.3.html",
+    "lessons": [
+      "pwn.binary-strings"
+    ]
+  },
+  {
+    "url": "https://man7.org/linux/man-pages/man2/dup.2.html",
+    "status": 200,
+    "final": "https://man7.org/linux/man-pages/man2/dup.2.html",
+    "lessons": [
+      "pwn.file-descriptors"
+    ]
+  },
+  {
+    "url": "https://man7.org/linux/man-pages/man2/read.2.html",
+    "status": 200,
+    "final": "https://man7.org/linux/man-pages/man2/read.2.html",
+    "lessons": [
+      "pwn.file-descriptors",
+      "pwn.partial-io"
+    ]
+  },
+  {
+    "url": "https://man7.org/linux/man-pages/man2/write.2.html",
+    "status": 200,
+    "final": "https://man7.org/linux/man-pages/man2/write.2.html",
+    "lessons": [
+      "pwn.file-descriptors",
+      "pwn.partial-io"
+    ]
+  },
+  {
+    "url": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/input-output-fio/fio45-c/",
+    "status": 200,
+    "final": "https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/input-output-fio/fio45-c/",
+    "lessons": [
+      "pwn.atomic-open"
+    ]
+  },
+  {
+    "url": "https://man7.org/linux/man-pages/man2/open.2.html",
+    "status": 200,
+    "final": "https://man7.org/linux/man-pages/man2/open.2.html",
+    "lessons": [
+      "pwn.atomic-open"
+    ]
+  },
+  {
+    "url": "https://sourceware.org/binutils/docs/binutils/nm.html",
+    "status": 200,
+    "final": "https://sourceware.org/binutils/docs/binutils/nm.html",
+    "lessons": [
+      "rev.binary"
+    ]
+  },
+  {
+    "url": "https://sourceware.org/binutils/docs/binutils/objdump.html",
+    "status": 200,
+    "final": "https://sourceware.org/binutils/docs/binutils/objdump.html",
+    "lessons": [
+      "rev.assembly",
+      "rev.control-flow",
+      "rev.report",
+      "rev.static",
+      "rev.switch-recovery"
+    ]
+  },
+  {
+    "url": "https://gitlab.com/x86-psABIs/x86-64-ABI",
+    "status": 200,
+    "final": "https://gitlab.com/x86-psABIs/x86-64-ABI",
+    "lessons": [
+      "rev.assembly",
+      "rev.calling-convention"
+    ]
+  },
+  {
+    "url": "https://github.com/ARM-software/abi-aa/blob/main/aapcs64/aapcs64.rst",
+    "status": 200,
+    "final": "https://github.com/ARM-software/abi-aa/blob/main/aapcs64/aapcs64.rst",
+    "lessons": [
+      "rev.assembly"
+    ]
+  },
+  {
+    "url": "https://sourceware.org/binutils/docs/binutils/strings.html",
+    "status": 200,
+    "final": "https://sourceware.org/binutils/docs/binutils/strings.html",
+    "lessons": [
+      "rev.static"
+    ]
+  },
+  {
+    "url": "https://sourceware.org/gdb/current/onlinedocs/gdb.html/Set-Breaks.html",
+    "status": 200,
+    "final": "https://sourceware.org/gdb/current/onlinedocs/gdb.html/Set-Breaks.html",
+    "lessons": [
+      "rev.dynamic"
+    ]
+  },
+  {
+    "url": "https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html",
+    "status": 200,
+    "final": "https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html",
+    "lessons": [
+      "rev.report",
+      "rev.switch-recovery"
+    ]
+  },
+  {
+    "url": "https://sourceware.org/gdb/current/onlinedocs/gdb.html/Registers.html",
+    "status": 200,
+    "final": "https://sourceware.org/gdb/current/onlinedocs/gdb.html/Registers.html",
+    "lessons": [
+      "rev.calling-convention"
+    ]
+  },
+  {
+    "url": "https://gabi.xinuos.com/elf/03-sheader.html",
+    "status": 200,
+    "final": "https://gabi.xinuos.com/elf/03-sheader.html",
+    "lessons": [
+      "rev.elf-layout"
+    ]
+  },
+  {
+    "url": "https://gabi.xinuos.com/elf/07-pheader.html",
+    "status": 200,
+    "final": "https://gabi.xinuos.com/elf/07-pheader.html",
+    "lessons": [
+      "rev.elf-layout"
+    ]
+  },
+  {
+    "url": "https://gabi.xinuos.com/elf/08-dynamic.html",
+    "status": 200,
+    "final": "https://gabi.xinuos.com/elf/08-dynamic.html",
+    "lessons": [
+      "rev.relocation"
+    ]
+  },
+  {
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent",
+    "status": 200,
+    "final": "https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent",
+    "lessons": [
+      "web.flow",
+      "web.output"
+    ]
+  },
+  {
+    "url": "https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML",
+    "status": 200,
+    "final": "https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML",
+    "lessons": [
+      "web.flow"
+    ]
+  },
+  {
+    "url": "https://www.sqlite.org/lang_select.html",
+    "status": 200,
+    "final": "https://www.sqlite.org/lang_select.html",
+    "lessons": [
+      "web.sql"
+    ]
+  },
+  {
+    "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies",
+    "status": 200,
+    "final": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies",
+    "lessons": [
+      "web.sessions"
+    ]
+  },
+  {
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html",
+    "status": 200,
+    "final": "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html",
+    "lessons": [
+      "web.session-lifecycle",
+      "web.sessions"
+    ]
+  },
+  {
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html",
+    "status": 200,
+    "final": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html",
+    "lessons": [
+      "web.authorization",
+      "web.regression"
+    ]
+  },
+  {
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/Insecure_Direct_Object_Reference_Prevention_Cheat_Sheet.html",
+    "status": 200,
+    "final": "https://cheatsheetseries.owasp.org/cheatsheets/Insecure_Direct_Object_Reference_Prevention_Cheat_Sheet.html",
+    "lessons": [
+      "web.authorization"
+    ]
+  },
+  {
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html",
+    "status": 200,
+    "final": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html",
+    "lessons": [
+      "web.sql-injection"
+    ]
+  },
+  {
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html",
+    "status": 200,
+    "final": "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html",
+    "lessons": [
+      "web.output"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/html.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/html.html",
+    "lessons": [
+      "web.output"
+    ]
+  },
+  {
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html",
+    "status": 200,
+    "final": "https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html",
+    "lessons": [
+      "web.csrf"
+    ]
+  },
+  {
+    "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS",
+    "status": 200,
+    "final": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS",
+    "lessons": [
+      "web.cors"
+    ]
+  },
+  {
+    "url": "https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Same-origin_policy",
+    "status": 200,
+    "final": "https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Same-origin_policy",
+    "lessons": [
+      "web.cors"
+    ]
+  },
+  {
+    "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP",
+    "status": 200,
+    "final": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP",
+    "lessons": [
+      "web.csp"
+    ]
+  },
+  {
+    "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy",
+    "status": 200,
+    "final": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy",
+    "lessons": [
+      "web.csp"
+    ]
+  },
+  {
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html",
+    "status": 200,
+    "final": "https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html",
+    "lessons": [
+      "web.file-boundary"
+    ]
+  },
+  {
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+    "status": 200,
+    "final": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+    "lessons": [
+      "web.ssrf"
+    ]
+  },
+  {
+    "url": "https://docs.python.org/3/library/urllib.parse.html",
+    "status": 200,
+    "final": "https://docs.python.org/3/library/urllib.parse.html",
+    "lessons": [
+      "web.ssrf"
+    ]
+  },
+  {
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html",
+    "status": 200,
+    "final": "https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html",
+    "lessons": [
+      "web.mass-assignment"
+    ]
+  },
+  {
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html",
+    "status": 200,
+    "final": "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html",
+    "lessons": [
+      "web.mass-assignment"
+    ]
+  },
+  {
+    "url": "https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html",
+    "status": 200,
+    "final": "https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html",
+    "lessons": [
+      "web.reset-tokens"
+    ]
+  },
+  {
+    "url": "https://www.rfc-editor.org/rfc/rfc9111.html",
+    "status": 200,
+    "final": "https://www.rfc-editor.org/rfc/rfc9111.html",
+    "lessons": [
+      "web.private-caching"
+    ]
+  },
+  {
+    "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control",
+    "status": 200,
+    "final": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control",
+    "lessons": [
+      "web.private-caching"
+    ]
+  },
+  {
+    "url": "https://www.sqlite.org/lang_transaction.html",
+    "status": 200,
+    "final": "https://www.sqlite.org/lang_transaction.html",
+    "lessons": [
+      "web.idempotency"
+    ]
+  },
+  {
+    "url": "https://www.sqlite.org/lang_createtable.html",
+    "status": 200,
+    "final": "https://www.sqlite.org/lang_createtable.html",
+    "lessons": [
+      "web.idempotency"
+    ]
+  }
+]

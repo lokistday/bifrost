@@ -2,6 +2,8 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b1220">
 <meta name="description" content="실행을 멈추고 현재 코드와 변수의 값을 비교합니다.">
@@ -20,19 +22,20 @@
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=20261024-atlas1">
-<script src="../../js/catalog.js" defer></script>
-<script src="../../js/courses/pwn.js" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../../css/study.css?v=learning-a66aac410152">
+<script src="../../js/catalog.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/courses/pwn.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=20261024-atlas1" defer></script>
+<script src="../../js/learning-view.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/learning.js" defer></script>
 </head>
 <body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="pwn.debugger" style="--course-accent:var(--map-violet)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">시스템 보안 목차</a></nav>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">시스템 보안 목차</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -55,10 +58,39 @@
               <span class="lesson-dot" data-dot="pwn.debugger" aria-hidden="true"></span><span>GDB 중단점과 변수<small class="completion-label" data-completion="pwn.debugger"></small></span></a></li><li><a class="side-lesson" href="errors.html" >
               <span class="lesson-dot" data-dot="pwn.errors" aria-hidden="true"></span><span>Sanitizer로 경계 오류 찾기<small class="completion-label" data-completion="pwn.errors"></small></span></a></li><li><a class="side-lesson" href="mitigations.html" >
               <span class="lesson-dot" data-dot="pwn.mitigations" aria-hidden="true"></span><span>ASLR·NX·Canary의 역할과 한계<small class="completion-label" data-completion="pwn.mitigations"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>03 · 정수와 출력의 경계<span class="caption" data-module-count="2"></span></summary>
+            <ol><li><a class="side-lesson" href="integer-input.html" >
+              <span class="lesson-dot" data-dot="pwn.integer-input" aria-hidden="true"></span><span>숫자 입력·부호·범위 검증<small class="completion-label" data-completion="pwn.integer-input"></small></span></a></li><li><a class="side-lesson" href="allocation-size.html" >
+              <span class="lesson-dot" data-dot="pwn.allocation-size" aria-hidden="true"></span><span>할당 크기와 정수 wrap 방지<small class="completion-label" data-completion="pwn.allocation-size"></small></span></a></li><li><a class="side-lesson" href="format-strings.html" >
+              <span class="lesson-dot" data-dot="pwn.format-strings" aria-hidden="true"></span><span>서식 문자열·데이터·출력 잘림<small class="completion-label" data-completion="pwn.format-strings"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>04 · 소유권과 작은 파서<span class="caption" data-module-count="3"></span></summary>
+            <ol><li><a class="side-lesson" href="ownership.html" >
+              <span class="lesson-dot" data-dot="pwn.ownership" aria-hidden="true"></span><span>메모리 소유권·빌림·해제<small class="completion-label" data-completion="pwn.ownership"></small></span></a></li><li><a class="side-lesson" href="binary-parser.html" >
+              <span class="lesson-dot" data-dot="pwn.binary-parser" aria-hidden="true"></span><span>바이너리 길이·엔디언·파서 경계<small class="completion-label" data-completion="pwn.binary-parser"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>05 · 메모리 표현과 데이터 계약<span class="caption" data-module-count="4"></span></summary>
+            <ol><li><a class="side-lesson" href="struct-layout.html" >
+              <span class="lesson-dot" data-dot="pwn.struct-layout" aria-hidden="true"></span><span>구조체 배치와 명시적 직렬화<small class="completion-label" data-completion="pwn.struct-layout"></small></span></a></li><li><a class="side-lesson" href="binary-strings.html" >
+              <span class="lesson-dot" data-dot="pwn.binary-strings" aria-hidden="true"></span><span>바이너리 길이와 중간 NUL<small class="completion-label" data-completion="pwn.binary-strings"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>06 · 열린 객체와 스트림 경계<span class="caption" data-module-count="5"></span></summary>
+            <ol><li><a class="side-lesson" href="file-descriptors.html" >
+              <span class="lesson-dot" data-dot="pwn.file-descriptors" aria-hidden="true"></span><span>파일 디스크립터·dup·공유 오프셋<small class="completion-label" data-completion="pwn.file-descriptors"></small></span></a></li><li><a class="side-lesson" href="partial-io.html" >
+              <span class="lesson-dot" data-dot="pwn.partial-io" aria-hidden="true"></span><span>부분 I/O·누적 읽기·메시지 경계<small class="completion-label" data-completion="pwn.partial-io"></small></span></a></li><li><a class="side-lesson" href="atomic-open.html" >
+              <span class="lesson-dot" data-dot="pwn.atomic-open" aria-hidden="true"></span><span>파일 열기·TOCTOU·객체 검증<small class="completion-label" data-completion="pwn.atomic-open"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
-          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/pwn.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">02 · 관찰·진단·완화 · 4 / 6</div><h1>GDB 중단점과 변수</h1><p class="lesson-objective">실행을 멈추고 현재 코드와 변수의 값을 비교합니다.</p></div></header>
-          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/pwn.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">02 · 관찰·진단·완화 · 4 / 16</div><h1>GDB 중단점과 변수</h1><p class="lesson-objective">실행을 멈추고 현재 코드와 변수의 값을 비교합니다.</p></div></header>
+          <div class="lesson-meta"><span>기초</span><span>학습 45–80분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>버퍼 크기, 유효한 데이터 길이, 문자열 길이를 구분할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>할당 용량과 채워진 바이트 수는 다르고 strlen은 첫 NUL까지만 셉니다. 읽기 전에 경계와 객체 수명을 확인합니다.</p><a href="../../guides/bridges.html#c">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
           <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Ubuntu/WSL · GDB · -g -O0 빌드</strong></p><ul><li>gdb --version을 확인합니다. GDB가 없다면 Foundation 환경 준비의 Ubuntu 설치 단계를 완료합니다.</li><li>GDB 프롬프트에서 입력할 명령과 Bash에서 입력할 컴파일 명령을 구분합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="build.html">시스템 보안 · 소스·컴파일·실행 파일 ↗</a></li><li><a href="lifetime.html">시스템 보안 · 스택·힙과 수명 ↗</a></li></ul>
             </section>
@@ -69,19 +101,9 @@
         <a class="learning-button" href="../../labs/pwn.zip" download>전체 실습 ZIP 받기 ↓</a>
         <ul><li><a href="../../labs/pwn/memory.c" download>memory.c ↓</a></li></ul>
       </section>
-          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2><ol class="walkthrough"><li><h3>Bash와 GDB 명령 분리하기</h3><p>먼저 Bash에서 빌드하고 GDB를 시작합니다. 이후 break와 run은 (gdb) 프롬프트에서 입력합니다.</p>
-        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>gcc -Wall -Wextra -g -O0 memory.c -o memory
-gdb ./memory</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>GDB가 memory의 심볼 정보를 읽고 프롬프트를 표시합니다.</pre></div></li><li><h3>초기화 실행 여부를 먼저 확인하기</h3><p>break main, run, list 순서로 입력합니다. 현재 위치를 보고 int local = 7 대입을 실제로 실행할 때까지 next로 진행한 뒤 print local을 합니다. 필요한 next 횟수는 줄 매핑에 따라 다를 수 있습니다.</p>
-        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>break main
-run
-list
-next
-print local</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>local 초기화가 끝난 위치에서 관찰값은 7입니다.</pre></div></li><li><h3>포인터와 대상 값을 함께 보기</h3><p>list와 next로 malloc 검사와 *heap = 9가 끝난 위치까지 진행합니다. 그때 print heap과 print *heap을 비교하고 continue로 정상 종료시킵니다.</p>
-        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>print heap
-print *heap
-continue
-quit</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>유효한 주소와 역참조 값 9를 관찰하며 정상 출력 뒤 프로그램이 종료합니다.</pre></div></li></ol>
-            <h3>전체 예제 연결하기</h3><div class="code-shell"><div class="code-toolbar"><span>예제 · 명령 또는 관찰 절차</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">gcc -g -O0 memory.c -o memory
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>혼합 절차 · 먼저 터미널에서 빌드·gdb 실행 → 주석 아래는 GDB 콘솔에 입력</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">gcc -g -O0 memory.c -o memory
 gdb ./memory
 # 아래는 GDB 프롬프트에서
 break main
@@ -90,14 +112,35 @@ list
 next
 print local
 continue
-quit</code></pre></div><div class="expected-output"><h3>예상 결과와 해석</h3><pre>local = 7 대입 줄을 실행한 뒤 print local은 7을 보여 줍니다. main 첫 줄에서의 next 횟수는 컴파일러에 따라 다릅니다.</pre></div></section>
+quit</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>local = 7 대입 줄을 실행한 뒤 print local은 7을 보여 줍니다. main 첫 줄에서의 next 횟수는 컴파일러에 따라 다릅니다.</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>Bash와 GDB 명령 분리하기</h3><p>먼저 Bash에서 빌드하고 GDB를 시작합니다. 이후 break와 run은 (gdb) 프롬프트에서 입력합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Ubuntu/WSL · GDB · -g -O0 빌드</span></div><pre><code>gcc -Wall -Wextra -g -O0 memory.c -o memory
+gdb ./memory</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>GDB가 memory의 심볼 정보를 읽고 프롬프트를 표시합니다.</pre></div></li><li><h3>초기화 실행 여부를 먼저 확인하기</h3><p>break main, run, list 순서로 입력합니다. 현재 위치를 보고 int local = 7 대입을 실제로 실행할 때까지 next로 진행한 뒤 print local을 합니다. 필요한 next 횟수는 줄 매핑에 따라 다를 수 있습니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>GDB 콘솔 명령 · 대상 실행 파일을 연 같은 디버깅 세션</span></div><pre><code>break main
+run
+list
+next
+print local</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>local 초기화가 끝난 위치에서 관찰값은 7입니다.</pre></div></li><li><h3>포인터와 대상 값을 함께 보기</h3><p>list와 next로 malloc 검사와 *heap = 9가 끝난 위치까지 진행합니다. 그때 print heap과 print *heap을 비교하고 continue로 정상 종료시킵니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>GDB 콘솔 명령 · 대상 실행 파일을 연 같은 디버깅 세션</span></div><pre><code>print heap
+print *heap
+continue
+quit</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>유효한 주소와 역참조 값 9를 관찰하며 정상 출력 뒤 프로그램이 종료합니다.</pre></div></li></ol></section>
           <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>local 초기화 전과 후에 멈춘 위치를 비교하고 heap에 값을 넣은 뒤 print *heap을 확인하세요.</p>
             <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>No symbol 오류면 -g 옵션과 현재 프레임을 확인합니다. list로 현재 줄을 먼저 찾으세요.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
         <ol><li>local 초기화 전에는 줄 위치만 기록하고 초기화되지 않은 값에 의미를 부여하지 않습니다. 대입 후 print local = 7을 확인합니다.</li><li>malloc 성공 검사와 초기화 뒤 heap 주소와 *heap=9를 별도로 적습니다.</li><li>마지막에 continue로 정상 종료하고, -g -O0 빌드와 사용한 GDB 명령 순서를 노트에 남깁니다.</li></ol>
         
         <h3>결과를 판단하는 기준</h3><pre>소스 위치·초기화 순서·local=7·*heap=9·정상 종료가 연결된 기록이어야 합니다. 포인터 주소의 고정값은 요구하지 않습니다.</pre>
-      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p></section>
-          <section id="verify" class="article-section completion-panel"><div class="overline">04 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>대입문 직전과 직후의 중단점에서 같은 변수를 관찰하세요. 소스 줄과 실제 실행 시점을 구분하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>중단점은 보통 해당 줄 실행 전 상태를 보여 줍니다. next/step 뒤의 값을 비교하고 최적화 때문에 관찰이 달라질 수 있음을 기록합니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>현재 줄과 변수의 초기화 시점을 함께 기록했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>중단 후 계속 실행해 정상 종료했다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/pwn/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
         <fieldset class="question" data-question="0">
           <legend>1. GDB가 int local = 7 줄을 가리키고 있습니다. 바로 print local의 값이 항상 7이라고 믿어도 될까요?</legend>
           <label class="question-option"><input type="radio" name="question-0" value="0"><span>항상 7이다. 줄이 보이면 실행이 끝났다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>아니다. 현재 줄 실행 전인지 확인하고 대입 후 값을 읽어야 한다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>디버거에서 정수는 읽을 수 없다.</span></label>

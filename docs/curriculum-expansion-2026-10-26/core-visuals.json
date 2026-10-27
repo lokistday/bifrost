@@ -1,0 +1,436 @@
+{
+  "foundation.text-bytes": {
+    "type": "flow",
+    "title": "글자에서 바이트로, 다시 글자로",
+    "description": "A가의 코드 포인트는 2개입니다. UTF-8로 encode하면 41 ea b0 80의 4바이트가 되고, UTF-8로 decode하면 원래 문자열과 같아집니다. ASCII 해석은 실패합니다.",
+    "takeaway": "길이를 비교할 때 먼저 단위와 인코딩을 적으세요.",
+    "steps": [
+      [
+        "str · A가",
+        "코드 포인트 2개"
+      ],
+      [
+        "UTF-8 encode",
+        "41 ea b0 80 · 4바이트"
+      ],
+      [
+        "UTF-8 decode",
+        "왕복 비교 True",
+        "positive"
+      ]
+    ]
+  },
+  "foundation.structured-data": {
+    "type": "flow",
+    "title": "파싱 다음에도 검사가 남아 있습니다",
+    "description": "record.json은 JSON 파싱과 두 필드 계약을 통과합니다. record-invalid.json은 JSON 문법은 맞지만 minutes가 문자열이어서 값 검증에서 거부됩니다.",
+    "takeaway": "파싱 성공을 데이터 신뢰의 근거로 사용하지 마세요.",
+    "steps": [
+      [
+        "JSON 문법",
+        "문자열 → Python 값"
+      ],
+      [
+        "구조·키",
+        "learner, minutes만 허용"
+      ],
+      [
+        "타입·범위",
+        "정수 0~1440",
+        "positive"
+      ]
+    ]
+  },
+  "foundation.exceptions": {
+    "type": "compare",
+    "title": "실패도 읽을 수 있는 결과로 남깁니다",
+    "description": "정상 JSON 작업은 stdout에 learner와 minutes를 쓰고 상태 0을 반환합니다. 잘못된 minutes는 stdout 없이 stderr에 ValueError 진단을 쓰고 상태 2를 반환합니다.",
+    "takeaway": "성공 여부와 정상 값은 같은 칸에 넣지 마세요.",
+    "panels": [
+      {
+        "title": "정상 문서",
+        "rows": [
+          [
+            "stdout",
+            "learner=Loki"
+          ],
+          [
+            "종료 상태",
+            "0"
+          ]
+        ],
+        "tone": "positive"
+      },
+      {
+        "title": "잘못된 minutes",
+        "rows": [
+          [
+            "stderr",
+            "INVALID: ValueError"
+          ],
+          [
+            "종료 상태",
+            "2"
+          ]
+        ],
+        "tone": ""
+      }
+    ]
+  },
+  "foundation.cli": {
+    "type": "table",
+    "title": "30분 입력에서 기준값만 바꿉니다",
+    "description": "record.json의 minutes는 30입니다. minimum 0과 30은 선택, 31과 1440은 선택 제외이고 1441은 조건 계산 전에 범위 오류입니다.",
+    "takeaway": "입력 유효성과 조건 결과는 다른 단계입니다.",
+    "columns": [
+      "minimum",
+      "입력 유효성",
+      "selected"
+    ],
+    "rows": [
+      [
+        "0",
+        "유효",
+        "True"
+      ],
+      [
+        "30",
+        "유효",
+        "True"
+      ],
+      [
+        "31",
+        "유효",
+        "False"
+      ],
+      [
+        "1441",
+        "범위 오류",
+        "계산하지 않음"
+      ]
+    ]
+  },
+  "foundation.unit-tests": {
+    "type": "timeline",
+    "title": "통과만큼 실패도 확인합니다",
+    "description": "원본의 네 검사 메서드가 통과한 뒤 summary의 >=를 >로 바꾸면 동등 경계가 실패합니다. 구현을 복구하고 정상·오류 입력을 보강하면 다시 통과합니다.",
+    "takeaway": "결함에서 실패하는 검사가 수정의 근거가 됩니다.",
+    "events": [
+      [
+        "기준",
+        "원본 테스트",
+        "4 tests · OK"
+      ],
+      [
+        "결함",
+        ">=를 >로 변경",
+        "동등 경계 실패"
+      ],
+      [
+        "복구",
+        ">=로 되돌리기",
+        "동등 경계 통과",
+        "positive"
+      ],
+      [
+        "보강",
+        "1과 1440.0 추가",
+        "정상·타입 경계 확장"
+      ]
+    ]
+  },
+  "web.csrf": {
+    "type": "flow",
+    "title": "쿠키 다음에 변경 요청의 조건을 확인합니다",
+    "description": "단일 alice 세션 모형에서 POST·동일 Origin·공개 표본 토큰을 모두 만족해야 ALLOW입니다. 토큰 누락·다른 Origin·GET 변경은 각각 DENY입니다.",
+    "takeaway": "로그인 상태는 변경 의도를 자동으로 증명하지 않습니다.",
+    "steps": [
+      [
+        "세션 확인",
+        "인증된 alice인가?"
+      ],
+      [
+        "의도 방어",
+        "POST · Origin · 토큰"
+      ],
+      [
+        "변경 허용",
+        "네 조건을 모두 만족",
+        "positive"
+      ]
+    ],
+    "note": "고정 토큰은 공개 교육용이며 실제 세션·브라우저를 구현하지 않습니다."
+  },
+  "web.cors": {
+    "type": "compare",
+    "title": "CORS와 인가는 다른 질문에 답합니다",
+    "description": "허용 Origin에 EXPOSE를 출력하는 것은 브라우저의 응답 읽기 정책을 뜻합니다. alice가 bob의 자료를 읽을 수 있는지는 서버가 별도로 인가해야 합니다.",
+    "takeaway": "응답 읽기 허용으로 사용자 권한 검사를 대체하지 마세요.",
+    "panels": [
+      {
+        "title": "브라우저 · CORS",
+        "rows": [
+          [
+            "질문",
+            "이 Origin이 읽어도 되나?"
+          ],
+          [
+            "입력",
+            "Origin · 응답 헤더"
+          ]
+        ],
+        "tone": ""
+      },
+      {
+        "title": "서버 · 인가",
+        "rows": [
+          [
+            "질문",
+            "이 사용자가 읽어도 되나?"
+          ],
+          [
+            "입력",
+            "신원 · 자원 · 동작"
+          ]
+        ],
+        "tone": "positive"
+      }
+    ]
+  },
+  "web.csp": {
+    "type": "table",
+    "title": "정책 내용과 헤더 이름을 함께 봅니다",
+    "description": "동일한 다섯 지시문이어도 집행 헤더와 보고 전용 헤더의 목적은 다릅니다. unsafe-inline을 더한 정책은 이 실습 체크리스트에서 REVIEW입니다.",
+    "takeaway": "체크리스트 통과와 실제 브라우저 집행을 구분하세요.",
+    "columns": [
+      "표본",
+      "모형 출력",
+      "확인 범위"
+    ],
+    "rows": [
+      [
+        "집행 헤더",
+        "CHECKLIST_PASS",
+        "고정 항목만"
+      ],
+      [
+        "보고 전용",
+        "REPORT_ONLY",
+        "차단 주장 불가"
+      ],
+      [
+        "inline 추가",
+        "REVIEW",
+        "정책 검토 필요"
+      ]
+    ]
+  },
+  "web.file-boundary": {
+    "type": "flow",
+    "title": "이름이 통과해도 인가는 남습니다",
+    "description": "단일 txt 이름을 검사하고 resolve된 경로가 앱의 기준 폴더 안인지 확인합니다. 이 함수는 파일을 열거나 소유자를 검사하지 않습니다.",
+    "takeaway": "이름·경로·소유자·내용은 서로 다른 검증입니다.",
+    "steps": [
+      [
+        "이름 계약",
+        "단일 txt 파일명"
+      ],
+      [
+        "경로 경계",
+        "기준 폴더 포함 확인"
+      ],
+      [
+        "별도 검사",
+        "소유자 · 내용 · 열기",
+        "positive"
+      ]
+    ]
+  },
+  "web.ssrf": {
+    "type": "flow",
+    "title": "URL 검사 다음에 실제 연결 경계가 있습니다",
+    "description": "모형은 허용 scheme·host·port·path를 검사하고 끝납니다. 실제 서버 요청에는 DNS·리다이렉트·출구 정책 등의 검증이 더 필요합니다. 이 실습의 요청 수는 0입니다.",
+    "takeaway": "구문 통과를 실제 연결 안전성으로 확대하지 마세요.",
+    "steps": [
+      [
+        "사용자 입력",
+        "URL 대신 자료 ID 고려"
+      ],
+      [
+        "구문 검사",
+        "https · host · path"
+      ],
+      [
+        "실제 연결 경계",
+        "DNS · redirect · egress",
+        "positive"
+      ]
+    ],
+    "note": "세 번째 단계는 설계 검토 대상이며 제공 스크립트는 실행하지 않습니다."
+  },
+  "pwn.integer-input": {
+    "type": "flow",
+    "title": "범위를 확인한 다음 타입을 바꿉니다",
+    "description": "parse_count는 ASCII 십진 문법, strtoumax 오류와 끝 위치, 0~1024 범위를 확인한 뒤 size_t로 바꿉니다. 잘못된 입력은 사용하지 않고 상태 2로 종료합니다.",
+    "takeaway": "캐스팅 전에 원래 값의 의미를 검증하세요.",
+    "steps": [
+      [
+        "문자열 계약",
+        "숫자만 · 빈 값 거부"
+      ],
+      [
+        "변환·범위",
+        "errno · end · ≤1024"
+      ],
+      [
+        "cast와 사용",
+        "검증 후 size_t",
+        "positive"
+      ]
+    ]
+  },
+  "pwn.allocation-size": {
+    "type": "table",
+    "title": "계산 가능한 크기와 할당 성공은 다릅니다",
+    "description": "allocation_size의 작은 사례는 8+3×4=20이고, SIZE_MAX 개수는 연산 전에 거부됩니다. 빈 개수는 헤더 8바이트이며 원소 크기 0은 거부됩니다.",
+    "takeaway": "큰 값을 먼저 계산하지 말고 허용 조건부터 확인하세요.",
+    "columns": [
+      "count · element · header",
+      "결과",
+      "이유"
+    ],
+    "rows": [
+      [
+        "3 · 4 · 8",
+        "OK · 20",
+        "범위 내"
+      ],
+      [
+        "SIZE_MAX · 4 · 8",
+        "REJECT",
+        "계산 전 제한"
+      ],
+      [
+        "0 · 4 · 8",
+        "OK · 8",
+        "헤더만 남음"
+      ],
+      [
+        "1 · 0 · 8",
+        "REJECT",
+        "원소 크기 0"
+      ]
+    ]
+  },
+  "pwn.format-strings": {
+    "type": "compare",
+    "title": "출력에 필요한 길이와 저장 용량을 비교합니다",
+    "description": "[%s] 서식에서 %s%n 입력은 데이터 6바이트로 용량 8에 들어갑니다. Bifrost는 괄호 포함 9바이트가 필요해 용량 8에서 잘립니다. NUL 공간도 필요합니다.",
+    "takeaway": "needed < capacity일 때에만 잘리지 않습니다.",
+    "panels": [
+      {
+        "title": "데이터 · %s%n",
+        "rows": [
+          [
+            "required",
+            "6바이트"
+          ],
+          [
+            "capacity",
+            "8바이트"
+          ],
+          [
+            "결과",
+            "[%s%n] · no"
+          ]
+        ],
+        "tone": "positive"
+      },
+      {
+        "title": "데이터 · Bifrost",
+        "rows": [
+          [
+            "required",
+            "9바이트"
+          ],
+          [
+            "capacity",
+            "8바이트"
+          ],
+          [
+            "결과",
+            "[Bifros · yes"
+          ]
+        ],
+        "tone": ""
+      }
+    ]
+  },
+  "pwn.ownership": {
+    "type": "timeline",
+    "title": "사용을 끝낸 뒤 소유자가 한 번 해제합니다",
+    "description": "make_note가 만든 힙 버퍼의 소유자는 main입니다. show_note는 호출 중 빌려 읽고 반환하며, 이후 main이 해제하고 owner를 NULL로 바꿉니다. 다른 별칭이 자동으로 지워지는 것은 아닙니다.",
+    "takeaway": "포인터 변수가 남아 있어도 해제된 객체를 사용할 수 없습니다.",
+    "events": [
+      [
+        "할당",
+        "make_note",
+        "main이 소유권 받음"
+      ],
+      [
+        "빌림",
+        "show_note",
+        "유효한 동안 읽기"
+      ],
+      [
+        "해제",
+        "free(owner)",
+        "블록 수명 종료"
+      ],
+      [
+        "변수 변경",
+        "owner = NULL",
+        "다른 별칭은 별개",
+        "positive"
+      ]
+    ]
+  },
+  "pwn.binary-parser": {
+    "type": "cells",
+    "title": "헤더 2바이트와 실제 본문 길이를 맞춥니다",
+    "description": "정상 표본은 00 03 뒤에 42 49 46 세 바이트가 옵니다. 최소 헤더가 있는지 먼저 검사하고 선언 길이 3이 남은 바이트 3과 같은지 비교합니다.",
+    "takeaway": "헤더를 읽기 전에 크기부터 확인하세요.",
+    "rows": [
+      {
+        "title": "헤더 2바이트와 본문 3바이트",
+        "labels": [
+          "길이 상위",
+          "길이 하위",
+          "본문 0",
+          "본문 1",
+          "본문 2"
+        ],
+        "values": [
+          "00",
+          "03",
+          "42",
+          "49",
+          "46"
+        ]
+      },
+      {
+        "title": "본문의 문자 표현",
+        "labels": [
+          "위치 2",
+          "위치 3",
+          "위치 4"
+        ],
+        "values": [
+          "B",
+          "I",
+          "F"
+        ]
+      }
+    ]
+  }
+}

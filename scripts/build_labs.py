@@ -1,15 +1,23 @@
 """Rebuild original, offline teaching fixtures and deterministic downloadable bundles."""
 from pathlib import Path
-import csv
 import hashlib
-import io
 import json
 import socket
 import struct
 import zipfile
+import shutil
+import tempfile
+import atexit
 
-ROOT = Path(__file__).resolve().parents[1] / 'labs'
+PROJECT = Path(__file__).resolve().parents[1]
+PUBLISH = PROJECT / 'labs'
+assert PUBLISH.resolve() == PROJECT / 'labs' and not PUBLISH.is_symlink(), 'Unexpected labs output directory'
+_staging = tempfile.TemporaryDirectory(prefix='bifrost-labs-')
+atexit.register(_staging.cleanup)
+ROOT = Path(_staging.name)
+(ROOT / 'network').mkdir()
 SOURCES = Path(__file__).resolve().parent / 'lab_sources'
+assert SOURCES.resolve() == PROJECT / 'scripts/lab_sources', 'Unexpected source directory'
 FIXTURES = Path(__file__).resolve().parents[1] / 'content' / 'lab-fixtures'
 
 def write(track, name, content):
@@ -17,191 +25,10 @@ def write(track, name, content):
     folder.mkdir(parents=True, exist_ok=True)
     (folder / name).write_text(content.strip() + '\n', encoding='utf-8', newline='\n')
 
-write('foundation', 'hello.py', '''name = "Bifrost"
-minutes = 15
-print(f"Hello, {name}")
-print(f"Study: {minutes * 2} minutes")''')
-write('foundation', 'events.csv', '''user,status
-alice,ok
-bob,denied
-alice,ok
-carol,denied''')
-write('foundation', 'summarize.py', '''from pathlib import Path
-import csv
 
-path = Path(__file__).with_name("events.csv")
-with path.open(encoding="utf-8", newline="") as file:
-    rows = list(csv.DictReader(file))
-denied = [row for row in rows if row["status"] == "denied"]
-print(f"events={len(rows)} denied={len(denied)}")
-for row in denied:
-    print(row["user"])''')
-write('foundation', 'addresses.c', '''#include <stdio.h>
-int main(void) {
-    int value = 7;
-    int *pointer = &value;
-    printf("value=%d dereferenced=%d\\n", value, *pointer);
-    printf("address=%p\\n", (void *)pointer);
-    *pointer = 9;
-    printf("after=%d\\n", value);
-    return 0;
-}''')
-write('foundation', 'notes.txt', 'Bifrost\nLinux practice\nKeep evidence')
 
-write('web', 'demo.py', '''"""Offline models, not a server or a production authentication system."""
-import html
-import sqlite3
-db = sqlite3.connect(":memory:")
-db.execute("CREATE TABLE users (id INTEGER, name TEXT)")
-db.executemany("INSERT INTO users VALUES (?, ?)", [(1, "alice"), (2, "bob")])
-payload = "' OR 1=1 --"
-unsafe = db.execute("SELECT name FROM users WHERE name = '" + payload + "'").fetchall()
-safe = db.execute("SELECT name FROM users WHERE name = ?", (payload,)).fetchall()
-print(f"unsafe_rows={len(unsafe)} safe_rows={len(safe)}")
-print("alice_rows=" + str(len(db.execute("SELECT name FROM users WHERE name = ?", ("alice",)).fetchall())))
-print(html.escape('<b>hello</b>'))
-def can_read(user, owner):
-    return (isinstance(user, str) and bool(user.strip())
-            and isinstance(owner, str) and bool(owner.strip())
-            and user == owner)
-print(f"own={can_read('alice', 'alice')} other={can_read('alice', 'bob')}")
-assert len(unsafe) == 2 and len(safe) == 0
-assert can_read("alice", "alice") and not can_read("alice", "bob")
-print("regression=PASS")''')
-write('web', 'browser.html', '''<!doctype html><html lang="ko"><meta charset="utf-8">
-<title>Bifrost DOM 실습</title><h1>텍스트와 HTML</h1>
-<p>왼쪽은 텍스트 노드, 오른쪽은 코드에 고정된 HTML입니다.</p>
-<p id="text"></p><p id="markup"></p>
-<script>
-const sample = '<b>Bifrost</b>';
-document.querySelector('#text').textContent = sample;
-// Only a fixed, authored literal is used here. Do not insert untrusted data this way.
-document.querySelector('#markup').innerHTML = sample;
-</script></html>''')
-write('web', 'requests.txt', '''GET /notes/1 HTTP/1.1
-Host: localhost
-Cookie: session=DEMO_ONLY
 
-HTTP/1.1 200 OK
-Content-Type: text/plain; charset=utf-8
-Set-Cookie: session=DEMO_ONLY; HttpOnly; SameSite=Lax
 
-This is Alice's note.
-
-# Separate example: Alice requests Bob's note -> 403 Forbidden.
-# DEMO_ONLY is a fictional identifier, not a working credential.
-# In HTTPS production, a session cookie should also use Secure.''')
-write('web', 'permissions.csv', '''actor,resource,action,expected
-alice,alice-note,read,allow
-alice,bob-note,read,deny
-anonymous,alice-note,read,deny
-bob,bob-note,read,allow''')
-
-write('pwn', 'memory.c', '''#include <stdio.h>
-#include <stdlib.h>
-int main(void) {
-    int local = 7;
-    int values[3] = {10, 20, 30};
-    int *heap = malloc(sizeof *heap);
-    if (!heap) return 1;
-    *heap = 9;
-    printf("local=%d heap=%d\\n", local, *heap);
-    for (size_t i = 0; i < sizeof values / sizeof values[0]; ++i)
-        printf("%d%s", values[i], i == 2 ? "\\n" : " ");
-    free(heap);
-    heap = NULL;
-    return 0;
-}''')
-write('pwn', 'bounds.c', '''/* Deliberate LOCAL teaching error. Compile with AddressSanitizer first. */
-#include <stdio.h>
-int main(void) {
-    int values[3] = {10, 20, 30};
-    for (int i = 0; i <= 3; ++i) printf("%d\\n", values[i]);
-    return 0;
-}''')
-write('rev', 'check.c', '''#include <stdio.h>
-#include <string.h>
-int check(const char *text) {
-    return strlen(text) == 7 && strcmp(text, "BIFROST") == 0;
-}
-int main(int argc, char **argv) {
-    if (argc != 2) { puts("usage: check WORD"); return 2; }
-    puts(check(argv[1]) ? "match" : "no match");
-    return 0;
-}''')
-write('rev', 'analysis.md', '''# 분석 기록
-- 환경 / CPU / 컴파일 명령:
-- 가설:
-- 정적 근거 (함수·문자열·분기):
-- 동적 근거 (입력·중단점·출력):
-- 반례:
-- 결론과 한계:''')
-
-write('forensic', 'auth.csv', '''id,time,host,user,event,source
-E01,2026-10-20T09:00:00+09:00,app,alice,login_ok,192.0.2.10
-E02,2026-10-20T00:01:00+00:00,app,bob,login_denied,198.51.100.8
-E03,2026-10-20T00:01:10+00:00,app,bob,login_denied,198.51.100.8
-E04,2026-10-20T00:01:20+00:00,app,bob,login_denied,198.51.100.8
-E05,2026-10-20T09:02:00+09:00,app,bob,login_ok,198.51.100.8
-E06,2026-10-20T00:03:00+00:00,app,bob,file_read,198.51.100.8''')
-write('forensic', 'evidence.txt', 'Bifrost training evidence\ncase=BF-001\nowner=alice')
-write('forensic', 'timeline.py', '''from pathlib import Path
-from datetime import datetime, timezone
-import csv
-with Path(__file__).with_name("auth.csv").open(encoding="utf-8", newline="") as f:
-    rows = list(csv.DictReader(f))
-for row in sorted(rows, key=lambda r: datetime.fromisoformat(r["time"])):
-    time = datetime.fromisoformat(row["time"]).astimezone(timezone.utc)
-    print(time.isoformat(), row["id"], row["event"])''')
-
-write('network', 'flows.csv', '''id,time,src,dst,port,action,service
-N01,2026-10-20T00:00:00Z,192.0.2.10,10.10.10.20,443,ALLOW,web
-N02,2026-10-20T00:00:01Z,10.10.10.20,10.10.20.30,5432,ALLOW,database
-N03,2026-10-20T00:01:00Z,198.51.100.8,10.10.20.30,5432,DENY,database
-N04,2026-10-20T00:01:10Z,198.51.100.8,10.10.10.20,22,DENY,ssh
-N05,2026-10-20T00:01:20Z,198.51.100.8,10.10.10.20,22,DENY,ssh
-N06,2026-10-20T00:01:30Z,10.10.10.20,203.0.113.9,443,ALLOW,egress''')
-write('network', 'policy.json', json.dumps({'description': 'Simplified first-match educational policy; default deny. Not an actual firewall config.', 'rules': [
-    {'src': '0.0.0.0/0', 'dst': '10.10.10.20/32', 'port': 443, 'action': 'ALLOW'},
-    {'src': '10.10.10.20/32', 'dst': '10.10.20.30/32', 'port': 5432, 'action': 'ALLOW'}]}, indent=2))
-write('network', 'evaluate.py', '''from pathlib import Path
-import csv
-import ipaddress
-import json
-root = Path(__file__).parent
-rules = json.loads((root / "policy.json").read_text())["rules"]
-with (root / "flows.csv").open(newline="", encoding="utf-8") as f:
-    for flow in csv.DictReader(f):
-        action = "DENY"
-        for rule in rules:
-            if (ipaddress.ip_address(flow["src"]) in ipaddress.ip_network(rule["src"])
-                and ipaddress.ip_address(flow["dst"]) in ipaddress.ip_network(rule["dst"])
-                and int(flow["port"]) == rule["port"]):
-                action = rule["action"]
-                break
-        print(flow["id"], action, "MATCH" if action == flow["action"] else "MISMATCH")''')
-write('network', 'detect.py', '''from pathlib import Path
-from collections import Counter
-import csv
-with Path(__file__).with_name("flows.csv").open(newline="", encoding="utf-8") as f:
-    counts = Counter(row["src"] for row in csv.DictReader(f) if row["action"] == "DENY")
-for source, count in sorted(counts.items()):
-    if count >= 3:
-        print(f"REVIEW {source} denied={count}")
-# Whole-file teaching counter. No time window, identity or intent inference.''')
-write('network', 'design.md', '''# BF-001 통합 네트워크 검토
-- 진입점: Internet -> web 10.10.10.20:443
-- 데이터: web -> database 10.10.20.30:5432
-- 관리: 별도 관리 구간과 신원 검증 필요
-- 누락된 관측: DNS, TLS 인증서, 사용자 신원, 허용 egress의 목적
-
-| 흐름 | 허용/거부 | 근거 | 검증 방법 | 롤백 |
-| --- | --- | --- | --- | --- |
-| Internet -> DB | | | | |
-| web -> DB | | | | |
-| web -> 외부 | | | | |
-
-증거 ID / 대안 가설 / 탐지의 오탐 / 변경 영향 / 재검증 결과를 기록하세요.''')
 
 # A real, tiny Ethernet/IPv4 PCAP, generated without third-party libraries.
 def checksum(data):
@@ -268,96 +95,27 @@ write('network', 'tls13.keys', tls_fixture['keylog'])
 write('network', 'tls13-provenance.json', json.dumps({key: value for key, value in tls_fixture.items()
       if key not in ('chunks', 'keylog')}, ensure_ascii=False, indent=2))
 
-write('crypto', 'lab.py', '''import base64
-import hashlib
-import hmac
-import sys
-mode = sys.argv[1] if len(sys.argv) > 1 else "representation"
-data = b"Bifrost"
-if mode == "representation":
-    print(data.hex())
-    print(base64.b64encode(data).decode())
-    print(base64.b64decode("Qmlmcm9zdA==").decode())
-elif mode == "modular":
-    print(17 % 5, pow(3, -1, 26))
-elif mode == "classical":
-    text = "BIFROST"
-    cipher = "".join(chr((ord(c) - 65 + 3) % 26 + 65) for c in text)
-    print(cipher)
-    print("".join(chr((ord(c) - 65 - 3) % 26 + 65) for c in cipher))
-elif mode == "hash":
-    a, b = hashlib.sha256(data).digest(), hashlib.sha256(data + b"!").digest()
-    print("same=", a == b)
-    print("hex_length=", len(a.hex()))
-elif mode == "mac":
-    key = b"DEMO-KEY-NOT-FOR-PRODUCTION"
-    tag = hmac.digest(key, data, "sha256")
-    print("original=", hmac.compare_digest(tag, hmac.digest(key, data, "sha256")))
-    print("changed=", hmac.compare_digest(tag, hmac.digest(key, data + b"!", "sha256")))
-elif mode == "nonce":
-    # Toy XOR demonstration of stream reuse, NOT a cipher to deploy.
-    a, b, stream = b"YES", b"NO!", bytes([31, 22, 9])
-    xor = lambda x, y: bytes(i ^ j for i, j in zip(x, y))
-    print(xor(xor(a, stream), xor(b, stream)) == xor(a, b))
-elif mode == "password":
-    # Fixed teaching salts; real systems need a fresh random salt per password.
-    derive = lambda salt: hashlib.scrypt(b"demo-password", salt=salt, n=16384, r=8, p=1, dklen=32)
-    print("same_salt=", derive(b"teaching-salt-A") == derive(b"teaching-salt-A"))
-    print("other_salt=", derive(b"teaching-salt-A") == derive(b"teaching-salt-B"))
-else:
-    raise SystemExit("mode: representation modular classical hash mac nonce password")''')
-write('crypto', 'protocol.md', '''# Bifrost: 키 역할 설계 (실제 암호문이나 키가 아닙니다)
-- Alice의 서명 개인키: Alice만 보유
-- Alice의 검증 공개키: Bob이 신뢰할 수 있는 경로로 확보
-- Bob의 복호 개인키: Bob만 보유
-- Bob의 암호화 공개키: Alice가 신뢰할 수 있는 경로로 확보
-- 질문: Bob에게 보낼 내용을 암호화할 때 누구의 공개키를 사용할까?
-- 질문: Alice의 서명을 검증할 때 누구의 공개키를 사용할까?
-- 질문: 키가 바뀌면 기존 기록의 검증·복호화는 어떻게 보장할까?''')
 
-write('misc', 'puzzle.txt', 'label=training\npayload=UW1sbWNtOXpkQT09\nnoise=ignore-me')
-write('misc', 'solve.py', '''from pathlib import Path
-import base64
-import sys
-path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).with_name("puzzle.txt")
-fields = dict(line.split("=", 1) for line in path.read_text(encoding="utf-8").splitlines() if "=" in line)
-value = fields["payload"].encode("ascii")
-for step in range(2):
-    value = base64.b64decode(value, validate=True)
-    print(f"step={step + 1}: {value.decode('ascii')}")''')
-write('misc', 'writeup.md', '''# 문제 해결 기록
-## 입력과 목표
-## 단서와 가설 (사실 / 추측 구분)
-## 실패한 접근
-## 재현 명령과 중간 출력
-## 최종 결과의 검증
-## 다른 입력에서의 한계''')
 
-write('cloud', 'config.json', json.dumps({'workload': 'training-notes', 'provider': 'fictional', 'storage': {'name': 'training-notes', 'public': True, 'encrypted': False}, 'identity': {'action': '*', 'resource': '*', 'long_lived_key': True}, 'network': {'database_public': True, 'admin_source': '0.0.0.0/0'}, 'audit': {'enabled': False, 'retention_days': 0}}, indent=2))
-write('cloud', 'config-reviewed.json', json.dumps({'workload': 'training-notes', 'provider': 'fictional',
-    'storage': {'name': 'training-notes', 'public': False, 'encrypted': True},
-    'identity': {'action': 'ReadObject', 'resource': 'training-notes', 'long_lived_key': False},
-    'network': {'database_public': False, 'admin_source': '192.0.2.0/24'},
-    'audit': {'enabled': True, 'retention_days': 30}}, indent=2))
-write('cloud', 'audit.csv', '''id,time,actor,action,resource,result
-C01,2026-10-20T00:00:00Z,reader,ReadObject,training-notes,Allow
-C02,2026-10-20T00:01:00Z,reader,ChangePolicy,training-notes,Deny
-C03,2026-10-20T00:02:00Z,deploy-role,ChangePolicy,training-notes,Allow
-C04,2026-10-20T00:03:00Z,anonymous,ReadObject,training-notes,Allow''')
-write('cloud', 'responsibility.csv', '''control,IaaS_customer,SaaS_customer
-physical_datacenter,no,no
-guest_os_patch,yes,usually_no
-data_classification,yes,yes
-identity_access,yes,yes
-application_config,yes,service_dependent''')
 
 # Readable authored sources for the expanded labs. Keep these outside generated
 # labs/: rebuilding copies the originals before calculating checksums and ZIPs.
-for folder in sorted(SOURCES.iterdir()):
-    if folder.is_dir():
-        for source in sorted(folder.iterdir()):
-            if source.is_file():
-                write(folder.name, source.name, source.read_text(encoding='utf-8'))
+source_manifest = json.loads((PROJECT / 'content/lab-sources.json').read_text(encoding='utf-8'))
+for track, names in source_manifest.items():
+    assert track in {c['id'] for c in json.loads((PROJECT / 'content/site.json').read_text(encoding='utf-8'))['courses']}
+    for name in names:
+        assert Path(name).name == name and '/' not in name and '\\' not in name and name not in ('.', '..')
+        source = SOURCES / track / name
+        assert (SOURCES / track).resolve() == SOURCES / track, f'Unexpected course source directory: {track}'
+        assert source.is_file() and not source.is_symlink(), f'Not an authored regular file: {source}'
+        assert source.resolve().parent == (SOURCES / track).resolve(), f'Source escapes track: {source}'
+        write(track, name, source.read_text(encoding='utf-8'))
+
+for track in source_manifest:
+    for name in ('lab_input.py', 'project.py'):
+        write(track, name, (PROJECT / 'scripts/lab_common' / name).read_text(encoding='utf-8'))
+    if track in ('cloud', 'network', 'crypto'):
+        write(track, 'model_contracts.py', (PROJECT / 'scripts/lab_common/model_contracts.py').read_text(encoding='utf-8'))
 
 for folder in sorted(ROOT.iterdir()):
     if not folder.is_dir(): continue
@@ -365,7 +123,8 @@ for folder in sorted(ROOT.iterdir()):
 이 묶음은 Bifrost가 직접 만든 교육용 자료입니다. 실제 개인정보·접속 키·운영 로그가 아닙니다.
 
 ZIP을 먼저 풀고 파일을 확인하세요. Python 예제의 기본 환경은 Python 3.10 이상입니다.
-기본 예제는 표준 라이브러리만 사용하며, crypto의 aead.py·signature.py만 선택 패키지가 필요합니다.
+기본 예제는 표준 라이브러리만 사용하며, crypto의 실제 AEAD·서명·봉투 암호 예제는 선택 패키지가 필요합니다.
+선택 패키지 설치와 실행 범위는 crypto의 requirements.txt 및 차시별 가이드를 확인하세요.
 Linux/WSL/macOS에서는 python3, Windows PowerShell에서는 py -3 명령으로 실행합니다.
 C 예제는 Ubuntu/WSL의 gcc, gdb, binutils를 기준으로 합니다. 바이너리를 제공하지 않고 소스를 제공합니다.
 명령은 각 차시를 따라 실행하세요. 스크립트가 외부 서비스에 접속하거나 클라우드 자원을 만들지는 않습니다.
@@ -376,6 +135,8 @@ network의 traffic.pcap은 합성 DNS 2개와 TCP/HTTP 6개, 총 8프레임입�
 network 정책·cloud 구성은 단순화한 교육 모델입니다. 실제 장비나 공급자에 그대로 적용할 형식이 아닙니다.
 crypto의 고전 암호와 XOR 예제는 원리 관찰용이며 실제 보안에 사용하지 않습니다.
 자세한 준비·예상 결과·한계·풀이가 제공된 묶음은 LAB-GUIDE.md를 먼저 읽으세요.
+후속 응용 차시는 ROUND2-GUIDE.md를, network·cloud·crypto의 앞선 확장은 ADVANCED-GUIDE.md를 함께 확인하세요.
+분야를 마치면 project-brief.md의 종합 프로젝트를 진행하세요. A/B 표본·결과 검사·보고서 루브릭이 있습니다.
 ''')
     hashes = '\n'.join(f'{hashlib.sha256(file.read_bytes()).hexdigest()}  {file.name}'
                        for file in sorted(folder.iterdir(), key=lambda path: path.name)
@@ -394,3 +155,15 @@ crypto의 고전 암호와 XOR 예제는 원리 관찰용이며 실제 보안에
             archive.writestr(info, file.read_bytes())
 
 print('Rebuilt 9 offline lab bundles.')
+
+# Only files produced in this fresh staging directory can enter the publication
+# manifest. Local learner scratch files are preserved but never published.
+manifest = sorted(p.relative_to(ROOT).as_posix() for p in ROOT.rglob('*') if p.is_file())
+PUBLISH.mkdir(exist_ok=True)
+for name in manifest:
+    target = PUBLISH / name
+    assert not target.is_symlink() and not target.parent.is_symlink(), f'Refuse symlink output: {target}'
+    assert target.resolve().is_relative_to(PUBLISH.resolve()), f'Output escapes labs: {target}'
+    target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(ROOT / name, target)
+(PUBLISH / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')

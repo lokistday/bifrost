@@ -2,6 +2,8 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b1220">
 <meta name="description" content="브라우저에서 데이터를 코드로 해석하지 않도록 출력 방법을 고릅니다.">
@@ -20,19 +22,20 @@
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=20261024-atlas1">
-<script src="../../js/catalog.js" defer></script>
-<script src="../../js/courses/web.js" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../../css/study.css?v=learning-a66aac410152">
+<script src="../../js/catalog.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/courses/web.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=20261024-atlas1" defer></script>
+<script src="../../js/learning-view.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/learning.js" defer></script>
 </head>
 <body class="learning-page" data-course="web" data-course-number="08" data-view="lesson" data-lesson-id="web.output" style="--course-accent:var(--map-blue)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">웹 보안 목차</a></nav>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">웹 보안 목차</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -56,10 +59,39 @@
               <span class="lesson-dot" data-dot="web.sql-injection" aria-hidden="true"></span><span>SQL Injection과 바인딩<small class="completion-label" data-completion="web.sql-injection"></small></span></a></li><li><a class="side-lesson" href="output.html" aria-current="page">
               <span class="lesson-dot" data-dot="web.output" aria-hidden="true"></span><span>출력 컨텍스트와 XSS 방어<small class="completion-label" data-completion="web.output"></small></span></a></li><li><a class="side-lesson" href="regression.html" >
               <span class="lesson-dot" data-dot="web.regression" aria-hidden="true"></span><span>수정·반례·회귀 테스트<small class="completion-label" data-completion="web.regression"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>03 · 브라우저와 서버의 신뢰 경계<span class="caption" data-module-count="2"></span></summary>
+            <ol><li><a class="side-lesson" href="csrf.html" >
+              <span class="lesson-dot" data-dot="web.csrf" aria-hidden="true"></span><span>CSRF와 상태 변경 요청<small class="completion-label" data-completion="web.csrf"></small></span></a></li><li><a class="side-lesson" href="cors.html" >
+              <span class="lesson-dot" data-dot="web.cors" aria-hidden="true"></span><span>동일 출처·CORS·응답 읽기 권한<small class="completion-label" data-completion="web.cors"></small></span></a></li><li><a class="side-lesson" href="csp.html" >
+              <span class="lesson-dot" data-dot="web.csp" aria-hidden="true"></span><span>CSP·보안 헤더와 적용 범위<small class="completion-label" data-completion="web.csp"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>04 · 파일과 외부 요청의 경계<span class="caption" data-module-count="3"></span></summary>
+            <ol><li><a class="side-lesson" href="file-boundary.html" >
+              <span class="lesson-dot" data-dot="web.file-boundary" aria-hidden="true"></span><span>파일 이름·경로 이탈·저장 경계<small class="completion-label" data-completion="web.file-boundary"></small></span></a></li><li><a class="side-lesson" href="ssrf.html" >
+              <span class="lesson-dot" data-dot="web.ssrf" aria-hidden="true"></span><span>SSRF·서버 요청과 출구 통제<small class="completion-label" data-completion="web.ssrf"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>05 · 요청 계약과 제한된 권한<span class="caption" data-module-count="4"></span></summary>
+            <ol><li><a class="side-lesson" href="mass-assignment.html" >
+              <span class="lesson-dot" data-dot="web.mass-assignment" aria-hidden="true"></span><span>요청 계약과 Mass Assignment<small class="completion-label" data-completion="web.mass-assignment"></small></span></a></li><li><a class="side-lesson" href="session-lifecycle.html" >
+              <span class="lesson-dot" data-dot="web.session-lifecycle" aria-hidden="true"></span><span>세션 갱신·만료·서버 무효화<small class="completion-label" data-completion="web.session-lifecycle"></small></span></a></li><li><a class="side-lesson" href="reset-tokens.html" >
+              <span class="lesson-dot" data-dot="web.reset-tokens" aria-hidden="true"></span><span>일회 토큰·목적 결합·만료<small class="completion-label" data-completion="web.reset-tokens"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>06 · 공유와 거래의 일관성<span class="caption" data-module-count="5"></span></summary>
+            <ol><li><a class="side-lesson" href="private-caching.html" >
+              <span class="lesson-dot" data-dot="web.private-caching" aria-hidden="true"></span><span>개인 응답·공유 캐시·Cache-Control<small class="completion-label" data-completion="web.private-caching"></small></span></a></li><li><a class="side-lesson" href="idempotency.html" >
+              <span class="lesson-dot" data-dot="web.idempotency" aria-hidden="true"></span><span>거래 불변 조건·트랜잭션·재시도<small class="completion-label" data-completion="web.idempotency"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
-          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/web.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">02 · 권한·입력 처리·검증 · 6 / 7</div><h1>출력 컨텍스트와 XSS 방어</h1><p class="lesson-objective">브라우저에서 데이터를 코드로 해석하지 않도록 출력 방법을 고릅니다.</p></div></header>
-          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/web.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">02 · 권한·입력 처리·검증 · 6 / 17</div><h1>출력 컨텍스트와 XSS 방어</h1><p class="lesson-objective">브라우저에서 데이터를 코드로 해석하지 않도록 출력 방법을 고릅니다.</p></div></header>
+          <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>인증과 대상 자원의 인가는 같은 검사인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>인증은 주체 확인, 인가는 주체·대상·행동의 허용 판단입니다. 세션이 유효해도 타인의 자원은 거부해야 합니다.</p><a href="../../guides/bridges.html#web">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
           <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>브라우저와 Python 3 · 출력 비교</strong></p><ul><li>browser.html과 demo.py를 각각 준비합니다. 브라우저 예제와 Python 출력은 서로 다른 관찰 단계입니다.</li><li>이 차시는 고정된 무해한 태그만 비교합니다. 외부 페이지나 사용자 계정에 입력을 보내지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="flow.html">웹 보안 · HTML·DOM과 요청 흐름 ↗</a></li><li><a href="sql-injection.html">웹 보안 · SQL Injection과 바인딩 ↗</a></li></ul>
             </section>
@@ -70,19 +102,30 @@
         <a class="learning-button" href="../../labs/web.zip" download>전체 실습 ZIP 받기 ↓</a>
         <ul><li><a href="../../labs/web/browser.html" download>browser.html ↓</a></li><li><a href="../../labs/web/demo.py" download>demo.py ↓</a></li></ul>
       </section>
-          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2><ol class="walkthrough"><li><h3>Python 출력의 기호 대응 읽기</h3><p>demo.py의 html.escape 부분과 출력 한 줄을 비교합니다. &lt;와 &gt;가 엔티티가 되었음을 확인하되 이를 JavaScript 문자열이나 URL에 범용으로 적용하지 않습니다.</p>
-        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>python3 demo.py</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>출력 중 &amp;lt;b&amp;gt;hello&amp;lt;/b&amp;gt;가 보입니다.</pre></div></li><li><h3>브라우저의 출력 경계 바꾸기</h3><p>browser.html에서 #markup에 대입하는 .innerHTML을 .textContent로 바꾸고 저장합니다. 고정 sample은 그대로 두어 API 변경의 영향만 봅니다.</p>
-        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>document.querySelector(&quot;#markup&quot;).textContent = sample;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>두 줄 모두 &lt;b&gt;Bifrost&lt;/b&gt; 문자를 보여 주며 #markup 아래에 b 요소가 생기지 않습니다.</pre></div></li><li><h3>URL 자리에는 별도 정책 적기</h3><p>댓글 작성자 링크처럼 사용자가 URL을 제공하는 상황을 가정합니다. 주소 해석과 허용 스킴·목적지 정책을 확인하고 속성 API로 설정하는 절차를 적습니다. HTML 글자 인코딩만 했다는 이유로 모든 URL을 허용하지 않습니다.</p>
-        </li></ol>
-            <h3>전체 예제 연결하기</h3><div class="code-shell"><div class="code-toolbar"><span>예제 · 명령 또는 관찰 절차</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 demo.py
-# HTML 엔티티 출력과 browser.html의 두 결과를 비교합니다.</code></pre></div><div class="expected-output"><h3>예상 결과와 해석</h3><pre>&amp;lt;b&amp;gt;hello&amp;lt;/b&amp;gt;</pre></div></section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 브라우저와 Python 3 · 출력 비교</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 demo.py
+# HTML 엔티티 출력과 browser.html의 두 결과를 비교합니다.</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>&amp;lt;b&amp;gt;hello&amp;lt;/b&amp;gt;</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>Python 출력의 기호 대응 읽기</h3><p>demo.py의 html.escape 부분과 출력 한 줄을 비교합니다. &lt;와 &gt;가 엔티티가 되었음을 확인하되 이를 JavaScript 문자열이나 URL에 범용으로 적용하지 않습니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 브라우저와 Python 3 · 출력 비교</span></div><pre><code>python3 demo.py</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>출력 중 &amp;lt;b&amp;gt;hello&amp;lt;/b&amp;gt;가 보입니다.</pre></div></li><li><h3>브라우저의 출력 경계 바꾸기</h3><p>browser.html에서 #markup에 대입하는 .innerHTML을 .textContent로 바꾸고 저장합니다. 고정 sample은 그대로 두어 API 변경의 영향만 봅니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>JavaScript · 안내된 HTML의 script 부분 또는 같은 개발자 도구 콘솔</span></div><pre><code>document.querySelector(&quot;#markup&quot;).textContent = sample;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>두 줄 모두 &lt;b&gt;Bifrost&lt;/b&gt; 문자를 보여 주며 #markup 아래에 b 요소가 생기지 않습니다.</pre></div></li><li><h3>URL 자리에는 별도 정책 적기</h3><p>댓글 작성자 링크처럼 사용자가 URL을 제공하는 상황을 가정합니다. 주소 해석과 허용 스킴·목적지 정책을 확인하고 속성 API로 설정하는 절차를 적습니다. HTML 글자 인코딩만 했다는 이유로 모든 URL을 허용하지 않습니다.</p>
+        </li></ol></section>
           <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>browser.html의 오른쪽 대입도 textContent로 바꾸고 두 줄이 같아지는지 확인하세요. 사용자 입력을 URL에 넣는 사례에는 별도 스킴 허용 정책이 필요한 이유를 적습니다.</p>
             <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>한 번 인코딩된 값을 반복 인코딩하면 &amp;amp;lt;처럼 보일 수 있습니다. 데이터 흐름에서 출력 경계를 한 곳으로 정하세요.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
         <ol><li>#text와 #markup의 대입문을 모두 textContent로 맞춘 뒤 Elements에서 자식이 텍스트인지 확인합니다.</li><li>API를 바꾸기 전에는 한쪽에 b 요소가 있었고 바꾼 뒤에는 태그 문자가 그대로 보인다고 기록합니다.</li><li>URL 사례에는 https 같은 허용 스킴 정책과 주소 파싱을 별도로 표시합니다. html.escape가 URL 허용 여부까지 판단하지 않는다고 설명합니다.</li></ol>
         
         <h3>결과를 판단하는 기준</h3><pre>두 p의 textContent는 같은 문자열이고 DOM에 sample에서 생긴 b 요소가 없어야 합니다. HTML 텍스트·URL·스크립트 문맥의 차이도 서술해야 합니다.</pre>
-      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p></section>
-          <section id="verify" class="article-section completion-panel"><div class="overline">04 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>동일 문자열을 HTML 본문·속성·URL에 넣는 세 상황의 처리 방법을 비교하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>본문 textContent, 안전한 DOM 속성 사용, URL 스킴·목적 검증을 구별합니다. 한 종류의 HTML 이스케이프를 모든 문맥의 해결책으로 쓰지 않습니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>HTML 해석 여부를 DOM에서 확인했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>HTML 인코딩의 적용 범위와 한계를 적었다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/web/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
         <fieldset class="question" data-question="0">
           <legend>1. 일반 사용자 닉네임을 글자로 표시하는 데 가장 직접적인 API는?</legend>
           <label class="question-option"><input type="radio" name="question-0" value="0"><span>임의 문자열을 innerHTML에 넣는다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>textContent로 텍스트를 넣는다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>문자열 앞에 script 태그를 붙인다.</span></label>

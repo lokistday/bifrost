@@ -61,7 +61,7 @@ for (const item of site.courses) {
 
     const page = enhance(relative);
     check(page.document.querySelector('.lesson-article') === page.originalArticle, 'Enhancement preserves static article and focus targets');
-    check(Object.values(page.window.BifrostCourses).flatMap(c => c.modules.flatMap(m => m.lessons)).length === 62, 'Production catalog retains every permanent ID');
+    check(Object.values(page.window.BifrostCourses).flatMap(c => c.modules.flatMap(m => m.lessons)).length === registry.length, 'Production catalog retains every permanent ID');
     check(!page.document.getElementById('completeLesson').hidden, 'Completion enabled only after JS');
     const savedBefore = page.saved.get('bifrost_progress_v2');
     lesson.questions.forEach((question, index) => {
@@ -109,4 +109,4 @@ dataCourses.misc = course;
 const markup = create(dataCourses, { renderLesson: () => '', renderCourse: () => '' }).lesson('misc', sample.id);
 const doc = parseHTML(`<html><body>${markup}</body></html>`).document;
 check(!doc.querySelector('[onerror], img[src="x"]') && doc.body.textContent.includes(attack), 'Content cannot create executable HTML');
-console.log(`PASS: ${checks} static teaching, production hydration and self-check assertions across 62 lessons.`);
+console.log(`PASS: ${checks} static teaching, production hydration and self-check assertions across ${registry.length} lessons.`);

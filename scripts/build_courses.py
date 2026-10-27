@@ -5,6 +5,7 @@ content/courses/*.json are the source. Generated JS must not be edited by hand.
 from pathlib import Path
 import json
 import re
+from learning_design import attach, paths
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -15,6 +16,7 @@ def load_courses(strict=True):
     courses = {}
     for number, item in enumerate(site['courses']):
         key = item['id']
+        assert re.fullmatch(r'[a-z][a-z0-9-]*', key), f'Invalid course path: {key}'
         course = json.loads((ROOT / f'content/courses/{key}.json').read_text(encoding='utf-8'))
         assert course['id'] == key and key not in courses, f'Duplicate/mismatched course: {key}'
         course['number'] = f'{number:02d}'
@@ -29,6 +31,7 @@ def load_courses(strict=True):
     assert set(fields) == set(courses), 'Field introductions differ from course manifest'
     for course in courses.values():
         assert course['modules'] and course['sources'], f'Incomplete course: {course["id"]}'
+        assert all(len(r)==2 and r[0] and r[1].startswith('https://') for r in course['sources']), f'Unsafe course reference: {course["id"]}'
         assert all(p in lessons for p in course['prereqs']), f'Unknown course prerequisite: {course["id"]}'
         assert len(course['introduction']['items']) == 5, f'Field introduction needs five entries: {course["id"]}'
         for module in course['modules']:
@@ -80,6 +83,7 @@ def load_courses(strict=True):
 
         for key in lessons:
             check_prerequisites(key, [])
+    attach(courses)
     return site, courses
 
 
@@ -100,6 +104,7 @@ def build(strict=True):
             {k: l[k] for k in ['id', 'title', 'goal']} for l in m['lessons']]) for m in course['modules']]
         write_bundle(ROOT / f'js/courses/{key}.js', f'window.BifrostCourses.{key}', course)
     write_bundle(ROOT / 'js/catalog.js', 'window.BifrostCourses', catalog)
+    (ROOT/'content/generated-paths.json').write_text(json.dumps(paths(courses),ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     return site, courses
 
 

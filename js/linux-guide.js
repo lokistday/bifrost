@@ -1,4 +1,5 @@
 let guideReturnFocus = null;
+document.getElementById('linuxGuideClose').addEventListener('click', showMainGuide);
 function revealLinuxGuide({pushHistory=false}={}) {
   const overlay = document.getElementById("linuxGuideOverlay");
   const frame = document.getElementById("linuxGuideFrame");

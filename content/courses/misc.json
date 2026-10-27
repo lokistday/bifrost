@@ -2,12 +2,12 @@
   "id": "misc",
   "title": "Misc",
   "label": "문제 해결·자동화",
-  "subtitle": "특정 분야에 묶이지 않는 데이터 변환·단서 추출·도구 제작을 독립적으로 연습합니다.",
+  "subtitle": "구조화된 파싱·파일 목록·그래프·제약 풀이·재현성 검증으로 분야 공통 문제 해결력을 기릅니다.",
   "level": "입문 → 중급",
   "prereqs": [
     "foundation.python-files"
   ],
-  "outcome": "입력 형식과 가설을 좁히고 검증 가능한 자동화 도구와 풀이 기록을 만듭니다.",
+  "outcome": "입력 계약과 후보 공간을 명시하고 오류·반례·해의 개수·정규화의 의미를 검증하는 오프라인 분석 도구를 만듭니다.",
   "modules": [
     {
       "title": "01 · 단서와 데이터 파이프라인",
@@ -438,6 +438,1070 @@
           ]
         }
       ]
+    },
+    {
+      "title": "03 · 구조화와 탐색",
+      "intro": "입력 문법·파일 목록·그래프를 명시적으로 모델링합니다.",
+      "lessons": [
+        {
+          "id": "misc.structured-parsing",
+          "title": "정규식 전체 일치와 오류 행 보존",
+          "goal": "이름 있는 그룹으로 고정 형식을 읽고 부분 일치·중복·오류 행을 구분합니다.",
+          "concepts": [
+            "정규식은 문자열의 패턴을 표현하지만 모든 문서 형식을 정규식 하나로 처리할 수는 없습니다. 이 차시는 id=L01 user=alice status=ok라는 제한된 한 줄 형식을 정의합니다. 실제 CSV나 JSON은 인용부호·중첩 규칙이 다르므로 해당 형식의 파서를 사용하는 것이 우선입니다.",
+            "search는 줄 중간의 일치를 찾고 fullmatch는 전체 문자열이 형식에 맞는지 확인합니다. 세 번째 줄에는 앞의 noise와 뒤의 extra가 있으므로 안쪽에 정상처럼 보이는 부분이 있어도 거부합니다. 부분 일치만 사용하면 불필요한 접두·접미 데이터가 조용히 통과할 수 있습니다.",
+            "이름 있는 그룹 id,user,status로 추출한 값은 다음 처리 단계의 구조화된 필드가 됩니다. re.ASCII와 명시적인 [a-z], [0-9]로 예제의 문자 범위를 좁혔으며 일반적인 사람 이름이나 국제화 계정명 전체를 지원한다고 주장하지 않습니다.",
+            "형식이 맞아도 ID가 중복되면 같은 사건을 두 번 집계할 수 있습니다. parse_lines는 첫 ID만 받아들이고 중복 행과 형식 오류의 원래 줄 번호를 rejected에 보존합니다. 거부한 행을 지우고 정상 개수만 출력하면 누락의 규모와 이유를 다시 검토하기 어렵습니다."
+          ],
+          "code": "python3 toolbox.py parse",
+          "expected": "denied=L02,L04\naccepted=3 rejected-lines=3",
+          "task": "events.txt 사본에 L02의 정상 형식 행을 한 번 더 추가하세요. 그다음 세 번째 줄을 정확한 형식으로 고친 사본과 비교하고 accepted·rejected·denied가 어떻게 변하는지 설명하세요.",
+          "hint": "중복 여부는 ID 필드 기준입니다. 세 번째 줄은 noise와 extra를 모두 제거해야 전체 일치가 됩니다.",
+          "prerequisites": [
+            "misc.automation",
+            "foundation.python-files"
+          ],
+          "files": [
+            "toolbox.py",
+            "events.txt"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 전체 형식과 부분 형식 구분",
+              "explanation": "원본의 정상 세 줄과 noise/extra가 있는 한 줄을 읽고 실행합니다. 거부 행 번호를 원본에 연결합니다.",
+              "code": "python3 toolbox.py parse",
+              "expected": "denied=L02,L04\naccepted=3 rejected-lines=3"
+            },
+            {
+              "title": "2. 중복 ID 반례 넣기",
+              "explanation": "사본 끝에 id=L02 user=bob status=denied를 추가합니다. 정상 문법이더라도 ID가 이미 존재합니다.",
+              "code": "python3 toolbox.py parse --source events-duplicate.txt",
+              "expected": "denied=L02,L04\naccepted=3 rejected-lines=3,5"
+            },
+            {
+              "title": "3. 구조 오류만 고치기",
+              "explanation": "원본의 세 번째 줄에서 noise 접두와 extra 접미를 제거한 사본을 만듭니다. ID L03은 다른 행과 겹치지 않습니다.",
+              "code": "python3 toolbox.py parse --source events-fixed.txt",
+              "expected": "denied=L02,L03,L04\naccepted=4 rejected-lines=none"
+            }
+          ],
+          "solution": {
+            "approach": [
+              "추가한 다섯 번째 L02는 문법이 맞아도 중복이라 거부되므로 집계가 늘지 않습니다.",
+              "세 번째 줄을 정확한 형식으로 고치면 L03 denied가 추가되어 허용 행이 4개가 됩니다.",
+              "거부 이유를 실무용으로 확장한다면 형식/중복을 별도 코드로 나누고 줄 번호와 원문을 안전하게 보관한다고 제안합니다."
+            ],
+            "expected": "정상·부분 일치·중복 ID의 세 사례를 구분하고 거부 행 번호를 유지한 비교표를 제출합니다."
+          },
+          "questions": [
+            {
+              "prompt": "정상 패턴 앞뒤에 잡음이 붙은 줄을 거부하려면?",
+              "options": [
+                "search만 사용",
+                "고정 형식 전체에 fullmatch 사용",
+                "공백을 모두 지우고 무조건 허용"
+              ],
+              "answer": 1,
+              "explanation": "정의한 한 줄 전체가 일치해야 합니다. search는 내부의 정상처럼 보이는 부분만 찾을 수 있습니다."
+            },
+            {
+              "prompt": "중복 L02를 다시 세지 않는 이유는?",
+              "options": [
+                "사용자 bob은 항상 악성이므로",
+                "정규식이 숫자를 읽지 못하므로",
+                "같은 사건 ID를 중복 집계하지 않기 위해"
+              ],
+              "answer": 2,
+              "explanation": "문법 검증과 의미상 중복 검증은 별개입니다. 두 가지 모두 검사해야 합니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "정규식 search로 일부만 일치하면 정상 입력으로 본다.",
+              "correction": "형식 전체가 계약이면 fullmatch를 사용합니다."
+            },
+            {
+              "mistake": "거부 행을 삭제하고 최종 개수만 기록한다.",
+              "correction": "원본 줄 번호·거부 이유와 전체 규모를 보존합니다."
+            }
+          ],
+          "references": [
+            [
+              "Python re · fullmatch와 이름 있는 그룹",
+              "https://docs.python.org/3/library/re.html"
+            ],
+            [
+              "Python csv · DictReader",
+              "https://docs.python.org/3/library/csv.html"
+            ]
+          ],
+          "checks": [
+            "전체 일치와 부분 일치를 구분했다.",
+            "중복 및 오류 행을 추적했다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "해당 분야 ZIP을 풀고 misc 폴더에서 실행합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿉니다.",
+              "파일은 합성 교육 자료입니다. 실습은 로컬 파일/메모리만 처리하며 실제 계정·서버·개인정보를 사용하지 않습니다. 원본은 보관하고 변경 과제에는 사본을 사용합니다."
+            ]
+          }
+        },
+        {
+          "id": "misc.archive-inspection",
+          "title": "압축 목록·경로·자원 한도 검토",
+          "goal": "파일을 추출하기 전에 목록과 경로 후보를 검사하고 안전한 추출의 추가 조건을 설명합니다.",
+          "concepts": [
+            "압축 파일을 받으면 확장자를 믿고 바로 풀기보다 내부 목록과 크기·압축 방식·경로를 먼저 확인합니다. 이 실습은 zipfile로 메모리 안에 notes.txt와 ../outside.txt 두 항목을 만든 뒤 목록만 읽습니다. 디스크에는 아무 파일도 추출하지 않습니다.",
+            "../outside.txt 같은 상대 경로는 의도한 폴더의 밖을 가리킬 수 있습니다. safe_member는 역슬래시를 슬래시로 정규화하고 절대경로·..·콜론을 거부하는 최소한의 이름 검사입니다. Windows 드라이브 경로도 콜론을 포함하므로 이 모형에서는 후보에서 제외됩니다.",
+            "정상처럼 보이는 이름이 CANDIDATE가 되는 것은 안전한 추출을 보장하지 않습니다. 심볼릭 링크, Windows 장치 이름, 기존 파일 덮어쓰기, 대소문자 충돌, 실제 대상 경로 확인 등은 이 작은 함수가 다루지 않습니다. 따라서 PASS나 SAFE 대신 CANDIDATE로 표시합니다.",
+            "작은 압축 파일도 해제 뒤 큰 자원을 요구할 수 있습니다. 개별/총 해제 크기, 파일 수, 중첩 깊이, 시간 제한과 압축비를 함께 고려해야 합니다. 헤더의 file_size만 신뢰하지 말고 실제 읽기 한도도 적용해야 하지만 이 실습은 고정 소형 ZIP 목록 검사만 하며 안전한 범용 추출기를 구현하지 않습니다."
+          ],
+          "code": "python3 toolbox.py archive",
+          "expected": "notes.txt size=9 CANDIDATE\n../outside.txt size=13 REJECT\nextracted=0",
+          "task": "safe_member에 /tmp/a, C:\\temp\\a, notes/../a, notes/a.txt를 전달해 판정을 표로 만드세요. CANDIDATE인 이름도 추출 전 필요한 추가 조건 세 가지를 쓰세요.",
+          "hint": "도구는 파일을 풀지 않습니다. CANDIDATE는 이름 검사 한 단계를 통과했다는 뜻입니다.",
+          "prerequisites": [
+            "misc.triage",
+            "foundation.paths"
+          ],
+          "files": [
+            "toolbox.py"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 목록만 읽기",
+              "explanation": "메모리 ZIP의 두 항목 이름과 해제 크기를 확인합니다. extracted=0이 실제 추출을 수행하지 않았음을 명시합니다.",
+              "code": "python3 toolbox.py archive",
+              "expected": "notes.txt size=9 CANDIDATE\n../outside.txt size=13 REJECT\nextracted=0"
+            },
+            {
+              "title": "2. 경로 규칙의 반례 시험",
+              "explanation": "Linux/macOS Bash와 Windows PowerShell 모두 아래 큰따옴표 명령을 사용합니다. 역슬래시는 Python 문자열에 이중으로 씁니다.",
+              "code": "python3 -c \"from toolbox import safe_member; print([safe_member(x) for x in ['/tmp/a','C:\\\\temp\\\\a','notes/../a','notes/a.txt']])\"",
+              "expected": "[False, False, False, True]"
+            },
+            {
+              "title": "3. 이름 검사 범위의 한계 보기",
+              "explanation": "Windows 장치 이름 CON도 함수가 허용하는지 확인합니다. 이름 검사의 통과와 모든 플랫폼의 안전성을 구분합니다.",
+              "code": "python3 -c \"from toolbox import safe_member; print(safe_member('CON'))\"",
+              "expected": "True. 모형이 장치 이름 규칙을 구현하지 않았다는 한계를 보여 줍니다."
+            }
+          ],
+          "solution": {
+            "approach": [
+              "절대경로 /tmp/a, 드라이브 경로 C:\\temp\\a, 상위 이동 notes/../a는 False이며 notes/a.txt는 True입니다.",
+              "추가 조건으로 링크/장치 이름, 실제 대상 경로와 기존 파일 충돌, 전체/개별 자원 한도를 적습니다.",
+              "CON의 True는 의도한 최소 이름 검사의 한계이며 실제 파일로 만들거나 추출하지 않습니다."
+            ],
+            "expected": "네 경로의 판정과 CANDIDATE의 한계·자원 제한·실제 추출 없음이 명시되어야 합니다."
+          },
+          "questions": [
+            {
+              "prompt": "notes/a.txt가 CANDIDATE이면 바로 풀어도 안전한가요?",
+              "options": [
+                "이름 검사 외 링크·대상 경로·충돌·자원 한도가 필요",
+                "예, 어떤 OS에서도 안전",
+                "예, 확장자가 txt라 실행될 수 없다"
+              ],
+              "answer": 0,
+              "explanation": "이 함수는 제한된 문자열 규칙만 확인하며 범용 안전 추출기가 아닙니다."
+            },
+            {
+              "prompt": "작은 ZIP 파일에서 메모리를 과도하게 쓸 수 있는 이유는?",
+              "options": [
+                "ZIP은 항상 네트워크 접속을 한다",
+                "압축된 크기와 해제 뒤 크기가 다를 수 있기 때문",
+                "파일명은 항상 암호화되기 때문"
+              ],
+              "answer": 1,
+              "explanation": "압축비·개수·중첩·총 해제 크기와 실제 읽기 한도를 고려해야 합니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "경로 검사 한 함수가 안전한 압축 해제를 완성한다.",
+              "correction": "파일시스템 의미·링크·충돌·자원 한도를 별도로 다룹니다."
+            },
+            {
+              "mistake": "압축 파일의 용량만 보고 처리 자원을 정한다.",
+              "correction": "해제 크기·개수·깊이·시간과 실제 읽기량을 제한합니다."
+            }
+          ],
+          "references": [
+            [
+              "Python zipfile · 목록과 경로 주의사항",
+              "https://docs.python.org/3/library/zipfile.html"
+            ],
+            [
+              "Python pathlib · 순수 경로",
+              "https://docs.python.org/3/library/pathlib.html#pure-paths"
+            ]
+          ],
+          "checks": [
+            "추출 전에 목록과 경로를 확인했다.",
+            "CANDIDATE와 안전한 추출의 차이를 설명했다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "해당 분야 ZIP을 풀고 misc 폴더에서 실행합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿉니다.",
+              "파일은 합성 교육 자료입니다. 실습은 로컬 파일/메모리만 처리하며 실제 계정·서버·개인정보를 사용하지 않습니다. 원본은 보관하고 변경 과제에는 사본을 사용합니다."
+            ]
+          }
+        },
+        {
+          "id": "misc.graph-search",
+          "title": "그래프 탐색과 최단 경로의 조건",
+          "goal": "방문 집합과 큐로 순환을 피하고 간선 수 기준 최단 경로를 구합니다.",
+          "concepts": [
+            "문제의 단계·의존 관계·가능한 이동을 그래프로 표현하면 시도 순서를 명확히 할 수 있습니다. graph.json의 노드는 start,decode,inspect,parse,report이며 간선은 허용된 다음 단계입니다. 이 예제는 공격 경로나 실제 네트워크를 탐색하지 않는 작은 문제 해결 모형입니다.",
+            "BFS는 큐에 먼저 들어간 노드부터 처리해 시작점에서 가까운 층을 차례로 탐색합니다. 모든 간선의 비용이 같은 경우 처음 발견한 목표 경로가 간선 수 기준 최단입니다. 각 단계의 시간이나 비용이 다르면 최소 단계와 최소 비용은 같지 않아 다른 알고리즘이나 모델이 필요합니다.",
+            "decode→start의 되돌아가는 간선이 있으므로 visited 없이 이웃을 계속 넣으면 반복하거나 중복 탐색이 커질 수 있습니다. 새 노드를 큐에 넣을 때 방문 표시를 해 동일 노드가 여러 경로로 중복 삽입되는 것을 줄입니다.",
+            "이웃을 sorted로 정렬해 같은 입력에서 선택 경로가 재현되도록 했습니다. 여러 최단 경로가 있어도 이 도구는 하나만 반환합니다. 목표가 도달 불가능하면 None을 반환하며, 입력 그래프 밖의 실제 가능성이나 가장 좋은 학습 순서를 자동으로 증명하는 것은 아닙니다."
+          ],
+          "code": "python3 toolbox.py graph",
+          "expected": "path=start->inspect->report\nedges=2",
+          "task": "graph.json 사본에서 inspect→report 간선만 제거해 경로가 어떻게 바뀌는지 확인하세요. 그다음 parse→report도 제거한 별도 사본에서 도달 불가능을 확인하세요.",
+          "hint": "BFS가 최소화하는 값은 여기서 간선 수입니다. 단계를 실제로 수행한 비용은 없습니다.",
+          "prerequisites": [
+            "misc.automation",
+            "foundation.python-flow"
+          ],
+          "files": [
+            "toolbox.py",
+            "graph.json"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 동일 비용 그래프에서 최단 경로 찾기",
+              "explanation": "start에서 목표까지 두 경로를 손으로 적고 간선 수를 셉니다. inspect 경로는 두 간선, decode/parse 경로는 세 간선입니다.",
+              "code": "python3 toolbox.py graph",
+              "expected": "path=start->inspect->report\nedges=2"
+            },
+            {
+              "title": "2. 짧은 경로 하나 제거하기",
+              "explanation": "사본에서 inspect의 이웃 목록을 []로 바꾸고 나머지 간선과 목표는 유지합니다.",
+              "code": "python3 toolbox.py graph --source graph-long.json",
+              "expected": "path=start->decode->parse->report\nedges=3"
+            },
+            {
+              "title": "3. 도달 불가능과 순환 처리 확인",
+              "explanation": "다른 사본에서 inspect와 parse의 이웃을 모두 []로 만듭니다. decode→start 순환은 그대로 둡니다.",
+              "code": "python3 toolbox.py graph --source graph-none.json",
+              "expected": "path=UNREACHABLE\nedges=none. 순환이 있어도 탐색은 종료합니다."
+            }
+          ],
+          "solution": {
+            "approach": [
+              "inspect→report를 제거하면 남은 start→decode→parse→report가 세 간선 최단입니다.",
+              "parse→report도 없애면 report로 들어오는 경로가 없어 도달 불가능합니다.",
+              "visited가 start를 다시 큐에 넣지 않으므로 decode→start 순환을 무한 반복하지 않습니다."
+            ],
+            "expected": "원본·긴 경로·불가능의 세 결과와 동일 비용 가정, 순환 방지 설명이 있어야 합니다."
+          },
+          "questions": [
+            {
+              "prompt": "BFS 결과가 두 단계라면 무엇이 최소인가요?",
+              "options": [
+                "반드시 실행 시간",
+                "반드시 금전 비용",
+                "모든 간선의 비용이 같은 이 모형의 간선 수"
+              ],
+              "answer": 2,
+              "explanation": "가중치가 다른 경우 최소 간선 수가 최소 시간·비용을 의미하지 않습니다."
+            },
+            {
+              "prompt": "decode에서 start로 되돌아가는 간선의 반복을 막는 것은?",
+              "options": [
+                "visited 집합",
+                "파일 확장자",
+                "정답 문자열"
+              ],
+              "answer": 0,
+              "explanation": "방문한 노드를 다시 큐에 넣지 않아 중복 순환을 제한합니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "단계가 적으므로 실제 작업도 항상 가장 빠르다.",
+              "correction": "동일 간선 비용이라는 모델 가정을 확인합니다."
+            },
+            {
+              "mistake": "경로가 없으면 현실에서도 해결 불가능하다고 결론 낸다.",
+              "correction": "입력 그래프의 간선 누락이나 모델 범위를 검토합니다."
+            }
+          ],
+          "references": [
+            [
+              "Python collections · deque",
+              "https://docs.python.org/3/library/collections.html#collections.deque"
+            ],
+            [
+              "Python · 집합 자료형",
+              "https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset"
+            ]
+          ],
+          "checks": [
+            "큐와 방문 집합의 역할을 설명했다.",
+            "동일 비용 최단과 도달 불가능을 구분했다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "해당 분야 ZIP을 풀고 misc 폴더에서 실행합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿉니다.",
+              "파일은 합성 교육 자료입니다. 실습은 로컬 파일/메모리만 처리하며 실제 계정·서버·개인정보를 사용하지 않습니다. 원본은 보관하고 변경 과제에는 사본을 사용합니다."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": "04 · 제약과 재현성",
+      "intro": "해의 유일성과 분석 결과의 의미 보존을 검증합니다.",
+      "lessons": [
+        {
+          "id": "misc.constraint-solving",
+          "title": "제약 조건과 해의 유일성 검증",
+          "goal": "작은 후보 공간을 완전 탐색하고 조건 부족·모순·유일해를 구분합니다.",
+          "concepts": [
+            "문제 풀이에서 그럴듯한 답 하나를 찾는 것과 조건을 모두 만족하는 해가 하나뿐임을 확인하는 것은 다릅니다. clues.json은 alice,bob,carol을 1,2,3 위치에 중복 없이 배치하는 작은 논리 문제입니다. 후보 수는 3! = 6으로 전체 탐색이 충분히 작습니다.",
+            "itertools.permutations로 서로 다른 위치의 모든 순열을 만들고 before와 not_at 조건을 AND로 검사합니다. alice는 bob보다 앞서고 alice는 1이 아니며 carol은 3이 아닙니다. 이 세 조건을 모두 적용하면 alice=2,bob=3,carol=1만 남습니다.",
+            "조건 하나를 제거하면 여러 답이 남을 수 있고 서로 충돌하는 조건을 추가하면 답이 0개가 될 수 있습니다. 도구는 첫 답에서 멈추지 않고 모두 세므로 조건 부족과 모순을 구분할 수 있습니다. 답이 0일 때 프로그램 오류와 입력 모순도 따로 점검해야 합니다.",
+            "완전 탐색은 작은 공간에서 명확하지만 사람 수가 늘면 팩토리얼로 후보가 급격히 늘어납니다. 대규모 문제에는 더 이른 가지치기나 제약 해결 도구가 필요합니다. 이 예제는 범위가 작은 합성 논리 퍼즐이며 암호를 무제한으로 깨는 방법을 제공하지 않습니다."
+          ],
+          "code": "python3 toolbox.py constraints",
+          "expected": "alice=2 bob=3 carol=1\nsolutions=1",
+          "task": "사본에서 not_at 조건을 모두 제거해 답 수를 확인하세요. 다른 사본에는 bob이 alice보다 앞선다는 before 조건을 추가해 답 수를 비교하세요.",
+          "hint": "첫 답을 출력하고 종료하지 않습니다. 해가 0개·1개·여러 개인 경우를 나눠 해석하세요.",
+          "prerequisites": [
+            "misc.graph-search",
+            "foundation.python-flow"
+          ],
+          "files": [
+            "toolbox.py",
+            "clues.json"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 모든 조건을 만족하는 해 세기",
+              "explanation": "세 사람의 순열은 여섯 개입니다. 조건별로 어떤 후보가 제거되는지 적고 전체 결과를 확인합니다.",
+              "code": "python3 toolbox.py constraints",
+              "expected": "alice=2 bob=3 carol=1\nsolutions=1"
+            },
+            {
+              "title": "2. 조건을 덜 주었을 때 비교",
+              "explanation": "사본의 not_at을 []로 바꾸어 alice가 bob보다 앞서기만 하면 되게 합니다. before 조건은 유지합니다.",
+              "code": "python3 toolbox.py constraints --source clues-open.json",
+              "expected": "서로 다른 세 해가 출력되고 solutions=3입니다."
+            },
+            {
+              "title": "3. 모순 조건의 결과 확인",
+              "explanation": "원본의 별도 사본 before에 [\"bob\",\"alice\"]를 추가합니다. alice<bob와 bob<alice를 동시에 만족할 수 없습니다.",
+              "code": "python3 toolbox.py constraints --source clues-conflict.json",
+              "expected": "해의 행 없이 solutions=0입니다."
+            }
+          ],
+          "solution": {
+            "approach": [
+              "원본에서 alice는 1이 아니며 bob보다 앞서므로 2, bob은 3, carol은 1입니다.",
+              "not_at을 없애면 (alice,bob,carol) 위치는 (1,2,3),(1,3,2),(2,3,1) 세 개입니다.",
+              "반대 before를 추가하면 엄격한 선후 관계가 모순이라 해가 0입니다. 조건과 코드 오류 여부를 각각 확인합니다."
+            ],
+            "expected": "유일해·조건 부족·모순의 세 입력과 해 개수를 제시하고 탐색 공간 크기도 설명합니다."
+          },
+          "questions": [
+            {
+              "prompt": "조건을 만족하는 첫 답을 찾았습니다. 유일해라고 말할 수 있나요?",
+              "options": [
+                "예, 첫 답은 항상 유일하다",
+                "아니요, 나머지 후보도 확인해야 한다",
+                "사람이 세 명이면 무조건 가능"
+              ],
+              "answer": 1,
+              "explanation": "한 해의 존재와 해의 유일성은 서로 다른 주장입니다. 전체 후보 또는 유일성 검증이 필요합니다."
+            },
+            {
+              "prompt": "alice<bob와 bob<alice를 동시에 추가하면?",
+              "options": [
+                "반드시 두 해가 생긴다",
+                "조건이 자동으로 서로 취소된다",
+                "엄격한 선후 조건이 모순이라 해가 없다"
+              ],
+              "answer": 2,
+              "explanation": "서로 반대인 엄격 부등식은 같은 배치에서 동시에 참일 수 없습니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "답 하나가 나오면 모든 조건이 충분하다고 결론 낸다.",
+              "correction": "해 개수를 세어 유일성과 조건 부족을 확인합니다."
+            },
+            {
+              "mistake": "순열 탐색을 사람 수에 관계없이 같은 비용으로 생각한다.",
+              "correction": "후보 수 n! 증가와 가지치기 필요성을 검토합니다."
+            }
+          ],
+          "references": [
+            [
+              "Python itertools · permutations",
+              "https://docs.python.org/3/library/itertools.html#itertools.permutations"
+            ],
+            [
+              "Python · all과 순회",
+              "https://docs.python.org/3/library/functions.html#all"
+            ]
+          ],
+          "checks": [
+            "해 존재와 유일성을 구분했다.",
+            "조건 부족과 모순을 입력으로 재현했다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "해당 분야 ZIP을 풀고 misc 폴더에서 실행합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿉니다.",
+              "파일은 합성 교육 자료입니다. 실습은 로컬 파일/메모리만 처리하며 실제 계정·서버·개인정보를 사용하지 않습니다. 원본은 보관하고 변경 과제에는 사본을 사용합니다."
+            ]
+          }
+        },
+        {
+          "id": "misc.reproducible-results",
+          "title": "정규화·재현성·결과 무결성 검증",
+          "goal": "동일한 의미의 입력을 결정적 형태로 정규화하고 값 변경과 순서 변경을 구분합니다.",
+          "concepts": [
+            "분석 결과를 비교할 때 JSON 공백이나 객체 키 순서만 달라 해시가 바뀌면 의미 변경과 표현 변경을 혼동하기 쉽습니다. 이 실습은 schema=1, 고유 ID와 상태를 갖는 events 목록이라는 좁은 계약을 정하고 의미가 같은 입력의 표현을 정규화합니다.",
+            "canonical은 events를 ID로 정렬하고 객체 키를 정렬하며 불필요한 공백 없이 ASCII JSON으로 직렬화합니다. 이 계약에서는 events 순서를 의미에 포함하지 않으므로 역순 입력이 같은 바이트가 됩니다. 순서가 의미인 실제 이벤트 스트림에 이 규칙을 그대로 적용하면 정보를 잃습니다.",
+            "반대로 상태값이 ok에서 denied로 바뀌면 정규화 뒤 바이트와 해시도 달라져야 합니다. verify는 순서만 바꾼 동등 사례와 실제 값이 바뀐 비동등 사례를 함께 비교합니다. 중복 ID와 허용하지 않은 상태는 애매하게 덮어쓰지 않고 거부합니다.",
+            "SHA-256은 결과 바이트의 비교에 유용하지만 제작자의 신원이나 원본 자료의 사실성을 보증하지 않습니다. 재현 가능한 분석에는 입력 해시, 스크립트 버전, 명령, 환경, 정규화 계약도 함께 남겨야 합니다. 이 예제의 정규화는 범용 JSON 서명 표준이나 완전한 증거 관리 체계가 아닙니다."
+          ],
+          "code": "python3 toolbox.py verify",
+          "expected": "canonical={\"events\":[{\"id\":\"R01\",\"status\":\"ok\"},{\"id\":\"R02\",\"status\":\"denied\"}],\"schema\":1}\norder-independent=True value-sensitive=True\nsha256=b9d3a37611682440379f60a8ba04705e66a71a7b5f5e0f6bd8975c5b3b2a191c",
+          "task": "repro.json 사본에서 events 순서만 뒤집고 원본과 해시를 비교하세요. 다른 사본에서 R02 상태를 ok로 바꿔 비교하고, 두 변화의 의미를 기록하세요.",
+          "hint": "이 계약은 순서를 버려도 된다고 먼저 정했습니다. 순서가 사건의 의미라면 정렬 정규화를 쓰면 안 됩니다.",
+          "prerequisites": [
+            "misc.writeup",
+            "misc.structured-parsing"
+          ],
+          "files": [
+            "toolbox.py",
+            "repro.json"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 계약과 정규화 출력 읽기",
+              "explanation": "입력의 이벤트 순서는 R02,R01이지만 출력은 ID 정렬로 R01,R02입니다. 키 순서·공백·인코딩 규칙을 함께 기록합니다.",
+              "code": "python3 toolbox.py verify",
+              "expected": "order-independent=True value-sensitive=True와 고정 SHA-256이 출력됩니다."
+            },
+            {
+              "title": "2. 순서 변경의 동등성 확인",
+              "explanation": "사본의 events 순서만 뒤집습니다. 값과 ID는 유지해 정규화가 같은 바이트를 만드는지 비교합니다.",
+              "code": "python3 toolbox.py verify --source repro-order.json",
+              "expected": "원본과 canonical 및 sha256이 같습니다. order-independent=True입니다."
+            },
+            {
+              "title": "3. 값 변경과 구조 오류 구분",
+              "explanation": "R02 상태만 ok로 바꾼 사본을 실행합니다. 또 다른 사본에는 같은 ID를 두 번 넣어 모호한 입력을 거부하는지 확인합니다.",
+              "code": "python3 toolbox.py verify --source repro-value.json\npython3 toolbox.py verify --source repro-duplicate.json",
+              "expected": "값 변경 사본은 다른 sha256을 출력합니다. 중복 사본은 INVALID: duplicate ID, 종료 상태 2입니다."
+            }
+          ],
+          "solution": {
+            "approach": [
+              "순서만 뒤집으면 ID 정렬 뒤 바이트가 같아 원본의 b9d3...a191c 해시가 유지됩니다.",
+              "R02=ok 변경은 결과의 의미가 달라 canonical과 해시가 모두 바뀝니다.",
+              "분석 기록에는 원본 입력 해시, toolbox.py 버전/해시, 실행 명령, Python 버전과 순서를 무시한다는 계약을 같이 남깁니다."
+            ],
+            "expected": "표현 순서 변화·값 변화·중복 구조 오류를 분리한 결과와 재현 메타데이터가 있어야 합니다."
+          },
+          "questions": [
+            {
+              "prompt": "events를 정렬하는 정규화를 실제 타임라인에도 그대로 적용하면 왜 위험할까요?",
+              "options": [
+                "SHA-256이 자동으로 해독되므로",
+                "원래 순서가 의미일 때 그 정보를 잃을 수 있으므로",
+                "JSON은 정렬을 지원하지 않으므로"
+              ],
+              "answer": 1,
+              "explanation": "정규화 전에 어떤 차이를 동등하게 볼지 계약을 정해야 합니다. 순서가 의미이면 보존해야 합니다."
+            },
+            {
+              "prompt": "결과 파일의 해시가 같으면 무엇을 뒷받침하나요?",
+              "options": [
+                "작성자 신원과 자료 사실성",
+                "모든 환경에서 같은 결론의 정당성",
+                "비교한 결과 바이트의 일치"
+              ],
+              "answer": 2,
+              "explanation": "해시는 바이트 비교의 근거입니다. 출처·정당성·실행 환경은 별도로 기록합니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "정렬하면 어떤 데이터든 의미가 보존된다.",
+              "correction": "순서가 의미인지 먼저 정하고 필요한 경우 그대로 보존합니다."
+            },
+            {
+              "mistake": "결과 해시만 있으면 재현 절차를 생략한다.",
+              "correction": "입력·코드·환경·명령·정규화 계약을 함께 남깁니다."
+            }
+          ],
+          "references": [
+            [
+              "Python json · 직렬화 옵션",
+              "https://docs.python.org/3/library/json.html"
+            ],
+            [
+              "Python hashlib · SHA-256",
+              "https://docs.python.org/3/library/hashlib.html"
+            ]
+          ],
+          "checks": [
+            "표현 동등성과 값 변경을 구분했다.",
+            "재현 메타데이터와 정규화 한계를 기록했다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "해당 분야 ZIP을 풀고 misc 폴더에서 실행합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿉니다.",
+              "파일은 합성 교육 자료입니다. 실습은 로컬 파일/메모리만 처리하며 실제 계정·서버·개인정보를 사용하지 않습니다. 원본은 보관하고 변경 과제에는 사본을 사용합니다."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": "05 · 컨테이너와 매체 자료",
+      "intro": "파일 매직·이미지 표본·바이트 통계를 서로 다른 관찰 층으로 읽습니다.",
+      "lessons": [
+        {
+          "id": "misc.container-identification",
+          "title": "파일 매직과 바깥·안쪽 형식 구분",
+          "goal": "짧은 시그니처와 구조 검증을 나누고 컨테이너와 내용의 형식을 단계별로 확인합니다.",
+          "concepts": [
+            "확장자는 이름의 일부이고 매직 바이트는 내용 앞부분의 단서입니다. gzip은 흔히 1f8b, ZIP의 로컬 파일 헤더는 PK03 04로 시작하지만 짧은 접두 일치만으로 완전한 컨테이너라고 확정할 수 없습니다. 이 실습은 후보라는 이름을 사용해 그 차이를 표시합니다.",
+            "media_tools.py identify는 Bifrost와 줄바꿈 8바이트를 메모리에서 gzip으로 감싼 직접 만든 표본을 읽습니다. 바깥 형식은 gzip 후보이고 안쪽은 ASCII 텍스트입니다. 압축 형식과 본문 형식을 하나의 분류로 뭉치지 않고 각 단계의 가정을 기록합니다.",
+            "gzip 헤더의 첫 두 바이트만 남겨도 kind는 GZIP-CANDIDATE를 반환하지만 정상적으로 해제 가능한 구조는 아닙니다. 따라서 식별 후보, 실제 파서의 구조 검사, 내용 해석을 세 단계로 구분합니다. 확장자를 바꾸는 일은 바이트를 변환하거나 손상된 구조를 고치지 않습니다.",
+            "이 예제는 작은 고정 메모리 자료만 처리합니다. 임의 대용량 파일·중첩 컨테이너·암호화 ZIP·자원 고갈을 안전하게 처리하는 범용 탐지기가 아닙니다. 실제 입력에는 읽기/해제 한도와 오류 처리, 원본 보존, 여러 형식 가능성과 폴리글롯의 한계를 별도로 검토해야 합니다."
+          ],
+          "code": "python3 media_tools.py identify",
+          "expected": "outer=GZIP-CANDIDATE\ninner-bytes=8 text=Bifrost\ntruncated-header=GZIP-CANDIDATE structure-validated=False",
+          "task": "Python에서 kind에 빈 바이트, b\"PK\\x03\\x04\", b\"P3\"를 전달해 후보 판정을 비교하세요. 네 글자 접두만으로 ZIP이 유효하다고 말할 수 없는 이유를 쓰세요.",
+          "hint": "kind는 접두 검사이고 identify의 작은 gzip 해제는 별도 단계입니다.",
+          "prerequisites": [
+            "misc.triage",
+            "misc.archive-inspection"
+          ],
+          "files": [
+            "media_tools.py"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 바깥 형식과 내용 읽기",
+              "explanation": "제공한 작은 자료를 감싼 gzip과 해제된 8바이트 본문을 구분합니다. 파일을 내려받거나 외부 도구를 실행하지 않습니다.",
+              "code": "python3 media_tools.py identify",
+              "expected": "outer=GZIP-CANDIDATE\ninner-bytes=8 text=Bifrost\ntruncated-header=GZIP-CANDIDATE structure-validated=False"
+            },
+            {
+              "title": "2. 접두만 있는 반례 비교",
+              "explanation": "아래 문자열은 Python 바이트 리터럴입니다. 본문이나 완전한 헤더를 포함하지 않는 후보와 빈 입력을 비교합니다.",
+              "code": "python3 -c \"from media_tools import kind; print([kind(x) for x in [b'',b'PK\\x03\\x04',b'P3']])\"",
+              "expected": "['UNKNOWN', 'ZIP-CANDIDATE', 'PPM-CANDIDATE']"
+            },
+            {
+              "title": "3. gzip 구조 검증의 실패 관찰",
+              "explanation": "두 매직 바이트뿐인 자료를 실제 gzip 해제 함수에 전달합니다. 오류가 난 것이 후보 접두의 존재와 모순되지 않습니다.",
+              "code": "python3 -c \"import gzip; gzip.decompress(b'\\x1f\\x8b')\"",
+              "expected": "EOFError가 발생하고 0이 아닌 종료 상태입니다. 예외 문구는 Python 버전에 따라 다를 수 있습니다."
+            }
+          ],
+          "solution": {
+            "approach": [
+              "빈 입력은 UNKNOWN, ZIP과 PPM 접두는 각각 CANDIDATE입니다.",
+              "시그니처 접두에는 디렉터리/크기/체크섬 등 전체 구조가 없으므로 실제 파서는 거부할 수 있습니다.",
+              "확장자·접두 후보·구조 검사·해제 본문을 단계별 기록으로 남깁니다."
+            ],
+            "expected": "바깥 컨테이너와 내부 내용, 후보 접두와 실제 파싱 성공을 구분한 표를 만듭니다."
+          },
+          "questions": [
+            {
+              "prompt": "1f8b 두 바이트만 보고 GZIP-CANDIDATE가 나왔습니다. 적절한 결론은?",
+              "options": [
+                "정상 해제 가능한 gzip임이 증명됐다",
+                "완전한 파일인지 별도 구조 검증이 필요한 접두 후보",
+                "파일명이 반드시 .gz이다"
+              ],
+              "answer": 1,
+              "explanation": "시그니처와 완전한 형식 검증은 서로 다릅니다."
+            },
+            {
+              "prompt": "gzip을 풀었더니 텍스트가 나왔습니다. 어느 구분이 맞나요?",
+              "options": [
+                "gzip이므로 본문도 반드시 바이너리 실행 코드",
+                "압축은 암호화라 본문을 읽을 수 없다",
+                "바깥 gzip과 안쪽 텍스트 형식을 별도로 적는다"
+              ],
+              "answer": 2,
+              "explanation": "컨테이너와 본문은 서로 다른 층의 형식입니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "매직 접두만 맞으면 파일이 완전하다고 판정한다.",
+              "correction": "전체 구조·길이·체크섬과 파서의 결과를 확인합니다."
+            },
+            {
+              "mistake": "확장자를 바꿔 형식을 변환했다고 생각한다.",
+              "correction": "이름 변경과 실제 바이트 변환을 구분합니다."
+            }
+          ],
+          "references": [
+            [
+              "Python gzip · 컨테이너 읽기",
+              "https://docs.python.org/3/library/gzip.html"
+            ],
+            [
+              "Python zlib · 제한 길이 해제",
+              "https://docs.python.org/3/library/zlib.html"
+            ]
+          ],
+          "checks": [
+            "컨테이너와 본문 형식을 나눴다.",
+            "시그니처 후보와 파싱 성공을 구분했다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "misc ZIP을 풀고 해당 폴더로 이동합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿔 실행하세요.",
+              "원본은 보관하고 변경 과제에는 사본을 사용합니다. 제공한 작은 합성 입력만 오프라인에서 다루며 계정·외부 자원·실제 개인정보를 사용하지 않습니다."
+            ]
+          }
+        },
+        {
+          "id": "misc.pixel-data",
+          "title": "PPM 헤더와 RGB 픽셀 채널 읽기",
+          "goal": "작은 텍스트 이미지의 크기·표본 개수·색 채널을 읽고 메타데이터와 실제 표본을 구분합니다.",
+          "concepts": [
+            "P3는 RGB 픽셀 값을 텍스트 숫자로 적는 plain PPM 형식입니다. 헤더에는 매직 P3, 가로·세로, Maxval이 있고 이후 픽셀마다 빨강·초록·파랑 표본이 세 개씩 이어집니다. 이 차시는 직접 작성한 네 픽셀 자료를 읽는 실습이며 사진을 편집하지 않습니다.",
+            "sample-p3.ppm은 2×2, Maxval255이며 빨강·초록·파랑·흰색 네 픽셀을 담습니다. 필요한 숫자는 2×2×3=12개이고 각 채널의 합은 510입니다. 첫 픽셀은 (255,0,0)이므로 채널 순서를 BGR이나 다른 배열로 가정하면 해석이 달라집니다.",
+            "헤더의 크기와 주석은 EXIF 촬영 시각이나 카메라 신원과 다릅니다. 주석의 임의 문장을 사실로 보증하지 않으며, PPM 자료만으로 실제 장면의 진실성이나 제작자를 판정할 수 없습니다. 색 표본의 의미도 명세의 감마·색 공간과 응용 변형을 고려해야 합니다.",
+            "제공 파서는 P3 한 이미지, 1~64의 크기, Maxval1~255라는 교육 계약만 지원합니다. 숫자 개수와 범위를 검사하지만 임의의 거대한 악성 이미지에 안전한 범용 디코더는 아닙니다. 이 작은 신뢰 자료를 대상으로 표본 개수·채널·메타데이터 차이를 확인합니다."
+          ],
+          "code": "python3 media_tools.py ppm",
+          "expected": "magic=P3 width=2 height=2 max=255\npixels=4 red-sum=510 green-sum=510 blue-sum=510\nfirst=(255, 0, 0)",
+          "task": "사본에서 첫 빨강 픽셀을 (0,0,0)으로 바꾸고 채널 합을 예측하세요. 다른 사본에서는 마지막 숫자 하나를 지워 길이 검사가 필요한 이유를 확인하세요.",
+          "hint": "한 픽셀은 숫자 세 개입니다. 한 채널만 바꾸는 것과 픽셀 수를 바꾸는 일을 구분하세요.",
+          "prerequisites": [
+            "misc.container-identification",
+            "foundation.python-values"
+          ],
+          "files": [
+            "media_tools.py",
+            "sample-p3.ppm"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 헤더와 표본 수 연결",
+              "explanation": "P3, 2, 2, 255를 읽고 뒤의 숫자 12개를 네 RGB 픽셀로 나눕니다.",
+              "code": "python3 media_tools.py ppm",
+              "expected": "magic=P3 width=2 height=2 max=255\npixels=4 red-sum=510 green-sum=510 blue-sum=510\nfirst=(255, 0, 0)"
+            },
+            {
+              "title": "2. 첫 픽셀 값만 바꾸기",
+              "explanation": "사본의 첫 픽셀에서 빨강 255만 0으로 바꿉니다. 헤더와 나머지 11개 채널 값은 유지합니다.",
+              "code": "python3 media_tools.py ppm --source sample-dark.ppm",
+              "expected": "pixels=4 red-sum=255 green-sum=510 blue-sum=510\nfirst=(0, 0, 0). 헤더는 원본과 같습니다."
+            },
+            {
+              "title": "3. 개수와 범위 오류 구분",
+              "explanation": "다른 사본에서 마지막 채널 값 하나를 삭제합니다. 또 다른 사본은 값 255를 256으로 바꿉니다.",
+              "code": "python3 media_tools.py ppm --source sample-short.ppm\npython3 media_tools.py ppm --source sample-range.ppm",
+              "expected": "각각 INVALID: sample count/range, 종료 상태 2"
+            }
+          ],
+          "solution": {
+            "approach": [
+              "첫 픽셀은 빨강만 255였으므로 검정으로 바꾸면 빨강 합만 510에서 255로 줄어듭니다.",
+              "12개가 아닌 11개 표본이나 Maxval 밖의 256은 규약에 맞지 않아 거부합니다.",
+              "결과는 직접 작성한 픽셀 데이터의 해석이며 촬영자·촬영 시각·실제 장면의 증명이 아니라고 표시합니다."
+            ],
+            "expected": "헤더·표본 개수·RGB 순서·값 변경과 자료 출처의 한계를 함께 기록합니다."
+          },
+          "questions": [
+            {
+              "prompt": "2×2 RGB 이미지에 필요한 채널 숫자 수는?",
+              "options": [
+                "4",
+                "8",
+                "12"
+              ],
+              "answer": 2,
+              "explanation": "가로 2×세로 2×픽셀당 3채널=12입니다."
+            },
+            {
+              "prompt": "PPM 주석에 촬영자가 적혀 있으면 무엇을 확정하나요?",
+              "options": [
+                "사용자가 적은 텍스트일 뿐 실제 신원은 별도 근거가 필요하다",
+                "카메라 서명이 검증됐다",
+                "모든 주석은 EXIF 표준이다"
+              ],
+              "answer": 0,
+              "explanation": "주석·기본 헤더와 인증된 메타데이터는 다릅니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "RGB 표본을 EXIF 정보라고 부른다.",
+              "correction": "픽셀 표본·크기 헤더·응용 메타데이터를 구분합니다."
+            },
+            {
+              "mistake": "픽셀 숫자만 읽으면 어떤 PPM도 지원한다.",
+              "correction": "P3 단일 이미지·크기/Maxval 상한 등 지원 계약을 명시합니다."
+            }
+          ],
+          "references": [
+            [
+              "Netpbm · PPM 명세",
+              "https://netpbm.sourceforge.net/doc/ppm.html"
+            ],
+            [
+              "Python pathlib · 텍스트 파일 읽기",
+              "https://docs.python.org/3/library/pathlib.html#pathlib.Path.read_text"
+            ]
+          ],
+          "checks": [
+            "RGB 표본 개수와 채널 합을 검증했다.",
+            "헤더/주석과 실제 신원 증거를 구분했다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "misc ZIP을 풀고 해당 폴더로 이동합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿔 실행하세요.",
+              "원본은 보관하고 변경 과제에는 사본을 사용합니다. 제공한 작은 합성 입력만 오프라인에서 다루며 계정·외부 자원·실제 개인정보를 사용하지 않습니다."
+            ]
+          }
+        },
+        {
+          "id": "misc.byte-statistics",
+          "title": "바이트 분포와 엔트로피의 해석 한계",
+          "goal": "표본의 빈도와 경험적 엔트로피를 계산하고 암호화·난수 판정으로 과장하지 않습니다.",
+          "concepts": [
+            "바이트 빈도는 각 값이 몇 번 나타나는지 세는 통계입니다. 경험적 Shannon엔트로피 H=-Σp log2 p는 이 표본의 분포를 요약하며 여기서는 bit/byte단위로 표시합니다. 시간 순서나 긴 반복 구조를 직접 표현하지는 않습니다.",
+            "256개의 A는 값1개만 있어 H0, A와B를 번갈아128회 놓으면 두 값이 같은 빈도로 H1입니다. 0부터255까지 한 번씩 나열한 결정적 순서는 모든 바이트 값이 동일 빈도로 H8입니다. 이 마지막 자료는 완전히 예측 가능한데도 통계값이 최댓값입니다.",
+            "높은 엔트로피는 압축·암호화·무작위 자료에서 나타날 수 있지만 단독으로 종류를 확정하지 않습니다. 낮은 엔트로피도 안전하거나 무해함을 증명하지 않습니다. 길이가 작은 표본과 부분 구간에서는 추정이 특히 불안정하므로 표본 길이와 선택 범위를 함께 적습니다.",
+            "같은 바이트 개수를 유지한 채 순서만 바꾸면 이 통계는 같습니다. 따라서 파일 형식·헤더·구조·역변환 가능성·출처 등 독립 근거와 결합해야 합니다. 이 도구는 고정된 세 합성 배열을 요약할 뿐 암호화 탐지기·압축 판정기·난수 품질 인증기가 아닙니다."
+          ],
+          "code": "python3 media_tools.py frequency",
+          "expected": "constant bytes=256 unique=1 H=0.000\nalternating bytes=256 unique=2 H=1.000\nall-values bytes=256 unique=256 H=8.000\nclassification=NOT-DETERMINED",
+          "task": "ABAB와 AABB의 엔트로피를 비교하고, 결정적인 0~255 순서가 H8인데도 난수라고 말할 수 없는 이유를 쓰세요. 같은 통계값을 갖는 다른 순서도 만드세요.",
+          "hint": "계산은 바이트 빈도를 사용합니다. 순서가 바뀌어도 빈도가 같으면 H는 같습니다.",
+          "prerequisites": [
+            "misc.pixel-data",
+            "foundation.python-flow"
+          ],
+          "files": [
+            "media_tools.py"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 길이가 같은 세 분포 비교",
+              "explanation": "세 자료의 길이는 256으로 고정하고 고유 값 수와 H를 비교합니다. 통계의 단위를 bit/byte로 기록합니다.",
+              "code": "python3 media_tools.py frequency",
+              "expected": "H는 순서대로 0.000, 1.000, 8.000이며 classification=NOT-DETERMINED입니다."
+            },
+            {
+              "title": "2. 순서 정보를 놓치는 반례 만들기",
+              "explanation": "길이와 바이트 개수가 같고 순서만 다른 두 자료를 비교합니다.",
+              "code": "python3 -c \"from media_tools import entropy; print(entropy(b'ABAB'),entropy(b'AABB'))\"",
+              "expected": "1.0 1.0"
+            },
+            {
+              "title": "3. 최대 통계와 예측 가능성 구분",
+              "explanation": "0~255의 역순도 동일한 빈도입니다. 순서를 완전히 예측할 수 있지만 엔트로피 통계는 같습니다.",
+              "code": "python3 -c \"from media_tools import entropy; print(entropy(bytes(range(256))),entropy(bytes(reversed(range(256)))))\"",
+              "expected": "8.0 8.0"
+            }
+          ],
+          "solution": {
+            "approach": [
+              "ABAB와 AABB는 A 두 개/B 두 개로 같은 빈도여서 둘 다 H1입니다.",
+              "0~255의 정순/역순은 모든 값이 한 번씩 나타나 둘 다 H8이지만 결정적인 규칙으로 예측됩니다.",
+              "통계가 순서와 생성 과정을 모르므로 암호화/난수를 확정하지 않고 길이·헤더·구조와 추가 실험을 적습니다."
+            ],
+            "expected": "표본 길이·빈도·단위·순서 반례와 분류 불가의 이유가 분명해야 합니다."
+          },
+          "questions": [
+            {
+              "prompt": "0~255를 순서대로 쓴 자료가 H8입니다. 올바른 해석은?",
+              "options": [
+                "안전한 암호화가 증명됐다",
+                "바이트 분포는 균등하지만 순서/생성 과정은 따로 봐야 한다",
+                "항상 운영 난수로 사용해도 된다"
+              ],
+              "answer": 1,
+              "explanation": "경험적인 단일 바이트 분포의 최댓값은 난수성이나 암호화의 증명이 아닙니다."
+            },
+            {
+              "prompt": "ABAB와 AABB의 H가 같은 이유는?",
+              "options": [
+                "파일명이 같아서",
+                "Python이 항상 1을 내서",
+                "바이트 빈도가 같고 이 통계는 순서를 직접 보지 않아서"
+              ],
+              "answer": 2,
+              "explanation": "같은 빈도를 유지하는 순서 변경은 이 통계에 반영되지 않습니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "H가 높으면 암호화 파일이라고 단정한다.",
+              "correction": "압축·구조·결정적인 균등 표본 등 대안 설명을 확인합니다."
+            },
+            {
+              "mistake": "짧은 표본의 H를 파일 전체 특성으로 일반화한다.",
+              "correction": "길이·구간 선택·추정 한계를 함께 기록합니다."
+            }
+          ],
+          "references": [
+            [
+              "Python math · log2",
+              "https://docs.python.org/3/library/math.html#math.log2"
+            ],
+            [
+              "Python collections · Counter",
+              "https://docs.python.org/3/library/collections.html#collections.Counter"
+            ]
+          ],
+          "checks": [
+            "표본 분포와 순서를 구분했다.",
+            "엔트로피를 암호화/난수 판정으로 쓰지 않았다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "misc ZIP을 풀고 해당 폴더로 이동합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿔 실행하세요.",
+              "원본은 보관하고 변경 과제에는 사본을 사용합니다. 제공한 작은 합성 입력만 오프라인에서 다루며 계정·외부 자원·실제 개인정보를 사용하지 않습니다."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": "06 · 자원 예산과 배치 재개",
+      "intro": "제한된 해제와 출처를 확인하는 반복 처리를 설계합니다.",
+      "lessons": [
+        {
+          "id": "misc.bounded-decompression",
+          "title": "해제 출력 한도와 스트림 경계 검증",
+          "goal": "압축 입력·해제 출력 예산과 완료·여분 데이터 조건을 실제 코드로 검증합니다.",
+          "concepts": [
+            "압축 파일의 작은 크기가 해제 후 자원 사용량을 보장하지 않습니다. 이전 압축 목록 차시의 이름 검사와 별도로 입력 바이트 수·출력 바이트 수·파일 수·시간 등의 예산이 필요합니다. 이 실습은 단일 zlib 스트림과 바이트 예산만 다루며 중첩 압축의 전체 보호를 구현하지 않습니다.",
+            "bounded_decompress는 입력 상한을 먼저 확인하고 decompressobj.decompress에 출력 한도+1만 요청합니다. 한 바이트의 초과를 탐지하되 무제한 flush로 나머지를 한꺼번에 풀지 않습니다. 예제의 실제 본문은 A 32개라 한도 32는 허용, 31은 거부돼야 합니다.",
+            "출력이 예산 안에 있어도 eof가 거짓이면 잘린 스트림일 수 있습니다. unused_data가 있으면 뒤의 여분이나 연결된 다른 스트림을 이 계약은 거부합니다. unconsumed_tail은 출력 한도 때문에 처리하지 못한 입력이 남았다는 신호일 수 있으므로 초과 처리와 함께 검사합니다.",
+            "이 코드는 이미 메모리에 있는 입력에 바이트 예산을 적용합니다. 거대한 파일을 읽기 전에 제한하거나 CPU 시간·메모리 할당 전체를 강제하는 격리 장치가 아닙니다. 실제 도구에는 입력 읽기 단계의 한도·작업 시간·중첩과 동시성·출력 저장 정책도 필요하며 본 표본의 통과를 범용 안전 해제로 주장하지 않습니다."
+          ],
+          "code": "python3 media_tools.py decompress --limit 32\npython3 media_tools.py decompress --limit 31",
+          "expected": "accepted=True output=32 limit=32\naccepted=False reason=output budget limit=31",
+          "task": "같은 압축 자료에서 한도 0/32/33을 비교하고, 압축 끝 한 바이트를 빼거나 뒤에 !를 붙인 자료를 함수에 넣으세요. 예산 초과·잘림·여분을 다르게 기록하세요.",
+          "hint": "정상 압축 본문은 32바이트입니다. eof/unused_data와 출력 길이는 각각 다른 조건입니다.",
+          "prerequisites": [
+            "misc.archive-inspection",
+            "misc.container-identification"
+          ],
+          "files": [
+            "media_tools.py"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 경계 양쪽의 출력 예산 시험",
+              "explanation": "압축 표본은 고정하고 출력 상한만 32와 31로 바꿉니다. 명령은 판정 결과를 출력하며 이 CLI의 거부 표시는 종료 상태 0입니다.",
+              "code": "python3 media_tools.py decompress --limit 32\npython3 media_tools.py decompress --limit 31",
+              "expected": "accepted=True output=32 limit=32\naccepted=False reason=output budget limit=31"
+            },
+            {
+              "title": "2. 여분 스트림 거부 확인",
+              "explanation": "함수는 ValueError로 계약 위반을 표시합니다. 아래 명령은 원본 zlib 스트림 뒤에 !를 붙입니다.",
+              "code": "python3 -c \"import zlib; from media_tools import bounded_decompress; bounded_decompress(zlib.compress(b'A'*32)+b'!')\"",
+              "expected": "ValueError: trailing/concatenated stream, 0이 아닌 종료 상태"
+            },
+            {
+              "title": "3. 잘린 스트림의 완료 검사",
+              "explanation": "예산은 충분해도 체크섬/끝부분이 없는 스트림을 완료로 보면 안 됩니다.",
+              "code": "python3 -c \"import zlib; from media_tools import bounded_decompress; bounded_decompress(zlib.compress(b'A'*32)[:-1])\"",
+              "expected": "ValueError: truncated stream, 0이 아닌 종료 상태"
+            }
+          ],
+          "solution": {
+            "approach": [
+              "한도 0은 output budget으로 거부하고, 32/33은 32바이트 출력으로 허용합니다.",
+              "끝 바이트 삭제는 eof가 거짓이라 truncated stream, 뒤의 ! 추가는 unused_data로 trailing/concatenated stream입니다.",
+              "이 함수는 메모리 내 입력의 단일 스트림 예산이며 CPU/중첩/파일 읽기 전체 한도는 별도로 필요하다고 적습니다."
+            ],
+            "expected": "경계 예산·완료·여분의 세 검사와 CLI 판정/예외 종료의 차이를 설명합니다."
+          },
+          "questions": [
+            {
+              "prompt": "출력 길이가 한도 안이면 잘린 스트림도 허용해도 되나요?",
+              "options": [
+                "아니요, eof 완료와 여분 데이터 등을 따로 검사한다",
+                "예, 길이만 중요하다",
+                "예, 확장자가 맞으면 가능하다"
+              ],
+              "answer": 0,
+              "explanation": "예산과 구조적 완료는 서로 다른 조건입니다."
+            },
+            {
+              "prompt": "출력 한도 검사 뒤 무제한 flush를 호출하면 왜 문제일 수 있나요?",
+              "options": [
+                "압축이 암호화로 바뀐다",
+                "나머지 출력을 제한 없이 생성해 예산을 우회할 수 있다",
+                "파일명이 무조건 바뀐다"
+              ],
+              "answer": 1,
+              "explanation": "전체 해제 경로가 같은 예산 계약을 지켜야 합니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "입력 압축 크기만 제한하면 안전하다.",
+              "correction": "출력과 시간·중첩 등 별도 자원 축을 검토합니다."
+            },
+            {
+              "mistake": "길이 검사만으로 정상 스트림 완료를 인정한다.",
+              "correction": "eof·여분·미처리 입력을 함께 검사합니다."
+            }
+          ],
+          "references": [
+            [
+              "Python zlib · 제한 길이 해제",
+              "https://docs.python.org/3/library/zlib.html"
+            ],
+            [
+              "Python gzip · 컨테이너 읽기",
+              "https://docs.python.org/3/library/gzip.html"
+            ]
+          ],
+          "checks": [
+            "정확한 출력 경계와 초과를 검사했다.",
+            "예산과 스트림 완료를 구분했다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "misc ZIP을 풀고 해당 폴더로 이동합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿔 실행하세요.",
+              "원본은 보관하고 변경 과제에는 사본을 사용합니다. 제공한 작은 합성 입력만 오프라인에서 다루며 계정·외부 자원·실제 개인정보를 사용하지 않습니다."
+            ]
+          }
+        },
+        {
+          "id": "misc.resumable-batch",
+          "title": "배치 출처와 재개 체크포인트 검증",
+          "goal": "입력·변환 버전·작업 ID에 근거해 재실행 대상을 정하고 체크포인트의 한계를 기록합니다.",
+          "concepts": [
+            "여러 입력을 배치로 처리할 때 파일이 있다는 이유만으로 완료라고 보면 입력 변경이나 도구 버전 변화를 놓칠 수 있습니다. 이 실습은 작업 ID와 ASCII 텍스트 목록을 받고 변환 버전+구분 바이트+원문의 해시로 캐시 키를 만듭니다. 변환은 작은 대문자화 모형이며 외부 작업을 수행하지 않습니다.",
+            "체크포인트는 schema와 transform 버전, 작업별 입력 키와 결과를 갖습니다. 동일 키와 예상 결과가 맞으면 SKIP, 새 입력이나 값 변경이면 RUN입니다. 이 저렴한 모형은 캐시 결과 변조를 확인하려고 예상 대문자도 다시 계산하므로 실제 고비용 작업의 성능 효과를 측정하는 벤치마크가 아닙니다.",
+            "J02 텍스트만 바꾸면 J01/J03은 SKIP이고 J02만 RUN이어야 합니다. 중복 작업 ID나 지원하지 않는 체크포인트 버전은 조용히 덮어쓰지 않고 오류로 거부합니다. 해시만 맞고 결과 문자열이 틀리면 이 모형은 재계산해 완료 기록을 갱신합니다.",
+            "선택한 체크포인트는 같은 폴더의 고정 .tmp에 쓴 뒤 교체합니다. 이는 통제된 폴더의 단일 작성자를 전제로 하며 동시 작업 잠금·충돌 해결·fsync 내구성·트랜잭션을 보장하지 않습니다. 원본 입력과 코드 버전·명령·환경도 함께 남기고 체크포인트를 신원/출처 인증으로 해석하지 않습니다."
+          ],
+          "code": "python3 media_tools.py batch",
+          "expected": "J01 RUN BIFROST\nJ02 RUN KEEP EVIDENCE\nJ03 RUN REVIEW LIMITS\njobs=3 checkpoint=MEMORY-ONLY",
+          "task": "새 작업 폴더에서 체크포인트를 만들어 두 번 실행한 뒤 J02 텍스트만 바꾼 사본으로 다시 실행하세요. RUN/SKIP 변화와 입력/변환 버전의 역할을 설명하세요.",
+          "hint": "원본 자료 폴더에 기존 체크포인트가 있다면 덮어쓰지 말고 새 파일명을 사용합니다. 실습은 단일 작성자 기준입니다.",
+          "prerequisites": [
+            "misc.reproducible-results",
+            "misc.automation"
+          ],
+          "files": [
+            "media_tools.py",
+            "batch-jobs.json"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 영구 기록 없이 기본 작업 보기",
+              "explanation": "기본 실행은 결과를 메모리에만 두고 입력 폴더를 변경하지 않습니다. 작업 ID와 변환 결과를 확인합니다.",
+              "code": "python3 media_tools.py batch",
+              "expected": "J01/J02/J03이 모두 RUN이며 checkpoint=MEMORY-ONLY입니다."
+            },
+            {
+              "title": "2. 새 체크포인트로 반복 실행",
+              "explanation": "아직 없는 round2-state.json을 선택합니다. 첫 실행 후 동일 명령을 한 번 더 실행해 재개 조건을 확인합니다.",
+              "code": "python3 media_tools.py batch --checkpoint round2-state.json\npython3 media_tools.py batch --checkpoint round2-state.json",
+              "expected": "첫 실행은 모두 RUN, 둘째는 모두 SKIP이며 두 실행 모두 checkpoint=WRITTEN입니다."
+            },
+            {
+              "title": "3. 입력 하나만 변경한 사본 비교",
+              "explanation": "batch-jobs-work.json에서 J02 텍스트만 Changed로 바꿉니다. 같은 체크포인트를 사용해 변경된 작업만 재처리하는지 확인합니다.",
+              "code": "python3 media_tools.py batch --source batch-jobs-work.json --checkpoint round2-state.json",
+              "expected": "J01 SKIP BIFROST\nJ02 RUN CHANGED\nJ03 SKIP REVIEW LIMITS\njobs=3 checkpoint=WRITTEN"
+            }
+          ],
+          "solution": {
+            "approach": [
+              "비어 있는 체크포인트의 첫 실행은 3 RUN, 동일 입력 재실행은 3 SKIP입니다.",
+              "J02 입력 해시가 달라지면 이 작업만 RUN이며 다른 작업의 키/결과는 유지됩니다.",
+              "체크포인트의 schema/transform을 확인하고 단일 작성자·교체 내구성의 한계를 기록합니다."
+            ],
+            "expected": "최초/재개/부분 변경의 실행 표와 입력 식별·버전·동시성 한계를 적습니다."
+          },
+          "questions": [
+            {
+              "prompt": "J02 원문만 바뀌었는데 체크포인트가 있습니다. 올바른 처리는?",
+              "options": [
+                "파일이 있으니 전부 SKIP",
+                "변경 입력의 키를 비교해 J02를 재처리",
+                "체크포인트 파일명만 바꾸기"
+              ],
+              "answer": 1,
+              "explanation": "완료 파일의 존재보다 입력과 변환 버전의 일치가 재개 판정의 근거입니다."
+            },
+            {
+              "prompt": "고정 .tmp에 쓴 뒤 replace하면 무엇을 보장하나요?",
+              "options": [
+                "여러 작성자의 동시 갱신이 자동 병합된다",
+                "전원 차단에도 항상 기록이 남는다",
+                "이 모형은 단일 작성자 전제이며 동시성과 내구성은 별도 설계이다"
+              ],
+              "answer": 2,
+              "explanation": "파일 교체만으로 잠금·트랜잭션·내구성 전체가 완성되지는 않습니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "체크포인트가 있으면 입력 변경과 관계없이 완료이다.",
+              "correction": "작업 ID·입력 키·변환 버전·캐시 결과를 검증합니다."
+            },
+            {
+              "mistake": "replace 한 번으로 분산 트랜잭션이 완성된다.",
+              "correction": "단일 작성자·충돌·복구·내구성을 별도로 설계합니다."
+            }
+          ],
+          "references": [
+            [
+              "Python hashlib · 입력 식별",
+              "https://docs.python.org/3/library/hashlib.html"
+            ],
+            [
+              "Python pathlib · 파일 교체",
+              "https://docs.python.org/3/library/pathlib.html#pathlib.Path.replace"
+            ],
+            [
+              "Python json · 구조화된 자료",
+              "https://docs.python.org/3/library/json.html"
+            ]
+          ],
+          "checks": [
+            "세 단계의 RUN/SKIP 변화를 재현했다.",
+            "버전과 단일 작성자 한계를 명시했다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "misc ZIP을 풀고 해당 폴더로 이동합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿔 실행하세요.",
+              "원본은 보관하고 변경 과제에는 사본을 사용합니다. 제공한 작은 합성 입력만 오프라인에서 다루며 계정·외부 자원·실제 개인정보를 사용하지 않습니다."
+            ]
+          }
+        }
+      ]
     }
   ],
   "sources": [
@@ -448,6 +1512,22 @@
     [
       "Python base64 문서 · 영어",
       "https://docs.python.org/3/library/base64.html"
+    ],
+    [
+      "Python re · fullmatch와 이름 있는 그룹",
+      "https://docs.python.org/3/library/re.html"
+    ],
+    [
+      "Python zipfile · 목록과 경로 주의사항",
+      "https://docs.python.org/3/library/zipfile.html"
+    ],
+    [
+      "Python collections · deque",
+      "https://docs.python.org/3/library/collections.html#collections.deque"
+    ],
+    [
+      "Python itertools · permutations",
+      "https://docs.python.org/3/library/itertools.html#itertools.permutations"
     ]
   ]
 }

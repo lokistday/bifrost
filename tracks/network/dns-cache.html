@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="캐시 유효 시간과 NXDOMAIN·NODATA의 적용 범위를 구분합니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="DNS TTL과 부정 응답 캐시 — Network Security · Bifrost">
+<meta property="og:description" content="캐시 유효 시간과 NXDOMAIN·NODATA의 적용 범위를 구분합니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/tracks/network/dns-cache.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/network/dns-cache.html">
+<title>DNS TTL과 부정 응답 캐시 — Network Security · Bifrost</title>
+<script src="../../js/theme.js"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../../css/study.css?v=learning-a66aac410152">
+<script src="../../js/catalog.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/courses/network.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/learning.js" defer></script>
+</head>
+<body class="learning-page" data-course="network" data-course-number="05" data-view="lesson" data-lesson-id="network.dns-cache" style="--course-accent:var(--map-amber)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">네트워크 보안 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="network.dns-cache">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../index.html#mindmap">학습 지도</a><span aria-hidden="true">/</span><a href="./">Network Security</a><span aria-hidden="true">/</span><span aria-current="page">17차시</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar"><a class="back-link" href="./">← Network Security 전체 과정</a><div class="course-stats"><span data-count="network"></span>
+        <div class="course-meter" role="progressbar" aria-label="Network Security 완료 진도" aria-valuemin="0" aria-valuemax="100" data-meter="network"><span></span></div>
+      </div>
+        <nav aria-label="차시 목차">
+          <details >
+            <summary>01 · 분석을 위한 프로토콜<span class="caption" data-module-count="0"></span></summary>
+            <ol><li><a class="side-lesson" href="addressing.html" >
+              <span class="lesson-dot" data-dot="network.addressing" aria-hidden="true"></span><span>계층·CIDR·관측 위치<small class="completion-label" data-completion="network.addressing"></small></span></a></li><li><a class="side-lesson" href="pcap.html" >
+              <span class="lesson-dot" data-dot="network.pcap" aria-hidden="true"></span><span>PCAP·필터·스트림<small class="completion-label" data-completion="network.pcap"></small></span></a></li><li><a class="side-lesson" href="transport.html" >
+              <span class="lesson-dot" data-dot="network.transport" aria-hidden="true"></span><span>DNS·TCP 연결과 실패 분류<small class="completion-label" data-completion="network.transport"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>02 · 경계와 정책 설계<span class="caption" data-module-count="1"></span></summary>
+            <ol><li><a class="side-lesson" href="tls.html" >
+              <span class="lesson-dot" data-dot="network.tls" aria-hidden="true"></span><span>TLS와 보이는 정보의 경계<small class="completion-label" data-completion="network.tls"></small></span></a></li><li><a class="side-lesson" href="segmentation.html" >
+              <span class="lesson-dot" data-dot="network.segmentation" aria-hidden="true"></span><span>망 분리·신뢰 경계·관리 경로<small class="completion-label" data-completion="network.segmentation"></small></span></a></li><li><a class="side-lesson" href="policy.html" >
+              <span class="lesson-dot" data-dot="network.policy" aria-hidden="true"></span><span>방화벽 정책과 회귀 검증<small class="completion-label" data-completion="network.policy"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>03 · 탐지와 통합 방어<span class="caption" data-module-count="2"></span></summary>
+            <ol><li><a class="side-lesson" href="detection.html" >
+              <span class="lesson-dot" data-dot="network.detection" aria-hidden="true"></span><span>탐지 기준·오탐·추가 증거<small class="completion-label" data-completion="network.detection"></small></span></a></li><li><a class="side-lesson" href="zero-trust.html" >
+              <span class="lesson-dot" data-dot="network.zero-trust" aria-hidden="true"></span><span>신원과 자산 중심의 Zero Trust<small class="completion-label" data-completion="network.zero-trust"></small></span></a></li><li><a class="side-lesson" href="capstone.html" >
+              <span class="lesson-dot" data-dot="network.capstone" aria-hidden="true"></span><span>중간 종합: 작은 서비스 방어 설계<small class="completion-label" data-completion="network.capstone"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>04 · 경로·상태·운영 검증<span class="caption" data-module-count="3"></span></summary>
+            <ol><li><a class="side-lesson" href="routing.html" >
+              <span class="lesson-dot" data-dot="network.routing" aria-hidden="true"></span><span>최장 접두사와 돌아오는 경로<small class="completion-label" data-completion="network.routing"></small></span></a></li><li><a class="side-lesson" href="nat-correlation.html" >
+              <span class="lesson-dot" data-dot="network.nat-correlation" aria-hidden="true"></span><span>NAT 주소·포트·시간으로 로그 연결<small class="completion-label" data-completion="network.nat-correlation"></small></span></a></li><li><a class="side-lesson" href="connection-state.html" >
+              <span class="lesson-dot" data-dot="network.connection-state" aria-hidden="true"></span><span>연결 상태와 응답 허용의 조건<small class="completion-label" data-completion="network.connection-state"></small></span></a></li><li><a class="side-lesson" href="detection-metrics.html" >
+              <span class="lesson-dot" data-dot="network.detection-metrics" aria-hidden="true"></span><span>정밀도·재현율과 탐지 임계값<small class="completion-label" data-completion="network.detection-metrics"></small></span></a></li><li><a class="side-lesson" href="incident-correlation.html" >
+              <span class="lesson-dot" data-dot="network.incident-correlation" aria-hidden="true"></span><span>네트워크 증거 연결과 대응 판단<small class="completion-label" data-completion="network.incident-correlation"></small></span></a></li></ol>
+          </details>
+          <details open>
+            <summary>05 · 프로토콜 경계와 관측 품질<span class="caption" data-module-count="4"></span></summary>
+            <ol><li><a class="side-lesson" href="ipv6-boundaries.html" >
+              <span class="lesson-dot" data-dot="network.ipv6-boundaries" aria-hidden="true"></span><span>IPv6 주소 범위와 정책의 빈틈<small class="completion-label" data-completion="network.ipv6-boundaries"></small></span></a></li><li><a class="side-lesson" href="stream-reassembly.html" >
+              <span class="lesson-dot" data-dot="network.stream-reassembly" aria-hidden="true"></span><span>스트림 재조립과 누락·겹침<small class="completion-label" data-completion="network.stream-reassembly"></small></span></a></li><li><a class="side-lesson" href="dns-cache.html" aria-current="page">
+              <span class="lesson-dot" data-dot="network.dns-cache" aria-hidden="true"></span><span>DNS TTL과 부정 응답 캐시<small class="completion-label" data-completion="network.dns-cache"></small></span></a></li><li><a class="side-lesson" href="path-mtu.html" >
+              <span class="lesson-dot" data-dot="network.path-mtu" aria-hidden="true"></span><span>MTU·PMTUD와 큰 전송의 실패<small class="completion-label" data-completion="network.path-mtu"></small></span></a></li><li><a class="side-lesson" href="event-time-windows.html" >
+              <span class="lesson-dot" data-dot="network.event-time-windows" aria-hidden="true"></span><span>사건 시각·지연 도착과 세션 경계<small class="completion-label" data-completion="network.event-time-windows"></small></span></a></li></ol>
+          </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
+      </aside><article class="lesson-article">
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/network.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">05 · 프로토콜 경계와 관측 품질 · 17 / 19</div><h1>DNS TTL과 부정 응답 캐시</h1><p class="lesson-objective">캐시 유효 시간과 NXDOMAIN·NODATA의 적용 범위를 구분합니다.</p></div></header>
+          <div class="lesson-meta"><span>심화 연결</span><span>학습 50–80분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>센서에 기록이 없다는 사실이 통신이 없었다는 뜻인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>센서 위치·필터·손실·시간 범위를 확인해야 합니다. 관측되지 않은 경로가 남아 있을 수 있습니다.</p><a href="../../guides/bridges.html#network">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
+          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>로컬 파일 실습 · Python 3.10 이상</strong></p><ul><li>network ZIP 전체를 풀고 protocol_models.py와 protocol-models.json가 있는 폴더에서 실행합니다. 외부 서버·클라우드 계정·실제 네트워크 접속은 없습니다.</li><li>Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. 변경 실험은 원본을 보관하고 사본과 --input 옵션을 사용합니다.</li><li>Python 3.10 이상 표준 라이브러리만 사용합니다. 추가 패키지가 필요하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="transport.html">네트워크 보안 · DNS·TCP 연결과 실패 분류 ↗</a></li><li><a href="routing.html">네트워크 보안 · 최장 접두사와 돌아오는 경로 ↗</a></li></ul>
+            </section>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>DNS 응답을 캐시하면 같은 질의마다 권한 서버에 다시 물을 필요가 줄어듭니다. TTL은 그 응답을 재사용할 수 있는 시간이며, 응답을 받은 시각을 기준으로 남은 시간을 계산합니다. 레코드 변경 뒤 모든 캐시가 즉시 같은 값을 보게 되는 것은 아닙니다.</p><figure class="learning-visual" data-visual-id="network.dns-cache"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교표</span><h3>부정 응답에도 만료 시각이 있습니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="부정 응답에도 만료 시각이 있습니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 272" width="760" height="272" role="img" aria-labelledby="visual-network-dns-cache-title visual-network-dns-cache-desc" focusable="false"><title id="visual-network-dns-cache-title">부정 응답에도 만료 시각이 있습니다</title><desc id="visual-network-dns-cache-desc">양성 응답 0+30과 부정 응답 10+min(60,20)은 모두 30에 만료됩니다. 29에는 재사용하고 30에는 하지 않습니다.</desc><defs><marker id="visual-network-dns-cache-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone "><rect class="v-table-head" x="28" y="20" width="230" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="41" y="47">종류</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="258" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="271" y="47">시각 29</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="495" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="508" y="47">시각 30</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="78" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="105">양성 A</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="105">HIT</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="105">MISS</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="136" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="163">NXDOMAIN</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="163">NEGATIVE</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="163">MISS</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="194" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="221">NODATA A</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="221">타입 범위만</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="221">만료</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">MISS는 이름 부재와 다릅니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>양성 응답 0+30과 부정 응답 10+min(60,20)은 모두 30에 만료됩니다. 29에는 재사용하고 30에는 하지 않습니다.</p></details></figure><p>이 모형의 양성 응답은 name·qtype에 연결되고 받은 시각 0에서 TTL30입니다. 시각 29에는 HIT지만 정확히 30에는 MISS입니다. MISS는 원래 이름이 존재하지 않음을 뜻하지 않고 이 자료의 재사용 가능한 항목이 없다는 뜻입니다.</p><p>부정 응답도 캐시될 수 있습니다. NXDOMAIN은 해당 이름의 존재 부정, NODATA는 이름은 있지만 요청한 타입의 자료가 없다는 의미로 구분합니다. 이 한 IN 클래스 모형에서 NXDOMAIN은 다른 qtype에도 적용하고 NODATA는 같은 name·qtype에만 적용합니다.</p><p>표본의 부정 TTL은 SOA TTL과 SOA MINIMUM 중 작은 값입니다. 받은 시각 10, 두 값 60·20이면 30에 만료됩니다. 실제 DNS의 위임·CNAME·DNSSEC·서버 오류 재시도·오래된 응답 제공은 구현하지 않았으며 실제 리졸버를 만들거나 외부 질의를 보내지 않습니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>DNS 변경은 모든 이용자에게 즉시 반영된다고 한다.</dt><dd>기존 캐시의 남은 TTL과 리졸버 동작을 확인합니다.</dd><dt>모든 실패 응답을 NXDOMAIN으로 묶는다.</dt><dd>이름 부재·타입 부재·서버 오류·전달 실패를 분리합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/network.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/network/protocol_models.py" download>protocol_models.py ↓</a></li><li><a href="../../labs/network/protocol-models.json" download>protocol-models.json ↓</a></li><li><a href="../../labs/network/ROUND2-GUIDE.md" download>ROUND2-GUIDE.md ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 로컬 파일 실습 · Python 3.10 이상</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 protocol_models.py dns</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>Q1 state=HIT answer=192.0.2.7
+Q2 state=MISS answer=-
+Q3 state=NEGATIVE_NXDOMAIN answer=-
+Q4 state=MISS answer=-</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>TTL 만료 경계 비교</h3><p>29와 30의 결과를 보고 부정 응답도 캐시된다는 점을 확인합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 로컬 파일 실습 · Python 3.10 이상</span></div><pre><code>python3 protocol_models.py dns</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>Q1 state=HIT answer=192.0.2.7
+Q2 state=MISS answer=-
+Q3 state=NEGATIVE_NXDOMAIN answer=-
+Q4 state=MISS answer=-</pre></div></li><li><h3>NODATA의 타입 범위</h3><p>A 자료가 없다는 결과를 AAAA까지 확장하지 않습니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 로컬 파일 실습 · Python 3.10 이상</span></div><pre><code>python3 -c &quot;from protocol_models import load,dns_lookup;d=load();print(dns_lookup(d[&#39;dns_records&#39;],&#39;v6only.example&#39;,&#39;A&#39;,10)[0]);print(dns_lookup(d[&#39;dns_records&#39;],&#39;v6only.example&#39;,&#39;AAAA&#39;,10)[0])&quot;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>NEGATIVE_NODATA
+MISS</pre></div></li><li><h3>대소문자와 끝 점 정규화</h3><p>이 ASCII 이름 모형에서는 대소문자와 마지막 점을 정규화합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 로컬 파일 실습 · Python 3.10 이상</span></div><pre><code>python3 -c &quot;from protocol_models import load,dns_lookup;print(dns_lookup(load()[&#39;dns_records&#39;],&#39;LEARN.EXAMPLE.&#39;,&#39;A&#39;,29))&quot;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>(&#39;HIT&#39;, &#39;192.0.2.7&#39;)</pre></div></li></ol></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>부정 레코드의 soa_minimum을 5로 바꿔 Q3가 왜 MISS가 되는지 예측하세요. NODATA의 A 결과를 AAAA의 부재로 확대하면 안 되는 이유도 적습니다.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>새 만료 시각은 받은 시각 10 + min(60,5)=15입니다. NXDOMAIN과 NODATA의 캐시 키를 비교하세요.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>soa_minimum=5의 사본을 --input으로 실행합니다.</li><li>부정 응답 만료가 15이므로 Q3(29)와 Q4(30)가 모두 MISS라고 계산합니다.</li><li>NODATA는 name·qtype, NXDOMAIN은 이 클래스의 name에 적용하며 둘 다 만료 시각 뒤에는 재사용하지 않는다고 적습니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>Q3는 MISS로 바뀝니다. 캐시 미일치·권한 서버의 최신 응답·네트워크 장애는 서로 다른 상태입니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>수신 10초·TTL 20초인 응답을 29초와 30초에 조회하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>29초는 유효, 30초는 만료 경계입니다. 이 단순 모형의 반열린 구간 [received, received+TTL)을 설명합니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>원본의 예상 결과와 변경 과제의 결과를 근거로 비교했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>실제로 검증한 보장과 모형에서 생략한 조건을 나누어 기록했다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/network/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. TTL30을 시각 0에 받은 항목이 시각 30에 MISS입니다. 뜻은?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>해당 이름은 영구히 존재하지 않는다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>이 모형에서 재사용 유효 기간이 끝났다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>모든 서버가 데이터를 삭제했다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 이 모형에서 재사용 유효 기간이 끝났다.</strong></p><p>캐시 유효성과 이름 존재 여부를 구분해야 합니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. A 질의의 NODATA를 AAAA 질의에도 그대로 쓰면?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>언제나 올바르다.</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>TTL만 길게 하면 된다.</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>타입별 부재를 다른 타입까지 확대하는 오류이다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 타입별 부재를 다른 타입까지 확대하는 오류이다.</strong></p><p>NODATA와 NXDOMAIN의 의미와 캐시 범위가 다릅니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>원본의 예상 결과와 변경 과제의 결과를 근거로 비교했다.</li><li>실제로 검증한 보장과 모형에서 생략한 조건을 나누어 기록했다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="stream-reassembly.html"><small>← 이전 차시</small>스트림 재조립과 누락·겹침</a>
+            <a href="path-mtu.html"><small>다음 차시 →</small>MTU·PMTUD와 큰 전송의 실패</a></nav>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://www.rfc-editor.org/rfc/rfc1035" target="_blank" rel="noopener noreferrer">RFC 1035 · DNS TTL ↗</a></li>
+        <li><a href="https://www.rfc-editor.org/rfc/rfc2308" target="_blank" rel="noopener noreferrer">RFC 2308 · DNS 부정 캐시 ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

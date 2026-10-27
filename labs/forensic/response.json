@@ -1,0 +1,12 @@
+{
+  "case": "BF-IR-002",
+  "observations": [
+    {"id": "E04", "host": "workstation-7", "finding": "unexpected-child", "confirmed": true},
+    {"id": "E05", "host": "workstation-7", "finding": "external-transfer", "confirmed": false}
+  ],
+  "actions": [
+    {"name": "isolate-network", "authorized": true, "impact_reviewed": true, "evidence_preserved": true, "rollback": "approved reconnect"},
+    {"name": "power-off", "authorized": true, "impact_reviewed": true, "evidence_preserved": false, "rollback": "reboot loses volatile state"},
+    {"name": "erase-host", "authorized": false, "impact_reviewed": false, "evidence_preserved": false, "rollback": "none"}
+  ]
+}

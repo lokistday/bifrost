@@ -1,0 +1,13 @@
+{
+  "description": "Fictional key IDs and certificate metadata. Public teaching key is in design_checks.py; never reuse it.",
+  "keys": [
+    {"id": "K1", "state": "active"}, {"id": "K2", "state": "retired"},
+    {"id": "K3", "state": "compromised"}, {"id": "K4", "state": "destroyed"}
+  ],
+  "certificate": {"dns_names": ["learn.example"], "not_before": "2026-01-01", "not_after": "2026-12-31", "root": "Training Root"},
+  "certificate_cases": [
+    {"id": "T1", "host": "learn.example", "date": "2026-10-20"},
+    {"id": "T2", "host": "other.example", "date": "2026-10-20"},
+    {"id": "T3", "host": "learn.example", "date": "2027-01-01"}
+  ]
+}

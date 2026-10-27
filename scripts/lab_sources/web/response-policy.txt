@@ -1,0 +1,10 @@
+# Fictional HTTPS response headers; this file does not configure GitHub Pages.
+Content-Security-Policy: default-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Content-Type: text/html; charset=utf-8
+
+# CORS is a separate API-response policy, not a replacement for CSP or authorization.
+Access-Control-Allow-Origin: https://learn.example.invalid
+Access-Control-Allow-Credentials: true
+Vary: Origin

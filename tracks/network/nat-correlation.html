@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="공유 공인 IP만으로 내부 호스트를 단정하지 않고 변환 기록을 대조합니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="NAT 주소·포트·시간으로 로그 연결 — Network Security · Bifrost">
+<meta property="og:description" content="공유 공인 IP만으로 내부 호스트를 단정하지 않고 변환 기록을 대조합니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/tracks/network/nat-correlation.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/network/nat-correlation.html">
+<title>NAT 주소·포트·시간으로 로그 연결 — Network Security · Bifrost</title>
+<script src="../../js/theme.js"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../../css/study.css?v=learning-a66aac410152">
+<script src="../../js/catalog.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/courses/network.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/learning.js" defer></script>
+</head>
+<body class="learning-page" data-course="network" data-course-number="05" data-view="lesson" data-lesson-id="network.nat-correlation" style="--course-accent:var(--map-amber)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">네트워크 보안 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="network.nat-correlation">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../index.html#mindmap">학습 지도</a><span aria-hidden="true">/</span><a href="./">Network Security</a><span aria-hidden="true">/</span><span aria-current="page">11차시</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar"><a class="back-link" href="./">← Network Security 전체 과정</a><div class="course-stats"><span data-count="network"></span>
+        <div class="course-meter" role="progressbar" aria-label="Network Security 완료 진도" aria-valuemin="0" aria-valuemax="100" data-meter="network"><span></span></div>
+      </div>
+        <nav aria-label="차시 목차">
+          <details >
+            <summary>01 · 분석을 위한 프로토콜<span class="caption" data-module-count="0"></span></summary>
+            <ol><li><a class="side-lesson" href="addressing.html" >
+              <span class="lesson-dot" data-dot="network.addressing" aria-hidden="true"></span><span>계층·CIDR·관측 위치<small class="completion-label" data-completion="network.addressing"></small></span></a></li><li><a class="side-lesson" href="pcap.html" >
+              <span class="lesson-dot" data-dot="network.pcap" aria-hidden="true"></span><span>PCAP·필터·스트림<small class="completion-label" data-completion="network.pcap"></small></span></a></li><li><a class="side-lesson" href="transport.html" >
+              <span class="lesson-dot" data-dot="network.transport" aria-hidden="true"></span><span>DNS·TCP 연결과 실패 분류<small class="completion-label" data-completion="network.transport"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>02 · 경계와 정책 설계<span class="caption" data-module-count="1"></span></summary>
+            <ol><li><a class="side-lesson" href="tls.html" >
+              <span class="lesson-dot" data-dot="network.tls" aria-hidden="true"></span><span>TLS와 보이는 정보의 경계<small class="completion-label" data-completion="network.tls"></small></span></a></li><li><a class="side-lesson" href="segmentation.html" >
+              <span class="lesson-dot" data-dot="network.segmentation" aria-hidden="true"></span><span>망 분리·신뢰 경계·관리 경로<small class="completion-label" data-completion="network.segmentation"></small></span></a></li><li><a class="side-lesson" href="policy.html" >
+              <span class="lesson-dot" data-dot="network.policy" aria-hidden="true"></span><span>방화벽 정책과 회귀 검증<small class="completion-label" data-completion="network.policy"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>03 · 탐지와 통합 방어<span class="caption" data-module-count="2"></span></summary>
+            <ol><li><a class="side-lesson" href="detection.html" >
+              <span class="lesson-dot" data-dot="network.detection" aria-hidden="true"></span><span>탐지 기준·오탐·추가 증거<small class="completion-label" data-completion="network.detection"></small></span></a></li><li><a class="side-lesson" href="zero-trust.html" >
+              <span class="lesson-dot" data-dot="network.zero-trust" aria-hidden="true"></span><span>신원과 자산 중심의 Zero Trust<small class="completion-label" data-completion="network.zero-trust"></small></span></a></li><li><a class="side-lesson" href="capstone.html" >
+              <span class="lesson-dot" data-dot="network.capstone" aria-hidden="true"></span><span>중간 종합: 작은 서비스 방어 설계<small class="completion-label" data-completion="network.capstone"></small></span></a></li></ol>
+          </details>
+          <details open>
+            <summary>04 · 경로·상태·운영 검증<span class="caption" data-module-count="3"></span></summary>
+            <ol><li><a class="side-lesson" href="routing.html" >
+              <span class="lesson-dot" data-dot="network.routing" aria-hidden="true"></span><span>최장 접두사와 돌아오는 경로<small class="completion-label" data-completion="network.routing"></small></span></a></li><li><a class="side-lesson" href="nat-correlation.html" aria-current="page">
+              <span class="lesson-dot" data-dot="network.nat-correlation" aria-hidden="true"></span><span>NAT 주소·포트·시간으로 로그 연결<small class="completion-label" data-completion="network.nat-correlation"></small></span></a></li><li><a class="side-lesson" href="connection-state.html" >
+              <span class="lesson-dot" data-dot="network.connection-state" aria-hidden="true"></span><span>연결 상태와 응답 허용의 조건<small class="completion-label" data-completion="network.connection-state"></small></span></a></li><li><a class="side-lesson" href="detection-metrics.html" >
+              <span class="lesson-dot" data-dot="network.detection-metrics" aria-hidden="true"></span><span>정밀도·재현율과 탐지 임계값<small class="completion-label" data-completion="network.detection-metrics"></small></span></a></li><li><a class="side-lesson" href="incident-correlation.html" >
+              <span class="lesson-dot" data-dot="network.incident-correlation" aria-hidden="true"></span><span>네트워크 증거 연결과 대응 판단<small class="completion-label" data-completion="network.incident-correlation"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>05 · 프로토콜 경계와 관측 품질<span class="caption" data-module-count="4"></span></summary>
+            <ol><li><a class="side-lesson" href="ipv6-boundaries.html" >
+              <span class="lesson-dot" data-dot="network.ipv6-boundaries" aria-hidden="true"></span><span>IPv6 주소 범위와 정책의 빈틈<small class="completion-label" data-completion="network.ipv6-boundaries"></small></span></a></li><li><a class="side-lesson" href="stream-reassembly.html" >
+              <span class="lesson-dot" data-dot="network.stream-reassembly" aria-hidden="true"></span><span>스트림 재조립과 누락·겹침<small class="completion-label" data-completion="network.stream-reassembly"></small></span></a></li><li><a class="side-lesson" href="dns-cache.html" >
+              <span class="lesson-dot" data-dot="network.dns-cache" aria-hidden="true"></span><span>DNS TTL과 부정 응답 캐시<small class="completion-label" data-completion="network.dns-cache"></small></span></a></li><li><a class="side-lesson" href="path-mtu.html" >
+              <span class="lesson-dot" data-dot="network.path-mtu" aria-hidden="true"></span><span>MTU·PMTUD와 큰 전송의 실패<small class="completion-label" data-completion="network.path-mtu"></small></span></a></li><li><a class="side-lesson" href="event-time-windows.html" >
+              <span class="lesson-dot" data-dot="network.event-time-windows" aria-hidden="true"></span><span>사건 시각·지연 도착과 세션 경계<small class="completion-label" data-completion="network.event-time-windows"></small></span></a></li></ol>
+          </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
+      </aside><article class="lesson-article">
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/network.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">04 · 경로·상태·운영 검증 · 11 / 19</div><h1>NAT 주소·포트·시간으로 로그 연결</h1><p class="lesson-objective">공유 공인 IP만으로 내부 호스트를 단정하지 않고 변환 기록을 대조합니다.</p></div></header>
+          <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>센서에 기록이 없다는 사실이 통신이 없었다는 뜻인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>센서 위치·필터·손실·시간 범위를 확인해야 합니다. 관측되지 않은 경로가 남아 있을 수 있습니다.</p><a href="../../guides/bridges.html#network">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
+          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>오프라인 모델 실습 · Python 3.10 이상</strong></p><ul><li>network ZIP을 풀고 defense_models.py와 defense-models.json가 있는 폴더에서 실행합니다. 추가 패키지나 외부 계정이 필요하지 않습니다.</li><li>Linux/WSL/macOS 명령은 python3입니다. Windows PowerShell에서는 python3 부분을 py -3로 바꿉니다.</li><li>파일 변경 과제는 복사본과 --input 옵션을 사용합니다. 결과는 교육 모형에 한정하며 운영 보안 검증을 대신하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="routing.html">네트워크 보안 · 최장 접두사와 돌아오는 경로 ↗</a></li><li><a href="../forensic/timeline.html">디지털 포렌식 · UTC로 타임라인 맞추기 ↗</a></li></ul>
+            </section>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>NAPT는 여러 내부 통신을 하나의 외부 주소와 서로 다른 포트에 대응시킬 수 있습니다. 외부 로그의 공인 IP 하나만으로 내부 호스트를 고를 수 없습니다. 원래 주소·포트, 변환 주소·포트, 목적지와 기록 시점이 함께 필요합니다.</p><figure class="learning-visual" data-visual-id="network.nat-correlation"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교표</span><h3>공인 IP가 같아도 연결은 다릅니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="공인 IP가 같아도 연결은 다릅니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 272" width="760" height="272" role="img" aria-labelledby="visual-network-nat-correlation-title visual-network-nat-correlation-desc" focusable="false"><title id="visual-network-nat-correlation-title">공인 IP가 같아도 연결은 다릅니다</title><desc id="visual-network-nat-correlation-desc">두 내부 호스트가 공인 IP를 공유하지만 변환 포트는 다릅니다. NAT02는 유효 구간 뒤라 UNKNOWN입니다.</desc><defs><marker id="visual-network-nat-correlation-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone "><rect class="v-table-head" x="28" y="20" width="230" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="41" y="47">관측</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="258" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="271" y="47">외부 포트·시간</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="495" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="508" y="47">내부 주소</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="78" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="105">NAT01</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="105">40001 · 구간 안</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="105">10.20.1.7</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="136" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="163">NAT02</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="163">40001 · 종료 뒤</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="163">UNKNOWN</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="194" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="221">NAT03</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="221">40002 · 구간 안</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="221">10.20.1.8</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">주소·포트·시간을 함께 대조합니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>두 내부 호스트가 공인 IP를 공유하지만 변환 포트는 다릅니다. NAT02는 유효 구간 뒤라 UNKNOWN입니다.</p></details></figure><p>실습에서 40001은 10.20.1.7, 40002는 10.20.1.8에 연결됩니다. 두 내부 호스트의 원래 포트가 51000으로 같아도 변환 포트가 다르면 구분됩니다. 실습은 TCP만 가정하고 destination 문자열에 목적지 주소와 포트를 묶었습니다. 실제 분석에서는 프로토콜도 키에 포함합니다.</p><p>변환은 영구 정보가 아닙니다. 포트 재사용과 상태 삭제가 있으므로 사건 시각을 변환의 유효 구간과 비교합니다. 표본은 같은 길이의 UTC 형식이며 start 이상 end 미만입니다. 종료 뒤의 NAT02는 현재 자료로 연결할 수 없어 UNKNOWN입니다.</p><p>현장에서는 시계 오차, 이중 NAT, 프록시, 장비 식별자와 로그 공백을 더 검토합니다. 여러 매핑이 일치하면 하나를 임의로 고르지 않고 모호함을 보고합니다. 호스트 주소를 알아도 사람이나 계정의 행위자는 별도 증거가 필요합니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>공인 IP를 곧바로 사용자 ID로 쓴다.</dt><dd>주소·호스트·세션·신원을 별도 증거로 연결합니다.</dd><dt>매핑을 시간 제한 없는 정보로 본다.</dt><dd>생성·만료 시각과 포트 재사용을 확인합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/network.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/network/defense_models.py" download>defense_models.py ↓</a></li><li><a href="../../labs/network/defense-models.json" download>defense-models.json ↓</a></li><li><a href="../../labs/network/ADVANCED-GUIDE.md" download>ADVANCED-GUIDE.md ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 오프라인 모델 실습 · Python 3.10 이상</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 defense_models.py nat</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>NAT01 matches=1 private=10.20.1.7
+NAT02 matches=0 private=UNKNOWN
+NAT03 matches=1 private=10.20.1.8</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>변환 표와 관측 표 구분</h3><p>nat는 변환 표, observations는 외부에서 본 접속 표입니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 오프라인 모델 실습 · Python 3.10 이상</span></div><pre><code>python3 -c &quot;from defense_models import load;d=load();print(len(d[&#39;nat&#39;]),len(d[&#39;observations&#39;]))&quot;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>2 3</pre></div></li><li><h3>세 관측 대조</h3><p>외부 포트가 다르거나 유효 시간이 지난 경우를 분리합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 오프라인 모델 실습 · Python 3.10 이상</span></div><pre><code>python3 defense_models.py nat</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>NAT01 matches=1 private=10.20.1.7
+NAT02 matches=0 private=UNKNOWN
+NAT03 matches=1 private=10.20.1.8</pre></div></li><li><h3>종료 경계 확인</h3><p>원본을 바꾸지 않고 관측 시각을 매핑 종료 시각과 같게 만듭니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 오프라인 모델 실습 · Python 3.10 이상</span></div><pre><code>python3 -c &quot;from defense_models import load,correlate_nat;d=load();o=dict(d[&#39;observations&#39;][0]);o[&#39;time&#39;]=d[&#39;nat&#39;][0][&#39;end&#39;];print(correlate_nat(o,d[&#39;nat&#39;]))&quot;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>[]</pre></div></li></ol></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>사본에서 NAT01의 public_port를 40002로 바꾸고 결과를 비교하세요. NAT02의 UNKNOWN을 사건 부재로 단정할 수 없는 이유와 실제로 더 필요한 연결 필드를 적습니다.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>포트뿐 아니라 목적지와 시간도 일치해야 합니다. 종료 시각은 포함하지 않습니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>NAT01의 포트만 바꾼 작업 사본을 --input으로 읽습니다.</li><li>NAT01이 10.20.1.8과 일치하는지 확인하고 원본 결과와 비교합니다.</li><li>UNKNOWN의 대안으로 매핑 만료·시간 오차·기록 유실을 적고 추가 장비·프로토콜·신원 기록을 구분합니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>변경한 NAT01은 matches=1 private=10.20.1.8입니다. 일치 없음과 활동 없음, 호스트 식별과 사람 식별을 각각 구분합니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>동일 공인 IP를 쓰는 두 내부 단말의 사건을 연결할 필드를 고르세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>공인 IP만으로 구분되지 않습니다. 시간·프로토콜·외부와 내부 포트·주소 및 변환 기록의 유효 구간이 필요합니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>결과의 근거와 반례를 설명하고 과제의 변경 결과를 기록했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>교육 모형의 생략 사항과 실제 환경에서 필요한 추가 검증을 구분했다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/network/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. 두 외부 접속의 공인 IP가 같으면 같은 내부 호스트인가요?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>포트·목적지·시간·변환 기록도 확인해야 한다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>언제나 같다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>IP 끝자리만 보면 된다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 포트·목적지·시간·변환 기록도 확인해야 한다.</strong></p><p>주소 공유와 포트 재사용 때문에 공인 IP 하나로 내부 연결을 유일하게 정할 수 없습니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. 매핑 종료 뒤 관측이 UNKNOWN입니다. 적절한 해석은?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>접속이 없었다는 증명이다.</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>현재 변환 자료로 연결하지 못했다.</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>해당 사람의 행위를 부정하는 증명이다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 현재 변환 자료로 연결하지 못했다.</strong></p><p>조회한 자료의 범위를 벗어난 결과입니다. 보존 공백과 시계 오차 등도 검토합니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>결과의 근거와 반례를 설명하고 과제의 변경 결과를 기록했다.</li><li>교육 모형의 생략 사항과 실제 환경에서 필요한 추가 검증을 구분했다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="routing.html"><small>← 이전 차시</small>최장 접두사와 돌아오는 경로</a>
+            <a href="connection-state.html"><small>다음 차시 →</small>연결 상태와 응답 허용의 조건</a></nav>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://www.rfc-editor.org/rfc/rfc3022" target="_blank" rel="noopener noreferrer">RFC 3022 · Traditional NAT ↗</a></li>
+        <li><a href="https://www.rfc-editor.org/rfc/rfc5382" target="_blank" rel="noopener noreferrer">RFC 5382 · TCP NAT 동작 ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

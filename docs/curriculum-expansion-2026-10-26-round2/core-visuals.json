@@ -1,0 +1,415 @@
+{
+  "foundation.mutable-data": {
+    "type": "compare",
+    "title": "바깥 dict와 안쪽 목록을 따로 봅니다",
+    "description": "dict(original)은 새 dict이지만 tags 목록을 공유합니다. deepcopy로 만든 separate에는 safe만 추가되고 원본의 review 변경은 전달되지 않습니다.",
+    "takeaway": "객체 동일성과 값의 같음은 다른 판단입니다.",
+    "panels": [
+      {
+        "title": "얕은 복사",
+        "rows": [
+          [
+            "바깥 dict",
+            "다른 객체"
+          ],
+          [
+            "tags 목록",
+            "같은 객체"
+          ],
+          [
+            "원본 영향",
+            "append가 전달됨"
+          ]
+        ],
+        "tone": ""
+      },
+      {
+        "title": "깊은 복사",
+        "rows": [
+          [
+            "바깥 dict",
+            "다른 객체"
+          ],
+          [
+            "tags 목록",
+            "별도 객체"
+          ],
+          [
+            "원본 영향",
+            "이 표본에서는 독립"
+          ]
+        ],
+        "tone": "positive"
+      }
+    ]
+  },
+  "foundation.atomic-output": {
+    "type": "flow",
+    "title": "새 결과를 완성한 뒤 이름을 교체합니다",
+    "description": "자기 임시 폴더의 기존 version=1은 교체 직전 실패에서 유지됩니다. 임시 파일을 닫고 교체한 성공 경로에서는 version=2가 되고 잔여 파일은 0개입니다.",
+    "takeaway": "기존 결과 유지와 임시 자원 정리를 각각 검사하세요.",
+    "steps": [
+      [
+        "임시 파일",
+        "동일 폴더 · 새 JSON"
+      ],
+      [
+        "닫기와 판단",
+        "flush · 실패면 정리"
+      ],
+      [
+        "성공 시 교체",
+        "os.replace",
+        "positive"
+      ]
+    ]
+  },
+  "foundation.config-precedence": {
+    "type": "flow",
+    "title": "나중 계층이 우선하지만 각 입력은 검증합니다",
+    "description": "기본값 5에 파일 10, 환경 문자열 20, CLI 정수 30을 순서대로 적용합니다. 빈 환경값이나 잘못된 파일 값은 높은 계층이 있어도 오류입니다.",
+    "takeaway": "선택한 값과 설정 출처를 함께 남기세요.",
+    "steps": [
+      [
+        "기본·파일",
+        "5 → 10"
+      ],
+      [
+        "환경",
+        "문자열 20 검증"
+      ],
+      [
+        "명령행",
+        "30 · source=cli",
+        "positive"
+      ]
+    ]
+  },
+  "foundation.subprocess": {
+    "type": "flow",
+    "title": "실행 파일과 인자 데이터를 분리합니다",
+    "description": "고정 Python 실행 파일이 argv_worker.py를 실행합니다. two words와 x;echo NOT_A_COMMAND는 두 문자열 인자이고 shell=False라 추가 셸 명령을 구성하지 않습니다.",
+    "takeaway": "실패 상태와 시간 초과도 정상 출력과 따로 처리하세요.",
+    "steps": [
+      [
+        "호출자",
+        "고정 실행 파일 · argv"
+      ],
+      [
+        "자식",
+        "문자열 두 개 그대로"
+      ],
+      [
+        "결과 검사",
+        "상태 · stderr · timeout",
+        "positive"
+      ]
+    ]
+  },
+  "foundation.structured-logging": {
+    "type": "flow",
+    "title": "전체 요청 대신 필요한 필드만 고릅니다",
+    "description": "입력에는 password와 authorization이 있지만 출력은 event·request_id·result·status 네 키뿐입니다. JSON이 줄바꿈을 이스케이프하지만 허용 필드 안의 비밀까지 찾아내지는 않습니다.",
+    "takeaway": "최소 필드 선택과 값의 의미 검토를 함께 하세요.",
+    "steps": [
+      [
+        "입력 객체",
+        "전체 덤프를 피함"
+      ],
+      [
+        "허용 필드",
+        "이름 · 타입 · 길이"
+      ],
+      [
+        "JSON 한 줄",
+        "이스케이프 · 재파싱",
+        "positive"
+      ]
+    ]
+  },
+  "web.mass-assignment": {
+    "type": "flow",
+    "title": "사용자가 보낸 모든 키를 저장하지 않습니다",
+    "description": "update_profile은 소유자를 확인하고 display_name·theme만 허용합니다. role을 섞은 요청은 전체 거부하고 원본 dict를 유지합니다.",
+    "takeaway": "필드 허용과 사용자 인가는 다른 검사입니다.",
+    "steps": [
+      [
+        "소유자 확인",
+        "actor와 owner"
+      ],
+      [
+        "요청 계약",
+        "허용 키 · 타입 · 길이"
+      ],
+      [
+        "새 결과 반환",
+        "role · owner 보존",
+        "positive"
+      ]
+    ]
+  },
+  "web.session-lifecycle": {
+    "type": "timeline",
+    "title": "신뢰 수준이 바뀌면 식별자도 갱신합니다",
+    "description": "고정 시각 90에서 S-OLD를 제거하고 S-NEW에 alice와 expires=140을 연결합니다. 유효 기간 중 로그아웃하면 즉시 제거되고, 별도 표본에서 140 도달도 무효입니다.",
+    "takeaway": "쿠키 삭제와 서버 무효화는 각각 확인하세요.",
+    "events": [
+      [
+        "인증 후",
+        "ID 교체",
+        "S-OLD 제거"
+      ],
+      [
+        "유효",
+        "S-NEW 조회",
+        "91 → alice",
+        "positive"
+      ],
+      [
+        "경로 A",
+        "로그아웃",
+        "91에서도 None"
+      ],
+      [
+        "경로 B",
+        "만료 경계",
+        "140 → None"
+      ]
+    ]
+  },
+  "web.reset-tokens": {
+    "type": "flow",
+    "title": "일치하는 토큰에도 권한 범위가 있습니다",
+    "description": "공개 표본 토큰이 일치해도 alice·reset-password·만료 전·미사용 조건을 만족해야 합니다. 성공하면 used가 바뀌어 같은 표본의 재사용은 거부됩니다.",
+    "takeaway": "토큰 비교와 한 번 사용의 원자성은 다른 문제입니다.",
+    "steps": [
+      [
+        "권한 범위",
+        "사용자 · 목적 · 수명"
+      ],
+      [
+        "토큰 비교",
+        "저장 해시와 비교"
+      ],
+      [
+        "소비 상태",
+        "첫 성공 뒤 재사용 거부",
+        "positive"
+      ]
+    ]
+  },
+  "web.private-caching": {
+    "type": "compare",
+    "title": "같은 URL이어도 본문은 사용자마다 다릅니다",
+    "description": "경로만 키로 쓰는 잘못된 public 표본은 bob에게도 profile:alice를 전달합니다. 별도의 새 no-store 표본은 각자 본문을 만들고 항목을 저장하지 않습니다.",
+    "takeaway": "새 정책의 통과는 과거 캐시 삭제 증거가 아닙니다.",
+    "panels": [
+      {
+        "title": "잘못된 public",
+        "rows": [
+          [
+            "alice 요청",
+            "profile:alice 저장"
+          ],
+          [
+            "bob 요청",
+            "profile:alice 재사용"
+          ],
+          [
+            "범위",
+            "의도한 노출 재현"
+          ]
+        ],
+        "tone": ""
+      },
+      {
+        "title": "새 no-store 표본",
+        "rows": [
+          [
+            "alice 요청",
+            "profile:alice 생성"
+          ],
+          [
+            "bob 요청",
+            "profile:bob 생성"
+          ],
+          [
+            "범위",
+            "저장 항목 0개"
+          ]
+        ],
+        "tone": "positive"
+      }
+    ]
+  },
+  "web.idempotency": {
+    "type": "timeline",
+    "title": "재시도 횟수보다 상태의 불변 조건을 봅니다",
+    "description": "재고 3에서 alice의 2개 예약은 재고 1·주문 1을 만듭니다. 동일 재시도는 추가 차감 없이 REPLAY, 수량 변경은 CONFLICT이며 중간 실패는 롤백합니다.",
+    "takeaway": "결과 이름과 실제 재고·주문 수를 함께 확인하세요.",
+    "events": [
+      [
+        "첫 요청",
+        "RESERVED",
+        "재고 1 · 주문 1"
+      ],
+      [
+        "같은 요청",
+        "REPLAY",
+        "추가 차감 없음",
+        "positive"
+      ],
+      [
+        "수량 변경",
+        "CONFLICT",
+        "기존 상태 유지"
+      ],
+      [
+        "중간 실패",
+        "ROLLBACK",
+        "새 변경을 취소"
+      ]
+    ]
+  },
+  "pwn.struct-layout": {
+    "type": "cells",
+    "title": "전송 형식은 명시적으로 7바이트입니다",
+    "description": "type 01, code 01 02 03 04, count 05 06을 순서대로 전송합니다. 호스트 struct의 padding은 읽지 않습니다. --layout의 실제 크기와 오프셋은 별도 관찰입니다.",
+    "takeaway": "독립된 전송 표본과 왕복을 둘 다 검증하세요.",
+    "rows": [
+      {
+        "title": "명시적 전송 바이트",
+        "labels": [
+          "type",
+          "code 0",
+          "code 1",
+          "code 2",
+          "code 3",
+          "count 0",
+          "count 1"
+        ],
+        "values": [
+          "01",
+          "01",
+          "02",
+          "03",
+          "04",
+          "05",
+          "06"
+        ]
+      }
+    ]
+  },
+  "pwn.binary-strings": {
+    "type": "cells",
+    "title": "첫 NUL 뒤의 바이트도 버퍼에 남습니다",
+    "description": "data의 실제 5바이트는 41 42 00 43 44입니다. strlen은 첫 00에서 끝나 2를 반환하지만 명시적 길이의 Hex는 5바이트를 모두 보여 줍니다.",
+    "takeaway": "바이너리 길이를 strlen으로 계산하지 마세요.",
+    "rows": [
+      {
+        "title": "data · 실제 버퍼 5바이트",
+        "labels": [
+          "A",
+          "B",
+          "NUL",
+          "C",
+          "D"
+        ],
+        "values": [
+          "41",
+          "42",
+          [
+            "00",
+            "danger"
+          ],
+          "43",
+          "44"
+        ]
+      },
+      {
+        "title": "C 문자열로 읽는 범위",
+        "labels": [
+          "문자 0",
+          "문자 1",
+          "종료"
+        ],
+        "values": [
+          "A",
+          "B",
+          "NUL"
+        ]
+      }
+    ]
+  },
+  "pwn.file-descriptors": {
+    "type": "timeline",
+    "title": "두 디스크립터가 하나의 offset을 움직입니다",
+    "description": "자기 임시 파일 ABCDEF에서 원본이 AB를 읽으면 offset=2, dup가 CD를 읽으면 4입니다. 원본을 닫은 뒤 dup로 EF를 읽으면 6이고 다음 읽기는 EOF입니다.",
+    "takeaway": "정수 복사와 dup를 구분하세요.",
+    "events": [
+      [
+        "offset 0→2",
+        "원본 read",
+        "AB"
+      ],
+      [
+        "offset 2→4",
+        "dup read",
+        "CD"
+      ],
+      [
+        "참조 종료",
+        "원본 close",
+        "dup는 유지"
+      ],
+      [
+        "offset 4→6",
+        "dup read",
+        "EF · 다음 EOF",
+        "positive"
+      ]
+    ]
+  },
+  "pwn.partial-io": {
+    "type": "flow",
+    "title": "헤더와 본문을 각각 모읍니다",
+    "description": "chunk=2에서 2바이트 헤더는 한 번, 5바이트 본문 BIFRO는 2+2+1의 세 번으로 모여 총 네 번 읽습니다. 중간 EOF는 거부하고 0 진행 쓰기도 거부합니다.",
+    "takeaway": "한 호출을 한 메시지로 가정하지 마세요.",
+    "steps": [
+      [
+        "헤더 2",
+        "2 · 1회 읽기"
+      ],
+      [
+        "본문 5",
+        "2 + 2 + 1 · 3회"
+      ],
+      [
+        "완성 판단",
+        "모두 수신 또는 거부",
+        "positive"
+      ]
+    ]
+  },
+  "pwn.atomic-open": {
+    "type": "flow",
+    "title": "이름의 이전 상태보다 열린 객체를 확인합니다",
+    "description": "자기 디렉터리 FD에서 O_EXCL 생성은 기존 이름을 거부합니다. O_NOFOLLOW로 마지막 링크를 거부하고 열린 FD의 fstat으로 일반 파일을 확인합니다.",
+    "takeaway": "단일 플래그의 범위를 다른 보장으로 확대하지 마세요.",
+    "steps": [
+      [
+        "통제된 경로",
+        "고정 dirfd · 단일 이름"
+      ],
+      [
+        "원자적 요청",
+        "생성 EXCL · 열기 NOFOLLOW"
+      ],
+      [
+        "열린 객체",
+        "fstat · 일반 파일",
+        "positive"
+      ]
+    ]
+  }
+}

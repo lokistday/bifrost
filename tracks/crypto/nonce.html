@@ -2,6 +2,8 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b1220">
 <meta name="description" content="같은 키 아래 nonce 제약을 어겼을 때 보장이 깨질 수 있음을 설명합니다.">
@@ -20,19 +22,20 @@
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=20261024-atlas1">
-<script src="../../js/catalog.js" defer></script>
-<script src="../../js/courses/crypto.js" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../../css/study.css?v=learning-a66aac410152">
+<script src="../../js/catalog.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/courses/crypto.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=20261024-atlas1" defer></script>
+<script src="../../js/learning-view.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/learning.js" defer></script>
 </head>
 <body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.nonce" style="--course-accent:var(--map-pink)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">암호학 목차</a></nav>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">암호학 목차</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -62,10 +65,31 @@
               <span class="lesson-dot" data-dot="crypto.public-key" aria-hidden="true"></span><span>공개키 암호화와 서명<small class="completion-label" data-completion="crypto.public-key"></small></span></a></li><li><a class="side-lesson" href="nonce.html" aria-current="page">
               <span class="lesson-dot" data-dot="crypto.nonce" aria-hidden="true"></span><span>난수·nonce와 재사용<small class="completion-label" data-completion="crypto.nonce"></small></span></a></li><li><a class="side-lesson" href="password.html" >
               <span class="lesson-dot" data-dot="crypto.password" aria-hidden="true"></span><span>비밀번호 KDF·salt·비용<small class="completion-label" data-completion="crypto.password"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>04 · 키 수명과 프로토콜 검증<span class="caption" data-module-count="3"></span></summary>
+            <ol><li><a class="side-lesson" href="key-lifecycle.html" >
+              <span class="lesson-dot" data-dot="crypto.key-lifecycle" aria-hidden="true"></span><span>키 상태·교체·침해 대응<small class="completion-label" data-completion="crypto.key-lifecycle"></small></span></a></li><li><a class="side-lesson" href="hkdf-context.html" >
+              <span class="lesson-dot" data-dot="crypto.hkdf-context" aria-hidden="true"></span><span>HKDF 추출·확장과 용도 분리<small class="completion-label" data-completion="crypto.hkdf-context"></small></span></a></li><li><a class="side-lesson" href="certificate-trust.html" >
+              <span class="lesson-dot" data-dot="crypto.certificate-trust" aria-hidden="true"></span><span>인증서 이름·기간·신뢰 경로<small class="completion-label" data-completion="crypto.certificate-trust"></small></span></a></li><li><a class="side-lesson" href="message-encoding.html" >
+              <span class="lesson-dot" data-dot="crypto.message-encoding" aria-hidden="true"></span><span>메시지 경계와 인증할 바이트<small class="completion-label" data-completion="crypto.message-encoding"></small></span></a></li><li><a class="side-lesson" href="replay-protection.html" >
+              <span class="lesson-dot" data-dot="crypto.replay-protection" aria-hidden="true"></span><span>유효한 태그와 재전송 방지<small class="completion-label" data-completion="crypto.replay-protection"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>05 · 암호 레코드와 안전한 사용<span class="caption" data-module-count="4"></span></summary>
+            <ol><li><a class="side-lesson" href="aad-record-binding.html" >
+              <span class="lesson-dot" data-dot="crypto.aad-record-binding" aria-hidden="true"></span><span>AEAD와 레코드 문맥의 결합<small class="completion-label" data-completion="crypto.aad-record-binding"></small></span></a></li><li><a class="side-lesson" href="verifier-migration.html" >
+              <span class="lesson-dot" data-dot="crypto.verifier-migration" aria-hidden="true"></span><span>비밀번호 검증값의 버전과 재해시<small class="completion-label" data-completion="crypto.verifier-migration"></small></span></a></li><li><a class="side-lesson" href="envelope-keywrap.html" >
+              <span class="lesson-dot" data-dot="crypto.envelope-keywrap" aria-hidden="true"></span><span>봉투 암호화와 DEK 재포장<small class="completion-label" data-completion="crypto.envelope-keywrap"></small></span></a></li><li><a class="side-lesson" href="signature-authorization.html" >
+              <span class="lesson-dot" data-dot="crypto.signature-authorization" aria-hidden="true"></span><span>서명 문맥과 업무 권한<small class="completion-label" data-completion="crypto.signature-authorization"></small></span></a></li><li><a class="side-lesson" href="unbiased-randomness.html" >
+              <span class="lesson-dot" data-dot="crypto.unbiased-randomness" aria-hidden="true"></span><span>난수의 예측 가능성과 나머지 편향<small class="completion-label" data-completion="crypto.unbiased-randomness"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
-          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/crypto.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">03 · 현대 암호 설계와 키 수명 · 8 / 9</div><h1>난수·nonce와 재사용</h1><p class="lesson-objective">같은 키 아래 nonce 제약을 어겼을 때 보장이 깨질 수 있음을 설명합니다.</p></div></header>
-          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/crypto.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">03 · 현대 암호 설계와 키 수명 · 8 / 19</div><h1>난수·nonce와 재사용</h1><p class="lesson-objective">같은 키 아래 nonce 제약을 어겼을 때 보장이 깨질 수 있음을 설명합니다.</p></div></header>
+          <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>암호학적 검증 성공이면 현재 요청을 처리해도 되나요?</p><details><summary>판단 기준과 보충 자료</summary><p>인증된 바이트와 현재 권한·문맥·재전송·만료는 다른 검증입니다. 목적과 상태를 함께 확인합니다.</p><a href="../../guides/bridges.html#bytes">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
           <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>재사용 원리 · Python 3</strong></p><ul><li>기본 lab.py nonce는 표준 라이브러리로 실행하는 장난감 XOR 모델입니다. AES-GCM 구현이 아닙니다.</li><li>실제 AEAD의 변조·nonce 불일치 검증은 aead.py를 비교 참고합니다. 공개 교육 키로 새 데이터를 보호하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="symmetric.html">암호학 · 대칭키·AEAD·인증 태그 ↗</a></li><li><a href="../foundation/python-flow.html">공통 기초 · 조건·반복·함수 ↗</a></li></ul>
             </section>
@@ -76,23 +100,34 @@
         <a class="learning-button" href="../../labs/crypto.zip" download>전체 실습 ZIP 받기 ↓</a>
         <ul><li><a href="../../labs/crypto/lab.py" download>lab.py ↓</a></li></ul>
       </section>
-          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2><ol class="walkthrough"><li><h3>상쇄되는 XOR를 따라가기</h3><p>lab.py의 a·b·stream으로 각 암호문을 만들고 두 암호문 XOR가 두 평문 XOR와 같아지는지 봅니다. 이것은 평문 관계 누출 예시입니다.</p>
-        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>python3 lab.py nonce</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>True</pre></div></li><li><h3>스트림을 바꿔 비교</h3><p>한쪽 스트림만 바꾸면 상쇄되던 항이 남습니다. 아래 고정된 작은 예에서는 등식이 False가 됩니다. 두 스트림 사용 자체가 운영 암호 구현은 아닙니다.</p>
-        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>xor = lambda x, y: bytes(a ^ b for a, b in zip(x, y))
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 재사용 원리 · Python 3</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 lab.py nonce
+python3 -c &quot;import secrets; print(len(secrets.token_bytes(16)))&quot;</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>True
+16</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>상쇄되는 XOR를 따라가기</h3><p>lab.py의 a·b·stream으로 각 암호문을 만들고 두 암호문 XOR가 두 평문 XOR와 같아지는지 봅니다. 이것은 평문 관계 누출 예시입니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 재사용 원리 · Python 3</span></div><pre><code>python3 lab.py nonce</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>True</pre></div></li><li><h3>스트림을 바꿔 비교</h3><p>한쪽 스트림만 바꾸면 상쇄되던 항이 남습니다. 아래 고정된 작은 예에서는 등식이 False가 됩니다. 두 스트림 사용 자체가 운영 암호 구현은 아닙니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>Python 부분 코드 · 앞 단계의 변수·객체를 유지한 같은 스크립트 · 재사용 원리 · Python 3</span></div><pre><code>xor = lambda x, y: bytes(a ^ b for a, b in zip(x, y))
 a, b = b&quot;YES&quot;, b&quot;NO!&quot;
 s1, s2 = bytes([31,22,9]), bytes([30,22,9])
 print(xor(xor(a,s1),xor(b,s2)) == xor(a,b))</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>False</pre></div></li><li><h3>수명주기 반례 설계</h3><p>nonce를 0부터 세다가 재시작하는 경우, 두 프로세스가 같은 범위를 쓰는 경우, 예전 백업으로 복원하는 경우를 표로 씁니다. 키별 고유 범위·원자적 할당·키 교체 조건을 검토합니다.</p>
-        <div class="step-observation"><strong>관찰할 결과</strong><pre>생성 방법뿐 아니라 중복을 막는 운영 조건이 남습니다.</pre></div></li></ol>
-            <h3>전체 예제 연결하기</h3><div class="code-shell"><div class="code-toolbar"><span>예제 · 명령 또는 관찰 절차</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 lab.py nonce
-python3 -c &quot;import secrets; print(len(secrets.token_bytes(16)))&quot;</code></pre></div><div class="expected-output"><h3>예상 결과와 해석</h3><pre>True
-16</pre></div></section>
+        <div class="step-observation"><strong>관찰할 결과</strong><pre>생성 방법뿐 아니라 중복을 막는 운영 조건이 남습니다.</pre></div></li></ol></section>
           <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>장난감 코드의 stream을 두 메시지에서 다르게 했을 때 등식이 유지되는지 확인하세요. 프로세스 재시작·동시 실행·키 교체 시 nonce 중복을 어떻게 피할지 설계합니다.</p>
             <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>랜덤 값은 충분한 길이와 사용량 관리가 필요합니다. 무조건 중복이 불가능하다고 쓰지 마세요.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
         <ol><li>같은 스트림의 두 번 XOR 상쇄를 식과 실행 결과로 확인합니다.</li><li>다른 스트림 예에서는 False임을 기록하고 이것이 AES-GCM 전체 공격 구현이 아님을 적습니다.</li><li>재시작·동시 실행·복구의 중복 위험을 키별 nonce 관리와 연결합니다.</li></ol>
         
         <h3>결과를 판단하는 기준</h3><pre>nonce 공개 가능성과 재사용 금지를 구분합니다. 일반 random이나 고정 상수를 새 암호화 nonce로 반복하지 않습니다.</pre>
-      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p></section>
-          <section id="verify" class="article-section completion-panel"><div class="overline">04 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>두 프로세스가 같은 키로 독립적인 0부터 카운터 nonce를 쓰는 설계를 검토하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>각 프로세스 내부에서 증가해도 서로 중복됩니다. 키별 유일성을 공유 상태·범위 분할·검증된 설계로 보장해야 합니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>예제의 한계와 실제 nonce 요구를 구분했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>재시작·동시성까지 고려한 생성 방침을 적었다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/crypto/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
         <fieldset class="question" data-question="0">
           <legend>1. AES-GCM nonce의 핵심 조건은?</legend>
           <label class="question-option"><input type="radio" name="question-0" value="0"><span>항상 비밀이어야 하므로 저장하면 안 된다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>같은 키에서 재사용하지 않아야 한다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>암호문과 같은 길이여야 한다.</span></label>

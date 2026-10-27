@@ -1,0 +1,42 @@
+[
+  {
+    "tenant": "blue",
+    "document": "18",
+    "version": "1",
+    "seq": 100,
+    "nonce_hex": "626966726f73740000000064",
+    "ciphertext_hex": "8a1be00c5835a78cca58a713a5468cb125793e777858b327ef31787f8f8f9a7c085176f3"
+  },
+  {
+    "tenant": "blue",
+    "document": "17",
+    "version": "1",
+    "seq": 1,
+    "nonce_hex": "626966726f73740000000001",
+    "ciphertext_hex": "c1e4129fbe8964e4d67b0833280b813269cb7c2816ffe731cdf5ec12efe38cee2a1cacc5"
+  },
+  {
+    "tenant": "blue",
+    "document": "17",
+    "version": "1",
+    "seq": 1,
+    "nonce_hex": "626966726f73740000000001",
+    "ciphertext_hex": "c1e4129fbe8964e4d67b0833280b813269cb7c2816ffe731cdf5ec12efe38cee2a1cacc5"
+  },
+  {
+    "tenant": "red",
+    "document": "17",
+    "version": "1",
+    "seq": 999,
+    "nonce_hex": "626966726f73740000000002",
+    "ciphertext_hex": "09b6e34884bc28f067e13b061454e4b7ff6d0c3b98b2ab4239ea71ca50e9983dd414a511"
+  },
+  {
+    "tenant": "blue",
+    "document": "17",
+    "version": "1",
+    "seq": 2,
+    "nonce_hex": "626966726f73740000000002",
+    "ciphertext_hex": "09b6e34884bc28f067e13b061454e4b7ff6d0c3b98b2ab4239ea71ca50e9983dd414a511"
+  }
+]

@@ -103,9 +103,28 @@ check(flat('network.tls').includes('15프레임') && flat('network.tls').include
 check(flat('crypto.symmetric').includes('aead.py') && !flat('crypto.symmetric').includes('실행하지 않습니다'), 'AEAD visual matches the executable authenticated encryption lab');
 check(flat('crypto.public-key').includes('Ed25519') && flat('cloud.capstone').includes('INVALID'), 'Signature and cloud visual notes match improved labs');
 
+// The pixel graphic must show the colors and row order of the downloadable P3
+// fixture, rather than an independently drawn decorative image.
+const ppm = fs.readFileSync(path.join(ROOT, 'labs/misc/sample-p3.ppm'), 'ascii')
+  .split(/\r?\n/).map(line => line.split('#')[0]).join(' ').trim().split(/\s+/);
+check(ppm.shift() === 'P3', 'Pixel fixture is the authored text format');
+const [pixelWidth, pixelHeight, maximum] = ppm.splice(0, 3).map(Number);
+const samplesRGB = Array.from({ length: pixelWidth * pixelHeight }, (_, i) => ppm.slice(i * 3, i * 3 + 3).map(Number));
+const pixelVisual = data.lessons['misc.pixel-data'];
+check(pixelVisual.type === 'pixels' && pixelVisual.width === pixelWidth && pixelVisual.height === pixelHeight && pixelVisual.maximum === maximum, 'Graphic dimensions and sample maximum match P3');
+assert.deepEqual(JSON.parse(JSON.stringify(pixelVisual.pixels)), samplesRGB, 'RGB source matches the lab samples');
+const pixelDocument = parseHTML(`<html><body>${renderer.renderLesson('misc.pixel-data')}</body></html>`).document;
+const swatches = [...pixelDocument.querySelectorAll('rect[data-pixel]')];
+assert.deepEqual(swatches.map(rect => rect.getAttribute('fill')), samplesRGB.map(rgb => '#' + rgb.map(n => Math.round(n * 255 / maximum).toString(16).padStart(2, '0')).join('')), 'Actual painted colors match RGB');
+check(Number(swatches[1].getAttribute('x')) > Number(swatches[0].getAttribute('x')) && swatches[1].getAttribute('y') === swatches[0].getAttribute('y'), 'First pixel row reads left to right');
+check(swatches[2].getAttribute('x') === swatches[0].getAttribute('x') && Number(swatches[2].getAttribute('y')) > Number(swatches[0].getAttribute('y')), 'Next pixel row starts below the first');
+data.lessons['misc.pixel-data'] = { ...pixelVisual, pixels: [[255, 0, '<script>']] };
+assert.throws(() => renderer.renderLesson('misc.pixel-data'), /Invalid pixel diagram/, 'Invalid samples cannot create SVG markup');
+data.lessons['misc.pixel-data'] = pixelVisual;
+
 const originalTitle = data.lessons['web.flow'].title;
 data.lessons['web.flow'].title = '<img src=x onerror=alert(1)> & "test"';
 const malicious = parseHTML(`<html><body>${renderer.renderLesson('web.flow')}</body></html>`).document;
 check(!malicious.querySelector('img,[onerror]') && malicious.querySelector('h3').textContent === data.lessons['web.flow'].title, 'Diagram content is escaped');
 data.lessons['web.flow'].title = originalTitle;
-console.log(`PASS: ${checks} visual checks; 62 lesson and 9 course diagrams, text alternatives, routing, canvas bounds and lab facts.`);
+console.log(`PASS: ${checks} visual checks; ${lessonIDs.length} lesson and ${Object.keys(courses).length} course diagrams, text alternatives, routing, canvas bounds and lab facts.`);

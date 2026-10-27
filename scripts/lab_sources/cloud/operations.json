@@ -1,0 +1,101 @@
+{
+  "description": "Fictional cloud records. These are neither Terraform plans nor real provider API responses.",
+  "trust": {
+    "iss": "https://issuer.example",
+    "aud": "bifrost-deploy",
+    "sub": "repo:training/bifrost:ref:refs/heads/main"
+  },
+  "claims": [
+    {
+      "id": "C1",
+      "iss": "https://issuer.example",
+      "aud": "bifrost-deploy",
+      "sub": "repo:training/bifrost:ref:refs/heads/main"
+    },
+    {
+      "id": "C2",
+      "iss": "https://issuer.example",
+      "aud": "bifrost-deploy",
+      "sub": "repo:training/other:ref:refs/heads/main"
+    },
+    {
+      "id": "C3",
+      "iss": "https://issuer.example",
+      "aud": "another-service",
+      "sub": "repo:training/bifrost:ref:refs/heads/main"
+    }
+  ],
+  "changes": [
+    {
+      "resource": "admin-ingress",
+      "operation": "update",
+      "field": "admin_source",
+      "before": "192.0.2.0/24",
+      "after": "0.0.0.0/0"
+    },
+    {
+      "resource": "notes-data",
+      "operation": "delete",
+      "field": "exists",
+      "before": true,
+      "after": false
+    },
+    {
+      "resource": "web-replicas",
+      "operation": "update",
+      "field": "count",
+      "before": 2,
+      "after": 3
+    }
+  ],
+  "images": [
+    {
+      "id": "I1",
+      "reference": "registry.example/bifrost:latest",
+      "provenance": "",
+      "uid": 0,
+      "privileged": true
+    },
+    {
+      "id": "I2",
+      "reference": "registry.example/bifrost@sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "provenance": "authored-example.json",
+      "uid": 10001,
+      "privileged": false
+    }
+  ],
+  "enabled_categories": [
+    "management",
+    "object-read"
+  ],
+  "audit": [
+    {
+      "account": "training-a",
+      "region": "lab-1",
+      "event_id": "E1",
+      "category": "management"
+    },
+    {
+      "account": "training-a",
+      "region": "lab-1",
+      "event_id": "E1",
+      "category": "management"
+    },
+    {
+      "account": "training-b",
+      "region": "lab-1",
+      "event_id": "E1",
+      "category": "management"
+    }
+  ],
+  "recovery": {
+    "latest_verified_backup": "2026-10-20T09:40:00Z",
+    "incident": "2026-10-20T10:00:00Z",
+    "recovery_started": "2026-10-20T10:00:00Z",
+    "service_verified": "2026-10-20T10:45:00Z",
+    "rpo_minutes": 15,
+    "rto_minutes": 60,
+    "backup_file": "backup-records.json",
+    "backup_sha256": "751d5686558603fcf29f55fbfab2ddcabedacc68a9b35b986f7093a82afa2f4a"
+  }
+}

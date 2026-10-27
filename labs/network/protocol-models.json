@@ -1,0 +1,31 @@
+{
+  "description": "Synthetic records. Documentation addresses are not actual destinations. No packets or DNS requests are sent.",
+  "family_rules": [{"network": "192.0.2.0/24", "port": 443}],
+  "family_requests": [
+    {"id": "F1", "destination": "192.0.2.5", "port": 443},
+    {"id": "F2", "destination": "2001:db8:20::5", "port": 443},
+    {"id": "F3", "destination": "fe80::5", "port": 443},
+    {"id": "F4", "destination": "fd00::5", "port": 443}
+  ],
+  "stream": {
+    "length": 8,
+    "complete": [{"offset": 5, "hex": "535421"}, {"offset": 0, "hex": "424946"}, {"offset": 3, "hex": "524f"}, {"offset": 0, "hex": "424946"}],
+    "gap": [{"offset": 5, "hex": "535421"}, {"offset": 0, "hex": "424946"}],
+    "conflict": [{"offset": 0, "hex": "424946"}, {"offset": 3, "hex": "524f"}, {"offset": 5, "hex": "535421"}, {"offset": 2, "hex": "58"}]
+  },
+  "dns_records": [
+    {"name": "learn.example", "qtype": "A", "status": "POSITIVE", "received": 0, "ttl": 30, "answer": "192.0.2.7"},
+    {"name": "absent.example", "qtype": "A", "status": "NXDOMAIN", "received": 10, "soa_ttl": 60, "soa_minimum": 20},
+    {"name": "v6only.example", "qtype": "A", "status": "NODATA", "received": 0, "soa_ttl": 60, "soa_minimum": 30}
+  ],
+  "queries": [
+    {"id": "Q1", "name": "learn.example", "qtype": "A", "now": 29},
+    {"id": "Q2", "name": "learn.example", "qtype": "A", "now": 30},
+    {"id": "Q3", "name": "absent.example", "qtype": "AAAA", "now": 29},
+    {"id": "Q4", "name": "absent.example", "qtype": "AAAA", "now": 30}
+  ],
+  "mtu": {"version": 6, "packet_bytes": 1500, "path_mtu": 1280},
+  "lateness": 5,
+  "timeout": 10,
+  "events": [{"id": "E1", "event_time": 0}, {"id": "E2", "event_time": 4}, {"id": "E3", "event_time": 14}, {"id": "E4", "event_time": 6}]
+}

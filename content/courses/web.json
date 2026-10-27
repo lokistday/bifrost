@@ -2,13 +2,13 @@
   "id": "web",
   "title": "Web Hacking",
   "label": "웹 보안",
-  "subtitle": "브라우저와 데이터베이스의 기본기를 거쳐 입력 처리와 권한 검사를 검증합니다.",
+  "subtitle": "웹의 입력·브라우저 정책에서 세션 수명·복구 권한·캐시·거래 상태까지 검증합니다.",
   "level": "입문 → 중급",
   "prereqs": [
     "foundation.http",
     "foundation.python-files"
   ],
-  "outcome": "취약한 처리와 수정된 처리를 로컬 예제로 비교하고 회귀 테스트를 남깁니다.",
+  "outcome": "로컬 표본으로 필드·권한·수명·공유·재시도의 경계를 분석하고 정상 기능과 거부·복구 상태를 함께 검증합니다.",
   "modules": [
     {
       "title": "01 · 웹의 동작과 데이터",
@@ -742,6 +742,1097 @@
           ]
         }
       ]
+    },
+    {
+      "title": "03 · 브라우저와 서버의 신뢰 경계",
+      "intro": "CSRF·CORS·CSP가 서로 다른 질문에 답한다는 것을 요청·응답 표본으로 구분합니다.",
+      "lessons": [
+        {
+          "id": "web.csrf",
+          "title": "CSRF와 상태 변경 요청",
+          "goal": "로그인 쿠키의 존재와 사용자 의도 확인을 구분하고 정상·위조 상태 변경을 비교합니다.",
+          "concepts": [
+            "CSRF는 브라우저가 대상 사이트의 쿠키 같은 인증 정보를 자동으로 보내는 특성을 이용해 사용자가 의도하지 않은 상태 변경을 유도하는 문제입니다. 로그인한 사용자라는 사실과 그 사용자가 이 변경을 의도했다는 사실은 다르며, 타인 자료 인가 검사와도 별도의 질문입니다.",
+            "동기화 토큰 방식에서는 서버가 세션과 연결한 예측하기 어려운 값을 발급하고 변경 요청에서 확인합니다. 토큰을 단순히 URL에 넣으면 기록·참조 정보로 노출될 수 있어 전달 위치도 설계해야 합니다. 실제 구현에서는 프레임워크의 검증된 기능과 세션별 토큰 정책을 사용합니다.",
+            "이 모형은 POST·alice 세션·정확한 Origin·공개 표본 토큰 네 조건을 확인합니다. 고정 토큰은 한 세션의 조건 분리를 보여 주기 위한 값이며 실제 인증·토큰 생성·만료·재사용 방어를 구현하지 않습니다. compare_digest를 사용해도 공개된 고정 토큰을 비밀로 만들지는 못합니다.",
+            "상태 변경을 GET으로 열지 않는 설계와 SameSite 쿠키는 방어의 여러 층입니다. SameSite의 site와 Origin의 scheme·host·port는 같은 단위가 아니고, 예외와 브라우저 동작도 고려해야 합니다. 단일 속성이 모든 흐름에서 토큰 검증을 대체한다고 가정하지 않습니다.",
+            "Origin 검사도 실제 요청의 신뢰 경계를 이해해야 합니다. 임의 HTTP 클라이언트는 헤더 값을 만들 수 있으므로 인증·인가가 따로 필요합니다. XSS가 같은 출처에서 실행되면 토큰 보호도 약해질 수 있어 출력 방어를 함께 유지해야 합니다."
+          ],
+          "prerequisites": [
+            "web.sessions",
+            "web.authorization",
+            "web.output"
+          ],
+          "environment": {
+            "label": "Python 3.10 이상 · 오프라인 웹 정책 모형",
+            "details": [
+              "Web ZIP을 풀고 web 폴더에서 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 python3 대신 py -3를 사용합니다. 외부 요청·브라우저 서버·계정은 필요하지 않습니다.",
+              "web_controls.py는 입력과 정책 결과를 비교하는 순수 모형입니다. 실제 쿠키·CORS·CSP의 브라우저 집행이나 운영 웹 서버의 안전성을 증명하지 않습니다. .invalid 주소와 공개 토큰은 교육용 표본입니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 정상 변경과 누락 토큰을 비교하기",
+              "explanation": "csrf 모드는 유효한 네 조건의 요청을 ALLOW로, 토큰 없는 요청을 DENY로 분리합니다. 파일의 allow_change 조건과 각 튜플 값을 연결해서 읽습니다.",
+              "code": "python3 web_controls.py csrf",
+              "expected": "valid=ALLOW\nno-token=DENY\nforeign=DENY\nget-change=DENY"
+            },
+            {
+              "title": "2. 토큰을 알아도 다른 출처는 거부되는지 확인하기",
+              "explanation": "같은 표본 세션과 토큰을 유지하고 Origin만 바꿉니다. 이 결과는 모형이 입력 문자열을 비교했다는 뜻이며 실제 브라우저에서 요청이 발생했는지 검증한 결과는 아닙니다.",
+              "code": "python3 -c \"from web_controls import allow_change,TOKEN; print(allow_change('POST','alice',TOKEN,'https://other.example.invalid'))\"",
+              "expected": "False"
+            },
+            {
+              "title": "3. 세션·메서드의 경계를 따로 검사하기",
+              "explanation": "Origin과 토큰이 같아도 세션이 누락되면 거부되는지 확인합니다. 읽기 요청과 상태 변경을 같은 허용 규칙으로 처리하지 않는 이유를 기록합니다.",
+              "code": "python3 -c \"from web_controls import allow_change,SITE,TOKEN; print(allow_change('POST',None,TOKEN,SITE)); print(allow_change('GET','alice',TOKEN,SITE))\"",
+              "expected": "False\nFalse"
+            }
+          ],
+          "code": "python3 web_controls.py csrf",
+          "expected": "정상 POST 한 사례만 ALLOW이고 토큰 누락·다른 출처·GET 변경은 DENY입니다.",
+          "task": "사본의 cases에 잘못된 토큰·누락 세션·정상 요청을 추가해 각각 결과를 예상하세요. 왜 서버에서 CORS 설정만으로 CSRF 방어를 완성했다고 할 수 없는지도 설명하세요.",
+          "hint": "CORS는 브라우저 코드가 응답을 읽도록 허용하는 정책입니다. 모든 교차 출처 요청의 전송이나 서버 상태 변경을 일괄 차단하는 장치는 아닙니다.",
+          "solution": {
+            "approach": [
+              "정상 네 조건을 기준으로 token만 wrong으로 바꾸면 DENY, session만 None으로 바꾸면 DENY가 나오는지 확인합니다.",
+              "원래 정상 네 조건을 그대로 추가한 사례는 계속 ALLOW여야 합니다. 모든 요청 거부를 보안 수정의 성공으로 취급하지 않습니다.",
+              "보고서에는 이 모형의 고정 토큰·단일 세션 한계와 실제 세션별 발급·만료·프레임워크 검증 필요성을 적고, 인증·인가·CSRF·CORS의 질문을 구분합니다."
+            ],
+            "expected": "추가 세 사례는 DENY, DENY, ALLOW입니다. CORS와 CSRF의 차이, 정상 동작 유지, 모형에서 검증하지 않은 브라우저·세션 동작을 명시합니다."
+          },
+          "pitfalls": [
+            {
+              "mistake": "로그인 쿠키가 있으면 모든 변경이 사용자의 의도라고 판단한다.",
+              "correction": "인증된 사용자와 요청의 정당성은 별도입니다. 상태 변경에 적합한 CSRF 방어를 적용합니다."
+            },
+            {
+              "mistake": "이 예제의 공개 TOKEN을 서비스에 복사한다.",
+              "correction": "고정 공개 값은 조건 관찰용입니다. 실제 서비스는 세션별 예측 불가능한 값과 검증된 프레임워크 구현을 사용합니다."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "브라우저가 로그인 쿠키를 보내는 상태에서 외부 페이지가 변경 요청을 유도했습니다. 쿠키만 확인해도 충분한가요?",
+              "options": [
+                "그렇다. 쿠키는 언제나 클릭 의도를 증명한다.",
+                "아니다. 인증과 별도로 변경 요청의 정당성을 검증해야 한다.",
+                "CORS 응답 헤더만 지우면 모든 변경이 자동 중단된다."
+              ],
+              "answer": 1,
+              "explanation": "브라우저가 자동으로 붙이는 인증 정보는 사용자 의도와 다릅니다. 경로에 맞는 CSRF·인가 검증과 상태 변경 설계가 필요합니다."
+            },
+            {
+              "prompt": "공개된 고정 토큰을 compare_digest로 비교했습니다. 안전한 운영 토큰이 되었나요?",
+              "options": [
+                "그렇다. 비교 함수가 임의의 값을 비밀로 바꾼다.",
+                "토큰을 URL에 넣으면 언제나 더 안전해진다.",
+                "아니다. 비교 방식과 발급값의 비밀성·예측 불가능성은 다르다."
+              ],
+              "answer": 2,
+              "explanation": "비교 함수는 토큰 발급·세션 결합·노출 방지를 대신하지 않습니다. 여기의 토큰은 공개 교육 표본입니다."
+            }
+          ],
+          "checks": [
+            "인증·인가·사용자 의도 검증을 구분했다.",
+            "정상 변경과 세 종류의 거부를 각각 확인했다."
+          ],
+          "files": [
+            "web_controls.py",
+            "LAB-GUIDE.md"
+          ],
+          "references": [
+            [
+              "OWASP · CSRF 방어",
+              "https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html"
+            ],
+            [
+              "Python · compare_digest 비교",
+              "https://docs.python.org/3/library/hmac.html#hmac.compare_digest"
+            ]
+          ]
+        },
+        {
+          "id": "web.cors",
+          "title": "동일 출처·CORS·응답 읽기 권한",
+          "goal": "브라우저의 교차 출처 응답 접근과 서버의 인증·인가를 분리해서 설명합니다.",
+          "concepts": [
+            "Origin은 scheme·host·port의 조합입니다. 같은 호스트라도 http와 https, 서로 다른 유효 포트는 다른 Origin일 수 있습니다. 동일 출처 정책은 주로 브라우저 스크립트가 다른 출처의 자료에 접근하는 범위를 제한하며 서버의 사용자별 인가 정책을 대신하지 않습니다.",
+            "CORS는 서버 응답 헤더로 특정 출처의 스크립트가 응답을 읽도록 허용하는 방식입니다. 어떤 요청은 브라우저가 먼저 preflight를 보내지만, 모든 교차 출처 요청이 항상 preflight를 거치는 것은 아닙니다. CORS 오류가 발생했어도 서버에서 요청 처리가 이미 일어났을 수 있습니다.",
+            "자격 증명을 포함한 응답을 노출할 때 Access-Control-Allow-Origin에 *를 사용해 모든 Origin을 허용할 수는 없습니다. 이 실습은 브라우저가 직렬화한 Origin 문자열 하나를 정확히 허용하며 Credentials와 Vary: Origin 헤더를 함께 만듭니다. Vary는 캐시가 출처에 따라 다른 응답임을 구분하도록 하는 단서입니다.",
+            "출처를 포함 문자열이나 접미 문자열로 비교하면 비슷한 이름의 다른 호스트가 허용될 수 있습니다. learn.example.invalid.attacker.invalid는 learn.example.invalid와 다른 호스트입니다. null Origin도 파일·격리된 문서 등에서 발생할 수 있으므로 이유 없이 신뢰하지 않습니다.",
+            "Python 모형은 헤더 생성 결과만 보여 줍니다. 응답을 EXPOSE로 표시해도 로그인·리소스 인가가 성공했다는 뜻은 아닙니다. 실제 CORS 검증에는 HTTPS 환경의 브라우저, preflight 응답, 캐시, 오류 응답, 자격 증명 흐름을 함께 확인해야 합니다."
+          ],
+          "prerequisites": [
+            "foundation.http",
+            "web.csrf"
+          ],
+          "environment": {
+            "label": "Python 3.10 이상 · 오프라인 웹 정책 모형",
+            "details": [
+              "Web ZIP을 풀고 web 폴더에서 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 python3 대신 py -3를 사용합니다. 외부 요청·브라우저 서버·계정은 필요하지 않습니다.",
+              "web_controls.py는 입력과 정책 결과를 비교하는 순수 모형입니다. 실제 쿠키·CORS·CSP의 브라우저 집행이나 운영 웹 서버의 안전성을 증명하지 않습니다. .invalid 주소와 공개 토큰은 교육용 표본입니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 허용 출처와 유사 호스트 비교하기",
+              "explanation": "cors 모드의 네 Origin을 읽습니다. suffix 사례는 신뢰 호스트처럼 시작하지만 실제로는 다른 출처입니다.",
+              "code": "python3 web_controls.py cors",
+              "expected": "allowed=EXPOSE\nforeign=NO_CORS_HEADERS\nsuffix=NO_CORS_HEADERS\nnull=NO_CORS_HEADERS\nauthorization=SEPARATE_CHECK"
+            },
+            {
+              "title": "2. 실제 생성 헤더의 세 항목 확인하기",
+              "explanation": "cors_headers는 정해진 직렬화 Origin을 정확히 비교하는 작은 함수입니다. 정상 응답의 헤더 이름을 출력하고, source 문자열을 그대로 반사하는 코드가 없는지 확인합니다.",
+              "code": "python3 -c \"from web_controls import cors_headers,SITE; h=cors_headers(SITE); print(h['Access-Control-Allow-Origin']); print(h['Access-Control-Allow-Credentials']); print(h['Vary'])\"",
+              "expected": "https://learn.example.invalid\ntrue\nOrigin"
+            },
+            {
+              "title": "3. 프로토콜을 바꾼 출처 거부하기",
+              "explanation": "허용 목록은 https Origin 하나입니다. http 문자열을 넣으면 헤더가 비어 있습니다. 이것이 요청 자체를 보내지 못하게 했다는 증거는 아니라는 점을 적습니다.",
+              "code": "python3 -c \"from web_controls import cors_headers; print(cors_headers('http://learn.example.invalid'))\"",
+              "expected": "{}"
+            }
+          ],
+          "code": "python3 web_controls.py cors",
+          "expected": "허용한 Origin에만 CORS 헤더를 만들고 인가는 별도 검사라고 표시합니다.",
+          "task": "http://learn.example.invalid, https://learn.example.invalid:8443, null을 허용 목록 함수에 전달한 결과를 기록하세요. 임의 Origin 반사를 추가하면 어떤 데이터 노출 조건이 생길 수 있는지도 적으세요.",
+          "hint": "다른 Origin에 헤더를 만들지 않는 것과 서버가 요청을 거부하는 것은 같은 의미가 아닙니다. 인증·인가 결과가 있는 API 응답을 기준으로 생각해 보세요.",
+          "solution": {
+            "approach": [
+              "세 출처는 SITE와 정확히 일치하지 않아 모두 빈 헤더 dict여야 합니다. 실제 브라우저는 기본 포트를 정규화해 Origin을 직렬화한다는 점도 구분합니다.",
+              "Origin을 그대로 응답에 복사하고 Credentials를 true로 쓰면 공격자 출처에도 인증된 응답을 노출할 조건이 될 수 있다고 설명합니다.",
+              "정상 Origin은 계속 허용하면서 사용자별 자료는 서버 인가가 검사해야 한다고 기록합니다. CORS 실패만으로 CSRF나 직접 HTTP 클라이언트 접근이 차단됐다고 주장하지 않습니다."
+            ],
+            "expected": "세 입력 모두 {}이며 정상 SITE는 세 헤더를 유지합니다. 보고서는 요청 전송·응답 읽기·사용자 인가를 다른 항목으로 설명해야 합니다."
+          },
+          "pitfalls": [
+            {
+              "mistake": "CORS는 서버가 받는 모든 교차 출처 요청을 막는 방화벽이라고 생각한다.",
+              "correction": "CORS는 브라우저의 응답 접근 정책입니다. 요청 전송과 서버 처리 여부를 별도로 확인합니다."
+            },
+            {
+              "mistake": "호스트 이름이 포함되면 같은 Origin이라고 판단한다.",
+              "correction": "scheme·host·port와 정확한 허용 목록을 확인합니다. 유사한 접미 호스트는 다릅니다."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "개발자 도구에 CORS 오류가 보입니다. 서버의 데이터 변경이 없었다고 결론낼 수 있나요?",
+              "options": [
+                "그렇다. 오류가 보이면 서버에 요청이 도착하지 않는다.",
+                "서버 로그는 볼 필요가 없다.",
+                "아니다. 일부 요청은 전송·처리된 후 응답 읽기만 차단될 수 있다."
+              ],
+              "answer": 2,
+              "explanation": "브라우저의 응답 노출과 서버 처리는 다른 단계입니다. CSRF 방어와 상태 변경 설계는 별도로 필요합니다."
+            },
+            {
+              "prompt": "자격 증명이 있는 응답에서 허용 Origin을 결정할 때 적절한 것은?",
+              "options": [
+                "검토된 정확한 Origin만 허용하고 서버 인가를 별도로 수행한다.",
+                "요청 Origin을 아무 검증 없이 반사한다.",
+                "호스트 이름 일부가 포함되면 전부 허용한다."
+              ],
+              "answer": 0,
+              "explanation": "정확한 허용 목록과 캐시 처리, 인증·인가를 함께 검토해야 합니다. 이 모형은 한 Origin의 헤더 생성만 다룹니다."
+            }
+          ],
+          "checks": [
+            "Origin과 site를 혼동하지 않고 정책 단위를 적었다.",
+            "CORS·CSRF·서버 인가의 차이를 설명했다."
+          ],
+          "files": [
+            "web_controls.py",
+            "response-policy.txt",
+            "LAB-GUIDE.md"
+          ],
+          "references": [
+            [
+              "MDN · CORS",
+              "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS"
+            ],
+            [
+              "MDN · 동일 출처 정책",
+              "https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Same-origin_policy"
+            ]
+          ]
+        },
+        {
+          "id": "web.csp",
+          "title": "CSP·보안 헤더와 적용 범위",
+          "goal": "정책 전달·보고 전용·브라우저 집행을 구분하고 CSP의 보완 역할을 검토합니다.",
+          "concepts": [
+            "CSP는 문서가 불러오거나 실행할 수 있는 리소스의 출처 등을 브라우저에 지시합니다. XSS 위험을 줄이는 추가 층이지만 입력을 안전하게 출력하는 코드와 서버 인가를 고쳐 주지는 않습니다. 허용 출처에 공격자가 파일을 올릴 수 있다면 단순한 self 허용도 별도 검토가 필요합니다.",
+            "Content-Security-Policy 헤더는 집행 정책을, Content-Security-Policy-Report-Only는 위반 관찰을 위한 정책을 전달합니다. 보고 전용 헤더를 설정했다고 스크립트 실행을 차단한 것으로 기록하면 안 됩니다. 실제 보고 수집도 별도의 설정과 검증이 필요합니다.",
+            "예제의 default-src는 지정하지 않은 여러 리소스 지시문의 기본값이고 script-src는 스크립트 정책입니다. object-src none은 플러그인 객체, base-uri none은 base URL 변경, frame-ancestors none은 문서를 삽입할 상위 프레임을 제한합니다. 모든 지시문이 default-src로 대체되는 것은 아닙니다.",
+            "이 체크리스트는 다섯 개의 고정 문자열과 unsafe-inline 포함 여부를 확인합니다. 일반 CSP 파서도 브라우저도 아니어서 중복 지시문·문법·nonce·해시·리다이렉트 등의 실제 의미를 완전하게 해석하지 않습니다. CHECKLIST_PASS는 표본 체크리스트 충족만 뜻합니다.",
+            "실제 사이트에 정책을 넣을 때에는 필요한 정상 스크립트·스타일·이미지·폼을 먼저 목록화하고 단계적으로 검증해야 합니다. nonce나 해시 기반 정책도 고려합니다. 이 실습은 response-policy.txt를 읽는 오프라인 검토이며 Bifrost의 응답 헤더를 변경하지 않습니다."
+          ],
+          "prerequisites": [
+            "web.output",
+            "web.cors"
+          ],
+          "environment": {
+            "label": "Python 3.10 이상 · 오프라인 웹 정책 모형",
+            "details": [
+              "Web ZIP을 풀고 web 폴더에서 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 python3 대신 py -3를 사용합니다. 외부 요청·브라우저 서버·계정은 필요하지 않습니다.",
+              "web_controls.py는 입력과 정책 결과를 비교하는 순수 모형입니다. 실제 쿠키·CORS·CSP의 브라우저 집행이나 운영 웹 서버의 안전성을 증명하지 않습니다. .invalid 주소와 공개 토큰은 교육용 표본입니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 집행·관찰·검토 상태 비교하기",
+              "explanation": "csp 모드는 같은 기본 정책의 헤더 이름을 바꾸거나 script-src에 unsafe-inline을 추가한 세 사례를 비교합니다. 마지막 줄이 실제 브라우저 검증 미실시를 명시합니다.",
+              "code": "python3 web_controls.py csp",
+              "expected": "enforced=CHECKLIST_PASS\nreport-only=REPORT_ONLY\ninline=REVIEW\nbrowser_enforcement=NOT_TESTED"
+            },
+            {
+              "title": "2. 헤더 파일과 체크 항목 연결하기",
+              "explanation": "response-policy.txt의 다섯 CSP 지시문을 찾아 역할을 적습니다. nosniff·Referrer-Policy·Content-Type·CORS 헤더는 CSP와 다른 역할의 설정입니다. 파일 자체는 응답 서버 설정이 아닙니다.",
+              "code": "python3 -c \"from pathlib import Path; print(next(line for line in Path('response-policy.txt').read_text().splitlines() if line.startswith('Content-Security-Policy:')))\"",
+              "expected": "Content-Security-Policy: default-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+            },
+            {
+              "title": "3. 필요한 지시문이 빠진 사본 확인하기",
+              "explanation": "고정 체크리스트에서 base-uri를 제거하면 REVIEW가 나와야 합니다. 이 결과는 실제 브라우저 취약성의 확정 판정이 아니라 검토 항목이 빠졌다는 의미입니다.",
+              "code": "from pathlib import Path\nfrom web_controls import review_csp\nline = next(s for s in Path(\"response-policy.txt\").read_text().splitlines()\n            if s.startswith(\"Content-Security-Policy:\"))\npolicy = line.split(\": \", 1)[1].replace(\"; base-uri 'none'\", \"\")\nprint(review_csp(\"Content-Security-Policy\", policy))",
+              "expected": "policy_probe.py로 저장하고 python3 policy_probe.py로 실행하면 REVIEW입니다."
+            }
+          ],
+          "code": "python3 web_controls.py csp",
+          "expected": "고정 체크리스트 통과·보고 전용·검토 필요를 분리하고 실제 브라우저 집행은 검증하지 않았다고 출력합니다.",
+          "task": "정책 사본에서 base-uri를 제거한 경우와 헤더 이름을 Report-Only로 바꾼 경우를 비교하세요. 실제 배포 전에 확인할 정상 리소스 세 가지와 브라우저 검증 항목을 적으세요.",
+          "hint": "default-src가 frame-ancestors나 base-uri까지 대신한다고 가정하지 마세요. 체크리스트 결과와 브라우저가 실제로 적용한 정책은 별도 근거입니다.",
+          "solution": {
+            "approach": [
+              "기본 정책에서 base-uri none만 빼면 REVIEW, 동일한 기본 정책을 Report-Only로 넘기면 REPORT_ONLY임을 확인합니다.",
+              "정상 JavaScript·CSS·이미지의 출처와 인라인 사용 여부를 기록하고, 실제 HTTPS 환경에서 개발자 도구의 응답 헤더·콘솔 위반·기능 동작을 검사할 계획을 세웁니다.",
+              "보안 보고에는 체크리스트 통과와 실제 집행 확인을 구분하고, XSS의 원인인 출력 컨텍스트 처리도 유지해야 한다고 적습니다."
+            ],
+            "expected": "REVIEW와 REPORT_ONLY를 다른 원인으로 설명합니다. 정상 기능 검증 계획과 실제 브라우저 집행 미검증이라는 한계를 함께 기록해야 합니다."
+          },
+          "pitfalls": [
+            {
+              "mistake": "Report-Only를 설정하고 스크립트가 차단된다고 주장한다.",
+              "correction": "보고 전용은 집행 정책과 다릅니다. 헤더 이름과 실제 위반 관찰을 구분합니다."
+            },
+            {
+              "mistake": "문자열 체크리스트 PASS가 모든 CSP 문법과 XSS 방어를 증명한다고 믿는다.",
+              "correction": "이 검사는 고정 표본의 항목만 확인합니다. 실제 파싱·브라우저 집행·안전한 출력 처리는 별도로 검증합니다."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "CHECKLIST_PASS와 browser_enforcement=NOT_TESTED가 함께 나왔습니다. 올바른 해석은?",
+              "options": [
+                "사이트에서 모든 XSS가 차단되었다.",
+                "표본 체크 항목은 충족했지만 실제 브라우저 집행은 확인하지 않았다.",
+                "모든 브라우저에 같은 정책이 자동 설치되었다."
+              ],
+              "answer": 1,
+              "explanation": "실습 도구가 확인한 범위를 넘겨 주장하지 않습니다. 실제 HTTP 응답·브라우저 동작·정상 기능을 추가 검증해야 합니다."
+            },
+            {
+              "prompt": "동일 정책을 Content-Security-Policy-Report-Only로 전달하면?",
+              "options": [
+                "정책 관찰에 쓰이며 그 헤더만으로 실행 차단을 주장할 수 없다.",
+                "항상 모든 스크립트를 차단한다.",
+                "서버 인가가 자동으로 적용된다."
+              ],
+              "answer": 0,
+              "explanation": "집행과 보고 전용은 목적이 다릅니다. 실제 보고 수집과 집행 정책은 각각 설정하고 확인해야 합니다."
+            }
+          ],
+          "checks": [
+            "CSP 지시문·헤더 이름·집행 범위를 구분했다.",
+            "문자열 점검 결과를 실제 브라우저 보안 증명으로 확대하지 않았다."
+          ],
+          "files": [
+            "web_controls.py",
+            "response-policy.txt",
+            "LAB-GUIDE.md"
+          ],
+          "references": [
+            [
+              "MDN · CSP 안내",
+              "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP"
+            ],
+            [
+              "MDN · Content-Security-Policy 헤더",
+              "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "04 · 파일과 외부 요청의 경계",
+      "intro": "파일 이름과 URL을 좁은 계약으로 검사하고 실제 저장·연결에서 남는 검증을 정리합니다.",
+      "lessons": [
+        {
+          "id": "web.file-boundary",
+          "title": "파일 이름·경로 이탈·저장 경계",
+          "goal": "파일 이름을 신뢰 경계로 다루고 허용 이름·정규화 경로·인가의 역할을 분리합니다.",
+          "concepts": [
+            "사용자 입력을 저장소 경로에 바로 붙이면 ../ 같은 구문으로 허용 폴더 밖을 가리킬 수 있습니다. 절대 경로·다른 구분자·URL 디코딩 순서도 영향을 주므로 금지 문자열 몇 개를 지우는 방식은 규칙을 설명하고 검증하기 어렵습니다.",
+            "이 모형은 앱이 관리하는 폴더에서 단일 txt 파일 이름만 허용합니다. ASCII 영문·숫자·밑줄·하이픈과 .txt 확장자라는 좁은 계약을 먼저 확인한 뒤 resolve한 경로가 기준 폴더 안인지 확인합니다. 중첩 경로가 필요하지 않은 기능에서는 아예 경로 구문을 받지 않는 것이 단순합니다.",
+            "이름 검사에서 ALLOW_NAME이 나와도 파일 내용·존재·소유자·권한은 확인한 것이 아닙니다. 확장자나 브라우저가 보낸 Content-Type만으로 업로드 내용이 안전하다고 판단할 수 없습니다. 크기 제한, 실제 내용 검사, 저장 위치, 실행 방지, 사용자별 인가는 다른 검증입니다.",
+            "resolve는 존재하는 심볼릭 링크도 따라갈 수 있어 폴더 밖 링크를 찾는 데 도움이 됩니다. 그러나 검사 후 열기 사이에 링크가 바뀌면 경합 문제가 남습니다. 실제 시스템은 공격자가 저장 경로를 교체할 수 없게 하거나 운영체제의 안전한 파일 열기 방식을 사용해야 합니다.",
+            "파일 이름을 사용자에게서 직접 받는 대신 서버가 발급한 자료 ID를 소유자 확인 뒤 내부 경로로 매핑할 수도 있습니다. 이 실습은 파일을 열거나 저장하지 않으며, 이름 검사와 경로 포함 관계라는 일부 단계를 관찰합니다. 모든 파일 업로드 방어를 구현한 예제가 아닙니다."
+          ],
+          "prerequisites": [
+            "foundation.paths",
+            "web.authorization"
+          ],
+          "environment": {
+            "label": "Python 3.10 이상 · 오프라인 웹 정책 모형",
+            "details": [
+              "Web ZIP을 풀고 web 폴더에서 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 python3 대신 py -3를 사용합니다. 외부 요청·브라우저 서버·계정은 필요하지 않습니다.",
+              "web_controls.py는 입력과 정책 결과를 비교하는 순수 모형입니다. 실제 쿠키·CORS·CSP의 브라우저 집행이나 운영 웹 서버의 안전성을 증명하지 않습니다. .invalid 주소와 공개 토큰은 교육용 표본입니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 정상 이름과 경로 구문 비교하기",
+              "explanation": "files 모드는 실제 파일을 읽지 않고 이름과 해석 경로만 검사합니다. URL 인코딩처럼 보이는 %2e도 이 계약에서는 허용 문자가 아닙니다.",
+              "code": "python3 web_controls.py files",
+              "expected": "note.txt=ALLOW_NAME\n../private.txt=DENY\nnested/note.txt=DENY\nnote.txt.exe=DENY\n%2e%2e.txt=DENY"
+            },
+            {
+              "title": "2. 허용 이름의 결과가 의미하는 범위 확인하기",
+              "explanation": "choose_file의 반환 경로에서 이름만 출력합니다. missing-note.txt가 실제로 없어도 경로 검사 자체는 통과하므로 ALLOW_NAME을 파일 읽기 성공과 혼동하지 않습니다.",
+              "code": "python3 -c \"from pathlib import Path; from web_controls import choose_file; print(choose_file(Path.cwd(),'missing-note.txt').name)\"",
+              "expected": "missing-note.txt"
+            },
+            {
+              "title": "3. 앱 경계와 사용자 경계를 분리하기",
+              "explanation": "코드에서 정규식과 is_relative_to 검사를 각각 찾습니다. 그 앞에 사용자별 인가가 없다는 점을 확인하고, 같은 폴더의 다른 사람 파일은 어떤 별도 검사가 필요한지 정리합니다.",
+              "code": "python3 -c \"from pathlib import Path; from web_controls import choose_file; print(choose_file(Path.cwd(),'alice-note.txt').name)\"",
+              "expected": "alice-note.txt. 이 출력은 alice의 접근 권한 검증 결과가 아닙니다."
+            }
+          ],
+          "code": "python3 web_controls.py files",
+          "expected": "허용한 단일 txt 이름만 ALLOW_NAME이고 경로·다른 확장자·인코딩 구문은 DENY입니다.",
+          "task": "note_1.txt, note..txt, /tmp/note.txt, note.TXT를 모형에 넣어 결과를 기록하세요. 이 계약에서 허용한 이름 하나가 있어도 다른 사용자의 자료를 열면 안 되는 이유를 설명하세요.",
+          "hint": "정규식은 대소문자를 구분합니다. 허용 이름·폴더 포함·파일 내용·사용자 인가를 네 칸으로 나누면 어느 검사를 했는지 선명해집니다.",
+          "solution": {
+            "approach": [
+              "note_1.txt는 허용이고 나머지 세 이름은 거부됩니다. note.TXT를 허용하고 싶다면 요구 사항을 바꾸고 테스트를 더해야 하며 우연히 허용될 것으로 가정하지 않습니다.",
+              "ALLOW_NAME은 파일 존재와 내용·안전성을 검증하지 않는다고 기록합니다. 경로 안이라는 사실은 그 사용자 소유라는 사실과 다릅니다.",
+              "사용자에게 자료 ID만 받고 서버가 소유자·동작을 검사한 뒤 내부 파일 경로를 선택하는 대안과, 경로를 동시에 바꾸는 공격자가 있는 환경의 경합 한계를 적습니다."
+            ],
+            "expected": "note_1.txt만 허용됩니다. 결과 표와 네 검증 범위 구분, 사용자별 인가와 경합 한계 설명이 있어야 완료입니다."
+          },
+          "pitfalls": [
+            {
+              "mistake": "../만 삭제하면 모든 경로 이탈이 해결된다고 생각한다.",
+              "correction": "구분자·절대 경로·디코딩·링크를 고려해야 합니다. 필요 없는 경로 구문은 애초에 받지 않는 좁은 계약을 씁니다."
+            },
+            {
+              "mistake": "폴더 안의 txt면 누구에게나 읽혀도 된다고 생각한다.",
+              "correction": "위치·확장자 검사는 사용자별 인가를 대신하지 않습니다. 내용·소유자·동작도 검사해야 합니다."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "missing-note.txt가 ALLOW_NAME에 해당합니다. 무엇을 확인했나요?",
+              "options": [
+                "파일에 악성 내용이 없음을 증명했다.",
+                "요청자의 소유 파일임을 증명했다.",
+                "이름 계약과 해석 경로의 폴더 포함 관계만 확인했다."
+              ],
+              "answer": 2,
+              "explanation": "이 함수는 파일을 열지 않습니다. 파일 존재·내용·읽기 권한·소유자 검증은 별도입니다."
+            },
+            {
+              "prompt": "검사 직후 공격자가 심볼릭 링크를 바꿀 수 있는 폴더입니다. resolve 검사만으로 충분한가요?",
+              "options": [
+                "아니다. 검사와 사용 사이 경합 및 디렉터리 제어를 함께 다뤄야 한다.",
+                "그렇다. 경로 문자열은 한 번 확인하면 영원히 같다.",
+                "확장자를 txt로 바꾸면 경합이 사라진다."
+              ],
+              "answer": 0,
+              "explanation": "검사 시점과 파일 열기 시점은 다릅니다. 실제 시스템에서는 디렉터리 제어와 안전한 파일 열기 방식이 필요합니다."
+            }
+          ],
+          "checks": [
+            "이름 허용을 파일 안전성·인가와 구분했다.",
+            "기준 폴더와 링크·경합의 한계를 설명했다."
+          ],
+          "files": [
+            "web_controls.py",
+            "LAB-GUIDE.md"
+          ],
+          "references": [
+            [
+              "OWASP · 파일 처리와 업로드 방어",
+              "https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html"
+            ],
+            [
+              "Python · 경로 해석과 resolve",
+              "https://docs.python.org/3/library/pathlib.html"
+            ]
+          ]
+        },
+        {
+          "id": "web.ssrf",
+          "title": "SSRF·서버 요청과 출구 통제",
+          "goal": "서버가 대신 요청하는 기능의 신뢰 경계를 분석하고 URL 구문 검사만의 한계를 설명합니다.",
+          "concepts": [
+            "SSRF는 사용자에게 영향을 받는 주소로 서버가 요청하도록 만들어, 사용자가 직접 접근할 수 없는 내부 서비스 등에 서버 권한으로 접근하는 문제입니다. 브라우저 CORS는 서버의 HTTP 클라이언트를 제한하지 않으므로 다른 방어가 필요합니다.",
+            "URL은 scheme·hostname·port·사용자 정보·경로·쿼리 등의 구성 요소로 파싱해야 합니다. assets.example.invalid@other.invalid의 실제 hostname은 other.invalid입니다. 문자열 시작 부분에 허용 호스트가 보인다고 목적지를 신뢰하면 안 됩니다.",
+            "이 모형은 https·정확한 한 호스트·443 포트·허용된 두 경로·사용자 정보 없음·쿼리와 fragment 없음이라는 좁은 URL 구문 계약을 확인합니다. urllib.parse는 URL을 나눌 뿐 안전한 목적지임을 검증하지 않으므로 파싱 후 각 항목을 검사합니다.",
+            "구문 허용만으로 실제 연결 목적지가 확정되지는 않습니다. DNS 결과·재바인딩·리다이렉트·프록시·클라우드 메타데이터 등은 추가 신뢰 경계입니다. 운영 환경은 허용된 목적지의 해석과 재검증, 리다이렉트 제한, 네트워크 출구 정책을 함께 적용해야 합니다.",
+            "가능하면 사용자가 URL 전체를 주는 기능 대신 서버가 정한 자료 ID를 허용된 목적지에 매핑합니다. 이 실습의 ALLOW_SYNTAX는 첫 단계 통과만 뜻하며 요청을 보내지 않습니다. network_requests=0이고 .invalid 주소는 외부 접속을 위한 것이 아닙니다."
+          ],
+          "prerequisites": [
+            "web.cors",
+            "web.file-boundary",
+            "foundation.network"
+          ],
+          "environment": {
+            "label": "Python 3.10 이상 · 오프라인 웹 정책 모형",
+            "details": [
+              "Web ZIP을 풀고 web 폴더에서 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 python3 대신 py -3를 사용합니다. 외부 요청·브라우저 서버·계정은 필요하지 않습니다.",
+              "web_controls.py는 입력과 정책 결과를 비교하는 순수 모형입니다. 실제 쿠키·CORS·CSP의 브라우저 집행이나 운영 웹 서버의 안전성을 증명하지 않습니다. .invalid 주소와 공개 토큰은 교육용 표본입니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 네 가지 URL 사례 분류하기",
+              "explanation": "ssrf 모드는 문자열만 파싱합니다. loopback·userinfo·redirect-param이 각각 왜 거부되는지 함수의 다른 조건과 연결합니다.",
+              "code": "python3 web_controls.py ssrf",
+              "expected": "allowed=ALLOW_SYNTAX\nloopback=DENY\nuserinfo=DENY\nredirect-param=DENY\nnetwork_requests=0"
+            },
+            {
+              "title": "2. @ 앞의 이름과 실제 hostname 구분하기",
+              "explanation": "이 URL을 실제로 열지 말고 urlsplit의 읽기 결과만 봅니다. username과 hostname을 반대로 판단하지 않도록 출력합니다.",
+              "code": "python3 -c \"from urllib.parse import urlsplit; p=urlsplit('https://assets.example.invalid@other.invalid/guide.txt'); print(p.username); print(p.hostname)\"",
+              "expected": "assets.example.invalid\nother.invalid"
+            },
+            {
+              "title": "3. 구문 통과와 실제 연결 검증 분리하기",
+              "explanation": "허용 경로 diagram.png는 구문 통과지만 다른 경로나 포트는 거부됩니다. 통과 뒤 DNS·리다이렉트까지 검사했다는 기록을 남기면 잘못된 주장입니다.",
+              "code": "python3 -c \"from web_controls import allowed_fetch; print(allowed_fetch('https://assets.example.invalid/diagram.png')); print(allowed_fetch('https://assets.example.invalid:8443/guide.txt')); print(allowed_fetch('https://assets.example.invalid/private.txt'))\"",
+              "expected": "True\nFalse\nFalse"
+            }
+          ],
+          "code": "python3 web_controls.py ssrf",
+          "expected": "한 표본 URL만 구문 허용이고 나머지 세 입력은 거부하며 실제 네트워크 요청은 0입니다.",
+          "task": "허용 URL 뒤에 ?next=...를 붙인 사례와 포트 8443 사례를 비교하세요. 자료 ID guide와 diagram을 서버가 정한 두 URL에 매핑하는 사전을 설계하고, 알 수 없는 ID를 거부하는 이유를 설명하세요.",
+          "hint": "리다이렉트 목적지의 검증을 문자열 쿼리 검사만으로 해결했다고 주장하지 마세요. 이 실습은 어떠한 응답도 받지 않습니다.",
+          "solution": {
+            "approach": [
+              "쿼리가 있는 URL은 parsed.query 조건, 8443은 parsed.port 조건에서 거부된다고 표로 연결합니다.",
+              "예시 매핑은 {\"guide\":\"https://assets.example.invalid/guide.txt\", \"diagram\":\"https://assets.example.invalid/diagram.png\"}입니다. 미등록 ID는 오류로 처리하고 기본 URL로 자동 전환하지 않습니다.",
+              "ID 매핑은 입력 공간을 줄이지만 운영 연결의 DNS·리다이렉트·출구 통제·타임아웃·응답 크기 같은 추가 검증은 필요하다고 명시합니다."
+            ],
+            "expected": "두 잘못된 URL은 False입니다. ID 매핑과 미등록 거부를 설명하고, 구문 허용이 실제 안전한 연결을 증명하지 않는다는 한계를 기록합니다."
+          },
+          "pitfalls": [
+            {
+              "mistake": "urlsplit이 성공하면 안전한 URL이라고 믿는다.",
+              "correction": "파싱은 구성 요소를 나누는 일입니다. 정책·실제 목적지·연결 경계를 별도로 확인합니다."
+            },
+            {
+              "mistake": "서버 요청도 브라우저 CORS가 막아 줄 것이라 생각한다.",
+              "correction": "서버의 HTTP 클라이언트는 브라우저 CORS 정책의 보호 대상이 아닙니다. 서버와 네트워크 출구에서 제어합니다."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "허용 호스트처럼 보이는 이름 뒤에 @other.invalid가 있습니다. 실제 hostname은?",
+              "options": [
+                "assets.example.invalid",
+                "other.invalid",
+                "두 호스트 모두 자동 허용된다."
+              ],
+              "answer": 1,
+              "explanation": "@ 앞은 URL의 사용자 정보일 수 있습니다. 문자열 접두사 대신 파싱한 hostname과 사용자 정보 조건을 확인해야 합니다."
+            },
+            {
+              "prompt": "ALLOW_SYNTAX가 나왔습니다. 이 실습이 검증한 것은?",
+              "options": [
+                "DNS·리다이렉트까지 포함한 실제 목적지 안전성",
+                "원격 서버가 보낸 본문의 무해함",
+                "정해진 URL 구성 요소 계약이며 실제 연결은 하지 않았다."
+              ],
+              "answer": 2,
+              "explanation": "모형은 네트워크 요청을 전혀 보내지 않습니다. 실제 연결 경계와 운영 통제는 별도의 작업입니다."
+            }
+          ],
+          "checks": [
+            "URL 구성 요소와 실제 목적지를 구분했다.",
+            "구문 검사 이후에 필요한 출구 통제를 적었다."
+          ],
+          "files": [
+            "web_controls.py",
+            "LAB-GUIDE.md"
+          ],
+          "references": [
+            [
+              "OWASP · SSRF 방어",
+              "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html"
+            ],
+            [
+              "Python · URL 파싱과 검증 한계",
+              "https://docs.python.org/3/library/urllib.parse.html"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "05 · 요청 계약과 제한된 권한",
+      "intro": "수정 필드·세션 수명·복구 토큰의 범위를 명시하고 정상·거부·재사용 상태를 비교합니다.",
+      "lessons": [
+        {
+          "id": "web.mass-assignment",
+          "title": "요청 계약과 Mass Assignment",
+          "goal": "클라이언트가 수정할 필드와 서버가 관리하는 필드를 나누고 임의 필드 덮어쓰기를 거부합니다.",
+          "concepts": [
+            "클라이언트의 JSON을 그대로 사용자 객체에 병합하면 화면에 없는 role·owner·금액 같은 필드도 바뀔 수 있습니다. 이를 Mass Assignment 문제로 부릅니다. 화면에서 입력 칸을 숨기는 것은 서버가 받을 필드를 제한하지 않으므로 서버 경계에 명시적인 수정 계약이 필요합니다.",
+            "이 모형은 display_name과 theme만 수정하도록 허용합니다. role과 owner는 서버 관리 필드이고, 알 수 없는 필드나 빈 객체는 거부합니다. 관리자 요청과 일반 사용자 요청이 다르다면 각각의 허용 필드 계약과 인가를 따로 설계합니다.",
+            "허용한 키의 값도 검증해야 합니다. display_name은 공백만 아닌 문자열 1~40자, theme는 dark 또는 light입니다. 파일명·HTML 출력·SQL 같은 다른 사용 문맥에는 추가 처리가 필요하며, 이 일반 필드 검사가 모든 XSS나 데이터베이스 문제를 해결하지는 않습니다.",
+            "update_profile은 actor가 owner인지 확인하고, 입력 검증을 마친 뒤 새 dict에 허용된 변경을 넣습니다. 원본은 바꾸지 않아 거부된 요청이 일부 필드만 수정한 상태를 남기지 않습니다. 이번 자료는 문자열 값뿐이라 바깥 dict 복사로 충분하며 중첩 객체가 추가되면 복사 계약도 다시 검토합니다.",
+            "불필요한 필드를 조용히 무시할지 요청 전체를 거부할지는 API 계약의 선택입니다. 이 모형은 오류를 드러내기 위해 전체 거부를 택했습니다. 필드 허용·사용자 인가·동시 갱신 충돌·감사 기록은 서로 다른 검증이며 실제 서버·저장을 구현한 예제는 아닙니다."
+          ],
+          "prerequisites": [
+            "web.authorization",
+            "foundation.structured-data",
+            "foundation.mutable-data"
+          ],
+          "environment": {
+            "label": "Python 3.10 이상 · 오프라인 상태 모형 · Web ZIP",
+            "details": [
+              "web 폴더에서 web_state.py를 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. Checkout 차시는 Python 배포판에 포함된 sqlite3를 사용합니다.",
+              "공개 표본 ID·토큰과 고정 시각을 사용하는 독립 실습입니다. 실제 계정·로그인·이메일·결제·HTTP 서버를 만들거나 사이트의 진도 저장 방식을 바꾸지 않습니다. 소스를 바꿀 때는 사본을 사용합니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 정상 이름 변경과 권한 필드 주입 비교하기",
+              "explanation": "contract 모드는 이름만 바꾼 정상 요청을 새 dict로 반환하고 role=admin 요청은 거부합니다. 원본 이름과 역할이 그대로인지 마지막 두 줄을 확인합니다.",
+              "code": "python3 web_state.py contract",
+              "expected": "normal_name=Freya\nrole_assignment=REJECT\noriginal_role=learner\noriginal_name=Loki"
+            },
+            {
+              "title": "2. 정상 테마 변경의 범위를 읽기",
+              "explanation": "소유자 alice가 theme만 바꿀 수 있습니다. 반환값과 원본에서 같은 키를 각각 읽어 원본 보존도 확인합니다.",
+              "code": "python3 -c \"from web_state import update_profile; p={'owner':'alice','theme':'dark','role':'learner'}; r=update_profile(p,{'theme':'light'},'alice'); print(r['theme']); print(p['theme'])\"",
+              "expected": "light\ndark"
+            },
+            {
+              "title": "3. 키 허용과 사용자 인가를 분리하기",
+              "explanation": "아래 코드를 profile_probe.py로 저장합니다. theme는 허용 필드지만 bob은 소유자가 아니므로 PermissionError가 발생합니다.",
+              "code": "from web_state import update_profile\ntry:\n    update_profile({\"owner\":\"alice\",\"theme\":\"dark\"},{\"theme\":\"light\"},\"bob\")\nexcept PermissionError:\n    print(\"other_user=DENY\")",
+              "expected": "python3 profile_probe.py → other_user=DENY"
+            }
+          ],
+          "code": "python3 web_state.py contract",
+          "expected": "정상 변경은 반환값에만 적용되고 role 주입은 거부되며 원본을 유지합니다.",
+          "task": "정상 display_name과 role=admin을 같은 요청에 넣어 전체 요청이 거부되는지 확인하세요. 40자·41자 이름과 공백만 있는 이름도 비교하고, 거부 뒤 원본 상태를 검사하세요.",
+          "hint": "부분 성공을 기대하지 않는 계약입니다. 정상 키 하나가 포함되어도 알 수 없는 키가 있으면 변경 전체가 실패합니다.",
+          "solution": {
+            "approach": [
+              "사본의 payload를 {\"display_name\":\"Freya\",\"role\":\"admin\"}으로 만들면 ValueError이고 원본 display_name=Loki·role=learner가 유지되어야 합니다.",
+              "A 40개는 허용, 41개는 거부입니다. 공백만 있는 값도 거부합니다. 값 길이와 내용 검증을 별도 사례로 남깁니다.",
+              "actor=bob은 허용 필드만 보내도 PermissionError입니다. 키 계약과 리소스 인가를 별도 검사로 기록합니다."
+            ],
+            "expected": "혼합 요청은 전체 거부·원본 유지, 이름 경계는 40 허용/41 거부, 타인 요청은 인가 거부입니다. 요청 전체 병합을 수정 과제로 넣지 않습니다."
+          },
+          "pitfalls": [
+            {
+              "mistake": "화면에 role 입력 칸이 없으므로 서버에서도 바뀔 수 없다고 생각한다.",
+              "correction": "클라이언트 요청은 직접 만들 수 있습니다. 서버에서 필드 허용 목록과 인가를 적용합니다."
+            },
+            {
+              "mistake": "필드 이름만 허용하면 값의 자료형·길이도 검증됐다고 생각한다.",
+              "correction": "허용 키와 값 계약은 별도입니다. 다른 출력·저장 문맥의 안전 처리도 유지합니다."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "정상 이름과 role=admin이 함께 왔습니다. 이번 계약의 결과는?",
+              "options": [
+                "이름만 고치고 역할은 조용히 무시한다.",
+                "role도 사용자가 보냈으므로 고친다.",
+                "요청 전체를 거부하고 원본을 유지한다."
+              ],
+              "answer": 2,
+              "explanation": "이번 모형은 알 수 없는 필드가 포함되면 전체 거부하는 명시적 계약입니다. 허용 목록과 원본 보존을 함께 확인합니다."
+            },
+            {
+              "prompt": "bob이 허용 필드 theme만 보냈습니다. alice의 자료를 고쳐도 되나요?",
+              "options": [
+                "아니다. 필드 허용과 사용자별 인가는 별도다.",
+                "그렇다. theme는 누구에게나 수정 가능하다.",
+                "입력 길이만 짧으면 된다."
+              ],
+              "answer": 0,
+              "explanation": "수정할 필드가 합법적이어도 그 자료를 수정할 권한이 있어야 합니다."
+            }
+          ],
+          "checks": [
+            "수정 가능 필드와 서버 관리 필드를 나눴다.",
+            "거부 요청의 원본 보존과 타인 인가를 확인했다."
+          ],
+          "files": [
+            "web_state.py",
+            "ROUND2-GUIDE.md"
+          ],
+          "references": [
+            [
+              "OWASP · Mass Assignment 방어",
+              "https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html"
+            ],
+            [
+              "OWASP · 입력 검증",
+              "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"
+            ]
+          ]
+        },
+        {
+          "id": "web.session-lifecycle",
+          "title": "세션 갱신·만료·서버 무효화",
+          "goal": "로그인 전후 식별자 교체와 로그아웃·만료의 서버 측 상태 변화를 추적합니다.",
+          "concepts": [
+            "세션 식별자는 브라우저와 서버의 상태를 연결하는 값입니다. 로그인 전에 쓰던 식별자를 인증 후에도 그대로 쓰면 누군가 미리 알던 식별자가 인증 상태와 연결될 수 있습니다. 로그인처럼 신뢰 수준이 바뀔 때 새 식별자로 갱신하고 이전 식별자를 무효화하는 이유입니다.",
+            "rotate_after_verified_login은 인증 검증이 이미 끝났다는 전제에서 old ID를 제거하고 새 ID에 user와 만료값을 저장합니다. 이 함수는 비밀번호를 검사하지 않습니다. S-OLD·S-NEW는 공개 표본이고 실제 세션 ID는 충분히 예측 불가능한 값으로 발급해야 합니다.",
+            "로그아웃은 브라우저 쿠키를 지우는 일과 서버가 식별자를 더 이상 인정하지 않는 일을 구분해야 합니다. 쿠키만 없애면 이미 복사된 식별자가 서버에서 계속 유효할 수 있습니다. 이 모형의 logout은 메모리 저장소에서 ID를 제거해 다음 조회를 실패시킵니다.",
+            "만료 조건은 now>=expires입니다. 고정 now=90에서 새 수명을 50으로 정했으므로 139는 아직 유효하고 140부터 무효입니다. 실제 설계에서는 절대 수명과 유휴 수명, 시계 정책, 다른 기기의 세션·권한 변경 후 무효화 등을 별도로 정합니다.",
+            "이 실습은 한 프로세스의 상태 전이를 관찰합니다. 쿠키 속성·TLS·분산 저장소의 원자성·세션 탈취 방지·CSRF 검증을 구현하지 않습니다. ID 교체와 만료 검증이 있더라도 사용자별 자원 인가와 계정 복구 절차는 그대로 필요합니다."
+          ],
+          "prerequisites": [
+            "web.sessions",
+            "web.csrf",
+            "foundation.config-precedence"
+          ],
+          "environment": {
+            "label": "Python 3.10 이상 · 오프라인 상태 모형 · Web ZIP",
+            "details": [
+              "web 폴더에서 web_state.py를 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. Checkout 차시는 Python 배포판에 포함된 sqlite3를 사용합니다.",
+              "공개 표본 ID·토큰과 고정 시각을 사용하는 독립 실습입니다. 실제 계정·로그인·이메일·결제·HTTP 서버를 만들거나 사이트의 진도 저장 방식을 바꾸지 않습니다. 소스를 바꿀 때는 사본을 사용합니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 식별자 교체와 독립 만료 표본 보기",
+              "explanation": "sessions 모드는 교체 뒤 old/new를 비교합니다. at_expiry는 별도 동일 초기 조건의 표본으로 140을 검사하고, 원래 표본에서는 살아 있는 세션을 92에 로그아웃한 결과를 봅니다.",
+              "code": "python3 web_state.py sessions",
+              "expected": "old_after_rotate=None\nnew_after_rotate=alice\nat_expiry=None\nafter_logout=None"
+            },
+            {
+              "title": "2. 만료 직전과 정확한 만료 시각 비교하기",
+              "explanation": "공개 ID를 고정 시각 90에 갱신합니다. now를 주입하므로 기다리거나 PC 시계를 바꾸지 않고 정확한 경계를 검사할 수 있습니다.",
+              "code": "python3 -c \"from web_state import SessionModel; s=SessionModel(); s.rotate_after_verified_login('S-OLD','S-NEW','alice',90); print(s.user_for('S-NEW',139)); print(s.user_for('S-NEW',140))\"",
+              "expected": "alice\nNone"
+            },
+            {
+              "title": "3. 만료 전 로그아웃의 효과 분리하기",
+              "explanation": "같은 유효한 시각 91에서 로그아웃 전후를 비교하면 만료 때문에 무효가 된 결과와 구분할 수 있습니다.",
+              "code": "python3 -c \"from web_state import SessionModel; s=SessionModel(); s.rotate_after_verified_login('S-OLD','S-NEW','alice',90); print(s.user_for('S-NEW',91)); s.logout('S-NEW'); print(s.user_for('S-NEW',91))\"",
+              "expected": "alice\nNone"
+            }
+          ],
+          "code": "python3 web_state.py sessions",
+          "expected": "old ID 무효·새 ID 유효·만료 경계 무효·만료 전 로그아웃 무효를 구분합니다.",
+          "task": "작업 사본에서 이전 ID를 삭제하는 줄을 빼고, 교체 뒤 old ID가 남는 결함을 어떤 검사로 잡을지 작성하세요. 새 ID 충돌 시 갱신이 거부되는지와 만료 경계 139/140도 확인하세요.",
+          "hint": "old ID의 user가 None일 때는 user_for 결과만으로 삭제 여부를 알 수 없습니다. 서버 저장소의 키 존재 여부도 함께 검사해야 합니다.",
+          "solution": {
+            "approach": [
+              "원본에서는 \"S-OLD\" not in sessions가 True입니다. old ID 삭제를 뺀 사본에서는 키가 남으므로 이 불변 조건 검사가 실패해야 합니다.",
+              "새 ID를 이미 존재하는 S-OLD로 주면 ValueError이며 기존 상태가 유지되어야 합니다. 새 ID의 충돌을 조용히 덮어쓰지 않습니다.",
+              "인증된 새 세션은 139에 alice, 140에 None이고, 91에 logout한 뒤에는 같은 91에서도 None임을 별도 표본으로 비교합니다."
+            ],
+            "expected": "저장소에서 이전 키 제거·충돌 거부·만료·로그아웃을 각각 검사합니다. 비밀번호 인증이나 실제 쿠키 검증을 완료했다고 주장하지 않습니다."
+          },
+          "pitfalls": [
+            {
+              "mistake": "브라우저 쿠키만 지우면 서버의 복사된 세션 ID도 자동 무효라고 생각한다.",
+              "correction": "서버 저장소에서 유효성을 끝내야 합니다. 쿠키 제거와 서버 무효화를 별도로 확인합니다."
+            },
+            {
+              "mistake": "새 ID 발급과 비밀번호 검증을 같은 함수의 보장으로 해석한다.",
+              "correction": "이 모형의 전제는 인증 검증 완료입니다. 실제 신원 검증은 별도의 작업입니다."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "쿠키는 지웠지만 서버에 ID가 남아 있습니다. 복사된 ID는 어떻게 되나요?",
+              "options": [
+                "항상 자동 무효가 된다.",
+                "서버 정책에 따라 여전히 유효할 수 있어 서버 무효화가 필요하다.",
+                "쿠키 삭제가 DB 전체를 지운다."
+              ],
+              "answer": 1,
+              "explanation": "클라이언트 보관과 서버 유효성은 다른 상태입니다. 로그아웃의 두 경계를 함께 설계합니다."
+            },
+            {
+              "prompt": "expires=140이고 now=140입니다. 이번 계약의 결과는?",
+              "options": [
+                "무효다. now>=expires를 만료로 본다.",
+                "정확히 같은 값은 항상 하루 더 유효하다.",
+                "PC를 다시 켤 때까지 유효하다."
+              ],
+              "answer": 0,
+              "explanation": "비교 연산자의 동등 경계가 중요합니다. 기다리기보다 주입한 고정 시각으로 검사할 수 있습니다."
+            }
+          ],
+          "checks": [
+            "갱신·이전 키 제거·로그아웃·만료를 따로 검사했다.",
+            "공개 표본 ID와 운영 인증·분산 상태의 한계를 구분했다."
+          ],
+          "files": [
+            "web_state.py",
+            "ROUND2-GUIDE.md"
+          ],
+          "references": [
+            [
+              "OWASP · 세션 수명 관리",
+              "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
+            ],
+            [
+              "Python · 보안 목적 난수·토큰",
+              "https://docs.python.org/3/library/secrets.html"
+            ]
+          ]
+        },
+        {
+          "id": "web.reset-tokens",
+          "title": "일회 토큰·목적 결합·만료",
+          "goal": "복구용 권한을 사용자·목적·만료·한 번 사용이라는 계약에 묶어 검증합니다.",
+          "concepts": [
+            "비밀번호 재설정 링크는 일반 로그인과 다른 제한된 권한을 전달합니다. 링크를 아는 것만으로 특정 작업을 할 수 있다면 토큰 노출은 그 권한의 노출입니다. 토큰은 충분한 엔트로피로 발급하고, 보관·전달·사용 횟수·만료를 함께 설계해야 합니다.",
+            "fixture_ticket은 공개 표본 토큰의 SHA-256과 alice·reset-password·expires=100을 저장합니다. 해시는 저장소에서 원문을 직접 보관하지 않는 방법의 한 부분이며, 예측 가능한 짧은 토큰을 강하게 만들지는 않습니다. 운영 발급에는 보안 목적 난수와 적절한 길이가 필요합니다.",
+            "consume_ticket은 used·만료·사용자·목적을 먼저 확인하고 토큰의 해시를 비교한 뒤 used=True로 바꿉니다. 잘못된 사용자나 목적의 시도는 표본을 소비하지 않습니다. 계정 변경·이메일 변경 같은 다른 작업에 같은 권한을 재사용하지 않도록 목적을 결합합니다.",
+            "한 번 사용은 동시 요청에서도 하나만 성공해야 의미가 있습니다. 이 Python 메모리 모형의 확인 후 변경은 분산·동시 실행의 원자성을 보장하지 않습니다. 실제 저장소에서는 조건부 갱신·트랜잭션과 비밀번호 변경을 함께 일관되게 처리해야 합니다.",
+            "이 실습은 이메일 발송·계정 존재 여부 응답·실제 비밀번호 변경을 하지 않습니다. 실제 복구 흐름은 균일한 사용자 응답, 시도 제한, 신뢰할 전달 경로, 토큰 로그 노출 방지, 복구 후 세션 처리도 검토해야 합니다. 표본 토큰을 운영에 복사하지 않습니다."
+          ],
+          "prerequisites": [
+            "web.session-lifecycle",
+            "crypto.hash"
+          ],
+          "environment": {
+            "label": "Python 3.10 이상 · 오프라인 상태 모형 · Web ZIP",
+            "details": [
+              "web 폴더에서 web_state.py를 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. Checkout 차시는 Python 배포판에 포함된 sqlite3를 사용합니다.",
+              "공개 표본 ID·토큰과 고정 시각을 사용하는 독립 실습입니다. 실제 계정·로그인·이메일·결제·HTTP 서버를 만들거나 사이트의 진도 저장 방식을 바꾸지 않습니다. 소스를 바꿀 때는 사본을 사용합니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 정상·재사용·범위 위반을 비교하기",
+              "explanation": "reset 모드는 한 표본의 정상 사용과 재사용을 비교하고, 사용자·목적·만료 위반은 각각 새 표본으로 검사합니다. 실제 시간 경과를 기다리지 않습니다.",
+              "code": "python3 web_state.py reset",
+              "expected": "valid=ACCEPT\nreplay=REJECT\nwrong_user=REJECT\nexpired=REJECT\nwrong_purpose=REJECT"
+            },
+            {
+              "title": "2. 잘못된 시도가 먼저 왔을 때 상태 확인하기",
+              "explanation": "잘못된 토큰이 정상 토큰을 소모하지 않아야 합니다. 같은 ticket에서 used를 확인한 뒤 유효한 표본으로 다시 시도합니다.",
+              "code": "python3 -c \"from web_state import fixture_ticket,consume_ticket; t=fixture_ticket(); print(consume_ticket(t,'wrong','alice','reset-password',90)); print(t.used); print(consume_ticket(t,'PUBLIC-RESET-TOKEN','alice','reset-password',90))\"",
+              "expected": "False\nFalse\nTrue"
+            },
+            {
+              "title": "3. 만료 직전과 정확한 경계 확인하기",
+              "explanation": "두 독립 표본에서 99와 100을 검사합니다. 첫 성공은 used를 바꾸므로 같은 객체에서 다른 시간 검사를 하면 재사용 거부와 만료 거부가 섞일 수 있습니다.",
+              "code": "python3 -c \"from web_state import fixture_ticket,consume_ticket; print(consume_ticket(fixture_ticket(),'PUBLIC-RESET-TOKEN','alice','reset-password',99)); print(consume_ticket(fixture_ticket(),'PUBLIC-RESET-TOKEN','alice','reset-password',100))\"",
+              "expected": "True\nFalse"
+            }
+          ],
+          "code": "python3 web_state.py reset",
+          "expected": "정상 첫 사용만 허용하고 재사용·다른 사용자·만료·다른 목적은 거부합니다.",
+          "task": "사본에서 used 검사를 빼면 같은 토큰 두 번 사용 검사가 실패하는지 확인하세요. expires=120의 새 표본에서 119와 120을 따로 검사하고, 해시 저장만으로 동시 한 번 사용이 보장되지 않는 이유를 설명하세요.",
+          "hint": "시간 경계 테스트는 각각 새 표본을 사용합니다. 재사용 검사와 만료 검사는 원인을 분리해야 합니다.",
+          "solution": {
+            "approach": [
+              "원본의 첫 사용 True 뒤 같은 ticket의 두 번째는 False입니다. used 검사만 뺀 사본은 두 번째가 True가 되어 재사용 거부 기대가 실패해야 합니다.",
+              "expires=120인 독립 표본에서 now=119는 허용, 120은 거부됩니다. 잘못된 사용자·목적은 used를 False로 유지해야 합니다.",
+              "해시 비교는 토큰 일치 여부이고, 확인과 사용 표시 사이 동시성을 해결하려면 실제 저장소의 원자적 상태 변경이 필요하다고 적습니다."
+            ],
+            "expected": "재사용 결함 검출·119/120 경계·실패 뒤 미소비를 확인합니다. 실제 계정 복구 시스템이나 동시성 검증을 구현한 결과로 쓰지 않습니다."
+          },
+          "pitfalls": [
+            {
+              "mistake": "토큰을 해시하면 짧고 예측 가능한 원문도 안전해진다고 생각한다.",
+              "correction": "해시는 엔트로피를 늘리지 않습니다. 보안 목적 난수로 발급하고 길이·사용 범위를 정합니다."
+            },
+            {
+              "mistake": "used 불리언 한 개만 있으면 여러 서버에서 한 번 사용이 보장된다고 생각한다.",
+              "correction": "확인과 상태 변경의 원자성이 필요합니다. 메모리의 순차 실험과 저장소 동시 처리를 구분합니다."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "정상 토큰이지만 purpose가 email-change입니다. 이 표본의 결과는?",
+              "options": [
+                "해시만 같으면 모든 작업에서 허용한다.",
+                "등록 목적이 reset-password이므로 거부한다.",
+                "자동으로 목적을 바꿔 저장한다."
+              ],
+              "answer": 1,
+              "explanation": "토큰 값뿐 아니라 권한의 사용자·목적·수명도 일치해야 합니다."
+            },
+            {
+              "prompt": "해시 비교 뒤 used=True로 바꾸는 순차 코드가 통과했습니다. 아직 별도로 필요한 검증은?",
+              "options": [
+                "여러 동시 요청에서 한 번만 성공하는 원자적 변경이다.",
+                "토큰을 로그에 원문으로 출력하는 기능이다.",
+                "만료를 제거하는 작업이다."
+              ],
+              "answer": 0,
+              "explanation": "순차 동작과 동시성 보장은 다릅니다. 실제 저장소의 조건부 갱신·트랜잭션으로 검증해야 합니다."
+            }
+          ],
+          "checks": [
+            "토큰 값·사용자·목적·만료·소비 상태를 분리했다.",
+            "순차 일회 사용과 실제 동시성 보장을 구분했다."
+          ],
+          "files": [
+            "web_state.py",
+            "ROUND2-GUIDE.md"
+          ],
+          "references": [
+            [
+              "OWASP · 비밀번호 재설정 흐름",
+              "https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html"
+            ],
+            [
+              "Python · 보안 목적 난수·토큰",
+              "https://docs.python.org/3/library/secrets.html"
+            ],
+            [
+              "Python · compare_digest",
+              "https://docs.python.org/3/library/hmac.html#hmac.compare_digest"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "06 · 공유와 거래의 일관성",
+      "intro": "개인 응답의 캐시 재사용과 거래 재시도에서 지켜야 할 상태 불변 조건을 검증합니다.",
+      "lessons": [
+        {
+          "id": "web.private-caching",
+          "title": "개인 응답·공유 캐시·Cache-Control",
+          "goal": "개인화된 응답의 잘못된 공유를 재현하고 no-store·private·no-cache의 뜻을 구분합니다.",
+          "concepts": [
+            "공유 캐시는 여러 사용자의 요청 사이에서 응답을 재사용할 수 있습니다. 개인 프로필이 URL /profile만으로 같은 항목에 저장되면 alice의 본문이 bob에게 전달될 수 있습니다. 원본 서버의 인가가 올바르더라도 캐시 재사용 경계를 잘못 정하면 노출이 생길 수 있습니다.",
+            "no-store는 저장을 제한하고 private는 공유 캐시의 저장을 제한하며, no-cache는 저장 자체의 금지가 아니라 재사용 전에 검증이 필요하다는 뜻입니다. 이름이 비슷해도 다른 계약입니다. 실제 표준은 요청/응답·자격 증명·검증자·여러 지시문 상호작용을 더 자세히 다룹니다.",
+            "cache_rule은 고정된 다섯 가지 상태를 분류하는 부분 모형입니다. public,max-age=60의 가상 개인 응답은 경로만으로 재사용해 잘못된 정책의 결과를 보여 줍니다. 실제 HTTP 캐시·시간 경과·ETag/304·Vary·Authorization 예외를 구현한 것은 아닙니다.",
+            "보호 표본은 새 캐시에서 no-store를 사용해 bob에게 bob 본문을 생성합니다. 응답 정책을 바꾼다고 기존 캐시에 남은 복사본이 자동으로 모두 지워지지는 않습니다. 실제 수정에서는 CDN·프록시·브라우저의 기존 캐시 수명과 무효화 계획도 별도로 확인합니다.",
+            "Vary나 쿠키별 키를 추가하면 어떤 요청을 구분할지 바꿀 수 있지만, 민감 응답의 무분별한 공유를 언제나 해결하는 만능 규칙은 아닙니다. 공개 정적 자산과 사용자 전용 응답을 구분하고, 로그인·로그아웃·오류 응답까지 실제 경로에서 검사해야 합니다."
+          ],
+          "prerequisites": [
+            "web.authorization",
+            "web.cors",
+            "foundation.http"
+          ],
+          "environment": {
+            "label": "Python 3.10 이상 · 오프라인 상태 모형 · Web ZIP",
+            "details": [
+              "web 폴더에서 web_state.py를 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. Checkout 차시는 Python 배포판에 포함된 sqlite3를 사용합니다.",
+              "공개 표본 ID·토큰과 고정 시각을 사용하는 독립 실습입니다. 실제 계정·로그인·이메일·결제·HTTP 서버를 만들거나 사이트의 진도 저장 방식을 바꾸지 않습니다. 소스를 바꿀 때는 사본을 사용합니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 잘못된 public 정책으로 노출 재현하기",
+              "explanation": "cache 모드의 public 두 줄은 같은 빈 캐시에서 순서대로 실행합니다. no_store_bob은 별도의 새 캐시이므로 이전 복사본이 삭제됐다는 증거가 아닙니다.",
+              "code": "python3 web_state.py cache",
+              "expected": "public_alice=profile:alice\npublic_bob=profile:alice\nno_store_bob=profile:bob\nno_cache=STORE_REVALIDATE\nprivate=PRIVATE_ONLY"
+            },
+            {
+              "title": "2. 세 지시문을 별도로 분류하기",
+              "explanation": "함수는 표준 전체를 구현하지 않고 정해진 부분 집합을 분류합니다. no-cache를 NO_STORE로 출력하지 않는 이유를 설명합니다.",
+              "code": "python3 -c \"from web_state import cache_rule; print(cache_rule('no-store')); print(cache_rule('private, max-age=60')); print(cache_rule('no-cache'))\"",
+              "expected": "NO_STORE\nPRIVATE_ONLY\nSTORE_REVALIDATE"
+            },
+            {
+              "title": "3. 보호 표본의 캐시 잔여 확인하기",
+              "explanation": "새 dict에서 no-store 응답을 두 사용자에게 생성합니다. 저장 항목 0개와 사용자별 본문을 함께 확인해야 합니다.",
+              "code": "python3 -c \"from web_state import cached_profile; c={}; print(cached_profile(c,'alice','no-store')); print(cached_profile(c,'bob','no-store')); print(len(c))\"",
+              "expected": "profile:alice\nprofile:bob\n0"
+            }
+          ],
+          "code": "python3 web_state.py cache",
+          "expected": "잘못된 public 표본은 alice 본문을 재사용하고, 새 no-store 표본에서는 각 사용자 본문과 저장 0개를 확인합니다.",
+          "task": "공개 개인 응답의 두 번째 사용자 기대값을 profile:bob으로 적어 실패를 확인하세요. 새 no-store 표본과 비교하고, 기존 캐시 복사본 처리 및 no-cache의 실제 재검증에 필요한 근거를 기록하세요.",
+          "hint": "캐시를 새로 만드는 실험과 이미 배포된 캐시를 무효화하는 작업은 다릅니다. 이 함수에는 실제 CDN 정리 기능이 없습니다.",
+          "solution": {
+            "approach": [
+              "public 표본의 두 번째 실제값은 profile:alice이므로 bob 기대가 실패합니다. 이는 의도적으로 잘못된 캐시 정책의 재현입니다.",
+              "새 dict에서 no-store로 실행하면 bob 본문을 받고 저장된 항목은 0입니다. 이를 이전 캐시 항목이 전 세계에서 삭제됐다고 해석하지 않습니다.",
+              "실제 운영 검증에는 캐시 계층·TTL·키·헤더·기존 복사본 무효화와 ETag/Last-Modified 등 재검증 흐름이 필요하다고 기록합니다."
+            ],
+            "expected": "잘못된 재사용 실패와 새 보호 표본 통과를 비교합니다. no-cache를 저장 금지로 설명하거나 no-store가 과거 복사본을 자동 삭제한다고 쓰면 미완성입니다."
+          },
+          "pitfalls": [
+            {
+              "mistake": "no-cache는 캐시에 저장할 수 없다는 뜻이라고 생각한다.",
+              "correction": "저장과 재사용 전 검증은 다릅니다. no-store와 no-cache를 구분합니다."
+            },
+            {
+              "mistake": "새 응답에 no-store를 넣었으니 과거 캐시도 모두 삭제됐다고 생각한다.",
+              "correction": "기존 복사본의 수명·무효화는 별도 작업입니다. 새 캐시 실험의 범위를 명시합니다."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "no-cache의 의미로 적절한 것은?",
+              "options": [
+                "어떠한 캐시에도 절대 저장 불가다.",
+                "저장될 수 있지만 재사용 전에 검증이 필요하다.",
+                "개인 정보를 모든 사용자에게 공유하라는 뜻이다."
+              ],
+              "answer": 1,
+              "explanation": "no-store와 no-cache는 다른 지시문입니다. 실제 HTTP 캐시의 검증자와 응답 흐름도 확인해야 합니다."
+            },
+            {
+              "prompt": "새 캐시에서 no-store 실험이 통과했습니다. 확인되지 않은 것은?",
+              "options": [
+                "이 표본의 저장 항목이 0개라는 점",
+                "두 사용자 본문이 새로 생성되었다는 점",
+                "이미 배포된 모든 캐시 복사본이 삭제됐다는 점"
+              ],
+              "answer": 2,
+              "explanation": "새 표본의 동작은 기존 전 세계 캐시의 무효화 증거가 아닙니다. 실제 계층과 수명·정리 작업을 별도로 검증합니다."
+            }
+          ],
+          "checks": [
+            "저장·공유·재검증을 다른 속성으로 설명했다.",
+            "잘못된 개인 응답 공유와 새 보호 표본을 비교했다."
+          ],
+          "files": [
+            "web_state.py",
+            "ROUND2-GUIDE.md"
+          ],
+          "references": [
+            [
+              "RFC 9111 · HTTP 캐시 규칙",
+              "https://www.rfc-editor.org/rfc/rfc9111.html"
+            ],
+            [
+              "MDN · Cache-Control",
+              "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control"
+            ]
+          ]
+        },
+        {
+          "id": "web.idempotency",
+          "title": "거래 불변 조건·트랜잭션·재시도",
+          "goal": "재고 변경과 주문 기록을 함께 처리하고 같은 요청의 재시도를 중복 효과 없이 검증합니다.",
+          "concepts": [
+            "정상 기능도 요청 순서와 재시도에서 보안 문제가 생길 수 있습니다. 재고가 음수가 되지 않음, 주문 하나와 재고 차감이 함께 남음, 같은 요청 키의 같은 내용은 한 번만 효과를 냄 같은 불변 조건을 먼저 정하면 경계가 명확해집니다.",
+            "Checkout은 제품 kit 하나의 재고 3을 관리하는 메모리 SQLite 모형입니다. UPDATE에 stock>=quantity 조건을 넣고 실제 변경 행 수를 확인합니다. 먼저 재고를 읽고 나중에 무조건 차감하는 두 단계와 달리 조건을 변경 문장에 결합합니다.",
+            "재고 차감과 주문 INSERT는 BEGIN IMMEDIATE와 COMMIT 사이에 있습니다. 둘 사이에서 예외가 나면 ROLLBACK하고 같은 예외를 다시 올립니다. 예외를 넓게 잡는 이유는 정리이며, 실패를 삼키고 성공을 반환하는 동작과 다릅니다.",
+            "주문 키는 user와 request_key의 조합이고 같은 키의 quantity가 같으면 REPLAY, 다르면 CONFLICT입니다. 동일 효과를 반복하지 않는 멱등성은 인증·인가와 다르며 요청 키 자체도 비밀 인증 정보가 아닙니다. 제품·주소·가격이 늘어나면 어떤 요청 내용을 비교할지 계약을 넓혀야 합니다.",
+            "이 표본은 단일 연결·고정 제품·순차 호출입니다. 실제 결제·다중 서비스의 정확히 한 번 효과·여러 서버 동시성·재시도 보관 기간을 증명하지 않습니다. SQLite의 실제 트랜잭션과 제약은 사용하지만 운영 규모의 동시 부하 검증은 별도입니다."
+          ],
+          "prerequisites": [
+            "web.sql",
+            "web.regression",
+            "web.mass-assignment",
+            "foundation.exceptions"
+          ],
+          "environment": {
+            "label": "Python 3.10 이상 · 오프라인 상태 모형 · Web ZIP",
+            "details": [
+              "web 폴더에서 web_state.py를 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. Checkout 차시는 Python 배포판에 포함된 sqlite3를 사용합니다.",
+              "공개 표본 ID·토큰과 고정 시각을 사용하는 독립 실습입니다. 실제 계정·로그인·이메일·결제·HTTP 서버를 만들거나 사이트의 진도 저장 방식을 바꾸지 않습니다. 소스를 바꿀 때는 사본을 사용합니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 정상 예약·동일 재시도·변경 재시도 비교하기",
+              "explanation": "checkout 모드는 매번 새 메모리 DB에서 시작합니다. 첫 2개 예약 뒤 재고 1을 유지하면서 같은 요청은 재사용 결과, 다른 수량은 충돌로 분리합니다.",
+              "code": "python3 web_state.py checkout",
+              "expected": "first=RESERVED stock=1\nrepeat=REPLAY stock=1\nchanged=CONFLICT stock=1\nother=OUT_OF_STOCK stock=1\nrollback_stock=1"
+            },
+            {
+              "title": "2. 같은 키를 다른 사용자가 쓰는 경우 확인하기",
+              "explanation": "사용자가 키 범위에 포함되어 alice와 bob은 같은 키여도 다른 요청입니다. 각각 1개 예약한 뒤 재고가 1인지 확인하고 연결을 닫습니다.",
+              "code": "from web_state import Checkout\ns=Checkout()\ntry:\n    print(s.reserve(\"alice\",\"REQ-A\",1))\n    print(s.reserve(\"bob\",\"REQ-A\",1))\n    print(s.stock())\nfinally:\n    s.close()",
+              "expected": "checkout_probe.py로 저장해 실행하면 RESERVED\nRESERVED\n1"
+            },
+            {
+              "title": "3. 중간 실패가 두 변경을 되돌리는지 확인하기",
+              "explanation": "차감 후 INSERT 전에 실패를 주입합니다. 새 표본의 재고는 3이고 주문 행은 0개여야 하며 원래 예외도 호출자에게 전달됩니다.",
+              "code": "from web_state import Checkout\ns=Checkout()\ntry:\n    try:\n        s.reserve(\"alice\",\"REQ-X\",1,fail_after_update=True)\n    except RuntimeError:\n        print(\"failure=REPORTED\")\n    print(\"stock=\"+str(s.stock()))\n    print(\"orders=\"+str(s.db.execute(\"SELECT COUNT(*) FROM orders\").fetchone()[0]))\nfinally:\n    s.close()",
+              "expected": "rollback_probe.py로 저장해 실행하면 failure=REPORTED\nstock=3\norders=0"
+            }
+          ],
+          "code": "python3 web_state.py checkout",
+          "expected": "동일 재시도는 재고를 다시 줄이지 않고 변경된 수량·재고 부족을 거부하며 중간 실패는 롤백합니다.",
+          "task": "원본 재고 3에서 같은 alice/REQ-1/2 요청을 세 번 실행해 재고와 주문 수를 확인하세요. 사본에서 예외 경로 ROLLBACK을 제거하면 중간 실패 뒤 불변 조건 검사가 실패하는지 확인한 뒤 복구하세요.",
+          "hint": "거부와 실패에서도 재고·주문을 함께 확인합니다. REPLAY 출력만으로 중복 효과가 없다고 단정하지 마세요.",
+          "solution": {
+            "approach": [
+              "같은 요청 세 번의 결과는 RESERVED, REPLAY, REPLAY이고 재고 1·주문 1행입니다. 기대값을 함수의 결과로 재계산하지 않고 고정해 비교합니다.",
+              "별도 작업 사본의 롤백을 제거하고 fail_after_update=True를 실행하면 차감이 열린 트랜잭션에 남아 같은 연결에서 재고가 달라질 수 있습니다. 기존 상태 3·주문 0 불변 조건이 실패해야 합니다.",
+              "원본 롤백을 복구한 뒤 실패 보고와 stock=3·orders=0을 함께 확인합니다. 운영 동시성·외부 결제·다른 요청 필드 비교는 미검증이라고 기록합니다."
+            ],
+            "expected": "세 번의 재시도는 주문 1행과 재고 1을 유지합니다. 중간 실패는 예외를 보고하고 재고 3·주문 0을 유지해야 합니다. 롤백 없는 사본은 실습용으로만 사용하고 복구합니다."
+          },
+          "pitfalls": [
+            {
+              "mistake": "같은 요청 키면 수량이 바뀌어도 이전 성공을 그대로 적용한다.",
+              "correction": "동일 키의 요청 내용이 같은지 비교합니다. 바뀐 요청은 충돌로 처리하는 계약을 정합니다."
+            },
+            {
+              "mistake": "except에서 롤백했으니 예외를 숨기고 성공을 반환해도 된다고 생각한다.",
+              "correction": "정리 후 원래 실패를 다시 전달합니다. 원자적 복구와 성공 보고는 다른 문제입니다."
+            }
+          ],
+          "questions": [
+            {
+              "prompt": "같은 사용자·요청 키로 수량 2 성공 뒤 수량 1이 왔습니다. 이번 계약은?",
+              "options": [
+                "새 요청처럼 다시 차감한다.",
+                "기존 요청을 조용히 덮어쓴다.",
+                "CONFLICT이고 기존 재고와 주문을 유지한다."
+              ],
+              "answer": 2,
+              "explanation": "멱등 키는 요청 내용의 비교와 함께 사용합니다. 같은 키의 다른 내용은 명시적 충돌입니다."
+            },
+            {
+              "prompt": "차감 후 주문 기록 전에 실패했습니다. 적절한 처리는?",
+              "options": [
+                "트랜잭션을 롤백하고 실패를 호출자에게 다시 전달한다.",
+                "주문 없이 재고만 줄인 채 성공한다.",
+                "진단 메시지만 숨긴다."
+              ],
+              "answer": 0,
+              "explanation": "재고와 주문의 불변 조건을 함께 유지하고 실패를 정상 효과로 보고하지 않아야 합니다."
+            }
+          ],
+          "checks": [
+            "재고·주문·재시도의 불변 조건을 함께 검사했다.",
+            "조건부 변경·트랜잭션·멱등성·인증의 역할을 구분했다."
+          ],
+          "files": [
+            "web_state.py",
+            "ROUND2-GUIDE.md"
+          ],
+          "references": [
+            [
+              "SQLite · 트랜잭션",
+              "https://www.sqlite.org/lang_transaction.html"
+            ],
+            [
+              "SQLite · UNIQUE·CHECK 제약",
+              "https://www.sqlite.org/lang_createtable.html"
+            ],
+            [
+              "Python · sqlite3 인터페이스",
+              "https://docs.python.org/3/library/sqlite3.html"
+            ]
+          ]
+        }
+      ]
     }
   ],
   "sources": [
@@ -756,6 +1847,90 @@
     [
       "PortSwigger SQL Injection 학습 · 영어",
       "https://portswigger.net/web-security/sql-injection"
+    ],
+    [
+      "OWASP · CSRF 방어",
+      "https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html"
+    ],
+    [
+      "Python · compare_digest 비교",
+      "https://docs.python.org/3/library/hmac.html#hmac.compare_digest"
+    ],
+    [
+      "MDN · CORS",
+      "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS"
+    ],
+    [
+      "MDN · 동일 출처 정책",
+      "https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Same-origin_policy"
+    ],
+    [
+      "MDN · CSP 안내",
+      "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP"
+    ],
+    [
+      "MDN · Content-Security-Policy 헤더",
+      "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy"
+    ],
+    [
+      "OWASP · 파일 처리와 업로드 방어",
+      "https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html"
+    ],
+    [
+      "Python · 경로 해석과 resolve",
+      "https://docs.python.org/3/library/pathlib.html"
+    ],
+    [
+      "OWASP · SSRF 방어",
+      "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html"
+    ],
+    [
+      "Python · URL 파싱과 검증 한계",
+      "https://docs.python.org/3/library/urllib.parse.html"
+    ],
+    [
+      "OWASP · Mass Assignment 방어",
+      "https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html"
+    ],
+    [
+      "OWASP · 입력 검증",
+      "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"
+    ],
+    [
+      "OWASP · 세션 수명 관리",
+      "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
+    ],
+    [
+      "Python · 보안 목적 난수·토큰",
+      "https://docs.python.org/3/library/secrets.html"
+    ],
+    [
+      "OWASP · 비밀번호 재설정 흐름",
+      "https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html"
+    ],
+    [
+      "Python · compare_digest",
+      "https://docs.python.org/3/library/hmac.html#hmac.compare_digest"
+    ],
+    [
+      "RFC 9111 · HTTP 캐시 규칙",
+      "https://www.rfc-editor.org/rfc/rfc9111.html"
+    ],
+    [
+      "MDN · Cache-Control",
+      "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control"
+    ],
+    [
+      "SQLite · 트랜잭션",
+      "https://www.sqlite.org/lang_transaction.html"
+    ],
+    [
+      "SQLite · UNIQUE·CHECK 제약",
+      "https://www.sqlite.org/lang_createtable.html"
+    ],
+    [
+      "Python · sqlite3 인터페이스",
+      "https://docs.python.org/3/library/sqlite3.html"
     ]
   ]
 }

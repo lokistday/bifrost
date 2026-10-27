@@ -1,0 +1,7 @@
+{
+  "model": "synthetic process/range snapshot; not a memory dump",
+  "processes": [
+    {"pid": 500, "name": "renderer", "started": "2026-10-02T00:00:00+00:00", "ranges": [{"id": "M1", "start": 4096, "size": 4096, "permission": "rx", "backing": "image"}, {"id": "M2", "start": 8192, "size": 4096, "permission": "rwx", "backing": "private"}]},
+    {"pid": 600, "name": "worker", "started": "2026-10-02T00:00:10+00:00", "ranges": [{"id": "M3", "start": 16384, "size": 4096, "permission": "rw", "backing": "private"}]}
+  ]
+}

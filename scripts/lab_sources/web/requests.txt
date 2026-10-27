@@ -1,0 +1,13 @@
+GET /notes/1 HTTP/1.1
+Host: localhost
+Cookie: session=DEMO_ONLY
+
+HTTP/1.1 200 OK
+Content-Type: text/plain; charset=utf-8
+Set-Cookie: session=DEMO_ONLY; HttpOnly; SameSite=Lax
+
+This is Alice's note.
+
+# Separate example: Alice requests Bob's note -> 403 Forbidden.
+# DEMO_ONLY is a fictional identifier, not a working credential.
+# In HTTPS production, a session cookie should also use Secure.

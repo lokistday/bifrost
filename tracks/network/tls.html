@@ -2,6 +2,8 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b1220">
 <meta name="description" content="암호화된 통신에서 볼 수 있는 것과 없는 것을 구분합니다.">
@@ -20,19 +22,20 @@
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=20261024-atlas1">
-<script src="../../js/catalog.js" defer></script>
-<script src="../../js/courses/network.js" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../../css/study.css?v=learning-a66aac410152">
+<script src="../../js/catalog.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/courses/network.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=20261024-atlas1" defer></script>
+<script src="../../js/learning-view.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/learning.js" defer></script>
 </head>
 <body class="learning-page" data-course="network" data-course-number="05" data-view="lesson" data-lesson-id="network.tls" style="--course-accent:var(--map-amber)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">네트워크 보안 목차</a></nav>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">네트워크 보안 목차</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -61,11 +64,32 @@
             <ol><li><a class="side-lesson" href="detection.html" >
               <span class="lesson-dot" data-dot="network.detection" aria-hidden="true"></span><span>탐지 기준·오탐·추가 증거<small class="completion-label" data-completion="network.detection"></small></span></a></li><li><a class="side-lesson" href="zero-trust.html" >
               <span class="lesson-dot" data-dot="network.zero-trust" aria-hidden="true"></span><span>신원과 자산 중심의 Zero Trust<small class="completion-label" data-completion="network.zero-trust"></small></span></a></li><li><a class="side-lesson" href="capstone.html" >
-              <span class="lesson-dot" data-dot="network.capstone" aria-hidden="true"></span><span>종합: 작은 서비스 방어 설계<small class="completion-label" data-completion="network.capstone"></small></span></a></li></ol>
+              <span class="lesson-dot" data-dot="network.capstone" aria-hidden="true"></span><span>중간 종합: 작은 서비스 방어 설계<small class="completion-label" data-completion="network.capstone"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>04 · 경로·상태·운영 검증<span class="caption" data-module-count="3"></span></summary>
+            <ol><li><a class="side-lesson" href="routing.html" >
+              <span class="lesson-dot" data-dot="network.routing" aria-hidden="true"></span><span>최장 접두사와 돌아오는 경로<small class="completion-label" data-completion="network.routing"></small></span></a></li><li><a class="side-lesson" href="nat-correlation.html" >
+              <span class="lesson-dot" data-dot="network.nat-correlation" aria-hidden="true"></span><span>NAT 주소·포트·시간으로 로그 연결<small class="completion-label" data-completion="network.nat-correlation"></small></span></a></li><li><a class="side-lesson" href="connection-state.html" >
+              <span class="lesson-dot" data-dot="network.connection-state" aria-hidden="true"></span><span>연결 상태와 응답 허용의 조건<small class="completion-label" data-completion="network.connection-state"></small></span></a></li><li><a class="side-lesson" href="detection-metrics.html" >
+              <span class="lesson-dot" data-dot="network.detection-metrics" aria-hidden="true"></span><span>정밀도·재현율과 탐지 임계값<small class="completion-label" data-completion="network.detection-metrics"></small></span></a></li><li><a class="side-lesson" href="incident-correlation.html" >
+              <span class="lesson-dot" data-dot="network.incident-correlation" aria-hidden="true"></span><span>네트워크 증거 연결과 대응 판단<small class="completion-label" data-completion="network.incident-correlation"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>05 · 프로토콜 경계와 관측 품질<span class="caption" data-module-count="4"></span></summary>
+            <ol><li><a class="side-lesson" href="ipv6-boundaries.html" >
+              <span class="lesson-dot" data-dot="network.ipv6-boundaries" aria-hidden="true"></span><span>IPv6 주소 범위와 정책의 빈틈<small class="completion-label" data-completion="network.ipv6-boundaries"></small></span></a></li><li><a class="side-lesson" href="stream-reassembly.html" >
+              <span class="lesson-dot" data-dot="network.stream-reassembly" aria-hidden="true"></span><span>스트림 재조립과 누락·겹침<small class="completion-label" data-completion="network.stream-reassembly"></small></span></a></li><li><a class="side-lesson" href="dns-cache.html" >
+              <span class="lesson-dot" data-dot="network.dns-cache" aria-hidden="true"></span><span>DNS TTL과 부정 응답 캐시<small class="completion-label" data-completion="network.dns-cache"></small></span></a></li><li><a class="side-lesson" href="path-mtu.html" >
+              <span class="lesson-dot" data-dot="network.path-mtu" aria-hidden="true"></span><span>MTU·PMTUD와 큰 전송의 실패<small class="completion-label" data-completion="network.path-mtu"></small></span></a></li><li><a class="side-lesson" href="event-time-windows.html" >
+              <span class="lesson-dot" data-dot="network.event-time-windows" aria-hidden="true"></span><span>사건 시각·지연 도착과 세션 경계<small class="completion-label" data-completion="network.event-time-windows"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
-          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/network.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">02 · 경계와 정책 설계 · 4 / 9</div><h1>TLS와 보이는 정보의 경계</h1><p class="lesson-objective">암호화된 통신에서 볼 수 있는 것과 없는 것을 구분합니다.</p></div></header>
-          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/network.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">02 · 경계와 정책 설계 · 4 / 19</div><h1>TLS와 보이는 정보의 경계</h1><p class="lesson-objective">암호화된 통신에서 볼 수 있는 것과 없는 것을 구분합니다.</p></div></header>
+          <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>센서에 기록이 없다는 사실이 통신이 없었다는 뜻인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>센서 위치·필터·손실·시간 범위를 확인해야 합니다. 관측되지 않은 경로가 남아 있을 수 있습니다.</p><a href="../../guides/bridges.html#network">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
           <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>실제 TLS 1.3 비교 · Python 3와 선택 Wireshark</strong></p><ul><li>network 폴더에서 python3 analyze_tls.py를 실행하면 표준 라이브러리만으로 저장된 레코드의 관찰 요약을 봅니다. Windows는 py -3을 사용합니다. 실제 통신·캡처·서버 계정은 필요하지 않습니다.</li><li>Wireshark에서 traffic.pcap과 tls13.pcap을 각각 엽니다. 처음에는 TLS 키로그를 설정하지 않고 비교합니다.</li><li>선택 복호 비교는 tls-notes.txt를 따라 오직 이 공개 교육용 tls13.keys를 사용합니다. 키로그를 추가한 조건과 키 없는 관측을 보고서에 분리합니다. 개인·서비스 키를 넣지 않습니다.</li><li>TLS 표본은 ECH 없는 bifrost.test SNI를 보여 줍니다. 이 가시성을 모든 HTTPS·QUIC·암호화 DNS 환경으로 일반화하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="transport.html">네트워크 보안 · DNS·TCP 연결과 실패 분류 ↗</a></li><li><a href="../foundation/http.html">공통 기초 · HTTP 요청과 응답 읽기 ↗</a></li></ul>
             </section>
@@ -76,26 +100,37 @@
         <a class="learning-button" href="../../labs/network.zip" download>전체 실습 ZIP 받기 ↓</a>
         <ul><li><a href="../../labs/network/traffic.pcap" download>traffic.pcap ↓</a></li><li><a href="../../labs/network/tls13.pcap" download>tls13.pcap ↓</a></li><li><a href="../../labs/network/analyze_tls.py" download>analyze_tls.py ↓</a></li><li><a href="../../labs/network/tls-notes.txt" download>tls-notes.txt ↓</a></li><li><a href="../../labs/network/tls13.keys" download>tls13.keys ↓</a></li><li><a href="../../labs/network/tls13-provenance.json" download>tls13-provenance.json ↓</a></li><li><a href="../../labs/network/LAB-GUIDE.md" download>LAB-GUIDE.md ↓</a></li></ul>
       </section>
-          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2><ol class="walkthrough"><li><h3>평문 표본과 TLS 표본 분리</h3><p>traffic.pcap은 8프레임이고 HTTP 스트림에서 GET /lesson이 읽힙니다. tls13.pcap은 별도 TLS 1.3 표본입니다. 파일 이름·키 제공 여부를 표 첫 열에 씁니다.</p>
-        <div class="step-observation"><strong>관찰할 결과</strong><pre>평문 tls 필터 0, HTTP 경로 보임 / TLS 키 없는 표본은 HTTP 경로 평문 보이지 않음입니다.</pre></div></li><li><h3>실제 레코드 요약과 협상 비교</h3><p>analyze_tls.py로 프레임·Hello·SNI·선택 버전·암호화 레코드를 확인합니다. 암호화 레코드 9개를 HTTP 요청 9건이라고 해석하지 않습니다.</p>
-        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>python3 analyze_tls.py</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>frames=15, client_hello=1 server_hello=1, sni=bifrost.test, negotiated=TLS1.3, encrypted_records=9, plaintext_http_visible=False</pre></div></li><li><h3>선택 복호와 관측 조건 비교</h3><p>tls-notes.txt를 따라 교육용 tls13.keys를 Wireshark에 제공하면 암호화된 HTTP를 비교할 수 있습니다. 이는 세션 키 없는 수동 관측자가 원래 읽을 수 있다는 뜻이 아닙니다. TLS 1.3의 인증서도 협상 암호화 뒤에 있음을 확인합니다.</p>
-        <div class="step-observation"><strong>관찰할 결과</strong><pre>키 없음/키 제공의 가시성 차이를 적고 인증서 신뢰·사용자 인가가 별도 검증임을 남깁니다.</pre></div></li></ol>
-            <h3>전체 예제 연결하기</h3><div class="code-shell"><div class="code-toolbar"><span>예제 · 명령 또는 관찰 절차</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 analyze_tls.py
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 실제 TLS 1.3 비교 · Python 3와 선택 Wireshark</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 analyze_tls.py
 # Wireshark: traffic.pcap → http / tls 필터 비교
-# Wireshark: tls13.pcap → tls.handshake.type == 1 / tls.record.content_type == 23</code></pre></div><div class="expected-output"><h3>예상 결과와 해석</h3><pre>frames=15
+# Wireshark: tls13.pcap → tls.handshake.type == 1 / tls.record.content_type == 23</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>frames=15
 client_hello=1 server_hello=1
 sni=bifrost.test
 negotiated=TLS1.3
 encrypted_records=9
 plaintext_http_visible=False
-평문 traffic.pcap은 별도 8프레임이며 tls 필터 결과는 0입니다.</pre></div></section>
+평문 traffic.pcap은 별도 8프레임이며 tls 필터 결과는 0입니다.</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>평문 표본과 TLS 표본 분리</h3><p>traffic.pcap은 8프레임이고 HTTP 스트림에서 GET /lesson이 읽힙니다. tls13.pcap은 별도 TLS 1.3 표본입니다. 파일 이름·키 제공 여부를 표 첫 열에 씁니다.</p>
+        <div class="step-observation"><strong>관찰할 결과</strong><pre>평문 tls 필터 0, HTTP 경로 보임 / TLS 키 없는 표본은 HTTP 경로 평문 보이지 않음입니다.</pre></div></li><li><h3>실제 레코드 요약과 협상 비교</h3><p>analyze_tls.py로 프레임·Hello·SNI·선택 버전·암호화 레코드를 확인합니다. 암호화 레코드 9개를 HTTP 요청 9건이라고 해석하지 않습니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 실제 TLS 1.3 비교 · Python 3와 선택 Wireshark</span></div><pre><code>python3 analyze_tls.py</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>frames=15, client_hello=1 server_hello=1, sni=bifrost.test, negotiated=TLS1.3, encrypted_records=9, plaintext_http_visible=False</pre></div></li><li><h3>선택 복호와 관측 조건 비교</h3><p>tls-notes.txt를 따라 교육용 tls13.keys를 Wireshark에 제공하면 암호화된 HTTP를 비교할 수 있습니다. 이는 세션 키 없는 수동 관측자가 원래 읽을 수 있다는 뜻이 아닙니다. TLS 1.3의 인증서도 협상 암호화 뒤에 있음을 확인합니다.</p>
+        <div class="step-observation"><strong>관찰할 결과</strong><pre>키 없음/키 제공의 가시성 차이를 적고 인증서 신뢰·사용자 인가가 별도 검증임을 남깁니다.</pre></div></li></ol></section>
           <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>두 PCAP의 HTTP 경로 가시성·협상·주소/길이를 비교하세요. TLS 분석 요약을 재현하고 키 없는 관찰 4개, 추가 로그/키가 필요한 항목 3개를 적습니다. 선택 복호 비교를 했다면 교육 키를 제공했다는 조건을 표시합니다.</p>
             <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>TLS 1.3의 outer record type 23에는 암호화된 협상·알림도 들어갈 수 있어 encrypted_records를 HTTP 요청 수로 세면 안 됩니다. 키로그 없이 인증서 내용·HTTP 본문을 읽었다고 쓰지 않습니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
         <ol><li>traffic.pcap 8개 평문 프레임과 tls13.pcap 15개 TLS 프레임을 별도 표본으로 기록합니다.</li><li>주소·포트·길이·시점 및 이 표본의 SNI는 관찰 가능, HTTP 경로·본문·서버 인증서 내용은 키 없는 TLS 1.3 표본에서 그대로 읽지 못함으로 분류합니다.</li><li>analyze_tls.py 요약을 재현하고 선택 복호는 공개 교육용 키를 제공한 조건으로 표시합니다. 실제 인증서 신뢰·응용 인가는 추가 근거를 요구합니다.</li></ol>
         
         <h3>결과를 판단하는 기준</h3><pre>평문과 TLS, 키 없는 관찰과 교육 키 복호, 외부 레코드 개수와 응용 요청 수가 명확히 구분됩니다. SNI 가시성을 모든 TLS 환경으로 일반화하지 않습니다.</pre>
-      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p></section>
-          <section id="verify" class="article-section completion-panel"><div class="overline">04 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>TLS 복호 키 없이 패킷 크기·시간만으로 본문 내용을 단정하는 주장을 검토하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>암호화된 본문을 읽었다고 할 수 없습니다. 가시 메타데이터·추론·직접 확인한 내용을 분리하고 키 보유 조건을 명시합니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>평문8프레임과 TLS15프레임의 출처·관찰 조건을 구분했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>키 없는 메타데이터와 교육 키로 복호한 내용을 나누고 TLS 인증·응용 인가 한계를 설명했다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/network/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
         <fieldset class="question" data-question="0">
           <legend>1. 세션 키 없는 수동 관측자가 일반적인 HTTPS 트래픽에서 여전히 확인할 수 있는 것은?</legend>
           <label class="question-option"><input type="radio" name="question-0" value="0"><span>HTTP 요청 본문 전체</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>사용자의 비밀번호 원문</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>IP 주소·포트·전송 시점과 길이</span></label>

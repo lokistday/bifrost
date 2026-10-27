@@ -1,0 +1,38 @@
+{
+  "description": "Synthetic documentation addresses and logical events, not a packet capture or real firewall configuration.",
+  "routes": [
+    {"prefix": "0.0.0.0/0", "next_hop": "wan"},
+    {"prefix": "10.0.0.0/8", "next_hop": "core"},
+    {"prefix": "10.20.0.0/16", "next_hop": "app"}
+  ],
+  "nat": [
+    {"private_ip": "10.20.1.7", "private_port": 51000, "public_ip": "198.51.100.10", "public_port": 40001, "destination": "203.0.113.20:443", "start": "2026-10-20T10:00:00Z", "end": "2026-10-20T10:05:00Z"},
+    {"private_ip": "10.20.1.8", "private_port": 51000, "public_ip": "198.51.100.10", "public_port": 40002, "destination": "203.0.113.20:443", "start": "2026-10-20T10:00:00Z", "end": "2026-10-20T10:05:00Z"}
+  ],
+  "observations": [
+    {"id": "NAT01", "public_ip": "198.51.100.10", "public_port": 40001, "destination": "203.0.113.20:443", "time": "2026-10-20T10:01:00Z"},
+    {"id": "NAT02", "public_ip": "198.51.100.10", "public_port": 40001, "destination": "203.0.113.20:443", "time": "2026-10-20T10:06:00Z"},
+    {"id": "NAT03", "public_ip": "198.51.100.10", "public_port": 40002, "destination": "203.0.113.20:443", "time": "2026-10-20T10:01:00Z"}
+  ],
+  "state_events": [
+    {"id": "S1", "client": "10.20.1.7", "client_port": 51000, "server": "203.0.113.20", "server_port": 443, "direction": "out", "event": "SYN"},
+    {"id": "S2", "client": "10.20.1.7", "client_port": 51000, "server": "203.0.113.20", "server_port": 443, "direction": "in", "event": "SYN_ACK"},
+    {"id": "S3", "client": "10.20.1.7", "client_port": 51000, "server": "203.0.113.20", "server_port": 443, "direction": "out", "event": "ACK"},
+    {"id": "S4", "client": "10.20.1.7", "client_port": 51000, "server": "203.0.113.20", "server_port": 443, "direction": "in", "event": "DATA"},
+    {"id": "S5", "client": "10.20.1.8", "client_port": 52000, "server": "203.0.113.20", "server_port": 443, "direction": "in", "event": "DATA"},
+    {"id": "S6", "client": "10.20.1.7", "client_port": 51000, "server": "203.0.113.20", "server_port": 443, "direction": "out", "event": "CLOSE"},
+    {"id": "S7", "client": "10.20.1.7", "client_port": 51000, "server": "203.0.113.20", "server_port": 443, "direction": "in", "event": "DATA"}
+  ],
+  "detections": [
+    {"id": "D1", "score": 6, "attack": true}, {"id": "D2", "score": 5, "attack": true},
+    {"id": "D3", "score": 2, "attack": true}, {"id": "D4", "score": 4, "attack": false},
+    {"id": "D5", "score": 3, "attack": false}, {"id": "D6", "score": 1, "attack": false},
+    {"id": "D7", "score": 0, "attack": false}, {"id": "D8", "score": 0, "attack": false}
+  ],
+  "response": [
+    {"time": "10:00:02Z", "request_id": "R-17", "source": "app", "result": "401"},
+    {"time": "10:00:00Z", "request_id": "R-17", "source": "dns", "result": "resolved"},
+    {"time": "10:00:01Z", "request_id": "R-17", "source": "firewall", "result": "allow"},
+    {"time": "10:00:03Z", "request_id": "R-18", "source": "app", "result": "200"}
+  ]
+}

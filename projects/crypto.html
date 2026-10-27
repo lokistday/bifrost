@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="실제 AES-GCM 표본을 문서별 문맥에 묶고 재전송 상태와 함께 검사합니다. 유효한 암호문이라는 사실과 지금 처리해도 된다는 결정을 분리하세요.">
+<meta name="theme-color" content="#0b1220">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:title" content="레코드 이동·재전송·키 교체의 검증 계획 · Bifrost">
+<meta property="og:description" content="실제 AES-GCM 표본을 문서별 문맥에 묶고 재전송 상태와 함께 검사합니다. 유효한 암호문이라는 사실과 지금 처리해도 된다는 결정을 분리하세요.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/projects/crypto.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/projects/crypto.html">
+<link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+<title>레코드 이동·재전송·키 교체의 검증 계획 · Bifrost</title>
+<script src="../js/theme.js"></script>
+<link rel="stylesheet" href="../css/main.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../css/theme.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../css/learning.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../css/study.css?v=learning-a66aac410152">
+
+</head>
+<body class="learning-page study-page">
+<a class="skip-link" href="#studyContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav"><a class="brand" href="../index.html"><span class="brand-mark">✦</span><span>BIFROST</span></a><nav class="navlinks" aria-label="주 메뉴"><a href="../index.html#mindmap">학습 지도</a><a href="../learn/">검색 · 학습 경로</a><a href="../guides/bridges.html">기초 연결</a></nav><button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button></div></header>
+<main class="study-wrap" id="studyContent" tabindex="-1">
+      <nav class="breadcrumb" aria-label="현재 위치"><a href="../learn/">학습 경로</a><span>/</span><a href="../tracks/crypto/">Cryptography</a><span>/ 종합 프로젝트</span></nav>
+      <header class="study-hero"><div class="overline">Cryptography / FINAL PROJECT</div><h1>레코드 이동·재전송·키 교체의 검증 계획</h1><p>실제 AES-GCM 표본을 문서별 문맥에 묶고 재전송 상태와 함께 검사합니다. 유효한 암호문이라는 사실과 지금 처리해도 된다는 결정을 분리하세요.</p><div class="lesson-meta"><span>180–270분 · 설치 제외 저자 추정</span><span>로컬 표본 · 계정 불필요</span><span>A/B 변형 + 근거 보고서</span></div></header>
+      <ol class="project-flow" aria-label="프로젝트 진행 흐름"><li><b>01 · PREDICT</b><span>자료와 계약 읽기<br>실행 전 예상</span></li><li><b>02 · BUILD</b><span>A 표본 독립 풀이<br>정상·거부 검사</span></li><li><b>03 · TRANSFER</b><span>B 표본 재검증<br>새 반례 추가</span></li><li><b>04 · EXPLAIN</b><span>근거 보고서<br>루브릭 검토</span></li></ol>
+      <nav class="study-jumps" aria-label="프로젝트 항목"><a href="#ready">준비 ↓</a><a href="#assignment">과제 ↓</a><a href="#check">검사 ↓</a><a href="#rubric">평가 ↓</a></nav>
+      <section id="ready" class="study-section"><h2>먼저 준비할 것</h2><p>ZIP 전체를 풀고 원본을 보관하세요. 폴더 전체의 작업 사본에서 진행합니다. 모든 자료는 직접 만든 교육용 표본이며 외부 서비스에 접속할 필요가 없습니다.</p><ul><li><a href="../tracks/crypto/replay-protection.html">유효한 태그와 재전송 방지</a></li><li><a href="../tracks/crypto/aad-record-binding.html">AEAD와 레코드 문맥의 결합</a></li><li><a href="../tracks/crypto/envelope-keywrap.html">봉투 암호화와 DEK 재포장</a></li><li><a href="../tracks/crypto/signature-authorization.html">서명 문맥과 업무 권한</a></li></ul><div class="project-files"><a class="learning-button primary" href="../labs/crypto.zip" download>실습과 프로젝트 ZIP ↓</a><a class="learning-button" href="../labs/crypto/project-brief.md" download>과제 안내 ↓</a><a class="learning-button" href="../labs/crypto/project-report.md" download>보고서 양식 ↓</a></div><details><summary>표본·보조 파일 목록</summary><ul><li><a href="../labs/crypto/project-input-a.json" download>project-input-a.json ↓</a></li><li><a href="../labs/crypto/project-input-b.json" download>project-input-b.json ↓</a></li></ul><p>각 파일을 따로 받으면 의존 파일이 빠질 수 있습니다. 실행할 때는 ZIP 전체를 사용하세요.</p></details></section>
+      <section id="assignment" class="study-section"><h2>수행할 과제</h2><ol><li>가상 환경에서 고정 requirements.txt를 설치하고 공개 교육 키라는 범위를 적습니다.</li><li>AES-GCM 검증과 시퀀스 검사 순서를 구현하고 A/B를 비교합니다.</li><li>인증 실패 요청의 큰 seq가 정상 요청을 막지 않도록 실패 후 last 상태를 확인합니다.</li><li>실제 봉투 재포장 예제를 실행한 증거와 정기 교체·유출 대응·서명 권한 검토를 함께 보고합니다.</li></ol><div class="baseline-note"><h3>출력 계약</h3><p>기존 round2-crypto.json의 공개 DEK를 사용합니다. AAD는 UTF-8 JSON 배열 [&quot;project-v1&quot;,tenant,document,version,seq]를 공백 없이 직렬화한 바이트입니다. seq도 인증 대상입니다. 인증 실패는 AUTH_FAIL, 인증 성공 후 seq&gt;last일 때만 ACCEPT하고 last를 갱신하며 그 외에는 REPLAY입니다. last는 이 연습의 단일 blue/17/1 스트림 상태입니다.</p><p>project-answer-template.json의 필드와 타입은 유지하고 직접 계산한 결과를 새 answers-a.json·answers-b.json에 넣습니다. 빈 목록과 0은 자리표시자입니다.</p></div></section>
+      <section id="check" class="study-section"><h2>결과를 확인하는 방법</h2><p>각 분야 작업 폴더의 터미널에서 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용하세요. Crypto는 가상 환경에 requirements.txt 설치가 필요합니다.</p><div class="code-shell"><pre><code>python3 project.py check answers-a.json --variant a
+python3 project.py check answers-b.json --variant b</code></pre></div>
+      
+      
+      <p>결과 검사기는 답안 JSON만 읽습니다. 코드를 실행하거나 서버로 제출하지 않습니다. 결과 일치(0)·불일치(1)·답안 입력 오류(2)를 구분합니다. 코드 품질과 보고서의 사실성은 아래 기준으로 별도 검토하세요.</p><details class="solution"><summary>독립 시도 후, 참고 결과와 풀이 읽기</summary><p>공개된 참조 구현입니다. 답을 본 뒤에는 새로운 반례를 직접 만들어 설명할 수 있는지 확인하세요.</p><div class="code-shell"><pre><code>python3 project.py example --variant a
+python3 project.py example --variant b</code></pre></div><a href="../labs/crypto/project_reference.py" download>참조 구현 읽기 ↓</a></details></section>
+      <section id="rubric" class="study-section"><h2>완주를 판단하는 기준</h2><p>항목별 0 = 근거 없음 · 1 = 설명만 가능 · 2 = 재현할 근거 있음. 8점은 자기 평가 척도이며 인증 점수가 아닙니다. 각 항목에 해당하는 파일·명령·이벤트 위치를 보고서에 연결하세요.</p><ol><li>실제 인증 실패와 재전송 거부를 구분했다.</li><li>인증 실패한 요청이 상태를 갱신하거나 평문을 노출하지 않는다.</li><li>A/B와 재시작·동시 처리의 한계를 설명한다.</li><li>KEK/DEK 교체와 과거 노출·현재 권한을 구분해 검증 계획을 썼다.</li></ol><h3>보고서에 남길 것</h3><p>범위·환경 → 예상 → 실제 관찰 → A/B 차이 → 반례와 수정 → 미확인 사항. 해시·종료 상태·테스트 결과만으로 모든 결론을 증명했다고 표현하지 마세요.</p><p>1–3일 뒤 답안 없이 B를 다시 풀거나 새 입력을 만들어 확인하세요. 설명이 막히면 해당 선행 차시로 돌아가 필요한 부분을 보충합니다.</p></section>
+      <section class="study-section"><h2>실제 형식으로 연결하기</h2><p>실제 cryptography AESGCM.decrypt의 InvalidTag와 정상 평문을 관찰합니다. 통과해도 새 암호 프로토콜을 배포할 자격을 의미하지 않습니다.</p><h3>이 프로젝트의 범위</h3><p>단일 스트림·단일 프로세스 교육 모형이며 실제 서비스의 원자성·지속 상태·nonce 발급 설계는 포함하지 않습니다. 공개 키·nonce를 운영에 재사용하지 않습니다.</p><a class="learning-button" href="../learn/#projects">다른 분야 프로젝트 보기 ↗</a></section></main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../index.html#resources">외부 참고 자료 ↗</a></div></footer>
+</body></html>

@@ -1,0 +1,34 @@
+[
+  {
+    "tenant": "blue",
+    "document": "17",
+    "version": "1",
+    "seq": 5,
+    "nonce_hex": "626966726f73740000000005",
+    "ciphertext_hex": "f20cbb70ae3c883882d27fb95708db90dda0f0e41bc6427d4750c90316d81273481dc2c9"
+  },
+  {
+    "tenant": "blue",
+    "document": "17",
+    "version": "2",
+    "seq": 100,
+    "nonce_hex": "626966726f73740000000064",
+    "ciphertext_hex": "8a1be00c5835a78cca58a713a5468cb125793e777858b327ef31787f8f8f9a7c085176f3"
+  },
+  {
+    "tenant": "blue",
+    "document": "17",
+    "version": "1",
+    "seq": 4,
+    "nonce_hex": "626966726f73740000000004",
+    "ciphertext_hex": "0631e7731ec078c37175b9e1977c5e5c1a1fff8d34bbfe2ab1c031e62274f1d764d2c23a"
+  },
+  {
+    "tenant": "blue",
+    "document": "17",
+    "version": "1",
+    "seq": 6,
+    "nonce_hex": "626966726f73740000000006",
+    "ciphertext_hex": "13c7c60f62786b244ddecb8710781e53bf87e2275f4ebb1fd6d98060a21836609bbe4ccd"
+  }
+]

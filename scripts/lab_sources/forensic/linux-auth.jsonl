@@ -1,0 +1,4 @@
+{"id":"L11","time":"2026-10-02T00:00:00+00:00","host":"training-linux","service":"sshd","pid":700,"user":"alice","session":"S21","event":"auth-failed","result":"deny","command":""}
+{"id":"L12","time":"2026-10-02T00:00:20+00:00","host":"training-linux","service":"sshd","pid":701,"user":"alice","session":"S22","event":"auth-success","result":"allow","command":""}
+{"id":"L13","time":"2026-10-02T00:00:40+00:00","host":"training-linux","service":"sudo","pid":800,"user":"alice","session":"S22","event":"command-request","result":"allow","command":"/usr/bin/id"}
+{"id":"L14","time":"2026-10-02T00:00:50+00:00","host":"training-linux","service":"sudo","pid":801,"user":"bob","session":"S23","event":"command-request","result":"deny","command":"/usr/bin/id"}

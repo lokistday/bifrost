@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="glow"><stop stop-color="#1b4353"/><stop offset="1" stop-color="#0b1220"/></radialGradient>
+    <linearGradient id="spectrum"><stop stop-color="#5ce1e6"/><stop offset=".5" stop-color="#9b8cff"/><stop offset="1" stop-color="#f28ccb"/></linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0b1220"/>
+  <circle cx="890" cy="315" r="320" fill="url(#glow)"/>
+  <g fill="none" stroke-dasharray="5 9" stroke-width="2" opacity=".7">
+    <path d="M875 210V90" stroke="#5ce1e6"/><path d="M945 238 1030 145" stroke="#9b8cff"/>
+    <path d="M977 305 1110 285" stroke="#67d6a0"/><path d="M954 375 1088 452" stroke="#f5a875"/>
+    <path d="M900 415 930 548" stroke="#85d2ff"/><path d="M840 410 795 548" stroke="#ffc247"/>
+    <path d="M785 370 697 459" stroke="#ff4db8"/><path d="M770 310 656 287" stroke="#ff526d"/>
+    <path d="M800 240 720 144" stroke="#73b5ff"/>
+  </g>
+  <g fill="#132132" stroke-width="1.5">
+    <rect x="827" y="58" width="96" height="36" rx="10" stroke="#5ce1e6"/>
+    <rect x="1004" y="112" width="96" height="36" rx="10" stroke="#9b8cff"/>
+    <rect x="1075" y="266" width="96" height="36" rx="10" stroke="#67d6a0"/>
+    <rect x="1045" y="445" width="96" height="36" rx="10" stroke="#f5a875"/>
+    <rect x="883" y="530" width="96" height="36" rx="10" stroke="#85d2ff"/>
+    <rect x="742" y="530" width="96" height="36" rx="10" stroke="#ffc247"/>
+    <rect x="643" y="445" width="96" height="36" rx="10" stroke="#ff4db8"/>
+    <rect x="611" y="266" width="96" height="36" rx="10" stroke="#ff526d"/>
+    <rect x="671" y="112" width="96" height="36" rx="10" stroke="#73b5ff"/>
+  </g>
+  <g fill="#c8d5e6" font-family="Malgun Gothic,sans-serif" font-size="12" text-anchor="middle">
+    <text x="875" y="81">CORE</text><text x="1052" y="135">SYSTEM</text><text x="1123" y="289">FORENSIC</text>
+    <text x="1093" y="468">MISC</text><text x="931" y="553">CLOUD</text><text x="790" y="553">NETWORK</text>
+    <text x="691" y="468">CRYPTO</text><text x="659" y="289">REVERSE</text><text x="719" y="135">WEB</text>
+  </g>
+  <circle cx="875" cy="315" r="119" fill="none" stroke="#9b8cff" opacity=".24"/>
+  <circle cx="875" cy="315" r="108" fill="#101f30" stroke="#5ce1e6" stroke-opacity=".65"/>
+  <path d="M875 247 884 274 912 283 884 292 875 321 866 292 838 283 866 274Z" fill="#5ce1e6"/>
+  <text x="875" y="360" text-anchor="middle" fill="#e7edf7" font-family="Malgun Gothic,sans-serif" font-weight="700" font-size="21" letter-spacing="4">BIFROST</text>
+  <rect x="70" y="148" width="48" height="4" rx="2" fill="url(#spectrum)"/>
+  <text x="70" y="205" fill="#85d2ff" font-family="Malgun Gothic,sans-serif" font-size="15" letter-spacing="3">SECURITY LEARNING MAP</text>
+  <text x="66" y="302" fill="#e7edf7" font-family="Malgun Gothic,sans-serif" font-weight="800" font-size="77" letter-spacing="2">BIFROST</text>
+  <text x="70" y="361" fill="#c8d5e6" font-family="Malgun Gothic,sans-serif" font-size="26">이해하고, 실행하고,</text>
+  <text x="70" y="403" fill="#c8d5e6" font-family="Malgun Gothic,sans-serif" font-size="26">근거를 남기기.</text>
+  <text x="70" y="486" fill="#a9b8cc" font-family="Malgun Gothic,sans-serif" font-size="17">{{COURSES}}개 분야 · {{LESSONS}}개 차시 · 파일 실습과 시각 자료</text>
+</svg>

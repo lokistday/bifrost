@@ -1,0 +1,6 @@
+{
+  "people": ["alice", "bob", "carol"],
+  "positions": [1, 2, 3],
+  "before": [["alice", "bob"]],
+  "not_at": [["alice", 1], ["carol", 3]]
+}

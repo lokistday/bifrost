@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="명시적 버퍼 길이와 C 문자열 종료 규칙을 구분하고 자료형 계약을 지킵니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="바이너리 길이와 중간 NUL — Pwn / System · Bifrost">
+<meta property="og:description" content="명시적 버퍼 길이와 C 문자열 종료 규칙을 구분하고 자료형 계약을 지킵니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/tracks/pwn/binary-strings.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/pwn/binary-strings.html">
+<title>바이너리 길이와 중간 NUL — Pwn / System · Bifrost</title>
+<script src="../../js/theme.js"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../../css/study.css?v=learning-a66aac410152">
+<script src="../../js/catalog.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/courses/pwn.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/learning.js" defer></script>
+</head>
+<body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="pwn.binary-strings" style="--course-accent:var(--map-violet)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">시스템 보안 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="pwn.binary-strings">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../index.html#mindmap">학습 지도</a><span aria-hidden="true">/</span><a href="./">Pwn / System</a><span aria-hidden="true">/</span><span aria-current="page">13차시</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar"><a class="back-link" href="./">← Pwn / System 전체 과정</a><div class="course-stats"><span data-count="pwn"></span>
+        <div class="course-meter" role="progressbar" aria-label="Pwn / System 완료 진도" aria-valuemin="0" aria-valuemax="100" data-meter="pwn"><span></span></div>
+      </div>
+        <nav aria-label="차시 목차">
+          <details >
+            <summary>01 · 실행과 메모리 모델<span class="caption" data-module-count="0"></span></summary>
+            <ol><li><a class="side-lesson" href="build.html" >
+              <span class="lesson-dot" data-dot="pwn.build" aria-hidden="true"></span><span>소스·컴파일·실행 파일<small class="completion-label" data-completion="pwn.build"></small></span></a></li><li><a class="side-lesson" href="lifetime.html" >
+              <span class="lesson-dot" data-dot="pwn.lifetime" aria-hidden="true"></span><span>스택·힙과 수명<small class="completion-label" data-completion="pwn.lifetime"></small></span></a></li><li><a class="side-lesson" href="bounds.html" >
+              <span class="lesson-dot" data-dot="pwn.bounds" aria-hidden="true"></span><span>배열 경계와 길이<small class="completion-label" data-completion="pwn.bounds"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>02 · 관찰·진단·완화<span class="caption" data-module-count="1"></span></summary>
+            <ol><li><a class="side-lesson" href="debugger.html" >
+              <span class="lesson-dot" data-dot="pwn.debugger" aria-hidden="true"></span><span>GDB 중단점과 변수<small class="completion-label" data-completion="pwn.debugger"></small></span></a></li><li><a class="side-lesson" href="errors.html" >
+              <span class="lesson-dot" data-dot="pwn.errors" aria-hidden="true"></span><span>Sanitizer로 경계 오류 찾기<small class="completion-label" data-completion="pwn.errors"></small></span></a></li><li><a class="side-lesson" href="mitigations.html" >
+              <span class="lesson-dot" data-dot="pwn.mitigations" aria-hidden="true"></span><span>ASLR·NX·Canary의 역할과 한계<small class="completion-label" data-completion="pwn.mitigations"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>03 · 정수와 출력의 경계<span class="caption" data-module-count="2"></span></summary>
+            <ol><li><a class="side-lesson" href="integer-input.html" >
+              <span class="lesson-dot" data-dot="pwn.integer-input" aria-hidden="true"></span><span>숫자 입력·부호·범위 검증<small class="completion-label" data-completion="pwn.integer-input"></small></span></a></li><li><a class="side-lesson" href="allocation-size.html" >
+              <span class="lesson-dot" data-dot="pwn.allocation-size" aria-hidden="true"></span><span>할당 크기와 정수 wrap 방지<small class="completion-label" data-completion="pwn.allocation-size"></small></span></a></li><li><a class="side-lesson" href="format-strings.html" >
+              <span class="lesson-dot" data-dot="pwn.format-strings" aria-hidden="true"></span><span>서식 문자열·데이터·출력 잘림<small class="completion-label" data-completion="pwn.format-strings"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>04 · 소유권과 작은 파서<span class="caption" data-module-count="3"></span></summary>
+            <ol><li><a class="side-lesson" href="ownership.html" >
+              <span class="lesson-dot" data-dot="pwn.ownership" aria-hidden="true"></span><span>메모리 소유권·빌림·해제<small class="completion-label" data-completion="pwn.ownership"></small></span></a></li><li><a class="side-lesson" href="binary-parser.html" >
+              <span class="lesson-dot" data-dot="pwn.binary-parser" aria-hidden="true"></span><span>바이너리 길이·엔디언·파서 경계<small class="completion-label" data-completion="pwn.binary-parser"></small></span></a></li></ol>
+          </details>
+          <details open>
+            <summary>05 · 메모리 표현과 데이터 계약<span class="caption" data-module-count="4"></span></summary>
+            <ol><li><a class="side-lesson" href="struct-layout.html" >
+              <span class="lesson-dot" data-dot="pwn.struct-layout" aria-hidden="true"></span><span>구조체 배치와 명시적 직렬화<small class="completion-label" data-completion="pwn.struct-layout"></small></span></a></li><li><a class="side-lesson" href="binary-strings.html" aria-current="page">
+              <span class="lesson-dot" data-dot="pwn.binary-strings" aria-hidden="true"></span><span>바이너리 길이와 중간 NUL<small class="completion-label" data-completion="pwn.binary-strings"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>06 · 열린 객체와 스트림 경계<span class="caption" data-module-count="5"></span></summary>
+            <ol><li><a class="side-lesson" href="file-descriptors.html" >
+              <span class="lesson-dot" data-dot="pwn.file-descriptors" aria-hidden="true"></span><span>파일 디스크립터·dup·공유 오프셋<small class="completion-label" data-completion="pwn.file-descriptors"></small></span></a></li><li><a class="side-lesson" href="partial-io.html" >
+              <span class="lesson-dot" data-dot="pwn.partial-io" aria-hidden="true"></span><span>부분 I/O·누적 읽기·메시지 경계<small class="completion-label" data-completion="pwn.partial-io"></small></span></a></li><li><a class="side-lesson" href="atomic-open.html" >
+              <span class="lesson-dot" data-dot="pwn.atomic-open" aria-hidden="true"></span><span>파일 열기·TOCTOU·객체 검증<small class="completion-label" data-completion="pwn.atomic-open"></small></span></a></li></ol>
+          </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
+      </aside><article class="lesson-article">
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/pwn.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">05 · 메모리 표현과 데이터 계약 · 13 / 16</div><h1>바이너리 길이와 중간 NUL</h1><p class="lesson-objective">명시적 버퍼 길이와 C 문자열 종료 규칙을 구분하고 자료형 계약을 지킵니다.</p></div></header>
+          <div class="lesson-meta"><span>심화 연결</span><span>학습 60–100분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>버퍼 크기, 유효한 데이터 길이, 문자열 길이를 구분할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>할당 용량과 채워진 바이트 수는 다르고 strlen은 첫 NUL까지만 셉니다. 읽기 전에 경계와 객체 수명을 확인합니다.</p><a href="../../guides/bridges.html#c">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
+          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Ubuntu/WSL · GCC · C11 · 로컬 시스템 실습</strong></p><ul><li>Pwn ZIP을 풀고 pwn 폴더에서 실행합니다. Windows에서는 WSL 터미널을 사용합니다. gcc --version을 확인하고 -std=c11 -Wall -Wextra -Werror -Wformat=2 -g -O0로 빌드합니다.</li><li>FD·open 차시는 Linux/POSIX API와 자기 mkstemp/mkdtemp 파일만 사용합니다. 다른 사용자 파일이나 시스템 설정을 변경하지 않습니다. 기본 출력은 재현 가능하지만 --layout의 구조체 크기·오프셋은 ABI에 따라 달라집니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="../foundation/text-bytes.html">공통 기초 · 문자열·바이트·UTF-8의 경계 ↗</a></li><li><a href="bounds.html">시스템 보안 · 배열 경계와 길이 ↗</a></li><li><a href="binary-parser.html">시스템 보안 · 바이너리 길이·엔디언·파서 경계 ↗</a></li></ul>
+            </section>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>바이너리 버퍼는 0을 포함한 바이트를 담을 수 있고 길이를 별도로 전달합니다. C 문자열은 첫 NUL 바이트를 종료로 해석합니다. 같은 배열을 두 규칙으로 읽으면 길이가 다를 수 있어, 파일·프로토콜 길이를 strlen으로 계산하면 입력 일부가 사라질 수 있습니다.</p><figure class="learning-visual" data-visual-id="pwn.binary-strings"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 데이터 모형</span><h3>첫 NUL 뒤의 바이트도 버퍼에 남습니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="첫 NUL 뒤의 바이트도 버퍼에 남습니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 305" width="760" height="305" role="img" aria-labelledby="visual-pwn-binary-strings-title visual-pwn-binary-strings-desc" focusable="false"><title id="visual-pwn-binary-strings-title">첫 NUL 뒤의 바이트도 버퍼에 남습니다</title><desc id="visual-pwn-binary-strings-desc">data의 실제 5바이트는 41 42 00 43 44입니다. strlen은 첫 00에서 끝나 2를 반환하지만 명시적 길이의 Hex는 5바이트를 모두 보여 줍니다.</desc><defs><marker id="visual-pwn-binary-strings-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="28" y="30">data · 실제 버퍼 5바이트</tspan></text><g class="v-tone "><rect class="v-node" x="50" y="65" width="127" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="113.5" y="54">A</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="113.5" y="102">41</tspan></text></g><g class="v-tone "><rect class="v-node" x="182" y="65" width="127" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="245.5" y="54">B</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="245.5" y="102">42</tspan></text></g><g class="v-tone danger"><rect class="v-node v-outside" x="314" y="65" width="127" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="377.5" y="54">NUL</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="377.5" y="102">00</tspan></text></g><g class="v-tone "><rect class="v-node" x="446" y="65" width="127" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="509.5" y="54">C</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="509.5" y="102">43</tspan></text></g><g class="v-tone "><rect class="v-node" x="578" y="65" width="127" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="641.5" y="54">D</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="641.5" y="102">44</tspan></text></g><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="28" y="175">C 문자열로 읽는 범위</tspan></text><g class="v-tone "><rect class="v-node" x="182" y="210" width="127" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="245.5" y="199">문자 0</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="245.5" y="247">A</tspan></text></g><g class="v-tone "><rect class="v-node" x="314" y="210" width="127" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="377.5" y="199">문자 1</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="377.5" y="247">B</tspan></text></g><g class="v-tone "><rect class="v-node" x="446" y="210" width="127" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="509.5" y="199">종료</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="509.5" y="247">NUL</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">바이너리 길이를 strlen으로 계산하지 마세요.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>data의 실제 5바이트는 41 42 00 43 44입니다. strlen은 첫 00에서 끝나 2를 반환하지만 명시적 길이의 Hex는 5바이트를 모두 보여 줍니다.</p></details></figure><p>표본은 A B NUL C D의 5바이트이고 첫 NUL이 있기 때문에 strlen 호출은 2를 반환합니다. 뒤 C D가 메모리에서 지워진 것은 아닙니다. Hex를 명시적 sizeof 범위로 출력하면 다섯 바이트를 모두 볼 수 있습니다.</p><p>NUL 종료가 보장되지 않은 배열에 strlen이나 %s를 사용하면 유효 범위 밖까지 읽을 수 있습니다. 배열의 크기·실제 채운 길이·문자열 길이는 다른 값입니다. 이번 plain 배열은 종료 문자가 없으므로 strlen으로 읽지 않고 명시적 길이의 계약 함수에만 전달합니다.</p><p>ascii_text는 1~32바이트의 출력 가능한 ASCII만 허용하는 좁은 예제입니다. 중간 NUL·제어 문자·비ASCII는 거부합니다. UTF-8 텍스트 검증이나 모든 파일명·HTML·SQL의 안전 처리를 구현한 함수가 아니며 바이너리 자료에 일괄 적용해서는 안 됩니다.</p><p>같은 입력을 한 단계는 문자열로, 다음 단계는 원래 길이로 해석하면 검사한 대상과 사용한 대상이 달라질 수 있습니다. 인터페이스에서 바이트와 길이를 함께 전달하거나, 텍스트 계약을 검증한 뒤 명확히 변환하는 방식으로 해석 경계를 유지합니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>strlen 결과를 파일·네트워크의 실제 바이트 수로 사용한다.</dt><dd>C 문자열 종료와 명시적 버퍼 길이를 구분합니다. 바이너리는 길이를 별도로 전달합니다.</dd><dt>plain 배열도 영어 글자이므로 strlen으로 읽어도 된다고 생각한다.</dt><dd>문자 모양이 아니라 유효 NUL 종료가 전제입니다. 종료 없는 배열에는 명시적 길이 API를 사용합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/pwn.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/pwn/embedded_nul.c" download>embedded_nul.c ↓</a></li><li><a href="../../labs/pwn/ROUND2-GUIDE.md" download>ROUND2-GUIDE.md ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Ubuntu/WSL · GCC · C11 · 로컬 시스템 실습</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">gcc -std=c11 -Wall -Wextra -Werror -Wformat=2 -g -O0 embedded_nul.c -o embedded_nul
+./embedded_nul</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>5바이트 버퍼의 문자열 길이 2와 전체 Hex를 비교하고 좁은 텍스트 계약의 거부를 확인합니다.</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>배열 길이와 첫 NUL 위치 비교하기</h3><p>data의 다섯 바이트와 plain의 네 바이트를 소스에서 확인합니다. data에는 유효한 종료 NUL이 있지만 plain에는 없으므로 plain에 strlen을 추가하지 않습니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Ubuntu/WSL · GCC · C11 · 로컬 시스템 실습</span></div><pre><code>gcc -std=c11 -Wall -Wextra -Werror -Wformat=2 -g -O0 embedded_nul.c -o embedded_nul
+./embedded_nul</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>buffer_bytes=5 string_length=2
+hex=4142004344
+text_contract=REJECT_NUL
+plain_text=ACCEPT</pre></div></li><li><h3>Hex에서 사라지지 않은 뒤쪽 바이트 찾기</h3><p>Hex의 00 뒤 43 44가 C D임을 확인합니다. 문자열이 2라고 해서 전체 버퍼가 2바이트가 된 것은 아닙니다. 출력의 REJECT_NUL은 고정 표본의 거부 이유 이름입니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Ubuntu/WSL · GCC · C11 · 로컬 시스템 실습</span></div><pre><code>./embedded_nul</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>hex=4142004344이며 명시적 버퍼 크기 5가 유지됩니다.</pre></div></li><li><h3>호출별 길이 계약 읽기</h3><p>소스에서 sizeof data와 strlen(data)가 사용되는 곳, plain이 sizeof로만 전달되는 곳을 표시합니다. ascii_text가 읽는 범위는 호출자가 전달한 실제 유효 크기라는 전제를 갖습니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Ubuntu/WSL · GCC · C11 · 로컬 시스템 실습</span></div><pre><code>./embedded_nul</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>data는 텍스트 계약 거부, plain은 길이 4의 ASCII 계약 허용입니다. plain을 NUL 문자열로 읽는 호출은 없습니다.</pre></div></li></ol></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>작업 사본의 data를 {&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;,0}으로 바꾸고 strlen·Hex·전체 5바이트의 텍스트 계약 결과를 예상하세요. NUL을 완전히 없앤 뒤 strlen을 실행하는 실험은 하지 마세요.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>끝에 NUL을 옮겨도 명시적 5바이트 필드에는 NUL이 포함됩니다. 문자열 길이와 텍스트 필드의 길이 계약을 따로 봅니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>data의 NUL을 끝으로 옮기면 buffer_bytes=5, string_length=4, hex=4142434400입니다. strlen은 여전히 유효 범위 안의 종료를 찾습니다.</li><li>전체 sizeof data=5를 ascii_text에 주면 NUL도 범위에 포함되므로 거부됩니다. plain의 네 바이트는 그대로 허용입니다.</li><li>문자열로 쓰려면 유효 종료 보장, 바이너리로 쓰려면 명시적 크기를 유지해야 한다고 정리합니다. NUL 없는 배열에 문자열 함수를 호출하지 않습니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>5와 4라는 서로 다른 길이, Hex 4142434400, 전체 필드 거부를 확인합니다. NUL 위치를 바꾸는 것과 원래 버퍼 길이를 바꾸는 것은 다릅니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>A, NUL, B의 3바이트를 strlen과 길이를 별도로 전달한 fwrite로 비교하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>strlen은 첫 NUL에서 멈춰 1이며 길이 3의 이진 출력은 NUL까지 포함합니다. 터미널 표시만으로 실제 바이트 수를 판단하지 않습니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>버퍼 크기·채운 길이·문자열 종료를 구분했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>같은 자료를 검사·사용할 때 길이 계약을 유지했다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/pwn/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. A B NUL C D 버퍼에서 strlen은 2입니다. C D는?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>메모리에서 자동 삭제된다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>버퍼에는 남지만 C 문자열의 첫 종료 뒤에 있다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>암호화되어 안 보인다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 버퍼에는 남지만 C 문자열의 첫 종료 뒤에 있다.</strong></p><p>문자열 해석이 종료될 뿐 바이트 자체가 없어지는 것은 아닙니다. 명시적 크기의 Hex에서 확인할 수 있습니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. NUL 없는 char[4]가 영어 글자 네 개입니다. 안전한 길이 처리는?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>글자처럼 보이면 strlen을 바로 호출한다.</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>끝을 찾을 때까지 아무 메모리나 읽는다.</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>실제 유효 길이를 전달하는 API를 사용한다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 실제 유효 길이를 전달하는 API를 사용한다.</strong></p><p>문자열 함수는 NUL 종료 전제가 필요합니다. 명시적 버퍼 크기와 문자열 종료를 혼동하지 않습니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>버퍼 크기·채운 길이·문자열 종료를 구분했다.</li><li>같은 자료를 검사·사용할 때 길이 계약을 유지했다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="struct-layout.html"><small>← 이전 차시</small>구조체 배치와 명시적 직렬화</a>
+            <a href="file-descriptors.html"><small>다음 차시 →</small>파일 디스크립터·dup·공유 오프셋</a></nav>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/characters-and-strings-str/str32-c/" target="_blank" rel="noopener noreferrer">SEI CERT C · NUL 종료를 요구하는 함수 ↗</a></li>
+        <li><a href="https://man7.org/linux/man-pages/man3/strlen.3.html" target="_blank" rel="noopener noreferrer">Linux man-pages · strlen ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

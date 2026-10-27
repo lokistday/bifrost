@@ -1,0 +1,72 @@
+{
+  "rules": [
+    {
+      "src": "192.0.2.0/24",
+      "dst": "10.0.0.10/32",
+      "port": 443,
+      "action": "ALLOW"
+    },
+    {
+      "src": "10.0.0.10/32",
+      "dst": "10.0.1.10/32",
+      "port": 5432,
+      "action": "ALLOW"
+    },
+    {
+      "src": "2001:db8:1::/64",
+      "dst": "2001:db8:2::10/128",
+      "port": 443,
+      "action": "ALLOW"
+    }
+  ],
+  "flows": [
+    {
+      "src": "192.0.2.5",
+      "dst": "10.0.0.10",
+      "port": 443
+    },
+    {
+      "src": "10.0.0.10",
+      "dst": "10.0.1.10",
+      "port": 5432
+    },
+    {
+      "src": "192.0.2.5",
+      "dst": "10.0.1.10",
+      "port": 5432
+    },
+    {
+      "src": "2001:db8:1::5",
+      "dst": "2001:db8:2::10",
+      "port": 443
+    },
+    {
+      "src": "2001:db8:1::5",
+      "dst": "2001:db8:2::11",
+      "port": 443
+    },
+    {
+      "src": "192.0.2.5",
+      "dst": "10.0.0.10",
+      "port": 22
+    }
+  ],
+  "alerts": [
+    {
+      "predicted": true,
+      "actual": true
+    },
+    {
+      "predicted": true,
+      "actual": true
+    },
+    {
+      "predicted": false,
+      "actual": true
+    },
+    {
+      "predicted": false,
+      "actual": false
+    }
+  ]
+}

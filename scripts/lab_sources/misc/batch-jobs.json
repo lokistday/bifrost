@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "jobs": [
+    {"id": "J01", "text": "Bifrost"},
+    {"id": "J02", "text": "Keep evidence"},
+    {"id": "J03", "text": "Review limits"}
+  ]
+}

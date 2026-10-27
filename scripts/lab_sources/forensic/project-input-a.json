@@ -1,0 +1,30 @@
+[
+  {
+    "id": "E1",
+    "at": "2026-10-27T09:00:00+09:00",
+    "host": "lab-1",
+    "session": "S7",
+    "event": "login"
+  },
+  {
+    "id": "E2",
+    "at": "2026-10-27T00:01:00Z",
+    "host": "lab-2",
+    "session": "S7",
+    "event": "read"
+  },
+  {
+    "id": "E3",
+    "at": "2026-10-27T00:02:00Z",
+    "host": "lab-1",
+    "session": "S7",
+    "event": "read"
+  },
+  {
+    "id": "E4",
+    "at": "2026-10-27T00:00:30Z",
+    "host": "lab-1",
+    "session": "S8",
+    "event": "read"
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "description": "PUBLIC offline education fixture. Never reuse keys, nonce, password, or signature seed.",
+  "record": {
+    "dek_hex": "404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f",
+    "nonce_hex": "726f756e64322d6e6f6e6365",
+    "ciphertext_hex": "4e2ce3bb5250c31c1e68a872d67a19dbe6577b29cb82f555dd94b03ab4"
+  },
+  "wrapping": {
+    "old_kek_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+    "new_kek_hex": "202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f",
+    "wrapped_dek_hex": "bd2a276ae8c7464c7e8b396674ac6e0e9558c84c6009b3fa413cf06a67a200823e4d720df2419fa9"
+  },
+  "password_record": {
+    "format_version": 1,
+    "algorithm": "pbkdf2-sha256",
+    "iterations": 1000,
+    "salt_hex": "000102030405060708090a0b0c0d0e0f",
+    "verifier_hex": "c0e09545c342ea432c7246a2bf71a6c4cb49776aaf6ba489ec46394d2d1cce9e"
+  },
+  "signing_seed_hex": "808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9f",
+  "reviewer_actions": [
+    "approve"
+  ],
+  "sample_bytes": [
+    250,
+    251,
+    249
+  ]
+}

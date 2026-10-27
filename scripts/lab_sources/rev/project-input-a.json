@@ -1,0 +1,10 @@
+{
+  "tokens": [
+    "read",
+    "login",
+    "read",
+    "login",
+    "logout",
+    "read"
+  ]
+}

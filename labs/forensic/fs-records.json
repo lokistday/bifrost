@@ -1,0 +1,8 @@
+{
+  "model": "one synthetic filesystem at one snapshot; not an NTFS/ext4 parser",
+  "records": [
+    {"record": "R1", "inode": 42, "path": "/work/notes.txt", "links": 2, "mtime": "2026-10-02T00:00:00+00:00", "ctime": "2026-10-02T00:00:10+00:00", "birth": null},
+    {"record": "R2", "inode": 42, "path": "/work/alias.txt", "links": 2, "mtime": "2026-10-02T00:00:00+00:00", "ctime": "2026-10-02T00:00:10+00:00", "birth": null},
+    {"record": "R3", "inode": 77, "path": "/work/report.txt", "links": 1, "mtime": "2026-10-02T00:01:00+00:00", "ctime": "2026-10-02T00:01:00+00:00", "birth": "2026-10-01T23:59:00+00:00"}
+  ]
+}

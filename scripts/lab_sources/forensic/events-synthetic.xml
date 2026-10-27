@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Original exported-XML-like fixture; not an EVTX binary or live log. -->
+<Events>
+  <Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+    <System><Provider Name="Microsoft-Windows-Security-Auditing"/><EventID>4625</EventID><TimeCreated SystemTime="2026-10-02T00:00:00+00:00"/><EventRecordID>101</EventRecordID><Computer>training-ws</Computer></System>
+    <EventData><Data Name="TargetUserName">alice</Data><Data Name="LogonType">3</Data><Data Name="IpAddress">192.0.2.44</Data></EventData>
+  </Event>
+  <Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+    <System><Provider Name="Microsoft-Windows-Security-Auditing"/><EventID>4624</EventID><TimeCreated SystemTime="2026-10-02T09:00:10+09:00"/><EventRecordID>102</EventRecordID><Computer>training-ws</Computer></System>
+    <EventData><Data Name="IpAddress">192.0.2.44</Data><Data Name="TargetUserName">alice</Data><Data Name="LogonType">3</Data></EventData>
+  </Event>
+</Events>

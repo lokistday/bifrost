@@ -2,6 +2,8 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b1220">
 <meta name="description" content="파일 경로를 입력으로 받아 반복 가능한 처리를 만듭니다.">
@@ -20,19 +22,20 @@
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=20261024-atlas1">
-<script src="../../js/catalog.js" defer></script>
-<script src="../../js/courses/misc.js" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../../css/study.css?v=learning-a66aac410152">
+<script src="../../js/catalog.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/courses/misc.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=20261024-atlas1" defer></script>
+<script src="../../js/learning-view.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/learning.js" defer></script>
 </head>
 <body class="learning-page" data-course="misc" data-course-number="03" data-view="lesson" data-lesson-id="misc.automation" style="--course-accent:var(--map-orange)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">문제 해결·자동화 목차</a></nav>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">문제 해결·자동화 목차</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -53,10 +56,39 @@
             <ol><li><a class="side-lesson" href="automation.html" aria-current="page">
               <span class="lesson-dot" data-dot="misc.automation" aria-hidden="true"></span><span>작은 CLI와 입력 검증<small class="completion-label" data-completion="misc.automation"></small></span></a></li><li><a class="side-lesson" href="writeup.html" >
               <span class="lesson-dot" data-dot="misc.writeup" aria-hidden="true"></span><span>풀이 기록과 역변환 검증<small class="completion-label" data-completion="misc.writeup"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>03 · 구조화와 탐색<span class="caption" data-module-count="2"></span></summary>
+            <ol><li><a class="side-lesson" href="structured-parsing.html" >
+              <span class="lesson-dot" data-dot="misc.structured-parsing" aria-hidden="true"></span><span>정규식 전체 일치와 오류 행 보존<small class="completion-label" data-completion="misc.structured-parsing"></small></span></a></li><li><a class="side-lesson" href="archive-inspection.html" >
+              <span class="lesson-dot" data-dot="misc.archive-inspection" aria-hidden="true"></span><span>압축 목록·경로·자원 한도 검토<small class="completion-label" data-completion="misc.archive-inspection"></small></span></a></li><li><a class="side-lesson" href="graph-search.html" >
+              <span class="lesson-dot" data-dot="misc.graph-search" aria-hidden="true"></span><span>그래프 탐색과 최단 경로의 조건<small class="completion-label" data-completion="misc.graph-search"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>04 · 제약과 재현성<span class="caption" data-module-count="3"></span></summary>
+            <ol><li><a class="side-lesson" href="constraint-solving.html" >
+              <span class="lesson-dot" data-dot="misc.constraint-solving" aria-hidden="true"></span><span>제약 조건과 해의 유일성 검증<small class="completion-label" data-completion="misc.constraint-solving"></small></span></a></li><li><a class="side-lesson" href="reproducible-results.html" >
+              <span class="lesson-dot" data-dot="misc.reproducible-results" aria-hidden="true"></span><span>정규화·재현성·결과 무결성 검증<small class="completion-label" data-completion="misc.reproducible-results"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>05 · 컨테이너와 매체 자료<span class="caption" data-module-count="4"></span></summary>
+            <ol><li><a class="side-lesson" href="container-identification.html" >
+              <span class="lesson-dot" data-dot="misc.container-identification" aria-hidden="true"></span><span>파일 매직과 바깥·안쪽 형식 구분<small class="completion-label" data-completion="misc.container-identification"></small></span></a></li><li><a class="side-lesson" href="pixel-data.html" >
+              <span class="lesson-dot" data-dot="misc.pixel-data" aria-hidden="true"></span><span>PPM 헤더와 RGB 픽셀 채널 읽기<small class="completion-label" data-completion="misc.pixel-data"></small></span></a></li><li><a class="side-lesson" href="byte-statistics.html" >
+              <span class="lesson-dot" data-dot="misc.byte-statistics" aria-hidden="true"></span><span>바이트 분포와 엔트로피의 해석 한계<small class="completion-label" data-completion="misc.byte-statistics"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>06 · 자원 예산과 배치 재개<span class="caption" data-module-count="5"></span></summary>
+            <ol><li><a class="side-lesson" href="bounded-decompression.html" >
+              <span class="lesson-dot" data-dot="misc.bounded-decompression" aria-hidden="true"></span><span>해제 출력 한도와 스트림 경계 검증<small class="completion-label" data-completion="misc.bounded-decompression"></small></span></a></li><li><a class="side-lesson" href="resumable-batch.html" >
+              <span class="lesson-dot" data-dot="misc.resumable-batch" aria-hidden="true"></span><span>배치 출처와 재개 체크포인트 검증<small class="completion-label" data-completion="misc.resumable-batch"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
-          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/misc.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">02 · 도구와 재현 · 3 / 4</div><h1>작은 CLI와 입력 검증</h1><p class="lesson-objective">파일 경로를 입력으로 받아 반복 가능한 처리를 만듭니다.</p></div></header>
-          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/misc.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">02 · 도구와 재현 · 3 / 14</div><h1>작은 CLI와 입력 검증</h1><p class="lesson-objective">파일 경로를 입력으로 받아 반복 가능한 처리를 만듭니다.</p></div></header>
+          <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>화면에 보이는 문자열과 파일의 원시 바이트는 같나요?</p><details><summary>판단 기준과 보충 자료</summary><p>인코딩·컨테이너·압축을 거치며 표현이 달라집니다. 변환 순서·크기 제한·중간 검증을 기록합니다.</p><a href="../../guides/bridges.html#bytes">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
           <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>입력 오류 처리 CLI · Python 3</strong></p><ul><li>solve.py의 작업 사본을 solve_checked.py로 저장하고 정상·오류 파일을 각각 인자로 넘깁니다.</li><li>예시 해설은 입력 크기 제한과 중복 키 정책을 포함합니다. 읽은 파일은 데이터로만 처리하고 실행하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="pipeline.html">문제 해결·자동화 · 바이트 변환과 중간 검증 ↗</a></li><li><a href="../foundation/python-flow.html">공통 기초 · 조건·반복·함수 ↗</a></li><li><a href="../foundation/python-files.html">공통 기초 · CSV 읽기와 오류 좁히기 ↗</a></li></ul>
             </section>
@@ -67,13 +99,15 @@
         <a class="learning-button" href="../../labs/misc.zip" download>전체 실습 ZIP 받기 ↓</a>
         <ul><li><a href="../../labs/misc/solve.py" download>solve.py ↓</a></li><li><a href="../../labs/misc/puzzle.txt" download>puzzle.txt ↓</a></li></ul>
       </section>
-          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2><ol class="walkthrough"><li><h3>정상과 세 실패를 나누기</h3><p>정상, 파일 없음, payload 누락, 잘못된 Base64의 네 파일/경로를 준비합니다. 각 경우의 기대 메시지와 종료 코드를 먼저 정합니다.</p>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 입력 오류 처리 CLI · Python 3</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 solve.py puzzle.txt
+python3 solve.py missing.txt</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>첫 실행은 Bifrost까지 출력하고, 두 번째는 파일을 찾지 못하는 오류를 냅니다.</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>정상과 세 실패를 나누기</h3><p>정상, 파일 없음, payload 누락, 잘못된 Base64의 네 파일/경로를 준비합니다. 각 경우의 기대 메시지와 종료 코드를 먼저 정합니다.</p>
         <div class="step-observation"><strong>관찰할 결과</strong><pre>정상은 0, 입력 오류는 2로 반환하는 검증표입니다.</pre></div></li><li><h3>경계에서 구체적 예외 처리</h3><p>파일 읽기는 OSError/UnicodeError, 필드 누락·중복은 ValueError, Base64는 binascii.Error로 나누어 생각합니다. 코드에서는 입력 오류를 하나의 일관된 CLI 오류 형식으로 안내할 수 있습니다.</p>
         <div class="step-observation"><strong>관찰할 결과</strong><pre>실패를 숨기지 않고 어느 입력 조건을 고쳐야 하는지 설명합니다.</pre></div></li><li><h3>종료 코드까지 검사</h3><p>명령 뒤 Linux/WSL은 echo $?, PowerShell은 $LASTEXITCODE로 코드를 봅니다. 메시지가 예뻐도 실패 코드가 0이면 자동화 관점에서는 오답입니다.</p>
-        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>python3 solve_checked.py puzzle.txt
-python3 solve_checked.py missing.txt</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>정상은 결과와 코드 0, 없는 경로는 오류와 코드 2입니다.</pre></div></li></ol>
-            <h3>전체 예제 연결하기</h3><div class="code-shell"><div class="code-toolbar"><span>예제 · 명령 또는 관찰 절차</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 solve.py puzzle.txt
-python3 solve.py missing.txt</code></pre></div><div class="expected-output"><h3>예상 결과와 해석</h3><pre>첫 실행은 Bifrost까지 출력하고, 두 번째는 파일을 찾지 못하는 오류를 냅니다.</pre></div></section>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 입력 오류 처리 CLI · Python 3</span></div><pre><code>python3 solve_checked.py puzzle.txt
+python3 solve_checked.py missing.txt</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>정상은 결과와 코드 0, 없는 경로는 오류와 코드 2입니다.</pre></div></li></ol></section>
           <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>try/except를 추가해 파일 없음, payload 누락, 잘못된 Base64를 각각 설명하는 메시지와 0이 아닌 종료 코드로 처리하세요.</p>
             <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>모든 예외를 무시하지 말고 실패 원인을 구분합니다. 학습용 원본과 수정본을 따로 보관하세요.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
         <ol><li>경로를 argparse로 받고 최대 크기·UTF-8·키=값·중복·payload 존재를 검사합니다.</li><li>두 단계 엄격 디코딩 뒤 중간 출력을 표시합니다.</li><li>입력 관련 예외는 stderr와 코드 2로 보고 정상 입력은 0으로 마칩니다. 아래 코드를 별도 파일로 저장해 정상/오류 표로 검증합니다.</li></ol>
@@ -117,8 +151,17 @@ except (OSError, UnicodeError, ValueError, binascii.Error) as exc:
     raise SystemExit(2)
 print(&quot;\n&quot;.join(outputs))</code></pre></div>
         <h3>결과를 판단하는 기준</h3><pre>정상은 step=1: Qmlmcm9zdA== / step=2: Bifrost와 종료 코드 0입니다. 파일 없음·payload 누락·중복 키·잘못된 Base64는 stderr 안내와 코드 2입니다.</pre>
-      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p></section>
-          <section id="verify" class="article-section completion-panel"><div class="overline">04 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>빈 입력과 잘못된 Base64 입력을 CLI에 넣고 정상 빈 결과와 입력 오류를 구분하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>정한 계약에 따라 빈 입력 처리와 형식 오류를 구별하고 실패 상태를 반환합니다. 예외를 잡아 빈 결과 성공으로 바꾸지 않습니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>정상·파일 없음·필드 누락·형식 오류를 시험했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>오류를 삼키지 않고 원인을 출력했다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/misc/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
         <fieldset class="question" data-question="0">
           <legend>1. 오류 안내를 출력했지만 종료 코드가 0이면 생길 수 있는 문제는?</legend>
           <label class="question-option"><input type="radio" name="question-0" value="0"><span>상위 자동화가 실패를 성공으로 판단할 수 있다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>Base64가 자동으로 복구된다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>파일 확장자가 바뀐다.</span></label>

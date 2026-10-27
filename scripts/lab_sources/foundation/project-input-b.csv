@@ -1,0 +1,8 @@
+user,status
+dana,denied
+alice,ok
+dana,ok
+eve,denied
+x,pending
+ ,denied
+"new, user",ok

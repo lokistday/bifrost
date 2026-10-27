@@ -2,6 +2,8 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b1220">
 <meta name="description" content="클라우드의 통신 경로와 공개 노출을 구성 관점에서 검토합니다.">
@@ -20,19 +22,20 @@
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=20261024-atlas1">
-<script src="../../js/catalog.js" defer></script>
-<script src="../../js/courses/cloud.js" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../../css/study.css?v=learning-a66aac410152">
+<script src="../../js/catalog.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/courses/cloud.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=20261024-atlas1" defer></script>
+<script src="../../js/learning-view.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/learning.js" defer></script>
 </head>
 <body class="learning-page" data-course="cloud" data-course-number="04" data-view="lesson" data-lesson-id="cloud.vpc" style="--course-accent:var(--map-sky)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">클라우드 보안 목차</a></nav>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">클라우드 보안 목차</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -55,11 +58,32 @@
               <span class="lesson-dot" data-dot="cloud.storage" aria-hidden="true"></span><span>오브젝트 저장소와 데이터 공개<small class="completion-label" data-completion="cloud.storage"></small></span></a></li><li><a class="side-lesson" href="secrets.html" >
               <span class="lesson-dot" data-dot="cloud.secrets" aria-hidden="true"></span><span>장기 키·임시 신원·교체<small class="completion-label" data-completion="cloud.secrets"></small></span></a></li><li><a class="side-lesson" href="audit.html" >
               <span class="lesson-dot" data-dot="cloud.audit" aria-hidden="true"></span><span>감사 로그와 공개 변경 추적<small class="completion-label" data-completion="cloud.audit"></small></span></a></li><li><a class="side-lesson" href="capstone.html" >
-              <span class="lesson-dot" data-dot="cloud.capstone" aria-hidden="true"></span><span>종합: 구성 수정과 검증 계획<small class="completion-label" data-completion="cloud.capstone"></small></span></a></li></ol>
+              <span class="lesson-dot" data-dot="cloud.capstone" aria-hidden="true"></span><span>중간 종합: 구성 수정과 검증 계획<small class="completion-label" data-completion="cloud.capstone"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>03 · 배포·공급망·복구 운영<span class="caption" data-module-count="2"></span></summary>
+            <ol><li><a class="side-lesson" href="workload-trust.html" >
+              <span class="lesson-dot" data-dot="cloud.workload-trust" aria-hidden="true"></span><span>워크로드 신원과 역할 신뢰 조건<small class="completion-label" data-completion="cloud.workload-trust"></small></span></a></li><li><a class="side-lesson" href="iac-review.html" >
+              <span class="lesson-dot" data-dot="cloud.iac-review" aria-hidden="true"></span><span>인프라 변경 계획과 영향 범위<small class="completion-label" data-completion="cloud.iac-review"></small></span></a></li><li><a class="side-lesson" href="container-supply-chain.html" >
+              <span class="lesson-dot" data-dot="cloud.container-supply-chain" aria-hidden="true"></span><span>컨테이너 이미지와 공급망 근거<small class="completion-label" data-completion="cloud.container-supply-chain"></small></span></a></li><li><a class="side-lesson" href="audit-coverage.html" >
+              <span class="lesson-dot" data-dot="cloud.audit-coverage" aria-hidden="true"></span><span>중앙 감사 로그의 범위와 중복<small class="completion-label" data-completion="cloud.audit-coverage"></small></span></a></li><li><a class="side-lesson" href="recovery-exercise.html" >
+              <span class="lesson-dot" data-dot="cloud.recovery-exercise" aria-hidden="true"></span><span>백업 무결성과 RPO·RTO 복구 연습<small class="completion-label" data-completion="cloud.recovery-exercise"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>04 · 권한 조합과 워크로드 경계<span class="caption" data-module-count="3"></span></summary>
+            <ol><li><a class="side-lesson" href="effective-permissions.html" >
+              <span class="lesson-dot" data-dot="cloud.effective-permissions" aria-hidden="true"></span><span>실효 권한과 허용 범위의 교집합<small class="completion-label" data-completion="cloud.effective-permissions"></small></span></a></li><li><a class="side-lesson" href="kubernetes-rbac.html" >
+              <span class="lesson-dot" data-dot="cloud.kubernetes-rbac" aria-hidden="true"></span><span>Kubernetes 네임스페이스와 RBAC<small class="completion-label" data-completion="cloud.kubernetes-rbac"></small></span></a></li><li><a class="side-lesson" href="metadata-credentials.html" >
+              <span class="lesson-dot" data-dot="cloud.metadata-credentials" aria-hidden="true"></span><span>메타데이터 서비스와 자격 증명 경계<small class="completion-label" data-completion="cloud.metadata-credentials"></small></span></a></li><li><a class="side-lesson" href="private-endpoint-paths.html" >
+              <span class="lesson-dot" data-dot="cloud.private-endpoint-paths" aria-hidden="true"></span><span>프라이빗 엔드포인트와 DNS 경로<small class="completion-label" data-completion="cloud.private-endpoint-paths"></small></span></a></li><li><a class="side-lesson" href="breakglass-access.html" >
+              <span class="lesson-dot" data-dot="cloud.breakglass-access" aria-hidden="true"></span><span>긴급 접근의 만료·회수·증거<small class="completion-label" data-completion="cloud.breakglass-access"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
-          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/cloud.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">01 · 책임과 접근 설계 · 3 / 7</div><h1>VPC·서브넷·보안 경계</h1><p class="lesson-objective">클라우드의 통신 경로와 공개 노출을 구성 관점에서 검토합니다.</p></div></header>
-          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/cloud.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">01 · 책임과 접근 설계 · 3 / 17</div><h1>VPC·서브넷·보안 경계</h1><p class="lesson-objective">클라우드의 통신 경로와 공개 노출을 구성 관점에서 검토합니다.</p></div></header>
+          <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>사설 네트워크에 있으면 자원 접근 권한도 생기나요?</p><details><summary>판단 기준과 보충 자료</summary><p>경로 도달과 자원 인가는 별개입니다. 신원·정책·서비스 설정을 함께 확인해야 합니다.</p><a href="../../guides/bridges.html#network">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
           <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>가상 네트워크 구성 검토 · Python 3.10 이상</strong></p><ul><li>config-work.json의 network를 수정하고 로컬 review.py로 검사합니다. 실제 VPC·보안 그룹은 생성하지 않습니다.</li><li>192.0.2.0/24는 문서용 예시이며 실제 관리자 대역으로 배포하지 않습니다. IPv6는 별도로 검토합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="responsibility.html">클라우드 보안 · IaaS·PaaS·SaaS와 공동 책임 ↗</a></li><li><a href="../network/addressing.html">네트워크 보안 · 계층·CIDR·관측 위치 ↗</a></li><li><a href="../network/segmentation.html">네트워크 보안 · 망 분리·신뢰 경계·관리 경로 ↗</a></li></ul>
             </section>
@@ -70,20 +94,31 @@
         <a class="learning-button" href="../../labs/cloud.zip" download>전체 실습 ZIP 받기 ↓</a>
         <ul><li><a href="../../labs/cloud/config.json" download>config.json ↓</a></li><li><a href="../../labs/cloud/review.py" download>review.py ↓</a></li><li><a href="../../labs/cloud/LAB-GUIDE.md" download>LAB-GUIDE.md ↓</a></li></ul>
       </section>
-          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2><ol class="walkthrough"><li><h3>노출 경로를 그림으로 확인</h3><p>인터넷→Web, Web→DB, 관리자→관리 경로를 분리합니다. DB의 인터넷 직접 접근과 관리 전체 허용이 왜 다른 위험인지 씁니다.</p>
-        <div class="step-observation"><strong>관찰할 결과</strong><pre>공개·데이터·관리 흐름이 분리된 그림입니다.</pre></div></li><li><h3>모델 값 수정과 형식 검증</h3><p>database_public=false, admin_source=192.0.2.0/24로 바꾸고 검사합니다. 192.0.2.1/24는 host bit가 남아 모델에서 INVALID임을 비교합니다.</p>
-        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>python3 review.py config-work.json</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>유효 예시에서는 network.database와 network.admin이 PASS입니다. 빈 CIDR·잘못된 주소·host bit가 남는 입력은 INVALID입니다.</pre></div></li><li><h3>IPv6와 실제 경로 검증 설계</h3><p>::/0을 허용한 관리 경로가 남아 있지 않은지 별도 항목에 씁니다. 정상 관리자 접근, 비승인 출발지 거부, DB 직접 접근 거부를 시험 계획으로 정합니다.</p>
-        <div class="step-observation"><strong>관찰할 결과</strong><pre>IPv4 한 줄만 좁히고 끝내지 않는 검증표가 됩니다.</pre></div></li></ol>
-            <h3>전체 예제 연결하기</h3><div class="code-shell"><div class="code-toolbar"><span>예제 · 명령 또는 관찰 절차</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">config.json의 network 확인:
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>관찰 절차·자료 예시 · 그대로 셸에 붙여 넣지 말고 본문 안내를 따라 확인</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">config.json의 network 확인:
 database_public: true
-admin_source: 0.0.0.0/0</code></pre></div><div class="expected-output"><h3>예상 결과와 해석</h3><pre>DB 공개와 전체 IPv4 관리 허용이 검토 대상입니다. 실제 노출을 판단하려면 라우팅·주소·필터·서비스 리슨 상태가 더 필요합니다.</pre></div></section>
+admin_source: 0.0.0.0/0</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>DB 공개와 전체 IPv4 관리 허용이 검토 대상입니다. 실제 노출을 판단하려면 라우팅·주소·필터·서비스 리슨 상태가 더 필요합니다.</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>노출 경로를 그림으로 확인</h3><p>인터넷→Web, Web→DB, 관리자→관리 경로를 분리합니다. DB의 인터넷 직접 접근과 관리 전체 허용이 왜 다른 위험인지 씁니다.</p>
+        <div class="step-observation"><strong>관찰할 결과</strong><pre>공개·데이터·관리 흐름이 분리된 그림입니다.</pre></div></li><li><h3>모델 값 수정과 형식 검증</h3><p>database_public=false, admin_source=192.0.2.0/24로 바꾸고 검사합니다. 192.0.2.1/24는 host bit가 남아 모델에서 INVALID임을 비교합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 가상 네트워크 구성 검토 · Python 3.10 이상</span></div><pre><code>python3 review.py config-work.json</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>유효 예시에서는 network.database와 network.admin이 PASS입니다. 빈 CIDR·잘못된 주소·host bit가 남는 입력은 INVALID입니다.</pre></div></li><li><h3>IPv6와 실제 경로 검증 설계</h3><p>::/0을 허용한 관리 경로가 남아 있지 않은지 별도 항목에 씁니다. 정상 관리자 접근, 비승인 출발지 거부, DB 직접 접근 거부를 시험 계획으로 정합니다.</p>
+        <div class="step-observation"><strong>관찰할 결과</strong><pre>IPv4 한 줄만 좁히고 끝내지 않는 검증표가 됩니다.</pre></div></li></ol></section>
           <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>사본에서 database_public을 false로 바꾸고 관리 출발지를 192.0.2.0/24라는 문서용 예시로 제한하세요. 실제 운영 적용이 아닌 설계 검토이며 IPv6 정책도 별도로 적습니다.</p>
             <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>클라우드 구성 변경과 정상 배포·백업·관리 경로의 영향도 함께 확인해야 합니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
         <ol><li>DB 공개 의도를 false로 바꾸고 관리 출발지를 유효하고 구체적인 문서용 CIDR로 지정합니다.</li><li>빈 값·접두사 누락·잘못된 IP·host bit·IPv6 전체 범위를 반례로 확인합니다.</li><li>실제 환경에서는 경로·필터·리슨·신원·정상 운영 영향까지 별도 검증하도록 기록합니다.</li></ol>
         
         <h3>결과를 판단하는 기준</h3><pre>모델의 PASS 범위를 설명하면서 실제 노출이나 관리자 신원을 인증한 것처럼 쓰지 않습니다.</pre>
-      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p></section>
-          <section id="verify" class="article-section completion-panel"><div class="overline">04 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>DB의 공인 IP를 없애면 애플리케이션의 모든 DB 접근이 안전해지는지 설명하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>사설 경로에서도 잘못된 권한·워크로드 침해·잘못된 보안 규칙이 가능합니다. 네트워크 경계와 DB 인가를 따로 확인합니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>노출에 필요한 여러 조건을 구분했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>관리 경로와 IPv6의 별도 검토를 적었다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/cloud/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
         <fieldset class="question" data-question="0">
           <legend>1. admin_source=&quot;::/0&quot;의 의미와 모델 결과는?</legend>
           <label class="question-option"><input type="radio" name="question-0" value="0"><span>모든 IPv6 주소이며 REVIEW 대상이다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>주소가 하나도 없으므로 PASS다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>항상 IPv4 한 호스트만 의미한다.</span></label>

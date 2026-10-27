@@ -4,7 +4,7 @@
   const data = window.BifrostVisualData;
   const W = 760;
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const kinds = { flow: '흐름도', sequence: '순서도', compare: '비교도', table: '비교표', timeline: '타임라인', map: '구조도', cells: '데이터 모형', wheel: '연산 모형' };
+  const kinds = { flow: '흐름도', sequence: '순서도', compare: '비교도', table: '비교표', timeline: '타임라인', map: '구조도', cells: '데이터 모형', pixels: '픽셀과 RGB', wheel: '연산 모형' };
   const measure = (value, size) => [...String(value)].reduce((sum, c) => sum + (/[^\x00-\xff]/.test(c) ? 1 : /[MW@#%]/.test(c) ? .85 : /[il.,:;!|' ]/.test(c) ? .34 : .62) * size, 0);
   function wrap(value, width, size) {
     const result = [];
@@ -164,6 +164,26 @@
     }
     return { svg, height: y - 15 };
   }
+  function pixels(v) {
+    if (!Number.isInteger(v.width) || !Number.isInteger(v.height) || v.width < 1 || v.width > 4 || v.height < 1 || v.height > 4 ||
+        !Number.isInteger(v.maximum) || v.maximum < 1 || v.maximum > 255 || !Array.isArray(v.pixels) || v.pixels.length !== v.width * v.height ||
+        v.pixels.some(rgb => !Array.isArray(rgb) || rgb.length !== 3 || rgb.some(n => !Number.isInteger(n) || n < 0 || n > v.maximum))) {
+      throw new Error('Invalid pixel diagram: bounded dimensions and RGB samples required');
+    }
+    const cell = 224 / Math.max(v.width, v.height);
+    let svg = text(`${v.width} × ${v.height} 픽셀 · 행 순서`, 44, 28, 264, { size: 14, cls: 'v-heading' }).svg;
+    svg += text('좌표 (열, 행) → RGB 표본', 338, 28, 394, { size: 14, cls: 'v-heading' }).svg;
+    for (let x = 0; x < v.width; x++) svg += text(x, 44 + cell * (x + .5), 60, 32, { size: 11, anchor: 'middle', cls: 'v-secondary' }).svg;
+    for (let y = 0; y < v.height; y++) svg += text(y, 32, 75 + cell * (y + .5), 24, { size: 11, anchor: 'end', cls: 'v-secondary' }).svg;
+    v.pixels.forEach((rgb, i) => {
+      const x = i % v.width, y = Math.floor(i / v.width);
+      const color = '#' + rgb.map(n => Math.round(n * 255 / v.maximum).toString(16).padStart(2, '0')).join('');
+      svg += `<rect class="v-pixel" data-pixel="${i}" x="${44 + x * cell}" y="${70 + y * cell}" width="${cell}" height="${cell}" fill="${color}"/>`;
+      svg += `<rect class="v-pixel" x="338" y="${56 + i * 46}" width="20" height="20" fill="${color}"/>`;
+      svg += text(`(${x}, ${y})  R ${rgb[0]} · G ${rgb[1]} · B ${rgb[2]}`, 372, 72 + i * 46, 360, { size: 13 }).svg;
+    });
+    return { svg, height: Math.max(90 + v.height * cell, 98 + (v.pixels.length - 1) * 46) };
+  }
   function wheel(v, prefix) {
     let svg = '<circle class="v-zone" cx="190" cy="160" r="113"/>';
     for (let i = 0; i < 5; i++) {
@@ -176,7 +196,7 @@
     svg += box(355, 48, 377, 232, '역원은 곱한 나머지가 1', ['기준: mod 26', '3 × 9 = 27 → 나머지 1', '따라서 3의 역원은 9', '존재 조건: gcd(3, 26) = 1']);
     return { svg, height: 320 };
   }
-  const renderers = { flow, sequence, compare, table, timeline, map, cells, wheel };
+  const renderers = { flow, sequence, compare, table, timeline, map, cells, pixels, wheel };
   function render(id, course = false) {
     const v = (course ? data.courses : data.lessons)[id];
     if (!v) return '';

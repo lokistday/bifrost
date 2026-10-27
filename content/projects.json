@@ -1,0 +1,278 @@
+{
+  "foundation": {
+    "id": "foundation",
+    "title": "입력이 바뀌어도 믿을 수 있는 로그 요약기",
+    "problem": "보안 팀이 받은 CSV에서 정상·거부 기록을 요약하세요. 잘못된 행은 버리지 않고 행 번호와 이유를 남깁니다.",
+    "prerequisites": [
+      "foundation.python-files",
+      "foundation.cli",
+      "foundation.unit-tests",
+      "foundation.structured-logging"
+    ],
+    "contract": "total은 데이터 행 수입니다. ok/denied만 유효합니다. user는 공백 제거 후 비어 있으면 거부합니다. denied_users는 중복 제거·사전순, invalid_rows는 CSV 레코드 순번에 헤더 1을 더한 번호입니다. 이 표본에는 다중 줄 필드가 없습니다.",
+    "tasks": [
+      "csv 모듈로 A 표본을 읽는 CLI를 작성합니다. 정답 숫자를 코드에 넣지 마세요.",
+      "status 오류와 빈 user를 오류 목록에 남기고 유효 행만 집계합니다.",
+      "B 표본과 빈 데이터·잘못된 헤더 반례를 추가하고 정상 집계를 유지합니다.",
+      "원본 해시·실행 명령·오류 정책을 보고서로 묶습니다."
+    ],
+    "rubric": [
+      "A와 B의 집계가 모두 일치하고 정답을 하드코딩하지 않았다.",
+      "쉼표가 있는 사용자와 잘못된 행을 구분하고 오류를 조용히 누락하지 않았다.",
+      "경계 입력을 테스트하고 실패 때 종료 상태·출력 파일 정책을 설명했다.",
+      "원본·명령·출력·수정 이유를 다른 사람이 재현할 수 있다."
+    ],
+    "limitations": "합성 소형 CSV입니다. 대용량 스트리밍·로그 수집 서버·개인정보 처리는 별도 설계가 필요합니다.",
+    "bridge": "CSV를 스프레드시트에서 열어 보되 텍스트 가져오기로 확인합니다. 프로그램 행 수와 CSV 파서의 행 경계를 비교합니다.",
+    "minutes": [
+      120,
+      180
+    ]
+  },
+  "web": {
+    "id": "web",
+    "title": "세션과 재시도를 함께 검증하는 예약 서비스",
+    "problem": "세션 만료와 중복 예약을 분리해서 검사하세요. 만료한 요청은 예약 DB에 도달하지 않아야 하고 같은 요청의 재전송은 재고를 두 번 줄이면 안 됩니다.",
+    "prerequisites": [
+      "web.authorization",
+      "web.session-lifecycle",
+      "web.reset-tokens",
+      "web.private-caching",
+      "web.idempotency"
+    ],
+    "contract": "현재 신뢰한 세션의 expires보다 now가 작을 때만 예약합니다. 만료는 UNAUTHENTICATED입니다. 그 외에는 제공된 Checkout.reserve의 사용자별 키·수량 계약을 적용합니다. outcomes는 요청 순서, stock과 orders는 최종 상태입니다.",
+    "tasks": [
+      "세션 판정과 DB 상태 변경의 경계를 그림으로 그립니다.",
+      "web_state.Checkout을 사용해 시나리오를 순서대로 실행하는 드라이버를 작성합니다.",
+      "A/B 결과를 제출하고 만료 경계·수량 변경 재시도·타인 사용자 키를 반례로 확인합니다.",
+      "개인 응답 캐시와 복구 토큰을 이 서비스에 붙인다면 추가할 정상·거부 검사 4개를 설계합니다."
+    ],
+    "rubric": [
+      "두 표본의 상태 전이를 재현하고 만료 요청이 재고를 바꾸지 않는다.",
+      "REPLAY·CONFLICT·OUT_OF_STOCK을 구분한다.",
+      "실패·재시도 후 재고와 주문의 불변 조건을 확인한다.",
+      "인가·CSRF·캐시·토큰 검증을 서로 대체하지 않고 제안한다."
+    ],
+    "limitations": "오프라인 단일 SQLite 연결 모형입니다. 실제 HTTP·로그인·결제·동시 트랜잭션을 구현하거나 안전하다고 보증하는 프로젝트가 아닙니다.",
+    "bridge": "Checkout의 실제 SQLite 테이블을 SELECT로 읽고 상태 전이 표와 비교합니다. 브라우저 테스트는 별도의 격리된 자체 서비스에서만 확장합니다.",
+    "minutes": [
+      150,
+      240
+    ]
+  },
+  "pwn": {
+    "id": "pwn",
+    "title": "길이·NUL·부분 입력에 견디는 작은 C 파서",
+    "problem": "표본 레코드의 첫 2바이트는 big-endian 본문 길이입니다. 최대 8바이트 본문만 허용하고 잘림·후행 데이터·중간 NUL을 구분하세요.",
+    "prerequisites": [
+      "pwn.binary-parser",
+      "pwn.struct-layout",
+      "pwn.binary-strings",
+      "pwn.partial-io",
+      "pwn.atomic-open"
+    ],
+    "contract": "한 레코드는 정확히 2+선언 길이 바이트여야 합니다. 길이 0은 허용하며 8 초과는 거부합니다. accepted_ids는 입력 순서, payload_sum은 허용 본문의 unsigned 바이트 합, nul_ids는 허용 본문에 NUL이 있는 ID입니다.",
+    "tasks": [
+      "project-parser-starter.c의 parse 함수만 완성하세요. 호출자가 가진 버퍼와 출력 포인터의 계약도 적습니다.",
+      "자체 C 테스트 main을 만들어 A/B의 Hex를 바이트 배열로 실행합니다.",
+      "길이 0/8/9·1바이트 헤더·잘림·후행 데이터·NUL을 검사하고 Sanitizer에서도 실행합니다.",
+      "결과를 JSON으로 모아 검사기에 전달하고 메모리 소유권·부분 I/O 연결의 한계를 보고합니다."
+    ],
+    "rubric": [
+      "경계·잘림·후행 바이트를 정확히 판정하고 두 표본 결과가 일치한다.",
+      "길이를 검사하기 전에 헤더/본문을 읽지 않는다.",
+      "본문 길이를 strlen으로 대체하지 않고 호출자 객체의 수명을 지킨다.",
+      "정상·거부 테스트와 컴파일 옵션·Sanitizer 기록을 제공한다."
+    ],
+    "limitations": "작은 완성 버퍼의 파서입니다. 실제 네트워크 프레이밍·재시도·파일 경쟁 조건까지 이 함수가 해결하는 것은 아닙니다.",
+    "bridge": "gcc -std=c11 -Wall -Wextra -Werror -fsanitize=address,undefined로 자체 C 테스트를 실행하고 Python 참조 결과와 비교합니다.",
+    "minutes": [
+      180,
+      270
+    ]
+  },
+  "rev": {
+    "id": "rev",
+    "title": "순서에 따라 결과가 달라지는 프로그램 복원",
+    "problem": "직접 제공한 무해한 C 프로그램의 명령 처리를 분석합니다. 문자열 목록만 나열하지 말고 입력 시퀀스에서 상태와 결과를 복원하세요.",
+    "prerequisites": [
+      "rev.assembly",
+      "rev.dynamic",
+      "rev.differential",
+      "rev.integer-views",
+      "rev.state-machine"
+    ],
+    "contract": "project-machine.c를 -O0/-O2로 빌드합니다. 각각의 표본 tokens를 argv에 순서대로 전달합니다. states는 명령 처리 후 상태의 배열, accepted는 성공 명령 수입니다. 알 수 없는 명령은 상태를 유지합니다.",
+    "tasks": [
+      "소스는 처음 시도 동안 접어 두고 자체 컴파일한 바이너리의 문자열·분기·출력을 조사합니다.",
+      "login/read/logout/unknown을 포함한 전이표와 Python 참조 구현을 직접 만듭니다.",
+      "A/B 시퀀스를 실행해 출력과 복원 구현을 차등 비교합니다.",
+      "최적화된 바이너리를 비교하고 발견한 규칙의 근거·반례·ABI 제한을 보고합니다."
+    ],
+    "rubric": [
+      "각 명령의 전후 상태와 허용 조건을 복원했다.",
+      "A/B와 자신이 만든 반례에서 구현과 실행 결과를 비교했다.",
+      "정적 문자열의 존재와 실행 도달 여부를 구분했다.",
+      "빌드 옵션·도구 버전·관찰 근거를 포함했다."
+    ],
+    "limitations": "자체 교육 소스만 분석합니다. 실제 악성코드·상용 프로그램 우회나 라이선스 해제 과제가 아닙니다.",
+    "bridge": "실제 ELF를 readelf/objdump/GDB로 관찰합니다. 디버그 심볼 유무와 최적화 차이를 보고서의 근거에 연결합니다.",
+    "minutes": [
+      150,
+      240
+    ]
+  },
+  "forensic": {
+    "id": "forensic",
+    "title": "같은 계정, 다른 호스트: 근거를 추적하는 조사",
+    "problem": "합성 이벤트를 실제 SQLite DB 파일로 만들고 조사하세요. 같은 session 값만으로 다른 호스트의 사건을 연결하면 잘못된 결론에 도달합니다.",
+    "prerequisites": [
+      "forensic.integrity",
+      "forensic.timeline",
+      "forensic.browser-sqlite",
+      "forensic.log-correlation",
+      "forensic.evidence-coverage"
+    ],
+    "contract": "project-build-db.py가 A/B DB를 생성합니다. host=lab-1, session=S7인 행만 조사 범위입니다. timeline은 UTC 시각순 ID, reads는 그 범위의 read ID입니다. 시각 동률은 ID순입니다. suspect_actor는 자료만으로 실제 행위자를 확정할 수 없어 UNKNOWN입니다.",
+    "tasks": [
+      "새 작업 폴더에서 DB를 생성하고 원본 해시와 보관 기록을 남깁니다.",
+      "sqlite3의 mode=ro로 열거나 별도 작업 사본에서 SELECT를 수행합니다. 행의 원시 시각과 UTC를 함께 보관합니다.",
+      "호스트·세션 범위로 연결해 A/B 결과를 만들고 제외된 기록의 이유를 적습니다.",
+      "1페이지 보고서에서 관찰 사실·가설·미확인·추가 수집·업무 영향을 분리합니다."
+    ],
+    "rubric": [
+      "원본/작업 사본 해시와 재현 명령을 보관했다.",
+      "호스트·세션·시간을 함께 사용하고 범위 밖 기록을 섞지 않았다.",
+      "시각 순서를 인과나 실제 행위자의 신원으로 과장하지 않았다.",
+      "각 결론에 이벤트 ID를 연결하고 반증 자료·관측 공백을 적었다."
+    ],
+    "limitations": "SQLite는 실제 형식이지만 행은 교육용 합성 자료입니다. 실제 EVTX·메모리 이미지 수집·증거 법적 적격성까지 다루는 인증 과정은 아닙니다.",
+    "bridge": "JSON 모형에서 실제 SQLite 헤더·테이블·읽기 전용 질의로 넘어갑니다. 선택 과제로 자기 테스트 계정에서 만든 Windows 이벤트를 wevtutil로 내보내고 원시 XML과 비교할 수 있습니다. 외부 공유 전에 개인정보를 검토하세요.",
+    "minutes": [
+      180,
+      270
+    ]
+  },
+  "network": {
+    "id": "network",
+    "title": "이중 스택 서비스의 정책과 관측 검증",
+    "problem": "웹·DB·관리 경로를 가진 서비스에 IPv6를 추가합니다. 주소 계열, 기본 거부, 순서가 있는 규칙을 함께 검증하고 탐지 오탐과 관측 공백을 설명하세요.",
+    "prerequisites": [
+      "network.policy",
+      "network.detection-metrics",
+      "network.ipv6-boundaries",
+      "network.stream-reassembly",
+      "network.event-time-windows"
+    ],
+    "contract": "정책은 first-match이며 src/dst CIDR와 port가 모두 맞을 때 action을 적용합니다. 기본 DENY입니다. decisions는 흐름 순서의 판정입니다. TP/FP/FN은 별도 alerts 표본의 predicted/actual bool에서 계산합니다.",
+    "tasks": [
+      "A 표본의 IPv6 서비스 흐름이 왜 거부되는지 경계 그림을 그립니다.",
+      "입력을 하드코딩하지 않는 정책 평가기를 작성하고 B의 좁은 IPv6 규칙을 비교합니다.",
+      "탐지 혼동 행렬을 계산하고 수치가 정책의 안전성을 직접 입증하지 않는 이유를 적습니다.",
+      "traffic.pcap과 tls13.pcap에서 볼 수 있는 근거와 볼 수 없는 사용자·본문 정보를 구분하고 지연 로그·재조립 누락의 대응 계획을 씁니다."
+    ],
+    "rubric": [
+      "주소 계열·규칙 순서·기본 거부를 정확히 적용했다.",
+      "정상 웹·DB 흐름과 관리·다른 IPv6 목적지 거부를 함께 확인했다.",
+      "TP/FP/FN과 정밀도·재현율을 정확히 설명했다.",
+      "PCAP 프레임 근거·TLS 가시성·관측 공백·롤백 조건을 포함했다."
+    ],
+    "limitations": "모형 정책은 실제 방화벽 설정이 아닙니다. NAT·상태 추적·IPv6 확장 헤더·공급자 의미는 별도 검증이 필요합니다.",
+    "bridge": "제공된 실제 형식 PCAP을 Wireshark 또는 tshark -r로 읽고 프레임 번호를 보고서에 붙입니다. 라이브 스캔이나 외부 패킷 전송은 필요 없습니다.",
+    "minutes": [
+      180,
+      300
+    ]
+  },
+  "crypto": {
+    "id": "crypto",
+    "title": "레코드 이동·재전송·키 교체의 검증 계획",
+    "problem": "실제 AES-GCM 표본을 문서별 문맥에 묶고 재전송 상태와 함께 검사합니다. 유효한 암호문이라는 사실과 지금 처리해도 된다는 결정을 분리하세요.",
+    "prerequisites": [
+      "crypto.replay-protection",
+      "crypto.aad-record-binding",
+      "crypto.envelope-keywrap",
+      "crypto.signature-authorization"
+    ],
+    "contract": "기존 round2-crypto.json의 공개 DEK를 사용합니다. AAD는 UTF-8 JSON 배열 [\"project-v1\",tenant,document,version,seq]를 공백 없이 직렬화한 바이트입니다. seq도 인증 대상입니다. 인증 실패는 AUTH_FAIL, 인증 성공 후 seq>last일 때만 ACCEPT하고 last를 갱신하며 그 외에는 REPLAY입니다. last는 이 연습의 단일 blue/17/1 스트림 상태입니다.",
+    "tasks": [
+      "가상 환경에서 고정 requirements.txt를 설치하고 공개 교육 키라는 범위를 적습니다.",
+      "AES-GCM 검증과 시퀀스 검사 순서를 구현하고 A/B를 비교합니다.",
+      "인증 실패 요청의 큰 seq가 정상 요청을 막지 않도록 실패 후 last 상태를 확인합니다.",
+      "실제 봉투 재포장 예제를 실행한 증거와 정기 교체·유출 대응·서명 권한 검토를 함께 보고합니다."
+    ],
+    "rubric": [
+      "실제 인증 실패와 재전송 거부를 구분했다.",
+      "인증 실패한 요청이 상태를 갱신하거나 평문을 노출하지 않는다.",
+      "A/B와 재시작·동시 처리의 한계를 설명한다.",
+      "KEK/DEK 교체와 과거 노출·현재 권한을 구분해 검증 계획을 썼다."
+    ],
+    "limitations": "단일 스트림·단일 프로세스 교육 모형이며 실제 서비스의 원자성·지속 상태·nonce 발급 설계는 포함하지 않습니다. 공개 키·nonce를 운영에 재사용하지 않습니다.",
+    "bridge": "실제 cryptography AESGCM.decrypt의 InvalidTag와 정상 평문을 관찰합니다. 통과해도 새 암호 프로토콜을 배포할 자격을 의미하지 않습니다.",
+    "minutes": [
+      180,
+      270
+    ]
+  },
+  "misc": {
+    "id": "misc",
+    "title": "파일 이름을 믿지 않는 제한된 변환 파이프라인",
+    "problem": "Hex로 전달된 압축 표본을 제한 안에서 풀고 결과를 검증하세요. 후행 데이터와 끊어진 스트림은 정상 결과로 조용히 받아들이면 안 됩니다.",
+    "prerequisites": [
+      "misc.structured-parsing",
+      "misc.archive-inspection",
+      "misc.bounded-decompression",
+      "misc.resumable-batch"
+    ],
+    "contract": "zlib 스트림만 다룹니다. media_tools.bounded_decompress의 입력 1024바이트·출력 16바이트 제한, eof/후행 데이터 검사를 적용합니다. outcomes는 ACCEPT/REJECT 배열, hashes는 허용 결과의 SHA-256을 입력 순서로 나열합니다.",
+    "tasks": [
+      "각 표본의 바깥 표현·압축 형식·안쪽 바이트를 단계도로 그립니다.",
+      "기존 제한 함수 또는 같은 계약의 자체 구현으로 A/B를 처리합니다.",
+      "자신이 만든 빈 출력·정확히 16·17바이트·끊긴 입력·후행 데이터 사례를 추가합니다.",
+      "결과 해시·변환 버전·제한값을 넣은 체크포인트 구조와 재개 실패 조건을 보고합니다."
+    ],
+    "rubric": [
+      "출력 한도·종료·후행 데이터를 따로 확인한다.",
+      "거부 자료에서 부분 결과를 성공 파일로 남기지 않는다.",
+      "두 표본의 해시·순서가 맞고 입력을 하드코딩하지 않았다.",
+      "입력/변환 버전/제한 변경 때 재계산 필요성을 설명했다."
+    ],
+    "limitations": "한 층의 작은 zlib 표본입니다. 모든 압축 형식이나 중첩 아카이브를 안전하게 처리하는 범용 추출기가 아닙니다.",
+    "bridge": "실제 zlib 스트림을 풀고 바이트 해시를 비교합니다. 확장자·표시된 텍스트 대신 실제 바이트를 근거로 사용합니다.",
+    "minutes": [
+      120,
+      210
+    ]
+  },
+  "cloud": {
+    "id": "cloud",
+    "title": "사설 경로와 긴급 권한을 검증하는 변경 검토",
+    "problem": "구성 변경 뒤에도 정상 업무는 유지하고 다른 네임스페이스·만료된 긴급 권한은 거부해야 합니다. 결과를 보안 승인 보고서로 정리하세요.",
+    "prerequisites": [
+      "cloud.workload-trust",
+      "cloud.recovery-exercise",
+      "cloud.kubernetes-rbac",
+      "cloud.private-endpoint-paths",
+      "cloud.breakglass-access"
+    ],
+    "contract": "각 JSON은 기본 boundary-models.json에 적용할 독립적인 변형입니다. role_namespace, subject_namespace, lease_revoked만 바꿉니다. 기존 rbac/private/lease 판정 함수를 사용하고 각 요청의 결과를 입력 순서대로 출력합니다.",
+    "tasks": [
+      "변경 전 역할·신뢰 주체·DNS 경로·승인 수명을 연결한 경계 그림을 만듭니다.",
+      "기본 입력을 깊게 복사한 뒤 A/B 변경을 적용해 세 판정 목록을 만듭니다.",
+      "잘못된 subject namespace를 넓은 권한으로 해결하지 않고 신뢰 대상과 바인딩을 점검합니다.",
+      "실제 Kubernetes Role/RoleBinding JSON 초안, 변경 영향·감사 전달·복원 목표·롤백 증거를 보고서에 포함합니다."
+    ],
+    "rubric": [
+      "네임스페이스·주체·행동과 사설 경로·인가를 분리했다.",
+      "회수된 긴급 권한의 모든 사용이 거부되는지 확인했다.",
+      "정상 기능과 거부 기능을 함께 검증하고 모형 밖의 조건을 적었다.",
+      "제한된 Role/RoleBinding 초안과 감사·RPO/RTO·롤백 계획이 연결된다."
+    ],
+    "limitations": "오프라인 권한 모형입니다. Kubernetes API나 실제 공급자 정책을 호출하지 않습니다. 모형 통과는 실제 배포 승인이나 보안 인증이 아닙니다.",
+    "bridge": "제공된 project-role.json의 apiVersion/kind/metadata/rules를 Kubernetes 공식 예제와 대조합니다. 선택적으로 격리된 본인 로컬 클러스터에서만 auth can-i로 검증하고 실제 결과와 모형 차이를 기록하세요.",
+    "minutes": [
+      180,
+      300
+    ]
+  }
+}

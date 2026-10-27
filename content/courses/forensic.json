@@ -2,13 +2,13 @@
   "id": "forensic",
   "title": "Forensic",
   "label": "디지털 포렌식",
-  "subtitle": "원본을 보존하고 로그·시간·파일 근거로 작은 사건의 흐름을 구성합니다.",
+  "subtitle": "원본 보존부터 호스트·SQLite·파일 조각·다중 로그를 분석하고 대응과 복구 계획까지 연결합니다.",
   "level": "입문 → 중급",
   "prereqs": [
     "foundation.python-files",
     "foundation.paths"
   ],
-  "outcome": "증거 ID와 시간대를 명시하고 사실·가설·추가 확인을 구분한 보고서를 만듭니다.",
+  "outcome": "증거 ID·관찰 범위·불확실성을 기록하며 합성 사건의 단서를 연결하고 근거 기반 대응·복구 검증 계획을 작성합니다.",
   "modules": [
     {
       "title": "01 · 보존과 증거 읽기",
@@ -542,6 +542,1179 @@
           ]
         }
       ]
+    },
+    {
+      "title": "03 · 수집과 호스트 근거",
+      "intro": "수집 계획부터 프로세스·연결·응용 기록까지 관찰 범위를 넓힙니다.",
+      "lessons": [
+        {
+          "id": "forensic.collection-plan",
+          "title": "수집 우선순위와 증거 인계 기록",
+          "goal": "휘발성·업무 영향·분석 목적을 기준으로 수집 계획과 인계 기록을 작성합니다.",
+          "concepts": [
+            "증거 수집은 도구를 실행하는 순서만 정하는 일이 아닙니다. 어떤 질문에 답하려는지, 누가 승인했는지, 어떤 시스템과 시간 범위를 다룰지를 먼저 정합니다. 이 차시의 case.json은 실제 획득 명령이 아니라 E01~E03의 목적과 우선순위를 담은 합성 계획입니다.",
+            "메모리와 현재 연결은 전원 종료나 프로세스 종료로 사라질 수 있는 휘발성 자료입니다. 디스크 자료도 사용 중 변경될 수 있습니다. 일반적인 휘발성 우선 원칙을 참고하되 진행 중인 피해, 안전, 운영 영향, 조직 절차를 고려해야 하므로 모든 사고에 같은 순서를 강제할 수는 없습니다.",
+            "수집 기록에는 증거 ID, 출처, 원래 위치, 수집 시각과 시간대, 도구·버전, 담당자, 보관 위치, 해시와 인계 이력을 연결합니다. 단순한 해시 목록만으로 보관 경로나 수집 당시 상태가 증명되지는 않습니다. 작업 사본과 원본을 구분해 이후 분석 변경을 추적합니다.",
+            "casework.py plan은 사용자가 지정한 order대로 계획을 표시할 뿐 메모리를 획득하거나 순서의 적절성을 자동 판정하지 않습니다. 수집 도구가 시스템 상태를 바꿀 수도 있다는 점과 획득 실패·누락도 기록해야 합니다. 실제 장비 실습 없이 계획과 증거 취급의 이유를 연습합니다."
+          ],
+          "code": "python3 casework.py plan",
+          "expected": "E01 memory volatile=True\nE02 connections volatile=True\nE03 disk-copy volatile=False\nrecords=3 mode=plan-only",
+          "task": "case.json 사본에서 메모리보다 디스크의 order를 먼저 두어 출력 차이를 확인하고, 이 순서에서 잃을 수 있는 근거와 예외적으로 순서 변경이 필요한 상황을 각각 쓰세요. 증거 인계 기록 한 줄도 만드세요.",
+          "hint": "스크립트의 출력 순서는 입력 순서표를 따른 결과입니다. 자동으로 안전한 수집 순서를 보장하지 않습니다.",
+          "prerequisites": [
+            "forensic.integrity",
+            "forensic.report"
+          ],
+          "files": [
+            "casework.py",
+            "case.json"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 목적과 자료 종류를 연결하기",
+              "explanation": "case.json의 purpose와 volatile을 읽고 각 자료가 어떤 질문에 답하는지 기록합니다. 실행은 계획 출력만 하며 현재 PC를 조사하지 않습니다.",
+              "code": "python3 casework.py plan",
+              "expected": "E01 memory, E02 connections, E03 disk-copy가 순서대로 출력되고 mode=plan-only입니다."
+            },
+            {
+              "title": "2. 순서가 자동 판정이 아님을 확인하기",
+              "explanation": "사본의 E01 order를 3, E03 order를 1로 서로 바꿉니다. 중복 순위를 만들지 않습니다.",
+              "code": "python3 casework.py plan --source case-work.json",
+              "expected": "E03 disk-copy가 첫째, E02 connections가 둘째, E01 memory가 마지막에 표시됩니다. 기록 수는 3입니다."
+            },
+            {
+              "title": "3. 구조 오류와 판단 오류를 구분하기",
+              "explanation": "다른 사본에서 E01과 E02에 같은 order=1을 지정합니다. 구조적으로 모순인 계획은 도구가 거부하지만 유일한 순위라고 계획이 적절한 것은 아닙니다.",
+              "code": "python3 casework.py plan --source case-invalid.json",
+              "expected": "INVALID: duplicate ID/order, 종료 상태 2. 사본을 수정한 뒤 실행합니다."
+            }
+          ],
+          "solution": {
+            "approach": [
+              "디스크 우선 수집 동안 종료·재부팅되면 메모리·현재 연결을 잃을 수 있다고 씁니다.",
+              "진행 중인 피해 차단이나 안전을 위해 먼저 격리가 필요할 수 있으므로 승인자·영향·남길 근거를 함께 기록합니다.",
+              "예: E01 / workstation-7 / UTC 수집시각 / 담당자 / 도구버전 / 보관위치 / SHA-256 / 인계자·수령자를 같은 행으로 연결합니다."
+            ],
+            "expected": "계획 변경의 이득·손실과 인계 필드가 있어야 하며, 실제 획득을 수행했다고 적지 않습니다."
+          },
+          "questions": [
+            {
+              "prompt": "plan 출력에서 E03이 먼저 나왔습니다. 무엇을 의미하나요?",
+              "options": [
+                "스크립트가 디스크 우선이 항상 옳다고 인증했다",
+                "입력의 order가 그 순서라는 뜻이며 적절성은 별도 판단",
+                "실제 디스크 이미지가 이미 생성됐다"
+              ],
+              "answer": 1,
+              "explanation": "이 도구는 합성 계획의 정렬과 형식 검증만 합니다. 수집이나 우선순위의 운영 판단은 수행하지 않습니다."
+            },
+            {
+              "prompt": "메모리 수집 전 전원을 끄면 가장 직접적인 우려는?",
+              "options": [
+                "해시 알고리즘이 바뀐다",
+                "디스크 전체가 항상 삭제된다",
+                "현재 프로세스·메모리 상태 같은 휘발성 근거를 잃을 수 있다"
+              ],
+              "answer": 2,
+              "explanation": "전원 차단은 휘발성 자료를 잃게 합니다. 피해 차단·안전과의 절충을 기록해야 합니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "휘발성 우선이라는 말만으로 모든 상황의 순서를 정한다.",
+              "correction": "피해·안전·업무 영향·승인과 절차를 함께 검토합니다."
+            },
+            {
+              "mistake": "해시만 있으면 증거 인계 기록이 필요 없다.",
+              "correction": "누가 언제 어디서 다뤘는지와 원본/사본 위치도 연결합니다."
+            }
+          ],
+          "references": [
+            [
+              "NIST SP 800-86 · 디지털 증거 처리",
+              "https://csrc.nist.gov/pubs/sp/800/86/final"
+            ],
+            [
+              "NIST SP 800-61r3 · 대응과 복구",
+              "https://csrc.nist.gov/pubs/sp/800/61/r3/final"
+            ]
+          ],
+          "checks": [
+            "수집 목적·우선순위·한계를 구분했다.",
+            "증거 ID에 인계 필드를 연결했다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "해당 분야 ZIP을 풀고 forensic 폴더에서 실행합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿉니다.",
+              "파일은 합성 교육 자료입니다. 실습은 로컬 파일/메모리만 처리하며 실제 계정·서버·개인정보를 사용하지 않습니다. 원본은 보관하고 변경 과제에는 사본을 사용합니다."
+            ]
+          }
+        },
+        {
+          "id": "forensic.host-triage",
+          "title": "프로세스·부모·연결의 교차 확인",
+          "goal": "한 시점의 프로세스와 연결 표를 결합하고 확인 불가능한 항목을 남깁니다.",
+          "concepts": [
+            "호스트 트리아지는 제한된 시간에 추가 조사가 필요한 단서를 좁히는 과정입니다. 이름이 낯설다는 이유만으로 악성으로 분류하지 않습니다. 합성 snapshot.json의 부모 관계·사용자·시작 시각·현재 연결을 함께 보며 확인된 사실과 의심 이유를 구분합니다.",
+            "이 표본에서 PID 300 helper의 부모는 PID 200 viewer이고 C01 연결은 PID 300을 참조합니다. 따라서 viewer→helper→203.0.113.44:443이라는 관찰 연결을 만들 수 있습니다. 주소는 문서용 예약 대역이며 실제 위험 인프라가 아닙니다. 연결 유무만으로 데이터 유출을 확정하지 않습니다.",
+            "PID는 영구 신원이 아닙니다. 프로세스가 종료되면 재사용될 수 있고 서로 다른 시각에 모은 표를 PID만으로 붙이면 잘못된 연결을 만들 수 있습니다. 이 예제는 하나의 합성 스냅샷 안에서만 조인합니다. 실제 자료는 호스트·수집시각·프로세스 시작시각이나 고유 이벤트 식별자를 함께 검토합니다.",
+            "C03의 PID 999는 프로세스 표에 없습니다. 수집 간격·권한 부족·종료·누락 등의 가능성을 두고 UNKNOWN으로 남깁니다. 이 명령은 실제 메모리나 프로세스를 읽지 않으며 프로그램 이름, 서명, 실행 경로, 명령줄, 해시와 역사적 이벤트는 별도 증거가 필요합니다."
+          ],
+          "code": "python3 casework.py host",
+          "expected": "C01 viewer->helper remote=203.0.113.44:443\nC02 desktop->updater remote=192.0.2.10:443\nC03 pid=999 process=UNKNOWN",
+          "task": "snapshot.json의 사본에서 C01의 PID를 999로 바꾸고, 어떤 연결 근거를 잃는지 쓰세요. helper를 조사하려면 추가로 필요한 근거 세 가지도 적으세요.",
+          "hint": "UNKNOWN은 악성이라는 뜻도 정상이라는 뜻도 아닙니다. 표에 존재하지 않는 연결 키라는 뜻입니다.",
+          "prerequisites": [
+            "forensic.collection-plan",
+            "forensic.logs"
+          ],
+          "files": [
+            "casework.py",
+            "snapshot.json"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 합성 스냅샷의 기준시각 확인",
+              "explanation": "captured_at과 started를 읽고 이 자료가 지속 관찰이 아니라 한 시점의 표임을 기록합니다.",
+              "code": "python3 casework.py host",
+              "expected": "C01 viewer->helper, C02 desktop->updater, C03 process=UNKNOWN이 표시됩니다."
+            },
+            {
+              "title": "2. 조인 키를 바꾼 반례 실행",
+              "explanation": "사본에서 C01 pid를 999로 바꿉니다. 단순히 목적지 주소가 같아도 프로세스 연결이 유지되는지 확인합니다.",
+              "code": "python3 casework.py host --source snapshot-work.json",
+              "expected": "C01 pid=999 process=UNKNOWN. C02와 C03은 기존과 같습니다."
+            },
+            {
+              "title": "3. 단서와 결론의 범위 나누기",
+              "explanation": "원본을 다시 실행해 부모·자식·연결을 표로 정리하고, 외부 전송이나 악성 여부를 단정할 수 없는 이유를 씁니다.",
+              "code": "python3 casework.py host",
+              "expected": "원본 C01은 viewer->helper와 목적지 203.0.113.44:443을 연결합니다. 바이트 수나 파일 전송 내용은 제공하지 않습니다."
+            }
+          ],
+          "solution": {
+            "approach": [
+              "C01의 PID를 999로 바꾸면 helper와의 조인이 사라지므로 원래 이름 관계를 그대로 복사하지 않습니다.",
+              "추가 근거로 실행 파일 경로·해시/서명, 명령줄·부모 시작 이벤트, 연결 전후 패킷/전송량을 요청합니다.",
+              "PID 재사용과 수집 시각 차이 때문에 다른 시점의 프로세스 표를 바로 붙이지 않는다고 기록합니다."
+            ],
+            "expected": "관찰 가능한 연결 1건, UNKNOWN의 의미, 추가 증거 요청 3가지와 조사 우선순위 이유가 있어야 합니다."
+          },
+          "questions": [
+            {
+              "prompt": "C03의 PID가 프로세스 표에 없습니다. 적절한 기록은?",
+              "options": [
+                "무조건 루트킷",
+                "정상 종료였으므로 무시",
+                "UNKNOWN으로 남기고 수집 시각·누락·종료 가능성 확인"
+              ],
+              "answer": 2,
+              "explanation": "부재만으로 원인을 확정할 수 없습니다. 관측 범위와 자료 부족을 먼저 기록합니다."
+            },
+            {
+              "prompt": "다른 날의 PID 300 연결을 오늘의 helper에 바로 연결하면 왜 위험한가요?",
+              "options": [
+                "PID가 재사용될 수 있기 때문",
+                "PID는 항상 비밀키이기 때문",
+                "파일 해시가 같아지기 때문"
+              ],
+              "answer": 0,
+              "explanation": "호스트와 프로세스 수명·고유 식별자를 함께 확인하지 않으면 다른 프로세스를 잘못 조인할 수 있습니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "프로세스 이름이 helper면 정상이라고 결론 낸다.",
+              "correction": "이름은 바뀔 수 있습니다. 경로·서명·동작·원인 관계를 추가 확인합니다."
+            },
+            {
+              "mistake": "외부 443 연결이 보이면 데이터 유출을 확정한다.",
+              "correction": "암호화 연결의 존재와 실제 내용·목적은 별도 증거입니다."
+            }
+          ],
+          "references": [
+            [
+              "NIST SP 800-86 · 디지털 증거 처리",
+              "https://csrc.nist.gov/pubs/sp/800/86/final"
+            ],
+            [
+              "Microsoft Win32_Process · PID와 생성시각",
+              "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-process"
+            ]
+          ],
+          "checks": [
+            "부모·자식·연결을 같은 표본에서 조인했다.",
+            "PID 재사용과 UNKNOWN의 한계를 설명했다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "해당 분야 ZIP을 풀고 forensic 폴더에서 실행합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿉니다.",
+              "파일은 합성 교육 자료입니다. 실습은 로컬 파일/메모리만 처리하며 실제 계정·서버·개인정보를 사용하지 않습니다. 원본은 보관하고 변경 과제에는 사본을 사용합니다."
+            ]
+          }
+        },
+        {
+          "id": "forensic.browser-sqlite",
+          "title": "SQLite 방문 기록과 행위 해석의 한계",
+          "goal": "합성 SQLite 기록을 질의하고 필터 결과와 사용자의 실제 행위를 구분합니다.",
+          "concepts": [
+            "여러 응용 프로그램은 SQLite에 기록을 저장하지만 테이블 이름과 시간 기준은 제품·버전마다 다릅니다. 이 차시는 visits(id,time,url,transition)라는 독자 합성 스키마와 ISO 시간만 사용합니다. 실제 브라우저의 DB를 읽었다거나 특정 브라우저의 타임스탬프를 해석했다고 주장하지 않습니다.",
+            "casework.py browser는 신뢰하는 제공 history.sql을 메모리 DB에 넣은 뒤 auto가 아닌 행을 선택합니다. typed와 link 두 행이 표시되고 전체 세 행 중 하나를 필터링합니다. 표시 수와 전체 수를 함께 남겨 필터가 자료를 어떻게 줄였는지 추적합니다.",
+            "방문 기록은 URL이 처리되었다는 단서이지 사람이 의도적으로 페이지를 읽었다는 완전한 증명이 아닙니다. 자동 로드·리디렉션·동기화·프로필 공유 등이 해석에 영향을 줄 수 있습니다. 이 예제에서 transition은 제작자가 붙인 합성 분류이며 실제 사용자 신원을 증명하지 않습니다.",
+            "실제 SQLite 수집에서는 실행 중 파일 한 개만 복사하면 최근 트랜잭션이 WAL에 남아 누락될 수 있습니다. 원본·WAL·관련 파일과 수집 절차를 함께 검토하고 작업 사본에서 읽습니다. 본 실습은 메모리 DB라 WAL 획득·삭제 기록 복원·브라우저 개인자료 분석을 수행하지 않습니다."
+          ],
+          "code": "python3 casework.py browser",
+          "expected": "B01 2026-10-01T00:00:00+00:00 typed\nB02 2026-10-01T00:00:20+00:00 link\ntotal=3 displayed=2 synthetic=True",
+          "task": "history.sql 사본에서 B03의 transition만 auto에서 link로 바꿔 다시 질의하세요. 전체 수와 표시 수의 차이를 설명하고, 기록만으로 말할 수 없는 사실 두 가지를 쓰세요.",
+          "hint": "입력 자료에서 필터 조건만 바꿉니다. 원본 URL을 열거나 실제 브라우저 프로필을 사용하지 않습니다.",
+          "prerequisites": [
+            "forensic.integrity",
+            "forensic.logs",
+            "foundation.python-files"
+          ],
+          "files": [
+            "casework.py",
+            "history.sql"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 스키마와 질의 조건 확인",
+              "explanation": "제공한 신뢰할 수 있는 history.sql의 CREATE/INSERT를 읽습니다. 임의 출처 SQL은 실행하지 않습니다. 모형 DB는 메모리에서만 생성됩니다.",
+              "code": "python3 casework.py browser",
+              "expected": "B01 typed와 B02 link, total=3 displayed=2가 보입니다."
+            },
+            {
+              "title": "2. 필터 대상 한 행 바꾸기",
+              "explanation": "사본에서 B03의 마지막 값 auto를 link로 바꿉니다. URL이나 시각을 함께 바꾸지 않아 조건 차이를 분리합니다.",
+              "code": "python3 casework.py browser --source history-work.sql",
+              "expected": "B03 ... link가 추가되고 total=3 displayed=3 synthetic=True입니다."
+            },
+            {
+              "title": "3. 행의 존재와 행위 결론 구분",
+              "explanation": "원본을 다시 질의해 어떤 행이 제외됐는지 적습니다. 원본 전체 수와 필터 결과를 함께 남긴 후 사람의 의도·유출 여부에 필요한 추가 근거를 씁니다.",
+              "code": "python3 casework.py browser",
+              "expected": "원본 total=3 displayed=2로 돌아옵니다. B03은 삭제된 것이 아니라 질의에서 제외됐습니다."
+            }
+          ],
+          "solution": {
+            "approach": [
+              "B03의 transition을 바꾸면 총 행수 3은 그대로이고 표시 수만 2→3이 됩니다.",
+              "방문 기록만으로 실제 사람이 내용을 읽었는지, 파일이 실행되거나 외부로 유출됐는지는 확정할 수 없다고 씁니다.",
+              "실제 DB에는 스키마·epoch·WAL 여부 확인이 별도 필요하며 이 실습에서 이를 수행하지 않았다고 표시합니다."
+            ],
+            "expected": "질의 조건·전체/표시 행수·제외 행 ID와 관찰 한계가 분리되어 있어야 합니다."
+          },
+          "questions": [
+            {
+              "prompt": "total=3 displayed=2에서 사라진 한 행은?",
+              "options": [
+                "DB에서 삭제됐다",
+                "필터 조건에 따라 결과에서 제외됐다",
+                "누군가 조작한 것이 확정됐다"
+              ],
+              "answer": 1,
+              "explanation": "표시 결과의 부재와 저장된 데이터의 부재는 다릅니다. 원본 행수와 조건을 기록해야 합니다."
+            },
+            {
+              "prompt": "실제 실행 중 SQLite DB를 수집할 때 DB 한 개만 복사하면 생길 수 있는 문제는?",
+              "options": [
+                "WAL에 남은 최근 트랜잭션을 놓칠 수 있다",
+                "모든 데이터가 반드시 암호화된다",
+                "브라우저 사용자 신원이 자동 확인된다"
+              ],
+              "answer": 0,
+              "explanation": "WAL 모드에서는 DB와 관련 파일의 일관성과 획득 절차를 검토해야 합니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "typed 한 행으로 특정 사람이 직접 입력했다고 확정한다.",
+              "correction": "스키마 의미·프로필·자동화·동기화 등 추가 근거를 확인합니다."
+            },
+            {
+              "mistake": "SQL 파일을 메모리 DB에 넣으니 어떤 출처든 안전하다고 생각한다.",
+              "correction": "제공한 신뢰할 수 있는 교육 SQL만 사용합니다. 메모리 DB는 임의 SQL의 안전한 샌드박스가 아닙니다."
+            }
+          ],
+          "references": [
+            [
+              "Python sqlite3 · 데이터베이스 읽기",
+              "https://docs.python.org/3/library/sqlite3.html"
+            ],
+            [
+              "SQLite · Write-Ahead Logging",
+              "https://sqlite.org/wal.html"
+            ]
+          ],
+          "checks": [
+            "원본 행수와 필터 결과를 분리했다.",
+            "실제 브라우저 스키마와 WAL 수집의 차이를 설명했다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "해당 분야 ZIP을 풀고 forensic 폴더에서 실행합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿉니다.",
+              "파일은 합성 교육 자료입니다. 실습은 로컬 파일/메모리만 처리하며 실제 계정·서버·개인정보를 사용하지 않습니다. 원본은 보관하고 변경 과제에는 사본을 사용합니다."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": "04 · 조각·상관·사고 대응",
+      "intro": "불완전한 근거를 연결하고 범위·조치·복구를 분리한 대응 계획을 만듭니다.",
+      "lessons": [
+        {
+          "id": "forensic.file-signatures",
+          "title": "파일 시그니처와 조각 복원의 한계",
+          "goal": "바이트 오프셋에서 후보 시그니처를 찾고 선언 길이와 실제 잔여 길이를 비교합니다.",
+          "concepts": [
+            "파일 확장자와 내부 형식은 다를 수 있으므로 바이트 시그니처와 구조를 확인합니다. 그러나 서명 몇 바이트가 일치한다고 완전한 파일이나 진짜 문서라고 확정할 수는 없습니다. 다른 데이터 안에 우연히 같은 바이트가 나타나는 거짓 후보도 있습니다.",
+            "이 차시는 BF 서명 2바이트와 little-endian 길이 2바이트 뒤에 본문이 오는 가상의 작은 형식을 사용합니다. fragments.hex는 실제 삭제 영역이나 디스크 이미지가 아니라 제작한 15바이트 표본입니다. Hex 텍스트를 bytes.fromhex로 바꾼 뒤 0부터 세는 오프셋에서 검색합니다.",
+            "첫 후보는 오프셋 2에서 BF, 길이 3, 본문 ABC가 전부 있습니다. 두 번째는 오프셋 10에서 길이 5를 선언하지만 뒤에 XY 2바이트만 있어 INCOMPLETE입니다. 선언 길이를 믿고 없는 바이트를 복원했다고 쓰지 않으며, Python 슬라이스가 짧아져도 오류가 안 난다는 점을 확인합니다.",
+            "carving은 파일시스템 메타데이터가 부족할 때 구조 단서로 후보를 찾는 접근입니다. 조각화·압축·암호화·덮어쓰기에서는 단순 연속 검색이 실패할 수 있고 원래 이름·경로·생성 시각은 보통 별도 근거가 필요합니다. 이 스크립트는 구조 검사의 첫 단계만 보여 주며 실제 PNG/PDF 복구기가 아닙니다."
+          ],
+          "code": "python3 casework.py carve",
+          "expected": "offset=2 declared=3 available=3 COMPLETE\noffset=10 declared=5 available=2 INCOMPLETE",
+          "task": "fragments.hex 사본 끝에 5a3132를 더해 두 번째 후보 본문이 XYZ12가 되게 하세요. COMPLETE로 바뀌어도 원래 파일명이나 사용자 행위가 증명되지 않는 이유를 쓰세요.",
+          "hint": "오프셋은 Hex 문자열의 글자 위치가 아니라 디코드된 바이트의 위치입니다.",
+          "prerequisites": [
+            "forensic.integrity",
+            "foundation.python-files"
+          ],
+          "files": [
+            "casework.py",
+            "fragments.hex"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 원시 바이트 길이와 오프셋 확인",
+              "explanation": "Hex 문자는 두 글자가 한 바이트입니다. 표본을 디코드한 뒤 헤더 후보 위치를 계산하고 실행 결과와 대조합니다.",
+              "code": "python3 casework.py carve",
+              "expected": "offset=2 declared=3 available=3 COMPLETE\noffset=10 declared=5 available=2 INCOMPLETE"
+            },
+            {
+              "title": "2. 부족한 본문을 사본에서 채우기",
+              "explanation": "사본의 마지막에 5a3132를 붙입니다. 기존 XY에 Z12가 이어져 두 번째 후보 길이가 5가 됩니다.",
+              "code": "python3 casework.py carve --source fragments-work.hex",
+              "expected": "첫 후보는 그대로이고 둘째는 offset=10 declared=5 available=5 COMPLETE입니다."
+            },
+            {
+              "title": "3. 서명 없는 자료와 비교하기",
+              "explanation": "다른 사본을 00010203만 있는 Hex로 만듭니다. 후보가 없다는 결과와 데이터 자체가 없다는 주장을 구분합니다.",
+              "code": "python3 casework.py carve --source fragments-none.hex",
+              "expected": "출력 행이 없고 종료 상태 0입니다. 이 검색 방식의 BF 후보가 없다는 뜻입니다."
+            }
+          ],
+          "solution": {
+            "approach": [
+              "표본 끝에 5a3132를 붙여 두 번째 본문 길이를 2→5로 늘립니다.",
+              "COMPLETE는 이 장난감 헤더/연속 길이 조건을 만족한다는 뜻만 적습니다.",
+              "파일명·경로·원래 문서·사용자·삭제 원인은 표본이 제공하지 않으므로 별도 파일시스템과 사건 근거가 필요합니다."
+            ],
+            "expected": "후보의 시작 오프셋·선언/실제 길이·불완전성·원래 메타데이터의 부재를 기록합니다."
+          },
+          "questions": [
+            {
+              "prompt": "BF 시그니처를 찾고 길이도 맞았습니다. 확정할 수 있는 것은?",
+              "options": [
+                "제작자 신원",
+                "실제 PDF 파일이라는 사실",
+                "이 모형의 연속 길이 조건을 만족하는 후보라는 점"
+              ],
+              "answer": 2,
+              "explanation": "짧은 서명과 길이 검사만으로 실제 파일 형식·기원·행위를 증명하지 못합니다."
+            },
+            {
+              "prompt": "Hex 문자열에서 4246이 문자 위치 4에 있으면 바이트 오프셋은?",
+              "options": [
+                "4",
+                "2",
+                "8"
+              ],
+              "answer": 1,
+              "explanation": "공백 없는 Hex의 두 문자가 한 바이트이므로 바이트 기준 오프셋은 2입니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "COMPLETE를 원래 파일 전체가 복원됐다는 말로 쓴다.",
+              "correction": "검사한 모형 구조와 검증 범위를 정확히 적습니다."
+            },
+            {
+              "mistake": "후보가 없으니 관련 자료가 존재하지 않는다고 단정한다.",
+              "correction": "형식·조각화·암호화·덮어쓰기와 관찰 범위를 검토합니다."
+            }
+          ],
+          "references": [
+            [
+              "NIST SP 800-86 · 디지털 증거 처리",
+              "https://csrc.nist.gov/pubs/sp/800/86/final"
+            ],
+            [
+              "Python struct · 바이트 순서와 명시적 크기",
+              "https://docs.python.org/3/library/struct.html"
+            ]
+          ],
+          "checks": [
+            "바이트 오프셋과 길이 검사를 수행했다.",
+            "모형의 COMPLETE와 실제 복구를 구분했다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "해당 분야 ZIP을 풀고 forensic 폴더에서 실행합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿉니다.",
+              "파일은 합성 교육 자료입니다. 실습은 로컬 파일/메모리만 처리하며 실제 계정·서버·개인정보를 사용하지 않습니다. 원본은 보관하고 변경 과제에는 사본을 사용합니다."
+            ]
+          }
+        },
+        {
+          "id": "forensic.log-correlation",
+          "title": "호스트·세션을 잇는 다중 로그 상관",
+          "goal": "시간을 정규화한 뒤 호스트·세션 키로 사건 흐름을 좁히고 인과 추론의 한계를 표시합니다.",
+          "concepts": [
+            "로그 상관은 단순히 시간순으로 줄을 합치는 작업보다 넓습니다. 서로 다른 자료가 같은 대상이나 세션을 말하는지 확인할 키가 필요합니다. 이 표본은 host와 session이 모두 같은 행만 선택하며 인접 시각에 발생한 다른 호스트의 사건은 제외합니다.",
+            "A01의 2026-10-01T09:00:00+09:00은 UTC 00:00:00입니다. W01 다운로드, P01 프로세스 시작, N01 연결은 모두 UTC로 기록되어 같은 기준에 놓입니다. 시간대 없는 시각은 자동 추정하지 않고 오류로 처리해 정렬에 숨은 가정을 넣지 않습니다.",
+            "W02는 UTC 00:00:10으로 선택 사건 사이에 있지만 workstation-8/S11이라 제외됩니다. 시각이 가깝다는 이유만으로 한 사건에 붙이면 다른 사용자의 활동을 섞을 수 있습니다. 반대로 같은 키도 세션 재사용·계정 공유·프록시·수집 변환 때문에 실제 동일성을 별도로 확인해야 합니다.",
+            "로그 순서는 가설을 만들지만 다운로드가 실행을 일으켰다는 인과를 단독으로 증명하지 않습니다. 시계 오차·수집 지연·누락과 이벤트 ID를 기록하고, 파일 해시·프로세스 시작 인자·세션 생성 기록 등 독립 근거로 연결을 강화합니다. 본 표본에는 시계 오차 추정 자료가 없습니다."
+          ],
+          "code": "python3 casework.py correlate",
+          "expected": "A01 2026-10-01T00:00:00+00:00 login\nW01 2026-10-01T00:00:20+00:00 download\nP01 2026-10-01T00:01:00+00:00 process-start\nN01 2026-10-01T00:01:05+00:00 connection\nlinked=4 excluded=1",
+          "task": "crosslog.csv 사본의 W02 세션만 S10으로 바꾸고 다시 비교하세요. 그다음 호스트도 workstation-7로 바꾸세요. 각각의 선택 수와 잘못 연결할 위험을 설명하세요.",
+          "hint": "현재 필터는 host와 session의 AND입니다. 시간 정렬은 필터 후의 관계를 보일 뿐 인과를 인증하지 않습니다.",
+          "prerequisites": [
+            "forensic.timeline",
+            "forensic.host-triage"
+          ],
+          "files": [
+            "casework.py",
+            "crosslog.csv"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 시간대 정규화 결과 확인",
+              "explanation": "A01이 UTC 자정으로 바뀌는지 확인하고 네 선택 행의 ID와 순서를 적습니다.",
+              "code": "python3 casework.py correlate",
+              "expected": "A01→W01→P01→N01, linked=4 excluded=1"
+            },
+            {
+              "title": "2. 키 하나만 같게 만들기",
+              "explanation": "사본 W02의 session만 S10으로 바꾸고 host는 workstation-8로 둡니다. 시간이나 다른 행은 바꾸지 않습니다.",
+              "code": "python3 casework.py correlate --source crosslog-session.csv",
+              "expected": "W02는 여전히 제외되고 linked=4 excluded=1입니다."
+            },
+            {
+              "title": "3. 두 키를 모두 바꾼 모형 관찰",
+              "explanation": "다른 사본에서 W02 host와 session을 둘 다 선택 기준으로 바꿉니다. 이 실험은 입력 키를 신뢰한다는 모형 가정을 드러냅니다.",
+              "code": "python3 casework.py correlate --source crosslog-both.csv",
+              "expected": "A01→W02→W01→P01→N01, linked=5 excluded=0입니다. 실제 동일 사건이라는 추가 증명은 아닙니다."
+            }
+          ],
+          "solution": {
+            "approach": [
+              "session만 바뀌면 host 조건이 거짓이므로 W02는 제외됩니다.",
+              "두 키가 같아지면 UTC 00:00:10에 W02가 삽입돼 선택 수가 5가 됩니다.",
+              "같은 키와 선후 관계를 근거로 한 가설이라고 표시하고 파일/프로세스·독립 기록이 없으므로 실행 원인을 확정하지 않습니다."
+            ],
+            "expected": "정규화 시각·두 키의 일치 여부·포함/제외 이유·인과의 한계를 함께 적습니다."
+          },
+          "questions": [
+            {
+              "prompt": "다른 호스트의 로그가 10초 차이로 발생했습니다. 시간만으로 같은 사건에 붙여도 되나요?",
+              "options": [
+                "아니요, 대상·세션 등 연결 키와 독립 근거가 필요",
+                "예, 1분 이내면 항상 같은 사건",
+                "예, 로그 행수가 적으면 가능"
+              ],
+              "answer": 0,
+              "explanation": "인접 시각만으로는 대상의 동일성이나 인과를 증명하지 못합니다."
+            },
+            {
+              "prompt": "시각에 시간대가 빠진 새 행은 어떻게 다루나요?",
+              "options": [
+                "UTC라고 묵시적으로 가정",
+                "형식 오류로 표시하고 출처의 시간 기준을 확인",
+                "가장 뒤로 정렬하면 해결"
+              ],
+              "answer": 1,
+              "explanation": "시간 기준이 없는 값은 직접 비교하지 않고 출처와 가정을 확인해 기록합니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "가까운 시각이면 한 사건으로 합친다.",
+              "correction": "호스트·세션·고유 이벤트와 독립 근거를 검토합니다."
+            },
+            {
+              "mistake": "선행한 다운로드가 실행의 원인임을 확정한다.",
+              "correction": "순서와 인과는 다릅니다. 파일 해시·명령줄 등 추가 연결 근거가 필요합니다."
+            }
+          ],
+          "references": [
+            [
+              "Python datetime · 시간대가 있는 시각",
+              "https://docs.python.org/3/library/datetime.html"
+            ],
+            [
+              "NIST SP 800-86 · 디지털 증거 처리",
+              "https://csrc.nist.gov/pubs/sp/800/86/final"
+            ]
+          ],
+          "checks": [
+            "두 연결 키와 UTC를 함께 사용했다.",
+            "포함/제외와 인과 가설을 분리했다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "해당 분야 ZIP을 풀고 forensic 폴더에서 실행합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿉니다.",
+              "파일은 합성 교육 자료입니다. 실습은 로컬 파일/메모리만 처리하며 실제 계정·서버·개인정보를 사용하지 않습니다. 원본은 보관하고 변경 과제에는 사본을 사용합니다."
+            ]
+          }
+        },
+        {
+          "id": "forensic.incident-response",
+          "title": "사건 범위·격리·복구 검증 계획",
+          "goal": "관찰 사실과 미확인 가설을 분리하고 대응의 승인·영향·증거·복구 조건을 작성합니다.",
+          "concepts": [
+            "DFIR은 증거 분석과 사고 대응을 연결하지만 분석자가 관찰한 모든 의심을 즉시 확정 사고로 바꾸지는 않습니다. response.json에서 unexpected-child는 확인된 관찰이고 external-transfer는 미확인입니다. confirmed-hosts는 확인된 관찰의 호스트 집합이며 전체 침해 범위를 증명하는 목록이 아닙니다.",
+            "격리·종료·삭제는 피해를 줄일 수 있지만 업무 중단과 증거 손실도 만들 수 있습니다. 이 모형은 승인, 영향 검토, 증거 보존이 모두 참인 조치를 READY-FOR-REVIEW로 표시합니다. 이 표시는 검토 준비 상태일 뿐 실제 실행 승인이나 특정 조치의 보안 적합성 인증이 아닙니다.",
+            "전원 종료는 프로세스 실행을 멈추지만 휘발성 근거를 잃고, 네트워크 격리는 접속을 줄여도 이미 저장된 자료와 내부 실행을 모두 제거하지 않습니다. 조치마다 의도·범위·부작용·되돌리기 조건을 적고 조직의 담당자와 절차에 따라 판단합니다. 이 실습은 어떤 시스템에도 조치를 적용하지 않습니다.",
+            "복구는 서비스를 다시 켜는 것만이 아닙니다. 원인 수정과 정상 기능, 허용/거부 정책, 모니터링, 재발 징후, 복구 후 증거 보존을 확인하고 완료 기준과 관찰 기간을 정합니다. NIST SP 800-61r3의 대응·복구와 개선 관점을 참고하되 이 작은 모형이 전체 대응 절차를 대체하지 않습니다."
+          ],
+          "code": "python3 casework.py respond",
+          "expected": "confirmed-hosts=workstation-7\nisolate-network READY-FOR-REVIEW\npower-off HOLD\nerase-host HOLD\nexecution=NONE recovery-validation=REQUIRED",
+          "task": "response.json 사본에서 isolate-network의 authorized를 false로 바꾸고 결과를 비교하세요. 이후 격리 조치의 업무 영향·되돌리기 조건과 복구 확인 항목 세 가지를 작성하세요.",
+          "hint": "READY-FOR-REVIEW는 실행해도 된다는 뜻이 아닙니다. 미확인 전송 가설을 확인된 피해로 바꾸지 마세요.",
+          "prerequisites": [
+            "forensic.report",
+            "forensic.log-correlation"
+          ],
+          "files": [
+            "casework.py",
+            "response.json"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 사실과 미확인 가설 나누기",
+              "explanation": "관찰의 confirmed 값과 host를 읽습니다. confirmed-hosts는 이 자료 내의 집합이며 전체 범위가 아님을 표시합니다.",
+              "code": "python3 casework.py respond",
+              "expected": "확인 호스트 workstation-7, 격리 READY-FOR-REVIEW, 나머지 HOLD, execution=NONE"
+            },
+            {
+              "title": "2. 승인 조건의 반례 만들기",
+              "explanation": "사본에서 격리의 authorized만 false로 바꾸어 나머지 조건이 같아도 검토 준비 상태가 달라지는지 확인합니다.",
+              "code": "python3 casework.py respond --source response-work.json",
+              "expected": "isolate-network HOLD. 다른 조치도 HOLD이고 execution=NONE입니다."
+            },
+            {
+              "title": "3. 복구 완료의 근거 설계",
+              "explanation": "원본을 다시 보고 각 조치의 rollback을 읽습니다. 정상 서비스 검증·수정 검증·재발 관찰을 완료 조건으로 별도 작성합니다.",
+              "code": "python3 casework.py respond",
+              "expected": "recovery-validation=REQUIRED. 스크립트는 복구 완료나 조치 실행을 하지 않습니다."
+            }
+          ],
+          "solution": {
+            "approach": [
+              "승인이 false이면 다른 두 조건이 참이어도 격리는 HOLD입니다.",
+              "업무 영향은 원격 작업 중단, 되돌리기는 승인된 재연결과 재격리 가능 경로로 적습니다.",
+              "복구 확인으로 정상 접근/거부 정책, 원인 구성 수정의 회귀 검사, 정한 기간의 재발 징후와 로그 수집을 명시합니다."
+            ],
+            "expected": "범위의 확실성·조치 목적/부작용/승인·복구 검증 세 항목과 실제 실행 없음이 드러나야 합니다."
+          },
+          "questions": [
+            {
+              "prompt": "READY-FOR-REVIEW의 정확한 의미는?",
+              "options": [
+                "자동으로 안전한 조치임을 인증",
+                "교육 모형의 세 준비 조건이 충족됐으며 실제 실행 판단은 별도",
+                "조치가 이미 실행됐다"
+              ],
+              "answer": 1,
+              "explanation": "표시는 검토 조건일 뿐 실행 승인이나 적합성 증명이 아닙니다."
+            },
+            {
+              "prompt": "복구 완료를 뒷받침할 가장 적절한 근거는?",
+              "options": [
+                "서버가 한 번 켜졌다",
+                "의심 파일 이름을 바꿨다",
+                "원인 수정·정상/거부 동작·재발 관찰 기준을 확인했다"
+              ],
+              "answer": 2,
+              "explanation": "서비스 가동뿐 아니라 원인과 통제 검증 및 모니터링을 완료 기준으로 삼아야 합니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "확인 호스트 한 대가 전체 침해 범위라고 생각한다.",
+              "correction": "확인된 범위와 아직 조사하지 않은 범위를 구분합니다."
+            },
+            {
+              "mistake": "격리와 재부팅을 하면 증거 분석이 끝났다고 적는다.",
+              "correction": "휘발성 손실·원인 제거·복구 후 관찰과 교훈을 별도로 확인합니다."
+            }
+          ],
+          "references": [
+            [
+              "NIST SP 800-61r3 · 대응과 복구",
+              "https://csrc.nist.gov/pubs/sp/800/61/r3/final"
+            ],
+            [
+              "NIST SP 800-86 · 디지털 증거 처리",
+              "https://csrc.nist.gov/pubs/sp/800/86/final"
+            ]
+          ],
+          "checks": [
+            "확인된 범위와 미확인 가설을 나눴다.",
+            "조치의 승인·영향·증거·복구 조건을 기록했다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "해당 분야 ZIP을 풀고 forensic 폴더에서 실행합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿉니다.",
+              "파일은 합성 교육 자료입니다. 실습은 로컬 파일/메모리만 처리하며 실제 계정·서버·개인정보를 사용하지 않습니다. 원본은 보관하고 변경 과제에는 사본을 사용합니다."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": "05 · 운영체제 기록의 의미",
+      "intro": "Windows XML·Linux 인증·파일 이름과 객체를 출처 범위와 함께 해석합니다.",
+      "lessons": [
+        {
+          "id": "forensic.windows-events",
+          "title": "Windows 이벤트 XML의 원시 필드 읽기",
+          "goal": "네임스페이스와 이름 있는 필드로 이벤트를 읽고 시각·로그온 유형·기록 범위를 구분합니다.",
+          "concepts": [
+            "Windows 이벤트에는 화면의 번역된 설명 외에 Provider, EventID, Computer, EventRecordID, TimeCreated와 이름 붙은 EventData 필드가 있습니다. 같은 번호라도 공급자·채널·버전 맥락을 확인해야 합니다. 이 차시는 Event 구조를 닮게 만든 XML이며 실제 EVTX 바이너리를 파싱하지 않습니다.",
+            "EventData의 필드 위치는 고정 순서로 외우지 않고 Data의 Name 속성으로 찾습니다. 두 합성 기록은 IpAddress와 TargetUserName의 순서가 달라도 같은 이름의 값을 추출합니다. XML 네임스페이스가 있으므로 이름만 Event라고 검색하면 지원 레코드를 놓칠 수 있습니다.",
+            "표본의 4625는 실패, 4624는 성공 로그온 사례를 참고한 합성 이벤트이고 LogonType=3은 네트워크 로그온 맥락입니다. 성공 이벤트가 있다고 대화형 데스크톱 사용이나 특정 사람의 실제 의도를 증명하지 않습니다. 대상 계정·접속 정보·관련 로그를 함께 확인합니다.",
+            "EventRecordID는 모든 장비에서 유일한 사건 번호가 아닙니다. 이 파서는 한 컴퓨터/채널의 작은 합성 내보내기 안에서 중복을 검사합니다. 실제 통합 분석은 원본 출처·컴퓨터·채널·기록 ID를 함께 식별하고 UTC 정규화·보존 해시·획득 범위를 남겨야 합니다."
+          ],
+          "code": "python3 artifacts_round2.py windows",
+          "expected": "record=101 event=4625 utc=2026-10-02T00:00:00+00:00 user=alice type=3\nrecord=102 event=4624 utc=2026-10-02T00:00:10+00:00 user=alice type=3\nrecords=2 format=synthetic-xml",
+          "task": "XML 사본에서 두 번째 이벤트의 Data 순서를 뒤집어 결과가 유지되는지 확인하세요. 그다음 EventRecordID를 같은 값으로 바꿔 단일 내보내기 안의 중복 검사를 확인하세요.",
+          "hint": "TargetUserName은 위치가 아니라 Name으로 찾습니다. 중복 거부는 이 단일 출처 표본의 규칙입니다.",
+          "prerequisites": [
+            "forensic.logs",
+            "forensic.log-correlation"
+          ],
+          "files": [
+            "artifacts_round2.py",
+            "events-synthetic.xml"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 원시 필드와 정규화 시각 읽기",
+              "explanation": "단일 합성 내보내기의 두 기록을 읽습니다. 09:00:10+09:00이 UTC 00:00:10으로 바뀌는지 확인합니다.",
+              "code": "python3 artifacts_round2.py windows",
+              "expected": "record101 UTC 00:00:00, record102 UTC 00:00:10, 두 기록 모두 user=alice type=3이며 records=2입니다."
+            },
+            {
+              "title": "2. 필드 순서와 이름을 분리하기",
+              "explanation": "사본의 두 번째 EventData 안에서 Data 요소 순서를 바꾸되 Name과 값은 유지합니다.",
+              "code": "python3 artifacts_round2.py windows --source events-order.xml",
+              "expected": "원본과 같은 두 출력과 records=2입니다. 위치에 의존하지 않습니다."
+            },
+            {
+              "title": "3. 단일 출처의 중복 반례 보기",
+              "explanation": "다른 사본에서 두 번째 EventRecordID를 101로 바꿉니다. 출처가 다른 로그의 같은 번호까지 부정하는 검사는 아닙니다.",
+              "code": "python3 artifacts_round2.py windows --source events-duplicate.xml",
+              "expected": "첫 기록이 출력된 뒤 INVALID: missing/duplicate record ID, 종료 상태 2입니다. 오류 전 출력은 불완전한 결과입니다."
+            }
+          ],
+          "solution": {
+            "approach": [
+              "Data의 Name을 유지한 순서 변경은 추출 결과를 바꾸지 않습니다.",
+              "단일 컴퓨터/채널 안의 중복 ID는 오류로 기록하고, 오류 전 일부 출력으로 전체 성공을 주장하지 않습니다.",
+              "실제 여러 출처의 같은 EventRecordID는 가능하므로 컴퓨터·채널·출처를 포함한 복합 키와 관찰 범위를 적습니다."
+            ],
+            "expected": "이름 기반 추출·UTC 변환·단일 출처의 중복 범위와 실제 EVTX를 지원하지 않는다는 한계가 분명해야 합니다."
+          },
+          "questions": [
+            {
+              "prompt": "두 번째 EventData의 순서를 바꾸면 값은 어떻게 찾아야 하나요?",
+              "options": [
+                "세 번째 값을 사용자로 고정",
+                "Data의 Name 속성으로 조회",
+                "XML 파일명에서 추론"
+              ],
+              "answer": 1,
+              "explanation": "이름 기반 조회는 필드의 표시 순서 변화와 의미를 분리합니다."
+            },
+            {
+              "prompt": "다른 PC의 로그에도 EventRecordID101이 있으면?",
+              "options": [
+                "반드시 변조",
+                "항상 같은 사건",
+                "출처/컴퓨터/채널을 포함해 다른 기록일 수 있다"
+              ],
+              "answer": 2,
+              "explanation": "기록 번호는 전 세계적으로 유일하지 않습니다. 출처 범위를 포함한 식별이 필요합니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "4624를 사람이 직접 데스크톱에 들어온 증거로 단정한다.",
+              "correction": "로그온 유형·계정·관련 활동과 관찰 한계를 확인합니다."
+            },
+            {
+              "mistake": "이 XML 실습이 EVTX 획득과 파싱을 구현했다고 적는다.",
+              "correction": "제공한 신뢰 가능한 합성 XML의 원시 필드 해석만 수행합니다."
+            }
+          ],
+          "references": [
+            [
+              "Microsoft · Windows Event schema",
+              "https://learn.microsoft.com/en-us/windows/win32/wes/eventschema-schema"
+            ],
+            [
+              "Python ElementTree · XML과 네임스페이스",
+              "https://docs.python.org/3/library/xml.etree.elementtree.html"
+            ],
+            [
+              "Microsoft · 4624와 로그온 유형",
+              "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4624"
+            ]
+          ],
+          "checks": [
+            "필드 이름과 네임스페이스로 읽었다.",
+            "기록 번호가 유일한 출처 범위를 명시했다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "forensic ZIP을 풀고 해당 폴더로 이동합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿔 실행하세요.",
+              "원본은 보관하고 변경 과제에는 사본을 사용합니다. 제공한 작은 합성 입력만 오프라인에서 다루며 계정·외부 자원·실제 개인정보를 사용하지 않습니다."
+            ]
+          }
+        },
+        {
+          "id": "forensic.linux-auth",
+          "title": "Linux 인증과 sudo 요청의 증거 연결",
+          "goal": "성공/실패·계정·세션을 분리하고 권한 요청과 명령 완료의 차이를 설명합니다.",
+          "concepts": [
+            "Linux 인증 자료는 배포판과 설정에 따라 텍스트 파일·journal·다른 수집기에 남을 수 있습니다. 이 차시는 sshd와 sudo 개념을 사용하는 독자적인 JSONL 표본이며 실제 auth.log나 journal 바이너리 파서가 아닙니다. 형식이 비슷해도 원본 필드와 정책을 확인해야 합니다.",
+            "인증 실패 L11과 성공 L12는 PID와 세션이 서로 다릅니다. 같은 사용자 이름의 연속 기록이라고 동일 프로세스의 재시도나 공격 성공으로 확정하지 않습니다. 호스트·사용자·세션과 UTC 정렬을 기준으로 뒤의 sudo 요청이 어느 선행 성공 기록과 연결되는지 확인합니다.",
+            "L13은 alice/S22의 선행 성공 기록과 연결되고 allow 요청입니다. L14는 bob/S23의 deny 요청이고 연결된 성공 기록이 없습니다. linked-login=True는 해당 키의 앞선 기록이 있다는 뜻이며, 지금도 세션이 활성이라는 증명이나 sudo 명령 실행 완료의 증거는 아닙니다.",
+            "sudo의 허용·거부와 실행된 프로그램의 실제 종료 상태·출력은 다른 관측 단계입니다. 원본 로그의 감사 설정과 수집 범위가 부족하면 기록의 부재를 활동 부재로 바꿀 수 없습니다. 이 도구는 현재 PC의 계정·sudo 권한을 조회하거나 명령을 실행하지 않습니다."
+          ],
+          "code": "python3 artifacts_round2.py linux",
+          "expected": "L13 user=alice result=allow linked-login=True command=/usr/bin/id\nL14 user=bob result=deny linked-login=False command=/usr/bin/id\nexecution-outcome=NOT-PROVIDED",
+          "task": "JSONL 사본에서 L13의 session만 S99로 바꾸고 결과를 비교하세요. 명령이 실제로 성공했는지 확인하려면 어떤 추가 자료가 필요한지 두 가지 적으세요.",
+          "hint": "선행 로그인 연결 키는 host, user, session입니다. 요청의 allow를 명령의 성공 종료로 쓰지 마세요.",
+          "prerequisites": [
+            "forensic.log-correlation",
+            "forensic.incident-response"
+          ],
+          "files": [
+            "artifacts_round2.py",
+            "linux-auth.jsonl"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 인증과 권한 요청 단계 분리",
+              "explanation": "네 JSONL 행을 사건 ID·사용자·세션·결과로 정리하고 도구의 연결 결과를 봅니다.",
+              "code": "python3 artifacts_round2.py linux",
+              "expected": "L13 allow linked-login=True, L14 deny linked-login=False, execution-outcome=NOT-PROVIDED"
+            },
+            {
+              "title": "2. 세션 키의 반례 만들기",
+              "explanation": "L13의 세션만 S99로 고친 사본을 실행합니다. 계정과 허용 결과가 같아도 선행 로그인 연결은 달라집니다.",
+              "code": "python3 artifacts_round2.py linux --source linux-session.jsonl",
+              "expected": "L13 user=alice result=allow linked-login=False. L14는 기존과 같습니다."
+            },
+            {
+              "title": "3. 파일 행 순서와 사건 시각 구분",
+              "explanation": "원본 행 순서를 역순으로 저장한 사본을 실행합니다. 파서는 UTC와 ID로 정렬하므로 같은 선행 관계를 재구성합니다.",
+              "code": "python3 artifacts_round2.py linux --source linux-reversed.jsonl",
+              "expected": "원본과 동일한 L13/L14 연결 결과입니다. 시각 자체의 정확성은 별도 근거가 필요합니다."
+            }
+          ],
+          "solution": {
+            "approach": [
+              "L13 세션을 S99로 바꾸면 선행 성공 S22와 연결되지 않습니다. allow 자체는 유지됩니다.",
+              "실제 명령의 시작/종료 감사 자료, 종료 코드·출력 또는 프로세스 실행 기록을 요청합니다.",
+              "세션 종료·재사용·로그 누락은 이 표본에 없으므로 활성 세션과 명령 완료를 확정하지 않습니다."
+            ],
+            "expected": "인증 결과·세션 연결·sudo 허용·명령 완료를 네 단계로 구분한 기록이 있어야 합니다."
+          },
+          "questions": [
+            {
+              "prompt": "L13의 allow와 linked-login=True로 증명되지 않는 것은?",
+              "options": [
+                "동일 키의 선행 성공 기록이 있음",
+                "요청 결과가 allow임",
+                "실제 명령이 성공 종료했다는 사실"
+              ],
+              "answer": 2,
+              "explanation": "명령의 실행·종료·출력은 제공하지 않습니다. 요청 허용과 결과는 다릅니다."
+            },
+            {
+              "prompt": "사용자 alice만 같고 세션이 다르면?",
+              "options": [
+                "다른 세션 가능성을 남기고 동일 활동으로 자동 결합하지 않는다",
+                "항상 같은 프로세스이다",
+                "항상 공격자가 이름을 바꾼 것이다"
+              ],
+              "answer": 0,
+              "explanation": "계정명만으로 세션이나 프로세스의 동일성을 보장할 수 없습니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "allow를 명령 성공으로 번역한다.",
+              "correction": "요청 판정과 실행 결과 자료를 구분합니다."
+            },
+            {
+              "mistake": "로그인 기록이 연결되면 현재도 세션이 활성이라고 쓴다.",
+              "correction": "종료·재사용·수집 누락을 별도로 확인합니다."
+            }
+          ],
+          "references": [
+            [
+              "systemd · Journal fields",
+              "https://www.freedesktop.org/software/systemd/man/latest/systemd.journal-fields.html"
+            ],
+            [
+              "NIST SP800-86 · 자료 분석과 관찰 한계",
+              "https://csrc.nist.gov/pubs/sp/800/86/final"
+            ]
+          ],
+          "checks": [
+            "선행 성공과 요청을 복합 키로 연결했다.",
+            "권한 요청과 실행 결과의 차이를 적었다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "forensic ZIP을 풀고 해당 폴더로 이동합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿔 실행하세요.",
+              "원본은 보관하고 변경 과제에는 사본을 사용합니다. 제공한 작은 합성 입력만 오프라인에서 다루며 계정·외부 자원·실제 개인정보를 사용하지 않습니다."
+            ]
+          }
+        },
+        {
+          "id": "forensic.filesystem-records",
+          "title": "파일 이름·링크·시간 기록의 의미",
+          "goal": "한 파일시스템 스냅샷의 이름과 객체 식별자를 구분하고 시간·삭제 추론의 한계를 기록합니다.",
+          "concepts": [
+            "경로 이름은 파일 객체 자체와 같지 않습니다. 같은 파일시스템에서 여러 이름이 하나의 inode를 가리키는 하드링크가 있을 수 있습니다. 이 표본은 하나의 합성 파일시스템·한 시점에 한정하며 실제 NTFS/ext4나 디스크 이미지 구조를 읽지 않습니다.",
+            "R1의 notes.txt와 R2의 alias.txt는 inode42를 공유하고 links=2입니다. 따라서 관찰한 이름 두 개와 객체 한 개를 구분합니다. 서로 다른 장치의 inode 번호는 같을 수 있고 시간이 지나 재사용될 수도 있으므로 실제 분석은 장치/파일시스템·스냅샷 범위를 함께 식별해야 합니다.",
+            "Linux 계열의 ctime은 일반적으로 메타데이터 상태 변경 시각이며 생성 시각이라고 고정하지 않습니다. birth가 제공되지 않으면 UNKNOWN으로 남깁니다. mtime과 ctime의 차이는 권한·링크 등 여러 변화로 생길 수 있어 이 표만으로 특정 명령이나 조작을 단정하지 않습니다.",
+            "수집 목록에서 이름 하나가 빠졌다고 파일 내용이 삭제되거나 복구 불가능함이 증명되지 않습니다. 관찰 누락과 실제 unlink는 다른 주장입니다. 실제 마지막 하드링크 삭제도 열린 참조·파일시스템·덮어쓰기에 따라 후속 상태가 달라집니다. 이 실습은 자료 해석을 연습하며 실제 파일을 삭제하지 않습니다."
+          ],
+          "code": "python3 artifacts_round2.py filesystem",
+          "expected": "inode=42 observed-names=2 declared-links=2 paths=/work/notes.txt,/work/alias.txt\ninode=77 observed-names=1 declared-links=1 paths=/work/report.txt\nbirth-unknown=2 ctime-is-creation=False",
+          "task": "사본 목록에서 R2 행만 빼고 links 값은 그대로 두세요. 관찰 이름 수와 선언 링크 수가 다를 때 왜 실제 삭제를 단정할 수 없는지 쓰고, 추가 확인 자료를 제안하세요.",
+          "hint": "입력 목록 편집은 실제 파일시스템 명령이 아닙니다. inode 번호의 비교 범위도 적으세요.",
+          "prerequisites": [
+            "forensic.metadata",
+            "forensic.collection-plan"
+          ],
+          "files": [
+            "artifacts_round2.py",
+            "fs-records.json"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 이름 수와 객체 수 분리",
+              "explanation": "한 스냅샷의 R1/R2가 같은 inode를 가리킨다는 설정을 읽고 출력을 비교합니다.",
+              "code": "python3 artifacts_round2.py filesystem",
+              "expected": "inode42 observed-names=2 declared-links=2, inode77 observed-names=1 declared-links=1"
+            },
+            {
+              "title": "2. 불완전한 수집 목록의 반례",
+              "explanation": "사본의 records 배열에서 R2 객체만 제거합니다. 남은 R1의 links=2는 수정하지 않습니다.",
+              "code": "python3 artifacts_round2.py filesystem --source fs-partial.json",
+              "expected": "inode42 observed-names=1 declared-links=2, birth-unknown=1. 관찰 범위와 선언 값이 불일치합니다."
+            },
+            {
+              "title": "3. 생성 시각 누락의 한계 확인",
+              "explanation": "별도 사본에서 R3의 birth를 null로 바꿉니다. ctime을 생성 시각으로 대체하지 않습니다.",
+              "code": "python3 artifacts_round2.py filesystem --source fs-no-birth.json",
+              "expected": "birth-unknown=3 ctime-is-creation=False. inode별 이름 수는 원본과 같습니다."
+            }
+          ],
+          "solution": {
+            "approach": [
+              "R2를 목록에서 제거하면 관찰 이름은 한 개지만 선언 links는 2이므로 부분 수집 가능성을 적습니다.",
+              "동일 스냅샷의 전체 디렉터리 목록·파일시스템 식별자·삭제/변경 기록과 수집 범위를 추가로 확인합니다.",
+              "birth 부재는 UNKNOWN으로 두며 ctime을 생성 시각으로 채우거나 특정 사용자의 삭제로 단정하지 않습니다."
+            ],
+            "expected": "이름·객체·링크 선언·관찰 범위와 ctime/birth의 의미가 분리되어야 합니다."
+          },
+          "questions": [
+            {
+              "prompt": "목록에 이름 한 개, declared-links=2이면 가장 적절한 해석은?",
+              "options": [
+                "파일 내용이 반드시 삭제됐다",
+                "부분 목록 등 불일치 원인을 추가로 확인해야 한다",
+                "두 inode가 항상 동일하다"
+              ],
+              "answer": 1,
+              "explanation": "관찰 이름 수와 파일시스템 선언의 불일치는 수집 범위·갱신 시점 등을 검토할 단서입니다."
+            },
+            {
+              "prompt": "Linux 계열 ctime을 언제나 생성 시각이라고 써도 되나요?",
+              "options": [
+                "예, 이름이 creation을 뜻하므로",
+                "예, mtime보다 늦으면 가능하다",
+                "아니요, 상태 변경 시각과 생성 시각은 구분해야 한다"
+              ],
+              "answer": 2,
+              "explanation": "ctime은 일반적으로 메타데이터 상태 변경 시각입니다. birth 정보 유무와 플랫폼의 의미를 확인합니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "inode 숫자만 같으면 장치와 시점에 관계없이 같은 파일이다.",
+              "correction": "파일시스템/장치와 스냅샷 범위를 포함합니다."
+            },
+            {
+              "mistake": "수집 목록에서 사라진 이름을 실제 삭제 증거로 쓴다.",
+              "correction": "관찰 누락과 변경 사실은 별도 근거로 검증합니다."
+            }
+          ],
+          "references": [
+            [
+              "Linux man-pages · stat",
+              "https://man7.org/linux/man-pages/man2/stat.2.html"
+            ],
+            [
+              "Linux man-pages · link",
+              "https://man7.org/linux/man-pages/man2/link.2.html"
+            ]
+          ],
+          "checks": [
+            "이름과 객체의 동일성을 구분했다.",
+            "시간과 누락의 추론 한계를 적었다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "forensic ZIP을 풀고 해당 폴더로 이동합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿔 실행하세요.",
+              "원본은 보관하고 변경 과제에는 사본을 사용합니다. 제공한 작은 합성 입력만 오프라인에서 다루며 계정·외부 자원·실제 개인정보를 사용하지 않습니다."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": "06 · 메모리 단서와 관측 한계",
+      "intro": "영역 규칙과 시계/로그 범위를 명시해 주장의 강도를 조절합니다.",
+      "lessons": [
+        {
+          "id": "forensic.memory-triage",
+          "title": "메모리 영역 모형과 우선 조사 단서",
+          "goal": "프로세스별 영역·권한·백킹 정보를 읽고 검토 규칙과 악성 판정의 차이를 설명합니다.",
+          "concepts": [
+            "메모리 분석은 프로세스 목록 외에 주소 영역·권한·백킹 자료 등을 연결할 수 있습니다. 이 차시는 그 개념을 흉내 낸 JSON 스냅샷만 읽습니다. 실제 RAM 덤프를 획득하거나 Windows VAD 구조·커널 객체를 파싱하지 않으며 주소 안의 기계어 내용도 없습니다.",
+            "각 영역은 시작 주소와 크기로 반열린 구간 [start,start+size)을 표시합니다. M2는 8192에서 4096바이트이므로 [8192,12288)이며 끝 주소 12288은 범위에 포함하지 않습니다. 시작/크기의 자료형과 음수·0을 검사해 잘못된 범위 연산을 피합니다.",
+            "이 모형은 private 백킹이면서 쓰기 w와 실행 x가 함께 있는 영역만 REVIEW로 표시합니다. JIT 등 정상 기능에서도 이런 영역이 발생할 수 있고, 악성 동작은 RX나 기타 영역에도 숨을 수 있습니다. 이 규칙은 조사 우선순위의 단서이지 악성 분류기나 완전 탐지기가 아닙니다.",
+            "후속 확인에는 프로세스 출처·시작 시각·모듈/스레드 관계·실제 바이트·페이지 상태·로그 등이 필요합니다. 표본의 권한을 rwx에서 rx로 바꾸면 규칙 검토 수는 0이 되지만 위협 부재가 증명되지는 않습니다. 관찰 범위와 규칙의 거짓 양성/음성 가능성을 보고합니다."
+          ],
+          "code": "python3 artifacts_round2.py memory",
+          "expected": "M2 pid=500 private-WX=REVIEW range=[8192,12288)\nreview=1 verdict=NOT-A-MALWARE-VERDICT",
+          "task": "사본의 M2 권한을 rwx에서 rx로 바꾸고 검토 수를 비교하세요. 그다음 size=0인 사본을 실행하세요. 규칙 불일치와 잘못된 자료를 구분하고 추가 증거 세 가지를 적으세요.",
+          "hint": "REVIEW의 반대는 안전 판정이 아닙니다. 범위의 끝 주소는 포함되지 않습니다.",
+          "prerequisites": [
+            "forensic.host-triage",
+            "rev.integer-views"
+          ],
+          "files": [
+            "artifacts_round2.py",
+            "memory-model.json"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 범위와 규칙 읽기",
+              "explanation": "M2의 권한·백킹과 시작/크기를 확인한 뒤 반열린 구간을 계산합니다.",
+              "code": "python3 artifacts_round2.py memory",
+              "expected": "M2 pid=500 private-WX=REVIEW range=[8192,12288)\nreview=1 verdict=NOT-A-MALWARE-VERDICT"
+            },
+            {
+              "title": "2. 규칙 조건 하나만 변경",
+              "explanation": "M2의 permission을 rx로 바꾼 사본을 실행합니다. 다른 영역은 그대로 유지합니다.",
+              "code": "python3 artifacts_round2.py memory --source memory-rx.json",
+              "expected": "review=0 verdict=NOT-A-MALWARE-VERDICT. 이 규칙에 일치하는 영역이 없다는 뜻입니다."
+            },
+            {
+              "title": "3. 불가능한 크기 거부",
+              "explanation": "원본의 별도 사본에서 M2의 size를 0으로 만듭니다. 숫자 형식 오류와 관찰 단서 부재를 다르게 다룹니다.",
+              "code": "python3 artifacts_round2.py memory --source memory-invalid.json",
+              "expected": "INVALID: range must have nonnegative start and positive size, 종료 상태 2"
+            }
+          ],
+          "solution": {
+            "approach": [
+              "M2를 rwx에서 rx로 바꾸면 w 조건이 빠져 검토 수는 0이지만 안전하다고 쓰지 않습니다.",
+              "size=0은 빈 자료를 정상 영역으로 해석하지 않고 입력 오류로 분류합니다.",
+              "실제 바이트/역어셈블·프로세스/모듈 출처·스레드 시작/실행 기록 등 추가 근거를 요청하고 정상 JIT 가능성도 남깁니다."
+            ],
+            "expected": "영역 범위·규칙 일치·입력 오류·악성 판정의 차이와 추가 증거 세 가지를 기록합니다."
+          },
+          "questions": [
+            {
+              "prompt": "private-WX=REVIEW 한 건이 보이면 무엇을 뜻하나요?",
+              "options": [
+                "악성코드 확정",
+                "조사가 필요할 수 있는 모형 규칙의 일치",
+                "실제 메모리 덤프 획득 완료"
+              ],
+              "answer": 1,
+              "explanation": "정상 JIT도 가능하며 표본은 합성 JSON입니다. 규칙과 악성 판정은 다릅니다."
+            },
+            {
+              "prompt": "rwx를 rx로 바꿔 review=0이면?",
+              "options": [
+                "메모리 전체 안전이 증명됐다",
+                "프로세스는 실행되지 않았다",
+                "이 규칙의 일치가 없을 뿐 다른 위험은 별도 검토한다"
+              ],
+              "answer": 2,
+              "explanation": "규칙의 탐지 범위 밖 동작과 자료 누락 가능성이 남아 있습니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "쓰기와 실행이 모두 가능하면 항상 악성이다.",
+              "correction": "JIT 등 정상 기능과 독립 근거를 함께 검토합니다."
+            },
+            {
+              "mistake": "범위 끝 start+size를 포함한다.",
+              "correction": "반열린 구간으로 계산하고 경계 주소를 확인합니다."
+            }
+          ],
+          "references": [
+            [
+              "Microsoft · Memory protection constants",
+              "https://learn.microsoft.com/en-us/windows/win32/memory/memory-protection-constants"
+            ],
+            [
+              "NIST SP800-86 · 자료 분석과 관찰 한계",
+              "https://csrc.nist.gov/pubs/sp/800/86/final"
+            ]
+          ],
+          "checks": [
+            "합성 모형과 실제 메모리 분석을 구분했다.",
+            "우선 조사 규칙과 악성 판정을 분리했다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "forensic ZIP을 풀고 해당 폴더로 이동합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿔 실행하세요.",
+              "원본은 보관하고 변경 과제에는 사본을 사용합니다. 제공한 작은 합성 입력만 오프라인에서 다루며 계정·외부 자원·실제 개인정보를 사용하지 않습니다."
+            ]
+          }
+        },
+        {
+          "id": "forensic.evidence-coverage",
+          "title": "시계 오차·관측 범위·사건 순서",
+          "goal": "시간 보정의 불확실 구간과 로그 설정 범위를 근거로 주장 강도를 조절합니다.",
+          "concepts": [
+            "UTC로 바꾸는 것은 시간대 기준을 맞추는 일이며 장비 시계 자체의 오차를 수정하는 일과 다릅니다. 이 차시는 독자적인 초 단위 좌표에서 recorded-clock_ahead를 보정 중심으로 정하고 uncertainty만큼의 구간을 양쪽에 둡니다. 실제 NTP 동기화나 지연 측정은 수행하지 않습니다.",
+            "E31의 기록 100, 시계 빠름 8, 불확실성 2는 보정 구간 [90,94]입니다. E32의 기록 96, 시계 빠름 0, 불확실성 3은 [93,99]입니다. 원시 기록은 E32가 먼저처럼 보여도 보정 구간이 겹치므로 두 사건의 엄격한 선후를 확정하지 않습니다.",
+            "첫 구간의 최댓값이 둘째 구간의 최솟값보다 엄격히 작을 때만 이 모형은 A-BEFORE-B를 표시합니다. 경계가 접하는 경우에도 동시 가능성이 있으므로 ORDER-UNCERTAIN으로 남깁니다. 보정 값의 근거와 오차 범위를 모르면 그럴듯한 정렬 값만 만들어서는 안 됩니다.",
+            "coverage의 logging-enabled는 지정한 윈도의 설정 정보입니다. auth가 켜져 있어도 모든 행이 수집됐다는 증거는 아니며, process가 꺼져 있으면 프로세스 기록 부재를 실행 부재로 쓸 수 없습니다. 조사한 자료의 시간 범위·활성화·누락 가능성과 순서의 불확실성을 최종 주장 옆에 표시합니다."
+          ],
+          "code": "python3 artifacts_round2.py coverage",
+          "expected": "E31 corrected=[90,94]\nE32 corrected=[93,99]\nrelation=ORDER-UNCERTAIN\nsource=auth logging-enabled=True window=[80,120]\nsource=process logging-enabled=False window=[80,120]",
+          "task": "사본에서 두 이벤트의 uncertainty를 0으로 바꾸고 관계가 달라지는 이유를 설명하세요. 불확실성을 줄일 실제 근거와 process 기록 부재의 대안 설명도 각각 적으세요.",
+          "hint": "임의로 오차를 0으로 바꾸는 것은 실제 시계 정확도 개선이 아닙니다. 모형 조건의 영향을 보는 실험입니다.",
+          "prerequisites": [
+            "forensic.timeline",
+            "forensic.log-correlation"
+          ],
+          "files": [
+            "artifacts_round2.py",
+            "coverage.json"
+          ],
+          "walkthrough": [
+            {
+              "title": "1. 원시 시각과 보정 구간 분리",
+              "explanation": "각 사건의 중심과 양끝을 손으로 계산하고 출력과 비교합니다.",
+              "code": "python3 artifacts_round2.py coverage",
+              "expected": "E31 [90,94], E32 [93,99]가 겹쳐 ORDER-UNCERTAIN입니다."
+            },
+            {
+              "title": "2. 불확실성 가정의 영향 보기",
+              "explanation": "두 uncertainty만 0으로 바꾼 사본을 실행합니다. 다른 시계 보정 값은 유지합니다.",
+              "code": "python3 artifacts_round2.py coverage --source coverage-exact.json",
+              "expected": "E31 [92,92], E32 [96,96], relation=A-BEFORE-B. 오차가 0이라는 가정 아래의 결과입니다."
+            },
+            {
+              "title": "3. 관측 설정과 부재 해석 분리",
+              "explanation": "별도 사본에서 process의 enabled만 true로 바꿉니다. 실제 새 로그 행이 생기는지와 설정 출력 변화를 구분합니다.",
+              "code": "python3 artifacts_round2.py coverage --source coverage-enabled.json",
+              "expected": "source=process logging-enabled=True로 변하지만 이벤트 수와 순서 구간은 원본 그대로입니다."
+            }
+          ],
+          "solution": {
+            "approach": [
+              "uncertainty=0은 순서 A→B를 만들지만 실제 시계 오차가 0이라는 근거가 필요합니다.",
+              "동기화 상태·장비 오프셋 측정·수집 지연 근거 등으로 오차 범위를 검증해야 합니다.",
+              "process 기록 부재는 비활성·수집 범위 밖·누락 등의 가능성이 있어 실행 없음으로 단정하지 않습니다."
+            ],
+            "expected": "원시 값·보정 구간·가정의 근거·활성화 설정과 자료 완전성의 차이가 명확해야 합니다."
+          },
+          "questions": [
+            {
+              "prompt": "보정 구간 [90,94]와 [93,99]에서 엄격한 선후는?",
+              "options": [
+                "앞의 중심이 작으므로 확정",
+                "겹치므로 이 모형에서는 불확실",
+                "기록 번호가 작은 쪽이 항상 먼저"
+              ],
+              "answer": 1,
+              "explanation": "구간이 겹치면 가능한 순서가 하나로 고정되지 않습니다. 중심 정렬만으로 강한 주장을 하면 안 됩니다."
+            },
+            {
+              "prompt": "process 로그 설정이 꺼져 있고 실행 행이 없다면?",
+              "options": [
+                "실행 부재를 확정할 수 없다",
+                "아무 프로세스도 실행되지 않았다",
+                "파일 해시만 알면 설정은 불필요하다"
+              ],
+              "answer": 0,
+              "explanation": "관측 가능성이 없는 자료의 부재는 활동 부재의 증거가 되기 어렵습니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "UTC 정규화로 시계 오차까지 자동 해결됐다고 생각한다.",
+              "correction": "시간대 변환과 장비 오차 보정을 분리합니다."
+            },
+            {
+              "mistake": "enabled=true이면 로그가 완전하다고 단정한다.",
+              "correction": "설정·수집 범위·전송 손실·보존 기간을 추가로 확인합니다."
+            }
+          ],
+          "references": [
+            [
+              "Python datetime · 시간대",
+              "https://docs.python.org/3/library/datetime.html"
+            ],
+            [
+              "NIST SP800-86 · 자료 분석과 관찰 한계",
+              "https://csrc.nist.gov/pubs/sp/800/86/final"
+            ]
+          ],
+          "checks": [
+            "시간대와 시계 오차를 분리했다.",
+            "겹치는 구간과 관측 부재의 주장 한계를 적었다."
+          ],
+          "environment": {
+            "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",
+            "details": [
+              "forensic ZIP을 풀고 해당 폴더로 이동합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿔 실행하세요.",
+              "원본은 보관하고 변경 과제에는 사본을 사용합니다. 제공한 작은 합성 입력만 오프라인에서 다루며 계정·외부 자원·실제 개인정보를 사용하지 않습니다."
+            ]
+          }
+        }
+      ]
     }
   ],
   "sources": [
@@ -552,6 +1725,18 @@
     [
       "Wireshark 사용자 안내 · 영어",
       "https://www.wireshark.org/docs/wsug_html_chunked/ChapterWork.html"
+    ],
+    [
+      "NIST SP 800-86 · 디지털 증거 처리",
+      "https://csrc.nist.gov/pubs/sp/800/86/final"
+    ],
+    [
+      "NIST SP 800-61r3 · 대응과 복구",
+      "https://csrc.nist.gov/pubs/sp/800/61/r3/final"
+    ],
+    [
+      "Python sqlite3 · 데이터베이스 읽기",
+      "https://docs.python.org/3/library/sqlite3.html"
     ]
   ]
 }

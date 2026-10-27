@@ -1,0 +1,38 @@
+{
+  "description": "Fictional authorization snapshots. No credentials, endpoints, API calls, or cluster actions.",
+  "identity_allow": ["ReadNotes", "WriteNotes"],
+  "boundary_allow": ["ReadNotes"],
+  "permission_requests": [
+    {"id": "P1", "action": "ReadNotes"},
+    {"id": "P2", "action": "WriteNotes"},
+    {"id": "P3", "action": "ReadNotes", "explicit_deny": true},
+    {"id": "P4", "action": "DeleteNotes", "resource_policy_grant": true}
+  ],
+  "role": {"name": "pod-reader", "namespace": "learn", "rules": [{"api_group": "", "resource": "pods", "verbs": ["get", "list"]}]},
+  "binding": {"namespace": "learn", "role": "pod-reader", "subject": {"namespace": "learn", "name": "viewer"}},
+  "rbac_requests": [
+    {"id": "K1", "namespace": "learn", "subject_namespace": "learn", "subject_name": "viewer", "api_group": "", "resource": "pods", "verb": "get"},
+    {"id": "K2", "namespace": "prod", "subject_namespace": "learn", "subject_name": "viewer", "api_group": "", "resource": "pods", "verb": "get"},
+    {"id": "K3", "namespace": "learn", "subject_namespace": "learn", "subject_name": "viewer", "api_group": "", "resource": "secrets", "verb": "get"},
+    {"id": "K4", "namespace": "learn", "subject_namespace": "other", "subject_name": "viewer", "api_group": "", "resource": "pods", "verb": "get"}
+  ],
+  "metadata_options": {"endpoint_enabled": true, "tokens_required": true},
+  "instance_role_actions": ["ReadNotes"],
+  "metadata_requests": [
+    {"id": "M1", "network_reachable": true, "token_valid": false},
+    {"id": "M2", "network_reachable": true, "token_valid": true},
+    {"id": "M3", "network_reachable": false, "token_valid": true}
+  ],
+  "private_requests": [
+    {"id": "E1", "dns_target": "private-endpoint", "network_path": true, "endpoint_policy": true, "identity_permission": true},
+    {"id": "E2", "dns_target": "public-endpoint", "network_path": true, "endpoint_policy": true, "identity_permission": true},
+    {"id": "E3", "dns_target": "private-endpoint", "network_path": true, "endpoint_policy": true, "identity_permission": false},
+    {"id": "E4", "dns_target": "private-endpoint", "network_path": true, "endpoint_policy": false, "identity_permission": true}
+  ],
+  "lease": {"actor": "responder", "resource": "training-service", "actions": ["ReadHealth", "RestartService"], "approved_by": "incident-lead", "start": "2026-10-26T10:00:00Z", "expires": "2026-10-26T10:15:00Z", "revoked": false},
+  "lease_requests": [
+    {"id": "B1", "actor": "responder", "resource": "training-service", "action": "ReadHealth", "at": "2026-10-26T10:14:59Z"},
+    {"id": "B2", "actor": "responder", "resource": "training-service", "action": "ReadHealth", "at": "2026-10-26T10:15:00Z"},
+    {"id": "B3", "actor": "responder", "resource": "training-service", "action": "DeleteDatabase", "at": "2026-10-26T10:10:00Z"}
+  ]
+}

@@ -95,7 +95,10 @@ for (const course of courses) {
     lessonCount++;
   }
 }
-check(lessonCount === 62, '62 authored lessons');
+const registeredIDs = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/lesson-ids.json'), 'utf8'));
+assert.deepEqual([...ids].sort(), registeredIDs, 'Every registered lesson has a navigable page');
+check(lessonCount === registeredIDs.length, 'Complete authored lesson count');
+check(home.document.querySelector('.mindmap-hint').textContent.includes(`${lessonCount}개 차시`), 'Homepage count is generated from the curriculum');
 
 // Resolve the authored CSS, including responsive overrides, rather than copying a layout fixture.
 const CSSOM = require(require.resolve('cssom', { paths: [path.dirname(require.resolve('linkedom'))] }));
@@ -180,9 +183,11 @@ button.click();
 check(button.getAttribute('aria-pressed') === 'true', 'Completion button toggles');
 check(lesson.progress.has('foundation.python-values'), 'Completion stored by ID');
 check(hint.hasAttribute('open') && button === lesson.document.getElementById('completeLesson'), 'Completion preserves DOM, open hints and focus target');
-check(lesson.document.querySelector('[data-count]').textContent.includes('1 / 10'), 'Course total updates');
+const foundationTotal = home.courses.foundation.modules.flatMap(module => module.lessons).length;
+check(lesson.document.querySelector('[data-count]').textContent.includes(`1 / ${foundationTotal}`), 'Course total updates');
 const reload = openPage('tracks/foundation/index.html', '', store);
-check(reload.document.querySelector('[data-count]').textContent.includes('1 / 10'), 'Reload retains completion');
+check(reload.document.querySelector('[data-count]').textContent.includes(`1 / ${foundationTotal}`), 'Reload retains completion');
+check(!reload.progress.has('foundation.text-bytes'), 'Added lessons are not automatically completed by an old saved record');
 check(reload.document.querySelector('#continueLearning').getAttribute('href').includes('environment.html'), 'Completed last lesson does not skip first missing lesson');
 const homepage = openPage('index.html', '', store);
 check(!homepage.document.querySelector('#catalogSummary'), 'Homepage stays focused on the radial map after progress changes');
@@ -250,10 +255,17 @@ const guide = parseHTML(fs.readFileSync(path.join(ROOT, 'guides/linux.html'), 'u
 const returns = guide.querySelectorAll('a[href="../index.html#mindmap"]');
 check(returns.length === 2, 'Standalone Linux guide has working return links');
 for (const a of returns) {
-  const standalone = { window: {} }; standalone.window.parent = standalone.window;
-  check(vm.runInNewContext(`(function(){${a.getAttribute('onclick')}})()`, standalone) === undefined, 'Standalone return follows its real href');
-  let closed = false;
-  const embedded = { window: { parent: { showMainGuide: () => { closed = true; } } } };
-  check(vm.runInNewContext(`(function(){${a.getAttribute('onclick')}})()`, embedded) === false && closed, 'Embedded guide closes overlay');
+  check(a.hasAttribute('data-return-guide') && !a.hasAttribute('onclick'), 'Guide link has CSP-compatible behavior hook');
+  for (const mode of ['standalone','embedded','cross-origin']) {
+    let handler, closed=false, prevented=false;
+    const window = {};
+    window.parent = mode === 'standalone' ? window : {location:{origin:mode==='embedded'?'https://example.test':'https://other.test'},showMainGuide(){closed=true;}};
+    vm.runInNewContext(fs.readFileSync(path.join(ROOT,'js/linux-guide-page.js'),'utf8'),{
+      window, location:{origin:'https://example.test'},
+      document:{querySelectorAll(){return [{addEventListener(name,fn){handler=fn;}}];}}
+    });
+    handler({preventDefault(){prevented=true;}});
+    check(mode==='embedded' ? closed && prevented : !closed && !prevented, `Guide return ${mode} uses the appropriate navigation`);
+  }
 }
 console.log(`PASS: ${checks} checks; 9 courses and ${lessonCount} lesson deep links; migration, backup, storage failures and navigation.`);

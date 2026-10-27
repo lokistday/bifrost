@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="파일을 추출하기 전에 목록과 경로 후보를 검사하고 안전한 추출의 추가 조건을 설명합니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="압축 목록·경로·자원 한도 검토 — Misc · Bifrost">
+<meta property="og:description" content="파일을 추출하기 전에 목록과 경로 후보를 검사하고 안전한 추출의 추가 조건을 설명합니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/tracks/misc/archive-inspection.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/misc/archive-inspection.html">
+<title>압축 목록·경로·자원 한도 검토 — Misc · Bifrost</title>
+<script src="../../js/theme.js"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../../css/study.css?v=learning-a66aac410152">
+<script src="../../js/catalog.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/courses/misc.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/learning.js" defer></script>
+</head>
+<body class="learning-page" data-course="misc" data-course-number="03" data-view="lesson" data-lesson-id="misc.archive-inspection" style="--course-accent:var(--map-orange)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">문제 해결·자동화 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="misc.archive-inspection">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../index.html#mindmap">학습 지도</a><span aria-hidden="true">/</span><a href="./">Misc</a><span aria-hidden="true">/</span><span aria-current="page">6차시</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar"><a class="back-link" href="./">← Misc 전체 과정</a><div class="course-stats"><span data-count="misc"></span>
+        <div class="course-meter" role="progressbar" aria-label="Misc 완료 진도" aria-valuemin="0" aria-valuemax="100" data-meter="misc"><span></span></div>
+      </div>
+        <nav aria-label="차시 목차">
+          <details >
+            <summary>01 · 단서와 데이터 파이프라인<span class="caption" data-module-count="0"></span></summary>
+            <ol><li><a class="side-lesson" href="triage.html" >
+              <span class="lesson-dot" data-dot="misc.triage" aria-hidden="true"></span><span>문제 분류와 가설 세우기<small class="completion-label" data-completion="misc.triage"></small></span></a></li><li><a class="side-lesson" href="pipeline.html" >
+              <span class="lesson-dot" data-dot="misc.pipeline" aria-hidden="true"></span><span>바이트 변환과 중간 검증<small class="completion-label" data-completion="misc.pipeline"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>02 · 도구와 재현<span class="caption" data-module-count="1"></span></summary>
+            <ol><li><a class="side-lesson" href="automation.html" >
+              <span class="lesson-dot" data-dot="misc.automation" aria-hidden="true"></span><span>작은 CLI와 입력 검증<small class="completion-label" data-completion="misc.automation"></small></span></a></li><li><a class="side-lesson" href="writeup.html" >
+              <span class="lesson-dot" data-dot="misc.writeup" aria-hidden="true"></span><span>풀이 기록과 역변환 검증<small class="completion-label" data-completion="misc.writeup"></small></span></a></li></ol>
+          </details>
+          <details open>
+            <summary>03 · 구조화와 탐색<span class="caption" data-module-count="2"></span></summary>
+            <ol><li><a class="side-lesson" href="structured-parsing.html" >
+              <span class="lesson-dot" data-dot="misc.structured-parsing" aria-hidden="true"></span><span>정규식 전체 일치와 오류 행 보존<small class="completion-label" data-completion="misc.structured-parsing"></small></span></a></li><li><a class="side-lesson" href="archive-inspection.html" aria-current="page">
+              <span class="lesson-dot" data-dot="misc.archive-inspection" aria-hidden="true"></span><span>압축 목록·경로·자원 한도 검토<small class="completion-label" data-completion="misc.archive-inspection"></small></span></a></li><li><a class="side-lesson" href="graph-search.html" >
+              <span class="lesson-dot" data-dot="misc.graph-search" aria-hidden="true"></span><span>그래프 탐색과 최단 경로의 조건<small class="completion-label" data-completion="misc.graph-search"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>04 · 제약과 재현성<span class="caption" data-module-count="3"></span></summary>
+            <ol><li><a class="side-lesson" href="constraint-solving.html" >
+              <span class="lesson-dot" data-dot="misc.constraint-solving" aria-hidden="true"></span><span>제약 조건과 해의 유일성 검증<small class="completion-label" data-completion="misc.constraint-solving"></small></span></a></li><li><a class="side-lesson" href="reproducible-results.html" >
+              <span class="lesson-dot" data-dot="misc.reproducible-results" aria-hidden="true"></span><span>정규화·재현성·결과 무결성 검증<small class="completion-label" data-completion="misc.reproducible-results"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>05 · 컨테이너와 매체 자료<span class="caption" data-module-count="4"></span></summary>
+            <ol><li><a class="side-lesson" href="container-identification.html" >
+              <span class="lesson-dot" data-dot="misc.container-identification" aria-hidden="true"></span><span>파일 매직과 바깥·안쪽 형식 구분<small class="completion-label" data-completion="misc.container-identification"></small></span></a></li><li><a class="side-lesson" href="pixel-data.html" >
+              <span class="lesson-dot" data-dot="misc.pixel-data" aria-hidden="true"></span><span>PPM 헤더와 RGB 픽셀 채널 읽기<small class="completion-label" data-completion="misc.pixel-data"></small></span></a></li><li><a class="side-lesson" href="byte-statistics.html" >
+              <span class="lesson-dot" data-dot="misc.byte-statistics" aria-hidden="true"></span><span>바이트 분포와 엔트로피의 해석 한계<small class="completion-label" data-completion="misc.byte-statistics"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>06 · 자원 예산과 배치 재개<span class="caption" data-module-count="5"></span></summary>
+            <ol><li><a class="side-lesson" href="bounded-decompression.html" >
+              <span class="lesson-dot" data-dot="misc.bounded-decompression" aria-hidden="true"></span><span>해제 출력 한도와 스트림 경계 검증<small class="completion-label" data-completion="misc.bounded-decompression"></small></span></a></li><li><a class="side-lesson" href="resumable-batch.html" >
+              <span class="lesson-dot" data-dot="misc.resumable-batch" aria-hidden="true"></span><span>배치 출처와 재개 체크포인트 검증<small class="completion-label" data-completion="misc.resumable-batch"></small></span></a></li></ol>
+          </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
+      </aside><article class="lesson-article">
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/misc.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">03 · 구조화와 탐색 · 6 / 14</div><h1>압축 목록·경로·자원 한도 검토</h1><p class="lesson-objective">파일을 추출하기 전에 목록과 경로 후보를 검사하고 안전한 추출의 추가 조건을 설명합니다.</p></div></header>
+          <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>화면에 보이는 문자열과 파일의 원시 바이트는 같나요?</p><details><summary>판단 기준과 보충 자료</summary><p>인코딩·컨테이너·압축을 거치며 표현이 달라집니다. 변환 순서·크기 제한·중간 검증을 기록합니다.</p><a href="../../guides/bridges.html#bytes">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
+          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>오프라인 · Python 3.10 이상 · 표준 라이브러리</strong></p><ul><li>해당 분야 ZIP을 풀고 misc 폴더에서 실행합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿉니다.</li><li>파일은 합성 교육 자료입니다. 실습은 로컬 파일/메모리만 처리하며 실제 계정·서버·개인정보를 사용하지 않습니다. 원본은 보관하고 변경 과제에는 사본을 사용합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="triage.html">문제 해결·자동화 · 문제 분류와 가설 세우기 ↗</a></li><li><a href="../foundation/paths.html">공통 기초 · 경로와 작업용 사본 ↗</a></li></ul>
+            </section>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>압축 파일을 받으면 확장자를 믿고 바로 풀기보다 내부 목록과 크기·압축 방식·경로를 먼저 확인합니다. 이 실습은 zipfile로 메모리 안에 notes.txt와 ../outside.txt 두 항목을 만든 뒤 목록만 읽습니다. 디스크에는 아무 파일도 추출하지 않습니다.</p><figure class="learning-visual" data-visual-id="misc.archive-inspection"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교표</span><h3>추출하기 전에 목록을 보세요</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="추출하기 전에 목록을 보세요 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 272" width="760" height="272" role="img" aria-labelledby="visual-misc-archive-inspection-title visual-misc-archive-inspection-desc" focusable="false"><title id="visual-misc-archive-inspection-title">추출하기 전에 목록을 보세요</title><desc id="visual-misc-archive-inspection-desc">고정 메모리 ZIP은 notes.txt와 ../outside.txt를 포함합니다. 최소 이름 검사에서 정상 상대경로는 후보, 상위 폴더 이동은 거부됩니다. 파일은 추출하지 않습니다.</desc><defs><marker id="visual-misc-archive-inspection-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone "><rect class="v-table-head" x="28" y="20" width="230" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="41" y="47">항목</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="258" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="271" y="47">크기</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="495" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="508" y="47">판정</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="78" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="105">notes.txt</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="105">9바이트</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="105">CANDIDATE</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="136" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="163">../outside.txt</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="163">13바이트</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="163">REJECT</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="194" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="221">실제 추출</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="221">0개</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="221">수행 안 함</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">이름 검사는 자원·링크·충돌 검토를 대신하지 않습니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>고정 메모리 ZIP은 notes.txt와 ../outside.txt를 포함합니다. 최소 이름 검사에서 정상 상대경로는 후보, 상위 폴더 이동은 거부됩니다. 파일은 추출하지 않습니다.</p></details></figure><p>../outside.txt 같은 상대 경로는 의도한 폴더의 밖을 가리킬 수 있습니다. safe_member는 역슬래시를 슬래시로 정규화하고 절대경로·..·콜론을 거부하는 최소한의 이름 검사입니다. Windows 드라이브 경로도 콜론을 포함하므로 이 모형에서는 후보에서 제외됩니다.</p><p>정상처럼 보이는 이름이 CANDIDATE가 되는 것은 안전한 추출을 보장하지 않습니다. 심볼릭 링크, Windows 장치 이름, 기존 파일 덮어쓰기, 대소문자 충돌, 실제 대상 경로 확인 등은 이 작은 함수가 다루지 않습니다. 따라서 PASS나 SAFE 대신 CANDIDATE로 표시합니다.</p><p>작은 압축 파일도 해제 뒤 큰 자원을 요구할 수 있습니다. 개별/총 해제 크기, 파일 수, 중첩 깊이, 시간 제한과 압축비를 함께 고려해야 합니다. 헤더의 file_size만 신뢰하지 말고 실제 읽기 한도도 적용해야 하지만 이 실습은 고정 소형 ZIP 목록 검사만 하며 안전한 범용 추출기를 구현하지 않습니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>경로 검사 한 함수가 안전한 압축 해제를 완성한다.</dt><dd>파일시스템 의미·링크·충돌·자원 한도를 별도로 다룹니다.</dd><dt>압축 파일의 용량만 보고 처리 자원을 정한다.</dt><dd>해제 크기·개수·깊이·시간과 실제 읽기량을 제한합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/misc.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/misc/toolbox.py" download>toolbox.py ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 오프라인 · Python 3.10 이상 · 표준 라이브러리</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 toolbox.py archive</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>notes.txt size=9 CANDIDATE
+../outside.txt size=13 REJECT
+extracted=0</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>목록만 읽기</h3><p>메모리 ZIP의 두 항목 이름과 해제 크기를 확인합니다. extracted=0이 실제 추출을 수행하지 않았음을 명시합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 오프라인 · Python 3.10 이상 · 표준 라이브러리</span></div><pre><code>python3 toolbox.py archive</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>notes.txt size=9 CANDIDATE
+../outside.txt size=13 REJECT
+extracted=0</pre></div></li><li><h3>경로 규칙의 반례 시험</h3><p>Linux/macOS Bash와 Windows PowerShell 모두 아래 큰따옴표 명령을 사용합니다. 역슬래시는 Python 문자열에 이중으로 씁니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 오프라인 · Python 3.10 이상 · 표준 라이브러리</span></div><pre><code>python3 -c &quot;from toolbox import safe_member; print([safe_member(x) for x in [&#39;/tmp/a&#39;,&#39;C:\\temp\\a&#39;,&#39;notes/../a&#39;,&#39;notes/a.txt&#39;]])&quot;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>[False, False, False, True]</pre></div></li><li><h3>이름 검사 범위의 한계 보기</h3><p>Windows 장치 이름 CON도 함수가 허용하는지 확인합니다. 이름 검사의 통과와 모든 플랫폼의 안전성을 구분합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 오프라인 · Python 3.10 이상 · 표준 라이브러리</span></div><pre><code>python3 -c &quot;from toolbox import safe_member; print(safe_member(&#39;CON&#39;))&quot;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>True. 모형이 장치 이름 규칙을 구현하지 않았다는 한계를 보여 줍니다.</pre></div></li></ol></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>safe_member에 /tmp/a, C:\temp\a, notes/../a, notes/a.txt를 전달해 판정을 표로 만드세요. CANDIDATE인 이름도 추출 전 필요한 추가 조건 세 가지를 쓰세요.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>도구는 파일을 풀지 않습니다. CANDIDATE는 이름 검사 한 단계를 통과했다는 뜻입니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>절대경로 /tmp/a, 드라이브 경로 C:\temp\a, 상위 이동 notes/../a는 False이며 notes/a.txt는 True입니다.</li><li>추가 조건으로 링크/장치 이름, 실제 대상 경로와 기존 파일 충돌, 전체/개별 자원 한도를 적습니다.</li><li>CON의 True는 의도한 최소 이름 검사의 한계이며 실제 파일로 만들거나 추출하지 않습니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>네 경로의 판정과 CANDIDATE의 한계·자원 제한·실제 추출 없음이 명시되어야 합니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>압축 목록에 ../note와 절대 경로가 있을 때 추출 전에 검사할 항목을 적으세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>경로 이탈·링크·총 해제량·파일 수·중첩·중복 이름을 검사합니다. 목록 검사만으로 모든 파서 취약점이 해결된다고 주장하지 않습니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>추출 전에 목록과 경로를 확인했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>CANDIDATE와 안전한 추출의 차이를 설명했다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/misc/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. notes/a.txt가 CANDIDATE이면 바로 풀어도 안전한가요?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>이름 검사 외 링크·대상 경로·충돌·자원 한도가 필요</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>예, 어떤 OS에서도 안전</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>예, 확장자가 txt라 실행될 수 없다</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 이름 검사 외 링크·대상 경로·충돌·자원 한도가 필요</strong></p><p>이 함수는 제한된 문자열 규칙만 확인하며 범용 안전 추출기가 아닙니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. 작은 ZIP 파일에서 메모리를 과도하게 쓸 수 있는 이유는?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>ZIP은 항상 네트워크 접속을 한다</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>압축된 크기와 해제 뒤 크기가 다를 수 있기 때문</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>파일명은 항상 암호화되기 때문</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 압축된 크기와 해제 뒤 크기가 다를 수 있기 때문</strong></p><p>압축비·개수·중첩·총 해제 크기와 실제 읽기 한도를 고려해야 합니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>추출 전에 목록과 경로를 확인했다.</li><li>CANDIDATE와 안전한 추출의 차이를 설명했다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="structured-parsing.html"><small>← 이전 차시</small>정규식 전체 일치와 오류 행 보존</a>
+            <a href="graph-search.html"><small>다음 차시 →</small>그래프 탐색과 최단 경로의 조건</a></nav>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://docs.python.org/3/library/zipfile.html" target="_blank" rel="noopener noreferrer">Python zipfile · 목록과 경로 주의사항 ↗</a></li>
+        <li><a href="https://docs.python.org/3/library/pathlib.html#pure-paths" target="_blank" rel="noopener noreferrer">Python pathlib · 순수 경로 ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

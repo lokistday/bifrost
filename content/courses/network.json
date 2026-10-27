@@ -2,7 +2,7 @@
   "id": "network",
   "title": "Network Security",
   "label": "네트워크 보안",
-  "subtitle": "패킷 관찰을 출발점으로 웹·시스템·클라우드를 연결하는 방어 설계 과정입니다.",
+  "subtitle": "패킷 관찰에서 출발해 경로·정책·탐지·대응 근거를 연결하는 방어 설계 과정입니다.",
   "level": "중급 · 통합 과정",
   "prereqs": [
     "foundation.network",
@@ -11,7 +11,7 @@
     "web.authorization",
     "cloud.vpc"
   ],
-  "outcome": "통신 경로와 신뢰 경계를 설계하고 정책·탐지·변경 영향까지 근거로 검증합니다.",
+  "outcome": "통신 경로와 상태를 설명하고 오탐·미탐과 사건 영향의 불확실성을 포함한 방어 검증안을 만듭니다.",
   "modules": [
     {
       "title": "01 · 분석을 위한 프로토콜",
@@ -854,7 +854,7 @@
         },
         {
           "id": "network.capstone",
-          "title": "종합: 작은 서비스 방어 설계",
+          "title": "중간 종합: 작은 서비스 방어 설계",
           "goal": "분석 결과를 정책 변경·탐지·검증·롤백으로 연결합니다.",
           "concepts": [
             "이 종합 과제는 Web, DB, 관리 경로가 있는 가상 서비스입니다. PCAP은 정상 프로토콜 관찰용, flows.csv는 별도의 합성 정책 검토용입니다. 두 파일을 같은 실제 세션의 증거로 결합해서는 안 됩니다.",
@@ -960,6 +960,1079 @@
           ]
         }
       ]
+    },
+    {
+      "title": "04 · 경로·상태·운영 검증",
+      "intro": "경로·주소 변환·연결 상태를 추적하고 탐지 수치와 사건 증거를 함께 평가합니다.",
+      "lessons": [
+        {
+          "id": "network.routing",
+          "title": "최장 접두사와 돌아오는 경로",
+          "goal": "라우팅의 최장 접두사 선택과 보안 정책의 허용 판정을 구분합니다.",
+          "concepts": [
+            "라우터는 목적지 주소가 속하는 경로들을 찾고 가장 긴 접두사를 우선합니다. 10.20.1.7은 기본 경로 /0, 사설망 /8, 애플리케이션망 /16 모두에 포함되지만 이 표에서는 /16의 app 경로를 선택합니다. 목록의 맨 앞이라는 이유로 기본 경로를 고르면 더 구체적인 경로가 무시됩니다.",
+            "경로가 있다는 것은 다음 전달 위치를 정할 수 있다는 뜻입니다. 방화벽 허용, 애플리케이션 인증, 목적지의 정상 동작을 증명하지 않습니다. 반대로 정책이 허용해도 경로가 없거나 반환 경로가 다르면 통신이 실패할 수 있습니다.",
+            "요청 방향과 응답 방향의 경로를 따로 그립니다. 서로 다른 경로로 돌아오는 비대칭 통신은 상태를 공유하지 않는 중간 장비에서 관찰 누락이나 차단으로 이어질 수 있습니다. 장애를 정책 한 줄로만 설명하기 전에 양방향 경로를 확인합니다.",
+            "실습은 IPv4의 접두사 길이만 비교합니다. 동일 길이의 경로 간 우선순위, 동적 라우팅, 비용, 정책 기반 라우팅과 실제 장비 변경은 생략합니다. 결과를 운영 라우팅 테이블이나 패킷 전달의 증명으로 사용하지 않습니다."
+          ],
+          "code": "python3 defense_models.py routing",
+          "expected": "prefix=10.20.0.0/16 next_hop=app",
+          "task": "작업 사본에서 routes의 10.20.0.0/16 항목을 제거하고 10.20.1.7의 다음 경로를 예측·실행하세요. 요청 경로와 응답 경로도 각각 그림으로 남깁니다.",
+          "hint": "/16을 지워도 /8과 /0이 남습니다. 일치하는 후보 중 prefixlen이 가장 큰 것을 고르세요.",
+          "checks": [
+            "결과의 근거와 반례를 설명하고 과제의 변경 결과를 기록했다.",
+            "교육 모형의 생략 사항과 실제 환경에서 필요한 추가 검증을 구분했다."
+          ],
+          "files": [
+            "defense_models.py",
+            "defense-models.json",
+            "ADVANCED-GUIDE.md"
+          ],
+          "prerequisites": [
+            "network.addressing",
+            "network.segmentation"
+          ],
+          "environment": {
+            "label": "오프라인 모델 실습 · Python 3.10 이상",
+            "details": [
+              "network ZIP을 풀고 defense_models.py와 defense-models.json가 있는 폴더에서 실행합니다. 추가 패키지나 외부 계정이 필요하지 않습니다.",
+              "Linux/WSL/macOS 명령은 python3입니다. Windows PowerShell에서는 python3 부분을 py -3로 바꿉니다.",
+              "파일 변경 과제는 복사본과 --input 옵션을 사용합니다. 결과는 교육 모형에 한정하며 운영 보안 검증을 대신하지 않습니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 후보 경로 읽기",
+              "explanation": "세 경로가 일반적인 것에서 구체적인 것으로 겹친다는 점을 읽습니다.",
+              "code": "python3 -c \"from defense_models import load;print([r['prefix'] for r in load()['routes']])\"",
+              "expected": "['0.0.0.0/0', '10.0.0.0/8', '10.20.0.0/16']"
+            },
+            {
+              "title": "2. 최장 일치 경로 선택",
+              "explanation": "/16은 같은 목적지에 일치하는 후보 중 가장 구체적입니다.",
+              "code": "python3 defense_models.py routing",
+              "expected": "prefix=10.20.0.0/16 next_hop=app"
+            },
+            {
+              "title": "3. 다른 목적지 비교",
+              "explanation": "다른 사설망과 문서용 공인 주소가 서로 다른 경로를 선택하는지 확인합니다.",
+              "code": "python3 defense_models.py routing --destination 10.30.1.7\npython3 defense_models.py routing --destination 203.0.113.20",
+              "expected": "prefix=10.0.0.0/8 next_hop=core\nprefix=0.0.0.0/0 next_hop=wan"
+            }
+          ],
+          "solution": {
+            "approach": [
+              "원본의 세 prefix와 next_hop을 표로 적습니다.",
+              "/16을 제외한 사본에서 /8과 /0이 여전히 일치함을 확인합니다.",
+              "최장 일치가 /8로 바뀌어 core를 선택한다고 예측한 뒤 --input 사본으로 검증합니다."
+            ],
+            "expected": "사본은 prefix=10.0.0.0/8 next_hop=core입니다. 경로의 존재만으로 방화벽 허용과 반환 통신의 성공을 결론 내리지 않습니다."
+          },
+          "questions": [
+            {
+              "prompt": "10.20.1.7에 /0, /8, /16이 일치합니다. 이 모형의 선택은?",
+              "options": [
+                "목록 첫 행인 /0",
+                "가장 긴 /16",
+                "숫자가 작은 /8"
+              ],
+              "answer": 1,
+              "explanation": "가장 긴 접두사가 가장 구체적인 목적지 집합입니다."
+            },
+            {
+              "prompt": "경로와 허용 정책이 있지만 응답이 보이지 않습니다. 다음 확인은?",
+              "options": [
+                "암호 알고리즘만 바꾼다.",
+                "라우팅 성공을 로그인 성공으로 본다.",
+                "반환 경로와 응답 방향 관측 위치를 확인한다."
+              ],
+              "answer": 2,
+              "explanation": "경로·정책·서비스는 별도 조건입니다. 비대칭 경로와 관찰 누락도 검토합니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "첫 번째로 일치한 기본 경로를 바로 선택한다.",
+              "correction": "일치하는 경로 중 가장 긴 접두사를 선택합니다."
+            },
+            {
+              "mistake": "경로가 있으면 서비스도 안전하고 연결 가능하다고 한다.",
+              "correction": "정책, 반환 경로, 서비스 상태와 인증을 각각 검증합니다."
+            }
+          ],
+          "references": [
+            [
+              "RFC 1812 · 라우터의 경로 선택",
+              "https://www.rfc-editor.org/rfc/rfc1812"
+            ],
+            [
+              "Python · ipaddress",
+              "https://docs.python.org/3/library/ipaddress.html"
+            ]
+          ]
+        },
+        {
+          "id": "network.nat-correlation",
+          "title": "NAT 주소·포트·시간으로 로그 연결",
+          "goal": "공유 공인 IP만으로 내부 호스트를 단정하지 않고 변환 기록을 대조합니다.",
+          "concepts": [
+            "NAPT는 여러 내부 통신을 하나의 외부 주소와 서로 다른 포트에 대응시킬 수 있습니다. 외부 로그의 공인 IP 하나만으로 내부 호스트를 고를 수 없습니다. 원래 주소·포트, 변환 주소·포트, 목적지와 기록 시점이 함께 필요합니다.",
+            "실습에서 40001은 10.20.1.7, 40002는 10.20.1.8에 연결됩니다. 두 내부 호스트의 원래 포트가 51000으로 같아도 변환 포트가 다르면 구분됩니다. 실습은 TCP만 가정하고 destination 문자열에 목적지 주소와 포트를 묶었습니다. 실제 분석에서는 프로토콜도 키에 포함합니다.",
+            "변환은 영구 정보가 아닙니다. 포트 재사용과 상태 삭제가 있으므로 사건 시각을 변환의 유효 구간과 비교합니다. 표본은 같은 길이의 UTC 형식이며 start 이상 end 미만입니다. 종료 뒤의 NAT02는 현재 자료로 연결할 수 없어 UNKNOWN입니다.",
+            "현장에서는 시계 오차, 이중 NAT, 프록시, 장비 식별자와 로그 공백을 더 검토합니다. 여러 매핑이 일치하면 하나를 임의로 고르지 않고 모호함을 보고합니다. 호스트 주소를 알아도 사람이나 계정의 행위자는 별도 증거가 필요합니다."
+          ],
+          "code": "python3 defense_models.py nat",
+          "expected": "NAT01 matches=1 private=10.20.1.7\nNAT02 matches=0 private=UNKNOWN\nNAT03 matches=1 private=10.20.1.8",
+          "task": "사본에서 NAT01의 public_port를 40002로 바꾸고 결과를 비교하세요. NAT02의 UNKNOWN을 사건 부재로 단정할 수 없는 이유와 실제로 더 필요한 연결 필드를 적습니다.",
+          "hint": "포트뿐 아니라 목적지와 시간도 일치해야 합니다. 종료 시각은 포함하지 않습니다.",
+          "checks": [
+            "결과의 근거와 반례를 설명하고 과제의 변경 결과를 기록했다.",
+            "교육 모형의 생략 사항과 실제 환경에서 필요한 추가 검증을 구분했다."
+          ],
+          "files": [
+            "defense_models.py",
+            "defense-models.json",
+            "ADVANCED-GUIDE.md"
+          ],
+          "prerequisites": [
+            "network.routing",
+            "forensic.timeline"
+          ],
+          "environment": {
+            "label": "오프라인 모델 실습 · Python 3.10 이상",
+            "details": [
+              "network ZIP을 풀고 defense_models.py와 defense-models.json가 있는 폴더에서 실행합니다. 추가 패키지나 외부 계정이 필요하지 않습니다.",
+              "Linux/WSL/macOS 명령은 python3입니다. Windows PowerShell에서는 python3 부분을 py -3로 바꿉니다.",
+              "파일 변경 과제는 복사본과 --input 옵션을 사용합니다. 결과는 교육 모형에 한정하며 운영 보안 검증을 대신하지 않습니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 변환 표와 관측 표 구분",
+              "explanation": "nat는 변환 표, observations는 외부에서 본 접속 표입니다.",
+              "code": "python3 -c \"from defense_models import load;d=load();print(len(d['nat']),len(d['observations']))\"",
+              "expected": "2 3"
+            },
+            {
+              "title": "2. 세 관측 대조",
+              "explanation": "외부 포트가 다르거나 유효 시간이 지난 경우를 분리합니다.",
+              "code": "python3 defense_models.py nat",
+              "expected": "NAT01 matches=1 private=10.20.1.7\nNAT02 matches=0 private=UNKNOWN\nNAT03 matches=1 private=10.20.1.8"
+            },
+            {
+              "title": "3. 종료 경계 확인",
+              "explanation": "원본을 바꾸지 않고 관측 시각을 매핑 종료 시각과 같게 만듭니다.",
+              "code": "python3 -c \"from defense_models import load,correlate_nat;d=load();o=dict(d['observations'][0]);o['time']=d['nat'][0]['end'];print(correlate_nat(o,d['nat']))\"",
+              "expected": "[]"
+            }
+          ],
+          "solution": {
+            "approach": [
+              "NAT01의 포트만 바꾼 작업 사본을 --input으로 읽습니다.",
+              "NAT01이 10.20.1.8과 일치하는지 확인하고 원본 결과와 비교합니다.",
+              "UNKNOWN의 대안으로 매핑 만료·시간 오차·기록 유실을 적고 추가 장비·프로토콜·신원 기록을 구분합니다."
+            ],
+            "expected": "변경한 NAT01은 matches=1 private=10.20.1.8입니다. 일치 없음과 활동 없음, 호스트 식별과 사람 식별을 각각 구분합니다."
+          },
+          "questions": [
+            {
+              "prompt": "두 외부 접속의 공인 IP가 같으면 같은 내부 호스트인가요?",
+              "options": [
+                "포트·목적지·시간·변환 기록도 확인해야 한다.",
+                "언제나 같다.",
+                "IP 끝자리만 보면 된다."
+              ],
+              "answer": 0,
+              "explanation": "주소 공유와 포트 재사용 때문에 공인 IP 하나로 내부 연결을 유일하게 정할 수 없습니다."
+            },
+            {
+              "prompt": "매핑 종료 뒤 관측이 UNKNOWN입니다. 적절한 해석은?",
+              "options": [
+                "접속이 없었다는 증명이다.",
+                "현재 변환 자료로 연결하지 못했다.",
+                "해당 사람의 행위를 부정하는 증명이다."
+              ],
+              "answer": 1,
+              "explanation": "조회한 자료의 범위를 벗어난 결과입니다. 보존 공백과 시계 오차 등도 검토합니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "공인 IP를 곧바로 사용자 ID로 쓴다.",
+              "correction": "주소·호스트·세션·신원을 별도 증거로 연결합니다."
+            },
+            {
+              "mistake": "매핑을 시간 제한 없는 정보로 본다.",
+              "correction": "생성·만료 시각과 포트 재사용을 확인합니다."
+            }
+          ],
+          "references": [
+            [
+              "RFC 3022 · Traditional NAT",
+              "https://www.rfc-editor.org/rfc/rfc3022"
+            ],
+            [
+              "RFC 5382 · TCP NAT 동작",
+              "https://www.rfc-editor.org/rfc/rfc5382"
+            ]
+          ]
+        },
+        {
+          "id": "network.connection-state",
+          "title": "연결 상태와 응답 허용의 조건",
+          "goal": "새 연결 허용과 기존 연결의 응답 허용을 상태 전이로 설명합니다.",
+          "concepts": [
+            "포트만 보는 정책과 연결 상태를 추적하는 정책은 판단 정보가 다릅니다. 허용된 새 연결이 시작되었는지, 역방향 패킷이 그 연결의 응답인지 확인하면 모든 인바운드 포트를 열지 않고도 응답을 처리할 수 있습니다.",
+            "모형은 SYN을 pending, 역방향 SYN_ACK를 reply-seen, 다시 ACK를 established로 바꿉니다. DATA는 같은 연결 키가 established일 때만 허용합니다. 키는 클라이언트·서버 주소와 포트의 조합이며 프로토콜은 TCP로 고정했습니다.",
+            "S5는 다른 클라이언트와 포트의 데이터라 서버 포트가 443이어도 기존 연결 응답이 아닙니다. S6의 CLOSE 뒤에는 상태가 삭제되어 S7을 거부합니다. 실제 TCP 종료는 여러 방향의 FIN·ACK와 타임아웃을 다루므로 이 한 단계 종료와 같지 않습니다.",
+            "이 코드는 상태의 필요성을 보여주는 상태 기계입니다. 시퀀스 번호·윈도·재전송·시간 만료·장비 간 상태 공유·공격 내성은 구현하지 않았습니다. 운영 필터로 설치하지 않고 실제 장비 문서의 상태 처리와 비교하는 데 사용합니다."
+          ],
+          "code": "python3 defense_models.py state",
+          "expected": "S1 ALLOW state=pending\nS2 ALLOW state=reply-seen\nS3 ALLOW state=established\nS4 ALLOW state=established\nS5 DENY state=none\nS6 ALLOW state=none\nS7 DENY state=none",
+          "task": "작업 사본에서 S2를 제거하고 S3·S4의 결과를 예측하세요. 실제 방화벽에 필요한 시간·시퀀스·종료 검증도 세 항목 적습니다.",
+          "hint": "SYN만 봤다고 established가 되지는 않습니다. S3은 reply-seen을 전제로 합니다.",
+          "checks": [
+            "결과의 근거와 반례를 설명하고 과제의 변경 결과를 기록했다.",
+            "교육 모형의 생략 사항과 실제 환경에서 필요한 추가 검증을 구분했다."
+          ],
+          "files": [
+            "defense_models.py",
+            "defense-models.json",
+            "ADVANCED-GUIDE.md"
+          ],
+          "prerequisites": [
+            "network.transport",
+            "network.policy"
+          ],
+          "environment": {
+            "label": "오프라인 모델 실습 · Python 3.10 이상",
+            "details": [
+              "network ZIP을 풀고 defense_models.py와 defense-models.json가 있는 폴더에서 실행합니다. 추가 패키지나 외부 계정이 필요하지 않습니다.",
+              "Linux/WSL/macOS 명령은 python3입니다. Windows PowerShell에서는 python3 부분을 py -3로 바꿉니다.",
+              "파일 변경 과제는 복사본과 --input 옵션을 사용합니다. 결과는 교육 모형에 한정하며 운영 보안 검증을 대신하지 않습니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 이벤트 순서 읽기",
+              "explanation": "S1~S4는 같은 연결이고 S5는 별도 연결입니다.",
+              "code": "python3 -c \"from defense_models import load;print([(r['id'],r['event']) for r in load()['state_events']])\"",
+              "expected": "[('S1', 'SYN'), ('S2', 'SYN_ACK'), ('S3', 'ACK'), ('S4', 'DATA'), ('S5', 'DATA'), ('S6', 'CLOSE'), ('S7', 'DATA')]"
+            },
+            {
+              "title": "2. 상태 전이 확인",
+              "explanation": "상태를 생성·이동·삭제하는 이벤트와 상태 없이 도착한 이벤트를 비교합니다.",
+              "code": "python3 defense_models.py state",
+              "expected": "S1 ALLOW state=pending\nS2 ALLOW state=reply-seen\nS3 ALLOW state=established\nS4 ALLOW state=established\nS5 DENY state=none\nS6 ALLOW state=none\nS7 DENY state=none"
+            },
+            {
+              "title": "3. 응답 단계 생략 실험",
+              "explanation": "S2를 제외하면 S3과 S4가 established에 도달하지 못하는지 검증합니다.",
+              "code": "python3 -c \"from defense_models import load,track;d=load();print(track([r for r in d['state_events'] if r['id']!='S2'])[1:3])\"",
+              "expected": "[('S3', False, 'pending'), ('S4', False, 'pending')]"
+            }
+          ],
+          "solution": {
+            "approach": [
+              "S2가 없으면 pending에서 reply-seen으로 이동하지 못한다고 예측합니다.",
+              "S3과 S4 거부와 pending 상태 유지를 확인합니다.",
+              "실제 구현에는 pending 만료, 양방향 종료, 시퀀스 검증과 상태 용량 관리 등이 필요함을 기록합니다."
+            ],
+            "expected": "S2 제거 뒤 S3·S4는 DENY입니다. 모형의 pending은 자동 만료되지 않으므로 운영 장비처럼 해석할 수 없습니다."
+          },
+          "questions": [
+            {
+              "prompt": "443에서 온 S5를 거부하는 이유는?",
+              "options": [
+                "암호화 포트이기 때문이다.",
+                "다른 연결 키라 기존 상태가 없기 때문이다.",
+                "모든 응답은 금지되기 때문이다."
+              ],
+              "answer": 1,
+              "explanation": "서비스 포트가 같아도 다른 연결입니다. 해당 키의 established 상태가 필요합니다."
+            },
+            {
+              "prompt": "이 모형을 운영 방화벽으로 바로 쓸 수 없는 이유는?",
+              "options": [
+                "Python이라 항상 안전하지 않다.",
+                "정적 표본은 설명할 수 없다.",
+                "실제 TCP와 운영에 필요한 검증을 생략했다."
+              ],
+              "answer": 2,
+              "explanation": "시퀀스·만료·재전송과 운영 요구의 생략이 핵심 한계입니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "SYN 한 번 뒤의 데이터는 모두 신뢰한다.",
+              "correction": "연결 키와 전이 순서를 확인하고 장비의 타임아웃·시퀀스 처리도 검토합니다."
+            },
+            {
+              "mistake": "stateful이면 웹 인증도 해결된다.",
+              "correction": "연결 상태는 사용자 신원과 애플리케이션 내용의 정상성을 보장하지 않습니다."
+            }
+          ],
+          "references": [
+            [
+              "NIST SP 800-41r1 · 방화벽 정책",
+              "https://csrc.nist.gov/pubs/sp/800/41/r1/final"
+            ],
+            [
+              "RFC 9293 · TCP 상태",
+              "https://www.rfc-editor.org/rfc/rfc9293"
+            ]
+          ]
+        },
+        {
+          "id": "network.detection-metrics",
+          "title": "정밀도·재현율과 탐지 임계값",
+          "goal": "탐지 결과를 오탐·미탐으로 나누고 임계값 변경의 비용을 계산합니다.",
+          "concepts": [
+            "경보가 많다는 사실만으로 탐지가 좋다고 할 수 없습니다. 별도 정답이 있는 표본에서 공격을 경보한 TP, 정상을 경보한 FP, 공격을 놓친 FN, 정상을 정상으로 둔 TN을 셉니다. 실습의 attack 라벨은 제공된 정답이며 운영에서는 쉽게 얻을 수 없습니다.",
+            "정밀도는 TP/(TP+FP)로 경보 중 실제 공격의 비율입니다. 재현율은 TP/(TP+FN)로 실제 공격 중 찾아낸 비율입니다. 두 분모가 다르므로 정밀도가 높아져도 놓친 공격은 늘 수 있습니다. 분모가 0이면 임의로 0이나 1을 주지 않고 정의되지 않았음을 표시합니다.",
+            "임계값 3에서 TP=2, FP=2, FN=1, TN=3입니다. 임계값 6에서는 공격 하나만 잡아 TP=1, FP=0, FN=2, TN=5가 됩니다. 정밀도 1.000만 내세우면 미탐이 늘어난 사실을 감추게 됩니다.",
+            "작은 표본의 숫자는 실제 배포 성능이 아닙니다. 정상 업무 비율, 기간, 자산별 차이, 검토 인력과 경보 비용을 함께 평가하고 별도 검증 표본으로 다시 측정합니다. 임계값을 고른 자료와 평가 자료를 같게 쓰면 과도하게 좋아 보일 수 있습니다."
+          ],
+          "code": "python3 defense_models.py metrics",
+          "expected": "TP=2 FP=2 FN=1 TN=3\nprecision=0.500 recall=0.667",
+          "task": "임계값 3·5·6·99의 혼동 행렬과 정밀도·재현율을 비교하세요. 경보 인력이 줄어도 미탐 비용을 함께 보고해야 하는 이유를 씁니다.",
+          "hint": "99에서는 경보가 없어 정밀도의 분모가 0입니다. 재현율은 실제 공격 3건이 분모입니다.",
+          "checks": [
+            "결과의 근거와 반례를 설명하고 과제의 변경 결과를 기록했다.",
+            "교육 모형의 생략 사항과 실제 환경에서 필요한 추가 검증을 구분했다."
+          ],
+          "files": [
+            "defense_models.py",
+            "defense-models.json",
+            "ADVANCED-GUIDE.md"
+          ],
+          "prerequisites": [
+            "network.detection",
+            "foundation.python-flow"
+          ],
+          "environment": {
+            "label": "오프라인 모델 실습 · Python 3.10 이상",
+            "details": [
+              "network ZIP을 풀고 defense_models.py와 defense-models.json가 있는 폴더에서 실행합니다. 추가 패키지나 외부 계정이 필요하지 않습니다.",
+              "Linux/WSL/macOS 명령은 python3입니다. Windows PowerShell에서는 python3 부분을 py -3로 바꿉니다.",
+              "파일 변경 과제는 복사본과 --input 옵션을 사용합니다. 결과는 교육 모형에 한정하며 운영 보안 검증을 대신하지 않습니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 기준 임계값 측정",
+              "explanation": "8개 정답 표본에서 점수>=3을 경보로 봅니다.",
+              "code": "python3 defense_models.py metrics",
+              "expected": "TP=2 FP=2 FN=1 TN=3\nprecision=0.500 recall=0.667"
+            },
+            {
+              "title": "2. 엄격한 기준과 비교",
+              "explanation": "임계값 6의 높은 정밀도와 낮은 재현율을 함께 읽습니다.",
+              "code": "python3 defense_models.py metrics --threshold 6",
+              "expected": "TP=1 FP=0 FN=2 TN=5\nprecision=1.000 recall=0.333"
+            },
+            {
+              "title": "3. 경보가 없는 분모 처리",
+              "explanation": "경보 0건을 정밀도 100%로 표현할 수 없습니다.",
+              "code": "python3 defense_models.py metrics --threshold 99",
+              "expected": "TP=0 FP=0 FN=3 TN=5\nprecision=undefined recall=0.000"
+            }
+          ],
+          "solution": {
+            "approach": [
+              "기준의 TP+FP=4와 TP+FN=3을 따로 계산합니다.",
+              "5에서 TP=2, FP=0, FN=1, TN=5이고 precision=1.000 recall=0.667임을 확인합니다.",
+              "6과 99의 재현율 하락·정밀도 미정의를 보고하고 독립 검증 표본을 제안합니다."
+            ],
+            "expected": "5는 이 표본에서 3보다 오탐이 적지만 다른 환경까지 일반화할 수 없습니다. 정밀도·재현율과 운영 비용을 함께 제시합니다."
+          },
+          "questions": [
+            {
+              "prompt": "경보 4건 중 공격 2건이고 전체 공격은 3건입니다. 올바른 값은?",
+              "options": [
+                "정밀도 2/3, 재현율 2/4",
+                "정밀도 4/2, 재현율 3/2",
+                "정밀도 2/4, 재현율 2/3"
+              ],
+              "answer": 2,
+              "explanation": "정밀도의 분모는 경보, 재현율의 분모는 실제 공격입니다."
+            },
+            {
+              "prompt": "경보가 하나도 없는 규칙의 정밀도는?",
+              "options": [
+                "분모 0으로 정의되지 않았다고 표시한다.",
+                "항상 100%이다.",
+                "탐지 건수를 임의로 1로 둔다."
+              ],
+              "answer": 0,
+              "explanation": "TP+FP가 0입니다. 미정의와 모든 공격을 놓친 재현율을 구분합니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "정밀도 1.0이면 공격을 모두 찾았다고 한다.",
+              "correction": "재현율과 FN을 함께 확인합니다."
+            },
+            {
+              "mistake": "8개 표본의 임계값을 운영 표준으로 정한다.",
+              "correction": "새 표본·시간대·자산 유형으로 검증하고 비용을 측정합니다."
+            }
+          ],
+          "references": [
+            [
+              "Google · 분류의 정밀도와 재현율",
+              "https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall"
+            ],
+            [
+              "NIST SP 800-61r3 · 탐지와 대응",
+              "https://csrc.nist.gov/pubs/sp/800/61/r3/final"
+            ]
+          ]
+        },
+        {
+          "id": "network.incident-correlation",
+          "title": "네트워크 증거 연결과 대응 판단",
+          "goal": "여러 관측 지점을 연결해 접속 시도와 실제 영향을 구분합니다.",
+          "concepts": [
+            "DNS 질의, 방화벽 허용, 웹 응답은 서로 다른 관측입니다. DNS 성공은 이름 해석, allow는 해당 지점의 전달 정책, HTTP 401은 애플리케이션이 인증을 요구하거나 실패를 반환한 결과입니다. 어느 하나만으로 침해 성공이나 데이터 유출을 증명하지 않습니다.",
+            "표본은 R-17이라는 요청 ID가 각 자료에 연결되어 있다고 가정합니다. 실제 DNS와 방화벽 로그에 애플리케이션 ID가 자동으로 생기지는 않습니다. 주소·포트·시간·프록시 ID 등 연결 근거와 오차를 별도로 기록해야 합니다.",
+            "R-17의 세 기록을 시각순으로 정렬하면 resolved→allow→401입니다. 다른 R-18의 200을 같은 요청의 성공으로 합치지 않습니다. 비슷한 시간이나 같은 IP만으로 다른 요청을 섞으면 잘못된 사건 이야기를 만들 수 있습니다.",
+            "영향 판단에는 인증 성공, 리소스 접근, 전송량·데이터 범위, 호스트와 클라우드 증거가 더 필요합니다. 격리·차단을 검토할 때 서비스 영향, 증거 손실, 승인과 되돌리기 조건도 정합니다. 실습은 수동 판단 자료이며 자동 차단 도구가 아닙니다."
+          ],
+          "code": "python3 defense_models.py response",
+          "expected": "10:00:00Z dns resolved\n10:00:01Z firewall allow\n10:00:02Z app 401\ncorrelated=3 conclusion=attempt_observed impact=UNCONFIRMED",
+          "task": "확인한 사실, 미확인 영향, 다음 수집 자료, 차단의 업무 영향과 복구 조건을 네 칸으로 쓰세요. 사본에서 R-17의 app 기록을 빼고 증거 불충분으로 바뀌는지도 확인합니다.",
+          "hint": "실제 기록과 가설을 나누세요. allow와 401만으로 유출 여부를 결론 내릴 수 없습니다.",
+          "checks": [
+            "결과의 근거와 반례를 설명하고 과제의 변경 결과를 기록했다.",
+            "교육 모형의 생략 사항과 실제 환경에서 필요한 추가 검증을 구분했다."
+          ],
+          "files": [
+            "defense_models.py",
+            "defense-models.json",
+            "ADVANCED-GUIDE.md"
+          ],
+          "prerequisites": [
+            "network.nat-correlation",
+            "network.detection-metrics",
+            "forensic.timeline"
+          ],
+          "environment": {
+            "label": "오프라인 모델 실습 · Python 3.10 이상",
+            "details": [
+              "network ZIP을 풀고 defense_models.py와 defense-models.json가 있는 폴더에서 실행합니다. 추가 패키지나 외부 계정이 필요하지 않습니다.",
+              "Linux/WSL/macOS 명령은 python3입니다. Windows PowerShell에서는 python3 부분을 py -3로 바꿉니다.",
+              "파일 변경 과제는 복사본과 --input 옵션을 사용합니다. 결과는 교육 모형에 한정하며 운영 보안 검증을 대신하지 않습니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 저장 순서와 사건 순서 구분",
+              "explanation": "app이 먼저 저장됐어도 사건 시각이 먼저인 것은 아닙니다.",
+              "code": "python3 -c \"from defense_models import load;print([r['source'] for r in load()['response']])\"",
+              "expected": "['app', 'dns', 'firewall', 'app']"
+            },
+            {
+              "title": "2. 요청 ID와 시각 적용",
+              "explanation": "R-17을 고른 뒤 같은 날짜·UTC 형식의 time으로 정렬합니다.",
+              "code": "python3 defense_models.py response",
+              "expected": "10:00:00Z dns resolved\n10:00:01Z firewall allow\n10:00:02Z app 401\ncorrelated=3 conclusion=attempt_observed impact=UNCONFIRMED"
+            },
+            {
+              "title": "3. 다른 요청 성공 분리",
+              "explanation": "200은 R-18이므로 R-17 성공의 근거로 쓰지 않습니다.",
+              "code": "python3 -c \"from defense_models import load;print([(r['request_id'],r['result']) for r in load()['response'] if r['source']=='app'])\"",
+              "expected": "[('R-17', '401'), ('R-18', '200')]"
+            }
+          ],
+          "solution": {
+            "approach": [
+              "R-17의 이름 해석·전달 허용·401까지만 사실로 씁니다.",
+              "인증 우회·유출은 미확인으로 두고 해당 요청의 리소스·전송 기록을 요청합니다.",
+              "app 제거 사본은 correlated=2와 insufficient_evidence인지 확인합니다. 차단 계획에는 관리 경로·영향·검증·되돌리기를 적습니다."
+            ],
+            "expected": "원본은 시도 관측·영향 미확인이고 app 제거 사본은 증거 불충분입니다. 401 하나로 다른 경로의 침해도 없었다고 단정하지 않습니다."
+          },
+          "questions": [
+            {
+              "prompt": "allow 뒤 앱이 401을 반환했습니다. 입증된 것은?",
+              "options": [
+                "파일 유출 성공",
+                "전달 허용과 해당 요청의 401 응답",
+                "모든 시스템이 침해되지 않았음"
+              ],
+              "answer": 1,
+              "explanation": "각 관측 지점이 확인한 사실까지만 결론 내립니다."
+            },
+            {
+              "prompt": "R-17 같은 ID가 실제 DNS 로그에도 항상 있나요?",
+              "options": [
+                "항상 있다.",
+                "없으면 모든 분석을 포기한다.",
+                "실제 연결 필드와 시계 오차를 확인해야 한다."
+              ],
+              "answer": 2,
+              "explanation": "공통 ID는 합성 표본의 편의입니다. 실제 로그의 주소·포트·시각·중간 장비를 확인해야 합니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "같은 시간대의 HTTP 200을 모두 같은 요청에 합친다.",
+              "correction": "요청 ID나 다른 명시적 연결 근거를 먼저 검증합니다."
+            },
+            {
+              "mistake": "의심 IP 차단으로 대응이 끝난다.",
+              "correction": "업무 영향과 증거 보존, 관리 경로, 검증과 복구 조건을 함께 정합니다."
+            }
+          ],
+          "references": [
+            [
+              "NIST SP 800-61r3 · 사고 대응",
+              "https://csrc.nist.gov/pubs/sp/800/61/r3/final"
+            ],
+            [
+              "NIST SP 800-41r1 · 경계 정책",
+              "https://csrc.nist.gov/pubs/sp/800/41/r1/final"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "05 · 프로토콜 경계와 관측 품질",
+      "intro": "주소 계열·바이트 재조립·캐시·크기 제한·시간 경계가 분석과 방어 판단을 바꾸는 경우를 연습합니다.",
+      "lessons": [
+        {
+          "id": "network.ipv6-boundaries",
+          "title": "IPv6 주소 범위와 정책의 빈틈",
+          "goal": "주소 계열과 인터페이스 범위를 구분하고 IPv4 규칙의 적용 한계를 확인합니다.",
+          "concepts": [
+            "한 서비스가 IPv4와 IPv6를 함께 사용하면 두 주소 계열의 경로와 정책을 각각 검토해야 합니다. IPv4의 192.0.2.0/24 허용 규칙이 2001:db8:20::5까지 뜻하지는 않습니다. 문자열 접두사가 아니라 주소를 파싱하고 같은 계열의 CIDR 안에 있는지 비교합니다.",
+            "IPv6의 loopback ::1, link-local fe80::/10, unique-local fc00::/7은 서로 다른 범위를 가집니다. link-local 주소는 어떤 링크·인터페이스인지 함께 알아야 연결 대상을 해석할 수 있습니다. 인터페이스를 안다는 사실은 해당 접근을 허용한다는 뜻과도 다릅니다.",
+            "F2는 IPv6 허용 규칙이 없어서 DENY, F3는 link-local인데 인터페이스가 없어서 SCOPE_REQUIRED입니다. F4는 unique-local이지만 그 이유만으로 신뢰하지 않고 기본 거부합니다. 이 출력은 모형의 결정이며 실제 장비가 자동으로 같은 기본값을 갖는다는 뜻은 아닙니다.",
+            "scope 함수는 학습에 필요한 몇 범주만 분류합니다. unspecified·multicast·전환 주소 등 IPv6 전체 분류를 구현하지 않았고 other-ipv6를 공인·인터넷 도달 가능으로 해석하면 안 됩니다. 문서용 2001:db8::/32 표본에는 실제 접속하지 않습니다."
+          ],
+          "code": "python3 protocol_models.py ipv6",
+          "expected": "F1 scope=ipv4 decision=ALLOW\nF2 scope=other-ipv6 decision=DENY\nF3 scope=link-local decision=SCOPE_REQUIRED\nF4 scope=unique-local decision=DENY",
+          "task": "사본에 2001:db8:20::/64의 443 허용만 추가해 F2가 바뀌는지 확인하세요. F3에 interface=lab0만 넣으면 왜 여전히 허용이 아닌지, IPv6에서 추가로 확인할 제어 메시지·경로 조건도 적습니다.",
+          "hint": "주소 계열, 링크 범위, 허용 정책은 별도 항목입니다. 실제 IPv6에서는 필요한 ICMPv6 처리도 검토합니다.",
+          "checks": [
+            "원본의 예상 결과와 변경 과제의 결과를 근거로 비교했다.",
+            "실제로 검증한 보장과 모형에서 생략한 조건을 나누어 기록했다."
+          ],
+          "files": [
+            "protocol_models.py",
+            "protocol-models.json",
+            "ROUND2-GUIDE.md"
+          ],
+          "prerequisites": [
+            "network.addressing",
+            "network.routing"
+          ],
+          "environment": {
+            "label": "로컬 파일 실습 · Python 3.10 이상",
+            "details": [
+              "network ZIP 전체를 풀고 protocol_models.py와 protocol-models.json가 있는 폴더에서 실행합니다. 외부 서버·클라우드 계정·실제 네트워크 접속은 없습니다.",
+              "Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. 변경 실험은 원본을 보관하고 사본과 --input 옵션을 사용합니다.",
+              "Python 3.10 이상 표준 라이브러리만 사용합니다. 추가 패키지가 필요하지 않습니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 두 주소 계열 결과 비교",
+              "explanation": "F1의 IPv4 허용이 F2로 전파되지 않는지 확인합니다.",
+              "code": "python3 protocol_models.py ipv6",
+              "expected": "F1 scope=ipv4 decision=ALLOW\nF2 scope=other-ipv6 decision=DENY\nF3 scope=link-local decision=SCOPE_REQUIRED\nF4 scope=unique-local decision=DENY"
+            },
+            {
+              "title": "2. 명시적 IPv6 규칙 적용",
+              "explanation": "메모리의 규칙에 지정한 IPv6 범위와 포트만 추가합니다.",
+              "code": "python3 -c \"from protocol_models import load,family_policy;d=load();print(family_policy(d['family_requests'][1],d['family_rules']+[{'network':'2001:db8:20::/64','port':443}]))\"",
+              "expected": "ALLOW"
+            },
+            {
+              "title": "3. 인터페이스와 허용 분리",
+              "explanation": "링크를 지정해도 허용 규칙이 없으면 기본 거부입니다.",
+              "code": "python3 -c \"from protocol_models import load,family_policy;d=load();r=dict(d['family_requests'][2]);r['interface']='lab0';print(family_policy(r,d['family_rules']))\"",
+              "expected": "DENY"
+            }
+          ],
+          "solution": {
+            "approach": [
+              "F2에 필요한 최소 IPv6 CIDR·포트 규칙을 사본에 추가합니다.",
+              "F3은 interface 추가로 범위 누락이 해결돼도 허용 규칙 부재 때문에 DENY임을 설명합니다.",
+              "실제 적용에서는 IPv6 경로·바인딩·필요한 ICMPv6와 두 계열의 거부 반례를 별도로 검증한다고 씁니다."
+            ],
+            "expected": "F2만 ALLOW로 바뀌고 다른 계열·범위는 그대로 남습니다. other-ipv6는 인터넷 주소 분류나 도달 가능성의 증명이 아닙니다."
+          },
+          "questions": [
+            {
+              "prompt": "IPv4 /24를 허용하면 같은 서비스의 IPv6도 자동 허용되나요?",
+              "options": [
+                "항상 함께 허용된다.",
+                "주소 계열별 경로와 정책을 따로 확인해야 한다.",
+                "IPv6에는 정책이 필요 없다."
+              ],
+              "answer": 1,
+              "explanation": "IPv4 CIDR에는 IPv6 주소가 포함되지 않습니다. 두 스택을 각각 검증해야 합니다."
+            },
+            {
+              "prompt": "link-local 요청에 인터페이스만 추가하면?",
+              "options": [
+                "관리자 인증까지 완료된다.",
+                "공인 주소가 된다.",
+                "범위를 특정하지만 허용 여부는 별도이다."
+              ],
+              "answer": 2,
+              "explanation": "링크 식별과 접근 허용은 서로 다른 조건입니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "unique-local이면 모두 신뢰한다.",
+              "correction": "주소 범위와 신원·정책은 별도 판단입니다."
+            },
+            {
+              "mistake": "other-ipv6를 공인 주소라고 표시한다.",
+              "correction": "이 함수는 일부 범주만 구분하며 완전한 주소 분류가 아닙니다."
+            }
+          ],
+          "references": [
+            [
+              "RFC 4291 · IPv6 주소 구조",
+              "https://www.rfc-editor.org/rfc/rfc4291"
+            ],
+            [
+              "RFC 4890 · ICMPv6 필터 검토",
+              "https://www.rfc-editor.org/rfc/rfc4890"
+            ]
+          ]
+        },
+        {
+          "id": "network.stream-reassembly",
+          "title": "스트림 재조립과 누락·겹침",
+          "goal": "패킷 도착 순서와 바이트 스트림을 구분하고 재조립의 불확실성을 보고합니다.",
+          "concepts": [
+            "TCP 애플리케이션은 바이트 스트림을 읽으며 한 메시지가 한 패킷과 같다고 보장되지 않습니다. 분석할 때 캡처 도착 순서대로 payload를 붙이면 순서가 뒤바뀐 조각이나 재전송을 잘못 해석할 수 있습니다. 각 바이트의 상대 위치와 중복 여부를 확인해야 합니다.",
+            "실습은 길이 8의 한 방향 스트림과 상대 offset을 제공합니다. 5번 조각이 먼저 와도 위치 0부터 재조립하면 BIFROST!가 됩니다. 동일 위치·동일 바이트의 중복은 결과를 두 번 늘리지 않습니다.",
+            "조각이 없으면 빈 위치를 임의의 문자로 채워 완전한 메시지처럼 보여주지 않습니다. 같은 위치에 다른 바이트가 오면 conflict로 표시하고 모형은 전체 텍스트를 보류합니다. 실제 수신자·분석기의 겹침 처리 차이가 있으므로 한쪽 해석을 무조건 정답으로 택하지 않습니다.",
+            "offset은 원시 TCP sequence number가 아니라 이미 정규화했다고 가정한 위치입니다. 연결 식별·sequence wrap·SYN/FIN·윈도·재전송 시간과 IP 조각 재조립은 구현하지 않았습니다. 이 작은 바이트 모형의 성공을 실제 PCAP의 완전성이나 TCP 구현 검증으로 주장하지 않습니다."
+          ],
+          "code": "python3 protocol_models.py reassembly",
+          "expected": "bytes=8 missing=0 conflicts=0\ntext=BIFROST!",
+          "task": "conflict 사례의 마지막 조각 58(X)을 46(F)으로 바꾸고 충돌이 사라지는지 확인하세요. gap과 conflict의 추가 수집 자료와 결론 유보 이유를 각각 적습니다.",
+          "hint": "offset 2의 원래 바이트는 F입니다. 같은 중복과 다른 겹침은 구분해야 합니다.",
+          "checks": [
+            "원본의 예상 결과와 변경 과제의 결과를 근거로 비교했다.",
+            "실제로 검증한 보장과 모형에서 생략한 조건을 나누어 기록했다."
+          ],
+          "files": [
+            "protocol_models.py",
+            "protocol-models.json",
+            "ROUND2-GUIDE.md"
+          ],
+          "prerequisites": [
+            "network.pcap",
+            "network.connection-state"
+          ],
+          "environment": {
+            "label": "로컬 파일 실습 · Python 3.10 이상",
+            "details": [
+              "network ZIP 전체를 풀고 protocol_models.py와 protocol-models.json가 있는 폴더에서 실행합니다. 외부 서버·클라우드 계정·실제 네트워크 접속은 없습니다.",
+              "Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. 변경 실험은 원본을 보관하고 사본과 --input 옵션을 사용합니다.",
+              "Python 3.10 이상 표준 라이브러리만 사용합니다. 추가 패키지가 필요하지 않습니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 순서가 다른 조각 재조립",
+              "explanation": "동일 조각 재전송도 포함되어 있지만 바이트 수는 8입니다.",
+              "code": "python3 protocol_models.py reassembly",
+              "expected": "bytes=8 missing=0 conflicts=0\ntext=BIFROST!"
+            },
+            {
+              "title": "2. 누락된 위치 확인",
+              "explanation": "offset 3·4가 빠지면 완전한 문자열을 내보내지 않습니다.",
+              "code": "python3 protocol_models.py reassembly --case gap",
+              "expected": "bytes=6 missing=2 conflicts=0\ntext=UNAVAILABLE"
+            },
+            {
+              "title": "3. 다른 바이트의 겹침 확인",
+              "explanation": "offset 2에 F와 X가 충돌하면 한 값을 임의 선택하지 않습니다.",
+              "code": "python3 protocol_models.py reassembly --case conflict",
+              "expected": "bytes=8 missing=0 conflicts=1\ntext=UNAVAILABLE"
+            }
+          ],
+          "solution": {
+            "approach": [
+              "conflict 사본의 마지막 hex를 46으로 바꿔 원래 F와 같게 만듭니다.",
+              "유일 바이트 8·누락 0·충돌 0과 BIFROST! 복원을 확인합니다.",
+              "gap은 캡처 누락·관측 위치 등을, conflict는 원본 조각·수신자 정책·캡처 신뢰를 추가 검토하고 텍스트를 보류한다고 적습니다."
+            ],
+            "expected": "같은 바이트 중복은 무해한 재관측이지만 다른 겹침은 모호함입니다. 바이트가 채워져도 출처·연결 식별·원본 캡처 범위는 별도 검증합니다."
+          },
+          "questions": [
+            {
+              "prompt": "도착한 패킷 순서대로 payload를 이어 붙이면 항상 원문인가요?",
+              "options": [
+                "항상 원문이다.",
+                "TCP가 항상 한 패킷만 보내므로 문제없다.",
+                "상대 위치·재전송·누락을 확인해야 한다."
+              ],
+              "answer": 2,
+              "explanation": "스트림의 순서와 관측 도착 순서가 다를 수 있습니다."
+            },
+            {
+              "prompt": "같은 offset에 다른 두 바이트가 관측되면?",
+              "options": [
+                "충돌을 표시하고 처리 정책과 추가 근거를 확인한다.",
+                "첫 값을 지우고 항상 마지막 값을 믿는다.",
+                "아무 문자로나 채운다."
+              ],
+              "answer": 0,
+              "explanation": "임의 선택은 실제 수신자가 본 내용을 왜곡할 수 있습니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "패킷 한 개를 애플리케이션 메시지 한 개로 본다.",
+              "correction": "스트림과 애플리케이션 프레이밍을 따로 해석합니다."
+            },
+            {
+              "mistake": "누락 위치를 0으로 채우고 원문이라고 쓴다.",
+              "correction": "누락·가정과 복원 결과를 명확히 나눕니다."
+            }
+          ],
+          "references": [
+            [
+              "RFC 9293 · TCP sequence와 스트림",
+              "https://www.rfc-editor.org/rfc/rfc9293"
+            ],
+            [
+              "Wireshark · TCP 재조립",
+              "https://www.wireshark.org/docs/wsug_html_chunked/ChAdvReassemblySection.html"
+            ]
+          ]
+        },
+        {
+          "id": "network.dns-cache",
+          "title": "DNS TTL과 부정 응답 캐시",
+          "goal": "캐시 유효 시간과 NXDOMAIN·NODATA의 적용 범위를 구분합니다.",
+          "concepts": [
+            "DNS 응답을 캐시하면 같은 질의마다 권한 서버에 다시 물을 필요가 줄어듭니다. TTL은 그 응답을 재사용할 수 있는 시간이며, 응답을 받은 시각을 기준으로 남은 시간을 계산합니다. 레코드 변경 뒤 모든 캐시가 즉시 같은 값을 보게 되는 것은 아닙니다.",
+            "이 모형의 양성 응답은 name·qtype에 연결되고 받은 시각 0에서 TTL30입니다. 시각 29에는 HIT지만 정확히 30에는 MISS입니다. MISS는 원래 이름이 존재하지 않음을 뜻하지 않고 이 자료의 재사용 가능한 항목이 없다는 뜻입니다.",
+            "부정 응답도 캐시될 수 있습니다. NXDOMAIN은 해당 이름의 존재 부정, NODATA는 이름은 있지만 요청한 타입의 자료가 없다는 의미로 구분합니다. 이 한 IN 클래스 모형에서 NXDOMAIN은 다른 qtype에도 적용하고 NODATA는 같은 name·qtype에만 적용합니다.",
+            "표본의 부정 TTL은 SOA TTL과 SOA MINIMUM 중 작은 값입니다. 받은 시각 10, 두 값 60·20이면 30에 만료됩니다. 실제 DNS의 위임·CNAME·DNSSEC·서버 오류 재시도·오래된 응답 제공은 구현하지 않았으며 실제 리졸버를 만들거나 외부 질의를 보내지 않습니다."
+          ],
+          "code": "python3 protocol_models.py dns",
+          "expected": "Q1 state=HIT answer=192.0.2.7\nQ2 state=MISS answer=-\nQ3 state=NEGATIVE_NXDOMAIN answer=-\nQ4 state=MISS answer=-",
+          "task": "부정 레코드의 soa_minimum을 5로 바꿔 Q3가 왜 MISS가 되는지 예측하세요. NODATA의 A 결과를 AAAA의 부재로 확대하면 안 되는 이유도 적습니다.",
+          "hint": "새 만료 시각은 받은 시각 10 + min(60,5)=15입니다. NXDOMAIN과 NODATA의 캐시 키를 비교하세요.",
+          "checks": [
+            "원본의 예상 결과와 변경 과제의 결과를 근거로 비교했다.",
+            "실제로 검증한 보장과 모형에서 생략한 조건을 나누어 기록했다."
+          ],
+          "files": [
+            "protocol_models.py",
+            "protocol-models.json",
+            "ROUND2-GUIDE.md"
+          ],
+          "prerequisites": [
+            "network.transport",
+            "network.routing"
+          ],
+          "environment": {
+            "label": "로컬 파일 실습 · Python 3.10 이상",
+            "details": [
+              "network ZIP 전체를 풀고 protocol_models.py와 protocol-models.json가 있는 폴더에서 실행합니다. 외부 서버·클라우드 계정·실제 네트워크 접속은 없습니다.",
+              "Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. 변경 실험은 원본을 보관하고 사본과 --input 옵션을 사용합니다.",
+              "Python 3.10 이상 표준 라이브러리만 사용합니다. 추가 패키지가 필요하지 않습니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. TTL 만료 경계 비교",
+              "explanation": "29와 30의 결과를 보고 부정 응답도 캐시된다는 점을 확인합니다.",
+              "code": "python3 protocol_models.py dns",
+              "expected": "Q1 state=HIT answer=192.0.2.7\nQ2 state=MISS answer=-\nQ3 state=NEGATIVE_NXDOMAIN answer=-\nQ4 state=MISS answer=-"
+            },
+            {
+              "title": "2. NODATA의 타입 범위",
+              "explanation": "A 자료가 없다는 결과를 AAAA까지 확장하지 않습니다.",
+              "code": "python3 -c \"from protocol_models import load,dns_lookup;d=load();print(dns_lookup(d['dns_records'],'v6only.example','A',10)[0]);print(dns_lookup(d['dns_records'],'v6only.example','AAAA',10)[0])\"",
+              "expected": "NEGATIVE_NODATA\nMISS"
+            },
+            {
+              "title": "3. 대소문자와 끝 점 정규화",
+              "explanation": "이 ASCII 이름 모형에서는 대소문자와 마지막 점을 정규화합니다.",
+              "code": "python3 -c \"from protocol_models import load,dns_lookup;print(dns_lookup(load()['dns_records'],'LEARN.EXAMPLE.','A',29))\"",
+              "expected": "('HIT', '192.0.2.7')"
+            }
+          ],
+          "solution": {
+            "approach": [
+              "soa_minimum=5의 사본을 --input으로 실행합니다.",
+              "부정 응답 만료가 15이므로 Q3(29)와 Q4(30)가 모두 MISS라고 계산합니다.",
+              "NODATA는 name·qtype, NXDOMAIN은 이 클래스의 name에 적용하며 둘 다 만료 시각 뒤에는 재사용하지 않는다고 적습니다."
+            ],
+            "expected": "Q3는 MISS로 바뀝니다. 캐시 미일치·권한 서버의 최신 응답·네트워크 장애는 서로 다른 상태입니다."
+          },
+          "questions": [
+            {
+              "prompt": "TTL30을 시각 0에 받은 항목이 시각 30에 MISS입니다. 뜻은?",
+              "options": [
+                "해당 이름은 영구히 존재하지 않는다.",
+                "이 모형에서 재사용 유효 기간이 끝났다.",
+                "모든 서버가 데이터를 삭제했다."
+              ],
+              "answer": 1,
+              "explanation": "캐시 유효성과 이름 존재 여부를 구분해야 합니다."
+            },
+            {
+              "prompt": "A 질의의 NODATA를 AAAA 질의에도 그대로 쓰면?",
+              "options": [
+                "언제나 올바르다.",
+                "TTL만 길게 하면 된다.",
+                "타입별 부재를 다른 타입까지 확대하는 오류이다."
+              ],
+              "answer": 2,
+              "explanation": "NODATA와 NXDOMAIN의 의미와 캐시 범위가 다릅니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "DNS 변경은 모든 이용자에게 즉시 반영된다고 한다.",
+              "correction": "기존 캐시의 남은 TTL과 리졸버 동작을 확인합니다."
+            },
+            {
+              "mistake": "모든 실패 응답을 NXDOMAIN으로 묶는다.",
+              "correction": "이름 부재·타입 부재·서버 오류·전달 실패를 분리합니다."
+            }
+          ],
+          "references": [
+            [
+              "RFC 1035 · DNS TTL",
+              "https://www.rfc-editor.org/rfc/rfc1035"
+            ],
+            [
+              "RFC 2308 · DNS 부정 캐시",
+              "https://www.rfc-editor.org/rfc/rfc2308"
+            ]
+          ]
+        },
+        {
+          "id": "network.path-mtu",
+          "title": "MTU·PMTUD와 큰 전송의 실패",
+          "goal": "작은 연결 확인과 큰 전송의 성공을 구분하고 헤더를 제외한 바이트 예산을 계산합니다.",
+          "concepts": [
+            "경로상의 링크가 모두 같은 MTU를 갖는 것은 아닙니다. 작은 TCP 연결과 짧은 응답이 성공해도 큰 패킷에서 실패할 수 있습니다. 이때 단순히 서비스 포트가 열려 있다는 확인만 반복하지 않고 패킷 크기·경로·재전송과 제어 메시지를 봅니다.",
+            "IPv6의 중간 라우터는 출발지 대신 패킷을 조각내지 않습니다. 너무 큰 패킷과 Packet Too Big 메시지를 통해 출발지가 경로 MTU를 조정하는 동작을 이해해야 합니다. ICMPv6를 모두 금지하는 정책은 필요한 제어 통신까지 막을 수 있습니다.",
+            "표본은 경로 MTU1280, IPv6 기본 헤더40, TCP 기본 헤더20이라 단순 TCP payload 예산은 1220입니다. TCP 옵션·IPv6 확장 헤더·터널이 있으면 예산이 더 줄어듭니다. MTU와 애플리케이션 메시지 크기를 같은 숫자로 취급하지 않습니다.",
+            "ptb_blocked=STALLED는 PMTUD 피드백에 의존하고 다른 회복이 없다고 정한 학습 시나리오입니다. 실제 스택은 PLPMTUD·재시도·작은 세그먼트 같은 다른 동작을 할 수 있습니다. 실제 패킷을 전송하지 않고 헤더 예산과 조사 가설만 연습합니다."
+          ],
+          "code": "python3 protocol_models.py mtu",
+          "expected": "packet=1500 path_mtu=1280 oversized=True\nptb_blocked=STALLED\nptb_allowed=tcp_payload_budget_6=1220",
+          "task": "path_mtu를 1500으로 바꾸어 oversized와 payload 예산이 어떻게 바뀌는지 확인하세요. TCP 옵션 12바이트가 있으면 1280 경로의 예산이 얼마인지도 계산합니다.",
+          "hint": "MTU는 IP 패킷 기준입니다. IPv6 40 + TCP 20 + 추가 옵션을 뺍니다.",
+          "checks": [
+            "원본의 예상 결과와 변경 과제의 결과를 근거로 비교했다.",
+            "실제로 검증한 보장과 모형에서 생략한 조건을 나누어 기록했다."
+          ],
+          "files": [
+            "protocol_models.py",
+            "protocol-models.json",
+            "ROUND2-GUIDE.md"
+          ],
+          "prerequisites": [
+            "network.ipv6-boundaries",
+            "network.transport"
+          ],
+          "environment": {
+            "label": "로컬 파일 실습 · Python 3.10 이상",
+            "details": [
+              "network ZIP 전체를 풀고 protocol_models.py와 protocol-models.json가 있는 폴더에서 실행합니다. 외부 서버·클라우드 계정·실제 네트워크 접속은 없습니다.",
+              "Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. 변경 실험은 원본을 보관하고 사본과 --input 옵션을 사용합니다.",
+              "Python 3.10 이상 표준 라이브러리만 사용합니다. 추가 패키지가 필요하지 않습니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 경로의 작은 MTU 확인",
+              "explanation": "1500 패킷이 1280 경로보다 큰 상황을 봅니다.",
+              "code": "python3 protocol_models.py mtu",
+              "expected": "packet=1500 path_mtu=1280 oversized=True\nptb_blocked=STALLED\nptb_allowed=tcp_payload_budget_6=1220"
+            },
+            {
+              "title": "2. 계열별 기본 헤더 차이",
+              "explanation": "같은 MTU여도 IPv4와 IPv6의 기본 헤더 예산이 다릅니다.",
+              "code": "python3 -c \"from protocol_models import tcp_budget;print(tcp_budget(1500,4),tcp_budget(1500,6))\"",
+              "expected": "1460 1440"
+            },
+            {
+              "title": "3. 옵션의 바이트 비용 반영",
+              "explanation": "추가 헤더를 생략하지 않고 계산합니다.",
+              "code": "python3 -c \"from protocol_models import tcp_budget;print(tcp_budget(1280,6,12))\"",
+              "expected": "1208"
+            }
+          ],
+          "solution": {
+            "approach": [
+              "1500 MTU 사본에서 oversized=False와 기본 TCP 예산1440을 확인합니다.",
+              "1280-40-20-12=1208을 옵션 포함 예산으로 적습니다.",
+              "작은 통신 성공을 큰 전송 보장으로 확대하지 않고 PTB·터널·확장 헤더·재전송과 스택 회복 방식을 추가 확인합니다."
+            ],
+            "expected": "사본은 ptb_blocked=FITS와 예산1440입니다. STALLED는 정한 모형 조건이며 모든 실제 장비의 필연적 결과가 아닙니다."
+          },
+          "questions": [
+            {
+              "prompt": "IPv6 MTU1280에서 기본 TCP payload 예산은?",
+              "options": [
+                "1280",
+                "1220",
+                "1240"
+              ],
+              "answer": 1,
+              "explanation": "IPv6 기본40과 TCP 기본20을 빼면 1220입니다. 추가 헤더는 더 뺍니다."
+            },
+            {
+              "prompt": "작은 응답은 되고 큰 전송이 멈출 때 확인할 것은?",
+              "options": [
+                "페이지 제목만 변경",
+                "DNS가 성공했으니 문제없다고 결론",
+                "경로 MTU·PTB·재전송·헤더와 회복 동작"
+              ],
+              "answer": 2,
+              "explanation": "도달 가능성과 크기 제한은 별도 원인이 될 수 있습니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "필요한 ICMPv6까지 전부 차단한다.",
+              "correction": "제어 메시지의 역할과 검증·필터 조건을 구분합니다."
+            },
+            {
+              "mistake": "MSS를 항상 MTU와 같은 값으로 둔다.",
+              "correction": "IP·TCP·옵션·터널 헤더를 포함한 예산을 계산합니다."
+            }
+          ],
+          "references": [
+            [
+              "RFC 8201 · IPv6 PMTUD",
+              "https://www.rfc-editor.org/rfc/rfc8201"
+            ],
+            [
+              "RFC 4890 · ICMPv6 필터",
+              "https://www.rfc-editor.org/rfc/rfc4890"
+            ]
+          ]
+        },
+        {
+          "id": "network.event-time-windows",
+          "title": "사건 시각·지연 도착과 세션 경계",
+          "goal": "수집 순서와 사건 순서를 나누고 지연 이벤트가 집계에 주는 영향을 검증합니다.",
+          "concepts": [
+            "로그의 사건 시각과 분석기에 도착한 시각은 다릅니다. 네트워크 지연·버퍼·재전송 때문에 늦게 들어온 사건이 과거의 세션에 속할 수 있습니다. 도착 순서만으로 공격 시퀀스나 정상 기준선을 만들면 사건 연결과 경보 수가 달라집니다.",
+            "실습은 한 호스트·한 분석 키에 대한 사건만 넣으며 목록 순서가 수집 순서입니다. 사건 시각 0,4,14,6에서 허용 지연5를 사용하면 최대 사건 시각14 뒤에 온6은 watermark9보다 작아 지연 목록으로 분리됩니다. 여러 호스트나 사용자는 먼저 키별로 나누어야 합니다.",
+            "세션은 사건 시각으로 정렬한 뒤 연속 간격이 timeout10 이상이면 새로 시작하는 모형입니다. 0과4는 같은 세션, 14는 간격10으로 새 세션이므로 수락한 사건의 세션은2개입니다. 지연6까지 사후 재처리하면 4→6→14의 간격이 작아져 하나로 이어집니다.",
+            "실제 스트림 엔진의 watermark·허용 지연·재집계·유휴 파티션은 제품과 설정에 따라 다릅니다. 모형은 지연 사건을 삭제하지 않고 별도 목록에 보존하지만 지속 저장·중복 제거·분산 파티션을 구현하지 않았습니다. 경보 수정이나 기준선 보정의 정책도 함께 문서화해야 합니다."
+          ],
+          "code": "python3 protocol_models.py sessions",
+          "expected": "accepted=3 late=1 sessions=2\nlate_ids=E4\nretrospective_sessions=1",
+          "task": "lateness를 8로 바꿔 E4가 허용되는 경계를 확인하세요. timeout10에서 간격이 정확히10인 사건을 새 세션으로 둔 규칙과, 지연 사건 재처리 시 경보·보고서 수정 정책을 적습니다.",
+          "hint": "maximum14-lateness8=6이고 이 모형은 6보다 작은 사건만 지연으로 분리합니다.",
+          "checks": [
+            "원본의 예상 결과와 변경 과제의 결과를 근거로 비교했다.",
+            "실제로 검증한 보장과 모형에서 생략한 조건을 나누어 기록했다."
+          ],
+          "files": [
+            "protocol_models.py",
+            "protocol-models.json",
+            "ROUND2-GUIDE.md"
+          ],
+          "prerequisites": [
+            "network.detection-metrics",
+            "forensic.timeline"
+          ],
+          "environment": {
+            "label": "로컬 파일 실습 · Python 3.10 이상",
+            "details": [
+              "network ZIP 전체를 풀고 protocol_models.py와 protocol-models.json가 있는 폴더에서 실행합니다. 외부 서버·클라우드 계정·실제 네트워크 접속은 없습니다.",
+              "Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. 변경 실험은 원본을 보관하고 사본과 --input 옵션을 사용합니다.",
+              "Python 3.10 이상 표준 라이브러리만 사용합니다. 추가 패키지가 필요하지 않습니다."
+            ]
+          },
+          "walkthrough": [
+            {
+              "title": "1. 지연 분리와 사후 결과 비교",
+              "explanation": "실시간 수락 자료와 전체 사후 자료의 세션 수가 다릅니다.",
+              "code": "python3 protocol_models.py sessions",
+              "expected": "accepted=3 late=1 sessions=2\nlate_ids=E4\nretrospective_sessions=1"
+            },
+            {
+              "title": "2. 허용 지연의 정확한 경계",
+              "explanation": "늦음 판정은 watermark보다 작은 경우이므로 같은 시각6은 허용합니다.",
+              "code": "python3 -c \"from protocol_models import load,accept_late,sessions;d=load();a,l=accept_late(d['events'],8);print(len(a),len(l),len(sessions(a,10)))\"",
+              "expected": "4 0 1"
+            },
+            {
+              "title": "3. 세션 간격의 정확한 경계",
+              "explanation": "간격이 timeout 이상이면 새 세션이라는 명시적 규칙을 확인합니다.",
+              "code": "python3 -c \"from protocol_models import sessions;print(len(sessions([{'event_time':0},{'event_time':10}],10)));print(len(sessions([{'event_time':0},{'event_time':9.999}],10)))\"",
+              "expected": "2\n1"
+            }
+          ],
+          "solution": {
+            "approach": [
+              "lateness=8 사본에서 accepted4·late0·sessions1을 확인합니다.",
+              "watermark 같은 시각은 허용, timeout 같은 간격은 새 세션이라는 두 경계를 구분합니다.",
+              "원본·지연 목록을 보존하고 재집계 버전·수정 경보·보고서 정정과 키별 분할 규칙을 씁니다."
+            ],
+            "expected": "지연을 분리한2세션과 재처리한1세션은 입력 범위가 다르므로 서로 모순이 아닙니다. 어떤 시각·지연·키 정책을 썼는지 결과와 함께 남깁니다."
+          },
+          "questions": [
+            {
+              "prompt": "다른 사용자 사건까지 이 함수에 한꺼번에 넣으면?",
+              "options": [
+                "항상 올바른 사용자별 결과이다.",
+                "키별 분할이 없어 서로 다른 사건을 합칠 수 있다.",
+                "암호화가 자동 적용된다."
+              ],
+              "answer": 1,
+              "explanation": "모형은 한 키만 가정합니다. 실제 집계는 사용자·호스트 등 분석 키별로 나눕니다."
+            },
+            {
+              "prompt": "늦은 사건을 포함하자 세션 수가 달라졌습니다. 적절한 처리는?",
+              "options": [
+                "원본을 삭제한다.",
+                "원래 경보가 항상 거짓이라고 단정한다.",
+                "입력 범위·지연 정책과 재집계 버전을 기록한다."
+              ],
+              "answer": 2,
+              "explanation": "지연 자료가 연결을 바꿀 수 있으므로 재처리와 결과 수정의 근거를 남깁니다."
+            }
+          ],
+          "pitfalls": [
+            {
+              "mistake": "수집 순서를 항상 실제 사건 순서로 본다.",
+              "correction": "사건·수집 시각과 지연 범위를 구분합니다."
+            },
+            {
+              "mistake": "지연 자료를 버린 사실을 보고하지 않는다.",
+              "correction": "분리 보존과 재처리·경보 수정 정책을 문서화합니다."
+            }
+          ],
+          "references": [
+            [
+              "Apache Flink · Event time와 watermark",
+              "https://nightlies.apache.org/flink/flink-docs-stable/docs/concepts/time/"
+            ],
+            [
+              "Python · 정렬",
+              "https://docs.python.org/3/howto/sorting.html"
+            ]
+          ]
+        }
+      ]
     }
   ],
   "sources": [
@@ -970,6 +2043,14 @@
     [
       "NIST SP 800-207 Zero Trust Architecture · 영어",
       "https://csrc.nist.gov/pubs/sp/800/207/final"
+    ],
+    [
+      "RFC 1812 · 라우터의 경로 선택",
+      "https://www.rfc-editor.org/rfc/rfc1812"
+    ],
+    [
+      "NIST SP 800-61r3 · 사고 대응",
+      "https://csrc.nist.gov/pubs/sp/800/61/r3/final"
     ]
   ]
 }

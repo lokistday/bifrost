@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="프로세스별 영역·권한·백킹 정보를 읽고 검토 규칙과 악성 판정의 차이를 설명합니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="메모리 영역 모형과 우선 조사 단서 — Forensic · Bifrost">
+<meta property="og:description" content="프로세스별 영역·권한·백킹 정보를 읽고 검토 규칙과 악성 판정의 차이를 설명합니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/tracks/forensic/memory-triage.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/forensic/memory-triage.html">
+<title>메모리 영역 모형과 우선 조사 단서 — Forensic · Bifrost</title>
+<script src="../../js/theme.js"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../../css/study.css?v=learning-a66aac410152">
+<script src="../../js/catalog.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/courses/forensic.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/learning.js" defer></script>
+</head>
+<body class="learning-page" data-course="forensic" data-course-number="02" data-view="lesson" data-lesson-id="forensic.memory-triage" style="--course-accent:var(--map-green)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">디지털 포렌식 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="forensic.memory-triage">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../index.html#mindmap">학습 지도</a><span aria-hidden="true">/</span><a href="./">Forensic</a><span aria-hidden="true">/</span><span aria-current="page">15차시</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar"><a class="back-link" href="./">← Forensic 전체 과정</a><div class="course-stats"><span data-count="forensic"></span>
+        <div class="course-meter" role="progressbar" aria-label="Forensic 완료 진도" aria-valuemin="0" aria-valuemax="100" data-meter="forensic"><span></span></div>
+      </div>
+        <nav aria-label="차시 목차">
+          <details >
+            <summary>01 · 보존과 증거 읽기<span class="caption" data-module-count="0"></span></summary>
+            <ol><li><a class="side-lesson" href="integrity.html" >
+              <span class="lesson-dot" data-dot="forensic.integrity" aria-hidden="true"></span><span>원본·작업 사본·해시<small class="completion-label" data-completion="forensic.integrity"></small></span></a></li><li><a class="side-lesson" href="logs.html" >
+              <span class="lesson-dot" data-dot="forensic.logs" aria-hidden="true"></span><span>로그 필드와 사건 가설<small class="completion-label" data-completion="forensic.logs"></small></span></a></li><li><a class="side-lesson" href="metadata.html" >
+              <span class="lesson-dot" data-dot="forensic.metadata" aria-hidden="true"></span><span>파일 정보와 시간의 한계<small class="completion-label" data-completion="forensic.metadata"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>02 · 시간 정규화와 보고<span class="caption" data-module-count="1"></span></summary>
+            <ol><li><a class="side-lesson" href="timeline.html" >
+              <span class="lesson-dot" data-dot="forensic.timeline" aria-hidden="true"></span><span>UTC로 타임라인 맞추기<small class="completion-label" data-completion="forensic.timeline"></small></span></a></li><li><a class="side-lesson" href="report.html" >
+              <span class="lesson-dot" data-dot="forensic.report" aria-hidden="true"></span><span>근거가 추적되는 사건 보고서<small class="completion-label" data-completion="forensic.report"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>03 · 수집과 호스트 근거<span class="caption" data-module-count="2"></span></summary>
+            <ol><li><a class="side-lesson" href="collection-plan.html" >
+              <span class="lesson-dot" data-dot="forensic.collection-plan" aria-hidden="true"></span><span>수집 우선순위와 증거 인계 기록<small class="completion-label" data-completion="forensic.collection-plan"></small></span></a></li><li><a class="side-lesson" href="host-triage.html" >
+              <span class="lesson-dot" data-dot="forensic.host-triage" aria-hidden="true"></span><span>프로세스·부모·연결의 교차 확인<small class="completion-label" data-completion="forensic.host-triage"></small></span></a></li><li><a class="side-lesson" href="browser-sqlite.html" >
+              <span class="lesson-dot" data-dot="forensic.browser-sqlite" aria-hidden="true"></span><span>SQLite 방문 기록과 행위 해석의 한계<small class="completion-label" data-completion="forensic.browser-sqlite"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>04 · 조각·상관·사고 대응<span class="caption" data-module-count="3"></span></summary>
+            <ol><li><a class="side-lesson" href="file-signatures.html" >
+              <span class="lesson-dot" data-dot="forensic.file-signatures" aria-hidden="true"></span><span>파일 시그니처와 조각 복원의 한계<small class="completion-label" data-completion="forensic.file-signatures"></small></span></a></li><li><a class="side-lesson" href="log-correlation.html" >
+              <span class="lesson-dot" data-dot="forensic.log-correlation" aria-hidden="true"></span><span>호스트·세션을 잇는 다중 로그 상관<small class="completion-label" data-completion="forensic.log-correlation"></small></span></a></li><li><a class="side-lesson" href="incident-response.html" >
+              <span class="lesson-dot" data-dot="forensic.incident-response" aria-hidden="true"></span><span>사건 범위·격리·복구 검증 계획<small class="completion-label" data-completion="forensic.incident-response"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>05 · 운영체제 기록의 의미<span class="caption" data-module-count="4"></span></summary>
+            <ol><li><a class="side-lesson" href="windows-events.html" >
+              <span class="lesson-dot" data-dot="forensic.windows-events" aria-hidden="true"></span><span>Windows 이벤트 XML의 원시 필드 읽기<small class="completion-label" data-completion="forensic.windows-events"></small></span></a></li><li><a class="side-lesson" href="linux-auth.html" >
+              <span class="lesson-dot" data-dot="forensic.linux-auth" aria-hidden="true"></span><span>Linux 인증과 sudo 요청의 증거 연결<small class="completion-label" data-completion="forensic.linux-auth"></small></span></a></li><li><a class="side-lesson" href="filesystem-records.html" >
+              <span class="lesson-dot" data-dot="forensic.filesystem-records" aria-hidden="true"></span><span>파일 이름·링크·시간 기록의 의미<small class="completion-label" data-completion="forensic.filesystem-records"></small></span></a></li></ol>
+          </details>
+          <details open>
+            <summary>06 · 메모리 단서와 관측 한계<span class="caption" data-module-count="5"></span></summary>
+            <ol><li><a class="side-lesson" href="memory-triage.html" aria-current="page">
+              <span class="lesson-dot" data-dot="forensic.memory-triage" aria-hidden="true"></span><span>메모리 영역 모형과 우선 조사 단서<small class="completion-label" data-completion="forensic.memory-triage"></small></span></a></li><li><a class="side-lesson" href="evidence-coverage.html" >
+              <span class="lesson-dot" data-dot="forensic.evidence-coverage" aria-hidden="true"></span><span>시계 오차·관측 범위·사건 순서<small class="completion-label" data-completion="forensic.evidence-coverage"></small></span></a></li></ol>
+          </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
+      </aside><article class="lesson-article">
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/forensic.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">06 · 메모리 단서와 관측 한계 · 15 / 16</div><h1>메모리 영역 모형과 우선 조사 단서</h1><p class="lesson-objective">프로세스별 영역·권한·백킹 정보를 읽고 검토 규칙과 악성 판정의 차이를 설명합니다.</p></div></header>
+          <div class="lesson-meta"><span>심화 연결</span><span>학습 50–80분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>해시 일치와 파일 출처의 진위는 같은 것인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>해시는 기준 바이트와의 일치를 확인합니다. 기준의 신뢰·보관 이력·수집 범위는 별도 근거가 필요합니다.</p><a href="../../guides/bridges.html#evidence">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
+          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>오프라인 · Python 3.10 이상 · 표준 라이브러리</strong></p><ul><li>forensic ZIP을 풀고 해당 폴더로 이동합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿔 실행하세요.</li><li>원본은 보관하고 변경 과제에는 사본을 사용합니다. 제공한 작은 합성 입력만 오프라인에서 다루며 계정·외부 자원·실제 개인정보를 사용하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="host-triage.html">디지털 포렌식 · 프로세스·부모·연결의 교차 확인 ↗</a></li><li><a href="../rev/integer-views.html">리버싱 · 부호 해석·확장·비트 필드 복원 ↗</a></li></ul>
+            </section>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>메모리 분석은 프로세스 목록 외에 주소 영역·권한·백킹 자료 등을 연결할 수 있습니다. 이 차시는 그 개념을 흉내 낸 JSON 스냅샷만 읽습니다. 실제 RAM 덤프를 획득하거나 Windows VAD 구조·커널 객체를 파싱하지 않으며 주소 안의 기계어 내용도 없습니다.</p><figure class="learning-visual" data-visual-id="forensic.memory-triage"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교표</span><h3>영역 권한은 조사 단서입니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="영역 권한은 조사 단서입니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 272" width="760" height="272" role="img" aria-labelledby="visual-forensic-memory-triage-title visual-forensic-memory-triage-desc" focusable="false"><title id="visual-forensic-memory-triage-title">영역 권한은 조사 단서입니다</title><desc id="visual-forensic-memory-triage-desc">프로세스500의 M2는 private와 rwx여서 모형 규칙의 REVIEW입니다. M1 rx와 M3 rw는 이 규칙에 해당하지 않지만 안전 판정은 아닙니다.</desc><defs><marker id="visual-forensic-memory-triage-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone "><rect class="v-table-head" x="28" y="20" width="230" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="41" y="47">영역</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="258" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="271" y="47">권한/백킹</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="495" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="508" y="47">규칙</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="78" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="105">M1</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="105">rx · image</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="105">불일치</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="136" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="163">M2</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="163">rwx · private</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="163">REVIEW</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="194" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="221">M3</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="221">rw · private</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="221">불일치</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">정상 JIT와 다른 위험을 추가 근거로 구분하세요.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>프로세스500의 M2는 private와 rwx여서 모형 규칙의 REVIEW입니다. M1 rx와 M3 rw는 이 규칙에 해당하지 않지만 안전 판정은 아닙니다.</p></details></figure><p>각 영역은 시작 주소와 크기로 반열린 구간 [start,start+size)을 표시합니다. M2는 8192에서 4096바이트이므로 [8192,12288)이며 끝 주소 12288은 범위에 포함하지 않습니다. 시작/크기의 자료형과 음수·0을 검사해 잘못된 범위 연산을 피합니다.</p><p>이 모형은 private 백킹이면서 쓰기 w와 실행 x가 함께 있는 영역만 REVIEW로 표시합니다. JIT 등 정상 기능에서도 이런 영역이 발생할 수 있고, 악성 동작은 RX나 기타 영역에도 숨을 수 있습니다. 이 규칙은 조사 우선순위의 단서이지 악성 분류기나 완전 탐지기가 아닙니다.</p><p>후속 확인에는 프로세스 출처·시작 시각·모듈/스레드 관계·실제 바이트·페이지 상태·로그 등이 필요합니다. 표본의 권한을 rwx에서 rx로 바꾸면 규칙 검토 수는 0이 되지만 위협 부재가 증명되지는 않습니다. 관찰 범위와 규칙의 거짓 양성/음성 가능성을 보고합니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>쓰기와 실행이 모두 가능하면 항상 악성이다.</dt><dd>JIT 등 정상 기능과 독립 근거를 함께 검토합니다.</dd><dt>범위 끝 start+size를 포함한다.</dt><dd>반열린 구간으로 계산하고 경계 주소를 확인합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/forensic.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/forensic/artifacts_round2.py" download>artifacts_round2.py ↓</a></li><li><a href="../../labs/forensic/memory-model.json" download>memory-model.json ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 오프라인 · Python 3.10 이상 · 표준 라이브러리</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 artifacts_round2.py memory</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>M2 pid=500 private-WX=REVIEW range=[8192,12288)
+review=1 verdict=NOT-A-MALWARE-VERDICT</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>범위와 규칙 읽기</h3><p>M2의 권한·백킹과 시작/크기를 확인한 뒤 반열린 구간을 계산합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 오프라인 · Python 3.10 이상 · 표준 라이브러리</span></div><pre><code>python3 artifacts_round2.py memory</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>M2 pid=500 private-WX=REVIEW range=[8192,12288)
+review=1 verdict=NOT-A-MALWARE-VERDICT</pre></div></li><li><h3>규칙 조건 하나만 변경</h3><p>M2의 permission을 rx로 바꾼 사본을 실행합니다. 다른 영역은 그대로 유지합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 오프라인 · Python 3.10 이상 · 표준 라이브러리</span></div><pre><code>python3 artifacts_round2.py memory --source memory-rx.json</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>review=0 verdict=NOT-A-MALWARE-VERDICT. 이 규칙에 일치하는 영역이 없다는 뜻입니다.</pre></div></li><li><h3>불가능한 크기 거부</h3><p>원본의 별도 사본에서 M2의 size를 0으로 만듭니다. 숫자 형식 오류와 관찰 단서 부재를 다르게 다룹니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 오프라인 · Python 3.10 이상 · 표준 라이브러리</span></div><pre><code>python3 artifacts_round2.py memory --source memory-invalid.json</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>INVALID: range must have nonnegative start and positive size, 종료 상태 2</pre></div></li></ol></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>사본의 M2 권한을 rwx에서 rx로 바꾸고 검토 수를 비교하세요. 그다음 size=0인 사본을 실행하세요. 규칙 불일치와 잘못된 자료를 구분하고 추가 증거 세 가지를 적으세요.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>REVIEW의 반대는 안전 판정이 아닙니다. 범위의 끝 주소는 포함되지 않습니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>M2를 rwx에서 rx로 바꾸면 w 조건이 빠져 검토 수는 0이지만 안전하다고 쓰지 않습니다.</li><li>size=0은 빈 자료를 정상 영역으로 해석하지 않고 입력 오류로 분류합니다.</li><li>실제 바이트/역어셈블·프로세스/모듈 출처·스레드 시작/실행 기록 등 추가 근거를 요청하고 정상 JIT 가능성도 남깁니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>영역 범위·규칙 일치·입력 오류·악성 판정의 차이와 추가 증거 세 가지를 기록합니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>실행 가능한 메모리 영역이 있다는 사실만으로 악성 여부를 판정하는 규칙을 반박하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>JIT 등 정상 사례가 있습니다. 권한·매핑 원본·프로세스 맥락·실제 바이트·행위 증거를 함께 검토합니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>합성 모형과 실제 메모리 분석을 구분했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>우선 조사 규칙과 악성 판정을 분리했다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/forensic/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. private-WX=REVIEW 한 건이 보이면 무엇을 뜻하나요?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>악성코드 확정</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>조사가 필요할 수 있는 모형 규칙의 일치</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>실제 메모리 덤프 획득 완료</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 조사가 필요할 수 있는 모형 규칙의 일치</strong></p><p>정상 JIT도 가능하며 표본은 합성 JSON입니다. 규칙과 악성 판정은 다릅니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. rwx를 rx로 바꿔 review=0이면?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>메모리 전체 안전이 증명됐다</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>프로세스는 실행되지 않았다</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>이 규칙의 일치가 없을 뿐 다른 위험은 별도 검토한다</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 이 규칙의 일치가 없을 뿐 다른 위험은 별도 검토한다</strong></p><p>규칙의 탐지 범위 밖 동작과 자료 누락 가능성이 남아 있습니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>합성 모형과 실제 메모리 분석을 구분했다.</li><li>우선 조사 규칙과 악성 판정을 분리했다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="filesystem-records.html"><small>← 이전 차시</small>파일 이름·링크·시간 기록의 의미</a>
+            <a href="evidence-coverage.html"><small>다음 차시 →</small>시계 오차·관측 범위·사건 순서</a></nav>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://learn.microsoft.com/en-us/windows/win32/memory/memory-protection-constants" target="_blank" rel="noopener noreferrer">Microsoft · Memory protection constants ↗</a></li>
+        <li><a href="https://csrc.nist.gov/pubs/sp/800/86/final" target="_blank" rel="noopener noreferrer">NIST SP800-86 · 자료 분석과 관찰 한계 ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

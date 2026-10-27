@@ -1,0 +1,4 @@
+id=L01 user=alice status=ok
+id=L02 user=bob status=denied
+noise id=L03 user=carol status=denied extra
+id=L04 user=dave status=denied

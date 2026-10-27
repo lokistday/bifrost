@@ -2,6 +2,8 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b1220">
 <meta name="description" content="기계어 목록에서 호출과 조건 분기를 찾아 고수준 의미를 연결합니다.">
@@ -20,19 +22,20 @@
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=20261024-atlas1">
-<script src="../../js/catalog.js" defer></script>
-<script src="../../js/courses/rev.js" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../../css/study.css?v=learning-a66aac410152">
+<script src="../../js/catalog.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/courses/rev.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=20261024-atlas1" defer></script>
+<script src="../../js/learning-view.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/learning.js" defer></script>
 </head>
 <body class="learning-page" data-course="rev" data-course-number="07" data-view="lesson" data-lesson-id="rev.assembly" style="--course-accent:var(--map-red)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">리버싱 목차</a></nav>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">리버싱 목차</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -54,10 +57,39 @@
             <ol><li><a class="side-lesson" href="dynamic.html" >
               <span class="lesson-dot" data-dot="rev.dynamic" aria-hidden="true"></span><span>입력으로 분기 검증하기<small class="completion-label" data-completion="rev.dynamic"></small></span></a></li><li><a class="side-lesson" href="report.html" >
               <span class="lesson-dot" data-dot="rev.report" aria-hidden="true"></span><span>최적화 비교와 분석 보고서<small class="completion-label" data-completion="rev.report"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>03 · 형식과 함수 경계<span class="caption" data-module-count="2"></span></summary>
+            <ol><li><a class="side-lesson" href="byte-order.html" >
+              <span class="lesson-dot" data-dot="rev.byte-order" aria-hidden="true"></span><span>바이트 순서와 길이 필드 복원<small class="completion-label" data-completion="rev.byte-order"></small></span></a></li><li><a class="side-lesson" href="calling-convention.html" >
+              <span class="lesson-dot" data-dot="rev.calling-convention" aria-hidden="true"></span><span>호출 규약과 인자·반환값 추적<small class="completion-label" data-completion="rev.calling-convention"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>04 · 흐름 복원과 반례 검증<span class="caption" data-module-count="3"></span></summary>
+            <ol><li><a class="side-lesson" href="control-flow.html" >
+              <span class="lesson-dot" data-dot="rev.control-flow" aria-hidden="true"></span><span>반복·건너뛰기·종료 경로 복원<small class="completion-label" data-completion="rev.control-flow"></small></span></a></li><li><a class="side-lesson" href="data-flow.html" >
+              <span class="lesson-dot" data-dot="rev.data-flow" aria-hidden="true"></span><span>변환 연산과 데이터 의존성 역추적<small class="completion-label" data-completion="rev.data-flow"></small></span></a></li><li><a class="side-lesson" href="differential.html" >
+              <span class="lesson-dot" data-dot="rev.differential" aria-hidden="true"></span><span>참조 구현과 차등 검증<small class="completion-label" data-completion="rev.differential"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>05 · ELF와 정수 표현 심화<span class="caption" data-module-count="4"></span></summary>
+            <ol><li><a class="side-lesson" href="elf-layout.html" >
+              <span class="lesson-dot" data-dot="rev.elf-layout" aria-hidden="true"></span><span>ELF 섹션과 적재 세그먼트 구분<small class="completion-label" data-completion="rev.elf-layout"></small></span></a></li><li><a class="side-lesson" href="relocation.html" >
+              <span class="lesson-dot" data-dot="rev.relocation" aria-hidden="true"></span><span>재배치와 자체 공유 라이브러리 연결<small class="completion-label" data-completion="rev.relocation"></small></span></a></li><li><a class="side-lesson" href="integer-views.html" >
+              <span class="lesson-dot" data-dot="rev.integer-views" aria-hidden="true"></span><span>부호 해석·확장·비트 필드 복원<small class="completion-label" data-completion="rev.integer-views"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>06 · 컴파일 변환과 상태 복원<span class="caption" data-module-count="5"></span></summary>
+            <ol><li><a class="side-lesson" href="switch-recovery.html" >
+              <span class="lesson-dot" data-dot="rev.switch-recovery" aria-hidden="true"></span><span>switch 복원과 컴파일러의 선택<small class="completion-label" data-completion="rev.switch-recovery"></small></span></a></li><li><a class="side-lesson" href="state-machine.html" >
+              <span class="lesson-dot" data-dot="rev.state-machine" aria-hidden="true"></span><span>입력 순서로 상태기계 복원<small class="completion-label" data-completion="rev.state-machine"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
-          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/rev.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">01 · 바이너리와 정적 관찰 · 2 / 5</div><h1>명령어·비교·호출 읽기</h1><p class="lesson-objective">기계어 목록에서 호출과 조건 분기를 찾아 고수준 의미를 연결합니다.</p></div></header>
-          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/rev.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">01 · 바이너리와 정적 관찰 · 2 / 15</div><h1>명령어·비교·호출 읽기</h1><p class="lesson-objective">기계어 목록에서 호출과 조건 분기를 찾아 고수준 의미를 연결합니다.</p></div></header>
+          <div class="lesson-meta"><span>기초</span><span>학습 45–80분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>문자열이 있다는 사실만으로 그 기능이 실행됐다고 말할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>문자열은 단서입니다. 도달 가능한 분기·실제 입력·출력을 연결해 가설을 검증해야 합니다.</p><a href="../../guides/bridges.html#c">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
           <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Ubuntu/WSL · GNU objdump · -g -O0 check</strong></p><ul><li>먼저 rev.binary와 같은 옵션으로 check를 빌드합니다. disassembly.txt는 명령 출력에서 생성합니다.</li><li>uname -m과 file check를 기록하고 x86-64 또는 AArch64 등 자신의 명령어 체계를 구분합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="binary.html">리버싱 · ELF·심볼·컴파일 옵션 ↗</a></li><li><a href="../pwn/debugger.html">시스템 보안 · GDB 중단점과 변수 ↗</a></li></ul>
             </section>
@@ -68,20 +100,31 @@
         <a class="learning-button" href="../../labs/rev.zip" download>전체 실습 ZIP 받기 ↓</a>
         <ul><li><a href="../../labs/rev/check.c" download>check.c ↓</a></li></ul>
       </section>
-          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2><ol class="walkthrough"><li><h3>함수 범위를 좁혀 읽기</h3><p>전체 출력에서 &lt;check&gt; 위치를 찾습니다. 필요하면 --disassemble=check로 함수만 출력해 호출·분기·반환에 주석을 붙입니다.</p>
-        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>objdump -d --disassemble=check check</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>check 함수의 명령 목록을 얻습니다. 명령 주소와 표기 방식은 CPU·빌드에 따라 달라집니다.</pre></div></li><li><h3>두 조건을 제어 흐름에 연결하기</h3><p>strlen 결과와 길이 7 판정, strcmp 결과와 0 판정을 찾습니다. 호출이 보이지 않으면 동등한 길이·바이트 비교로 바뀌었는지 확인합니다. 분기의 주소를 소스 줄 번호와 혼동하지 않습니다.</p>
-        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>가설: 길이 != 7 → 거짓 반환
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Ubuntu/WSL · GNU objdump · -g -O0 check</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">objdump -d check &gt; disassembly.txt
+# disassembly.txt에서 &lt;check&gt;를 찾아 함수 범위를 읽습니다.</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>check의 명령 목록과 길이 검사·문자열 비교에 해당하는 제어 흐름을 찾습니다. 명령어 표기는 CPU마다 다릅니다.</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>함수 범위를 좁혀 읽기</h3><p>전체 출력에서 &lt;check&gt; 위치를 찾습니다. 필요하면 --disassemble=check로 함수만 출력해 호출·분기·반환에 주석을 붙입니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Ubuntu/WSL · GNU objdump · -g -O0 check</span></div><pre><code>objdump -d --disassemble=check check</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>check 함수의 명령 목록을 얻습니다. 명령 주소와 표기 방식은 CPU·빌드에 따라 달라집니다.</pre></div></li><li><h3>두 조건을 제어 흐름에 연결하기</h3><p>strlen 결과와 길이 7 판정, strcmp 결과와 0 판정을 찾습니다. 호출이 보이지 않으면 동등한 길이·바이트 비교로 바뀌었는지 확인합니다. 분기의 주소를 소스 줄 번호와 혼동하지 않습니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>관찰 절차·자료 예시 · 그대로 셸에 붙여 넣지 말고 본문 안내를 따라 확인</span></div><pre><code>가설: 길이 != 7 → 거짓 반환
 가설: 길이 == 7 → 문자열 일치 판정 → 참 또는 거짓</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>두 조건이 모두 충족되어야 참인 흐름을 설명합니다.</pre></div></li><li><h3>ABI와 관찰값 연결하기</h3><p>자신의 CPU와 ABI를 적고 인자가 함수 진입 후 어디로 이동하는지 따라갑니다. GDB의 print text를 함께 보면 이름 있는 인자와 낮은 수준의 전달 상태를 비교할 수 있습니다. 하나의 레지스터 이름을 다른 CPU 결과에 강제로 적용하지 않습니다.</p>
-        </li></ol>
-            <h3>전체 예제 연결하기</h3><div class="code-shell"><div class="code-toolbar"><span>예제 · 명령 또는 관찰 절차</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">objdump -d check &gt; disassembly.txt
-# disassembly.txt에서 &lt;check&gt;를 찾아 함수 범위를 읽습니다.</code></pre></div><div class="expected-output"><h3>예상 결과와 해석</h3><pre>check의 명령 목록과 길이 검사·문자열 비교에 해당하는 제어 흐름을 찾습니다. 명령어 표기는 CPU마다 다릅니다.</pre></div></section>
+        </li></ol></section>
           <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>check.c의 두 조건에 해당하는 영역을 표시하고 인자·반환값을 어느 규약으로 읽었는지 적으세요.</p>
             <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>문자열 주소를 숫자로 외우지 말고 참조·호출·분기의 연결을 따라가세요.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
         <ol><li>check 함수의 시작·끝과 길이 검사·문자열 검사·거짓/참 반환 경로를 표시합니다.</li><li>strcmp가 0이면 같고 check의 참 반환은 1이라는 차이를 설명합니다.</li><li>실제 CPU·ABI와 적용한 인자/반환값 규칙을 적습니다. 고정된 명령 줄을 찾지 못했다면 최적화·도구·빌드 옵션을 점검하고 관찰 범위를 기록합니다.</li></ol>
         
         <h3>결과를 판단하는 기준</h3><pre>해당 빌드의 비교·호출·분기와 두 조건의 논리 관계가 연결되어야 합니다. x86-64와 AArch64의 표기가 달라도 같은 의미를 설명할 수 있습니다.</pre>
-      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p></section>
-          <section id="verify" class="article-section completion-panel"><div class="overline">04 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>비교 직전 값 하나를 바꾼 자체 프로그램에서 분기 결과를 예측하고 실행으로 확인하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>분기 방향은 실제 비교 연산·플래그·부호 해석에 근거해야 합니다. 한 컴파일 결과를 모든 CPU의 명령 규칙으로 일반화하지 않습니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>호출과 조건 분기를 각각 표시했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>관찰한 ABI와 다른 CPU에서의 차이를 명시했다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/rev/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
         <fieldset class="question" data-question="0">
           <legend>1. strcmp(text, &quot;BIFROST&quot;)가 0을 반환했습니다. 소스의 == 0 판정은 어떤 의미인가요?</legend>
           <label class="question-option"><input type="radio" name="question-0" value="0"><span>두 문자열이 같아서 그 조건은 참이다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>문자열이 무조건 비어 있다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>프로그램 종료 코드가 0이라는 뜻이다.</span></label>

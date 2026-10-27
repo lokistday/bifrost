@@ -2,37 +2,40 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b1220">
 <meta name="description" content="분석 결과를 정책 변경·탐지·검증·롤백으로 연결합니다.">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Bifrost">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="종합: 작은 서비스 방어 설계 — Network Security · Bifrost">
+<meta property="og:title" content="중간 종합: 작은 서비스 방어 설계 — Network Security · Bifrost">
 <meta property="og:description" content="분석 결과를 정책 변경·탐지·검증·롤백으로 연결합니다.">
 <meta property="og:url" content="https://lokistday.github.io/bifrost/tracks/network/capstone.html">
 <meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/network/capstone.html">
-<title>종합: 작은 서비스 방어 설계 — Network Security · Bifrost</title>
+<title>중간 종합: 작은 서비스 방어 설계 — Network Security · Bifrost</title>
 <script src="../../js/theme.js"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=20261024-atlas1">
-<script src="../../js/catalog.js" defer></script>
-<script src="../../js/courses/network.js" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../../css/study.css?v=learning-a66aac410152">
+<script src="../../js/catalog.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/courses/network.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=20261024-atlas1" defer></script>
+<script src="../../js/learning-view.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/learning.js" defer></script>
 </head>
 <body class="learning-page" data-course="network" data-course-number="05" data-view="lesson" data-lesson-id="network.capstone" style="--course-accent:var(--map-amber)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">네트워크 보안 목차</a></nav>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">네트워크 보안 목차</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -61,11 +64,32 @@
             <ol><li><a class="side-lesson" href="detection.html" >
               <span class="lesson-dot" data-dot="network.detection" aria-hidden="true"></span><span>탐지 기준·오탐·추가 증거<small class="completion-label" data-completion="network.detection"></small></span></a></li><li><a class="side-lesson" href="zero-trust.html" >
               <span class="lesson-dot" data-dot="network.zero-trust" aria-hidden="true"></span><span>신원과 자산 중심의 Zero Trust<small class="completion-label" data-completion="network.zero-trust"></small></span></a></li><li><a class="side-lesson" href="capstone.html" aria-current="page">
-              <span class="lesson-dot" data-dot="network.capstone" aria-hidden="true"></span><span>종합: 작은 서비스 방어 설계<small class="completion-label" data-completion="network.capstone"></small></span></a></li></ol>
+              <span class="lesson-dot" data-dot="network.capstone" aria-hidden="true"></span><span>중간 종합: 작은 서비스 방어 설계<small class="completion-label" data-completion="network.capstone"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>04 · 경로·상태·운영 검증<span class="caption" data-module-count="3"></span></summary>
+            <ol><li><a class="side-lesson" href="routing.html" >
+              <span class="lesson-dot" data-dot="network.routing" aria-hidden="true"></span><span>최장 접두사와 돌아오는 경로<small class="completion-label" data-completion="network.routing"></small></span></a></li><li><a class="side-lesson" href="nat-correlation.html" >
+              <span class="lesson-dot" data-dot="network.nat-correlation" aria-hidden="true"></span><span>NAT 주소·포트·시간으로 로그 연결<small class="completion-label" data-completion="network.nat-correlation"></small></span></a></li><li><a class="side-lesson" href="connection-state.html" >
+              <span class="lesson-dot" data-dot="network.connection-state" aria-hidden="true"></span><span>연결 상태와 응답 허용의 조건<small class="completion-label" data-completion="network.connection-state"></small></span></a></li><li><a class="side-lesson" href="detection-metrics.html" >
+              <span class="lesson-dot" data-dot="network.detection-metrics" aria-hidden="true"></span><span>정밀도·재현율과 탐지 임계값<small class="completion-label" data-completion="network.detection-metrics"></small></span></a></li><li><a class="side-lesson" href="incident-correlation.html" >
+              <span class="lesson-dot" data-dot="network.incident-correlation" aria-hidden="true"></span><span>네트워크 증거 연결과 대응 판단<small class="completion-label" data-completion="network.incident-correlation"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>05 · 프로토콜 경계와 관측 품질<span class="caption" data-module-count="4"></span></summary>
+            <ol><li><a class="side-lesson" href="ipv6-boundaries.html" >
+              <span class="lesson-dot" data-dot="network.ipv6-boundaries" aria-hidden="true"></span><span>IPv6 주소 범위와 정책의 빈틈<small class="completion-label" data-completion="network.ipv6-boundaries"></small></span></a></li><li><a class="side-lesson" href="stream-reassembly.html" >
+              <span class="lesson-dot" data-dot="network.stream-reassembly" aria-hidden="true"></span><span>스트림 재조립과 누락·겹침<small class="completion-label" data-completion="network.stream-reassembly"></small></span></a></li><li><a class="side-lesson" href="dns-cache.html" >
+              <span class="lesson-dot" data-dot="network.dns-cache" aria-hidden="true"></span><span>DNS TTL과 부정 응답 캐시<small class="completion-label" data-completion="network.dns-cache"></small></span></a></li><li><a class="side-lesson" href="path-mtu.html" >
+              <span class="lesson-dot" data-dot="network.path-mtu" aria-hidden="true"></span><span>MTU·PMTUD와 큰 전송의 실패<small class="completion-label" data-completion="network.path-mtu"></small></span></a></li><li><a class="side-lesson" href="event-time-windows.html" >
+              <span class="lesson-dot" data-dot="network.event-time-windows" aria-hidden="true"></span><span>사건 시각·지연 도착과 세션 경계<small class="completion-label" data-completion="network.event-time-windows"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
-          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/network.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">03 · 탐지와 통합 방어 · 9 / 9</div><h1>종합: 작은 서비스 방어 설계</h1><p class="lesson-objective">분석 결과를 정책 변경·탐지·검증·롤백으로 연결합니다.</p></div></header>
-          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/network.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">03 · 탐지와 통합 방어 · 9 / 19</div><h1>중간 종합: 작은 서비스 방어 설계</h1><p class="lesson-objective">분석 결과를 정책 변경·탐지·검증·롤백으로 연결합니다.</p></div></header>
+          <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>센서에 기록이 없다는 사실이 통신이 없었다는 뜻인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>센서 위치·필터·손실·시간 범위를 확인해야 합니다. 관측되지 않은 경로가 남아 있을 수 있습니다.</p><a href="../../guides/bridges.html#network">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
           <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>종합 설계 검증 · Python 3와 편집기</strong></p><ul><li>network 폴더 전체를 작업 사본으로 복사하고 design.md를 작성합니다. 원본 PCAP·CSV를 보존합니다.</li><li>정책과 탐지기는 각각 별도 모델입니다. PCAP과 flows.csv가 동일 실제 세션이라는 가정은 하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="tls.html">네트워크 보안 · TLS와 보이는 정보의 경계 ↗</a></li><li><a href="policy.html">네트워크 보안 · 방화벽 정책과 회귀 검증 ↗</a></li><li><a href="detection.html">네트워크 보안 · 탐지 기준·오탐·추가 증거 ↗</a></li><li><a href="zero-trust.html">네트워크 보안 · 신원과 자산 중심의 Zero Trust ↗</a></li></ul>
             </section>
@@ -76,20 +100,31 @@
         <a class="learning-button" href="../../labs/network.zip" download>전체 실습 ZIP 받기 ↓</a>
         <ul><li><a href="../../labs/network/design.md" download>design.md ↓</a></li><li><a href="../../labs/network/flows.csv" download>flows.csv ↓</a></li><li><a href="../../labs/network/policy.json" download>policy.json ↓</a></li><li><a href="../../labs/network/evaluate.py" download>evaluate.py ↓</a></li><li><a href="../../labs/network/detect.py" download>detect.py ↓</a></li></ul>
       </section>
-          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2><ol class="walkthrough"><li><h3>주장과 근거 목록 만들기</h3><p>구조도에 정상 N01·N02, 거부 N03~N05, 검토 N06을 표시합니다. PCAP 관찰과 정책 로그 근거를 다른 표로 둡니다.</p>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 종합 설계 검증 · Python 3와 편집기</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 evaluate.py
+python3 detect.py
+# 설계 사본의 변경 전·후 결과를 design.md에 연결합니다.</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>N01·N02 업무 흐름이 유지되고 N03~N05는 거부되며, N06은 근거 있는 처리와 재검증 계획이 있습니다.</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>주장과 근거 목록 만들기</h3><p>구조도에 정상 N01·N02, 거부 N03~N05, 검토 N06을 표시합니다. PCAP 관찰과 정책 로그 근거를 다른 표로 둡니다.</p>
         <div class="step-observation"><strong>관찰할 결과</strong><pre>자료 출처가 섞이지 않은 자산·흐름·관측 표입니다.</pre></div></li><li><h3>최소 변경 후 회귀 비교</h3><p>N06 업무 필요를 판단하고 작업 사본의 policy.json을 수정하거나 DENY 유지 근거를 씁니다. evaluate.py와 detect.py의 결과를 변경 전후 비교합니다.</p>
         <div class="step-observation"><strong>관찰할 결과</strong><pre>N01·N02 유지, N03~N05 거부 유지, N06 근거와 조치, REVIEW의 조사 조건이 있습니다.</pre></div></li><li><h3>다층 검증과 복구 채우기</h3><p>TLS 관측 한계, Web/DB 인가, 서비스 신원, 감사·백업, 관리 경로를 검토합니다. 각 변경마다 정상/거부/실패 복구의 성공 기준을 씁니다.</p>
-        <div class="step-observation"><strong>관찰할 결과</strong><pre>미검증 항목·담당·추가 자료·롤백 조건이 보고서에 포함됩니다.</pre></div></li></ol>
-            <h3>전체 예제 연결하기</h3><div class="code-shell"><div class="code-toolbar"><span>예제 · 명령 또는 관찰 절차</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 evaluate.py
-python3 detect.py
-# 설계 사본의 변경 전·후 결과를 design.md에 연결합니다.</code></pre></div><div class="expected-output"><h3>예상 결과와 해석</h3><pre>N01·N02 업무 흐름이 유지되고 N03~N05는 거부되며, N06은 근거 있는 처리와 재검증 계획이 있습니다.</pre></div></section>
+        <div class="step-observation"><strong>관찰할 결과</strong><pre>미검증 항목·담당·추가 자료·롤백 조건이 보고서에 포함됩니다.</pre></div></li></ol></section>
           <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>design.md를 완성하세요. 각 변경에 예상 영향, 검증 입력, 성공 기준, 실패 시 복구 절차를 하나씩 적고 미관측 영역을 명시합니다.</p>
             <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>종합 과제의 완료는 도구 실행 횟수가 아니라 근거로 설계 결정을 설명할 수 있는지로 판단합니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
         <ol><li>정상 업무와 보호 자산을 먼저 정의하고 경계별 흐름·최소 권한을 작성합니다.</li><li>정책 모델 결과와 탐지 임계값을 재현하고 예외 N06은 좁힌 근거로 처리합니다.</li><li>TLS·신원·응용 권한·운영 관측을 연결하되 모델 밖의 실제 장비 검증은 미완료라고 표시합니다.</li></ol>
         
         <h3>결과를 판단하는 기준</h3><pre>평가 기준: 구조도/허용표의 일치, 정상·거부 회귀 근거, N06 판단, 탐지 한계·오탐, 신원·감사, 변경 영향·복구가 모두 설명됩니다.</pre>
-      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p></section>
-          <section id="verify" class="article-section completion-panel"><div class="overline">04 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>기존 설계에 IPv6 외부 경로를 추가한 뒤 IPv4 정책만으로 보호된다는 주장을 시험 계획으로 바꾸세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>두 주소 계열의 라우팅·필터·관측을 따로 확인합니다. 기존 IPv4 회귀 검사도 유지해야 합니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>정상·거부·이상 흐름을 모두 다뤘다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>변경 영향·한계·롤백을 포함한 보고서를 완성했다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/network/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
         <fieldset class="question" data-question="0">
           <legend>1. 종합 보고서에서 PCAP과 flows.csv를 어떻게 다뤄야 하나요?</legend>
           <label class="question-option"><input type="radio" name="question-0" value="0"><span>IP가 비슷하면 같은 실제 세션으로 확정한다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>두 자료는 별도 합성 자료임을 표시하고 각자의 관찰 근거로 사용한다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>flows.csv의 시간을 PCAP에 맞춰 바꾼다.</span></label>
@@ -106,7 +141,7 @@ python3 detect.py
             <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>정상·거부·이상 흐름을 모두 다뤘다.</li><li>변경 영향·한계·롤백을 포함한 보고서를 완성했다.</li></ul>
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="zero-trust.html"><small>← 이전 차시</small>신원과 자산 중심의 Zero Trust</a>
-            <a href="./"><small>과정 돌아보기 →</small>Network Security 목차</a></nav>
+            <a href="routing.html"><small>다음 차시 →</small>최장 접두사와 돌아오는 경로</a></nav>
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://csrc.nist.gov/pubs/sp/800/207/final" target="_blank" rel="noopener noreferrer">NIST SP 800-207 · 접근 설계 ↗</a></li>
         <li><a href="https://www.wireshark.org/docs/wsug_html_chunked/ChAdvFollowStreamSection.html" target="_blank" rel="noopener noreferrer">Wireshark · 스트림 분석 ↗</a></li>

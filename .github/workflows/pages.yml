@@ -40,11 +40,13 @@ jobs:
         run: |
           pnpm test
           python tests/labs_test.py
+          python -m unittest discover -s tests -p '*_expansion_test.py' -v
+          python tests/learning_revision_test.py
           sh tests/c_labs.sh
       - name: Require generated files to match committed sources
         run: |
-          git diff --exit-code -- index.html sitemap.xml js/curriculum.js js/catalog.js js/courses js/visual-data.js tracks labs
-          test -z "$(git ls-files --others --exclude-standard -- tracks labs js/courses)"
+          git diff --exit-code -- index.html sitemap.xml js/curriculum.js js/catalog.js js/courses js/visual-data.js tracks labs learn projects guides/bridges.html content/generated-paths.json content/site-metrics.json assets/og-image.svg README.md
+          test -z "$(git ls-files --others --exclude-standard -- tracks labs js/courses learn projects)"
       - name: Package public files
         run: python scripts/package_site.py
       - name: Configure Pages

@@ -1,0 +1,10 @@
+{
+  "case": "BF-IR-002",
+  "host": "workstation-7",
+  "observed_at": "2026-10-01T09:10:00+09:00",
+  "items": [
+    {"id": "E01", "kind": "memory", "volatile": true, "purpose": "process context", "order": 1},
+    {"id": "E02", "kind": "connections", "volatile": true, "purpose": "current peers", "order": 2},
+    {"id": "E03", "kind": "disk-copy", "volatile": false, "purpose": "persistent artifacts", "order": 3}
+  ]
+}

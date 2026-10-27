@@ -1,0 +1,5 @@
+actor,resource,action,expected
+alice,alice-note,read,allow
+alice,bob-note,read,deny
+anonymous,alice-note,read,deny
+bob,bob-note,read,allow

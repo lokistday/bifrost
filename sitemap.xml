@@ -2,6 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://lokistday.github.io/bifrost/</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/guides/linux.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/learn/</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/projects/foundation.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/projects/pwn.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/projects/forensic.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/projects/misc.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/projects/cloud.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/projects/network.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/projects/crypto.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/projects/rev.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/projects/web.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/guides/bridges.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/foundation/</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/foundation/environment.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/foundation/paths.html</loc></url>
@@ -13,6 +24,16 @@
   <url><loc>https://lokistday.github.io/bifrost/tracks/foundation/network.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/foundation/http.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/foundation/git.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/foundation/text-bytes.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/foundation/structured-data.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/foundation/exceptions.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/foundation/cli.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/foundation/unit-tests.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/foundation/mutable-data.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/foundation/atomic-output.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/foundation/config-precedence.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/foundation/subprocess.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/foundation/structured-logging.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/pwn/</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/pwn/build.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/pwn/lifetime.html</loc></url>
@@ -20,17 +41,48 @@
   <url><loc>https://lokistday.github.io/bifrost/tracks/pwn/debugger.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/pwn/errors.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/pwn/mitigations.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/pwn/integer-input.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/pwn/allocation-size.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/pwn/format-strings.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/pwn/ownership.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/pwn/binary-parser.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/pwn/struct-layout.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/pwn/binary-strings.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/pwn/file-descriptors.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/pwn/partial-io.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/pwn/atomic-open.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/forensic/</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/forensic/integrity.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/forensic/logs.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/forensic/metadata.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/forensic/timeline.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/forensic/report.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/forensic/collection-plan.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/forensic/host-triage.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/forensic/browser-sqlite.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/forensic/file-signatures.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/forensic/log-correlation.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/forensic/incident-response.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/forensic/windows-events.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/forensic/linux-auth.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/forensic/filesystem-records.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/forensic/memory-triage.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/forensic/evidence-coverage.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/misc/</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/misc/triage.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/misc/pipeline.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/misc/automation.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/misc/writeup.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/misc/structured-parsing.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/misc/archive-inspection.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/misc/graph-search.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/misc/constraint-solving.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/misc/reproducible-results.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/misc/container-identification.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/misc/pixel-data.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/misc/byte-statistics.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/misc/bounded-decompression.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/misc/resumable-batch.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/cloud/</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/cloud/responsibility.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/cloud/iam.html</loc></url>
@@ -39,6 +91,16 @@
   <url><loc>https://lokistday.github.io/bifrost/tracks/cloud/secrets.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/cloud/audit.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/cloud/capstone.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/cloud/workload-trust.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/cloud/iac-review.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/cloud/container-supply-chain.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/cloud/audit-coverage.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/cloud/recovery-exercise.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/cloud/effective-permissions.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/cloud/kubernetes-rbac.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/cloud/metadata-credentials.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/cloud/private-endpoint-paths.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/cloud/breakglass-access.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/network/</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/network/addressing.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/network/pcap.html</loc></url>
@@ -49,6 +111,16 @@
   <url><loc>https://lokistday.github.io/bifrost/tracks/network/detection.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/network/zero-trust.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/network/capstone.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/network/routing.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/network/nat-correlation.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/network/connection-state.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/network/detection-metrics.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/network/incident-correlation.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/network/ipv6-boundaries.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/network/stream-reassembly.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/network/dns-cache.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/network/path-mtu.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/network/event-time-windows.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/crypto/</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/crypto/representation.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/crypto/modular.html</loc></url>
@@ -59,12 +131,32 @@
   <url><loc>https://lokistday.github.io/bifrost/tracks/crypto/public-key.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/crypto/nonce.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/crypto/password.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/crypto/key-lifecycle.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/crypto/hkdf-context.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/crypto/certificate-trust.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/crypto/message-encoding.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/crypto/replay-protection.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/crypto/aad-record-binding.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/crypto/verifier-migration.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/crypto/envelope-keywrap.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/crypto/signature-authorization.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/crypto/unbiased-randomness.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/rev/</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/rev/binary.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/rev/assembly.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/rev/static.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/rev/dynamic.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/rev/report.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/rev/byte-order.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/rev/calling-convention.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/rev/control-flow.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/rev/data-flow.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/rev/differential.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/rev/elf-layout.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/rev/relocation.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/rev/integer-views.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/rev/switch-recovery.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/rev/state-machine.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/web/</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/web/flow.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/web/sql.html</loc></url>
@@ -73,4 +165,14 @@
   <url><loc>https://lokistday.github.io/bifrost/tracks/web/sql-injection.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/web/output.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/tracks/web/regression.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/web/csrf.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/web/cors.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/web/csp.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/web/file-boundary.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/web/ssrf.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/web/mass-assignment.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/web/session-lifecycle.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/web/reset-tokens.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/web/private-caching.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/tracks/web/idempotency.html</loc></url>
 </urlset>

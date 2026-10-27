@@ -15,7 +15,7 @@
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Bifrost 보안 학습 지도 — 9개 분야와 62개 차시">
+<meta property="og:image:alt" content="Bifrost 보안 학습 지도 — {{COURSE_COUNT}}개 분야와 {{LESSON_COUNT}}개 차시">
 <link rel="canonical" href="{{SITE_URL}}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Bifrost — 보안 학습 가이드">
@@ -53,7 +53,7 @@
 </div>
 <header class="topbar"><div class="wrap nav">
 <a class="brand" href="#home"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M20 2.8 23.8 15.2 36.2 19 23.8 22.8 20 35.2 16.2 22.8 3.8 19 16.2 15.2Z" fill="currentColor"/><path d="M31.1 4.7 32.5 9.1 36.9 10.5 32.5 11.9 31.1 16.3 29.7 11.9 25.3 10.5 29.7 9.1Z" fill="#9cf7ff"/></svg></span><span>Bifrost</span></a>
-<nav class="navlinks"><a href="#mindmap">학습 지도</a><a href="#practice">학습 가이드</a><a href="#resources">자료실</a></nav>
+<nav class="navlinks"><a href="#mindmap">학습 지도</a><a href="learn/">검색 · 학습 경로</a><a href="#practice">학습 가이드</a><a href="#resources">자료실</a></nav>
 <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">다크 모드</span></button>
 <a class="nav-cta" href="#mindmap">학습 시작하기 ↗</a>
 </div></header>
@@ -65,7 +65,8 @@
       <div class="eyebrow">BIFROST LEARNING ATLAS</div>
       <h1>보안 학습 지도</h1>
       <p>관심 있는 분야를 선택하고, 개념부터 실습까지 연결해 보세요.</p>
-      <div class="mindmap-hint"><span class="hint-pulse"></span> 9개 분야 <span aria-hidden="true">·</span> 62개 차시</div>
+      <p><a href="learn/">차시 검색 · 목표별 경로 · 종합 프로젝트 ↗</a></p>
+      <div class="mindmap-hint"><span class="hint-pulse"></span> {{COURSE_COUNT}}개 분야 <span aria-hidden="true">·</span> {{LESSON_COUNT}}개 차시</div>
     </div>
     <div class="mindmap-stage" role="group" aria-label="Bifrost 보안 학습 분야 마인드맵">
       <svg class="mindmap-lines" viewBox="0 0 1140 640" preserveAspectRatio="none" aria-hidden="true">
@@ -121,7 +122,7 @@
 <footer class="footer"><div class="wrap footer-inner"><div><strong>Bifrost</strong><br><small>Learn the concept. Practice with intent. Document what you discover.</small><br><small class="credit">by. Loki</small></div><div><small>학습과 실습은 본인이 소유하거나 명시적으로 허가받은 환경에서 진행하세요.<br>진도는 현재 브라우저에 저장되며, 계정 동기화는 아직 지원하지 않습니다.</small></div></div></footer>
 
 <div id="linuxGuideOverlay" role="dialog" aria-modal="true" aria-label="Windows에서 Linux 시작하기" aria-hidden="true">
-  <button id="linuxGuideClose" type="button" onclick="showMainGuide()">← 학습 지도</button>
+  <button id="linuxGuideClose" type="button">← 학습 지도</button>
   <iframe id="linuxGuideFrame" title="Windows에서 Linux 시작하기" loading="lazy"></iframe>
 </div>
 

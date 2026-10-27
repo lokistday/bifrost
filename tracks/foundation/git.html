@@ -2,6 +2,8 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b1220">
 <meta name="description" content="변경 내용을 커밋하고 다른 사람이 따라 할 실행 기록을 만듭니다.">
@@ -20,19 +22,20 @@
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=20261024-atlas1">
-<script src="../../js/catalog.js" defer></script>
-<script src="../../js/courses/foundation.js" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../../css/study.css?v=learning-a66aac410152">
+<script src="../../js/catalog.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/courses/foundation.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=20261024-atlas1" defer></script>
+<script src="../../js/learning-view.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/learning.js" defer></script>
 </head>
 <body class="learning-page" data-course="foundation" data-course-number="00" data-view="lesson" data-lesson-id="foundation.git" style="--course-accent:var(--map-cyan)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">공통 기초 목차</a></nav>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">공통 기초 목차</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -63,10 +66,31 @@
               <span class="lesson-dot" data-dot="foundation.network" aria-hidden="true"></span><span>IP·포트·DNS와 전송<small class="completion-label" data-completion="foundation.network"></small></span></a></li><li><a class="side-lesson" href="http.html" >
               <span class="lesson-dot" data-dot="foundation.http" aria-hidden="true"></span><span>HTTP 요청과 응답 읽기<small class="completion-label" data-completion="foundation.http"></small></span></a></li><li><a class="side-lesson" href="git.html" aria-current="page">
               <span class="lesson-dot" data-dot="foundation.git" aria-hidden="true"></span><span>Git과 재현 가능한 README<small class="completion-label" data-completion="foundation.git"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>04 · 데이터 경계와 도구 만들기<span class="caption" data-module-count="3"></span></summary>
+            <ol><li><a class="side-lesson" href="text-bytes.html" >
+              <span class="lesson-dot" data-dot="foundation.text-bytes" aria-hidden="true"></span><span>문자열·바이트·UTF-8의 경계<small class="completion-label" data-completion="foundation.text-bytes"></small></span></a></li><li><a class="side-lesson" href="structured-data.html" >
+              <span class="lesson-dot" data-dot="foundation.structured-data" aria-hidden="true"></span><span>JSON 파싱과 데이터 계약<small class="completion-label" data-completion="foundation.structured-data"></small></span></a></li><li><a class="side-lesson" href="exceptions.html" >
+              <span class="lesson-dot" data-dot="foundation.exceptions" aria-hidden="true"></span><span>예외·오류 메시지·종료 상태<small class="completion-label" data-completion="foundation.exceptions"></small></span></a></li><li><a class="side-lesson" href="cli.html" >
+              <span class="lesson-dot" data-dot="foundation.cli" aria-hidden="true"></span><span>재사용 가능한 명령행 도구<small class="completion-label" data-completion="foundation.cli"></small></span></a></li><li><a class="side-lesson" href="unit-tests.html" >
+              <span class="lesson-dot" data-dot="foundation.unit-tests" aria-hidden="true"></span><span>경계값 테스트와 실패 실험<small class="completion-label" data-completion="foundation.unit-tests"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>05 · 상태와 실행 경계 다루기<span class="caption" data-module-count="4"></span></summary>
+            <ol><li><a class="side-lesson" href="mutable-data.html" >
+              <span class="lesson-dot" data-dot="foundation.mutable-data" aria-hidden="true"></span><span>변경 가능한 자료와 방어적 복사<small class="completion-label" data-completion="foundation.mutable-data"></small></span></a></li><li><a class="side-lesson" href="atomic-output.html" >
+              <span class="lesson-dot" data-dot="foundation.atomic-output" aria-hidden="true"></span><span>자원 종료와 원자적 파일 교체<small class="completion-label" data-completion="foundation.atomic-output"></small></span></a></li><li><a class="side-lesson" href="config-precedence.html" >
+              <span class="lesson-dot" data-dot="foundation.config-precedence" aria-hidden="true"></span><span>설정 우선순위와 출처 추적<small class="completion-label" data-completion="foundation.config-precedence"></small></span></a></li><li><a class="side-lesson" href="subprocess.html" >
+              <span class="lesson-dot" data-dot="foundation.subprocess" aria-hidden="true"></span><span>자식 프로세스·argv·시간 제한<small class="completion-label" data-completion="foundation.subprocess"></small></span></a></li><li><a class="side-lesson" href="structured-logging.html" >
+              <span class="lesson-dot" data-dot="foundation.structured-logging" aria-hidden="true"></span><span>구조화 로그·허용 필드·민감 정보<small class="completion-label" data-completion="foundation.structured-logging"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
-          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/foundation.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">03 · 시스템·통신·기록 · 10 / 10</div><h1>Git과 재현 가능한 README</h1><p class="lesson-objective">변경 내용을 커밋하고 다른 사람이 따라 할 실행 기록을 만듭니다.</p></div></header>
-          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/foundation.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">03 · 시스템·통신·기록 · 10 / 20</div><h1>Git과 재현 가능한 README</h1><p class="lesson-objective">변경 내용을 커밋하고 다른 사람이 따라 할 실행 기록을 만듭니다.</p></div></header>
+          <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>파일의 위치와 실행 결과를 따로 설명할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>셸의 현재 폴더·파일 경로·프로그램 출력을 구별합니다. 환경 준비와 경로 차시에서 확인하세요.</p><a href="../../guides/bridges.html#python">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
           <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Ubuntu/WSL · Git · 로컬 저장소</strong></p><ul><li>git --version을 확인합니다. 새 bifrost-notes 폴더를 사용하고 기존 프로젝트 폴더 안에서 시작하지 않습니다.</li><li>원격 저장소·GitHub 계정·네트워크 연결 없이 진행합니다. 신원 설정은 이 저장소 범위에서 할 수 있습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="paths.html">공통 기초 · 경로와 작업용 사본 ↗</a></li></ul>
             </section>
@@ -77,29 +101,40 @@
         <a class="learning-button" href="../../labs/foundation.zip" download>전체 실습 ZIP 받기 ↓</a>
         <p class="caption">이 차시는 본문의 코드·설계 예제로 진행합니다.</p>
       </section>
-          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2><ol class="walkthrough"><li><h3>새 저장소에서 상태 확인하기</h3><p>본문 예제로 첫 커밋을 만든 뒤 상태와 로그를 봅니다. 사용자 신원 오류가 나면 이 폴더에서 git config user.name &quot;Learner&quot;와 git config user.email &quot;learner@example.invalid&quot;를 실행해 기록용 이름·이메일을 저장한 뒤 첫 커밋을 다시 시도합니다. 예시 주소는 실제 이메일이 아니며 원격 공개 시 커밋 메타데이터도 공개될 수 있습니다.</p>
-        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>git status
-git log --oneline</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>첫 커밋이 있고 작업 폴더 상태를 확인할 수 있습니다. 커밋 ID는 매번 다를 수 있습니다.</pre></div></li><li><h3>실행 가능한 기록 추가하기</h3><p>README에 실습 파일명, 환경, 명령, 실제 출력과 해석을 추가합니다. 예시에서는 foundation의 hello.py를 사용했다는 사실과 실행 위치를 명시합니다.</p>
-        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>git diff
-git add README.md
-git diff --staged</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>수정 전후 차이와 다음 커밋에 들어갈 내용을 각각 확인합니다.</pre></div></li><li><h3>커밋 후 기록만 보고 재실행하기</h3><p>수정한 기록을 커밋하고 README를 순서대로 따라 실행합니다. 빠진 경로나 입력 파일을 발견하면 기록을 고쳐 다시 커밋합니다.</p>
-        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>git commit -m &quot;Record hello exercise&quot;
-git log --oneline</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>기존 첫 커밋과 학습 기록 커밋, 최소 두 개의 커밋이 남습니다.</pre></div></li></ol>
-            <h3>전체 예제 연결하기</h3><div class="code-shell"><div class="code-toolbar"><span>예제 · 명령 또는 관찰 절차</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">mkdir bifrost-notes
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Ubuntu/WSL · Git · 로컬 저장소</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">mkdir bifrost-notes
 cd bifrost-notes
 git init
 printf &quot;# My Bifrost notes\n&quot; &gt; README.md
 git add README.md
 git diff --staged
 git commit -m &quot;Add first learning note&quot;
-git log --oneline</code></pre></div><div class="expected-output"><h3>예상 결과와 해석</h3><pre>README.md를 포함한 커밋 1개가 생깁니다. 커밋 ID는 환경마다 다릅니다. 사용자 이름·이메일 설정이 없으면 Git이 설정 안내를 출력합니다.</pre></div></section>
+git log --oneline</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>README.md를 포함한 커밋 1개가 생깁니다. 커밋 ID는 환경마다 다릅니다. 사용자 이름·이메일 설정이 없으면 Git이 설정 안내를 출력합니다.</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>새 저장소에서 상태 확인하기</h3><p>본문 예제로 첫 커밋을 만든 뒤 상태와 로그를 봅니다. 사용자 신원 오류가 나면 이 폴더에서 git config user.name &quot;Learner&quot;와 git config user.email &quot;learner@example.invalid&quot;를 실행해 기록용 이름·이메일을 저장한 뒤 첫 커밋을 다시 시도합니다. 예시 주소는 실제 이메일이 아니며 원격 공개 시 커밋 메타데이터도 공개될 수 있습니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Ubuntu/WSL · Git · 로컬 저장소</span></div><pre><code>git status
+git log --oneline</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>첫 커밋이 있고 작업 폴더 상태를 확인할 수 있습니다. 커밋 ID는 매번 다를 수 있습니다.</pre></div></li><li><h3>실행 가능한 기록 추가하기</h3><p>README에 실습 파일명, 환경, 명령, 실제 출력과 해석을 추가합니다. 예시에서는 foundation의 hello.py를 사용했다는 사실과 실행 위치를 명시합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Ubuntu/WSL · Git · 로컬 저장소</span></div><pre><code>git diff
+git add README.md
+git diff --staged</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>수정 전후 차이와 다음 커밋에 들어갈 내용을 각각 확인합니다.</pre></div></li><li><h3>커밋 후 기록만 보고 재실행하기</h3><p>수정한 기록을 커밋하고 README를 순서대로 따라 실행합니다. 빠진 경로나 입력 파일을 발견하면 기록을 고쳐 다시 커밋합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Ubuntu/WSL · Git · 로컬 저장소</span></div><pre><code>git commit -m &quot;Record hello exercise&quot;
+git log --oneline</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>기존 첫 커밋과 학습 기록 커밋, 최소 두 개의 커밋이 남습니다.</pre></div></li></ol></section>
           <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>Foundation 실습 하나의 입력·실행 명령·결과를 README에 추가하고 두 번째 커밋을 만드세요.</p>
             <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>Git이 신원을 요청하면 이 저장소에 git config user.name과 user.email을 설정하세요. --global은 모든 저장소에 적용됩니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
         <ol><li>README에 목적, 실제 OS·셸·Python 버전, hello.py 위치, 실행 명령, 실제 출력을 적습니다.</li><li>git diff와 git diff --staged로 검토한 뒤 README 변경을 두 번째 커밋으로 남깁니다.</li><li>다른 터미널에서 README만 보고 파일을 찾고 실행합니다. 실행 안 된 단계를 기록으로 보완했는지까지 점검합니다.</li></ol>
         
         <h3>결과를 판단하는 기준</h3><pre>git log에 최소 두 커밋이 보이고, README에는 입력·환경·명령·출력·해석이 있어야 합니다. 개인별 환경값과 커밋 ID는 서로 달라도 됩니다.</pre>
-      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p></section>
-          <section id="verify" class="article-section completion-panel"><div class="overline">04 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>임시 연습 저장소에서 README의 한 줄만 수정하고 커밋 전 diff와 커밋 후 log를 연결해 기록하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>diff는 미커밋 변경, log는 커밋 이력을 보여 줍니다. 파일 경로와 커밋 식별자가 다른 사람의 재현에 충분해야 합니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>status와 diff로 변경을 확인했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>README만 보고 실습을 다시 실행했다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/foundation/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
         <fieldset class="question" data-question="0">
           <legend>1. git add README.md 후 README를 더 수정했습니다. 다음 커밋에 최신 수정도 넣으려면?</legend>
           <label class="question-option"><input type="radio" name="question-0" value="0"><span>git add README.md를 다시 실행하고 staged diff를 확인한다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>이미 add했으므로 언제나 자동 포함된다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>git log만 실행하면 포함된다.</span></label>
@@ -116,7 +151,7 @@ git log --oneline</code></pre></div><div class="expected-output"><h3>예상 결�
             <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>status와 diff로 변경을 확인했다.</li><li>README만 보고 실습을 다시 실행했다.</li></ul>
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="http.html"><small>← 이전 차시</small>HTTP 요청과 응답 읽기</a>
-            <a href="./"><small>과정 돌아보기 →</small>Foundation 목차</a></nav>
+            <a href="text-bytes.html"><small>다음 차시 →</small>문자열·바이트·UTF-8의 경계</a></nav>
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://git-scm.com/docs/git-diff" target="_blank" rel="noopener noreferrer">Git · 변경 비교 git-diff ↗</a></li>
         <li><a href="https://git-scm.com/docs/git-add" target="_blank" rel="noopener noreferrer">Git · 변경 선택 git-add ↗</a></li>

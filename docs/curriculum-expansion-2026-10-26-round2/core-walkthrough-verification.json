@@ -1,0 +1,332 @@
+[
+  {
+    "id": "foundation.mutable-data",
+    "step": 1,
+    "exits": [
+      0
+    ],
+    "stdout": "alias_same=True\nshallow_nested_same=True\noriginal_tags=start,review\nseparate_tags=start,safe",
+    "stderr": "",
+    "expected": "alias_same=True\nshallow_nested_same=True\noriginal_tags=start,review\nseparate_tags=start,safe",
+    "literal_match": true
+  },
+  {
+    "id": "foundation.mutable-data",
+    "step": 2,
+    "exits": [
+      0
+    ],
+    "stdout": "False\nTrue",
+    "stderr": "",
+    "expected": "False\nTrue",
+    "literal_match": true
+  },
+  {
+    "id": "foundation.mutable-data",
+    "step": 3,
+    "exits": [
+      0
+    ],
+    "stdout": "['start']\n['start', 'done']",
+    "stderr": "",
+    "expected": "['start']\n['start', 'done']",
+    "literal_match": true
+  },
+  {
+    "id": "foundation.atomic-output",
+    "step": 1,
+    "exits": [
+      0
+    ],
+    "stdout": "after_failure={\"version\":1}\nafter_success={\"version\":2}\npending_files=0",
+    "stderr": "",
+    "expected": "after_failure={\"version\":1}\nafter_success={\"version\":2}\npending_files=0",
+    "literal_match": true
+  },
+  {
+    "id": "foundation.atomic-output",
+    "step": 2,
+    "exits": [
+      0
+    ],
+    "stdout": "closed=True",
+    "stderr": "",
+    "expected": "python3 close_probe.py → closed=True",
+    "literal_match": true
+  },
+  {
+    "id": "foundation.atomic-output",
+    "step": 3,
+    "exits": [
+      0
+    ],
+    "stdout": "after_failure={\"version\":1}\nafter_success={\"version\":2}\npending_files=0",
+    "stderr": "",
+    "expected": "다시 실행해도 version=1 유지 후 version=2 교체, pending_files=0입니다. 사용자 폴더의 파일은 변경하지 않습니다.",
+    "literal_match": false
+  },
+  {
+    "id": "foundation.config-precedence",
+    "step": 1,
+    "exits": [
+      0
+    ],
+    "stdout": "default=5 source=default\nfile=10 source=file\nenvironment=20 source=environment\ncli=30 source=cli\nempty_environment=INVALID",
+    "stderr": "",
+    "expected": "default=5 source=default\nfile=10 source=file\nenvironment=20 source=environment\ncli=30 source=cli\nempty_environment=INVALID",
+    "literal_match": true
+  },
+  {
+    "id": "foundation.config-precedence",
+    "step": 2,
+    "exits": [
+      0
+    ],
+    "stdout": "(20, 'environment')",
+    "stderr": "",
+    "expected": "(20, 'environment')",
+    "literal_match": true
+  },
+  {
+    "id": "foundation.config-precedence",
+    "step": 3,
+    "exits": [
+      0
+    ],
+    "stdout": "(5, 'default')",
+    "stderr": "",
+    "expected": "(5, 'default'). 빈 값의 거부는 config 모드 마지막 줄 empty_environment=INVALID로 확인합니다.",
+    "literal_match": true
+  },
+  {
+    "id": "foundation.subprocess",
+    "step": 1,
+    "exits": [
+      0
+    ],
+    "stdout": "argv=[\"two words\",\"x;echo NOT_A_COMMAND\"]\nexit=0\nchild_failure=3\ntimeout=EXPIRED",
+    "stderr": "",
+    "expected": "argv=[\"two words\",\"x;echo NOT_A_COMMAND\"]\nexit=0\nchild_failure=3\ntimeout=EXPIRED",
+    "literal_match": true
+  },
+  {
+    "id": "foundation.subprocess",
+    "step": 2,
+    "exits": [
+      0
+    ],
+    "stdout": "argv=[\"two words\",\"plain\"]\n0",
+    "stderr": "",
+    "expected": "argv=[\"two words\",\"plain\"]\n0",
+    "literal_match": true
+  },
+  {
+    "id": "foundation.subprocess",
+    "step": 3,
+    "exits": [
+      0
+    ],
+    "stdout": "3\nTrue\nfixture failure",
+    "stderr": "",
+    "expected": "3\nTrue\nfixture failure",
+    "literal_match": true
+  },
+  {
+    "id": "foundation.structured-logging",
+    "step": 1,
+    "exits": [
+      0
+    ],
+    "stdout": "{\"event\":\"profile.update\",\"request_id\":\"REQ-001\",\"result\":\"denied\",\"status\":403}\nsecret_values_present=False\nphysical_lines=1",
+    "stderr": "",
+    "expected": "{\"event\":\"profile.update\",\"request_id\":\"REQ-001\",\"result\":\"denied\",\"status\":403}\nsecret_values_present=False\nphysical_lines=1",
+    "literal_match": true
+  },
+  {
+    "id": "foundation.structured-logging",
+    "step": 2,
+    "exits": [
+      0
+    ],
+    "stdout": "1\nTrue",
+    "stderr": "",
+    "expected": "python3 log_probe.py → 1\nTrue",
+    "literal_match": true
+  },
+  {
+    "id": "foundation.structured-logging",
+    "step": 3,
+    "exits": [
+      0
+    ],
+    "stdout": "invalid_status=REJECT",
+    "stderr": "",
+    "expected": "status_probe.py로 저장해 실행하면 invalid_status=REJECT",
+    "literal_match": true
+  },
+  {
+    "id": "web.mass-assignment",
+    "step": 1,
+    "exits": [
+      0
+    ],
+    "stdout": "normal_name=Freya\nrole_assignment=REJECT\noriginal_role=learner\noriginal_name=Loki",
+    "stderr": "",
+    "expected": "normal_name=Freya\nrole_assignment=REJECT\noriginal_role=learner\noriginal_name=Loki",
+    "literal_match": true
+  },
+  {
+    "id": "web.mass-assignment",
+    "step": 2,
+    "exits": [
+      0
+    ],
+    "stdout": "light\ndark",
+    "stderr": "",
+    "expected": "light\ndark",
+    "literal_match": true
+  },
+  {
+    "id": "web.mass-assignment",
+    "step": 3,
+    "exits": [
+      0
+    ],
+    "stdout": "other_user=DENY",
+    "stderr": "",
+    "expected": "python3 profile_probe.py → other_user=DENY",
+    "literal_match": true
+  },
+  {
+    "id": "web.session-lifecycle",
+    "step": 1,
+    "exits": [
+      0
+    ],
+    "stdout": "old_after_rotate=None\nnew_after_rotate=alice\nat_expiry=None\nafter_logout=None",
+    "stderr": "",
+    "expected": "old_after_rotate=None\nnew_after_rotate=alice\nat_expiry=None\nafter_logout=None",
+    "literal_match": true
+  },
+  {
+    "id": "web.session-lifecycle",
+    "step": 2,
+    "exits": [
+      0
+    ],
+    "stdout": "alice\nNone",
+    "stderr": "",
+    "expected": "alice\nNone",
+    "literal_match": true
+  },
+  {
+    "id": "web.session-lifecycle",
+    "step": 3,
+    "exits": [
+      0
+    ],
+    "stdout": "alice\nNone",
+    "stderr": "",
+    "expected": "alice\nNone",
+    "literal_match": true
+  },
+  {
+    "id": "web.reset-tokens",
+    "step": 1,
+    "exits": [
+      0
+    ],
+    "stdout": "valid=ACCEPT\nreplay=REJECT\nwrong_user=REJECT\nexpired=REJECT\nwrong_purpose=REJECT",
+    "stderr": "",
+    "expected": "valid=ACCEPT\nreplay=REJECT\nwrong_user=REJECT\nexpired=REJECT\nwrong_purpose=REJECT",
+    "literal_match": true
+  },
+  {
+    "id": "web.reset-tokens",
+    "step": 2,
+    "exits": [
+      0
+    ],
+    "stdout": "False\nFalse\nTrue",
+    "stderr": "",
+    "expected": "False\nFalse\nTrue",
+    "literal_match": true
+  },
+  {
+    "id": "web.reset-tokens",
+    "step": 3,
+    "exits": [
+      0
+    ],
+    "stdout": "True\nFalse",
+    "stderr": "",
+    "expected": "True\nFalse",
+    "literal_match": true
+  },
+  {
+    "id": "web.private-caching",
+    "step": 1,
+    "exits": [
+      0
+    ],
+    "stdout": "public_alice=profile:alice\npublic_bob=profile:alice\nno_store_bob=profile:bob\nno_cache=STORE_REVALIDATE\nprivate=PRIVATE_ONLY",
+    "stderr": "",
+    "expected": "public_alice=profile:alice\npublic_bob=profile:alice\nno_store_bob=profile:bob\nno_cache=STORE_REVALIDATE\nprivate=PRIVATE_ONLY",
+    "literal_match": true
+  },
+  {
+    "id": "web.private-caching",
+    "step": 2,
+    "exits": [
+      0
+    ],
+    "stdout": "NO_STORE\nPRIVATE_ONLY\nSTORE_REVALIDATE",
+    "stderr": "",
+    "expected": "NO_STORE\nPRIVATE_ONLY\nSTORE_REVALIDATE",
+    "literal_match": true
+  },
+  {
+    "id": "web.private-caching",
+    "step": 3,
+    "exits": [
+      0
+    ],
+    "stdout": "profile:alice\nprofile:bob\n0",
+    "stderr": "",
+    "expected": "profile:alice\nprofile:bob\n0",
+    "literal_match": true
+  },
+  {
+    "id": "web.idempotency",
+    "step": 1,
+    "exits": [
+      0
+    ],
+    "stdout": "first=RESERVED stock=1\nrepeat=REPLAY stock=1\nchanged=CONFLICT stock=1\nother=OUT_OF_STOCK stock=1\nrollback_stock=1",
+    "stderr": "",
+    "expected": "first=RESERVED stock=1\nrepeat=REPLAY stock=1\nchanged=CONFLICT stock=1\nother=OUT_OF_STOCK stock=1\nrollback_stock=1",
+    "literal_match": true
+  },
+  {
+    "id": "web.idempotency",
+    "step": 2,
+    "exits": [
+      0
+    ],
+    "stdout": "RESERVED\nRESERVED\n1",
+    "stderr": "",
+    "expected": "checkout_probe.py로 저장해 실행하면 RESERVED\nRESERVED\n1",
+    "literal_match": true
+  },
+  {
+    "id": "web.idempotency",
+    "step": 3,
+    "exits": [
+      0
+    ],
+    "stdout": "failure=REPORTED\nstock=3\norders=0",
+    "stderr": "",
+    "expected": "rollback_probe.py로 저장해 실행하면 failure=REPORTED\nstock=3\norders=0",
+    "literal_match": true
+  }
+]

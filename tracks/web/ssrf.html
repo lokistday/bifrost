@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="서버가 대신 요청하는 기능의 신뢰 경계를 분석하고 URL 구문 검사만의 한계를 설명합니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="SSRF·서버 요청과 출구 통제 — Web Hacking · Bifrost">
+<meta property="og:description" content="서버가 대신 요청하는 기능의 신뢰 경계를 분석하고 URL 구문 검사만의 한계를 설명합니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/tracks/web/ssrf.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/web/ssrf.html">
+<title>SSRF·서버 요청과 출구 통제 — Web Hacking · Bifrost</title>
+<script src="../../js/theme.js"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../../css/study.css?v=learning-a66aac410152">
+<script src="../../js/catalog.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/courses/web.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/learning.js" defer></script>
+</head>
+<body class="learning-page" data-course="web" data-course-number="08" data-view="lesson" data-lesson-id="web.ssrf" style="--course-accent:var(--map-blue)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">웹 보안 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="web.ssrf">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../index.html#mindmap">학습 지도</a><span aria-hidden="true">/</span><a href="./">Web Hacking</a><span aria-hidden="true">/</span><span aria-current="page">12차시</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar"><a class="back-link" href="./">← Web Hacking 전체 과정</a><div class="course-stats"><span data-count="web"></span>
+        <div class="course-meter" role="progressbar" aria-label="Web Hacking 완료 진도" aria-valuemin="0" aria-valuemax="100" data-meter="web"><span></span></div>
+      </div>
+        <nav aria-label="차시 목차">
+          <details >
+            <summary>01 · 웹의 동작과 데이터<span class="caption" data-module-count="0"></span></summary>
+            <ol><li><a class="side-lesson" href="flow.html" >
+              <span class="lesson-dot" data-dot="web.flow" aria-hidden="true"></span><span>HTML·DOM과 요청 흐름<small class="completion-label" data-completion="web.flow"></small></span></a></li><li><a class="side-lesson" href="sql.html" >
+              <span class="lesson-dot" data-dot="web.sql" aria-hidden="true"></span><span>SELECT·WHERE와 매개변수<small class="completion-label" data-completion="web.sql"></small></span></a></li><li><a class="side-lesson" href="sessions.html" >
+              <span class="lesson-dot" data-dot="web.sessions" aria-hidden="true"></span><span>쿠키·세션·인증<small class="completion-label" data-completion="web.sessions"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>02 · 권한·입력 처리·검증<span class="caption" data-module-count="1"></span></summary>
+            <ol><li><a class="side-lesson" href="authorization.html" >
+              <span class="lesson-dot" data-dot="web.authorization" aria-hidden="true"></span><span>리소스 단위 인가<small class="completion-label" data-completion="web.authorization"></small></span></a></li><li><a class="side-lesson" href="sql-injection.html" >
+              <span class="lesson-dot" data-dot="web.sql-injection" aria-hidden="true"></span><span>SQL Injection과 바인딩<small class="completion-label" data-completion="web.sql-injection"></small></span></a></li><li><a class="side-lesson" href="output.html" >
+              <span class="lesson-dot" data-dot="web.output" aria-hidden="true"></span><span>출력 컨텍스트와 XSS 방어<small class="completion-label" data-completion="web.output"></small></span></a></li><li><a class="side-lesson" href="regression.html" >
+              <span class="lesson-dot" data-dot="web.regression" aria-hidden="true"></span><span>수정·반례·회귀 테스트<small class="completion-label" data-completion="web.regression"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>03 · 브라우저와 서버의 신뢰 경계<span class="caption" data-module-count="2"></span></summary>
+            <ol><li><a class="side-lesson" href="csrf.html" >
+              <span class="lesson-dot" data-dot="web.csrf" aria-hidden="true"></span><span>CSRF와 상태 변경 요청<small class="completion-label" data-completion="web.csrf"></small></span></a></li><li><a class="side-lesson" href="cors.html" >
+              <span class="lesson-dot" data-dot="web.cors" aria-hidden="true"></span><span>동일 출처·CORS·응답 읽기 권한<small class="completion-label" data-completion="web.cors"></small></span></a></li><li><a class="side-lesson" href="csp.html" >
+              <span class="lesson-dot" data-dot="web.csp" aria-hidden="true"></span><span>CSP·보안 헤더와 적용 범위<small class="completion-label" data-completion="web.csp"></small></span></a></li></ol>
+          </details>
+          <details open>
+            <summary>04 · 파일과 외부 요청의 경계<span class="caption" data-module-count="3"></span></summary>
+            <ol><li><a class="side-lesson" href="file-boundary.html" >
+              <span class="lesson-dot" data-dot="web.file-boundary" aria-hidden="true"></span><span>파일 이름·경로 이탈·저장 경계<small class="completion-label" data-completion="web.file-boundary"></small></span></a></li><li><a class="side-lesson" href="ssrf.html" aria-current="page">
+              <span class="lesson-dot" data-dot="web.ssrf" aria-hidden="true"></span><span>SSRF·서버 요청과 출구 통제<small class="completion-label" data-completion="web.ssrf"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>05 · 요청 계약과 제한된 권한<span class="caption" data-module-count="4"></span></summary>
+            <ol><li><a class="side-lesson" href="mass-assignment.html" >
+              <span class="lesson-dot" data-dot="web.mass-assignment" aria-hidden="true"></span><span>요청 계약과 Mass Assignment<small class="completion-label" data-completion="web.mass-assignment"></small></span></a></li><li><a class="side-lesson" href="session-lifecycle.html" >
+              <span class="lesson-dot" data-dot="web.session-lifecycle" aria-hidden="true"></span><span>세션 갱신·만료·서버 무효화<small class="completion-label" data-completion="web.session-lifecycle"></small></span></a></li><li><a class="side-lesson" href="reset-tokens.html" >
+              <span class="lesson-dot" data-dot="web.reset-tokens" aria-hidden="true"></span><span>일회 토큰·목적 결합·만료<small class="completion-label" data-completion="web.reset-tokens"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>06 · 공유와 거래의 일관성<span class="caption" data-module-count="5"></span></summary>
+            <ol><li><a class="side-lesson" href="private-caching.html" >
+              <span class="lesson-dot" data-dot="web.private-caching" aria-hidden="true"></span><span>개인 응답·공유 캐시·Cache-Control<small class="completion-label" data-completion="web.private-caching"></small></span></a></li><li><a class="side-lesson" href="idempotency.html" >
+              <span class="lesson-dot" data-dot="web.idempotency" aria-hidden="true"></span><span>거래 불변 조건·트랜잭션·재시도<small class="completion-label" data-completion="web.idempotency"></small></span></a></li></ol>
+          </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
+      </aside><article class="lesson-article">
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/web.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">04 · 파일과 외부 요청의 경계 · 12 / 17</div><h1>SSRF·서버 요청과 출구 통제</h1><p class="lesson-objective">서버가 대신 요청하는 기능의 신뢰 경계를 분석하고 URL 구문 검사만의 한계를 설명합니다.</p></div></header>
+          <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>인증과 대상 자원의 인가는 같은 검사인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>인증은 주체 확인, 인가는 주체·대상·행동의 허용 판단입니다. 세션이 유효해도 타인의 자원은 거부해야 합니다.</p><a href="../../guides/bridges.html#web">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
+          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Python 3.10 이상 · 오프라인 웹 정책 모형</strong></p><ul><li>Web ZIP을 풀고 web 폴더에서 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 python3 대신 py -3를 사용합니다. 외부 요청·브라우저 서버·계정은 필요하지 않습니다.</li><li>web_controls.py는 입력과 정책 결과를 비교하는 순수 모형입니다. 실제 쿠키·CORS·CSP의 브라우저 집행이나 운영 웹 서버의 안전성을 증명하지 않습니다. .invalid 주소와 공개 토큰은 교육용 표본입니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="cors.html">웹 보안 · 동일 출처·CORS·응답 읽기 권한 ↗</a></li><li><a href="file-boundary.html">웹 보안 · 파일 이름·경로 이탈·저장 경계 ↗</a></li><li><a href="../foundation/network.html">공통 기초 · IP·포트·DNS와 전송 ↗</a></li></ul>
+            </section>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>SSRF는 사용자에게 영향을 받는 주소로 서버가 요청하도록 만들어, 사용자가 직접 접근할 수 없는 내부 서비스 등에 서버 권한으로 접근하는 문제입니다. 브라우저 CORS는 서버의 HTTP 클라이언트를 제한하지 않으므로 다른 방어가 필요합니다.</p><figure class="learning-visual" data-visual-id="web.ssrf"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 흐름도</span><h3>URL 검사 다음에 실제 연결 경계가 있습니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="URL 검사 다음에 실제 연결 경계가 있습니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 222" width="760" height="222" role="img" aria-labelledby="visual-web-ssrf-title visual-web-ssrf-desc" focusable="false"><title id="visual-web-ssrf-title">URL 검사 다음에 실제 연결 경계가 있습니다</title><desc id="visual-web-ssrf-desc">모형은 허용 scheme·host·port·path를 검사하고 끝납니다. 실제 서버 요청에는 DNS·리다이렉트·출구 정책 등의 검증이 더 필요합니다. 이 실습의 요청 수는 0입니다.</desc><defs><marker id="visual-web-ssrf-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><circle class="v-step-circle" cx="42" cy="27" r="13"/><text class="v-step-number" x="42" y="31" text-anchor="middle">1</text><g class="v-tone "><rect class="v-node" x="28" y="54" width="214.66666666666666" height="144" rx="12"/><rect class="v-accent" x="29" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="82">사용자 입력</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="113">URL 대신 자료 ID 고려</tspan></text></g><circle class="v-step-circle" cx="286.66666666666663" cy="27" r="13"/><text class="v-step-number" x="286.66666666666663" y="31" text-anchor="middle">2</text><g class="v-tone "><rect class="v-node" x="272.66666666666663" y="54" width="214.66666666666666" height="144" rx="12"/><rect class="v-accent" x="273.66666666666663" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="289.66666666666663" y="82">구문 검사</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="289.66666666666663" y="113">https · host · path</tspan></text></g><path class="v-edge " d="M246.66666666666663 126H267.66666666666663" marker-end="url(#visual-web-ssrf-arrow)"/><circle class="v-step-circle" cx="531.3333333333333" cy="27" r="13"/><text class="v-step-number" x="531.3333333333333" y="31" text-anchor="middle">3</text><g class="v-tone positive"><rect class="v-node" x="517.3333333333333" y="54" width="214.66666666666666" height="144" rx="12"/><rect class="v-accent" x="518.3333333333333" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="534.3333333333333" y="82">실제 연결 경계</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="534.3333333333333" y="113">DNS · redirect · egress</tspan></text></g><path class="v-edge " d="M491.33333333333326 126H512.3333333333333" marker-end="url(#visual-web-ssrf-arrow)"/></svg></div><figcaption><span class="visual-takeaway">구문 통과를 실제 연결 안전성으로 확대하지 마세요.</span><small class="visual-note">세 번째 단계는 설계 검토 대상이며 제공 스크립트는 실행하지 않습니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>모형은 허용 scheme·host·port·path를 검사하고 끝납니다. 실제 서버 요청에는 DNS·리다이렉트·출구 정책 등의 검증이 더 필요합니다. 이 실습의 요청 수는 0입니다.</p></details></figure><p>URL은 scheme·hostname·port·사용자 정보·경로·쿼리 등의 구성 요소로 파싱해야 합니다. assets.example.invalid@other.invalid의 실제 hostname은 other.invalid입니다. 문자열 시작 부분에 허용 호스트가 보인다고 목적지를 신뢰하면 안 됩니다.</p><p>이 모형은 https·정확한 한 호스트·443 포트·허용된 두 경로·사용자 정보 없음·쿼리와 fragment 없음이라는 좁은 URL 구문 계약을 확인합니다. urllib.parse는 URL을 나눌 뿐 안전한 목적지임을 검증하지 않으므로 파싱 후 각 항목을 검사합니다.</p><p>구문 허용만으로 실제 연결 목적지가 확정되지는 않습니다. DNS 결과·재바인딩·리다이렉트·프록시·클라우드 메타데이터 등은 추가 신뢰 경계입니다. 운영 환경은 허용된 목적지의 해석과 재검증, 리다이렉트 제한, 네트워크 출구 정책을 함께 적용해야 합니다.</p><p>가능하면 사용자가 URL 전체를 주는 기능 대신 서버가 정한 자료 ID를 허용된 목적지에 매핑합니다. 이 실습의 ALLOW_SYNTAX는 첫 단계 통과만 뜻하며 요청을 보내지 않습니다. network_requests=0이고 .invalid 주소는 외부 접속을 위한 것이 아닙니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>urlsplit이 성공하면 안전한 URL이라고 믿는다.</dt><dd>파싱은 구성 요소를 나누는 일입니다. 정책·실제 목적지·연결 경계를 별도로 확인합니다.</dd><dt>서버 요청도 브라우저 CORS가 막아 줄 것이라 생각한다.</dt><dd>서버의 HTTP 클라이언트는 브라우저 CORS 정책의 보호 대상이 아닙니다. 서버와 네트워크 출구에서 제어합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/web.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/web/web_controls.py" download>web_controls.py ↓</a></li><li><a href="../../labs/web/LAB-GUIDE.md" download>LAB-GUIDE.md ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Python 3.10 이상 · 오프라인 웹 정책 모형</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 web_controls.py ssrf</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>한 표본 URL만 구문 허용이고 나머지 세 입력은 거부하며 실제 네트워크 요청은 0입니다.</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>네 가지 URL 사례 분류하기</h3><p>ssrf 모드는 문자열만 파싱합니다. loopback·userinfo·redirect-param이 각각 왜 거부되는지 함수의 다른 조건과 연결합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Python 3.10 이상 · 오프라인 웹 정책 모형</span></div><pre><code>python3 web_controls.py ssrf</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>allowed=ALLOW_SYNTAX
+loopback=DENY
+userinfo=DENY
+redirect-param=DENY
+network_requests=0</pre></div></li><li><h3>@ 앞의 이름과 실제 hostname 구분하기</h3><p>이 URL을 실제로 열지 말고 urlsplit의 읽기 결과만 봅니다. username과 hostname을 반대로 판단하지 않도록 출력합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Python 3.10 이상 · 오프라인 웹 정책 모형</span></div><pre><code>python3 -c &quot;from urllib.parse import urlsplit; p=urlsplit(&#39;https://assets.example.invalid@other.invalid/guide.txt&#39;); print(p.username); print(p.hostname)&quot;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>assets.example.invalid
+other.invalid</pre></div></li><li><h3>구문 통과와 실제 연결 검증 분리하기</h3><p>허용 경로 diagram.png는 구문 통과지만 다른 경로나 포트는 거부됩니다. 통과 뒤 DNS·리다이렉트까지 검사했다는 기록을 남기면 잘못된 주장입니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Python 3.10 이상 · 오프라인 웹 정책 모형</span></div><pre><code>python3 -c &quot;from web_controls import allowed_fetch; print(allowed_fetch(&#39;https://assets.example.invalid/diagram.png&#39;)); print(allowed_fetch(&#39;https://assets.example.invalid:8443/guide.txt&#39;)); print(allowed_fetch(&#39;https://assets.example.invalid/private.txt&#39;))&quot;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>True
+False
+False</pre></div></li></ol></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>허용 URL 뒤에 ?next=...를 붙인 사례와 포트 8443 사례를 비교하세요. 자료 ID guide와 diagram을 서버가 정한 두 URL에 매핑하는 사전을 설계하고, 알 수 없는 ID를 거부하는 이유를 설명하세요.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>리다이렉트 목적지의 검증을 문자열 쿼리 검사만으로 해결했다고 주장하지 마세요. 이 실습은 어떠한 응답도 받지 않습니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>쿼리가 있는 URL은 parsed.query 조건, 8443은 parsed.port 조건에서 거부된다고 표로 연결합니다.</li><li>예시 매핑은 {&quot;guide&quot;:&quot;https://assets.example.invalid/guide.txt&quot;, &quot;diagram&quot;:&quot;https://assets.example.invalid/diagram.png&quot;}입니다. 미등록 ID는 오류로 처리하고 기본 URL로 자동 전환하지 않습니다.</li><li>ID 매핑은 입력 공간을 줄이지만 운영 연결의 DNS·리다이렉트·출구 통제·타임아웃·응답 크기 같은 추가 검증은 필요하다고 명시합니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>두 잘못된 URL은 False입니다. ID 매핑과 미등록 거부를 설명하고, 구문 허용이 실제 안전한 연결을 증명하지 않는다는 한계를 기록합니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>처음 URL은 허용되지만 리다이렉트 목적지가 내부 주소인 흐름을 그리세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>각 이동과 실제 연결 주소에 출구 정책이 적용되어야 합니다. URL의 첫 문자열 검사만으로 DNS 재해석이나 리다이렉트 경계를 보장하지 않습니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>URL 구성 요소와 실제 목적지를 구분했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>구문 검사 이후에 필요한 출구 통제를 적었다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/web/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. 허용 호스트처럼 보이는 이름 뒤에 @other.invalid가 있습니다. 실제 hostname은?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>assets.example.invalid</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>other.invalid</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>두 호스트 모두 자동 허용된다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: other.invalid</strong></p><p>@ 앞은 URL의 사용자 정보일 수 있습니다. 문자열 접두사 대신 파싱한 hostname과 사용자 정보 조건을 확인해야 합니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. ALLOW_SYNTAX가 나왔습니다. 이 실습이 검증한 것은?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>DNS·리다이렉트까지 포함한 실제 목적지 안전성</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>원격 서버가 보낸 본문의 무해함</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>정해진 URL 구성 요소 계약이며 실제 연결은 하지 않았다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 정해진 URL 구성 요소 계약이며 실제 연결은 하지 않았다.</strong></p><p>모형은 네트워크 요청을 전혀 보내지 않습니다. 실제 연결 경계와 운영 통제는 별도의 작업입니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>URL 구성 요소와 실제 목적지를 구분했다.</li><li>구문 검사 이후에 필요한 출구 통제를 적었다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="file-boundary.html"><small>← 이전 차시</small>파일 이름·경로 이탈·저장 경계</a>
+            <a href="mass-assignment.html"><small>다음 차시 →</small>요청 계약과 Mass Assignment</a></nav>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html" target="_blank" rel="noopener noreferrer">OWASP · SSRF 방어 ↗</a></li>
+        <li><a href="https://docs.python.org/3/library/urllib.parse.html" target="_blank" rel="noopener noreferrer">Python · URL 파싱과 검증 한계 ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

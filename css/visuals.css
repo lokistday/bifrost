@@ -36,6 +36,7 @@ html[data-theme="dark"] .learning-visual{--visual-edge:#91a6bd;--visual-muted:#b
 .v-tone.positive .v-table-cell,.v-tone.danger .v-table-cell,.v-tone.warning .v-table-cell{fill:var(--surface-soft)}
 .v-table-head{fill:var(--surface-soft);stroke:var(--line);stroke-width:1}
 .v-separator{stroke:var(--line);stroke-width:1}
+.v-pixel{stroke:var(--visual-edge);stroke-width:1.5}
 .learning-visual figcaption{padding:16px 24px 17px;border-top:1px solid var(--line);background:var(--surface-soft);font-size:13px;line-height:1.85;color:var(--ink-soft)}
 .visual-takeaway{display:block}
 .visual-note{display:block;font-size:11px;line-height:1.8;color:var(--muted);margin-top:6px}

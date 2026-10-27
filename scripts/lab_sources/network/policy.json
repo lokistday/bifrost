@@ -1,0 +1,17 @@
+{
+  "description": "Simplified first-match educational policy; default deny. Not an actual firewall config.",
+  "rules": [
+    {
+      "src": "0.0.0.0/0",
+      "dst": "10.10.10.20/32",
+      "port": 443,
+      "action": "ALLOW"
+    },
+    {
+      "src": "10.10.10.20/32",
+      "dst": "10.10.20.30/32",
+      "port": 5432,
+      "action": "ALLOW"
+    }
+  ]
+}

@@ -2,6 +2,8 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b1220">
 <meta name="description" content="공유 키가 있는 변경 검출과 단순 해시를 비교합니다.">
@@ -20,19 +22,20 @@
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=20261024-atlas1">
-<script src="../../js/catalog.js" defer></script>
-<script src="../../js/courses/crypto.js" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-a66aac410152">
+<link rel="stylesheet" href="../../css/study.css?v=learning-a66aac410152">
+<script src="../../js/catalog.js?v=learning-a66aac410152" defer></script>
+<script src="../../js/courses/crypto.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=20261024-atlas1" defer></script>
+<script src="../../js/learning-view.js?v=learning-a66aac410152" defer></script>
 <script src="../../js/learning.js" defer></script>
 </head>
 <body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.mac" style="--course-accent:var(--map-pink)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="./#courseIntroduction">분야 소개</a><a href="./#courseModules">암호학 목차</a></nav>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">암호학 목차</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -62,10 +65,31 @@
               <span class="lesson-dot" data-dot="crypto.public-key" aria-hidden="true"></span><span>공개키 암호화와 서명<small class="completion-label" data-completion="crypto.public-key"></small></span></a></li><li><a class="side-lesson" href="nonce.html" >
               <span class="lesson-dot" data-dot="crypto.nonce" aria-hidden="true"></span><span>난수·nonce와 재사용<small class="completion-label" data-completion="crypto.nonce"></small></span></a></li><li><a class="side-lesson" href="password.html" >
               <span class="lesson-dot" data-dot="crypto.password" aria-hidden="true"></span><span>비밀번호 KDF·salt·비용<small class="completion-label" data-completion="crypto.password"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>04 · 키 수명과 프로토콜 검증<span class="caption" data-module-count="3"></span></summary>
+            <ol><li><a class="side-lesson" href="key-lifecycle.html" >
+              <span class="lesson-dot" data-dot="crypto.key-lifecycle" aria-hidden="true"></span><span>키 상태·교체·침해 대응<small class="completion-label" data-completion="crypto.key-lifecycle"></small></span></a></li><li><a class="side-lesson" href="hkdf-context.html" >
+              <span class="lesson-dot" data-dot="crypto.hkdf-context" aria-hidden="true"></span><span>HKDF 추출·확장과 용도 분리<small class="completion-label" data-completion="crypto.hkdf-context"></small></span></a></li><li><a class="side-lesson" href="certificate-trust.html" >
+              <span class="lesson-dot" data-dot="crypto.certificate-trust" aria-hidden="true"></span><span>인증서 이름·기간·신뢰 경로<small class="completion-label" data-completion="crypto.certificate-trust"></small></span></a></li><li><a class="side-lesson" href="message-encoding.html" >
+              <span class="lesson-dot" data-dot="crypto.message-encoding" aria-hidden="true"></span><span>메시지 경계와 인증할 바이트<small class="completion-label" data-completion="crypto.message-encoding"></small></span></a></li><li><a class="side-lesson" href="replay-protection.html" >
+              <span class="lesson-dot" data-dot="crypto.replay-protection" aria-hidden="true"></span><span>유효한 태그와 재전송 방지<small class="completion-label" data-completion="crypto.replay-protection"></small></span></a></li></ol>
+          </details>
+          <details >
+            <summary>05 · 암호 레코드와 안전한 사용<span class="caption" data-module-count="4"></span></summary>
+            <ol><li><a class="side-lesson" href="aad-record-binding.html" >
+              <span class="lesson-dot" data-dot="crypto.aad-record-binding" aria-hidden="true"></span><span>AEAD와 레코드 문맥의 결합<small class="completion-label" data-completion="crypto.aad-record-binding"></small></span></a></li><li><a class="side-lesson" href="verifier-migration.html" >
+              <span class="lesson-dot" data-dot="crypto.verifier-migration" aria-hidden="true"></span><span>비밀번호 검증값의 버전과 재해시<small class="completion-label" data-completion="crypto.verifier-migration"></small></span></a></li><li><a class="side-lesson" href="envelope-keywrap.html" >
+              <span class="lesson-dot" data-dot="crypto.envelope-keywrap" aria-hidden="true"></span><span>봉투 암호화와 DEK 재포장<small class="completion-label" data-completion="crypto.envelope-keywrap"></small></span></a></li><li><a class="side-lesson" href="signature-authorization.html" >
+              <span class="lesson-dot" data-dot="crypto.signature-authorization" aria-hidden="true"></span><span>서명 문맥과 업무 권한<small class="completion-label" data-completion="crypto.signature-authorization"></small></span></a></li><li><a class="side-lesson" href="unbiased-randomness.html" >
+              <span class="lesson-dot" data-dot="crypto.unbiased-randomness" aria-hidden="true"></span><span>난수의 예측 가능성과 나머지 편향<small class="completion-label" data-completion="crypto.unbiased-randomness"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
-          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/crypto.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">02 · 무결성과 진위 · 5 / 9</div><h1>HMAC과 태그 검증</h1><p class="lesson-objective">공유 키가 있는 변경 검출과 단순 해시를 비교합니다.</p></div></header>
-          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#verify">04 검증</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/crypto.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">02 · 무결성과 진위 · 5 / 19</div><h1>HMAC과 태그 검증</h1><p class="lesson-objective">공유 키가 있는 변경 검출과 단순 해시를 비교합니다.</p></div></header>
+          <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>암호학적 검증 성공이면 현재 요청을 처리해도 되나요?</p><details><summary>판단 기준과 보충 자료</summary><p>인증된 바이트와 현재 권한·문맥·재전송·만료는 다른 검증입니다. 목적과 상태를 함께 확인합니다.</p><a href="../../guides/bridges.html#bytes">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
           <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>HMAC 검증 · Python 3</strong></p><ul><li>lab.py의 공개된 DEMO-KEY는 동작 설명용입니다. 실제 비밀 값이나 서비스 키를 사용하지 않습니다.</li><li>표준 hmac과 hashlib만 필요합니다. 비교에는 hmac.compare_digest를 사용합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="hash.html">암호학 · SHA-256과 파일 무결성 ↗</a></li></ul>
             </section>
@@ -76,23 +100,34 @@
         <a class="learning-button" href="../../labs/crypto.zip" download>전체 실습 ZIP 받기 ↓</a>
         <ul><li><a href="../../labs/crypto/lab.py" download>lab.py ↓</a></li></ul>
       </section>
-          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2><ol class="walkthrough"><li><h3>원문·변조 비교</h3><p>lab.py mac을 실행하고 original=True, changed=False를 확인합니다. 태그를 만들었던 메시지와 검사 메시지가 정확히 같은지 봅니다.</p>
-        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>python3 lab.py mac</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>original= True
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · HMAC 검증 · Python 3</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 lab.py mac</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>original= True
+changed= False</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>원문·변조 비교</h3><p>lab.py mac을 실행하고 original=True, changed=False를 확인합니다. 태그를 만들었던 메시지와 검사 메시지가 정확히 같은지 봅니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · HMAC 검증 · Python 3</span></div><pre><code>python3 lab.py mac</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>original= True
 changed= False</pre></div></li><li><h3>키만 다른 반례</h3><p>같은 메시지라도 키가 다르면 검증이 실패해야 합니다. 태그는 메시지뿐 아니라 키에도 묶여 있습니다.</p>
-        <div class="code-shell"><div class="code-toolbar"><span>작게 나눠 확인하기</span></div><pre><code>import hmac
+        <div class="code-shell"><div class="code-toolbar"><span>Python 부분 코드 · 앞 단계의 변수·객체를 유지한 같은 스크립트 · HMAC 검증 · Python 3</span></div><pre><code>import hmac
 message = b&quot;Bifrost&quot;
 tag = hmac.digest(b&quot;training-key-A&quot;, message, &quot;sha256&quot;)
 print(hmac.compare_digest(tag, hmac.digest(b&quot;training-key-B&quot;, message, &quot;sha256&quot;)))</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>False</pre></div></li><li><h3>보장 범위 작성</h3><p>태그·메시지·키의 공개 여부를 분류하고 공유 키 보유자 누구나 태그를 만들 수 있음을 적습니다. 이 구조로 제3자에게 특정 한 명의 서명을 증명할 수는 없습니다.</p>
-        <div class="step-observation"><strong>관찰할 결과</strong><pre>무결성/키 보유자 인증, 비기밀성, 공유 키의 책임 한계가 구분됩니다.</pre></div></li></ol>
-            <h3>전체 예제 연결하기</h3><div class="code-shell"><div class="code-toolbar"><span>예제 · 명령 또는 관찰 절차</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 lab.py mac</code></pre></div><div class="expected-output"><h3>예상 결과와 해석</h3><pre>original= True
-changed= False</pre></div></section>
+        <div class="step-observation"><strong>관찰할 결과</strong><pre>무결성/키 보유자 인증, 비기밀성, 공유 키의 책임 한계가 구분됩니다.</pre></div></li></ol></section>
           <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>메시지가 같고 키가 다른 경우의 검증도 추가하세요. 태그를 메시지와 함께 보내도 되지만 키를 보내면 안 되는 이유를 설명합니다.</p>
             <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>DEMO-KEY는 공개된 실습용 상수입니다. 실제 자격 증명으로 재사용하지 않습니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
         <ol><li>동일 메시지·다른 키로 HMAC을 재계산해 False를 확인합니다.</li><li>메시지와 태그는 공개 전송 가능, 키는 비밀이라는 전제와 노출 시 영향을 씁니다.</li><li>비교는 compare_digest를 사용하고 재전송 방지·인가·기밀성이 별도임을 적습니다.</li></ol>
         
         <h3>결과를 판단하는 기준</h3><pre>메시지 변경과 키 변경의 실패 사례가 모두 있습니다. HMAC을 디지털 서명이나 암호화와 같은 기능으로 설명하지 않습니다.</pre>
-      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p></section>
-          <section id="verify" class="article-section completion-panel"><div class="overline">04 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>유효 HMAC이 붙은 메시지를 그대로 재전송할 때 태그 검증 결과와 처리 허용을 구분하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>태그는 유효할 수 있지만 재처리 허용은 시퀀스·nonce·상태 정책으로 별도 결정합니다. MAC 자체가 재전송 방지는 아닙니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>메시지 변경과 키 변경을 각각 검증했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>MAC·해시·암호화의 보장을 구분했다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/crypto/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
         <fieldset class="question" data-question="0">
           <legend>1. 같은 공유 키를 가진 Alice와 Bob 중 누가 태그를 만들었는지 HMAC만으로 제3자에게 증명할 수 있나요?</legend>
           <label class="question-option"><input type="radio" name="question-0" value="0"><span>항상 가능하다. 공개키가 없어도 서명이기 때문이다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>아니다. 두 사람 모두 같은 키로 태그를 만들 수 있다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>태그를 Base64로 바꾸면 가능하다.</span></label>

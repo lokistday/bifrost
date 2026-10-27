@@ -1,0 +1,5 @@
+id,time,actor,action,resource,result
+C01,2026-10-20T00:00:00Z,reader,ReadObject,training-notes,Allow
+C02,2026-10-20T00:01:00Z,reader,ChangePolicy,training-notes,Deny
+C03,2026-10-20T00:02:00Z,deploy-role,ChangePolicy,training-notes,Allow
+C04,2026-10-20T00:03:00Z,anonymous,ReadObject,training-notes,Allow
