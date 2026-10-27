@@ -166,4 +166,4 @@ for name in manifest:
     assert target.resolve().is_relative_to(PUBLISH.resolve()), f'Output escapes labs: {target}'
     target.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(ROOT / name, target)
-(PUBLISH / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
+(PUBLISH / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8', newline='\n')

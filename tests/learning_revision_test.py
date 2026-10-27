@@ -160,6 +160,12 @@ class InputFeedback(unittest.TestCase):
 
 
 class CleanPackaging(unittest.TestCase):
+    def test_generated_json_has_portable_lf_newlines(self):
+        for name in ['content/generated-paths.json','content/site-metrics.json','labs/manifest.json']:
+            raw=(ROOT/name).read_bytes()
+            self.assertNotIn(b'\r',raw,name)
+            json.loads(raw)
+
     def test_stray_source_and_existing_output_never_enter_zip_or_public_manifest(self):
         with tempfile.TemporaryDirectory(prefix='bifrost-clean-build-') as tmp:
             root=Path(tmp)

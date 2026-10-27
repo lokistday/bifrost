@@ -104,7 +104,7 @@ def build(strict=True):
             {k: l[k] for k in ['id', 'title', 'goal']} for l in m['lessons']]) for m in course['modules']]
         write_bundle(ROOT / f'js/courses/{key}.js', f'window.BifrostCourses.{key}', course)
     write_bundle(ROOT / 'js/catalog.js', 'window.BifrostCourses', catalog)
-    (ROOT/'content/generated-paths.json').write_text(json.dumps(paths(courses),ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    (ROOT/'content/generated-paths.json').write_text(json.dumps(paths(courses),ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
     return site, courses
 
 

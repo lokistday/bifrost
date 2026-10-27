@@ -15,10 +15,10 @@ def build(courses):
            *sorted((ROOT/'templates').glob('*')),
            *[ROOT/n for n in ('js/learning-view.js','js/study-search.js','css/study.css','scripts/render_study.cjs','scripts/learning_design.py','scripts/site_security.cjs')]]
     digest=hashlib.sha256()
-    for file in files:
+    for file in sorted(files, key=lambda p: p.relative_to(ROOT).as_posix()):
         digest.update(file.relative_to(ROOT).as_posix().encode('utf-8')+b'\0'+file.read_bytes())
     metrics['contentVersion']='learning-'+digest.hexdigest()[:12]
-    (ROOT/'content/site-metrics.json').write_text(json.dumps(metrics,indent=2)+'\n',encoding='utf-8')
+    (ROOT/'content/site-metrics.json').write_text(json.dumps(metrics,indent=2)+'\n',encoding='utf-8',newline='\n')
     values={key.upper():str(value) for key,value in metrics.items()}
     values['COURSE_TABLE']='\n'.join(f'| {c["title"]} | {sum(len(m["lessons"]) for m in c["modules"])} |' for c in courses.values())
     for source,dest in [('templates/README.md','README.md'),('templates/og-image.svg','assets/og-image.svg')]:
