@@ -1,6 +1,5 @@
 /* Shared typography, navigation, field introductions and homepage guidance.
    Theme tokens belong to theme.css; course views belong to learning.css. */
-@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap");
 
 * {
   box-sizing: border-box;

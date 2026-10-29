@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="별칭·얕은 복사·깊은 복사의 차이를 추적하고 원본 입력을 보존하는 함수를 만듭니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="변경 가능한 자료와 방어적 복사 — 웹의 동작부터 안전한 상태 관리까지 · Bifrost">
+<meta property="og:description" content="별칭·얕은 복사·깊은 복사의 차이를 추적하고 원본 입력을 보존하는 함수를 만듭니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/paths/web-defense/foundation.mutable-data.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/paths/web-defense/foundation.mutable-data.html">
+<title>변경 가능한 자료와 방어적 복사 — 웹의 동작부터 안전한 상태 관리까지 · Bifrost</title>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/foundation.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-paths.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/path-progress.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
+</head>
+<body class="learning-page" data-course="foundation" data-course-number="00" data-view="lesson" data-lesson-id="foundation.mutable-data" data-path="web-defense" style="--course-accent:var(--map-cyan)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#pathOutline">웹 보안 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="foundation.mutable-data">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../learn/">학습 경로</a><span aria-hidden="true">/</span><a href="./">웹의 동작부터 안전한 상태 관리까지</a><span aria-hidden="true">/</span><span aria-current="page">22단계</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar path-sidebar"><a class="back-link" href="./">← 웹의 동작부터 안전한 상태 관리까지 목차</a>
+        <div class="course-stats"><span data-path-count></span><div class="course-meter" role="progressbar" aria-label="웹의 동작부터 안전한 상태 관리까지 차시 완료 진도" aria-valuemin="0" aria-valuemax="100" data-path-meter><span></span></div></div>
+        <nav aria-label="웹의 동작부터 안전한 상태 관리까지 경로 목차"><details ><summary>Foundation<span class="caption">1–3단계</span></summary><ol><li><a class="side-lesson" href="foundation.environment.html" >
+          <span class="path-step-number">1</span><span><small>공통 기초 · 권장 선행</small>실습 환경 준비와 첫 실행<small class="completion-label" data-completion="foundation.environment"></small></span></a></li><li><a class="side-lesson" href="foundation.network.html" >
+          <span class="path-step-number">2</span><span><small>공통 기초 · 권장 선행</small>IP·포트·DNS와 전송<small class="completion-label" data-completion="foundation.network"></small></span></a></li><li><a class="side-lesson" href="foundation.http.html" >
+          <span class="path-step-number">3</span><span><small>공통 기초 · 권장 선행</small>HTTP 요청과 응답 읽기<small class="completion-label" data-completion="foundation.http"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">4–4단계</span></summary><ol><li><a class="side-lesson" href="web.flow.html" >
+          <span class="path-step-number">4</span><span><small>웹 보안 · 경로 핵심</small>HTML·DOM과 요청 흐름<small class="completion-label" data-completion="web.flow"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">5–6단계</span></summary><ol><li><a class="side-lesson" href="foundation.python-values.html" >
+          <span class="path-step-number">5</span><span><small>공통 기초 · 권장 선행</small>변수·문자열·자료형<small class="completion-label" data-completion="foundation.python-values"></small></span></a></li><li><a class="side-lesson" href="foundation.python-flow.html" >
+          <span class="path-step-number">6</span><span><small>공통 기초 · 권장 선행</small>조건·반복·함수<small class="completion-label" data-completion="foundation.python-flow"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">7–14단계</span></summary><ol><li><a class="side-lesson" href="web.sql.html" >
+          <span class="path-step-number">7</span><span><small>웹 보안 · 경로 핵심</small>SELECT·WHERE와 매개변수<small class="completion-label" data-completion="web.sql"></small></span></a></li><li><a class="side-lesson" href="web.sessions.html" >
+          <span class="path-step-number">8</span><span><small>웹 보안 · 경로 핵심</small>쿠키·세션·인증<small class="completion-label" data-completion="web.sessions"></small></span></a></li><li><a class="side-lesson" href="web.authorization.html" >
+          <span class="path-step-number">9</span><span><small>웹 보안 · 경로 핵심</small>리소스 단위 인가<small class="completion-label" data-completion="web.authorization"></small></span></a></li><li><a class="side-lesson" href="web.sql-injection.html" >
+          <span class="path-step-number">10</span><span><small>웹 보안 · 경로 핵심</small>SQL Injection과 바인딩<small class="completion-label" data-completion="web.sql-injection"></small></span></a></li><li><a class="side-lesson" href="web.output.html" >
+          <span class="path-step-number">11</span><span><small>웹 보안 · 경로 핵심</small>출력 컨텍스트와 XSS 방어<small class="completion-label" data-completion="web.output"></small></span></a></li><li><a class="side-lesson" href="web.csrf.html" >
+          <span class="path-step-number">12</span><span><small>웹 보안 · 경로 핵심</small>CSRF와 상태 변경 요청<small class="completion-label" data-completion="web.csrf"></small></span></a></li><li><a class="side-lesson" href="web.cors.html" >
+          <span class="path-step-number">13</span><span><small>웹 보안 · 경로 핵심</small>동일 출처·CORS·응답 읽기 권한<small class="completion-label" data-completion="web.cors"></small></span></a></li><li><a class="side-lesson" href="web.csp.html" >
+          <span class="path-step-number">14</span><span><small>웹 보안 · 경로 핵심</small>CSP·보안 헤더와 적용 범위<small class="completion-label" data-completion="web.csp"></small></span></a></li>
+          </ol></details><details open><summary>Foundation<span class="caption">15–22단계</span></summary><ol><li><a class="side-lesson" href="foundation.paths.html" >
+          <span class="path-step-number">15</span><span><small>공통 기초 · 권장 선행</small>경로와 작업용 사본<small class="completion-label" data-completion="foundation.paths"></small></span></a></li><li><a class="side-lesson" href="foundation.python-files.html" >
+          <span class="path-step-number">16</span><span><small>공통 기초 · 권장 선행</small>CSV 읽기와 오류 좁히기<small class="completion-label" data-completion="foundation.python-files"></small></span></a></li><li><a class="side-lesson" href="foundation.text-bytes.html" >
+          <span class="path-step-number">17</span><span><small>공통 기초 · 권장 선행</small>문자열·바이트·UTF-8의 경계<small class="completion-label" data-completion="foundation.text-bytes"></small></span></a></li><li><a class="side-lesson" href="foundation.structured-data.html" >
+          <span class="path-step-number">18</span><span><small>공통 기초 · 권장 선행</small>JSON 파싱과 데이터 계약<small class="completion-label" data-completion="foundation.structured-data"></small></span></a></li><li><a class="side-lesson" href="foundation.exceptions.html" >
+          <span class="path-step-number">19</span><span><small>공통 기초 · 권장 선행</small>예외·오류 메시지·종료 상태<small class="completion-label" data-completion="foundation.exceptions"></small></span></a></li><li><a class="side-lesson" href="foundation.cli.html" >
+          <span class="path-step-number">20</span><span><small>공통 기초 · 권장 선행</small>재사용 가능한 명령행 도구<small class="completion-label" data-completion="foundation.cli"></small></span></a></li><li><a class="side-lesson" href="foundation.unit-tests.html" >
+          <span class="path-step-number">21</span><span><small>공통 기초 · 권장 선행</small>경계값 테스트와 실패 실험<small class="completion-label" data-completion="foundation.unit-tests"></small></span></a></li><li><a class="side-lesson" href="foundation.mutable-data.html" aria-current="page">
+          <span class="path-step-number">22</span><span><small>공통 기초 · 권장 선행</small>변경 가능한 자료와 방어적 복사<small class="completion-label" data-completion="foundation.mutable-data"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">23–23단계</span></summary><ol><li><a class="side-lesson" href="web.mass-assignment.html" >
+          <span class="path-step-number">23</span><span><small>웹 보안 · 경로 핵심</small>요청 계약과 Mass Assignment<small class="completion-label" data-completion="web.mass-assignment"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">24–24단계</span></summary><ol><li><a class="side-lesson" href="foundation.config-precedence.html" >
+          <span class="path-step-number">24</span><span><small>공통 기초 · 권장 선행</small>설정 우선순위와 출처 추적<small class="completion-label" data-completion="foundation.config-precedence"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">25–25단계</span></summary><ol><li><a class="side-lesson" href="web.session-lifecycle.html" >
+          <span class="path-step-number">25</span><span><small>웹 보안 · 경로 핵심</small>세션 갱신·만료·서버 무효화<small class="completion-label" data-completion="web.session-lifecycle"></small></span></a></li>
+          </ol></details><details ><summary>Cryptography<span class="caption">26–27단계</span></summary><ol><li><a class="side-lesson" href="crypto.representation.html" >
+          <span class="path-step-number">26</span><span><small>암호학 · 권장 선행</small>바이트·Hex·Base64<small class="completion-label" data-completion="crypto.representation"></small></span></a></li><li><a class="side-lesson" href="crypto.hash.html" >
+          <span class="path-step-number">27</span><span><small>암호학 · 권장 선행</small>SHA-256과 파일 무결성<small class="completion-label" data-completion="crypto.hash"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">28–31단계</span></summary><ol><li><a class="side-lesson" href="web.reset-tokens.html" >
+          <span class="path-step-number">28</span><span><small>웹 보안 · 경로 핵심</small>일회 토큰·목적 결합·만료<small class="completion-label" data-completion="web.reset-tokens"></small></span></a></li><li><a class="side-lesson" href="web.private-caching.html" >
+          <span class="path-step-number">29</span><span><small>웹 보안 · 경로 핵심</small>개인 응답·공유 캐시·Cache-Control<small class="completion-label" data-completion="web.private-caching"></small></span></a></li><li><a class="side-lesson" href="web.regression.html" >
+          <span class="path-step-number">30</span><span><small>웹 보안 · 권장 선행</small>수정·반례·회귀 테스트<small class="completion-label" data-completion="web.regression"></small></span></a></li><li><a class="side-lesson" href="web.idempotency.html" >
+          <span class="path-step-number">31</span><span><small>웹 보안 · 경로 핵심</small>거래 불변 조건·트랜잭션·재시도<small class="completion-label" data-completion="web.idempotency"></small></span></a></li>
+          </ol></details><a class="side-lesson path-project-link" href="project.html"><span class="path-step-number">✦</span><span>마지막 · 종합 프로젝트</span></a></nav>
+        <a class="back-link" href="../../learn/#paths">다른 학습 경로 보기 ↗</a></aside><article class="lesson-article">
+          <nav class="path-location" aria-label="현재 학습 경로"><a href="./">웹 보안</a><strong>22 / 31단계</strong><a href="./#pathOutline">경로 목차 ↗</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/foundation.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">Foundation · 05 · 상태와 실행 경계 다루기 · 22 / 31</div><h1>변경 가능한 자료와 방어적 복사</h1><p class="lesson-objective">별칭·얕은 복사·깊은 복사의 차이를 추적하고 원본 입력을 보존하는 함수를 만듭니다.</p></div></header>
+          <div class="lesson-meta"><span>심화 연결</span><span>학습 50–80분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>파일의 위치와 실행 결과를 따로 설명할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>셸의 현재 폴더·파일 경로·프로그램 출력을 구별합니다. 환경 준비와 경로 차시에서 확인하세요.</p><a href="../../guides/bridges.html#python">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Python 3.10 이상 · 표준 라이브러리 · Foundation ZIP</strong></p><ul><li>압축을 풀고 foundation 폴더에서 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell에서는 같은 명령의 python3를 py -3로 바꿉니다.</li><li>workflow.py와 argv_worker.py를 같은 폴더에 둡니다. 예제는 자신이 만든 임시 폴더만 사용하며 외부 계정·접속·설치 패키지를 요구하지 않습니다. 수정 실험은 사본에서 진행합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="foundation.structured-data.html">공통 기초 · JSON 파싱과 데이터 계약 ↗</a></li><li><a href="foundation.unit-tests.html">공통 기초 · 경계값 테스트와 실패 실험 ↗</a></li></ul>
+            </details>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>대입은 객체를 복제하는 명령이 아니라 이름을 객체와 연결하는 동작입니다. alias=original이면 두 이름이 같은 dict를 가리킵니다. 한 이름으로 키나 중첩 목록을 바꾸면 다른 이름으로 읽는 결과도 달라질 수 있어, 원본을 보존해야 하는 분석 도구에서 중요한 경계입니다.</p><figure class="learning-visual" data-visual-id="foundation.mutable-data"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교도</span><h3>바깥 dict와 안쪽 목록을 따로 봅니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="바깥 dict와 안쪽 목록을 따로 봅니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" role="img" aria-labelledby="visual-foundation-mutable-data-title visual-foundation-mutable-data-desc" focusable="false"><title id="visual-foundation-mutable-data-title">바깥 dict와 안쪽 목록을 따로 봅니다</title><desc id="visual-foundation-mutable-data-desc">dict(original)은 새 dict이지만 tags 목록을 공유합니다. deepcopy로 만든 separate에는 safe만 추가되고 원본의 review 변경은 전달되지 않습니다.</desc><defs><marker id="visual-foundation-mutable-data-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone "><rect class="v-node" x="28" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="29" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="45" y="55">얕은 복사</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="84">바깥 dict</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="107">다른 객체</tspan></text><path class="v-separator" d="M45 128H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="148">tags 목록</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="171">같은 객체</tspan></text><path class="v-separator" d="M45 192H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="212">원본 영향</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="235">append가 전달됨</tspan></text></g><g class="v-tone positive"><rect class="v-node" x="392" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="393" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="409" y="55">깊은 복사</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="84">바깥 dict</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="107">다른 객체</tspan></text><path class="v-separator" d="M409 128H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="148">tags 목록</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="171">별도 객체</tspan></text><path class="v-separator" d="M409 192H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="212">원본 영향</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="235">이 표본에서는 독립</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">객체 동일성과 값의 같음은 다른 판단입니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>dict(original)은 새 dict이지만 tags 목록을 공유합니다. deepcopy로 만든 separate에는 safe만 추가되고 원본의 review 변경은 전달되지 않습니다.</p></details></figure><p>dict(original)은 바깥 dict를 새로 만들지만 값인 tags 목록까지 복제하지 않습니다. 이를 얕은 복사라고 합니다. 바깥 dict의 키를 바꾸는 것과 tags.append로 같은 목록을 바꾸는 것을 구분해야 예상하지 않은 원본 변경을 찾을 수 있습니다.</p><p>deepcopy는 이 예제의 dict와 list로 된 중첩 자료를 별도 구조로 복사합니다. tagged_copy는 원본을 읽어 깊은 복사에 태그를 더하고 반환합니다. 함수가 입력을 바꾸지 않는다는 계약을 정하면 여러 분석 단계가 같은 원본을 안전하게 비교하기 쉬워집니다.</p><p>is는 같은 객체인지, ==는 값이 같은지 비교합니다. 새 복사본은 처음에는 값이 같아도 is가 False일 수 있고, 얕은 복사본 안의 목록은 is가 True일 수 있습니다. 값 출력만 보면 공유 관계가 숨겨지므로 바깥과 중첩 객체를 따로 확인합니다.</p><p>깊은 복사가 모든 자원과 프로그램 상태를 복제하는 것은 아닙니다. 열린 파일·잠금·외부 연결과 사용자 정의 객체에는 별도 설계가 필요하고 큰 구조에는 비용이 듭니다. 이번 실습은 작은 일반 dict/list이며, 불변 자료를 쓰거나 필요한 필드만 새로 구성하는 대안도 검토합니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>b=a를 원본 백업이라고 생각한다.</dt><dd>같은 객체의 별칭입니다. 원본 보존 계약에 맞는 복사나 불변 구조를 선택합니다.</dd><dt>dict를 새로 만들었으니 모든 중첩 값도 새 객체라고 생각한다.</dt><dd>얕은 복사는 중첩 참조를 공유합니다. 실제 변경이 일어나는 깊이에서 확인합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/foundation.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/foundation/workflow.py" download>workflow.py ↓</a></li><li><a href="../../labs/foundation/ROUND2-GUIDE.md" download>ROUND2-GUIDE.md ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Python 3.10 이상 · 표준 라이브러리 · Foundation ZIP</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 workflow.py copy</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>얕은 복사의 목록 변경은 원본에 보이고, 깊은 복사에 더한 safe는 별도 목록에만 남습니다.</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>네 결과를 실행 전에 예상하기</h3><p>alias는 같은 dict, shallow는 바깥 dict만 복사, separate는 태그를 더한 깊은 복사입니다. separate를 먼저 만든 뒤 shallow의 중첩 목록을 바꿉니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Python 3.10 이상 · 표준 라이브러리 · Foundation ZIP</span></div><pre><code>python3 workflow.py copy</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>alias_same=True
+shallow_nested_same=True
+original_tags=start,review
+separate_tags=start,safe</pre></div></li><li><h3>바깥과 안쪽의 공유를 분리하기</h3><p>한 줄 예제의 첫 False는 새 바깥 dict, 두 번째 True는 공유된 tags 목록입니다. dict 복사 한 번으로 모든 것이 독립했다고 해석하지 않습니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Python 3.10 이상 · 표준 라이브러리 · Foundation ZIP</span></div><pre><code>python3 -c &quot;a={&#39;tags&#39;:[&#39;start&#39;]}; b=dict(a); print(a is b); print(a[&#39;tags&#39;] is b[&#39;tags&#39;])&quot;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>False
+True</pre></div></li><li><h3>함수의 원본 보존 계약 확인하기</h3><p>tagged_copy를 호출한 뒤 원본의 목록과 반환값 목록을 따로 출력합니다. 새 태그가 원본에 들어가지 않아야 합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Python 3.10 이상 · 표준 라이브러리 · Foundation ZIP</span></div><pre><code>python3 -c &quot;from workflow import tagged_copy; a={&#39;tags&#39;:[&#39;start&#39;]}; b=tagged_copy(a,&#39;done&#39;); print(a[&#39;tags&#39;]); print(b[&#39;tags&#39;])&quot;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>[&#39;start&#39;]
+[&#39;start&#39;, &#39;done&#39;]</pre></div></li></ol></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>tagged_copy의 사본에서 deepcopy를 dict로 바꿔 원본 보존 검사가 실패하는지 확인하세요. 그 뒤 복구하고 tags 외에 nested={&quot;counts&quot;:[1]}을 넣어 내부 목록 수정도 독립적인지 검사하세요.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>바깥 dict가 다른 객체인 것만으로 충분하지 않습니다. 두 단계 안의 목록을 바꾼 뒤 원본의 [1]이 유지되는지 봅니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>원본과 반환값이 같은 객체가 아닌지뿐 아니라 원본 tags가 [&quot;start&quot;]인지 고정 기대값으로 비교합니다.</li><li>deepcopy를 dict로 바꾼 작업 사본에서는 반환값에 done을 더할 때 원본 tags도 바뀌어야 합니다. 이 실패를 보고 복구합니다.</li><li>깊은 복사를 복구한 뒤 반환값의 nested.counts에 2를 추가해도 원본은 [1], 복사본은 [1,2]인지 확인합니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>얕은 복사 결함에서 원본 보존 기대가 실패하고, 복구 뒤 두 중첩 목록이 독립적이어야 합니다. 복사 비용과 열린 자원은 이번 검증 범위가 아닙니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>리스트 안에 딕셔너리가 있는 자료를 얕게 복사한 뒤 내부 딕셔너리만 바꾸세요. 깊은 복사와 비교하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>얕은 복사는 내부 객체를 공유하므로 원본도 변합니다. deepcopy는 이 표본의 중첩 객체를 분리합니다. 모든 객체에 대한 보편적 복제 해법이라고 일반화하지 않습니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>대입·얕은 복사·깊은 복사의 공유 관계를 구분했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>원본 보존을 고정 기대값과 고의 변경으로 검사했다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/foundation/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. dict(original) 뒤 copy[&quot;tags&quot;].append를 했더니 원본도 바뀌었습니다. 원인은?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>dict 복사는 항상 실패한다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>바깥 dict는 달라도 tags 목록의 참조를 공유한다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>Python이 파일을 자동 동기화했다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 바깥 dict는 달라도 tags 목록의 참조를 공유한다.</strong></p><p>얕은 복사는 값인 참조를 새 dict에 담습니다. 중첩 목록의 독립성은 별도 문제입니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. deepcopy한 dict/list 구조에서 두 값이 처음에 ==라고 합니다. 반드시 같은 객체인가요?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>그렇다. 값이 같으면 is도 항상 True다.</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>깊은 복사는 모든 외부 연결까지 복제한다.</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>아니다. 값의 같음과 객체의 동일성은 다른 질문이다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 아니다. 값의 같음과 객체의 동일성은 다른 질문이다.</strong></p><p>==와 is를 구분해야 합니다. 이번처럼 작은 일반 자료에서 복사 후 값은 같아도 독립 객체일 수 있습니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>대입·얕은 복사·깊은 복사의 공유 관계를 구분했다.</li><li>원본 보존을 고정 기대값과 고의 변경으로 검사했다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="경로의 이전·다음 단계"><a href="foundation.unit-tests.html"><small>← 이전 단계</small>경계값 테스트와 실패 실험</a>
+            <a href="web.mass-assignment.html"><small>다음 단계 →</small>요청 계약과 Mass Assignment</a></nav>
+          <p class="caption"><a href="../../tracks/foundation/mutable-data.html">이 차시를 Foundation 분야 과정으로 보기 ↗</a></p>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://docs.python.org/3/library/copy.html" target="_blank" rel="noopener noreferrer">Python · 얕은 복사와 깊은 복사 ↗</a></li>
+        <li><a href="https://docs.python.org/3/library/stdtypes.html" target="_blank" rel="noopener noreferrer">Python · list와 dict의 변경 가능성 ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

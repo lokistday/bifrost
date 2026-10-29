@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/network/transport.html">
 <title>DNS·TCP 연결과 실패 분류 — Network Security · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/network.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/network.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="network" data-course-number="05" data-view="lesson" data-lesson-id="network.transport" style="--course-accent:var(--map-amber)">
+<body class="learning-page" data-course="network" data-course-number="05" data-view="lesson" data-lesson-id="network.transport" data-path="" style="--course-accent:var(--map-amber)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -85,14 +86,15 @@
               <span class="lesson-dot" data-dot="network.event-time-windows" aria-hidden="true"></span><span>사건 시각·지연 도착과 세션 경계<small class="completion-label" data-completion="network.event-time-windows"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/network.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">01 · 분석을 위한 프로토콜 · 3 / 19</div><h1>DNS·TCP 연결과 실패 분류</h1><p class="lesson-objective">이름 조회·핸드셰이크·응용 응답의 순서를 분석합니다.</p></div></header>
           <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>센서에 기록이 없다는 사실이 통신이 없었다는 뜻인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>센서 위치·필터·손실·시간 범위를 확인해야 합니다. 관측되지 않은 경로가 남아 있을 수 있습니다.</p><a href="../../guides/bridges.html#network">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>DNS·TCP 관찰 · Wireshark</strong></p><ul><li>이 차시는 성공 연결만 담긴 traffic.pcap을 사용합니다. 재전송·시간 초과는 비교용 진단 가설로만 다룹니다.</li><li>실제 장애를 만들거나 외부 서버에 패킷을 보낼 필요가 없습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>DNS·TCP 관찰 · Wireshark</strong></p><ul><li>이 차시는 성공 연결만 담긴 traffic.pcap을 사용합니다. 재전송·시간 초과는 비교용 진단 가설로만 다룹니다.</li><li>실제 장애를 만들거나 외부 서버에 패킷을 보낼 필요가 없습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="pcap.html">네트워크 보안 · PCAP·필터·스트림 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>이 표본에서 DNS는 bifrost.test를 192.0.2.20으로 응답하고 TCP는 SYN, SYN/ACK, ACK로 연결을 시작합니다. 그 뒤 HTTP 요청과 응답이 전송됩니다. 순서 번호와 확인 응답 번호는 바이트 전달을 추적하며 패킷 번호와 다릅니다.</p><figure class="learning-visual" data-visual-id="network.transport"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 순서도</span><h3>DNS, TCP 연결, HTTP 데이터의 순서를 따라갑니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="DNS, TCP 연결, HTTP 데이터의 순서를 따라갑니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 644" width="760" height="644" role="img" aria-labelledby="visual-network-transport-title visual-network-transport-desc" focusable="false"><title id="visual-network-transport-title">DNS, TCP 연결, HTTP 데이터의 순서를 따라갑니다</title><desc id="visual-network-transport-desc">합성 표본의 프레임 1~2는 DNS 왕복입니다. 프레임 3은 SYN, 4는 SYN/ACK, 5는 ACK로 TCP 연결을 수립합니다. 6은 GET /lesson, 7은 200 응답, 8은 ACK입니다. DNS가 성공해도 이후 TCP나 응용 응답이 실패할 수 있습니다.</desc><defs><marker id="visual-network-transport-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><path class="v-lifeline" d="M110 76V630"/><path class="v-lifeline" d="M380 76V630"/><path class="v-lifeline" d="M650 76V630"/><g class="v-tone "><rect class="v-node" x="28" y="18" width="164" height="56" rx="12"/><rect class="v-accent" x="29" y="31" width="3" height="30" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="46">클라이언트</tspan></text></g><g class="v-tone "><rect class="v-node" x="298" y="18" width="164" height="56" rx="12"/><rect class="v-accent" x="299" y="31" width="3" height="30" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="315" y="46">DNS 서버</tspan></text></g><g class="v-tone "><rect class="v-node" x="568" y="18" width="164" height="56" rx="12"/><rect class="v-accent" x="569" y="31" width="3" height="30" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="585" y="46">웹 서버</tspan></text></g><path class="v-edge " d="M117 124H370" marker-end="url(#visual-network-transport-arrow)"/><rect class="v-label-bg" x="187.76" y="98" width="114.47999999999999" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="245" y="112">1. F1 · DNS 질의</tspan></text><path class="v-edge " d="M373 190H120" marker-end="url(#visual-network-transport-arrow)"/><rect class="v-label-bg" x="187.76" y="164" width="114.47999999999999" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="245" y="178">2. F2 · DNS 응답</tspan></text><path class="v-edge " d="M117 256H640" marker-end="url(#visual-network-transport-arrow)"/><rect class="v-label-bg" x="336.8" y="230" width="86.39999999999999" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="380" y="244">3. F3 · SYN</tspan></text><path class="v-edge " d="M643 322H120" marker-end="url(#visual-network-transport-arrow)"/><rect class="v-label-bg" x="321.92" y="296" width="116.15999999999998" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="380" y="310">4. F4 · SYN/ACK</tspan></text><path class="v-edge " d="M117 388H640" marker-end="url(#visual-network-transport-arrow)"/><rect class="v-label-bg" x="336.8" y="362" width="86.39999999999999" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="380" y="376">5. F5 · ACK</tspan></text><path class="v-edge " d="M117 454H640" marker-end="url(#visual-network-transport-arrow)"/><rect class="v-label-bg" x="310.4" y="428" width="139.2" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="380" y="442">6. F6 · GET /lesson</tspan></text><path class="v-edge positive" d="M643 520H120" marker-end="url(#visual-network-transport-arrow)"/><rect class="v-label-bg" x="319.88" y="494" width="120.23999999999998" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="380" y="508">7. F7 · HTTP 200</tspan></text><path class="v-edge " d="M117 586H640" marker-end="url(#visual-network-transport-arrow)"/><rect class="v-label-bg" x="336.8" y="560" width="86.39999999999999" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="380" y="574">8. F8 · ACK</tspan></text></svg></div><figcaption><span class="visual-takeaway">이름 조회 실패, 연결 실패, HTTP 실패를 서로 다른 단계에서 찾으세요.</span><small class="visual-note">각 화살표는 제공 표본의 한 프레임입니다. 실제 TCP에서는 데이터·ACK 결합이나 재전송 등으로 달라질 수 있습니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>합성 표본의 프레임 1~2는 DNS 왕복입니다. 프레임 3은 SYN, 4는 SYN/ACK, 5는 ACK로 TCP 연결을 수립합니다. 6은 GET /lesson, 7은 200 응답, 8은 ACK입니다. DNS가 성공해도 이후 TCP나 응용 응답이 실패할 수 있습니다.</p></details></figure><p>응답이 없다는 관찰만으로 방화벽 차단을 확정할 수 없습니다. 캡처 위치, 손실, 비대칭 경로, 서버 상태를 확인해야 합니다. 이 표본은 연결 성공만 담으므로 재전송·RST·시간 초과는 실제 관찰한 것처럼 보고하지 않습니다.</p><p>DNS 응답은 이름을 주소에 대응시키는 관찰이고 해당 서비스가 살아 있음을 보장하지 않습니다. 이어지는 TCP 연결 대상이 DNS 응답 주소와 같은지 확인하면 이름 해석과 연결 단계를 연결할 수 있습니다.</p><p>TCP의 SYN과 SYN/ACK, ACK는 전송 연결을 시작합니다. 순서 번호는 바이트 위치를 추적하고 ACK 번호는 다음에 기대하는 바이트 위치를 뜻합니다. 이 번호를 Wireshark의 프레임 번호와 혼동하지 않습니다.</p><p>HTTP 403 응답이 도착했다면 적어도 해당 요청에 응답한 응용 경로가 있습니다. TCP RST는 연결 거부·중단의 단서이고 응답 없음은 여러 원인이 가능합니다. 각 계층의 증거를 분리해야 무조건 방화벽을 바꾸는 식의 잘못된 조치를 피할 수 있습니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>DNS 응답을 받았으니 서비스 전체가 정상이라고 한다.</dt><dd>이름 해석·전송 연결·TLS·HTTP·인가를 각각 확인합니다.</dd><dt>합성 성공 표본에서 RST를 관찰했다고 보고한다.</dt><dd>표본에는 없는 현상입니다. 비교 시나리오와 실제 증거를 분리합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -144,15 +146,16 @@ http.request or http.response</code></pre></div><div class="step-observation"><s
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="pcap.html"><small>← 이전 차시</small>PCAP·필터·스트림</a>
             <a href="tls.html"><small>다음 차시 →</small>TLS와 보이는 정보의 경계</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://www.rfc-editor.org/rfc/rfc9293.html" target="_blank" rel="noopener noreferrer">RFC 9293 · TCP ↗</a></li>
         <li><a href="https://www.rfc-editor.org/rfc/rfc9110.html#section-15" target="_blank" rel="noopener noreferrer">RFC 9110 · HTTP 상태 코드 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

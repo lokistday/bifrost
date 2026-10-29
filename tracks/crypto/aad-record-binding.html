@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/crypto/aad-record-binding.html">
 <title>AEAD와 레코드 문맥의 결합 — Cryptography · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/crypto.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/crypto.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.aad-record-binding" style="--course-accent:var(--map-pink)">
+<body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.aad-record-binding" data-path="" style="--course-accent:var(--map-pink)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -85,14 +86,15 @@
               <span class="lesson-dot" data-dot="crypto.unbiased-randomness" aria-hidden="true"></span><span>난수의 예측 가능성과 나머지 편향<small class="completion-label" data-completion="crypto.unbiased-randomness"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/crypto.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">05 · 암호 레코드와 안전한 사용 · 15 / 19</div><h1>AEAD와 레코드 문맥의 결합</h1><p class="lesson-objective">암호문을 테넌트·문서·버전에 연결하고 인증 실패 시 평문을 사용하지 않습니다.</p></div></header>
           <div class="lesson-meta"><span>심화 연결</span><span>학습 50–80분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>암호학적 검증 성공이면 현재 요청을 처리해도 되나요?</p><details><summary>판단 기준과 보충 자료</summary><p>인증된 바이트와 현재 권한·문맥·재전송·만료는 다른 검증입니다. 목적과 상태를 함께 확인합니다.</p><a href="../../guides/bridges.html#bytes">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>로컬 파일 실습 · Python 3.10 이상 · 선택 cryptography 패키지</strong></p><ul><li>crypto ZIP 전체를 풀고 record_crypto.py와 round2-crypto.json가 있는 폴더에서 실행합니다. 외부 서버·클라우드 계정·실제 네트워크 접속은 없습니다.</li><li>Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. 변경 실험은 원본을 보관하고 사본과 --input 옵션을 사용합니다.</li><li>기존 crypto 실습의 선택 패키지 cryptography가 필요합니다. 준비된 가상환경을 사용하세요. 없다면 ROUND2-GUIDE.md와 기존 LAB-GUIDE.md의 requirements.txt 설치 안내를 확인합니다. 실제 키와 비밀번호를 입력하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>로컬 파일 실습 · Python 3.10 이상 · 선택 cryptography 패키지</strong></p><ul><li>crypto ZIP 전체를 풀고 record_crypto.py와 round2-crypto.json가 있는 폴더에서 실행합니다. 외부 서버·클라우드 계정·실제 네트워크 접속은 없습니다.</li><li>Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. 변경 실험은 원본을 보관하고 사본과 --input 옵션을 사용합니다.</li><li>기존 crypto 실습의 선택 패키지 cryptography가 필요합니다. 준비된 가상환경을 사용하세요. 없다면 ROUND2-GUIDE.md와 기존 LAB-GUIDE.md의 requirements.txt 설치 안내를 확인합니다. 실제 키와 비밀번호를 입력하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="symmetric.html">암호학 · 대칭키·AEAD·인증 태그 ↗</a></li><li><a href="message-encoding.html">암호학 · 메시지 경계와 인증할 바이트 ↗</a></li><li><a href="../web/authorization.html">웹 보안 · 리소스 단위 인가 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>암호문이 변조되지 않았어도 다른 문서의 암호문을 그대로 옮겨 붙이는 의미 혼동이 생길 수 있습니다. 암호 도구가 확인할 바이트에 테넌트·문서 ID·스키마 버전 같은 문맥을 포함하면 다른 자리에 놓인 값을 검출하는 데 도움이 됩니다. 이 연습은 기본 AEAD 변조 검사에서 레코드 연결로 확장합니다.</p><figure class="learning-visual" data-visual-id="crypto.aad-record-binding"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교표</span><h3>같은 암호문도 문맥이 다르면 거부합니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="같은 암호문도 문맥이 다르면 거부합니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 272" width="760" height="272" role="img" aria-labelledby="visual-crypto-aad-record-binding-title visual-crypto-aad-record-binding-desc" focusable="false"><title id="visual-crypto-aad-record-binding-title">같은 암호문도 문맥이 다르면 거부합니다</title><desc id="visual-crypto-aad-record-binding-desc">한 번 만든 AES-GCM 표본은 blue/17/1에 결합되어 있습니다. 문서18이나 테넌트red의 AAD로는 실제 태그 검증이 실패합니다.</desc><defs><marker id="visual-crypto-aad-record-binding-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone "><rect class="v-table-head" x="28" y="20" width="230" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="41" y="47">테넌트 · 문서</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="258" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="271" y="47">태그 검증</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="495" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="508" y="47">평문 반환</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="78" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="105">blue · 17</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="105">성공</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="105">training note</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="136" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="163">blue · 18</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="163">실패</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="163">없음</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="194" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="221">red · 17</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="221">실패</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="221">없음</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">기대 문맥은 인가된 요청과 연결합니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>한 번 만든 AES-GCM 표본은 blue/17/1에 결합되어 있습니다. 문서18이나 테넌트red의 AAD로는 실제 태그 검증이 실패합니다.</p></details></figure><p>AAD는 암호화하지 않지만 태그가 인증하는 연관 데이터입니다. 표본은 [프로토콜 레이블,blue,17,1]을 고정된 JSON 바이트로 만들어 AES-GCM에 넣었습니다. 복호화할 때도 요청에서 기대한 동일 바이트를 사용해야 합니다. 검증하지 않은 저장 메타데이터를 그대로 신뢰해 기대 문맥을 바꾸면 결합의 목적을 잃을 수 있습니다.</p><p>기존 암호문에 문서18이나 테넌트red의 문맥을 주면 실제 AES-GCM 검증이 InvalidTag로 실패합니다. 라이브러리의 고수준 decrypt는 성공한 평문만 반환하며 예제는 실패를 잡아 평문을 출력하지 않습니다. 실패한 내용을 부분 복구하거나 캐시에 정상 데이터로 넣지 않습니다.</p><p>AAD 일치는 사용자 인가나 문서 소유권 검사를 대신하지 않습니다. nonce의 키별 유일성·키 접근 통제·메타데이터의 출처도 필요합니다. 표본은 한 번 제작한 공개 키·nonce·암호문을 복호화만 하며 변경 내용을 같은 키·nonce로 재암호화하지 않습니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>AAD를 비밀 저장 공간으로 사용한다.</dt><dd>AAD는 기밀성을 제공하지 않으며 공개 가능한 문맥만 넣습니다.</dd><dt>암호문 옆의 문서 ID를 무조건 기대값으로 신뢰한다.</dt><dd>요청·소유권과 연결한 기대 문맥을 검증합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -144,15 +146,16 @@ other_tenant=REJECT plaintext_released=False</pre></div></li><li><h3>인증할 �
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="replay-protection.html"><small>← 이전 차시</small>유효한 태그와 재전송 방지</a>
             <a href="verifier-migration.html"><small>다음 차시 →</small>비밀번호 검증값의 버전과 재해시</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://cryptography.io/en/latest/hazmat/primitives/aead/" target="_blank" rel="noopener noreferrer">cryptography · AESGCM과 InvalidTag ↗</a></li>
         <li><a href="https://csrc.nist.gov/pubs/sp/800/38/d/final" target="_blank" rel="noopener noreferrer">NIST SP 800-38D · GCM과 AAD ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

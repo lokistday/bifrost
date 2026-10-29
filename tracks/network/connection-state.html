@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/network/connection-state.html">
 <title>연결 상태와 응답 허용의 조건 — Network Security · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/network.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/network.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="network" data-course-number="05" data-view="lesson" data-lesson-id="network.connection-state" style="--course-accent:var(--map-amber)">
+<body class="learning-page" data-course="network" data-course-number="05" data-view="lesson" data-lesson-id="network.connection-state" data-path="" style="--course-accent:var(--map-amber)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -85,14 +86,15 @@
               <span class="lesson-dot" data-dot="network.event-time-windows" aria-hidden="true"></span><span>사건 시각·지연 도착과 세션 경계<small class="completion-label" data-completion="network.event-time-windows"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/network.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">04 · 경로·상태·운영 검증 · 12 / 19</div><h1>연결 상태와 응답 허용의 조건</h1><p class="lesson-objective">새 연결 허용과 기존 연결의 응답 허용을 상태 전이로 설명합니다.</p></div></header>
           <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>센서에 기록이 없다는 사실이 통신이 없었다는 뜻인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>센서 위치·필터·손실·시간 범위를 확인해야 합니다. 관측되지 않은 경로가 남아 있을 수 있습니다.</p><a href="../../guides/bridges.html#network">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>오프라인 모델 실습 · Python 3.10 이상</strong></p><ul><li>network ZIP을 풀고 defense_models.py와 defense-models.json가 있는 폴더에서 실행합니다. 추가 패키지나 외부 계정이 필요하지 않습니다.</li><li>Linux/WSL/macOS 명령은 python3입니다. Windows PowerShell에서는 python3 부분을 py -3로 바꿉니다.</li><li>파일 변경 과제는 복사본과 --input 옵션을 사용합니다. 결과는 교육 모형에 한정하며 운영 보안 검증을 대신하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>오프라인 모델 실습 · Python 3.10 이상</strong></p><ul><li>network ZIP을 풀고 defense_models.py와 defense-models.json가 있는 폴더에서 실행합니다. 추가 패키지나 외부 계정이 필요하지 않습니다.</li><li>Linux/WSL/macOS 명령은 python3입니다. Windows PowerShell에서는 python3 부분을 py -3로 바꿉니다.</li><li>파일 변경 과제는 복사본과 --input 옵션을 사용합니다. 결과는 교육 모형에 한정하며 운영 보안 검증을 대신하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="transport.html">네트워크 보안 · DNS·TCP 연결과 실패 분류 ↗</a></li><li><a href="policy.html">네트워크 보안 · 방화벽 정책과 회귀 검증 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>포트만 보는 정책과 연결 상태를 추적하는 정책은 판단 정보가 다릅니다. 허용된 새 연결이 시작되었는지, 역방향 패킷이 그 연결의 응답인지 확인하면 모든 인바운드 포트를 열지 않고도 응답을 처리할 수 있습니다.</p><figure class="learning-visual" data-visual-id="network.connection-state"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 흐름도</span><h3>기존 연결의 응답인지 확인하기</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="기존 연결의 응답인지 확인하기 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 222" width="760" height="222" role="img" aria-labelledby="visual-network-connection-state-title visual-network-connection-state-desc" focusable="false"><title id="visual-network-connection-state-title">기존 연결의 응답인지 확인하기</title><desc id="visual-network-connection-state-desc">SYN, SYN_ACK, ACK 순서를 통과하면 established가 됩니다. 다른 연결 S5와 종료 후 S7에는 상태가 없습니다.</desc><defs><marker id="visual-network-connection-state-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><circle class="v-step-circle" cx="42" cy="27" r="13"/><text class="v-step-number" x="42" y="31" text-anchor="middle">1</text><g class="v-tone "><rect class="v-node" x="28" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="29" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="82">SYN</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="113">pending</tspan></text></g><circle class="v-step-circle" cx="225.5" cy="27" r="13"/><text class="v-step-number" x="225.5" y="31" text-anchor="middle">2</text><g class="v-tone "><rect class="v-node" x="211.5" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="212.5" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="228.5" y="82">SYN_ACK</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="228.5" y="113">reply-seen</tspan></text></g><path class="v-edge " d="M185.5 126H206.5" marker-end="url(#visual-network-connection-state-arrow)"/><circle class="v-step-circle" cx="409" cy="27" r="13"/><text class="v-step-number" x="409" y="31" text-anchor="middle">3</text><g class="v-tone positive"><rect class="v-node" x="395" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="396" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="412" y="82">ACK</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="412" y="113">established</tspan></text></g><path class="v-edge " d="M369 126H390" marker-end="url(#visual-network-connection-state-arrow)"/><circle class="v-step-circle" cx="592.5" cy="27" r="13"/><text class="v-step-number" x="592.5" y="31" text-anchor="middle">4</text><g class="v-tone "><rect class="v-node" x="578.5" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="579.5" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="595.5" y="82">CLOSE</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="595.5" y="113">상태 삭제</tspan></text></g><path class="v-edge " d="M552.5 126H573.5" marker-end="url(#visual-network-connection-state-arrow)"/></svg></div><figcaption><span class="visual-takeaway">같은 서비스 포트도 연결 상태는 다릅니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>SYN, SYN_ACK, ACK 순서를 통과하면 established가 됩니다. 다른 연결 S5와 종료 후 S7에는 상태가 없습니다.</p></details></figure><p>모형은 SYN을 pending, 역방향 SYN_ACK를 reply-seen, 다시 ACK를 established로 바꿉니다. DATA는 같은 연결 키가 established일 때만 허용합니다. 키는 클라이언트·서버 주소와 포트의 조합이며 프로토콜은 TCP로 고정했습니다.</p><p>S5는 다른 클라이언트와 포트의 데이터라 서버 포트가 443이어도 기존 연결 응답이 아닙니다. S6의 CLOSE 뒤에는 상태가 삭제되어 S7을 거부합니다. 실제 TCP 종료는 여러 방향의 FIN·ACK와 타임아웃을 다루므로 이 한 단계 종료와 같지 않습니다.</p><p>이 코드는 상태의 필요성을 보여주는 상태 기계입니다. 시퀀스 번호·윈도·재전송·시간 만료·장비 간 상태 공유·공격 내성은 구현하지 않았습니다. 운영 필터로 설치하지 않고 실제 장비 문서의 상태 처리와 비교하는 데 사용합니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>SYN 한 번 뒤의 데이터는 모두 신뢰한다.</dt><dd>연결 키와 전이 순서를 확인하고 장비의 타임아웃·시퀀스 처리도 검토합니다.</dd><dt>stateful이면 웹 인증도 해결된다.</dt><dd>연결 상태는 사용자 신원과 애플리케이션 내용의 정상성을 보장하지 않습니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -152,15 +154,16 @@ S7 DENY state=none</pre></div></li><li><h3>응답 단계 생략 실험</h3><p>S2
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="nat-correlation.html"><small>← 이전 차시</small>NAT 주소·포트·시간으로 로그 연결</a>
             <a href="detection-metrics.html"><small>다음 차시 →</small>정밀도·재현율과 탐지 임계값</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://csrc.nist.gov/pubs/sp/800/41/r1/final" target="_blank" rel="noopener noreferrer">NIST SP 800-41r1 · 방화벽 정책 ↗</a></li>
         <li><a href="https://www.rfc-editor.org/rfc/rfc9293" target="_blank" rel="noopener noreferrer">RFC 9293 · TCP 상태 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

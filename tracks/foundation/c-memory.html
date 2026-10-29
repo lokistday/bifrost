@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/foundation/c-memory.html">
 <title>C 컴파일과 주소·포인터 — Foundation · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/foundation.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/foundation.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="foundation" data-course-number="00" data-view="lesson" data-lesson-id="foundation.c-memory" style="--course-accent:var(--map-cyan)">
+<body class="learning-page" data-course="foundation" data-course-number="00" data-view="lesson" data-lesson-id="foundation.c-memory" data-path="" style="--course-accent:var(--map-cyan)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -86,14 +87,15 @@
               <span class="lesson-dot" data-dot="foundation.structured-logging" aria-hidden="true"></span><span>구조화 로그·허용 필드·민감 정보<small class="completion-label" data-completion="foundation.structured-logging"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/foundation.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">03 · 시스템·통신·기록 · 6 / 20</div><h1>C 컴파일과 주소·포인터</h1><p class="lesson-objective">소스와 실행 파일을 구분하고 값과 주소의 관계를 확인합니다.</p></div></header>
           <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>파일의 위치와 실행 결과를 따로 설명할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>셸의 현재 폴더·파일 경로·프로그램 출력을 구별합니다. 환경 준비와 경로 차시에서 확인하세요.</p><a href="../../guides/bridges.html#python">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Ubuntu/WSL · GCC</strong></p><ul><li>addresses.c를 내려받아 Ubuntu 터미널의 현재 폴더에 둡니다.</li><li>gcc --version이 출력되어야 합니다. 파일 수정 후 컴파일이 성공했는지 확인하고 실행합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Ubuntu/WSL · GCC</strong></p><ul><li>addresses.c를 내려받아 Ubuntu 터미널의 현재 폴더에 둡니다.</li><li>gcc --version이 출력되어야 합니다. 파일 수정 후 컴파일이 성공했는지 확인하고 실행합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="environment.html">공통 기초 · 실습 환경 준비와 첫 실행 ↗</a></li><li><a href="python-values.html">공통 기초 · 변수·문자열·자료형 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>Python은 인터프리터로 코드를 실행하지만 이 C 예제는 먼저 gcc로 기계어 실행 파일을 만듭니다. -Wall -Wextra는 경고를 늘리고 -g는 디버깅 정보를 넣습니다. 소스를 바꿨다면 다시 컴파일해야 실행 파일에 반영됩니다.</p><figure class="learning-visual" data-visual-id="foundation.c-memory"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 구조도</span><h3>포인터가 저장하는 주소와 그 주소의 값은 다릅니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="포인터가 저장하는 주소와 그 주소의 값은 다릅니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 374" width="760" height="374" role="img" aria-labelledby="visual-foundation-c-memory-title visual-foundation-c-memory-desc" focusable="false"><title id="visual-foundation-c-memory-title">포인터가 저장하는 주소와 그 주소의 값은 다릅니다</title><desc id="visual-foundation-c-memory-desc">pointer에는 value의 주소가 저장됩니다. 예시 주소 0x1000에 value의 값 7이 있고, *pointer는 그 위치의 값을 읽습니다. *pointer = 9를 실행하면 같은 위치의 값이 9로 바뀝니다. 이 그림의 주소는 설명용입니다.</desc><defs><marker id="visual-foundation-c-memory-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><path class="v-edge " d="M308 101C378 101 378 101 448 101" marker-end="url(#visual-foundation-c-memory-arrow)"/><path class="v-edge " d="M590 167C590 199.5 590 199.5 590 232" marker-end="url(#visual-foundation-c-memory-arrow)"/><g class="v-tone "><rect class="v-node" x="28" y="35" width="280" height="132" rx="12"/><rect class="v-accent" x="29" y="48" width="3" height="106" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="63">pointer</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="94">저장한 값: 0x1000</tspan><tspan x="45" y="114">value를 가리키는 주소</tspan></text></g><g class="v-tone "><rect class="v-node" x="448" y="35" width="284" height="132" rx="12"/><rect class="v-accent" x="449" y="48" width="3" height="106" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="465" y="63">value · 변경 전</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="465" y="94">주소: 0x1000</tspan><tspan x="465" y="114">저장한 값: 7</tspan></text></g><g class="v-tone positive"><rect class="v-node" x="448" y="232" width="284" height="120" rx="12"/><rect class="v-accent" x="449" y="245" width="3" height="94" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="465" y="260">value · 변경 후</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="465" y="291">같은 주소 0x1000</tspan><tspan x="465" y="311">저장한 값: 9</tspan></text></g><rect class="v-label-bg" x="320.88" y="82" width="114.24" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="378" y="96">*pointer로 읽기</tspan></text><rect class="v-label-bg" x="541.4" y="192" width="97.19999999999999" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="590" y="206">*pointer = 9</tspan></text></svg></div><figcaption><span class="visual-takeaway">주소를 바꾸지 않아도 역참조를 통해 그 주소에 저장된 값을 바꿀 수 있습니다.</span><small class="visual-note">주소·배치·칸 크기는 설명용입니다. 실제 주소는 실행 환경과 실행 시점에 따라 달라집니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>pointer에는 value의 주소가 저장됩니다. 예시 주소 0x1000에 value의 값 7이 있고, *pointer는 그 위치의 값을 읽습니다. *pointer = 9를 실행하면 같은 위치의 값이 9로 바뀝니다. 이 그림의 주소는 설명용입니다.</p></details></figure><p>&amp;value는 변수의 주소, pointer는 그 주소를 저장한 변수, *pointer는 그 위치의 값입니다. 주소를 출력할 때는 %p와 void * 변환을 사용합니다. 주소 숫자는 실행마다 달라도 정상이며 값의 변화와 별개입니다.</p><p>C에서 int value = 7은 정수 객체를 만들고 int *pointer = &amp;value는 그 객체의 위치를 가리키게 합니다. pointer라는 이름의 변수와 value라는 객체는 별개입니다. *pointer = 9는 가리키는 객체에 쓰므로 이후 value를 읽으면 9입니다.</p><p>주소를 정수값 7이나 9와 섞어 계산할 필요는 없습니다. 종이에 value 상자와 pointer 상자를 그리고 화살표를 연결하세요. 선언의 *는 포인터 자료형을 나타내고 식의 *pointer는 그 위치를 읽거나 쓰는 역참조라는 차이부터 익힙니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>pointer와 *pointer를 같은 값으로 읽는다.</dt><dd>pointer는 위치, *pointer는 그 위치의 객체로 나누어 표기합니다.</dd><dt>실행할 때마다 주소가 달라지면 잘못된 것으로 본다.</dt><dd>주소 배치는 환경에 따라 달라질 수 있습니다. 이 차시의 판단 기준은 값의 관계와 변경 결과입니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -148,15 +150,16 @@ after=9</pre></div></li><li><h3>화살표를 통한 쓰기 확인하기</h3><p>*
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="python-files.html"><small>← 이전 차시</small>CSV 읽기와 오류 좁히기</a>
             <a href="permissions.html"><small>다음 차시 →</small>Linux 권한과 파이프</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://www.gnu.org/software/c-intro-and-ref/manual/html_node/Pointers.html" target="_blank" rel="noopener noreferrer">GNU C · 포인터 ↗</a></li>
         <li><a href="https://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html" target="_blank" rel="noopener noreferrer">GCC · 디버깅 정보 옵션 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

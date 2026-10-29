@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/forensic/file-signatures.html">
 <title>파일 시그니처와 조각 복원의 한계 — Forensic · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/forensic.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/forensic.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="forensic" data-course-number="02" data-view="lesson" data-lesson-id="forensic.file-signatures" style="--course-accent:var(--map-green)">
+<body class="learning-page" data-course="forensic" data-course-number="02" data-view="lesson" data-lesson-id="forensic.file-signatures" data-path="" style="--course-accent:var(--map-green)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -86,14 +87,15 @@
               <span class="lesson-dot" data-dot="forensic.evidence-coverage" aria-hidden="true"></span><span>시계 오차·관측 범위·사건 순서<small class="completion-label" data-completion="forensic.evidence-coverage"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/forensic.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">04 · 조각·상관·사고 대응 · 9 / 16</div><h1>파일 시그니처와 조각 복원의 한계</h1><p class="lesson-objective">바이트 오프셋에서 후보 시그니처를 찾고 선언 길이와 실제 잔여 길이를 비교합니다.</p></div></header>
           <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>해시 일치와 파일 출처의 진위는 같은 것인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>해시는 기준 바이트와의 일치를 확인합니다. 기준의 신뢰·보관 이력·수집 범위는 별도 근거가 필요합니다.</p><a href="../../guides/bridges.html#evidence">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>오프라인 · Python 3.10 이상 · 표준 라이브러리</strong></p><ul><li>해당 분야 ZIP을 풀고 forensic 폴더에서 실행합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿉니다.</li><li>파일은 합성 교육 자료입니다. 실습은 로컬 파일/메모리만 처리하며 실제 계정·서버·개인정보를 사용하지 않습니다. 원본은 보관하고 변경 과제에는 사본을 사용합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>오프라인 · Python 3.10 이상 · 표준 라이브러리</strong></p><ul><li>해당 분야 ZIP을 풀고 forensic 폴더에서 실행합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿉니다.</li><li>파일은 합성 교육 자료입니다. 실습은 로컬 파일/메모리만 처리하며 실제 계정·서버·개인정보를 사용하지 않습니다. 원본은 보관하고 변경 과제에는 사본을 사용합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="integrity.html">디지털 포렌식 · 원본·작업 사본·해시 ↗</a></li><li><a href="../foundation/python-files.html">공통 기초 · CSV 읽기와 오류 좁히기 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>파일 확장자와 내부 형식은 다를 수 있으므로 바이트 시그니처와 구조를 확인합니다. 그러나 서명 몇 바이트가 일치한다고 완전한 파일이나 진짜 문서라고 확정할 수는 없습니다. 다른 데이터 안에 우연히 같은 바이트가 나타나는 거짓 후보도 있습니다.</p><figure class="learning-visual" data-visual-id="forensic.file-signatures"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교도</span><h3>시그니처 뒤에 본문이 충분한가?</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="시그니처 뒤에 본문이 충분한가? 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" role="img" aria-labelledby="visual-forensic-file-signatures-title visual-forensic-file-signatures-desc" focusable="false"><title id="visual-forensic-file-signatures-title">시그니처 뒤에 본문이 충분한가?</title><desc id="visual-forensic-file-signatures-desc">오프셋 2의 후보는 선언 3과 가용 3이 같고, 오프셋 10 후보는 선언 5에 가용 2라 불완전합니다. 이것은 합성 BF 형식의 길이 검사입니다.</desc><defs><marker id="visual-forensic-file-signatures-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone positive"><rect class="v-node" x="28" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="29" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="45" y="55">후보 1 · offset 2</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="84">선언</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="107">3바이트</tspan></text><path class="v-separator" d="M45 128H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="148">가용</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="171">ABC · 3</tspan></text><path class="v-separator" d="M45 192H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="212">판정</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="235">COMPLETE</tspan></text></g><g class="v-tone "><rect class="v-node" x="392" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="393" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="409" y="55">후보 2 · offset 10</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="84">선언</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="107">5바이트</tspan></text><path class="v-separator" d="M409 128H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="148">가용</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="171">XY · 2</tspan></text><path class="v-separator" d="M409 192H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="212">판정</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="235">INCOMPLETE</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">COMPLETE는 파일의 기원이나 원래 이름을 증명하지 않습니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>오프셋 2의 후보는 선언 3과 가용 3이 같고, 오프셋 10 후보는 선언 5에 가용 2라 불완전합니다. 이것은 합성 BF 형식의 길이 검사입니다.</p></details></figure><p>이 차시는 BF 서명 2바이트와 little-endian 길이 2바이트 뒤에 본문이 오는 가상의 작은 형식을 사용합니다. fragments.hex는 실제 삭제 영역이나 디스크 이미지가 아니라 제작한 15바이트 표본입니다. Hex 텍스트를 bytes.fromhex로 바꾼 뒤 0부터 세는 오프셋에서 검색합니다.</p><p>첫 후보는 오프셋 2에서 BF, 길이 3, 본문 ABC가 전부 있습니다. 두 번째는 오프셋 10에서 길이 5를 선언하지만 뒤에 XY 2바이트만 있어 INCOMPLETE입니다. 선언 길이를 믿고 없는 바이트를 복원했다고 쓰지 않으며, Python 슬라이스가 짧아져도 오류가 안 난다는 점을 확인합니다.</p><p>carving은 파일시스템 메타데이터가 부족할 때 구조 단서로 후보를 찾는 접근입니다. 조각화·압축·암호화·덮어쓰기에서는 단순 연속 검색이 실패할 수 있고 원래 이름·경로·생성 시각은 보통 별도 근거가 필요합니다. 이 스크립트는 구조 검사의 첫 단계만 보여 주며 실제 PNG/PDF 복구기가 아닙니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>COMPLETE를 원래 파일 전체가 복원됐다는 말로 쓴다.</dt><dd>검사한 모형 구조와 검증 범위를 정확히 적습니다.</dd><dt>후보가 없으니 관련 자료가 존재하지 않는다고 단정한다.</dt><dd>형식·조각화·암호화·덮어쓰기와 관찰 범위를 검토합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -143,15 +145,16 @@ offset=10 declared=5 available=2 INCOMPLETE</pre></div></li><li><h3>부족한 �
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="browser-sqlite.html"><small>← 이전 차시</small>SQLite 방문 기록과 행위 해석의 한계</a>
             <a href="log-correlation.html"><small>다음 차시 →</small>호스트·세션을 잇는 다중 로그 상관</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://csrc.nist.gov/pubs/sp/800/86/final" target="_blank" rel="noopener noreferrer">NIST SP 800-86 · 디지털 증거 처리 ↗</a></li>
         <li><a href="https://docs.python.org/3/library/struct.html" target="_blank" rel="noopener noreferrer">Python struct · 바이트 순서와 명시적 크기 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

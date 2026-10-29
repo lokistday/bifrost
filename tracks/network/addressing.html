@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/network/addressing.html">
 <title>계층·CIDR·관측 위치 — Network Security · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/network.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/network.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="network" data-course-number="05" data-view="lesson" data-lesson-id="network.addressing" style="--course-accent:var(--map-amber)">
+<body class="learning-page" data-course="network" data-course-number="05" data-view="lesson" data-lesson-id="network.addressing" data-path="" style="--course-accent:var(--map-amber)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -85,14 +86,15 @@
               <span class="lesson-dot" data-dot="network.event-time-windows" aria-hidden="true"></span><span>사건 시각·지연 도착과 세션 경계<small class="completion-label" data-completion="network.event-time-windows"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/network.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">01 · 분석을 위한 프로토콜 · 1 / 19</div><h1>계층·CIDR·관측 위치</h1><p class="lesson-objective">주소 범위와 관측 지점을 나누어 통신 경로를 설명합니다.</p></div></header>
           <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>센서에 기록이 없다는 사실이 통신이 없었다는 뜻인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>센서 위치·필터·손실·시간 범위를 확인해야 합니다. 관측되지 않은 경로가 남아 있을 수 있습니다.</p><a href="../../guides/bridges.html#network">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>주소·관측 설계 · Python 3와 편집기</strong></p><ul><li>network 폴더에서 Python의 표준 ipaddress 모듈을 사용합니다. 실제 장비 설정이나 인터넷 스캔은 하지 않습니다.</li><li>192.0.2.0/24·198.51.100.0/24·203.0.113.0/24는 자료 안의 문서용 주소입니다. 실습은 합성 로그만 읽습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>주소·관측 설계 · Python 3와 편집기</strong></p><ul><li>network 폴더에서 Python의 표준 ipaddress 모듈을 사용합니다. 실제 장비 설정이나 인터넷 스캔은 하지 않습니다.</li><li>192.0.2.0/24·198.51.100.0/24·203.0.113.0/24는 자료 안의 문서용 주소입니다. 실습은 합성 로그만 읽습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="../foundation/network.html">공통 기초 · IP·포트·DNS와 전송 ↗</a></li><li><a href="../foundation/python-values.html">공통 기초 · 변수·문자열·자료형 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>프레임은 링크 구간, IP 패킷은 네트워크 전달, TCP/UDP는 전송 끝점, HTTP는 응용 의미를 다룹니다. 한 계층의 성공이 다음 계층의 성공을 보장하지 않습니다. NAT나 프록시를 지나면 보이는 출발지와 실제 클라이언트도 달라질 수 있습니다.</p><figure class="learning-visual" data-visual-id="network.addressing"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 구조도</span><h3>서브넷의 이름보다 주소 범위를 확인합니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="서브넷의 이름보다 주소 범위를 확인합니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 330" width="760" height="330" role="img" aria-labelledby="visual-network-addressing-title visual-network-addressing-desc" focusable="false"><title id="visual-network-addressing-title">서브넷의 이름보다 주소 범위를 확인합니다</title><desc id="visual-network-addressing-desc">10.10.10.20은 10.10.10.0/24에 포함되지만 10.10.20.0/24에는 포함되지 않습니다. 서로 다른 서브넷 사이의 통신은 라우팅과 정책을 함께 확인해야 합니다. 캡처 위치를 바꾸면 볼 수 있는 구간도 달라집니다.</desc><defs><marker id="visual-network-addressing-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><rect class="v-zone" x="28" y="24" width="320" height="282" rx="12"/><text class="v-text v-secondary" font-size="12" text-anchor="start"><tspan x="42" y="47">10.10.10.0/24</tspan></text><rect class="v-zone" x="412" y="24" width="320" height="282" rx="12"/><text class="v-text v-secondary" font-size="12" text-anchor="start"><tspan x="426" y="47">10.10.20.0/24</tspan></text><path class="v-edge  v-dashed" d="M316 157C380 157 380 157 444 157" marker-end="url(#visual-network-addressing-arrow)"/><g class="v-tone "><rect class="v-node" x="60" y="100" width="256" height="114" rx="12"/><rect class="v-accent" x="61" y="113" width="3" height="88" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="77" y="128">10.10.10.20</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="77" y="159">왼쪽 /24 범위에 포함</tspan></text></g><g class="v-tone "><rect class="v-node" x="444" y="100" width="256" height="114" rx="12"/><rect class="v-accent" x="445" y="113" width="3" height="88" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="461" y="128">10.10.20.30</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="461" y="159">오른쪽 /24 범위의 DB</tspan></text></g><rect class="v-label-bg" x="293.12" y="253" width="173.76" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="380" y="267">구간 사이: 라우팅·정책 확인</tspan></text></svg></div><figcaption><span class="visual-takeaway">주소가 어느 범위에 속하는지와 그 위치에서 어떤 경로를 볼 수 있는지를 나누어 설명하세요.</span><small class="visual-note">주소 범위와 연결을 설명하는 모형입니다. 선이 있다는 사실만으로 실제 통신이 허용되는 것은 아닙니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>10.10.10.20은 10.10.10.0/24에 포함되지만 10.10.20.0/24에는 포함되지 않습니다. 서로 다른 서브넷 사이의 통신은 라우팅과 정책을 함께 확인해야 합니다. 캡처 위치를 바꾸면 볼 수 있는 구간도 달라집니다.</p></details></figure><p>CIDR /24는 IPv4 주소의 앞 24비트가 네트워크 부분이라는 뜻입니다. 10.10.10.20은 10.10.10.0/24 안에 있지만 10.10.20.0/24에는 없습니다. 관측 지점을 웹 앞·DB 앞·외부 경계로 표시하면 어떤 증거가 빠지는지 알 수 있습니다.</p><p>주소는 위치와 계층을 함께 읽어야 합니다. IP 주소는 전달 끝점을, 포트는 해당 전송 프로토콜 안의 끝점을 구별합니다. 443이라는 숫자만으로 실제 응용이 HTTPS라고 확정하지 말고 프로토콜 바이트와 서비스 설정을 확인합니다.</p><p>IPv4는 32비트이고 /24에서는 앞 24비트가 네트워크 부분입니다. /32는 단일 IPv4 주소를 지정합니다. 네트워크 포함 여부는 문자열 앞부분 비교가 아니라 비트 경계로 계산하므로 10.10.1과 10.10.10을 글자만으로 비교하지 않습니다.</p><p>외부 경계에서는 공인 주소를, Web→DB 경계에서는 내부 주소를 볼 수 있습니다. 프록시 뒤에서는 출발지 주소가 프록시로 바뀔 수 있으므로 원 요청자를 찾으려면 신뢰한 프록시가 남긴 요청 ID·로그를 연결해야 합니다. 관측 지점이 없는 그림은 어떤 주장을 할 수 있는지 불분명합니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>443 연결이면 인가된 사용자라고 판단한다.</dt><dd>포트는 전송 끝점입니다. TLS 인증과 응용 인가는 별도 계층에서 확인합니다.</dd><dt>/24와 /32를 장비 수 표시로 읽는다.</dt><dd>고정되는 주소 비트 수로 해석하고 실제 포함 여부를 계산합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -144,15 +146,16 @@ for cidr in [&quot;10.10.10.0/24&quot;, &quot;10.10.20.0/24&quot;, &quot;10.10.1
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="./"><small>← 전체 과정</small>분야 목차로</a>
             <a href="pcap.html"><small>다음 차시 →</small>PCAP·필터·스트림</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://docs.python.org/3/library/ipaddress.html" target="_blank" rel="noopener noreferrer">Python ipaddress · 네트워크 포함 검사 ↗</a></li>
         <li><a href="https://www.rfc-editor.org/rfc/rfc5737.html" target="_blank" rel="noopener noreferrer">RFC 5737 · 문서용 IPv4 주소 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

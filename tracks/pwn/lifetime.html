@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/pwn/lifetime.html">
 <title>스택·힙과 수명 — Pwn / System · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/pwn.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/pwn.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="pwn.lifetime" style="--course-accent:var(--map-violet)">
+<body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="pwn.lifetime" data-path="" style="--course-accent:var(--map-violet)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -86,14 +87,15 @@
               <span class="lesson-dot" data-dot="pwn.atomic-open" aria-hidden="true"></span><span>파일 열기·TOCTOU·객체 검증<small class="completion-label" data-completion="pwn.atomic-open"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/pwn.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">01 · 실행과 메모리 모델 · 2 / 16</div><h1>스택·힙과 수명</h1><p class="lesson-objective">지역 변수와 동적 할당 메모리의 수명을 구분합니다.</p></div></header>
           <div class="lesson-meta"><span>기초</span><span>학습 45–80분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>버퍼 크기, 유효한 데이터 길이, 문자열 길이를 구분할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>할당 용량과 채워진 바이트 수는 다르고 strlen은 첫 NUL까지만 셉니다. 읽기 전에 경계와 객체 수명을 확인합니다.</p><a href="../../guides/bridges.html#c">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Ubuntu/WSL · memory.c와 텍스트 편집기</strong></p><ul><li>memory.c는 정상 수명 관리 예제입니다. 해제 후 접근 코드를 추가해 실행할 필요는 없습니다.</li><li>컴파일 후 실행 결과와 소스의 할당·해제 위치를 나란히 기록합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Ubuntu/WSL · memory.c와 텍스트 편집기</strong></p><ul><li>memory.c는 정상 수명 관리 예제입니다. 해제 후 접근 코드를 추가해 실행할 필요는 없습니다.</li><li>컴파일 후 실행 결과와 소스의 할당·해제 위치를 나란히 기록합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="build.html">시스템 보안 · 소스·컴파일·실행 파일 ↗</a></li><li><a href="../foundation/c-memory.html">공통 기초 · C 컴파일과 주소·포인터 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>이 예제의 local과 values는 함수 블록의 자동 저장 기간을 갖고 heap은 malloc이 확보한 영역을 가리킵니다. 보통 앞쪽은 스택, 동적 영역은 힙으로 구현하지만 실제 위치와 최적화는 구현에 달려 있습니다.</p><figure class="learning-visual" data-visual-id="pwn.lifetime"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 구조도</span><h3>지역 변수와 동적 할당 영역은 끝나는 시점이 다릅니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="지역 변수와 동적 할당 영역은 끝나는 시점이 다릅니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" width="760" height="440" role="img" aria-labelledby="visual-pwn-lifetime-title visual-pwn-lifetime-desc" focusable="false"><title id="visual-pwn-lifetime-title">지역 변수와 동적 할당 영역은 끝나는 시점이 다릅니다</title><desc id="visual-pwn-lifetime-desc">예제의 local은 함수 블록에 속한 자동 저장 기간의 변수이고 값은 7입니다. malloc으로 얻은 동적 영역의 값은 9이며 free로 해제합니다. heap 포인터 변수와 그 포인터가 가리키는 동적 영역은 다른 대상입니다. free 후 그 영역을 읽지 않고 포인터를 NULL로 바꿉니다.</desc><defs><marker id="visual-pwn-lifetime-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><rect class="v-zone" x="28" y="24" width="300" height="392" rx="12"/><text class="v-text v-secondary" font-size="12" text-anchor="start"><tspan x="42" y="47">자동 저장 영역 · 현재 함수 블록</tspan></text><rect class="v-zone" x="432" y="24" width="300" height="392" rx="12"/><text class="v-text v-secondary" font-size="12" text-anchor="start"><tspan x="446" y="47">동적 할당 영역 · free 전까지</tspan></text><path class="v-edge " d="M292 320C380 320 380 154 468 154" marker-end="url(#visual-pwn-lifetime-arrow)"/><path class="v-edge " d="M582 214C582 234 582 234 582 254" marker-end="url(#visual-pwn-lifetime-arrow)"/><g class="v-tone "><rect class="v-node" x="64" y="94" width="228" height="120" rx="12"/><rect class="v-accent" x="65" y="107" width="3" height="94" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="81" y="122">local = 7</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="81" y="153">함수 블록에 속한 변수</tspan><tspan x="81" y="173">블록이 끝나면 수명 종료</tspan></text></g><g class="v-tone "><rect class="v-node" x="64" y="254" width="228" height="132" rx="12"/><rect class="v-accent" x="65" y="267" width="3" height="106" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="81" y="282">heap 포인터 변수</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="81" y="313">할당 영역의 주소를 저장</tspan><tspan x="81" y="333">가리키는 영역과는 별개</tspan></text></g><g class="v-tone "><rect class="v-node" x="468" y="94" width="228" height="120" rx="12"/><rect class="v-accent" x="469" y="107" width="3" height="94" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="485" y="122">*heap = 9</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="485" y="153">malloc 성공 뒤 사용</tspan><tspan x="485" y="173">free 전까지 유효</tspan></text></g><g class="v-tone danger"><rect class="v-node" x="468" y="254" width="228" height="132" rx="12"/><rect class="v-accent" x="469" y="267" width="3" height="106" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="485" y="282">free 이후</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="485" y="313">해제된 영역: 접근 금지</tspan><tspan x="485" y="333">포인터는 별도로 NULL 처리</tspan></text></g><rect class="v-label-bg" x="535.8" y="228" width="92.39999999999999" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="582" y="242">free(heap)</tspan></text></svg></div><figcaption><span class="visual-takeaway">포인터 변수가 남아 있다는 사실은 가리키던 메모리가 아직 유효하다는 뜻이 아닙니다.</span><small class="visual-note">일반적인 실행 환경의 개념 비교입니다. 실제 스택 배치·레지스터 사용은 ABI와 최적화에 따라 다릅니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>예제의 local은 함수 블록에 속한 자동 저장 기간의 변수이고 값은 7입니다. malloc으로 얻은 동적 영역의 값은 9이며 free로 해제합니다. heap 포인터 변수와 그 포인터가 가리키는 동적 영역은 다른 대상입니다. free 후 그 영역을 읽지 않고 포인터를 NULL로 바꿉니다.</p></details></figure><p>포인터 변수의 수명과 가리키는 메모리의 수명은 다릅니다. free 이후에는 그 영역을 읽거나 쓰면 안 됩니다. heap = NULL은 이 변수의 실수를 줄이지만 같은 영역을 가리키던 다른 포인터까지 무효화하지는 않습니다.</p><p>객체의 수명, 이름을 쓸 수 있는 범위, 포인터가 담은 주소를 분리합니다. main의 지역 포인터 heap은 함수 안에서 사용하는 변수이고 malloc으로 확보한 정수 영역은 free까지 사용할 수 있습니다. 이름이 heap이라는 사실이 변수 자체를 동적 할당 영역으로 만드는 것은 아닙니다.</p><p>malloc 실패는 NULL로 확인한 뒤 사용을 중단해야 합니다. 성공한 경로에서는 *heap = 9로 내용을 초기화한 후 읽고, 마지막 사용 뒤 free합니다. malloc이 준 영역의 초기 내용은 9로 자동 설정되는 것이 아니므로 쓰기 전 읽지 않습니다.</p><p>동적 메모리의 소유자는 해제 책임을 가진 코드를 뜻합니다. 같은 영역을 여러 포인터가 가리킬 수 있어 두 번 해제하거나 한 별칭을 남겨 두는 실수가 생깁니다. 지금은 소유자 하나와 해제 시점을 명확히 표시하는 것부터 연습합니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>포인터 변수의 이름 heap만 보고 저장 위치와 수명을 결정한다.</dt><dd>언어의 저장 기간과 실제 할당·해제 경로를 근거로 대상을 구분합니다.</dd><dt>free 이후 읽어도 한 번은 값이 남았으므로 안전하다고 판단한다.</dt><dd>값이 우연히 보이는 것과 객체 접근의 유효성은 다릅니다. 해제 후 접근하지 않습니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -145,15 +147,16 @@ if (!heap) return 1;
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="build.html"><small>← 이전 차시</small>소스·컴파일·실행 파일</a>
             <a href="bounds.html"><small>다음 차시 →</small>배열 경계와 길이</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://man7.org/linux/man-pages/man3/malloc.3.html" target="_blank" rel="noopener noreferrer">Linux man-pages · malloc·free의 계약 ↗</a></li>
         <li><a href="https://www.gnu.org/software/c-intro-and-ref/manual/html_node/Dynamic-Memory-Allocation.html" target="_blank" rel="noopener noreferrer">GNU C · 동적 메모리 할당 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="실제 Ed25519 서명의 정상·변조·잘못된 공개키 검증을 비교하고 키 소유자 신뢰와 구분합니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="공개키 암호화와 서명 — 클라우드 방어와 복구 검증 · Bifrost">
+<meta property="og:description" content="실제 Ed25519 서명의 정상·변조·잘못된 공개키 검증을 비교하고 키 소유자 신뢰와 구분합니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/paths/cloud-operations/crypto.public-key.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/paths/cloud-operations/crypto.public-key.html">
+<title>공개키 암호화와 서명 — 클라우드 방어와 복구 검증 · Bifrost</title>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/crypto.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-paths.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/path-progress.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
+</head>
+<body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.public-key" data-path="cloud-operations" style="--course-accent:var(--map-pink)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#pathOutline">클라우드 보안 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="crypto.public-key">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../learn/">학습 경로</a><span aria-hidden="true">/</span><a href="./">클라우드 방어와 복구 검증</a><span aria-hidden="true">/</span><span aria-current="page">46단계</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar path-sidebar"><a class="back-link" href="./">← 클라우드 방어와 복구 검증 목차</a>
+        <div class="course-stats"><span data-path-count></span><div class="course-meter" role="progressbar" aria-label="클라우드 방어와 복구 검증 차시 완료 진도" aria-valuemin="0" aria-valuemax="100" data-path-meter><span></span></div></div>
+        <nav aria-label="클라우드 방어와 복구 검증 경로 목차"><details ><summary>Foundation<span class="caption">1–3단계</span></summary><ol><li><a class="side-lesson" href="foundation.environment.html" >
+          <span class="path-step-number">1</span><span><small>공통 기초 · 권장 선행</small>실습 환경 준비와 첫 실행<small class="completion-label" data-completion="foundation.environment"></small></span></a></li><li><a class="side-lesson" href="foundation.network.html" >
+          <span class="path-step-number">2</span><span><small>공통 기초 · 권장 선행</small>IP·포트·DNS와 전송<small class="completion-label" data-completion="foundation.network"></small></span></a></li><li><a class="side-lesson" href="foundation.python-values.html" >
+          <span class="path-step-number">3</span><span><small>공통 기초 · 권장 선행</small>변수·문자열·자료형<small class="completion-label" data-completion="foundation.python-values"></small></span></a></li>
+          </ol></details><details ><summary>Network Security<span class="caption">4–4단계</span></summary><ol><li><a class="side-lesson" href="network.addressing.html" >
+          <span class="path-step-number">4</span><span><small>네트워크 보안 · 권장 선행</small>계층·CIDR·관측 위치<small class="completion-label" data-completion="network.addressing"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">5–5단계</span></summary><ol><li><a class="side-lesson" href="foundation.http.html" >
+          <span class="path-step-number">5</span><span><small>공통 기초 · 권장 선행</small>HTTP 요청과 응답 읽기<small class="completion-label" data-completion="foundation.http"></small></span></a></li>
+          </ol></details><details ><summary>Network Security<span class="caption">6–8단계</span></summary><ol><li><a class="side-lesson" href="network.pcap.html" >
+          <span class="path-step-number">6</span><span><small>네트워크 보안 · 권장 선행</small>PCAP·필터·스트림<small class="completion-label" data-completion="network.pcap"></small></span></a></li><li><a class="side-lesson" href="network.transport.html" >
+          <span class="path-step-number">7</span><span><small>네트워크 보안 · 권장 선행</small>DNS·TCP 연결과 실패 분류<small class="completion-label" data-completion="network.transport"></small></span></a></li><li><a class="side-lesson" href="network.segmentation.html" >
+          <span class="path-step-number">8</span><span><small>네트워크 보안 · 경로 핵심</small>망 분리·신뢰 경계·관리 경로<small class="completion-label" data-completion="network.segmentation"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">9–11단계</span></summary><ol><li><a class="side-lesson" href="foundation.python-flow.html" >
+          <span class="path-step-number">9</span><span><small>공통 기초 · 권장 선행</small>조건·반복·함수<small class="completion-label" data-completion="foundation.python-flow"></small></span></a></li><li><a class="side-lesson" href="foundation.paths.html" >
+          <span class="path-step-number">10</span><span><small>공통 기초 · 권장 선행</small>경로와 작업용 사본<small class="completion-label" data-completion="foundation.paths"></small></span></a></li><li><a class="side-lesson" href="foundation.python-files.html" >
+          <span class="path-step-number">11</span><span><small>공통 기초 · 권장 선행</small>CSV 읽기와 오류 좁히기<small class="completion-label" data-completion="foundation.python-files"></small></span></a></li>
+          </ol></details><details ><summary>Network Security<span class="caption">12–14단계</span></summary><ol><li><a class="side-lesson" href="network.policy.html" >
+          <span class="path-step-number">12</span><span><small>네트워크 보안 · 경로 핵심</small>방화벽 정책과 회귀 검증<small class="completion-label" data-completion="network.policy"></small></span></a></li><li><a class="side-lesson" href="network.routing.html" >
+          <span class="path-step-number">13</span><span><small>네트워크 보안 · 권장 선행</small>최장 접두사와 돌아오는 경로<small class="completion-label" data-completion="network.routing"></small></span></a></li><li><a class="side-lesson" href="network.ipv6-boundaries.html" >
+          <span class="path-step-number">14</span><span><small>네트워크 보안 · 경로 핵심</small>IPv6 주소 범위와 정책의 빈틈<small class="completion-label" data-completion="network.ipv6-boundaries"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">15–15단계</span></summary><ol><li><a class="side-lesson" href="foundation.permissions.html" >
+          <span class="path-step-number">15</span><span><small>공통 기초 · 권장 선행</small>Linux 권한과 파이프<small class="completion-label" data-completion="foundation.permissions"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">16–16단계</span></summary><ol><li><a class="side-lesson" href="cloud.responsibility.html" >
+          <span class="path-step-number">16</span><span><small>클라우드 보안 · 경로 핵심</small>IaaS·PaaS·SaaS와 공동 책임<small class="completion-label" data-completion="cloud.responsibility"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">17–18단계</span></summary><ol><li><a class="side-lesson" href="web.sessions.html" >
+          <span class="path-step-number">17</span><span><small>웹 보안 · 권장 선행</small>쿠키·세션·인증<small class="completion-label" data-completion="web.sessions"></small></span></a></li><li><a class="side-lesson" href="web.authorization.html" >
+          <span class="path-step-number">18</span><span><small>웹 보안 · 권장 선행</small>리소스 단위 인가<small class="completion-label" data-completion="web.authorization"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">19–19단계</span></summary><ol><li><a class="side-lesson" href="cloud.iam.html" >
+          <span class="path-step-number">19</span><span><small>클라우드 보안 · 경로 핵심</small>IAM 최소 권한과 명시적 거부<small class="completion-label" data-completion="cloud.iam"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">20–20단계</span></summary><ol><li><a class="side-lesson" href="foundation.git.html" >
+          <span class="path-step-number">20</span><span><small>공통 기초 · 권장 선행</small>Git과 재현 가능한 README<small class="completion-label" data-completion="foundation.git"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">21–22단계</span></summary><ol><li><a class="side-lesson" href="cloud.secrets.html" >
+          <span class="path-step-number">21</span><span><small>클라우드 보안 · 권장 선행</small>장기 키·임시 신원·교체<small class="completion-label" data-completion="cloud.secrets"></small></span></a></li><li><a class="side-lesson" href="cloud.workload-trust.html" >
+          <span class="path-step-number">22</span><span><small>클라우드 보안 · 경로 핵심</small>워크로드 신원과 역할 신뢰 조건<small class="completion-label" data-completion="cloud.workload-trust"></small></span></a></li>
+          </ol></details><details ><summary>Forensic<span class="caption">23–25단계</span></summary><ol><li><a class="side-lesson" href="forensic.integrity.html" >
+          <span class="path-step-number">23</span><span><small>디지털 포렌식 · 권장 선행</small>원본·작업 사본·해시<small class="completion-label" data-completion="forensic.integrity"></small></span></a></li><li><a class="side-lesson" href="forensic.logs.html" >
+          <span class="path-step-number">24</span><span><small>디지털 포렌식 · 권장 선행</small>로그 필드와 사건 가설<small class="completion-label" data-completion="forensic.logs"></small></span></a></li><li><a class="side-lesson" href="forensic.timeline.html" >
+          <span class="path-step-number">25</span><span><small>디지털 포렌식 · 권장 선행</small>UTC로 타임라인 맞추기<small class="completion-label" data-completion="forensic.timeline"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">26–28단계</span></summary><ol><li><a class="side-lesson" href="cloud.audit.html" >
+          <span class="path-step-number">26</span><span><small>클라우드 보안 · 권장 선행</small>감사 로그와 공개 변경 추적<small class="completion-label" data-completion="cloud.audit"></small></span></a></li><li><a class="side-lesson" href="cloud.audit-coverage.html" >
+          <span class="path-step-number">27</span><span><small>클라우드 보안 · 경로 핵심</small>중앙 감사 로그의 범위와 중복<small class="completion-label" data-completion="cloud.audit-coverage"></small></span></a></li><li><a class="side-lesson" href="cloud.vpc.html" >
+          <span class="path-step-number">28</span><span><small>클라우드 보안 · 권장 선행</small>VPC·서브넷·보안 경계<small class="completion-label" data-completion="cloud.vpc"></small></span></a></li>
+          </ol></details><details ><summary>Cryptography<span class="caption">29–32단계</span></summary><ol><li><a class="side-lesson" href="crypto.representation.html" >
+          <span class="path-step-number">29</span><span><small>암호학 · 권장 선행</small>바이트·Hex·Base64<small class="completion-label" data-completion="crypto.representation"></small></span></a></li><li><a class="side-lesson" href="crypto.hash.html" >
+          <span class="path-step-number">30</span><span><small>암호학 · 권장 선행</small>SHA-256과 파일 무결성<small class="completion-label" data-completion="crypto.hash"></small></span></a></li><li><a class="side-lesson" href="crypto.mac.html" >
+          <span class="path-step-number">31</span><span><small>암호학 · 권장 선행</small>HMAC과 태그 검증<small class="completion-label" data-completion="crypto.mac"></small></span></a></li><li><a class="side-lesson" href="crypto.symmetric.html" >
+          <span class="path-step-number">32</span><span><small>암호학 · 권장 선행</small>대칭키·AEAD·인증 태그<small class="completion-label" data-completion="crypto.symmetric"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">33–33단계</span></summary><ol><li><a class="side-lesson" href="cloud.storage.html" >
+          <span class="path-step-number">33</span><span><small>클라우드 보안 · 권장 선행</small>오브젝트 저장소와 데이터 공개<small class="completion-label" data-completion="cloud.storage"></small></span></a></li>
+          </ol></details><details ><summary>Network Security<span class="caption">34–37단계</span></summary><ol><li><a class="side-lesson" href="network.tls.html" >
+          <span class="path-step-number">34</span><span><small>네트워크 보안 · 권장 선행</small>TLS와 보이는 정보의 경계<small class="completion-label" data-completion="network.tls"></small></span></a></li><li><a class="side-lesson" href="network.detection.html" >
+          <span class="path-step-number">35</span><span><small>네트워크 보안 · 권장 선행</small>탐지 기준·오탐·추가 증거<small class="completion-label" data-completion="network.detection"></small></span></a></li><li><a class="side-lesson" href="network.zero-trust.html" >
+          <span class="path-step-number">36</span><span><small>네트워크 보안 · 권장 선행</small>신원과 자산 중심의 Zero Trust<small class="completion-label" data-completion="network.zero-trust"></small></span></a></li><li><a class="side-lesson" href="network.capstone.html" >
+          <span class="path-step-number">37</span><span><small>네트워크 보안 · 권장 선행</small>중간 종합: 작은 서비스 방어 설계<small class="completion-label" data-completion="network.capstone"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">38–42단계</span></summary><ol><li><a class="side-lesson" href="cloud.capstone.html" >
+          <span class="path-step-number">38</span><span><small>클라우드 보안 · 권장 선행</small>중간 종합: 구성 수정과 검증 계획<small class="completion-label" data-completion="cloud.capstone"></small></span></a></li><li><a class="side-lesson" href="cloud.iac-review.html" >
+          <span class="path-step-number">39</span><span><small>클라우드 보안 · 권장 선행</small>인프라 변경 계획과 영향 범위<small class="completion-label" data-completion="cloud.iac-review"></small></span></a></li><li><a class="side-lesson" href="cloud.recovery-exercise.html" >
+          <span class="path-step-number">40</span><span><small>클라우드 보안 · 경로 핵심</small>백업 무결성과 RPO·RTO 복구 연습<small class="completion-label" data-completion="cloud.recovery-exercise"></small></span></a></li><li><a class="side-lesson" href="cloud.effective-permissions.html" >
+          <span class="path-step-number">41</span><span><small>클라우드 보안 · 권장 선행</small>실효 권한과 허용 범위의 교집합<small class="completion-label" data-completion="cloud.effective-permissions"></small></span></a></li><li><a class="side-lesson" href="cloud.kubernetes-rbac.html" >
+          <span class="path-step-number">42</span><span><small>클라우드 보안 · 경로 핵심</small>Kubernetes 네임스페이스와 RBAC<small class="completion-label" data-completion="cloud.kubernetes-rbac"></small></span></a></li>
+          </ol></details><details ><summary>Network Security<span class="caption">43–43단계</span></summary><ol><li><a class="side-lesson" href="network.dns-cache.html" >
+          <span class="path-step-number">43</span><span><small>네트워크 보안 · 권장 선행</small>DNS TTL과 부정 응답 캐시<small class="completion-label" data-completion="network.dns-cache"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">44–45단계</span></summary><ol><li><a class="side-lesson" href="cloud.private-endpoint-paths.html" >
+          <span class="path-step-number">44</span><span><small>클라우드 보안 · 경로 핵심</small>프라이빗 엔드포인트와 DNS 경로<small class="completion-label" data-completion="cloud.private-endpoint-paths"></small></span></a></li><li><a class="side-lesson" href="cloud.breakglass-access.html" >
+          <span class="path-step-number">45</span><span><small>클라우드 보안 · 경로 핵심</small>긴급 접근의 만료·회수·증거<small class="completion-label" data-completion="cloud.breakglass-access"></small></span></a></li>
+          </ol></details><details open><summary>Cryptography<span class="caption">46–52단계</span></summary><ol><li><a class="side-lesson" href="crypto.public-key.html" aria-current="page">
+          <span class="path-step-number">46</span><span><small>암호학 · 권장 선행</small>공개키 암호화와 서명<small class="completion-label" data-completion="crypto.public-key"></small></span></a></li><li><a class="side-lesson" href="crypto.nonce.html" >
+          <span class="path-step-number">47</span><span><small>암호학 · 권장 선행</small>난수·nonce와 재사용<small class="completion-label" data-completion="crypto.nonce"></small></span></a></li><li><a class="side-lesson" href="crypto.key-lifecycle.html" >
+          <span class="path-step-number">48</span><span><small>암호학 · 경로 핵심</small>키 상태·교체·침해 대응<small class="completion-label" data-completion="crypto.key-lifecycle"></small></span></a></li><li><a class="side-lesson" href="crypto.password.html" >
+          <span class="path-step-number">49</span><span><small>암호학 · 권장 선행</small>비밀번호 KDF·salt·비용<small class="completion-label" data-completion="crypto.password"></small></span></a></li><li><a class="side-lesson" href="crypto.hkdf-context.html" >
+          <span class="path-step-number">50</span><span><small>암호학 · 권장 선행</small>HKDF 추출·확장과 용도 분리<small class="completion-label" data-completion="crypto.hkdf-context"></small></span></a></li><li><a class="side-lesson" href="crypto.message-encoding.html" >
+          <span class="path-step-number">51</span><span><small>암호학 · 권장 선행</small>메시지 경계와 인증할 바이트<small class="completion-label" data-completion="crypto.message-encoding"></small></span></a></li><li><a class="side-lesson" href="crypto.aad-record-binding.html" >
+          <span class="path-step-number">52</span><span><small>암호학 · 경로 핵심</small>AEAD와 레코드 문맥의 결합<small class="completion-label" data-completion="crypto.aad-record-binding"></small></span></a></li>
+          </ol></details><a class="side-lesson path-project-link" href="project.html"><span class="path-step-number">✦</span><span>마지막 · 종합 프로젝트</span></a></nav>
+        <a class="back-link" href="../../learn/#paths">다른 학습 경로 보기 ↗</a></aside><article class="lesson-article">
+          <nav class="path-location" aria-label="현재 학습 경로"><a href="./">클라우드 보안</a><strong>46 / 52단계</strong><a href="./#pathOutline">경로 목차 ↗</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/crypto.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">Cryptography · 03 · 현대 암호 설계와 키 수명 · 46 / 52</div><h1>공개키 암호화와 서명</h1><p class="lesson-objective">실제 Ed25519 서명의 정상·변조·잘못된 공개키 검증을 비교하고 키 소유자 신뢰와 구분합니다.</p></div></header>
+          <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>암호학적 검증 성공이면 현재 요청을 처리해도 되나요?</p><details><summary>판단 기준과 보충 자료</summary><p>인증된 바이트와 현재 권한·문맥·재전송·만료는 다른 검증입니다. 목적과 상태를 함께 확인합니다.</p><a href="../../guides/bridges.html#bytes">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>실제 Ed25519 서명 검증 · Python 3와 cryptography</strong></p><ul><li>대칭키 차시에서 만든 crypto/.venv와 requirements.txt를 그대로 사용합니다.</li><li>Linux/WSL/macOS: .venv/bin/python signature.py / Windows PowerShell: .\.venv\Scripts\python.exe signature.py. 본문 명령은 Linux 계열 표기입니다.</li><li>signature.json의 공개 검증 자료와 별도로 새 서명 왕복을 실행합니다. 실제 신원·인증서를 발급하는 실습은 아닙니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="crypto.mac.html">암호학 · HMAC과 태그 검증 ↗</a></li><li><a href="crypto.symmetric.html">암호학 · 대칭키·AEAD·인증 태그 ↗</a></li></ul>
+            </details>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>공개키 암호화는 수신자의 공개키로 보호하고 수신자의 개인키로 복호화하는 역할을 생각할 수 있습니다. 디지털 서명은 서명자의 개인키로 만들고 그 서명자의 공개키로 검증합니다. 이를 단순히 개인키로 암호화한다고 설명하면 목적과 알고리즘 차이를 놓칩니다.</p><figure class="learning-visual" data-visual-id="crypto.public-key"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교도</span><h3>기밀 전송과 서명에서는 키의 주인이 달라집니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="기밀 전송과 서명에서는 키의 주인이 달라집니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" role="img" aria-labelledby="visual-crypto-public-key-title visual-crypto-public-key-desc" focusable="false"><title id="visual-crypto-public-key-title">기밀 전송과 서명에서는 키의 주인이 달라집니다</title><desc id="visual-crypto-public-key-desc">Alice가 Bob에게 기밀 데이터를 보낼 때는 Bob의 공개키로 보호하고 Bob의 개인키로 복호화하는 구성을 생각합니다. Alice가 작성한 내용에 서명할 때는 Alice의 개인키로 서명하고 Alice의 공개키로 검증합니다. 공개키가 누구의 것인지 신뢰할 방법도 필요합니다. signature.py에서는 Ed25519로 실제 서명과 변조 검증을 실행합니다. Ed25519는 서명 알고리즘이며 왼쪽 비밀 전송의 암호화 알고리즘으로 사용하지 않습니다.</desc><defs><marker id="visual-crypto-public-key-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone "><rect class="v-node" x="28" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="29" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="45" y="55">Alice → Bob 기밀 전송</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="84">보호하는 키</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="107">Bob의 공개키</tspan></text><path class="v-separator" d="M45 128H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="148">복원하는 키</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="171">Bob의 개인키</tspan></text><path class="v-separator" d="M45 192H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="212">주요 목적</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="235">내용을 Bob만 읽도록 보호</tspan></text></g><g class="v-tone positive"><rect class="v-node" x="392" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="393" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="409" y="55">Alice의 서명과 검증</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="84">서명하는 키</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="107">Alice의 개인키</tspan></text><path class="v-separator" d="M409 128H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="148">검증하는 키</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="171">Alice의 공개키</tspan></text><path class="v-separator" d="M409 192H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="212">주요 목적</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="235">서명 키의 출처·무결성 검증</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">서명은 비밀을 숨기는 기능이 아닙니다. 기밀성 목표와 작성자·무결성 검증 목표를 구분하세요.</span><small class="visual-note">오른쪽 서명은 signature.py에서 실제 Ed25519로 확인합니다. 왼쪽은 수신자 공개키로 비밀을 보호하는 역할 설명입니다. 공개키의 출처·신뢰도 별도로 검증해야 합니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>Alice가 Bob에게 기밀 데이터를 보낼 때는 Bob의 공개키로 보호하고 Bob의 개인키로 복호화하는 구성을 생각합니다. Alice가 작성한 내용에 서명할 때는 Alice의 개인키로 서명하고 Alice의 공개키로 검증합니다. 공개키가 누구의 것인지 신뢰할 방법도 필요합니다. signature.py에서는 Ed25519로 실제 서명과 변조 검증을 실행합니다. Ed25519는 서명 알고리즘이며 왼쪽 비밀 전송의 암호화 알고리즘으로 사용하지 않습니다.</p></details></figure><p>실제 프로토콜은 공개키로 대용량 데이터를 직접 처리하기보다 대칭키와 결합하는 경우가 많습니다. 공개키가 진짜 상대의 것인지 신뢰하는 방법도 필요합니다. 수학적으로 맞는 검증과 올바른 사람의 키로 검증했다는 사실은 별도 조건입니다.</p><p>기밀 전송은 수신자에게만 읽히게 하는 목적이고 서명은 메시지가 특정 서명 키로 만들어졌는지 검증하는 목적입니다. Ed25519는 서명 알고리즘이므로 공개키로 암호화·개인키로 복호하는 API가 아닙니다. 목적에 맞는 알고리즘을 구분합니다.</p><p>서명 검증에는 메시지·서명·검증 공개키가 필요합니다. 메시지가 한 바이트 바뀌거나 서명·공개키가 달라지면 검증이 실패해야 합니다. 검증이 성공해도 공개키가 실제 Alice의 것인지 신뢰하는 경로가 없으면 Alice의 신원을 확정할 수 없습니다.</p><p>개인키는 서명 주체만 비밀로 보관하고 공개키는 배포할 수 있습니다. 키 교체 뒤 오래된 기록 검증을 위해 어떤 키가 어느 시점의 어떤 목적에 쓰였는지 식별할 기록이 필요합니다. 서명은 내용을 숨기거나 재전송을 자동 차단하지 않습니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>서명을 “개인키로 암호화”라고만 설명한다.</dt><dd>서명·검증 목적과 알고리즘을 분리하고 암호화 API와 혼동하지 않습니다.</dd><dt>서명된 메시지는 누구도 읽을 수 없다고 한다.</dt><dd>서명은 내용을 숨기지 않습니다. 기밀성이 필요하면 별도의 암호화 설계가 필요합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/crypto.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/crypto/signature.py" download>signature.py ↓</a></li><li><a href="../../labs/crypto/signature.json" download>signature.json ↓</a></li><li><a href="../../labs/crypto/protocol.md" download>protocol.md ↓</a></li><li><a href="../../labs/crypto/requirements.txt" download>requirements.txt ↓</a></li><li><a href="../../labs/crypto/LAB-GUIDE.md" download>LAB-GUIDE.md ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 실제 Ed25519 서명 검증 · Python 3와 cryptography</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">.venv/bin/python signature.py</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>original=VALID
+tampered_message=INVALID
+tampered_signature=INVALID
+wrong_key=INVALID
+fresh_round_trip=True</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>키 역할 두 가지 구분</h3><p>protocol.md의 Alice→Bob 기밀 전송에는 Bob의 공개키/개인키를, Alice 서명에는 Alice의 개인키/공개키를 배정합니다. 두 목적의 화살표를 따로 그립니다.</p>
+        <div class="step-observation"><strong>관찰할 결과</strong><pre>누가 읽어야 하는지와 누가 만들었는지 검증하는 목적이 구분됩니다.</pre></div></li><li><h3>서명 검증과 변조 비교</h3><p>signature.py로 제공된 Ed25519 서명을 검사하고 메시지·서명·공개키를 각각 바꾼 결과를 확인합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 실제 Ed25519 서명 검증 · Python 3와 cryptography</span></div><pre><code>.venv/bin/python signature.py</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>original=VALID
+tampered_message=INVALID
+tampered_signature=INVALID
+wrong_key=INVALID
+fresh_round_trip=True</pre></div></li><li><h3>공개키 신뢰와 교체 계획</h3><p>공격자의 공개키가 Alice의 키로 바뀌어 전달되는 상황을 그립니다. 신뢰할 키 배포 경로·식별자·폐기 및 과거 기록 검증 방침을 씁니다.</p>
+        <div class="step-observation"><strong>관찰할 결과</strong><pre>수학적 서명 검증과 키 소유자 신뢰가 별도 조건임을 설명합니다.</pre></div></li></ol></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>공개키가 공격자의 것으로 바뀌었을 때를 그려 보고, 신뢰 경로와 키 교체 시 기록 검증 방침을 적으세요.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>서명 알고리즘과 암호화 알고리즘을 동일한 연산처럼 취급하지 않습니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>기밀 전송의 수신자 Bob 키와 서명자의 Alice 키 역할을 정확히 나눕니다.</li><li>원본만 VALID이고 메시지·서명·키 변경은 INVALID인지 기록합니다.</li><li>신뢰할 키 배포와 교체·폐기·과거 서명 검증의 조건을 적고 서명이 암호화가 아님을 설명합니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>실제 서명 검증을 재현하고 공개키 대체 시나리오에서 잘못된 신원 신뢰가 생기는 이유를 설명합니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>공개키와 서명을 같은 비신뢰 채널에서 함께 받은 경우 검증 성공의 의미를 적으세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>그 공개키와 메시지의 수학적 일치이지 원하는 서명자 신원의 증명은 아닙니다. 공개키를 신뢰한 주체와 연결하는 경로가 필요합니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>암호화와 서명의 키 역할을 구분했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>공개키 진위 확인이 필요한 이유를 적었다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/crypto/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. Alice의 Ed25519 서명을 검증하는 데 사용하는 키는?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>Alice의 검증 공개키</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>Bob의 개인키</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>아무 공유 HMAC 키</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: Alice의 검증 공개키</strong></p><p>서명은 서명자의 개인키로 만들고 그에 대응하는 공개키로 검증합니다. 기밀 전송에서 수신자 키를 사용하는 역할과 다릅니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. 공격자의 키로 만든 서명이 그 공격자 공개키로 VALID입니다. 이 사실만으로 Alice가 서명했다고 할 수 있나요?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>가능하다. VALID이면 모든 사람의 신원이 같다.</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>불가능하다. 검증 키를 Alice와 연결하는 신뢰 근거가 필요하다.</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>가능하다. 서명이 평문을 암호화해서 신원을 숨겼기 때문이다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 불가능하다. 검증 키를 Alice와 연결하는 신뢰 근거가 필요하다.</strong></p><p>서명 검증은 주어진 키와의 수학적 관계를 확인합니다. 공개키가 누구에게 속하는지는 별도 신뢰 경로로 확인해야 합니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>암호화와 서명의 키 역할을 구분했다.</li><li>공개키 진위 확인이 필요한 이유를 적었다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="경로의 이전·다음 단계"><a href="cloud.breakglass-access.html"><small>← 이전 단계</small>긴급 접근의 만료·회수·증거</a>
+            <a href="crypto.nonce.html"><small>다음 단계 →</small>난수·nonce와 재사용</a></nav>
+          <p class="caption"><a href="../../tracks/crypto/public-key.html">이 차시를 Cryptography 분야 과정으로 보기 ↗</a></p>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://cryptography.io/en/stable/hazmat/primitives/asymmetric/ed25519/" target="_blank" rel="noopener noreferrer">cryptography · Ed25519 서명과 검증 ↗</a></li>
+        <li><a href="https://www.rfc-editor.org/rfc/rfc8032.html" target="_blank" rel="noopener noreferrer">RFC 8032 · EdDSA ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

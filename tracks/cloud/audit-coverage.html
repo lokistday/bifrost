@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/cloud/audit-coverage.html">
 <title>중앙 감사 로그의 범위와 중복 — Cloud Security · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/cloud.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/cloud.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="cloud" data-course-number="04" data-view="lesson" data-lesson-id="cloud.audit-coverage" style="--course-accent:var(--map-sky)">
+<body class="learning-page" data-course="cloud" data-course-number="04" data-view="lesson" data-lesson-id="cloud.audit-coverage" data-path="" style="--course-accent:var(--map-sky)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -79,14 +80,15 @@
               <span class="lesson-dot" data-dot="cloud.breakglass-access" aria-hidden="true"></span><span>긴급 접근의 만료·회수·증거<small class="completion-label" data-completion="cloud.breakglass-access"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/cloud.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">03 · 배포·공급망·복구 운영 · 11 / 17</div><h1>중앙 감사 로그의 범위와 중복</h1><p class="lesson-objective">감사 기록의 중복·계정 경계·수집 공백을 구분합니다.</p></div></header>
           <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>사설 네트워크에 있으면 자원 접근 권한도 생기나요?</p><details><summary>판단 기준과 보충 자료</summary><p>경로 도달과 자원 인가는 별개입니다. 신원·정책·서비스 설정을 함께 확인해야 합니다.</p><a href="../../guides/bridges.html#network">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>오프라인 모델 실습 · Python 3.10 이상</strong></p><ul><li>cloud ZIP을 풀고 operations.py와 operations.json가 있는 폴더에서 실행합니다. 추가 패키지나 외부 계정이 필요하지 않습니다.</li><li>Linux/WSL/macOS 명령은 python3입니다. Windows PowerShell에서는 python3 부분을 py -3로 바꿉니다.</li><li>파일 변경 과제는 복사본과 --input 옵션을 사용합니다. 결과는 교육 모형에 한정하며 운영 보안 검증을 대신하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>오프라인 모델 실습 · Python 3.10 이상</strong></p><ul><li>cloud ZIP을 풀고 operations.py와 operations.json가 있는 폴더에서 실행합니다. 추가 패키지나 외부 계정이 필요하지 않습니다.</li><li>Linux/WSL/macOS 명령은 python3입니다. Windows PowerShell에서는 python3 부분을 py -3로 바꿉니다.</li><li>파일 변경 과제는 복사본과 --input 옵션을 사용합니다. 결과는 교육 모형에 한정하며 운영 보안 검증을 대신하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="audit.html">클라우드 보안 · 감사 로그와 공개 변경 추적 ↗</a></li><li><a href="../forensic/logs.html">디지털 포렌식 · 로그 필드와 사건 가설 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>중앙 로그에는 같은 사건이 재전송되어 두 번 들어올 수 있습니다. 반대로 서로 다른 계정에서 같은 event_id를 쓸 수도 있습니다. 실습은 하나의 가상 공급자를 가정하고 account·region·event_id를 함께 써서 동일 사건의 중복을 제거합니다.</p><figure class="learning-visual" data-visual-id="cloud.audit-coverage"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교표</span><h3>세 행이 몇 사건을 뜻할까?</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="세 행이 몇 사건을 뜻할까? 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 272" width="760" height="272" role="img" aria-labelledby="visual-cloud-audit-coverage-title visual-cloud-audit-coverage-desc" focusable="false"><title id="visual-cloud-audit-coverage-title">세 행이 몇 사건을 뜻할까?</title><desc id="visual-cloud-audit-coverage-desc">같은 계정·지역·E1의 두 행은 중복입니다. 다른 계정의 E1은 별도 사건이므로 총 두 사건입니다.</desc><defs><marker id="visual-cloud-audit-coverage-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone "><rect class="v-table-head" x="28" y="20" width="230" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="41" y="47">행</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="258" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="271" y="47">계정 · 사건</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="495" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="508" y="47">분석 결과</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="78" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="105">1</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="105">training-a · E1</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="105">첫 관측</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="136" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="163">2</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="163">training-a · E1</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="163">중복</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="194" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="221">3</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="221">training-b · E1</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="221">별도 사건</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">ID의 유일성 범위를 확인합니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>같은 계정·지역·E1의 두 행은 중복입니다. 다른 계정의 E1은 별도 사건이므로 총 두 사건입니다.</p></details></figure><p>세 행 중 training-a의 E1 두 행은 중복이고 training-b의 E1은 다른 사건입니다. event_id만으로 중복 제거하면 두 계정의 사건을 하나로 합쳐 증거를 잃습니다. 실제로는 공급자와 로그 종류별 ID 의미·스키마 버전도 검토합니다.</p><p>관리 평면의 구성 변경 기록과 데이터 평면의 객체 읽기는 수집 설정이 다를 수 있습니다. 설정한 범주에 기록이 없으면 활동이 없었는지, 실제 활성화·권한·전달 경로·보존에 문제가 있는지 바로 알 수 없습니다. 수집 설정과 통제된 시험 이벤트를 대조해야 합니다.</p><p>unobserved_category는 현재 행에서 보이지 않은 범주일 뿐 로깅 비활성화의 증명도 아닙니다. 이 예제는 서명된 로그 검증·전달 지연·파티션별 누락·실제 CloudTrail 요금과 자원 설정을 다루지 않습니다. 외부 서비스를 실행하지 않고 범위와 증거의 한계를 연습합니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>행을 중복 제거하면서 원본도 덮어쓴다.</dt><dd>원본 보존과 분석용 변환 자료를 분리합니다.</dd><dt>관리 로그가 있으면 모든 데이터 접근도 기록된다고 본다.</dt><dd>이벤트 범주별 설정과 전달을 확인합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -138,15 +140,16 @@ absence_of_events=NOT_PROOF_OF_NO_ACTIVITY</pre></div></li><li><h3>잘못된 키
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="container-supply-chain.html"><small>← 이전 차시</small>컨테이너 이미지와 공급망 근거</a>
             <a href="recovery-exercise.html"><small>다음 차시 →</small>백업 무결성과 RPO·RTO 복구 연습</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html" target="_blank" rel="noopener noreferrer">AWS CloudTrail · Data events ↗</a></li>
         <li><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-log-file-validation-intro.html" target="_blank" rel="noopener noreferrer">AWS CloudTrail · 로그 무결성 검증 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

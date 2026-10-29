@@ -248,7 +248,7 @@ for (const search of ['', '?id=unknown', '?id=%3Cscript%3Ealert(1)%3C/script%3E'
   const missing = openPage('tracks/web/lesson.html', search);
   check(!!missing.document.querySelector('.not-found') && !missing.document.querySelector('script:not([src])'), 'Invalid/cross-course ID gives safe recovery');
 }
-const theme = openPage('tracks/cloud/index.html');
+const theme = openPage('tracks/cloud/index.html','',new Storage({'bifrost_theme_v1':'light'}));
 theme.document.getElementById('themeToggle').click();
 check(theme.document.documentElement.dataset.theme === 'dark', 'Shared theme works on course pages');
 const guide = parseHTML(fs.readFileSync(path.join(ROOT, 'guides/linux.html'), 'utf8')).document;

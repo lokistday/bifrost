@@ -59,6 +59,9 @@ document.getElementById('searchLevel').value='심화 연결';document.getElement
 check(shown().every(r=>r.dataset.level==='심화 연결'),'Difficulty filter');
 document.getElementById('searchReset').click();
 check(shown().length===all.length,'Reset restores every lesson');
+check(!document.getElementById('catalogResults').open,'Reset collapses the long catalog');
+q.value='로그';q.dispatchEvent(new Event('input'));
+check(document.getElementById('catalogResults').open,'Search automatically reveals its results');
 check(!/innerHTML|fetch\(|eval\(|localStorage/.test(read('js/study-search.js')),'Search is text-only and does not transmit/store queries');
 
 const html=['index.html','guides/linux.html','guides/bridges.html','learn/index.html',...Object.keys(courses).flatMap(k=>[`projects/${k}.html`,`tracks/${k}/lesson.html`]),...all.map(l=>`tracks/${l.id.replace('.','/')}.html`)];

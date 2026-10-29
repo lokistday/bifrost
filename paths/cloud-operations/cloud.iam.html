@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="누가 어떤 자원에 무슨 작업을 할지 좁힙니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="IAM 최소 권한과 명시적 거부 — 클라우드 방어와 복구 검증 · Bifrost">
+<meta property="og:description" content="누가 어떤 자원에 무슨 작업을 할지 좁힙니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/paths/cloud-operations/cloud.iam.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/paths/cloud-operations/cloud.iam.html">
+<title>IAM 최소 권한과 명시적 거부 — 클라우드 방어와 복구 검증 · Bifrost</title>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/cloud.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-paths.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/path-progress.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
+</head>
+<body class="learning-page" data-course="cloud" data-course-number="04" data-view="lesson" data-lesson-id="cloud.iam" data-path="cloud-operations" style="--course-accent:var(--map-sky)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#pathOutline">클라우드 보안 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="cloud.iam">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../learn/">학습 경로</a><span aria-hidden="true">/</span><a href="./">클라우드 방어와 복구 검증</a><span aria-hidden="true">/</span><span aria-current="page">19단계</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar path-sidebar"><a class="back-link" href="./">← 클라우드 방어와 복구 검증 목차</a>
+        <div class="course-stats"><span data-path-count></span><div class="course-meter" role="progressbar" aria-label="클라우드 방어와 복구 검증 차시 완료 진도" aria-valuemin="0" aria-valuemax="100" data-path-meter><span></span></div></div>
+        <nav aria-label="클라우드 방어와 복구 검증 경로 목차"><details ><summary>Foundation<span class="caption">1–3단계</span></summary><ol><li><a class="side-lesson" href="foundation.environment.html" >
+          <span class="path-step-number">1</span><span><small>공통 기초 · 권장 선행</small>실습 환경 준비와 첫 실행<small class="completion-label" data-completion="foundation.environment"></small></span></a></li><li><a class="side-lesson" href="foundation.network.html" >
+          <span class="path-step-number">2</span><span><small>공통 기초 · 권장 선행</small>IP·포트·DNS와 전송<small class="completion-label" data-completion="foundation.network"></small></span></a></li><li><a class="side-lesson" href="foundation.python-values.html" >
+          <span class="path-step-number">3</span><span><small>공통 기초 · 권장 선행</small>변수·문자열·자료형<small class="completion-label" data-completion="foundation.python-values"></small></span></a></li>
+          </ol></details><details ><summary>Network Security<span class="caption">4–4단계</span></summary><ol><li><a class="side-lesson" href="network.addressing.html" >
+          <span class="path-step-number">4</span><span><small>네트워크 보안 · 권장 선행</small>계층·CIDR·관측 위치<small class="completion-label" data-completion="network.addressing"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">5–5단계</span></summary><ol><li><a class="side-lesson" href="foundation.http.html" >
+          <span class="path-step-number">5</span><span><small>공통 기초 · 권장 선행</small>HTTP 요청과 응답 읽기<small class="completion-label" data-completion="foundation.http"></small></span></a></li>
+          </ol></details><details ><summary>Network Security<span class="caption">6–8단계</span></summary><ol><li><a class="side-lesson" href="network.pcap.html" >
+          <span class="path-step-number">6</span><span><small>네트워크 보안 · 권장 선행</small>PCAP·필터·스트림<small class="completion-label" data-completion="network.pcap"></small></span></a></li><li><a class="side-lesson" href="network.transport.html" >
+          <span class="path-step-number">7</span><span><small>네트워크 보안 · 권장 선행</small>DNS·TCP 연결과 실패 분류<small class="completion-label" data-completion="network.transport"></small></span></a></li><li><a class="side-lesson" href="network.segmentation.html" >
+          <span class="path-step-number">8</span><span><small>네트워크 보안 · 경로 핵심</small>망 분리·신뢰 경계·관리 경로<small class="completion-label" data-completion="network.segmentation"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">9–11단계</span></summary><ol><li><a class="side-lesson" href="foundation.python-flow.html" >
+          <span class="path-step-number">9</span><span><small>공통 기초 · 권장 선행</small>조건·반복·함수<small class="completion-label" data-completion="foundation.python-flow"></small></span></a></li><li><a class="side-lesson" href="foundation.paths.html" >
+          <span class="path-step-number">10</span><span><small>공통 기초 · 권장 선행</small>경로와 작업용 사본<small class="completion-label" data-completion="foundation.paths"></small></span></a></li><li><a class="side-lesson" href="foundation.python-files.html" >
+          <span class="path-step-number">11</span><span><small>공통 기초 · 권장 선행</small>CSV 읽기와 오류 좁히기<small class="completion-label" data-completion="foundation.python-files"></small></span></a></li>
+          </ol></details><details ><summary>Network Security<span class="caption">12–14단계</span></summary><ol><li><a class="side-lesson" href="network.policy.html" >
+          <span class="path-step-number">12</span><span><small>네트워크 보안 · 경로 핵심</small>방화벽 정책과 회귀 검증<small class="completion-label" data-completion="network.policy"></small></span></a></li><li><a class="side-lesson" href="network.routing.html" >
+          <span class="path-step-number">13</span><span><small>네트워크 보안 · 권장 선행</small>최장 접두사와 돌아오는 경로<small class="completion-label" data-completion="network.routing"></small></span></a></li><li><a class="side-lesson" href="network.ipv6-boundaries.html" >
+          <span class="path-step-number">14</span><span><small>네트워크 보안 · 경로 핵심</small>IPv6 주소 범위와 정책의 빈틈<small class="completion-label" data-completion="network.ipv6-boundaries"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">15–15단계</span></summary><ol><li><a class="side-lesson" href="foundation.permissions.html" >
+          <span class="path-step-number">15</span><span><small>공통 기초 · 권장 선행</small>Linux 권한과 파이프<small class="completion-label" data-completion="foundation.permissions"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">16–16단계</span></summary><ol><li><a class="side-lesson" href="cloud.responsibility.html" >
+          <span class="path-step-number">16</span><span><small>클라우드 보안 · 경로 핵심</small>IaaS·PaaS·SaaS와 공동 책임<small class="completion-label" data-completion="cloud.responsibility"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">17–18단계</span></summary><ol><li><a class="side-lesson" href="web.sessions.html" >
+          <span class="path-step-number">17</span><span><small>웹 보안 · 권장 선행</small>쿠키·세션·인증<small class="completion-label" data-completion="web.sessions"></small></span></a></li><li><a class="side-lesson" href="web.authorization.html" >
+          <span class="path-step-number">18</span><span><small>웹 보안 · 권장 선행</small>리소스 단위 인가<small class="completion-label" data-completion="web.authorization"></small></span></a></li>
+          </ol></details><details open><summary>Cloud Security<span class="caption">19–19단계</span></summary><ol><li><a class="side-lesson" href="cloud.iam.html" aria-current="page">
+          <span class="path-step-number">19</span><span><small>클라우드 보안 · 경로 핵심</small>IAM 최소 권한과 명시적 거부<small class="completion-label" data-completion="cloud.iam"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">20–20단계</span></summary><ol><li><a class="side-lesson" href="foundation.git.html" >
+          <span class="path-step-number">20</span><span><small>공통 기초 · 권장 선행</small>Git과 재현 가능한 README<small class="completion-label" data-completion="foundation.git"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">21–22단계</span></summary><ol><li><a class="side-lesson" href="cloud.secrets.html" >
+          <span class="path-step-number">21</span><span><small>클라우드 보안 · 권장 선행</small>장기 키·임시 신원·교체<small class="completion-label" data-completion="cloud.secrets"></small></span></a></li><li><a class="side-lesson" href="cloud.workload-trust.html" >
+          <span class="path-step-number">22</span><span><small>클라우드 보안 · 경로 핵심</small>워크로드 신원과 역할 신뢰 조건<small class="completion-label" data-completion="cloud.workload-trust"></small></span></a></li>
+          </ol></details><details ><summary>Forensic<span class="caption">23–25단계</span></summary><ol><li><a class="side-lesson" href="forensic.integrity.html" >
+          <span class="path-step-number">23</span><span><small>디지털 포렌식 · 권장 선행</small>원본·작업 사본·해시<small class="completion-label" data-completion="forensic.integrity"></small></span></a></li><li><a class="side-lesson" href="forensic.logs.html" >
+          <span class="path-step-number">24</span><span><small>디지털 포렌식 · 권장 선행</small>로그 필드와 사건 가설<small class="completion-label" data-completion="forensic.logs"></small></span></a></li><li><a class="side-lesson" href="forensic.timeline.html" >
+          <span class="path-step-number">25</span><span><small>디지털 포렌식 · 권장 선행</small>UTC로 타임라인 맞추기<small class="completion-label" data-completion="forensic.timeline"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">26–28단계</span></summary><ol><li><a class="side-lesson" href="cloud.audit.html" >
+          <span class="path-step-number">26</span><span><small>클라우드 보안 · 권장 선행</small>감사 로그와 공개 변경 추적<small class="completion-label" data-completion="cloud.audit"></small></span></a></li><li><a class="side-lesson" href="cloud.audit-coverage.html" >
+          <span class="path-step-number">27</span><span><small>클라우드 보안 · 경로 핵심</small>중앙 감사 로그의 범위와 중복<small class="completion-label" data-completion="cloud.audit-coverage"></small></span></a></li><li><a class="side-lesson" href="cloud.vpc.html" >
+          <span class="path-step-number">28</span><span><small>클라우드 보안 · 권장 선행</small>VPC·서브넷·보안 경계<small class="completion-label" data-completion="cloud.vpc"></small></span></a></li>
+          </ol></details><details ><summary>Cryptography<span class="caption">29–32단계</span></summary><ol><li><a class="side-lesson" href="crypto.representation.html" >
+          <span class="path-step-number">29</span><span><small>암호학 · 권장 선행</small>바이트·Hex·Base64<small class="completion-label" data-completion="crypto.representation"></small></span></a></li><li><a class="side-lesson" href="crypto.hash.html" >
+          <span class="path-step-number">30</span><span><small>암호학 · 권장 선행</small>SHA-256과 파일 무결성<small class="completion-label" data-completion="crypto.hash"></small></span></a></li><li><a class="side-lesson" href="crypto.mac.html" >
+          <span class="path-step-number">31</span><span><small>암호학 · 권장 선행</small>HMAC과 태그 검증<small class="completion-label" data-completion="crypto.mac"></small></span></a></li><li><a class="side-lesson" href="crypto.symmetric.html" >
+          <span class="path-step-number">32</span><span><small>암호학 · 권장 선행</small>대칭키·AEAD·인증 태그<small class="completion-label" data-completion="crypto.symmetric"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">33–33단계</span></summary><ol><li><a class="side-lesson" href="cloud.storage.html" >
+          <span class="path-step-number">33</span><span><small>클라우드 보안 · 권장 선행</small>오브젝트 저장소와 데이터 공개<small class="completion-label" data-completion="cloud.storage"></small></span></a></li>
+          </ol></details><details ><summary>Network Security<span class="caption">34–37단계</span></summary><ol><li><a class="side-lesson" href="network.tls.html" >
+          <span class="path-step-number">34</span><span><small>네트워크 보안 · 권장 선행</small>TLS와 보이는 정보의 경계<small class="completion-label" data-completion="network.tls"></small></span></a></li><li><a class="side-lesson" href="network.detection.html" >
+          <span class="path-step-number">35</span><span><small>네트워크 보안 · 권장 선행</small>탐지 기준·오탐·추가 증거<small class="completion-label" data-completion="network.detection"></small></span></a></li><li><a class="side-lesson" href="network.zero-trust.html" >
+          <span class="path-step-number">36</span><span><small>네트워크 보안 · 권장 선행</small>신원과 자산 중심의 Zero Trust<small class="completion-label" data-completion="network.zero-trust"></small></span></a></li><li><a class="side-lesson" href="network.capstone.html" >
+          <span class="path-step-number">37</span><span><small>네트워크 보안 · 권장 선행</small>중간 종합: 작은 서비스 방어 설계<small class="completion-label" data-completion="network.capstone"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">38–42단계</span></summary><ol><li><a class="side-lesson" href="cloud.capstone.html" >
+          <span class="path-step-number">38</span><span><small>클라우드 보안 · 권장 선행</small>중간 종합: 구성 수정과 검증 계획<small class="completion-label" data-completion="cloud.capstone"></small></span></a></li><li><a class="side-lesson" href="cloud.iac-review.html" >
+          <span class="path-step-number">39</span><span><small>클라우드 보안 · 권장 선행</small>인프라 변경 계획과 영향 범위<small class="completion-label" data-completion="cloud.iac-review"></small></span></a></li><li><a class="side-lesson" href="cloud.recovery-exercise.html" >
+          <span class="path-step-number">40</span><span><small>클라우드 보안 · 경로 핵심</small>백업 무결성과 RPO·RTO 복구 연습<small class="completion-label" data-completion="cloud.recovery-exercise"></small></span></a></li><li><a class="side-lesson" href="cloud.effective-permissions.html" >
+          <span class="path-step-number">41</span><span><small>클라우드 보안 · 권장 선행</small>실효 권한과 허용 범위의 교집합<small class="completion-label" data-completion="cloud.effective-permissions"></small></span></a></li><li><a class="side-lesson" href="cloud.kubernetes-rbac.html" >
+          <span class="path-step-number">42</span><span><small>클라우드 보안 · 경로 핵심</small>Kubernetes 네임스페이스와 RBAC<small class="completion-label" data-completion="cloud.kubernetes-rbac"></small></span></a></li>
+          </ol></details><details ><summary>Network Security<span class="caption">43–43단계</span></summary><ol><li><a class="side-lesson" href="network.dns-cache.html" >
+          <span class="path-step-number">43</span><span><small>네트워크 보안 · 권장 선행</small>DNS TTL과 부정 응답 캐시<small class="completion-label" data-completion="network.dns-cache"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">44–45단계</span></summary><ol><li><a class="side-lesson" href="cloud.private-endpoint-paths.html" >
+          <span class="path-step-number">44</span><span><small>클라우드 보안 · 경로 핵심</small>프라이빗 엔드포인트와 DNS 경로<small class="completion-label" data-completion="cloud.private-endpoint-paths"></small></span></a></li><li><a class="side-lesson" href="cloud.breakglass-access.html" >
+          <span class="path-step-number">45</span><span><small>클라우드 보안 · 경로 핵심</small>긴급 접근의 만료·회수·증거<small class="completion-label" data-completion="cloud.breakglass-access"></small></span></a></li>
+          </ol></details><details ><summary>Cryptography<span class="caption">46–52단계</span></summary><ol><li><a class="side-lesson" href="crypto.public-key.html" >
+          <span class="path-step-number">46</span><span><small>암호학 · 권장 선행</small>공개키 암호화와 서명<small class="completion-label" data-completion="crypto.public-key"></small></span></a></li><li><a class="side-lesson" href="crypto.nonce.html" >
+          <span class="path-step-number">47</span><span><small>암호학 · 권장 선행</small>난수·nonce와 재사용<small class="completion-label" data-completion="crypto.nonce"></small></span></a></li><li><a class="side-lesson" href="crypto.key-lifecycle.html" >
+          <span class="path-step-number">48</span><span><small>암호학 · 경로 핵심</small>키 상태·교체·침해 대응<small class="completion-label" data-completion="crypto.key-lifecycle"></small></span></a></li><li><a class="side-lesson" href="crypto.password.html" >
+          <span class="path-step-number">49</span><span><small>암호학 · 권장 선행</small>비밀번호 KDF·salt·비용<small class="completion-label" data-completion="crypto.password"></small></span></a></li><li><a class="side-lesson" href="crypto.hkdf-context.html" >
+          <span class="path-step-number">50</span><span><small>암호학 · 권장 선행</small>HKDF 추출·확장과 용도 분리<small class="completion-label" data-completion="crypto.hkdf-context"></small></span></a></li><li><a class="side-lesson" href="crypto.message-encoding.html" >
+          <span class="path-step-number">51</span><span><small>암호학 · 권장 선행</small>메시지 경계와 인증할 바이트<small class="completion-label" data-completion="crypto.message-encoding"></small></span></a></li><li><a class="side-lesson" href="crypto.aad-record-binding.html" >
+          <span class="path-step-number">52</span><span><small>암호학 · 경로 핵심</small>AEAD와 레코드 문맥의 결합<small class="completion-label" data-completion="crypto.aad-record-binding"></small></span></a></li>
+          </ol></details><a class="side-lesson path-project-link" href="project.html"><span class="path-step-number">✦</span><span>마지막 · 종합 프로젝트</span></a></nav>
+        <a class="back-link" href="../../learn/#paths">다른 학습 경로 보기 ↗</a></aside><article class="lesson-article">
+          <nav class="path-location" aria-label="현재 학습 경로"><a href="./">클라우드 보안</a><strong>19 / 52단계</strong><a href="./#pathOutline">경로 목차 ↗</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/cloud.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">Cloud Security · 01 · 책임과 접근 설계 · 19 / 52</div><h1>IAM 최소 권한과 명시적 거부</h1><p class="lesson-objective">누가 어떤 자원에 무슨 작업을 할지 좁힙니다.</p></div></header>
+          <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>사설 네트워크에 있으면 자원 접근 권한도 생기나요?</p><details><summary>판단 기준과 보충 자료</summary><p>경로 도달과 자원 인가는 별개입니다. 신원·정책·서비스 설정을 함께 확인해야 합니다.</p><a href="../../guides/bridges.html#network">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>가상 IAM 범위 검토 · Python 3.10 이상</strong></p><ul><li>config.json을 config-work.json으로 복사하고 python3 review.py config-work.json으로 검사합니다. Windows는 py -3을 사용합니다.</li><li>실제 IAM 역할·계정·키를 만들지 않습니다. ReadObject와 training-notes는 교육 식별자입니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="cloud.responsibility.html">클라우드 보안 · IaaS·PaaS·SaaS와 공동 책임 ↗</a></li><li><a href="web.authorization.html">웹 보안 · 리소스 단위 인가 ↗</a></li></ul>
+            </details>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>신원에는 사람과 워크로드가 있고 권한은 작업·대상·조건을 기준으로 정합니다. config.json의 action=*와 resource=*는 필요한 범위보다 넓을 가능성이 큽니다. 읽기용 역할에 정책 변경 권한까지 주지 않는 식으로 업무를 나눕니다.</p><figure class="learning-visual" data-visual-id="cloud.iam"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교도</span><h3>작업과 자원을 좁힌 뒤 실제 허용·거부를 검증합니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="작업과 자원을 좁힌 뒤 실제 허용·거부를 검증합니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" role="img" aria-labelledby="visual-cloud-iam-title visual-cloud-iam-desc" focusable="false"><title id="visual-cloud-iam-title">작업과 자원을 좁힌 뒤 실제 허용·거부를 검증합니다</title><desc id="visual-cloud-iam-desc">넓은 정책은 action=*와 resource=*로 필요 이상의 범위를 허용할 수 있습니다. 읽기 역할은 ReadObject와 training-notes처럼 작업과 대상을 좁혀 검토합니다. AWS의 실제 판정에는 여러 정책 종류와 명시적 Deny가 함께 적용되므로 문자열을 고친 로컬 PASS만으로 실제 최소 권한을 증명할 수 없습니다.</desc><defs><marker id="visual-cloud-iam-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone warning"><rect class="v-node" x="28" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="29" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="45" y="55">넓은 범위</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="84">작업 action</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="107">*</tspan></text><path class="v-separator" d="M45 128H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="148">대상 resource</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="171">*</tspan></text><path class="v-separator" d="M45 192H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="212">검토할 위험</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="235">읽기 역할에 변경 권한까지 포함</tspan></text></g><g class="v-tone positive"><rect class="v-node" x="392" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="393" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="409" y="55">업무에 맞춰 좁히기</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="84">작업 action</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="107">ReadObject</tspan></text><path class="v-separator" d="M409 128H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="148">대상 resource</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="171">training-notes</tspan></text><path class="v-separator" d="M409 192H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="212">추가 검증</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="235">정상 읽기 허용 · 변경·다른 자원 거부</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">누가·무엇에·어떤 작업을·어떤 조건으로 하는지 적고, 필요한 동작과 거부 동작을 모두 시험하세요.</span><small class="visual-note">작업 이름은 이 실습의 가상 모형입니다. AWS IAM 전체 정책 평가나 실제 서비스 API 명칭을 대신하지 않습니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>넓은 정책은 action=*와 resource=*로 필요 이상의 범위를 허용할 수 있습니다. 읽기 역할은 ReadObject와 training-notes처럼 작업과 대상을 좁혀 검토합니다. AWS의 실제 판정에는 여러 정책 종류와 명시적 Deny가 함께 적용되므로 문자열을 고친 로컬 PASS만으로 실제 최소 권한을 증명할 수 없습니다.</p></details></figure><p>AWS에서는 여러 정책 종류가 평가되며 명시적 Deny가 Allow보다 우선할 수 있습니다. 공급자별 평가 모델을 확인해야 합니다. review.py는 실제 IAM 엔진이 아니라 입력 형식과 와일드카드·장기 키 사용 같은 교육 조건을 검사합니다.</p><p>권한은 주체가 어떤 작업을 어떤 대상에 어떤 조건으로 할 수 있는지로 적습니다. 읽기 담당 reader에게 ChangePolicy나 DeleteObject가 필요한지 반례로 질문하면 과도한 권한을 찾기 쉽습니다. 사람 계정과 배포 워크로드의 역할을 분리합니다.</p><p>review.py의 identity.scope는 action/resource가 유효한 식별자인지와 와일드카드가 있는지 확인합니다. 빈 값은 INVALID이고 넓은 *·? 범위는 REVIEW입니다. 와일드카드가 없더라도 부적절한 관리 작업이거나 잘못된 대상이면 실제 최소 권한은 아닙니다.</p><p>실제 공급자 정책은 허용·거부·경계·리소스 정책·조직 정책·신뢰 관계 등이 조합될 수 있습니다. AWS의 명시적 거부 우선 같은 규칙은 공급자의 평가 모델 안에서 이해해야 합니다. 이 교육 검사기의 PASS를 실제 권한 허용 결과와 같은 뜻으로 쓰지 않습니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>ReadObject라고 이름을 적으면 실제 공급자도 같은 권한을 만든다고 생각한다.</dt><dd>교육 식별자와 공급자 실제 action·resource·조건 문법을 구분합니다.</dd><dt>명시적 Deny 규칙을 모든 클라우드의 동일한 평가 순서로 일반화한다.</dt><dd>사용하는 공급자·정책 종류의 평가 문서를 확인합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/cloud.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/cloud/config.json" download>config.json ↓</a></li><li><a href="../../labs/cloud/review.py" download>review.py ↓</a></li><li><a href="../../labs/cloud/LAB-GUIDE.md" download>LAB-GUIDE.md ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 가상 IAM 범위 검토 · Python 3.10 이상</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 review.py
+# identity.scope와 identity.temporary 항목을 찾습니다.</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>초기 구성은 두 항목 모두 REVIEW입니다.</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>주체·업무·대상 정의</h3><p>reader는 training-notes 읽기만 필요하다고 가정합니다. ChangePolicy·다른 저장소 읽기·자격 증명 관리 같은 불필요 작업은 거부 테스트 후보입니다.</p>
+        <div class="step-observation"><strong>관찰할 결과</strong><pre>정상 ReadObject / 대상 training-notes와 거부해야 할 작업·대상이 나뉩니다.</pre></div></li><li><h3>유효한 최소 범위 입력</h3><p>사본의 action=ReadObject, resource=training-notes, long_lived_key=false로 바꾸고 검사합니다. 이는 모델의 범위 조건을 만족하는 예시입니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 가상 IAM 범위 검토 · Python 3.10 이상</span></div><pre><code>python3 review.py config-work.json</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>identity.scope와 identity.temporary가 PASS로 표시됩니다. 다른 항목을 그대로 두었다면 전체가 8/8은 아닙니다.</pre></div></li><li><h3>잘못된 값과 실제 검증 구분</h3><p>action을 빈 문자열로 바꾼 사본은 INVALID가 되어야 합니다. 실제 환경에서는 필요한 읽기 성공, 변경/삭제/다른 자원 거부, 세션 만료를 별도 검증해야 합니다.</p>
+        <div class="step-observation"><strong>관찰할 결과</strong><pre>형식 오류·모델 기준·실제 접근 결과를 세 열로 나눕니다.</pre></div></li></ol></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>config 사본에서 action을 ReadObject, resource를 training-notes로 좁히고 long_lived_key를 false로 바꾸세요. 어떤 기능을 시험해야 실제 최소 권한을 확인할 수 있는지도 적습니다.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>문자열을 바꿔 PASS가 나오는 것은 모델의 조건 통과일 뿐 실제 접근 권한의 증명이 아닙니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>업무에 필요한 작업과 대상 식별자를 구체적으로 쓰고 와일드카드를 제거합니다.</li><li>장기 키를 false로 바꾸는 것과 실제 임시 신원 발급/만료 검증을 분리합니다.</li><li>정상 읽기와 불필요한 변경·삭제·다른 자원 접근의 거부 테스트를 적습니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>단순 빈 값으로 경고를 없애지 않고 명확한 범위를 지정합니다. PASS 이후에도 실제 정책 평가·신뢰 관계를 확인할 계획이 있습니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>읽기만 필요한 역할에 쓰기 권한을 뺐을 때 정상·거부 시험을 설계하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>필요한 읽기는 성공하고 쓰기는 거부되어야 합니다. 구성 검토와 실제 실효 권한 검증을 구별합니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>주체·작업·대상·조건을 나눴다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>실제 허용·거부 테스트가 추가로 필요함을 설명했다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/cloud/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. action=&quot;&quot;와 resource=&quot;&quot;로 바꾸면 어떤 결과여야 하나요?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>빈 값이니 최소 권한 PASS</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>검사 가능한 식별자가 없어 INVALID</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>자동으로 모든 권한 DENY가 확인된다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 검사 가능한 식별자가 없어 INVALID</strong></p><p>값을 지운 것은 안전한 범위를 지정한 것이 아닙니다. 형식 오류와 위험 조건을 구분해야 합니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. 와일드카드가 없는 권한이 PASS입니다. 아직 확인해야 할 것은?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>그 작업·대상이 업무에 필요한지와 실제 허용/거부 결과</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>파일 확장자를 바꾸면 되는지</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>공개키를 비밀번호로 쓸지</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 그 작업·대상이 업무에 필요한지와 실제 허용/거부 결과</strong></p><p>모델은 실제 IAM 엔진이 아닙니다. 와일드카드 유무만으로 최소 권한이나 정책 충돌을 판단할 수 없습니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>주체·작업·대상·조건을 나눴다.</li><li>실제 허용·거부 테스트가 추가로 필요함을 설명했다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="경로의 이전·다음 단계"><a href="web.authorization.html"><small>← 이전 단계</small>리소스 단위 인가</a>
+            <a href="foundation.git.html"><small>다음 단계 →</small>Git과 재현 가능한 README</a></nav>
+          <p class="caption"><a href="../../tracks/cloud/iam.html">이 차시를 Cloud Security 분야 과정으로 보기 ↗</a></p>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html" target="_blank" rel="noopener noreferrer">AWS IAM · 정책 평가 로직 ↗</a></li>
+        <li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html" target="_blank" rel="noopener noreferrer">AWS IAM · 최소 권한과 임시 자격 증명 ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

@@ -12,7 +12,7 @@ if TARGET.exists():
 TARGET.mkdir()
 for name in ['index.html', 'og-image.png', 'sitemap.xml']:
     shutil.copy2(ROOT / name, TARGET / name)
-for name in ['assets', 'css', 'js', 'guides', 'tracks', 'learn', 'projects']:
+for name in ['assets', 'css', 'js', 'guides', 'tracks', 'learn', 'projects', 'paths']:
     shutil.copytree(ROOT / name, TARGET / name, ignore=shutil.ignore_patterns('__pycache__', '*.pyc', 'node_modules', '.venv'))
 lab_names = json.loads((ROOT / 'labs/manifest.json').read_text(encoding='utf-8'))
 for name in [*lab_names, 'manifest.json']:

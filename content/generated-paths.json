@@ -18,6 +18,7 @@
       "foundation.git"
     ],
     "project": "foundation",
+    "label": "보안 입문",
     "sequence": [
       "foundation.environment",
       "foundation.paths",
@@ -57,6 +58,7 @@
       "web.idempotency"
     ],
     "project": "web",
+    "label": "웹 보안",
     "sequence": [
       "foundation.environment",
       "foundation.network",
@@ -110,6 +112,7 @@
       "forensic.incident-response"
     ],
     "project": "forensic",
+    "label": "DFIR",
     "sequence": [
       "foundation.environment",
       "foundation.paths",
@@ -163,6 +166,7 @@
       "network.segmentation"
     ],
     "project": "rev",
+    "label": "레드팀 기초",
     "sequence": [
       "foundation.environment",
       "foundation.network",
@@ -230,6 +234,7 @@
       "crypto.aad-record-binding"
     ],
     "project": "cloud",
+    "label": "클라우드 보안",
     "sequence": [
       "foundation.environment",
       "foundation.network",

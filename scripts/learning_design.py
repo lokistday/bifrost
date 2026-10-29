@@ -79,6 +79,8 @@ def paths(courses):
     lessons={l['id']:l for c in courses.values() for m in c['modules'] for l in m['lessons']}
     seen_ids=set()
     for route in result:
+        assert re.fullmatch(r'[a-z][a-z0-9-]*', route['id']), 'Invalid learning path ID'
+        route['label'] = {'start':'보안 입문','web-defense':'웹 보안','dfir':'DFIR','red-foundations':'레드팀 기초','cloud-operations':'클라우드 보안'}.get(route['id'],route['title'])
         assert route['id'] not in seen_ids and route['project'] in courses
         seen_ids.add(route['id'])
         sequence=[]

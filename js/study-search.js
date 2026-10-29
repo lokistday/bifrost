@@ -22,6 +22,11 @@
     }
     status.textContent = `${count}개 차시 · 제목·목표·핵심어를 검색합니다.`;
     empty.hidden = count !== 0;
+    const catalog = document.getElementById('catalogResults');
+    if (catalog) {
+      catalog.open = Boolean(words.length || course.value || level.value);
+      catalog.querySelector('summary span').textContent = `${count}개 차시`;
+    }
   }
   query.value = (new URLSearchParams(location.search).get('q') || '').slice(0, 120);
   form.hidden = false;

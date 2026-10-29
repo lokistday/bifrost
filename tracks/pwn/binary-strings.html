@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/pwn/binary-strings.html">
 <title>바이너리 길이와 중간 NUL — Pwn / System · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/pwn.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/pwn.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="pwn.binary-strings" style="--course-accent:var(--map-violet)">
+<body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="pwn.binary-strings" data-path="" style="--course-accent:var(--map-violet)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -86,14 +87,15 @@
               <span class="lesson-dot" data-dot="pwn.atomic-open" aria-hidden="true"></span><span>파일 열기·TOCTOU·객체 검증<small class="completion-label" data-completion="pwn.atomic-open"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/pwn.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">05 · 메모리 표현과 데이터 계약 · 13 / 16</div><h1>바이너리 길이와 중간 NUL</h1><p class="lesson-objective">명시적 버퍼 길이와 C 문자열 종료 규칙을 구분하고 자료형 계약을 지킵니다.</p></div></header>
           <div class="lesson-meta"><span>심화 연결</span><span>학습 60–100분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>버퍼 크기, 유효한 데이터 길이, 문자열 길이를 구분할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>할당 용량과 채워진 바이트 수는 다르고 strlen은 첫 NUL까지만 셉니다. 읽기 전에 경계와 객체 수명을 확인합니다.</p><a href="../../guides/bridges.html#c">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Ubuntu/WSL · GCC · C11 · 로컬 시스템 실습</strong></p><ul><li>Pwn ZIP을 풀고 pwn 폴더에서 실행합니다. Windows에서는 WSL 터미널을 사용합니다. gcc --version을 확인하고 -std=c11 -Wall -Wextra -Werror -Wformat=2 -g -O0로 빌드합니다.</li><li>FD·open 차시는 Linux/POSIX API와 자기 mkstemp/mkdtemp 파일만 사용합니다. 다른 사용자 파일이나 시스템 설정을 변경하지 않습니다. 기본 출력은 재현 가능하지만 --layout의 구조체 크기·오프셋은 ABI에 따라 달라집니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Ubuntu/WSL · GCC · C11 · 로컬 시스템 실습</strong></p><ul><li>Pwn ZIP을 풀고 pwn 폴더에서 실행합니다. Windows에서는 WSL 터미널을 사용합니다. gcc --version을 확인하고 -std=c11 -Wall -Wextra -Werror -Wformat=2 -g -O0로 빌드합니다.</li><li>FD·open 차시는 Linux/POSIX API와 자기 mkstemp/mkdtemp 파일만 사용합니다. 다른 사용자 파일이나 시스템 설정을 변경하지 않습니다. 기본 출력은 재현 가능하지만 --layout의 구조체 크기·오프셋은 ABI에 따라 달라집니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="../foundation/text-bytes.html">공통 기초 · 문자열·바이트·UTF-8의 경계 ↗</a></li><li><a href="bounds.html">시스템 보안 · 배열 경계와 길이 ↗</a></li><li><a href="binary-parser.html">시스템 보안 · 바이너리 길이·엔디언·파서 경계 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>바이너리 버퍼는 0을 포함한 바이트를 담을 수 있고 길이를 별도로 전달합니다. C 문자열은 첫 NUL 바이트를 종료로 해석합니다. 같은 배열을 두 규칙으로 읽으면 길이가 다를 수 있어, 파일·프로토콜 길이를 strlen으로 계산하면 입력 일부가 사라질 수 있습니다.</p><figure class="learning-visual" data-visual-id="pwn.binary-strings"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 데이터 모형</span><h3>첫 NUL 뒤의 바이트도 버퍼에 남습니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="첫 NUL 뒤의 바이트도 버퍼에 남습니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 305" width="760" height="305" role="img" aria-labelledby="visual-pwn-binary-strings-title visual-pwn-binary-strings-desc" focusable="false"><title id="visual-pwn-binary-strings-title">첫 NUL 뒤의 바이트도 버퍼에 남습니다</title><desc id="visual-pwn-binary-strings-desc">data의 실제 5바이트는 41 42 00 43 44입니다. strlen은 첫 00에서 끝나 2를 반환하지만 명시적 길이의 Hex는 5바이트를 모두 보여 줍니다.</desc><defs><marker id="visual-pwn-binary-strings-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="28" y="30">data · 실제 버퍼 5바이트</tspan></text><g class="v-tone "><rect class="v-node" x="50" y="65" width="127" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="113.5" y="54">A</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="113.5" y="102">41</tspan></text></g><g class="v-tone "><rect class="v-node" x="182" y="65" width="127" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="245.5" y="54">B</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="245.5" y="102">42</tspan></text></g><g class="v-tone danger"><rect class="v-node v-outside" x="314" y="65" width="127" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="377.5" y="54">NUL</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="377.5" y="102">00</tspan></text></g><g class="v-tone "><rect class="v-node" x="446" y="65" width="127" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="509.5" y="54">C</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="509.5" y="102">43</tspan></text></g><g class="v-tone "><rect class="v-node" x="578" y="65" width="127" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="641.5" y="54">D</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="641.5" y="102">44</tspan></text></g><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="28" y="175">C 문자열로 읽는 범위</tspan></text><g class="v-tone "><rect class="v-node" x="182" y="210" width="127" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="245.5" y="199">문자 0</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="245.5" y="247">A</tspan></text></g><g class="v-tone "><rect class="v-node" x="314" y="210" width="127" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="377.5" y="199">문자 1</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="377.5" y="247">B</tspan></text></g><g class="v-tone "><rect class="v-node" x="446" y="210" width="127" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="509.5" y="199">종료</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="509.5" y="247">NUL</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">바이너리 길이를 strlen으로 계산하지 마세요.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>data의 실제 5바이트는 41 42 00 43 44입니다. strlen은 첫 00에서 끝나 2를 반환하지만 명시적 길이의 Hex는 5바이트를 모두 보여 줍니다.</p></details></figure><p>표본은 A B NUL C D의 5바이트이고 첫 NUL이 있기 때문에 strlen 호출은 2를 반환합니다. 뒤 C D가 메모리에서 지워진 것은 아닙니다. Hex를 명시적 sizeof 범위로 출력하면 다섯 바이트를 모두 볼 수 있습니다.</p><p>NUL 종료가 보장되지 않은 배열에 strlen이나 %s를 사용하면 유효 범위 밖까지 읽을 수 있습니다. 배열의 크기·실제 채운 길이·문자열 길이는 다른 값입니다. 이번 plain 배열은 종료 문자가 없으므로 strlen으로 읽지 않고 명시적 길이의 계약 함수에만 전달합니다.</p><p>ascii_text는 1~32바이트의 출력 가능한 ASCII만 허용하는 좁은 예제입니다. 중간 NUL·제어 문자·비ASCII는 거부합니다. UTF-8 텍스트 검증이나 모든 파일명·HTML·SQL의 안전 처리를 구현한 함수가 아니며 바이너리 자료에 일괄 적용해서는 안 됩니다.</p><p>같은 입력을 한 단계는 문자열로, 다음 단계는 원래 길이로 해석하면 검사한 대상과 사용한 대상이 달라질 수 있습니다. 인터페이스에서 바이트와 길이를 함께 전달하거나, 텍스트 계약을 검증한 뒤 명확히 변환하는 방식으로 해석 경계를 유지합니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>strlen 결과를 파일·네트워크의 실제 바이트 수로 사용한다.</dt><dd>C 문자열 종료와 명시적 버퍼 길이를 구분합니다. 바이너리는 길이를 별도로 전달합니다.</dd><dt>plain 배열도 영어 글자이므로 strlen으로 읽어도 된다고 생각한다.</dt><dd>문자 모양이 아니라 유효 NUL 종료가 전제입니다. 종료 없는 배열에는 명시적 길이 API를 사용합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -146,15 +148,16 @@ plain_text=ACCEPT</pre></div></li><li><h3>Hex에서 사라지지 않은 뒤쪽 �
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="struct-layout.html"><small>← 이전 차시</small>구조체 배치와 명시적 직렬화</a>
             <a href="file-descriptors.html"><small>다음 차시 →</small>파일 디스크립터·dup·공유 오프셋</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/characters-and-strings-str/str32-c/" target="_blank" rel="noopener noreferrer">SEI CERT C · NUL 종료를 요구하는 함수 ↗</a></li>
         <li><a href="https://man7.org/linux/man-pages/man3/strlen.3.html" target="_blank" rel="noopener noreferrer">Linux man-pages · strlen ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

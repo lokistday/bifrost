@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/crypto/symmetric.html">
 <title>대칭키·AEAD·인증 태그 — Cryptography · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/crypto.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/crypto.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.symmetric" style="--course-accent:var(--map-pink)">
+<body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.symmetric" data-path="" style="--course-accent:var(--map-pink)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -85,14 +86,15 @@
               <span class="lesson-dot" data-dot="crypto.unbiased-randomness" aria-hidden="true"></span><span>난수의 예측 가능성과 나머지 편향<small class="completion-label" data-completion="crypto.unbiased-randomness"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/crypto.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">03 · 현대 암호 설계와 키 수명 · 6 / 19</div><h1>대칭키·AEAD·인증 태그</h1><p class="lesson-objective">실제 AES-GCM 자료의 정상 복호와 암호문·태그·AAD·nonce·키 변경 거부를 비교합니다.</p></div></header>
           <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>암호학적 검증 성공이면 현재 요청을 처리해도 되나요?</p><details><summary>판단 기준과 보충 자료</summary><p>인증된 바이트와 현재 권한·문맥·재전송·만료는 다른 검증입니다. 목적과 상태를 함께 확인합니다.</p><a href="../../guides/bridges.html#bytes">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>실제 AES-GCM 비교 · Python 3와 cryptography</strong></p><ul><li>Python 3.10 이상에서 crypto/LAB-GUIDE.md의 venv 절차를 따라 requirements.txt의 검증 버전을 설치합니다. 설치 뒤 실행은 오프라인이며 유료 서비스나 계정은 필요하지 않습니다.</li><li>Linux/macOS: python3 -m venv .venv → .venv/bin/python -m pip install -r requirements.txt → .venv/bin/python aead.py</li><li>Windows PowerShell: py -3 -m venv .venv → .\.venv\Scripts\python.exe -m pip install -r requirements.txt → .\.venv\Scripts\python.exe aead.py</li><li>teaching-key.json은 공개 교육용 키입니다. 실제 비밀 데이터에 사용하지 않습니다. Base64는 암호 바이트의 저장 표현입니다.</li><li>본문의 .venv/bin/python 명령은 Linux/WSL/macOS용입니다. Windows에서는 .\.venv\Scripts\python.exe로 바꿉니다. 가상환경 활성화나 PowerShell 정책 변경은 필요하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>실제 AES-GCM 비교 · Python 3와 cryptography</strong></p><ul><li>Python 3.10 이상에서 crypto/LAB-GUIDE.md의 venv 절차를 따라 requirements.txt의 검증 버전을 설치합니다. 설치 뒤 실행은 오프라인이며 유료 서비스나 계정은 필요하지 않습니다.</li><li>Linux/macOS: python3 -m venv .venv → .venv/bin/python -m pip install -r requirements.txt → .venv/bin/python aead.py</li><li>Windows PowerShell: py -3 -m venv .venv → .\.venv\Scripts\python.exe -m pip install -r requirements.txt → .\.venv\Scripts\python.exe aead.py</li><li>teaching-key.json은 공개 교육용 키입니다. 실제 비밀 데이터에 사용하지 않습니다. Base64는 암호 바이트의 저장 표현입니다.</li><li>본문의 .venv/bin/python 명령은 Linux/WSL/macOS용입니다. Windows에서는 .\.venv\Scripts\python.exe로 바꿉니다. 가상환경 활성화나 PowerShell 정책 변경은 필요하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="representation.html">암호학 · 바이트·Hex·Base64 ↗</a></li><li><a href="mac.html">암호학 · HMAC과 태그 검증 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>대칭키 암호는 같은 비밀을 공유해 내용을 보호합니다. 암호화만으로 변조가 항상 검출되는 것은 아니므로 인증된 암호화(AEAD)를 고려합니다. AES-GCM 같은 구성에서는 키, nonce, 암호문, 인증 태그와 선택적 추가 인증 데이터(AAD)의 역할을 구분합니다.</p><figure class="learning-visual" data-visual-id="crypto.symmetric"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 구조도</span><h3>데이터 봉투와 비밀키의 보관 위치를 분리합니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="데이터 봉투와 비밀키의 보관 위치를 분리합니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 414" width="760" height="414" role="img" aria-labelledby="visual-crypto-symmetric-title visual-crypto-symmetric-desc" focusable="false"><title id="visual-crypto-symmetric-title">데이터 봉투와 비밀키의 보관 위치를 분리합니다</title><desc id="visual-crypto-symmetric-desc">AEAD에는 비밀키, nonce, 평문, 추가 인증 데이터 AAD가 입력됩니다. 결과는 암호문과 인증 태그입니다. 봉투에는 알고리즘 식별, key_id, nonce, ciphertext, tag, aad를 저장할 수 있지만 비밀키 자체는 넣지 않습니다. 복호화 시 태그 검증이 실패한 데이터를 신뢰해 사용하면 안 됩니다.</desc><defs><marker id="visual-crypto-symmetric-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><path class="v-edge " d="M143 134C143 185 380 185 380 236" marker-end="url(#visual-crypto-symmetric-arrow)"/><path class="v-edge " d="M617 134C617 185 380 185 380 236" marker-end="url(#visual-crypto-symmetric-arrow)"/><path class="v-edge " d="M228 295C249 295 249 295 270 295" marker-end="url(#visual-crypto-symmetric-arrow)"/><path class="v-edge " d="M490 295C510 295 510 298 530 298" marker-end="url(#visual-crypto-symmetric-arrow)"/><g class="v-tone "><rect class="v-node" x="28" y="20" width="230" height="114" rx="12"/><rect class="v-accent" x="29" y="33" width="3" height="88" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="48">비밀키</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="79">key_id로 조회</tspan><tspan x="45" y="99">봉투 밖에서 관리</tspan></text></g><g class="v-tone "><rect class="v-node" x="502" y="20" width="230" height="114" rx="12"/><rect class="v-accent" x="503" y="33" width="3" height="88" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="519" y="48">nonce · AAD</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="519" y="79">알고리즘 조건 준수</tspan><tspan x="519" y="99">AAD는 인증 대상</tspan></text></g><g class="v-tone "><rect class="v-node" x="28" y="236" width="200" height="118" rx="12"/><rect class="v-accent" x="29" y="249" width="3" height="92" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="264">평문</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="295">보호할 원래 내용</tspan></text></g><g class="v-tone "><rect class="v-node" x="270" y="236" width="220" height="118" rx="12"/><rect class="v-accent" x="271" y="249" width="3" height="92" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="287" y="264">AEAD</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="287" y="295">기밀성·무결성</tspan><tspan x="287" y="315">복호화 시 태그 검증</tspan></text></g><g class="v-tone positive"><rect class="v-node" x="530" y="206" width="202" height="184" rx="12"/><rect class="v-accent" x="531" y="219" width="3" height="158" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="547" y="234">저장할 봉투</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="547" y="265">key_id · nonce · aad</tspan><tspan x="547" y="285">ciphertext · tag</tspan><tspan x="547" y="305">비밀키는 제외</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">AAD는 인증 대상이지만 암호화되는 평문과는 다릅니다. nonce 조건과 태그 검증도 함께 설계하세요.</span><small class="visual-note">aead.py는 실제 AES-256-GCM 복호화와 변조 거부를 실행합니다. 제공 키는 공개 교육 자료이며 고정 키·nonce는 저장된 한 메시지 전용입니다. 새 암호화에는 새 값을 생성합니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>AEAD에는 비밀키, nonce, 평문, 추가 인증 데이터 AAD가 입력됩니다. 결과는 암호문과 인증 태그입니다. 봉투에는 알고리즘 식별, key_id, nonce, ciphertext, tag, aad를 저장할 수 있지만 비밀키 자체는 넣지 않습니다. 복호화 시 태그 검증이 실패한 데이터를 신뢰해 사용하면 안 됩니다.</p></details></figure><p>envelope.json은 실제 AES-GCM 교육 암호문과 태그를 Base64로 담습니다. key_id는 키 조회용 식별자이고 비밀키는 별도의 공개 교육용 teaching-key.json에 있습니다. 이 고정 키는 실습 재현용이며 실제 데이터 보호용이 아닙니다.</p><p>AEAD는 암호문 기밀성과 인증을 함께 다루고 AAD의 무결성도 확인합니다. AAD는 숨기지 않아도 되지만 암호문이 어떤 레코드에 속하는지 묶고 싶을 때 유용합니다. record-id=17이 바뀌면 원래 태그로는 검증되지 않아야 합니다.</p><p>AES-GCM의 nonce는 비밀일 필요가 없지만 같은 키에서 재사용하면 안 됩니다. 새 암호화를 할 때 안전한 nonce 관리가 필요하고, 키 식별자는 올바른 비밀키를 찾는 이름일 뿐 비밀키 자체가 아닙니다.</p><p>이 실습은 실제 라이브러리로 제공된 암호문을 검증하고 암호문·태그·AAD·nonce·키 중 하나만 바꾼 실패를 비교합니다. 인증 실패 시 복호한 내용을 사용하지 않습니다. 고정 교육 자료 검증과 새 키·nonce로 새 암호문을 만드는 왕복 실험을 구분합니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>인증 실패 예외를 무시하고 받은 내용을 처리한다.</dt><dd>인증 성공 전에 내용을 신뢰하지 않으며 실패 시 전체 처리를 거부합니다.</dd><dt>공개된 교육 키와 고정 nonce를 새 서비스에 복사한다.</dt><dd>새 키·안전한 nonce 생성·중복 방지·권한·교체를 별도로 설계하고 검증된 라이브러리를 사용합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -152,15 +154,16 @@ fresh_round_trip=True</pre></div></li><li><h3>새 암호화와 실패 처리 해
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="mac.html"><small>← 이전 차시</small>HMAC과 태그 검증</a>
             <a href="public-key.html"><small>다음 차시 →</small>공개키 암호화와 서명</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://cryptography.io/en/stable/hazmat/primitives/aead/" target="_blank" rel="noopener noreferrer">cryptography · AESGCM와 인증 실패 ↗</a></li>
         <li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html" target="_blank" rel="noopener noreferrer">OWASP · 암호 저장 설계 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

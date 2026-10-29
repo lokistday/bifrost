@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/cloud/storage.html">
 <title>오브젝트 저장소와 데이터 공개 — Cloud Security · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/cloud.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/cloud.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="cloud" data-course-number="04" data-view="lesson" data-lesson-id="cloud.storage" style="--course-accent:var(--map-sky)">
+<body class="learning-page" data-course="cloud" data-course-number="04" data-view="lesson" data-lesson-id="cloud.storage" data-path="" style="--course-accent:var(--map-sky)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -79,14 +80,15 @@
               <span class="lesson-dot" data-dot="cloud.breakglass-access" aria-hidden="true"></span><span>긴급 접근의 만료·회수·증거<small class="completion-label" data-completion="cloud.breakglass-access"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/cloud.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">02 · 데이터·비밀·감사 · 4 / 17</div><h1>오브젝트 저장소와 데이터 공개</h1><p class="lesson-objective">데이터 분류·공개 범위·암호화·복구 정책을 함께 검토합니다.</p></div></header>
           <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>사설 네트워크에 있으면 자원 접근 권한도 생기나요?</p><details><summary>판단 기준과 보충 자료</summary><p>경로 도달과 자원 인가는 별개입니다. 신원·정책·서비스 설정을 함께 확인해야 합니다.</p><a href="../../guides/bridges.html#network">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>가상 저장소 정책 검토 · Python 3.10 이상</strong></p><ul><li>config-work.json과 공개 자료/비공개 노트 비교표를 작성합니다. 실제 저장소에 업로드하지 않습니다.</li><li>storage.public과 encrypted는 JSON 불리언을 씁니다. 문자열 &quot;false&quot;는 false와 다릅니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>가상 저장소 정책 검토 · Python 3.10 이상</strong></p><ul><li>config-work.json과 공개 자료/비공개 노트 비교표를 작성합니다. 실제 저장소에 업로드하지 않습니다.</li><li>storage.public과 encrypted는 JSON 불리언을 씁니다. 문자열 &quot;false&quot;는 false와 다릅니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="iam.html">클라우드 보안 · IAM 최소 권한과 명시적 거부 ↗</a></li><li><a href="../crypto/symmetric.html">암호학 · 대칭키·AEAD·인증 태그 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>저장소의 공개 설정은 데이터가 누구에게 읽히는지에 영향을 주고 암호화는 지정한 경계에서 기밀성을 보호합니다. 저장 시 암호화를 켰더라도 서비스가 익명 읽기를 허용하면 공개 요청자에게 평문을 제공할 수 있습니다.</p><figure class="learning-visual" data-visual-id="cloud.storage"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교도</span><h3>암호화가 켜져 있어도 익명 읽기는 별도 문제입니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="암호화가 켜져 있어도 익명 읽기는 별도 문제입니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" role="img" aria-labelledby="visual-cloud-storage-title visual-cloud-storage-desc" focusable="false"><title id="visual-cloud-storage-title">암호화가 켜져 있어도 익명 읽기는 별도 문제입니다</title><desc id="visual-cloud-storage-desc">저장 시 암호화를 켠 자료라도 저장소 정책이 익명 읽기를 허용하면 서비스가 요청자에게 평문을 제공할 수 있습니다. 비공개 자료는 공개 제어와 읽기 권한을 따로 좁혀야 합니다. 버전 관리·백업·보존·복원 시험도 각각 목적을 정해야 합니다.</desc><defs><marker id="visual-cloud-storage-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone warning"><rect class="v-node" x="28" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="29" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="45" y="55">암호화만 확인</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="84">저장 시 보호</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="107">encrypted=true</tspan></text><path class="v-separator" d="M45 128H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="148">접근 범위</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="171">public=true · 익명 읽기 가능</tspan></text><path class="v-separator" d="M45 192H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="212">빠진 검증</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="235">데이터 분류·권한·복구 시험</tspan></text></g><g class="v-tone positive"><rect class="v-node" x="392" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="393" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="409" y="55">접근과 복구까지 확인</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="84">저장 시 보호</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="107">encrypted=true</tspan></text><path class="v-separator" d="M409 128H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="148">접근 범위</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="171">public=false · 필요한 신원만</tspan></text><path class="v-separator" d="M409 192H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="212">추가 검증</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="235">익명 거부 · 정상 읽기 · 복원 시험</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">누가 읽을 수 있는지, 어떻게 보호하는지, 지웠을 때 복구되는지를 다른 질문으로 확인하세요.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>저장 시 암호화를 켠 자료라도 저장소 정책이 익명 읽기를 허용하면 서비스가 요청자에게 평문을 제공할 수 있습니다. 비공개 자료는 공개 제어와 읽기 권한을 따로 좁혀야 합니다. 버전 관리·백업·보존·복원 시험도 각각 목적을 정해야 합니다.</p></details></figure><p>버전 관리와 백업도 목적이 다릅니다. 실수로 덮어쓴 자료 복구, 삭제 방지, 보존 기간, 복원 시험을 함께 정해야 합니다. 개인 데이터와 공개 교육 자료를 같은 정책으로 묶지 말고 분류부터 시작합니다.</p><p>읽기 권한과 저장 시 암호화는 서로 다른 질문에 답합니다. 공개 요청자에게 읽기 권한이 있으면 저장소 서비스는 암호화된 자료를 복호해 전달할 수 있습니다. 따라서 암호화를 켠 뒤에도 누가 어떤 객체를 읽을 수 있는지 검증해야 합니다.</p><p>데이터 분류부터 시작하면 정책 목적이 명확해집니다. 공개 학습 자료는 공개 배포가 목적일 수 있지만 개인 노트·계정 자료·로그는 다른 접근·보존 기준이 필요합니다. 모든 공개 설정을 무조건 오답으로 외우지 말고 이 모델이 비공개 노트라는 가정을 확인합니다.</p><p>버전 관리는 이전 객체 버전을 복원하는 기능의 한 예이고 독립 백업·삭제 방지·장애 복구를 모두 대신하지 않습니다. 복원할 시점·대상·권한·소요 시간과 실제 복원 시험을 정해야 데이터 보호 주장이 완성됩니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>public=false만 확인하고 다른 리소스 정책의 허용을 보지 않는다.</dt><dd>실제 공급자의 정책 조합·공개 차단·공유 링크·교차 계정 접근을 검토합니다.</dd><dt>백업 파일이 존재하니 복원은 성공한다고 가정한다.</dt><dd>권한·키·의존성·복원 시점과 실제 검증을 포함합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -135,15 +137,16 @@ python3 review.py config-work.json</code></pre></div><div class="expected-output
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="vpc.html"><small>← 이전 차시</small>VPC·서브넷·보안 경계</a>
             <a href="secrets.html"><small>다음 차시 →</small>장기 키·임시 신원·교체</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html" target="_blank" rel="noopener noreferrer">Amazon S3 · 공개 접근 차단 ↗</a></li>
         <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html" target="_blank" rel="noopener noreferrer">Amazon S3 · 버전 관리 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/web/sql.html">
 <title>SELECT·WHERE와 매개변수 — Web Hacking · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/web.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/web.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="web" data-course-number="08" data-view="lesson" data-lesson-id="web.sql" style="--course-accent:var(--map-blue)">
+<body class="learning-page" data-course="web" data-course-number="08" data-view="lesson" data-lesson-id="web.sql" data-path="" style="--course-accent:var(--map-blue)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -87,14 +88,15 @@
               <span class="lesson-dot" data-dot="web.idempotency" aria-hidden="true"></span><span>거래 불변 조건·트랜잭션·재시도<small class="completion-label" data-completion="web.idempotency"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/web.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">01 · 웹의 동작과 데이터 · 2 / 17</div><h1>SELECT·WHERE와 매개변수</h1><p class="lesson-objective">데이터 조회 조건을 작성하고 SQL 문법과 값을 분리합니다.</p></div></header>
           <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>인증과 대상 자원의 인가는 같은 검사인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>인증은 주체 확인, 인가는 주체·대상·행동의 허용 판단입니다. 세션이 유효해도 타인의 자원은 거부해야 합니다.</p><a href="../../guides/bridges.html#web">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Python 3 · 내장 sqlite3 · sql.py</strong></p><ul><li>본문 예제를 sql.py에 저장하고 python3 sql.py로 실행합니다. Windows에서는 py -3 sql.py를 사용합니다.</li><li>DB는 :memory:이므로 프로세스가 끝나면 사라집니다. 외부 DB·계정·네트워크는 필요 없습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Python 3 · 내장 sqlite3 · sql.py</strong></p><ul><li>본문 예제를 sql.py에 저장하고 python3 sql.py로 실행합니다. Windows에서는 py -3 sql.py를 사용합니다.</li><li>DB는 :memory:이므로 프로세스가 끝나면 사라집니다. 외부 DB·계정·네트워크는 필요 없습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="../foundation/python-values.html">공통 기초 · 변수·문자열·자료형 ↗</a></li><li><a href="../foundation/python-flow.html">공통 기초 · 조건·반복·함수 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>SQL SELECT는 결과에 넣을 열을 고르고 WHERE는 행의 조건을 정합니다. users에서 name이 alice인 행을 찾는 일과 모든 사용자를 찾는 일은 조건이 다릅니다. SQL Injection을 보기 전에 정상 조회부터 설명할 수 있어야 합니다.</p><figure class="learning-visual" data-visual-id="web.sql"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 구조도</span><h3>SQL 구조와 입력값을 따로 전달합니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="SQL 구조와 입력값을 따로 전달합니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 352" width="760" height="352" role="img" aria-labelledby="visual-web-sql-title visual-web-sql-desc" focusable="false"><title id="visual-web-sql-title">SQL 구조와 입력값을 따로 전달합니다</title><desc id="visual-web-sql-desc">SQL 구조는 SELECT name FROM users WHERE name = ?입니다. 입력값 alice는 별도의 매개변수로 전달합니다. 드라이버가 바인딩하여 실행하면 alice 행 하나가 반환됩니다. 입력값을 SQL 코드 문자열에 직접 결합하지 않습니다.</desc><defs><marker id="visual-web-sql-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><path class="v-edge " d="M186 166C186 201 380 201 380 236" marker-end="url(#visual-web-sql-arrow)"/><path class="v-edge " d="M574 166C574 201 380 201 380 236" marker-end="url(#visual-web-sql-arrow)"/><g class="v-tone "><rect class="v-node" x="28" y="20" width="316" height="146" rx="12"/><rect class="v-accent" x="29" y="33" width="3" height="120" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="48">SQL 구조</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="79">SELECT name FROM users</tspan><tspan x="45" y="99">WHERE name = ?</tspan></text></g><g class="v-tone "><rect class="v-node" x="416" y="20" width="316" height="146" rx="12"/><rect class="v-accent" x="417" y="33" width="3" height="120" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="433" y="48">별도로 전달할 값</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="433" y="79">(&quot;alice&quot;,)</tspan><tspan x="433" y="99">문자열을 값으로 취급</tspan></text></g><g class="v-tone positive"><rect class="v-node" x="218" y="236" width="324" height="94" rx="12"/><rect class="v-accent" x="219" y="249" width="3" height="68" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="235" y="264">바인딩 후 조회</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="235" y="295">결과: [(&quot;alice&quot;,)]</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">물음표는 값을 놓을 자리입니다. 테이블 이름이나 SQL 구조를 마음대로 바꾸는 자리가 아닙니다.</span><small class="visual-note">이 차시는 Python sqlite3의 ? 자리표시자 예시입니다. 라이브러리마다 바인딩 문법은 다를 수 있습니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>SQL 구조는 SELECT name FROM users WHERE name = ?입니다. 입력값 alice는 별도의 매개변수로 전달합니다. 드라이버가 바인딩하여 실행하면 alice 행 하나가 반환됩니다. 입력값을 SQL 코드 문자열에 직접 결합하지 않습니다.</p></details></figure><p>Python sqlite3에서 ?는 값이 들어갈 자리입니다. execute의 두 번째 인자에 튜플로 값을 넘기면 드라이버가 값으로 처리합니다. 테이블 이름이나 열 이름까지 ?로 바꿀 수 있는 것은 아니므로 동적 식별자는 별도 허용 목록이 필요합니다.</p><p>CREATE TABLE은 표의 열 구조를 정하고 INSERT는 행을 넣습니다. SELECT name은 결과의 열을 정하고 WHERE name = ?는 반환할 행을 좁힙니다. fetchall()의 결과는 행들의 목록이며 각 행은 튜플입니다. [(&quot;alice&quot;,)]는 한 행·한 열, []는 결과 행이 없다는 뜻입니다.</p><p>쿼리의 ?는 입력값을 놓을 위치이며 Python 변수 이름을 SQL에 그대로 쓰는 표기가 아닙니다. execute(SQL, (값,))처럼 SQL 텍스트와 값을 별도로 전달합니다. 값이 따옴표를 포함해도 SQL 구조를 직접 이어 붙이지 않는 규칙을 유지합니다.</p><p>행의 순서는 ORDER BY를 지정하지 않으면 의도한 정렬을 보장하지 않습니다. 여러 행을 비교할 때는 ORDER BY name으로 기준을 정하거나 집합·행 수를 비교하세요. 지금의 핵심은 결과의 열 수와 조건에 따른 행 수입니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>[]를 DB 연결 실패라고 해석한다.</dt><dd>성공적으로 조회했지만 조건에 맞는 행이 없는 결과일 수 있습니다.</dd><dt>여러 행이 우연히 입력 순서로 나왔으니 항상 그 순서라고 생각한다.</dt><dd>순서가 학습 결론에 필요하면 ORDER BY를 명시합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -148,15 +150,16 @@ print(db.execute(&quot;SELECT name FROM users WHERE name = ?&quot;, (&quot;nobod
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="flow.html"><small>← 이전 차시</small>HTML·DOM과 요청 흐름</a>
             <a href="sessions.html"><small>다음 차시 →</small>쿠키·세션·인증</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://docs.python.org/3/library/sqlite3.html#how-to-use-placeholders-to-bind-values-in-sql-queries" target="_blank" rel="noopener noreferrer">Python · sqlite3 매개변수 바인딩 ↗</a></li>
         <li><a href="https://www.sqlite.org/lang_select.html" target="_blank" rel="noopener noreferrer">SQLite · SELECT 처리 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

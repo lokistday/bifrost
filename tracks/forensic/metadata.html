@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/forensic/metadata.html">
 <title>파일 정보와 시간의 한계 — Forensic · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/forensic.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/forensic.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="forensic" data-course-number="02" data-view="lesson" data-lesson-id="forensic.metadata" style="--course-accent:var(--map-green)">
+<body class="learning-page" data-course="forensic" data-course-number="02" data-view="lesson" data-lesson-id="forensic.metadata" data-path="" style="--course-accent:var(--map-green)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -86,14 +87,15 @@
               <span class="lesson-dot" data-dot="forensic.evidence-coverage" aria-hidden="true"></span><span>시계 오차·관측 범위·사건 순서<small class="completion-label" data-completion="forensic.evidence-coverage"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/forensic.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">01 · 보존과 증거 읽기 · 3 / 16</div><h1>파일 정보와 시간의 한계</h1><p class="lesson-objective">파일 내부 내용과 파일 시스템 메타데이터의 의미를 나눕니다.</p></div></header>
           <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>해시 일치와 파일 출처의 진위는 같은 것인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>해시는 기준 바이트와의 일치를 확인합니다. 기준의 신뢰·보관 이력·수집 범위는 별도 근거가 필요합니다.</p><a href="../../guides/bridges.html#evidence">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>파일 속성 비교 · Linux/WSL 또는 Python 3</strong></p><ul><li>stat·wc·cat 명령은 Linux/WSL에서 사용합니다. Windows에서는 아래 pathlib 예제로 내용과 크기를 확인할 수 있습니다.</li><li>자료의 원 사건 시각 대신 현재 추출 환경을 관찰하는 실습입니다. OS별 시각 값이 달라도 오답이 아닙니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>파일 속성 비교 · Linux/WSL 또는 Python 3</strong></p><ul><li>stat·wc·cat 명령은 Linux/WSL에서 사용합니다. Windows에서는 아래 pathlib 예제로 내용과 크기를 확인할 수 있습니다.</li><li>자료의 원 사건 시각 대신 현재 추출 환경을 관찰하는 실습입니다. OS별 시각 값이 달라도 오답이 아닙니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="integrity.html">디지털 포렌식 · 원본·작업 사본·해시 ↗</a></li><li><a href="../foundation/paths.html">공통 기초 · 경로와 작업용 사본 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>파일 내용에 case=BF-001이 있다는 것과 파일 시스템의 수정 시각은 다른 출처의 정보입니다. 다운로드나 압축 해제로 시각이 달라질 수 있습니다. 특히 생성·수정·접근 시각은 OS·파일 시스템·마운트 설정에 따라 의미가 다릅니다.</p><figure class="learning-visual" data-visual-id="forensic.metadata"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교도</span><h3>파일 안의 문구와 파일 시스템 정보는 다른 근거입니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="파일 안의 문구와 파일 시스템 정보는 다른 근거입니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" role="img" aria-labelledby="visual-forensic-metadata-title visual-forensic-metadata-desc" focusable="false"><title id="visual-forensic-metadata-title">파일 안의 문구와 파일 시스템 정보는 다른 근거입니다</title><desc id="visual-forensic-metadata-desc">evidence.txt 안에는 case=BF-001, owner=alice라는 문구가 있습니다. 이 owner 문자열은 파일 내용이며 운영체제가 기록한 소유자를 확인한 결과가 아닙니다. stat의 시각과 소유 정보는 파일 시스템 메타데이터입니다. 압축 해제·복사로 달라질 수 있는 시각을 원래 사건 시각으로 단정하지 않습니다.</desc><defs><marker id="visual-forensic-metadata-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone "><rect class="v-node" x="28" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="29" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="45" y="55">파일 내부 내용</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="84">읽는 방법</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="107">cat evidence.txt</tspan></text><path class="v-separator" d="M45 128H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="148">관찰한 문구</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="171">case=BF-001 · owner=alice</tspan></text><path class="v-separator" d="M45 192H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="212">해석 범위</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="235">파일에 적힌 문자열</tspan></text></g><g class="v-tone warning"><rect class="v-node" x="392" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="393" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="409" y="55">파일 시스템 정보</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="84">읽는 방법</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="107">stat · wc -c</tspan></text><path class="v-separator" d="M409 128H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="148">관찰 대상</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="171">시각 · 소유 정보 · 크기</tspan></text><path class="v-separator" d="M409 192H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="212">해석 범위</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="235">로컬 파일의 현재 메타데이터</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">값을 적을 때 어디서 읽었는지와 추출·복사 환경을 함께 기록하세요.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>evidence.txt 안에는 case=BF-001, owner=alice라는 문구가 있습니다. 이 owner 문자열은 파일 내용이며 운영체제가 기록한 소유자를 확인한 결과가 아닙니다. stat의 시각과 소유 정보는 파일 시스템 메타데이터입니다. 압축 해제·복사로 달라질 수 있는 시각을 원래 사건 시각으로 단정하지 않습니다.</p></details></figure><p>stat는 현재 파일 시스템의 정보를 보여 줍니다. 이 실습에서 추출된 시각을 원 사건 발생 시각으로 쓰면 안 됩니다. 해시·크기·파일명은 현재 관찰값으로 기록하고, 사건 시각은 출처가 명시된 로그와 비교합니다.</p><p>같은 파일을 설명하는 정보도 계층이 다릅니다. 파일 안의 owner=alice는 작성자가 넣은 텍스트이고, 파일 시스템 소유자는 OS가 관리하는 속성입니다. 한 값의 이름이 익숙하다고 다른 계층의 의미로 바꾸어 해석하지 않습니다.</p><p>수정 시각은 내용 수정의 단서가 될 수 있지만 복사 도구의 시각 보존 옵션이나 압축 해제 방식에 영향을 받습니다. 접근 시각도 마운트 설정과 캐시에 따라 읽을 때마다 갱신되지 않을 수 있습니다. 관찰 환경과 도구를 함께 기록해야 비교가 가능합니다.</p><p>크기와 내용 해시가 같고 메타데이터가 다르면 내용은 같은 사본일 수 있습니다. 반대로 파일 크기가 같아도 바이트 하나를 다른 바이트로 치환하면 내용은 달라집니다. 하나의 속성만으로 무결성·작성자·사건 시각을 한꺼번에 판단하지 않습니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>압축을 푼 시각을 사건 시각으로 타임라인에 넣는다.</dt><dd>추출 과정의 시각과 사건 로그의 시각에 출처를 붙여 분리합니다.</dd><dt>Windows의 ctime과 Unix의 ctime을 같은 뜻으로 외운다.</dt><dd>플랫폼별 속성 정의를 확인합니다. 이름만으로 생성·변경 시각을 판단하지 않습니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -149,15 +151,16 @@ print(&quot;mtime=&quot;, datetime.fromtimestamp(s.st_mtime, timezone.utc).isofo
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="logs.html"><small>← 이전 차시</small>로그 필드와 사건 가설</a>
             <a href="timeline.html"><small>다음 차시 →</small>UTC로 타임라인 맞추기</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://docs.python.org/3/library/os.html#os.stat_result" target="_blank" rel="noopener noreferrer">Python os.stat_result · 플랫폼별 파일 속성 ↗</a></li>
         <li><a href="https://docs.python.org/3/library/pathlib.html" target="_blank" rel="noopener noreferrer">Python pathlib · stat와 읽기 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

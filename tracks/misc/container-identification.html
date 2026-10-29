@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/misc/container-identification.html">
 <title>파일 매직과 바깥·안쪽 형식 구분 — Misc · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/misc.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/misc.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="misc" data-course-number="03" data-view="lesson" data-lesson-id="misc.container-identification" style="--course-accent:var(--map-orange)">
+<body class="learning-page" data-course="misc" data-course-number="03" data-view="lesson" data-lesson-id="misc.container-identification" data-path="" style="--course-accent:var(--map-orange)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -84,14 +85,15 @@
               <span class="lesson-dot" data-dot="misc.resumable-batch" aria-hidden="true"></span><span>배치 출처와 재개 체크포인트 검증<small class="completion-label" data-completion="misc.resumable-batch"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/misc.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">05 · 컨테이너와 매체 자료 · 10 / 14</div><h1>파일 매직과 바깥·안쪽 형식 구분</h1><p class="lesson-objective">짧은 시그니처와 구조 검증을 나누고 컨테이너와 내용의 형식을 단계별로 확인합니다.</p></div></header>
           <div class="lesson-meta"><span>심화 연결</span><span>학습 50–80분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>화면에 보이는 문자열과 파일의 원시 바이트는 같나요?</p><details><summary>판단 기준과 보충 자료</summary><p>인코딩·컨테이너·압축을 거치며 표현이 달라집니다. 변환 순서·크기 제한·중간 검증을 기록합니다.</p><a href="../../guides/bridges.html#bytes">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>오프라인 · Python 3.10 이상 · 표준 라이브러리</strong></p><ul><li>misc ZIP을 풀고 해당 폴더로 이동합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿔 실행하세요.</li><li>원본은 보관하고 변경 과제에는 사본을 사용합니다. 제공한 작은 합성 입력만 오프라인에서 다루며 계정·외부 자원·실제 개인정보를 사용하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>오프라인 · Python 3.10 이상 · 표준 라이브러리</strong></p><ul><li>misc ZIP을 풀고 해당 폴더로 이동합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿔 실행하세요.</li><li>원본은 보관하고 변경 과제에는 사본을 사용합니다. 제공한 작은 합성 입력만 오프라인에서 다루며 계정·외부 자원·실제 개인정보를 사용하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="triage.html">문제 해결·자동화 · 문제 분류와 가설 세우기 ↗</a></li><li><a href="archive-inspection.html">문제 해결·자동화 · 압축 목록·경로·자원 한도 검토 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>확장자는 이름의 일부이고 매직 바이트는 내용 앞부분의 단서입니다. gzip은 흔히 1f8b, ZIP의 로컬 파일 헤더는 PK03 04로 시작하지만 짧은 접두 일치만으로 완전한 컨테이너라고 확정할 수 없습니다. 이 실습은 후보라는 이름을 사용해 그 차이를 표시합니다.</p><figure class="learning-visual" data-visual-id="misc.container-identification"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 흐름도</span><h3>접두 후보와 구조 검증은 다릅니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="접두 후보와 구조 검증은 다릅니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 222" width="760" height="222" role="img" aria-labelledby="visual-misc-container-identification-title visual-misc-container-identification-desc" focusable="false"><title id="visual-misc-container-identification-title">접두 후보와 구조 검증은 다릅니다</title><desc id="visual-misc-container-identification-desc">고정 gzip 표본의 접두는 GZIP-CANDIDATE이고 실제 해제 뒤 본문은 Bifrost 줄바꿈 8바이트입니다. 두 접두 바이트만 남겨도 후보는 같지만 완전한 구조는 아닙니다.</desc><defs><marker id="visual-misc-container-identification-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><circle class="v-step-circle" cx="42" cy="27" r="13"/><text class="v-step-number" x="42" y="31" text-anchor="middle">1</text><g class="v-tone "><rect class="v-node" x="28" y="54" width="214.66666666666666" height="144" rx="12"/><rect class="v-accent" x="29" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="82">접두</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="113">1f8b · 후보</tspan></text></g><circle class="v-step-circle" cx="286.66666666666663" cy="27" r="13"/><text class="v-step-number" x="286.66666666666663" y="31" text-anchor="middle">2</text><g class="v-tone "><rect class="v-node" x="272.66666666666663" y="54" width="214.66666666666666" height="144" rx="12"/><rect class="v-accent" x="273.66666666666663" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="289.66666666666663" y="82">구조 읽기</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="289.66666666666663" y="113">gzip 해제 확인</tspan></text></g><path class="v-edge " d="M246.66666666666663 126H267.66666666666663" marker-end="url(#visual-misc-container-identification-arrow)"/><circle class="v-step-circle" cx="531.3333333333333" cy="27" r="13"/><text class="v-step-number" x="531.3333333333333" y="31" text-anchor="middle">3</text><g class="v-tone positive"><rect class="v-node" x="517.3333333333333" y="54" width="214.66666666666666" height="144" rx="12"/><rect class="v-accent" x="518.3333333333333" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="534.3333333333333" y="82">안쪽 내용</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="534.3333333333333" y="113">텍스트 8바이트</tspan></text></g><path class="v-edge " d="M491.33333333333326 126H512.3333333333333" marker-end="url(#visual-misc-container-identification-arrow)"/></svg></div><figcaption><span class="visual-takeaway">형식의 바깥과 안쪽을 별도 단계로 기록하세요.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>고정 gzip 표본의 접두는 GZIP-CANDIDATE이고 실제 해제 뒤 본문은 Bifrost 줄바꿈 8바이트입니다. 두 접두 바이트만 남겨도 후보는 같지만 완전한 구조는 아닙니다.</p></details></figure><p>media_tools.py identify는 Bifrost와 줄바꿈 8바이트를 메모리에서 gzip으로 감싼 직접 만든 표본을 읽습니다. 바깥 형식은 gzip 후보이고 안쪽은 ASCII 텍스트입니다. 압축 형식과 본문 형식을 하나의 분류로 뭉치지 않고 각 단계의 가정을 기록합니다.</p><p>gzip 헤더의 첫 두 바이트만 남겨도 kind는 GZIP-CANDIDATE를 반환하지만 정상적으로 해제 가능한 구조는 아닙니다. 따라서 식별 후보, 실제 파서의 구조 검사, 내용 해석을 세 단계로 구분합니다. 확장자를 바꾸는 일은 바이트를 변환하거나 손상된 구조를 고치지 않습니다.</p><p>이 예제는 작은 고정 메모리 자료만 처리합니다. 임의 대용량 파일·중첩 컨테이너·암호화 ZIP·자원 고갈을 안전하게 처리하는 범용 탐지기가 아닙니다. 실제 입력에는 읽기/해제 한도와 오류 처리, 원본 보존, 여러 형식 가능성과 폴리글롯의 한계를 별도로 검토해야 합니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>매직 접두만 맞으면 파일이 완전하다고 판정한다.</dt><dd>전체 구조·길이·체크섬과 파서의 결과를 확인합니다.</dd><dt>확장자를 바꿔 형식을 변환했다고 생각한다.</dt><dd>이름 변경과 실제 바이트 변환을 구분합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -143,15 +145,16 @@ truncated-header=GZIP-CANDIDATE structure-validated=False</pre></div></li><li><h
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="reproducible-results.html"><small>← 이전 차시</small>정규화·재현성·결과 무결성 검증</a>
             <a href="pixel-data.html"><small>다음 차시 →</small>PPM 헤더와 RGB 픽셀 채널 읽기</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://docs.python.org/3/library/gzip.html" target="_blank" rel="noopener noreferrer">Python gzip · 컨테이너 읽기 ↗</a></li>
         <li><a href="https://docs.python.org/3/library/zlib.html" target="_blank" rel="noopener noreferrer">Python zlib · 제한 길이 해제 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

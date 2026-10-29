@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/misc/resumable-batch.html">
 <title>배치 출처와 재개 체크포인트 검증 — Misc · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/misc.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/misc.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="misc" data-course-number="03" data-view="lesson" data-lesson-id="misc.resumable-batch" style="--course-accent:var(--map-orange)">
+<body class="learning-page" data-course="misc" data-course-number="03" data-view="lesson" data-lesson-id="misc.resumable-batch" data-path="" style="--course-accent:var(--map-orange)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -84,14 +85,15 @@
               <span class="lesson-dot" data-dot="misc.resumable-batch" aria-hidden="true"></span><span>배치 출처와 재개 체크포인트 검증<small class="completion-label" data-completion="misc.resumable-batch"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/misc.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">06 · 자원 예산과 배치 재개 · 14 / 14</div><h1>배치 출처와 재개 체크포인트 검증</h1><p class="lesson-objective">입력·변환 버전·작업 ID에 근거해 재실행 대상을 정하고 체크포인트의 한계를 기록합니다.</p></div></header>
           <div class="lesson-meta"><span>심화 연결</span><span>학습 50–80분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>화면에 보이는 문자열과 파일의 원시 바이트는 같나요?</p><details><summary>판단 기준과 보충 자료</summary><p>인코딩·컨테이너·압축을 거치며 표현이 달라집니다. 변환 순서·크기 제한·중간 검증을 기록합니다.</p><a href="../../guides/bridges.html#bytes">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>오프라인 · Python 3.10 이상 · 표준 라이브러리</strong></p><ul><li>misc ZIP을 풀고 해당 폴더로 이동합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿔 실행하세요.</li><li>원본은 보관하고 변경 과제에는 사본을 사용합니다. 제공한 작은 합성 입력만 오프라인에서 다루며 계정·외부 자원·실제 개인정보를 사용하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>오프라인 · Python 3.10 이상 · 표준 라이브러리</strong></p><ul><li>misc ZIP을 풀고 해당 폴더로 이동합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿔 실행하세요.</li><li>원본은 보관하고 변경 과제에는 사본을 사용합니다. 제공한 작은 합성 입력만 오프라인에서 다루며 계정·외부 자원·실제 개인정보를 사용하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="reproducible-results.html">문제 해결·자동화 · 정규화·재현성·결과 무결성 검증 ↗</a></li><li><a href="automation.html">문제 해결·자동화 · 작은 CLI와 입력 검증 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>여러 입력을 배치로 처리할 때 파일이 있다는 이유만으로 완료라고 보면 입력 변경이나 도구 버전 변화를 놓칠 수 있습니다. 이 실습은 작업 ID와 ASCII 텍스트 목록을 받고 변환 버전+구분 바이트+원문의 해시로 캐시 키를 만듭니다. 변환은 작은 대문자화 모형이며 외부 작업을 수행하지 않습니다.</p><figure class="learning-visual" data-visual-id="misc.resumable-batch"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교표</span><h3>같은 작업 ID라도 입력이 달라지면 다시 처리</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="같은 작업 ID라도 입력이 달라지면 다시 처리 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 272" width="760" height="272" role="img" aria-labelledby="visual-misc-resumable-batch-title visual-misc-resumable-batch-desc" focusable="false"><title id="visual-misc-resumable-batch-title">같은 작업 ID라도 입력이 달라지면 다시 처리</title><desc id="visual-misc-resumable-batch-desc">첫 실행은 세 작업 RUN, 동일 입력의 재개는 세 작업 SKIP입니다. J02 원문만 바꾸면 입력 키가 달라져 J02만 RUN으로 갱신합니다.</desc><defs><marker id="visual-misc-resumable-batch-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone "><rect class="v-table-head" x="28" y="20" width="230" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="41" y="47">단계</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="258" y="20" width="158" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="271" y="47">J01</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="416" y="20" width="158" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="429" y="47">J02</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="574" y="20" width="158" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="587" y="47">J03</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="78" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="105">최초</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="78" width="158" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="105">RUN</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="416" y="78" width="158" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="429" y="105">RUN</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="574" y="78" width="158" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="587" y="105">RUN</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="136" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="163">동일 재개</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="136" width="158" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="163">SKIP</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="416" y="136" width="158" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="429" y="163">SKIP</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="574" y="136" width="158" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="587" y="163">SKIP</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="194" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="221">J02 변경</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="194" width="158" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="221">SKIP</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="416" y="194" width="158" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="429" y="221">RUN</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="574" y="194" width="158" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="587" y="221">SKIP</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">입력과 변환 버전이 캐시 판정의 근거입니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>첫 실행은 세 작업 RUN, 동일 입력의 재개는 세 작업 SKIP입니다. J02 원문만 바꾸면 입력 키가 달라져 J02만 RUN으로 갱신합니다.</p></details></figure><p>체크포인트는 schema와 transform 버전, 작업별 입력 키와 결과를 갖습니다. 동일 키와 예상 결과가 맞으면 SKIP, 새 입력이나 값 변경이면 RUN입니다. 이 저렴한 모형은 캐시 결과 변조를 확인하려고 예상 대문자도 다시 계산하므로 실제 고비용 작업의 성능 효과를 측정하는 벤치마크가 아닙니다.</p><p>J02 텍스트만 바꾸면 J01/J03은 SKIP이고 J02만 RUN이어야 합니다. 중복 작업 ID나 지원하지 않는 체크포인트 버전은 조용히 덮어쓰지 않고 오류로 거부합니다. 해시만 맞고 결과 문자열이 틀리면 이 모형은 재계산해 완료 기록을 갱신합니다.</p><p>선택한 체크포인트는 같은 폴더의 고정 .tmp에 쓴 뒤 교체합니다. 이는 통제된 폴더의 단일 작성자를 전제로 하며 동시 작업 잠금·충돌 해결·fsync 내구성·트랜잭션을 보장하지 않습니다. 원본 입력과 코드 버전·명령·환경도 함께 남기고 체크포인트를 신원/출처 인증으로 해석하지 않습니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>체크포인트가 있으면 입력 변경과 관계없이 완료이다.</dt><dd>작업 ID·입력 키·변환 버전·캐시 결과를 검증합니다.</dd><dt>replace 한 번으로 분산 트랜잭션이 완성된다.</dt><dd>단일 작성자·충돌·복구·내구성을 별도로 설계합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -146,16 +148,17 @@ jobs=3 checkpoint=WRITTEN</pre></div></li></ol></section>
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="bounded-decompression.html"><small>← 이전 차시</small>해제 출력 한도와 스트림 경계 검증</a>
             <a href="../../projects/misc.html"><small>다음 단계 →</small>분야 종합 프로젝트</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://docs.python.org/3/library/hashlib.html" target="_blank" rel="noopener noreferrer">Python hashlib · 입력 식별 ↗</a></li>
         <li><a href="https://docs.python.org/3/library/pathlib.html#pathlib.Path.replace" target="_blank" rel="noopener noreferrer">Python pathlib · 파일 교체 ↗</a></li>
         <li><a href="https://docs.python.org/3/library/json.html" target="_blank" rel="noopener noreferrer">Python json · 구조화된 자료 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

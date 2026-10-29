@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/foundation/cli.html">
 <title>재사용 가능한 명령행 도구 — Foundation · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/foundation.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/foundation.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="foundation" data-course-number="00" data-view="lesson" data-lesson-id="foundation.cli" style="--course-accent:var(--map-cyan)">
+<body class="learning-page" data-course="foundation" data-course-number="00" data-view="lesson" data-lesson-id="foundation.cli" data-path="" style="--course-accent:var(--map-cyan)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -86,14 +87,15 @@
               <span class="lesson-dot" data-dot="foundation.structured-logging" aria-hidden="true"></span><span>구조화 로그·허용 필드·민감 정보<small class="completion-label" data-completion="foundation.structured-logging"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/foundation.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">04 · 데이터 경계와 도구 만들기 · 14 / 20</div><h1>재사용 가능한 명령행 도구</h1><p class="lesson-objective">입력 파일과 옵션을 명시하고 도움말·정상 동작·잘못된 옵션을 검증합니다.</p></div></header>
           <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>파일의 위치와 실행 결과를 따로 설명할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>셸의 현재 폴더·파일 경로·프로그램 출력을 구별합니다. 환경 준비와 경로 차시에서 확인하세요.</p><a href="../../guides/bridges.html#python">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Python 3.10 이상 · 표준 라이브러리 · Foundation ZIP</strong></p><ul><li>ZIP을 풀고 foundation 폴더에서 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 같은 명령의 python3를 py -3로 바꿉니다.</li><li>제공 스크립트는 오프라인으로 동작합니다. data_tools.py와 record.json을 같은 폴더에 두고, 입력을 바꿀 때에는 원본을 보관한 사본을 사용합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Python 3.10 이상 · 표준 라이브러리 · Foundation ZIP</strong></p><ul><li>ZIP을 풀고 foundation 폴더에서 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 같은 명령의 python3를 py -3로 바꿉니다.</li><li>제공 스크립트는 오프라인으로 동작합니다. data_tools.py와 record.json을 같은 폴더에 두고, 입력을 바꿀 때에는 원본을 보관한 사본을 사용합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="exceptions.html">공통 기초 · 예외·오류 메시지·종료 상태 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>명령행 인터페이스는 다른 사람이 파일을 열어 소스를 고치지 않고 같은 계산을 실행하도록 만드는 약속입니다. 위치 인자 path는 입력 파일, --minimum은 선택 기준이라는 의미를 부여합니다. 코드에 숨은 숫자보다 실행 기록에 인자가 드러나야 재현하기 쉽습니다.</p><figure class="learning-visual" data-visual-id="foundation.cli"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교표</span><h3>30분 입력에서 기준값만 바꿉니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="30분 입력에서 기준값만 바꿉니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 330" width="760" height="330" role="img" aria-labelledby="visual-foundation-cli-title visual-foundation-cli-desc" focusable="false"><title id="visual-foundation-cli-title">30분 입력에서 기준값만 바꿉니다</title><desc id="visual-foundation-cli-desc">record.json의 minutes는 30입니다. minimum 0과 30은 선택, 31과 1440은 선택 제외이고 1441은 조건 계산 전에 범위 오류입니다.</desc><defs><marker id="visual-foundation-cli-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone "><rect class="v-table-head" x="28" y="20" width="230" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="41" y="47">minimum</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="258" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="271" y="47">입력 유효성</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="495" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="508" y="47">selected</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="78" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="105">0</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="105">유효</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="105">True</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="136" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="163">30</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="163">유효</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="163">True</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="194" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="221">31</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="221">유효</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="221">False</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="252" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="279">1441</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="252" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="279">범위 오류</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="252" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="279">계산하지 않음</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">입력 유효성과 조건 결과는 다른 단계입니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>record.json의 minutes는 30입니다. minimum 0과 30은 선택, 31과 1440은 선택 제외이고 1441은 조건 계산 전에 범위 오류입니다.</p></details></figure><p>argparse는 인자 분리·도움말·기본 자료형 변환을 담당합니다. type=int는 abc를 거부하지만 -1이나 2000이 업무상 허용되는지는 알지 못합니다. data_tools는 parse_minutes를 다시 호출해 0~1440 범위라는 계약도 확인합니다.</p><p>요약 도구의 선택 조건은 minutes &gt;= minimum입니다. 정확히 경계에 있는 값이 포함되는지가 요구 사항입니다. 30분 입력에서 minimum=30과 31을 비교하면 참·거짓의 차이를 관찰할 수 있으며 이 한 쌍이 다음 테스트 차시의 기준이 됩니다.</p><p>기본 입력 파일은 스크립트 옆 record.json이지만 직접 준 상대 경로는 현재 작업 폴더를 기준으로 해석됩니다. 무엇을 읽었는지 기록하려면 실행 위치와 전달한 파일을 함께 적습니다. 이 구분을 하지 않으면 다른 파일을 읽고 같은 결과라고 착각할 수 있습니다.</p><p>자동화에는 명확한 오류 계약도 필요합니다. 없는 파일과 잘못된 데이터는 진단과 상태 2로 끝나고, 알 수 없는 옵션은 argparse가 거부합니다. allow_abbrev=False는 긴 옵션의 뜻이 축약 입력에 따라 달라지는 일을 줄이지만 입력 내용 검증을 대신하지 않습니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>argparse의 type=int가 모든 업무 입력을 검증해 준다고 믿는다.</dt><dd>형식 변환 뒤 허용 범위와 의미 검증을 별도로 합니다.</dd><dt>스크립트 경로와 입력 파일의 상대 경로가 언제나 같은 기준이라고 생각한다.</dt><dd>기본 입력과 직접 지정한 입력의 해석 기준을 확인하고 실행 위치를 기록합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -145,15 +147,16 @@ python3 data_tools.py summary record.json --minimum -1</code></pre></div><div cl
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="exceptions.html"><small>← 이전 차시</small>예외·오류 메시지·종료 상태</a>
             <a href="unit-tests.html"><small>다음 차시 →</small>경계값 테스트와 실패 실험</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://docs.python.org/3/library/argparse.html" target="_blank" rel="noopener noreferrer">Python · argparse ↗</a></li>
         <li><a href="https://docs.python.org/3/library/sys.html#sys.exit" target="_blank" rel="noopener noreferrer">Python · 종료 상태 sys.exit ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

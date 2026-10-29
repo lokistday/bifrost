@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/foundation/unit-tests.html">
 <title>경계값 테스트와 실패 실험 — Foundation · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/foundation.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/foundation.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="foundation" data-course-number="00" data-view="lesson" data-lesson-id="foundation.unit-tests" style="--course-accent:var(--map-cyan)">
+<body class="learning-page" data-course="foundation" data-course-number="00" data-view="lesson" data-lesson-id="foundation.unit-tests" data-path="" style="--course-accent:var(--map-cyan)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -86,14 +87,15 @@
               <span class="lesson-dot" data-dot="foundation.structured-logging" aria-hidden="true"></span><span>구조화 로그·허용 필드·민감 정보<small class="completion-label" data-completion="foundation.structured-logging"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/foundation.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">04 · 데이터 경계와 도구 만들기 · 15 / 20</div><h1>경계값 테스트와 실패 실험</h1><p class="lesson-objective">고정된 기대값으로 경계를 검사하고 고의 오류를 넣어 테스트의 검출력을 확인합니다.</p></div></header>
           <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>파일의 위치와 실행 결과를 따로 설명할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>셸의 현재 폴더·파일 경로·프로그램 출력을 구별합니다. 환경 준비와 경로 차시에서 확인하세요.</p><a href="../../guides/bridges.html#python">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Python 3.10 이상 · 표준 라이브러리 · Foundation ZIP</strong></p><ul><li>ZIP을 풀고 foundation 폴더에서 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 같은 명령의 python3를 py -3로 바꿉니다.</li><li>제공 스크립트는 오프라인으로 동작합니다. data_tools.py와 record.json을 같은 폴더에 두고, 입력을 바꿀 때에는 원본을 보관한 사본을 사용합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Python 3.10 이상 · 표준 라이브러리 · Foundation ZIP</strong></p><ul><li>ZIP을 풀고 foundation 폴더에서 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 같은 명령의 python3를 py -3로 바꿉니다.</li><li>제공 스크립트는 오프라인으로 동작합니다. data_tools.py와 record.json을 같은 폴더에 두고, 입력을 바꿀 때에는 원본을 보관한 사본을 사용합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="cli.html">공통 기초 · 재사용 가능한 명령행 도구 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>테스트는 정해진 입력에서 함수가 약속한 값을 내거나 정해진 예외를 내는지 확인하는 실행 가능한 기록입니다. 기대값을 실제 함수로 다시 계산하면 구현의 같은 오류를 복사할 수 있으므로 사람의 요구 사항에서 독립적으로 정합니다.</p><figure class="learning-visual" data-visual-id="foundation.unit-tests"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 타임라인</span><h3>통과만큼 실패도 확인합니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="통과만큼 실패도 확인합니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" width="760" height="460" role="img" aria-labelledby="visual-foundation-unit-tests-title visual-foundation-unit-tests-desc" focusable="false"><title id="visual-foundation-unit-tests-title">통과만큼 실패도 확인합니다</title><desc id="visual-foundation-unit-tests-desc">원본의 네 검사 메서드가 통과한 뒤 summary의 &gt;=를 &gt;로 바꾸면 동등 경계가 실패합니다. 구현을 복구하고 정상·오류 입력을 보강하면 다시 통과합니다.</desc><defs><marker id="visual-foundation-unit-tests-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><path class="v-edge " d="M166 40V434" marker-end="url(#visual-foundation-unit-tests-arrow)"/><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="57">기준</tspan></text><circle class="v-point" cx="166" cy="52" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="26" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="39" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="54">원본 테스트</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="85">4 tests · OK</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="163">결함</tspan></text><circle class="v-point" cx="166" cy="158" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="132" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="145" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="160">&gt;=를 &gt;로 변경</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="191">동등 경계 실패</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="269">복구</tspan></text><circle class="v-point" cx="166" cy="264" r="6"/><g class="v-tone positive"><rect class="v-node" x="202" y="238" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="251" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="266">&gt;=로 되돌리기</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="297">동등 경계 통과</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="375">보강</tspan></text><circle class="v-point" cx="166" cy="370" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="344" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="357" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="372">1과 1440.0 추가</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="403">정상·타입 경계 확장</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">결함에서 실패하는 검사가 수정의 근거가 됩니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>원본의 네 검사 메서드가 통과한 뒤 summary의 &gt;=를 &gt;로 바꾸면 동등 경계가 실패합니다. 구현을 복구하고 정상·오류 입력을 보강하면 다시 통과합니다.</p></details></figure><p>test_data_tools.py는 정상 범위 0·30·1440, 거부 범위 -1·1441, 문자열·불리언·실수 등의 타입, 문서 구조, 선택 경계를 검증합니다. 입력 목록을 나누는 이유는 실패했을 때 숫자 경계인지 타입 계약인지 좁혀 볼 수 있기 때문입니다.</p><p>unittest의 assertEqual은 고정된 예상 결과와 실제 결과를, assertRaises는 특정 예외가 발생했는지 확인합니다. 테스트의 이름과 subTest의 입력값은 실패 원인을 찾는 단서입니다. 테스트용 검증을 운영 입력 검사의 대체로 사용하지 않습니다.</p><p>테스트를 통과한 뒤 &gt;=를 &gt;로 고친 사본을 다시 실행하면 minimum=30 사례가 실패해야 합니다. 이 실패 실험은 경계 테스트가 해당 결함을 실제 검출하는지 확인합니다. 일부러 결함을 넣어도 통과하면 호출 대상과 기대값을 먼저 점검합니다.</p><p>모든 테스트의 통과는 준비한 사례에 대한 결과입니다. 큰 파일·중복 키·성능·모든 운영체제의 동작을 증명하지 않습니다. 새 결함을 발견하면 재현 입력과 기대 동작을 추가하고, 기존 정상 동작도 다시 검사하는 방식으로 범위를 넓힙니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>통과 메시지만 보고 테스트가 결함을 잡는다고 단정한다.</dt><dd>작은 고의 결함에서 실제 실패하는지 확인한 뒤 복구합니다.</dd><dt>실패를 없애기 위해 요구 사항 검토 없이 기대값을 바꾼다.</dt><dd>독립 기대값의 근거를 먼저 확인하고 구현과 요구 사항 중 어디가 틀렸는지 판단합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -142,15 +144,16 @@ learner=Loki minutes=30 selected=False</pre></div></li><li><h3>사본에서 경�
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="cli.html"><small>← 이전 차시</small>재사용 가능한 명령행 도구</a>
             <a href="mutable-data.html"><small>다음 차시 →</small>변경 가능한 자료와 방어적 복사</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://docs.python.org/3/library/unittest.html" target="_blank" rel="noopener noreferrer">Python · unittest ↗</a></li>
         <li><a href="https://docs.python.org/3/reference/simple_stmts.html#the-assert-statement" target="_blank" rel="noopener noreferrer">Python · assert와 최적화 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

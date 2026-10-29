@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/pwn/ownership.html">
 <title>메모리 소유권·빌림·해제 — Pwn / System · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/pwn.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/pwn.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="pwn.ownership" style="--course-accent:var(--map-violet)">
+<body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="pwn.ownership" data-path="" style="--course-accent:var(--map-violet)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -86,14 +87,15 @@
               <span class="lesson-dot" data-dot="pwn.atomic-open" aria-hidden="true"></span><span>파일 열기·TOCTOU·객체 검증<small class="completion-label" data-completion="pwn.atomic-open"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/pwn.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">04 · 소유권과 작은 파서 · 10 / 16</div><h1>메모리 소유권·빌림·해제</h1><p class="lesson-objective">누가 할당된 버퍼를 해제하는지 명시하고 해제 이후 별칭의 수명을 추적합니다.</p></div></header>
           <div class="lesson-meta"><span>응용</span><span>학습 60–100분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>버퍼 크기, 유효한 데이터 길이, 문자열 길이를 구분할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>할당 용량과 채워진 바이트 수는 다르고 strlen은 첫 NUL까지만 셉니다. 읽기 전에 경계와 객체 수명을 확인합니다.</p><a href="../../guides/bridges.html#c">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Ubuntu/WSL · GCC · C11 · 로컬 소스 실습</strong></p><ul><li>Pwn ZIP을 풀고 pwn 폴더에서 실행합니다. gcc --version을 확인합니다. Windows PowerShell에서 C 명령을 직접 실행하지 않고 WSL의 같은 폴더에서 실행합니다.</li><li>새로운 소스는 안전한 조건 분기만 실행하며 시스템 보호를 끄지 않습니다. gcc -std=c11 -Wall -Wextra -Werror -Wformat=2 -g -O0로 빌드합니다. 주소·진단의 세부 형식은 도구별로 달라질 수 있습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Ubuntu/WSL · GCC · C11 · 로컬 소스 실습</strong></p><ul><li>Pwn ZIP을 풀고 pwn 폴더에서 실행합니다. gcc --version을 확인합니다. Windows PowerShell에서 C 명령을 직접 실행하지 않고 WSL의 같은 폴더에서 실행합니다.</li><li>새로운 소스는 안전한 조건 분기만 실행하며 시스템 보호를 끄지 않습니다. gcc -std=c11 -Wall -Wextra -Werror -Wformat=2 -g -O0로 빌드합니다. 주소·진단의 세부 형식은 도구별로 달라질 수 있습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="lifetime.html">시스템 보안 · 스택·힙과 수명 ↗</a></li><li><a href="errors.html">시스템 보안 · Sanitizer로 경계 오류 찾기 ↗</a></li><li><a href="allocation-size.html">시스템 보안 · 할당 크기와 정수 wrap 방지 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>동적 할당 결과를 여러 포인터가 가리킬 수 있어도 같은 블록을 여러 번 해제하면 안 됩니다. 소유자는 해제 책임을 지고, 빌린 포인터는 정해진 수명 동안 읽거나 쓰기만 한다는 약속을 함수 인터페이스와 기록으로 드러내면 책임이 선명해집니다.</p><figure class="learning-visual" data-visual-id="pwn.ownership"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 타임라인</span><h3>사용을 끝낸 뒤 소유자가 한 번 해제합니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="사용을 끝낸 뒤 소유자가 한 번 해제합니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" width="760" height="460" role="img" aria-labelledby="visual-pwn-ownership-title visual-pwn-ownership-desc" focusable="false"><title id="visual-pwn-ownership-title">사용을 끝낸 뒤 소유자가 한 번 해제합니다</title><desc id="visual-pwn-ownership-desc">make_note가 만든 힙 버퍼의 소유자는 main입니다. show_note는 호출 중 빌려 읽고 반환하며, 이후 main이 해제하고 owner를 NULL로 바꿉니다. 다른 별칭이 자동으로 지워지는 것은 아닙니다.</desc><defs><marker id="visual-pwn-ownership-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><path class="v-edge " d="M166 40V434" marker-end="url(#visual-pwn-ownership-arrow)"/><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="57">할당</tspan></text><circle class="v-point" cx="166" cy="52" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="26" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="39" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="54">make_note</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="85">main이 소유권 받음</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="163">빌림</tspan></text><circle class="v-point" cx="166" cy="158" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="132" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="145" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="160">show_note</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="191">유효한 동안 읽기</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="269">해제</tspan></text><circle class="v-point" cx="166" cy="264" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="238" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="251" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="266">free(owner)</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="297">블록 수명 종료</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="375">변수 변경</tspan></text><circle class="v-point" cx="166" cy="370" r="6"/><g class="v-tone positive"><rect class="v-node" x="202" y="344" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="357" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="372">owner = NULL</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="403">다른 별칭은 별개</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">포인터 변수가 남아 있어도 해제된 객체를 사용할 수 없습니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>make_note가 만든 힙 버퍼의 소유자는 main입니다. show_note는 호출 중 빌려 읽고 반환하며, 이후 main이 해제하고 owner를 NULL로 바꿉니다. 다른 별칭이 자동으로 지워지는 것은 아닙니다.</p></details></figure><p>make_note는 문자열을 별도 힙 버퍼에 복사하고 호출자에게 소유권을 넘깁니다. show_note는 const char*를 빌려 출력하지만 해제하지 않습니다. const는 이 포인터를 통한 쓰기를 제한할 뿐 다른 별칭의 변경이나 수명 문제를 자동으로 없애지는 않습니다.</p><p>malloc 실패는 NULL로 표시할 수 있으므로 성공을 확인한 뒤에만 버퍼를 사용합니다. 이 예제는 짧고 고정된 Bifrost 표본을 복사하며 임의의 거대 입력을 다루는 범용 문자열 라이브러리가 아닙니다. 앞 차시의 크기 계산 제한도 별도 관심사입니다.</p><p>free는 할당된 블록을 반환하지만 그 주소를 담던 다른 포인터 변수들을 자동으로 지우지 않습니다. owner=NULL은 현재 변수의 실수 재사용을 줄이지만 이미 복사된 별칭까지 무효화하는 장치는 아닙니다. 빌린 포인터는 owner가 해제하기 전에만 사용해야 합니다.</p><p>Sanitizer는 실행한 경로의 수명 오류를 관찰하는 도구입니다. 진단이 없었다고 모든 경로에 누수나 해제 후 접근이 없음을 증명하지는 않습니다. 소유권 설계, 성공·실패 경로의 해제 책임, 정상 실행 검사와 함께 사용합니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>free가 포인터를 자동으로 NULL로 바꾼다고 생각한다.</dt><dd>free는 블록의 수명을 끝냅니다. 변수와 다른 별칭은 자동 변경되지 않습니다.</dd><dt>const char*이면 어떤 수명에서도 읽어도 된다고 생각한다.</dt><dd>const는 쓰기 제약이고 수명 보장은 아닙니다. 읽는 동안 객체가 유효해야 합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -145,16 +147,17 @@ owner_is_null=yes</pre></div></li><li><h3>별칭이 사용되는 순서 추적�
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="format-strings.html"><small>← 이전 차시</small>서식 문자열·데이터·출력 잘림</a>
             <a href="binary-parser.html"><small>다음 차시 →</small>바이너리 길이·엔디언·파서 경계</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/memory-management-mem/mem31-c/" target="_blank" rel="noopener noreferrer">SEI CERT C · 할당 메모리 해제 ↗</a></li>
         <li><a href="https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/memory-management-mem/mem30-c/" target="_blank" rel="noopener noreferrer">SEI CERT C · 해제 후 접근 금지 ↗</a></li>
         <li><a href="https://gcc.gnu.org/onlinedocs/gcc/Instrumentation-Options.html" target="_blank" rel="noopener noreferrer">GCC · AddressSanitizer 등 계측 옵션 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

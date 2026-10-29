@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/cloud/private-endpoint-paths.html">
 <title>프라이빗 엔드포인트와 DNS 경로 — Cloud Security · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/cloud.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/cloud.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="cloud" data-course-number="04" data-view="lesson" data-lesson-id="cloud.private-endpoint-paths" style="--course-accent:var(--map-sky)">
+<body class="learning-page" data-course="cloud" data-course-number="04" data-view="lesson" data-lesson-id="cloud.private-endpoint-paths" data-path="" style="--course-accent:var(--map-sky)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -79,14 +80,15 @@
               <span class="lesson-dot" data-dot="cloud.breakglass-access" aria-hidden="true"></span><span>긴급 접근의 만료·회수·증거<small class="completion-label" data-completion="cloud.breakglass-access"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/cloud.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">04 · 권한 조합과 워크로드 경계 · 16 / 17</div><h1>프라이빗 엔드포인트와 DNS 경로</h1><p class="lesson-objective">이름 해석·네트워크 경로·엔드포인트 정책·신원 권한을 분리합니다.</p></div></header>
           <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>사설 네트워크에 있으면 자원 접근 권한도 생기나요?</p><details><summary>판단 기준과 보충 자료</summary><p>경로 도달과 자원 인가는 별개입니다. 신원·정책·서비스 설정을 함께 확인해야 합니다.</p><a href="../../guides/bridges.html#network">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>로컬 파일 실습 · Python 3.10 이상</strong></p><ul><li>cloud ZIP 전체를 풀고 boundary_models.py와 boundary-models.json가 있는 폴더에서 실행합니다. 외부 서버·클라우드 계정·실제 네트워크 접속은 없습니다.</li><li>Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. 변경 실험은 원본을 보관하고 사본과 --input 옵션을 사용합니다.</li><li>Python 3.10 이상 표준 라이브러리만 사용합니다. 추가 패키지가 필요하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>로컬 파일 실습 · Python 3.10 이상</strong></p><ul><li>cloud ZIP 전체를 풀고 boundary_models.py와 boundary-models.json가 있는 폴더에서 실행합니다. 외부 서버·클라우드 계정·실제 네트워크 접속은 없습니다.</li><li>Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. 변경 실험은 원본을 보관하고 사본과 --input 옵션을 사용합니다.</li><li>Python 3.10 이상 표준 라이브러리만 사용합니다. 추가 패키지가 필요하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="vpc.html">클라우드 보안 · VPC·서브넷·보안 경계 ↗</a></li><li><a href="effective-permissions.html">클라우드 보안 · 실효 권한과 허용 범위의 교집합 ↗</a></li><li><a href="../network/dns-cache.html">네트워크 보안 · DNS TTL과 부정 응답 캐시 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>프라이빗 엔드포인트를 만들었다고 모든 클라이언트가 자동으로 그 경로를 쓰지는 않습니다. 서비스 이름이 어느 주소로 해석되는지, 클라이언트가 어떤 네트워크 경로를 갖는지 확인해야 합니다. 같은 이름도 리졸버·네트워크·DNS 설정에 따라 다른 경로를 사용할 수 있습니다.</p><figure class="learning-visual" data-visual-id="cloud.private-endpoint-paths"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 흐름도</span><h3>이름에서 자원 접근까지 네 조건</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="이름에서 자원 접근까지 네 조건 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 222" width="760" height="222" role="img" aria-labelledby="visual-cloud-private-endpoint-paths-title visual-cloud-private-endpoint-paths-desc" focusable="false"><title id="visual-cloud-private-endpoint-paths-title">이름에서 자원 접근까지 네 조건</title><desc id="visual-cloud-private-endpoint-paths-desc">private 이름 해석, 가능한 네트워크 경로, 엔드포인트 정책, 서비스 신원 권한이 각각 필요하다고 둔 모형입니다. 실제 정책 평가는 서비스별로 더 복잡합니다.</desc><defs><marker id="visual-cloud-private-endpoint-paths-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><circle class="v-step-circle" cx="42" cy="27" r="13"/><text class="v-step-number" x="42" y="31" text-anchor="middle">1</text><g class="v-tone "><rect class="v-node" x="28" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="29" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="82">DNS</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="113">private 대상인가</tspan></text></g><circle class="v-step-circle" cx="225.5" cy="27" r="13"/><text class="v-step-number" x="225.5" y="31" text-anchor="middle">2</text><g class="v-tone "><rect class="v-node" x="211.5" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="212.5" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="228.5" y="82">네트워크</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="228.5" y="113">경로가 가능한가</tspan></text></g><path class="v-edge " d="M185.5 126H206.5" marker-end="url(#visual-cloud-private-endpoint-paths-arrow)"/><circle class="v-step-circle" cx="409" cy="27" r="13"/><text class="v-step-number" x="409" y="31" text-anchor="middle">3</text><g class="v-tone "><rect class="v-node" x="395" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="396" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="412" y="82">엔드포인트 정책</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="412" y="113">이 경로를</tspan><tspan x="412" y="133">허용하는가</tspan></text></g><path class="v-edge " d="M369 126H390" marker-end="url(#visual-cloud-private-endpoint-paths-arrow)"/><circle class="v-step-circle" cx="592.5" cy="27" r="13"/><text class="v-step-number" x="592.5" y="31" text-anchor="middle">4</text><g class="v-tone positive"><rect class="v-node" x="578.5" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="579.5" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="595.5" y="82">신원 권한</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="595.5" y="113">자원 행동을</tspan><tspan x="595.5" y="133">허용하는가</tspan></text></g><path class="v-edge " d="M552.5 126H573.5" marker-end="url(#visual-cloud-private-endpoint-paths-arrow)"/></svg></div><figcaption><span class="visual-takeaway">사설 경로와 자원 권한은 별도입니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>private 이름 해석, 가능한 네트워크 경로, 엔드포인트 정책, 서비스 신원 권한이 각각 필요하다고 둔 모형입니다. 실제 정책 평가는 서비스별로 더 복잡합니다.</p></details></figure><p>표본 E1은 이름이 private-endpoint를 가리키고 네트워크·엔드포인트 정책·신원 권한이 모두 맞아 ALLOW_MODEL입니다. E2는 public-endpoint로 해석되어 PUBLIC_PATH로 표시합니다. 이는 공용 경로라는 관측이지 실제 허용이나 거부 판정은 아닙니다.</p><p>엔드포인트 정책은 해당 경로의 이용을 제한하는 조건입니다. 서비스의 자원 정책이나 IAM 권한을 대신하지 않으므로 E3의 신원 권한 부재와 E4의 엔드포인트 거부는 따로 나타납니다. 실제 평가는 서비스별 지원과 다른 정책 조합도 확인해야 합니다.</p><p>프라이빗 경로는 서버 신원 검증·TLS·사용자 인증과 별개이며 자원의 공용 접근을 자동으로 비활성화하지도 않습니다. 모형은 경로와 정책을 이미 평가했다고 가정한 boolean 값만 사용합니다. 실제 DNS·라우팅·보안 그룹·공급자 자원은 조회하거나 만들지 않습니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>private 경로면 데이터가 자동으로 암호화된다고 한다.</dt><dd>전송 암호화·서버 신원 검증을 별도로 유지합니다.</dd><dt>엔드포인트 생성으로 자원 공용 접근도 꺼졌다고 본다.</dt><dd>자원 정책과 공용 경로의 실제 거부를 따로 확인합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -140,15 +142,16 @@ E4 DENY_ENDPOINT_POLICY</pre></div></li><li><h3>DNS 대상만 수정</h3><p>E2�
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="metadata-credentials.html"><small>← 이전 차시</small>메타데이터 서비스와 자격 증명 경계</a>
             <a href="breakglass-access.html"><small>다음 차시 →</small>긴급 접근의 만료·회수·증거</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://docs.aws.amazon.com/vpc/latest/privatelink/privatelink-access-aws-services.html" target="_blank" rel="noopener noreferrer">AWS PrivateLink · DNS와 접근 ↗</a></li>
         <li><a href="https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-access.html" target="_blank" rel="noopener noreferrer">AWS · 엔드포인트 정책 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

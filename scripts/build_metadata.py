@@ -13,7 +13,7 @@ def build(courses):
     files=[*sorted((ROOT/'content/courses').glob('*.json')),
            *[ROOT/'content'/n for n in ('fields.json','visuals.json','transfer-exercises.txt','projects.json','learning-paths.json')],
            *sorted((ROOT/'templates').glob('*')),
-           *[ROOT/n for n in ('js/learning-view.js','js/study-search.js','css/study.css','scripts/render_study.cjs','scripts/learning_design.py','scripts/site_security.cjs')]]
+           *[ROOT/n for n in ('js/learning-view.js','js/learning.js','js/path-progress.js','js/study-search.js','css/study.css','css/theme.css','js/theme.js','css/main.css','scripts/render_pages.cjs','scripts/render_study.cjs','scripts/learning_design.py','scripts/site_security.cjs')]]
     digest=hashlib.sha256()
     for file in sorted(files, key=lambda p: p.relative_to(ROOT).as_posix()):
         digest.update(file.relative_to(ROOT).as_posix().encode('utf-8')+b'\0'+file.read_bytes())

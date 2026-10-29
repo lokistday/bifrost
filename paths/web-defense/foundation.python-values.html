@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="이름에 값을 담고 숫자 계산과 문자열 출력을 구분합니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="변수·문자열·자료형 — 웹의 동작부터 안전한 상태 관리까지 · Bifrost">
+<meta property="og:description" content="이름에 값을 담고 숫자 계산과 문자열 출력을 구분합니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/paths/web-defense/foundation.python-values.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/paths/web-defense/foundation.python-values.html">
+<title>변수·문자열·자료형 — 웹의 동작부터 안전한 상태 관리까지 · Bifrost</title>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/foundation.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-paths.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/path-progress.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
+</head>
+<body class="learning-page" data-course="foundation" data-course-number="00" data-view="lesson" data-lesson-id="foundation.python-values" data-path="web-defense" style="--course-accent:var(--map-cyan)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#pathOutline">웹 보안 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="foundation.python-values">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../learn/">학습 경로</a><span aria-hidden="true">/</span><a href="./">웹의 동작부터 안전한 상태 관리까지</a><span aria-hidden="true">/</span><span aria-current="page">5단계</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar path-sidebar"><a class="back-link" href="./">← 웹의 동작부터 안전한 상태 관리까지 목차</a>
+        <div class="course-stats"><span data-path-count></span><div class="course-meter" role="progressbar" aria-label="웹의 동작부터 안전한 상태 관리까지 차시 완료 진도" aria-valuemin="0" aria-valuemax="100" data-path-meter><span></span></div></div>
+        <nav aria-label="웹의 동작부터 안전한 상태 관리까지 경로 목차"><details ><summary>Foundation<span class="caption">1–3단계</span></summary><ol><li><a class="side-lesson" href="foundation.environment.html" >
+          <span class="path-step-number">1</span><span><small>공통 기초 · 권장 선행</small>실습 환경 준비와 첫 실행<small class="completion-label" data-completion="foundation.environment"></small></span></a></li><li><a class="side-lesson" href="foundation.network.html" >
+          <span class="path-step-number">2</span><span><small>공통 기초 · 권장 선행</small>IP·포트·DNS와 전송<small class="completion-label" data-completion="foundation.network"></small></span></a></li><li><a class="side-lesson" href="foundation.http.html" >
+          <span class="path-step-number">3</span><span><small>공통 기초 · 권장 선행</small>HTTP 요청과 응답 읽기<small class="completion-label" data-completion="foundation.http"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">4–4단계</span></summary><ol><li><a class="side-lesson" href="web.flow.html" >
+          <span class="path-step-number">4</span><span><small>웹 보안 · 경로 핵심</small>HTML·DOM과 요청 흐름<small class="completion-label" data-completion="web.flow"></small></span></a></li>
+          </ol></details><details open><summary>Foundation<span class="caption">5–6단계</span></summary><ol><li><a class="side-lesson" href="foundation.python-values.html" aria-current="page">
+          <span class="path-step-number">5</span><span><small>공통 기초 · 권장 선행</small>변수·문자열·자료형<small class="completion-label" data-completion="foundation.python-values"></small></span></a></li><li><a class="side-lesson" href="foundation.python-flow.html" >
+          <span class="path-step-number">6</span><span><small>공통 기초 · 권장 선행</small>조건·반복·함수<small class="completion-label" data-completion="foundation.python-flow"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">7–14단계</span></summary><ol><li><a class="side-lesson" href="web.sql.html" >
+          <span class="path-step-number">7</span><span><small>웹 보안 · 경로 핵심</small>SELECT·WHERE와 매개변수<small class="completion-label" data-completion="web.sql"></small></span></a></li><li><a class="side-lesson" href="web.sessions.html" >
+          <span class="path-step-number">8</span><span><small>웹 보안 · 경로 핵심</small>쿠키·세션·인증<small class="completion-label" data-completion="web.sessions"></small></span></a></li><li><a class="side-lesson" href="web.authorization.html" >
+          <span class="path-step-number">9</span><span><small>웹 보안 · 경로 핵심</small>리소스 단위 인가<small class="completion-label" data-completion="web.authorization"></small></span></a></li><li><a class="side-lesson" href="web.sql-injection.html" >
+          <span class="path-step-number">10</span><span><small>웹 보안 · 경로 핵심</small>SQL Injection과 바인딩<small class="completion-label" data-completion="web.sql-injection"></small></span></a></li><li><a class="side-lesson" href="web.output.html" >
+          <span class="path-step-number">11</span><span><small>웹 보안 · 경로 핵심</small>출력 컨텍스트와 XSS 방어<small class="completion-label" data-completion="web.output"></small></span></a></li><li><a class="side-lesson" href="web.csrf.html" >
+          <span class="path-step-number">12</span><span><small>웹 보안 · 경로 핵심</small>CSRF와 상태 변경 요청<small class="completion-label" data-completion="web.csrf"></small></span></a></li><li><a class="side-lesson" href="web.cors.html" >
+          <span class="path-step-number">13</span><span><small>웹 보안 · 경로 핵심</small>동일 출처·CORS·응답 읽기 권한<small class="completion-label" data-completion="web.cors"></small></span></a></li><li><a class="side-lesson" href="web.csp.html" >
+          <span class="path-step-number">14</span><span><small>웹 보안 · 경로 핵심</small>CSP·보안 헤더와 적용 범위<small class="completion-label" data-completion="web.csp"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">15–22단계</span></summary><ol><li><a class="side-lesson" href="foundation.paths.html" >
+          <span class="path-step-number">15</span><span><small>공통 기초 · 권장 선행</small>경로와 작업용 사본<small class="completion-label" data-completion="foundation.paths"></small></span></a></li><li><a class="side-lesson" href="foundation.python-files.html" >
+          <span class="path-step-number">16</span><span><small>공통 기초 · 권장 선행</small>CSV 읽기와 오류 좁히기<small class="completion-label" data-completion="foundation.python-files"></small></span></a></li><li><a class="side-lesson" href="foundation.text-bytes.html" >
+          <span class="path-step-number">17</span><span><small>공통 기초 · 권장 선행</small>문자열·바이트·UTF-8의 경계<small class="completion-label" data-completion="foundation.text-bytes"></small></span></a></li><li><a class="side-lesson" href="foundation.structured-data.html" >
+          <span class="path-step-number">18</span><span><small>공통 기초 · 권장 선행</small>JSON 파싱과 데이터 계약<small class="completion-label" data-completion="foundation.structured-data"></small></span></a></li><li><a class="side-lesson" href="foundation.exceptions.html" >
+          <span class="path-step-number">19</span><span><small>공통 기초 · 권장 선행</small>예외·오류 메시지·종료 상태<small class="completion-label" data-completion="foundation.exceptions"></small></span></a></li><li><a class="side-lesson" href="foundation.cli.html" >
+          <span class="path-step-number">20</span><span><small>공통 기초 · 권장 선행</small>재사용 가능한 명령행 도구<small class="completion-label" data-completion="foundation.cli"></small></span></a></li><li><a class="side-lesson" href="foundation.unit-tests.html" >
+          <span class="path-step-number">21</span><span><small>공통 기초 · 권장 선행</small>경계값 테스트와 실패 실험<small class="completion-label" data-completion="foundation.unit-tests"></small></span></a></li><li><a class="side-lesson" href="foundation.mutable-data.html" >
+          <span class="path-step-number">22</span><span><small>공통 기초 · 권장 선행</small>변경 가능한 자료와 방어적 복사<small class="completion-label" data-completion="foundation.mutable-data"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">23–23단계</span></summary><ol><li><a class="side-lesson" href="web.mass-assignment.html" >
+          <span class="path-step-number">23</span><span><small>웹 보안 · 경로 핵심</small>요청 계약과 Mass Assignment<small class="completion-label" data-completion="web.mass-assignment"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">24–24단계</span></summary><ol><li><a class="side-lesson" href="foundation.config-precedence.html" >
+          <span class="path-step-number">24</span><span><small>공통 기초 · 권장 선행</small>설정 우선순위와 출처 추적<small class="completion-label" data-completion="foundation.config-precedence"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">25–25단계</span></summary><ol><li><a class="side-lesson" href="web.session-lifecycle.html" >
+          <span class="path-step-number">25</span><span><small>웹 보안 · 경로 핵심</small>세션 갱신·만료·서버 무효화<small class="completion-label" data-completion="web.session-lifecycle"></small></span></a></li>
+          </ol></details><details ><summary>Cryptography<span class="caption">26–27단계</span></summary><ol><li><a class="side-lesson" href="crypto.representation.html" >
+          <span class="path-step-number">26</span><span><small>암호학 · 권장 선행</small>바이트·Hex·Base64<small class="completion-label" data-completion="crypto.representation"></small></span></a></li><li><a class="side-lesson" href="crypto.hash.html" >
+          <span class="path-step-number">27</span><span><small>암호학 · 권장 선행</small>SHA-256과 파일 무결성<small class="completion-label" data-completion="crypto.hash"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">28–31단계</span></summary><ol><li><a class="side-lesson" href="web.reset-tokens.html" >
+          <span class="path-step-number">28</span><span><small>웹 보안 · 경로 핵심</small>일회 토큰·목적 결합·만료<small class="completion-label" data-completion="web.reset-tokens"></small></span></a></li><li><a class="side-lesson" href="web.private-caching.html" >
+          <span class="path-step-number">29</span><span><small>웹 보안 · 경로 핵심</small>개인 응답·공유 캐시·Cache-Control<small class="completion-label" data-completion="web.private-caching"></small></span></a></li><li><a class="side-lesson" href="web.regression.html" >
+          <span class="path-step-number">30</span><span><small>웹 보안 · 권장 선행</small>수정·반례·회귀 테스트<small class="completion-label" data-completion="web.regression"></small></span></a></li><li><a class="side-lesson" href="web.idempotency.html" >
+          <span class="path-step-number">31</span><span><small>웹 보안 · 경로 핵심</small>거래 불변 조건·트랜잭션·재시도<small class="completion-label" data-completion="web.idempotency"></small></span></a></li>
+          </ol></details><a class="side-lesson path-project-link" href="project.html"><span class="path-step-number">✦</span><span>마지막 · 종합 프로젝트</span></a></nav>
+        <a class="back-link" href="../../learn/#paths">다른 학습 경로 보기 ↗</a></aside><article class="lesson-article">
+          <nav class="path-location" aria-label="현재 학습 경로"><a href="./">웹 보안</a><strong>5 / 31단계</strong><a href="./#pathOutline">경로 목차 ↗</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/foundation.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">Foundation · 02 · Python을 작은 단계로 · 5 / 31</div><h1>변수·문자열·자료형</h1><p class="lesson-objective">이름에 값을 담고 숫자 계산과 문자열 출력을 구분합니다.</p></div></header>
+          <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>파일의 위치와 실행 결과를 따로 설명할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>셸의 현재 폴더·파일 경로·프로그램 출력을 구별합니다. 환경 준비와 경로 차시에서 확인하세요.</p><a href="../../guides/bridges.html#python">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Python 3와 텍스트 편집기</strong></p><ul><li>예제 전체를 values.py라는 새 파일에 저장한 뒤 python3 values.py로 실행합니다. Windows는 py -3 values.py를 사용합니다.</li><li>이 차시의 코드는 설치 없이 Python 표준 기능만 사용합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="foundation.environment.html">공통 기초 · 실습 환경 준비와 첫 실행 ↗</a></li></ul>
+            </details>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>변수는 값에 붙이는 이름입니다. minutes = 15는 이름에 정수를 연결하지만 &quot;15&quot;는 문자열입니다. 정수끼리 +하면 합이 되고 문자열끼리 +하면 이어 붙입니다. 따라서 입력값을 계산하려면 자료형을 확인해야 합니다.</p><figure class="learning-visual" data-visual-id="foundation.python-values"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교도</span><h3>같은 15라도 자료형에 따라 결과가 달라집니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="같은 15라도 자료형에 따라 결과가 달라집니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" role="img" aria-labelledby="visual-foundation-python-values-title visual-foundation-python-values-desc" focusable="false"><title id="visual-foundation-python-values-title">같은 15라도 자료형에 따라 결과가 달라집니다</title><desc id="visual-foundation-python-values-desc">정수 15에 15를 더하면 30입니다. 문자열 &quot;15&quot;에 문자열 &quot;15&quot;를 더하면 &quot;1515&quot;로 이어집니다. int(&quot;15&quot;)는 문자열을 정수로 해석합니다. 따옴표와 자료형을 구분해야 예상 결과를 설명할 수 있습니다.</desc><defs><marker id="visual-foundation-python-values-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone positive"><rect class="v-node" x="28" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="29" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="45" y="55">숫자 · int</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="84">저장한 값</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="107">minutes = 15</tspan></text><path class="v-separator" d="M45 128H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="148">덧셈</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="171">15 + 15 → 30</tspan></text><path class="v-separator" d="M45 192H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="212">곱셈</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="235">15 * 2 → 30</tspan></text></g><g class="v-tone "><rect class="v-node" x="392" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="393" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="409" y="55">문자열 · str</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="84">저장한 값</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="107">minutes = &quot;15&quot;</tspan></text><path class="v-separator" d="M409 128H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="148">이어 붙이기</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="171">&quot;15&quot; + &quot;15&quot; → &quot;1515&quot;</tspan></text><path class="v-separator" d="M409 192H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="212">정수로 변환</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="235">int(&quot;15&quot;) → 15</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">화면에 비슷하게 보여도 type으로 확인한 자료형에 따라 연산의 뜻이 달라집니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>정수 15에 15를 더하면 30입니다. 문자열 &quot;15&quot;에 문자열 &quot;15&quot;를 더하면 &quot;1515&quot;로 이어집니다. int(&quot;15&quot;)는 문자열을 정수로 해석합니다. 따옴표와 자료형을 구분해야 예상 결과를 설명할 수 있습니다.</p></details></figure><p>f 문자열 안의 중괄호는 값을 출력문에 넣습니다. hello.py의 minutes * 2는 정수 곱셈이므로 30입니다. 문자열과 숫자를 무작정 더하면 TypeError가 날 수 있습니다. 오류 메시지 마지막 줄의 유형과 발생 줄을 함께 읽으세요.</p><p>대입문은 오른쪽 식을 먼저 계산한 뒤 왼쪽 이름에 연결합니다. minutes = minutes + 5는 기존 값을 읽고 5를 더한 새 값을 저장한다는 뜻입니다. 수학에서의 등식과 읽는 방향이 다릅니다.</p><p>문자열 &quot;20&quot;을 int로 바꾸면 숫자 계산이 가능하지만 모든 문자열이 숫자는 아닙니다. int(&quot;twenty&quot;)는 ValueError가 납니다. 사용자 입력을 받는 프로그램에서는 변환 실패도 정상적으로 처리할 경우에 포함해야 합니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>값이 20처럼 보여도 자료형을 확인하지 않는다.</dt><dd>type으로 종류를 확인하고, 계산과 문자열 표시를 별도 단계로 둡니다.</dd><dt>예제 파일을 바꾼 후 다른 이름의 파일을 실행한다.</dt><dd>편집한 경로와 실행 인자를 함께 기록해 같은 파일을 다루는지 확인합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/foundation.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/foundation/hello.py" download>hello.py ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>Python 코드 · 안내된 .py 파일에 저장해 실행 · Python 3와 텍스트 편집기</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">minutes = 15
+print(type(minutes).__name__)
+print(minutes * 2)
+print(&quot;15&quot; + &quot;15&quot;)
+print(f&quot;Study: {minutes} minutes&quot;)</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>int
+30
+1515
+Study: 15 minutes</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>값과 자료형을 나란히 보기</h3><p>따옴표 유무를 바꾸어 같은 기호 20이 어떤 값으로 취급되는지 확인합니다. 새 파일에 코드를 저장하고 실행하세요.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>Python 부분 코드 · 앞 단계의 변수·객체를 유지한 같은 스크립트 · Python 3와 텍스트 편집기</span></div><pre><code>print(type(20).__name__)
+print(type(&quot;20&quot;).__name__)</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>int
+str</pre></div></li><li><h3>연산 전에 결과 예측하기</h3><p>정수의 곱셈은 수량을 계산하고 문자열의 곱셈은 문자열을 반복합니다. 먼저 예측을 적은 뒤 실행해 차이를 확인합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>Python 부분 코드 · 앞 단계의 변수·객체를 유지한 같은 스크립트 · Python 3와 텍스트 편집기</span></div><pre><code>minutes = 20
+print(minutes * 2)
+print(&quot;20&quot; * 2)
+print(int(&quot;20&quot;) * 2)</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>40
+2020
+40</pre></div></li><li><h3>출력과 계산 분리하기</h3><p>f 문자열은 값을 표시하는 데 쓰입니다. 숫자값 minutes를 출력문 안에 넣어도 원래 변수의 자료형이 바뀌지는 않습니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>Python 부분 코드 · 앞 단계의 변수·객체를 유지한 같은 스크립트 · Python 3와 텍스트 편집기</span></div><pre><code>minutes = 20
+print(f&quot;Study: {minutes} minutes&quot;)
+print(type(minutes).__name__)</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>Study: 20 minutes
+int</pre></div></li></ol></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>숫자 minutes를 20으로 바꾸고 계산 결과를 먼저 예측하세요. int(&quot;20&quot;)와 &quot;20&quot;의 자료형도 비교합니다.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>type(value).__name__으로 자료형을 확인하세요. 따옴표의 유무를 살펴봅니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>minutes = 20으로 수정하면 minutes * 2는 40입니다. 기존 예제의 고정 문자열 &quot;15&quot; + &quot;15&quot;는 바꾸지 않았다면 계속 1515입니다.</li><li>int(&quot;20&quot;)은 int이고 &quot;20&quot;은 str임을 출력합니다. 값 변경과 자료형 변경을 구분해 설명합니다.</li><li>hello.py에서 minutes를 바꾼 실험과 새 values.py의 실험을 파일 이름별로 나누어 기록합니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>기존 예제의 minutes만 20으로 변경하면 int / 40 / 1515 / Study: 20 minutes입니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>문자열 &quot;08&quot;과 정수 8을 각각 두 배로 만들고, 문자열을 숫자로 변환한 뒤의 결과와 비교하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>&quot;08&quot; * 2는 &quot;0808&quot;, 8 * 2와 int(&quot;08&quot;) * 2는 16입니다. 값과 자료형을 함께 기록합니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>숫자 덧셈과 문자열 연결의 차이를 설명했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>변경 전 예상과 변경 후 실제 출력을 기록했다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/foundation/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. minutes = 20일 때 print(&quot;20&quot; + &quot;20&quot;)의 출력이 40이 아닌 이유는?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>문자열끼리의 +는 문자들을 이어 붙이기 때문이다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>Python은 20이라는 수를 계산할 수 없기 때문이다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>print가 항상 숫자를 두 번 출력하기 때문이다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 문자열끼리의 +는 문자들을 이어 붙이기 때문이다.</strong></p><p>따옴표 안의 값은 str입니다. 정수 계산을 하려면 int(&quot;20&quot;)처럼 변환하여 더해야 합니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. int(&quot;twenty&quot;)를 실행해 ValueError가 났습니다. 무엇을 확인해야 할까요?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>Python을 재설치해야 한다.</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>문자열이 정수 형식으로 변환 가능한 입력인지 확인한다.</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>변수 이름을 모두 대문자로 바꾼다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 문자열이 정수 형식으로 변환 가능한 입력인지 확인한다.</strong></p><p>int는 임의의 영어 단어를 숫자로 해석하지 않습니다. 입력 형식과 변환 실패 처리를 확인해야 합니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>숫자 덧셈과 문자열 연결의 차이를 설명했다.</li><li>변경 전 예상과 변경 후 실제 출력을 기록했다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="경로의 이전·다음 단계"><a href="web.flow.html"><small>← 이전 단계</small>HTML·DOM과 요청 흐름</a>
+            <a href="foundation.python-flow.html"><small>다음 단계 →</small>조건·반복·함수</a></nav>
+          <p class="caption"><a href="../../tracks/foundation/python-values.html">이 차시를 Foundation 분야 과정으로 보기 ↗</a></p>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://docs.python.org/3/tutorial/introduction.html" target="_blank" rel="noopener noreferrer">Python · 숫자와 문자열 입문 ↗</a></li>
+        <li><a href="https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals" target="_blank" rel="noopener noreferrer">Python · 형식 문자열 ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

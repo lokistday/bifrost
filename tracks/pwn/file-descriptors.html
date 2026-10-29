@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/pwn/file-descriptors.html">
 <title>파일 디스크립터·dup·공유 오프셋 — Pwn / System · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/pwn.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/pwn.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="pwn.file-descriptors" style="--course-accent:var(--map-violet)">
+<body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="pwn.file-descriptors" data-path="" style="--course-accent:var(--map-violet)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -86,14 +87,15 @@
               <span class="lesson-dot" data-dot="pwn.atomic-open" aria-hidden="true"></span><span>파일 열기·TOCTOU·객체 검증<small class="completion-label" data-completion="pwn.atomic-open"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/pwn.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">06 · 열린 객체와 스트림 경계 · 14 / 16</div><h1>파일 디스크립터·dup·공유 오프셋</h1><p class="lesson-objective">디스크립터 숫자와 열린 파일 상태를 구분하고 중복 핸들의 오프셋·종료를 추적합니다.</p></div></header>
           <div class="lesson-meta"><span>심화 연결</span><span>학습 60–100분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>버퍼 크기, 유효한 데이터 길이, 문자열 길이를 구분할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>할당 용량과 채워진 바이트 수는 다르고 strlen은 첫 NUL까지만 셉니다. 읽기 전에 경계와 객체 수명을 확인합니다.</p><a href="../../guides/bridges.html#c">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Ubuntu/WSL · GCC · C11 · 로컬 시스템 실습</strong></p><ul><li>Pwn ZIP을 풀고 pwn 폴더에서 실행합니다. Windows에서는 WSL 터미널을 사용합니다. gcc --version을 확인하고 -std=c11 -Wall -Wextra -Werror -Wformat=2 -g -O0로 빌드합니다.</li><li>FD·open 차시는 Linux/POSIX API와 자기 mkstemp/mkdtemp 파일만 사용합니다. 다른 사용자 파일이나 시스템 설정을 변경하지 않습니다. 기본 출력은 재현 가능하지만 --layout의 구조체 크기·오프셋은 ABI에 따라 달라집니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Ubuntu/WSL · GCC · C11 · 로컬 시스템 실습</strong></p><ul><li>Pwn ZIP을 풀고 pwn 폴더에서 실행합니다. Windows에서는 WSL 터미널을 사용합니다. gcc --version을 확인하고 -std=c11 -Wall -Wextra -Werror -Wformat=2 -g -O0로 빌드합니다.</li><li>FD·open 차시는 Linux/POSIX API와 자기 mkstemp/mkdtemp 파일만 사용합니다. 다른 사용자 파일이나 시스템 설정을 변경하지 않습니다. 기본 출력은 재현 가능하지만 --layout의 구조체 크기·오프셋은 ABI에 따라 달라집니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="ownership.html">시스템 보안 · 메모리 소유권·빌림·해제 ↗</a></li><li><a href="../foundation/permissions.html">공통 기초 · Linux 권한과 파이프 ↗</a></li><li><a href="binary-strings.html">시스템 보안 · 바이너리 길이와 중간 NUL ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>파일 디스크립터는 프로세스가 열린 객체를 참조하는 작은 정수입니다. 정수 값을 변수에 복사한다고 새 디스크립터가 생기지는 않습니다. dup는 새 디스크립터를 만들지만 같은 열린 파일 설명을 가리키므로 파일 오프셋 같은 일부 상태를 공유합니다.</p><figure class="learning-visual" data-visual-id="pwn.file-descriptors"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 타임라인</span><h3>두 디스크립터가 하나의 offset을 움직입니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="두 디스크립터가 하나의 offset을 움직입니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" width="760" height="460" role="img" aria-labelledby="visual-pwn-file-descriptors-title visual-pwn-file-descriptors-desc" focusable="false"><title id="visual-pwn-file-descriptors-title">두 디스크립터가 하나의 offset을 움직입니다</title><desc id="visual-pwn-file-descriptors-desc">자기 임시 파일 ABCDEF에서 원본이 AB를 읽으면 offset=2, dup가 CD를 읽으면 4입니다. 원본을 닫은 뒤 dup로 EF를 읽으면 6이고 다음 읽기는 EOF입니다.</desc><defs><marker id="visual-pwn-file-descriptors-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><path class="v-edge " d="M166 40V434" marker-end="url(#visual-pwn-file-descriptors-arrow)"/><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="57">offset 0→2</tspan></text><circle class="v-point" cx="166" cy="52" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="26" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="39" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="54">원본 read</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="85">AB</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="163">offset 2→4</tspan></text><circle class="v-point" cx="166" cy="158" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="132" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="145" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="160">dup read</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="191">CD</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="269">참조 종료</tspan></text><circle class="v-point" cx="166" cy="264" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="238" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="251" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="266">원본 close</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="297">dup는 유지</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="375">offset 4→6</tspan></text><circle class="v-point" cx="166" cy="370" r="6"/><g class="v-tone positive"><rect class="v-node" x="202" y="344" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="357" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="372">dup read</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="403">EF · 다음 EOF</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">정수 복사와 dup를 구분하세요.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>자기 임시 파일 ABCDEF에서 원본이 AB를 읽으면 offset=2, dup가 CD를 읽으면 4입니다. 원본을 닫은 뒤 dup로 EF를 읽으면 6이고 다음 읽기는 EOF입니다.</p></details></figure><p>표본은 자신이 만든 임시 파일에 ABCDEF를 쓰고 offset=0으로 되돌린 뒤 dup합니다. 원본에서 AB를 읽으면 다음 위치는 2이고, 복제 디스크립터에서 다음 읽기는 CD가 됩니다. 파일 내용 자체를 독립 복사한 결과가 아닙니다.</p><p>원본 디스크립터를 닫아도 복제 디스크립터가 남아 있으면 열린 객체를 계속 사용할 수 있습니다. 이후 EF를 읽고 마지막 read가 0을 반환하면 EOF입니다. 디스크립터 변수의 정수 값과 커널 객체의 수명을 따로 그려야 합니다.</p><p>read와 write는 요청한 크기보다 적게 처리하거나 신호로 중단될 수 있습니다. 이 표본은 남은 길이를 추적하고 EINTR을 다시 시도하는 작은 도우미를 씁니다. 다른 오류와 EOF를 무조건 성공으로 바꾸지 않으며, 비차단 I/O의 EAGAIN 처리는 별도 설계입니다.</p><p>임시 파일 이름은 생성 직후 unlink해도 열린 FD를 통한 접근은 유지됩니다. 이 실습은 자기 파일만 다루며 다른 사용자 파일을 지우지 않습니다. dup와 별도 open은 오프셋 공유 방식이 다르고, 프로그램 실행으로 FD가 상속되는 정책은 별도 CLOEXEC 검토 대상입니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>int duplicate=fd를 dup와 같은 동작이라고 생각한다.</dt><dd>숫자 복사는 같은 FD의 별칭일 뿐 새 참조를 만들지 않습니다.</dd><dt>dup가 파일 내용과 offset까지 독립 복제한다고 생각한다.</dt><dd>같은 열린 파일 설명을 공유해 offset이 함께 움직입니다. 별도 open과 구분합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -146,16 +148,17 @@ last_read=EOF</pre></div></li><li><h3>닫힌 것은 참조 하나임을 확인�
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="binary-strings.html"><small>← 이전 차시</small>바이너리 길이와 중간 NUL</a>
             <a href="partial-io.html"><small>다음 차시 →</small>부분 I/O·누적 읽기·메시지 경계</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://man7.org/linux/man-pages/man2/dup.2.html" target="_blank" rel="noopener noreferrer">Linux man-pages · dup와 공유 오프셋 ↗</a></li>
         <li><a href="https://man7.org/linux/man-pages/man2/read.2.html" target="_blank" rel="noopener noreferrer">Linux man-pages · read와 짧은 읽기 ↗</a></li>
         <li><a href="https://man7.org/linux/man-pages/man2/write.2.html" target="_blank" rel="noopener noreferrer">Linux man-pages · write와 부분 쓰기 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

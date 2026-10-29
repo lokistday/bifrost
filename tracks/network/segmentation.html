@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/network/segmentation.html">
 <title>망 분리·신뢰 경계·관리 경로 — Network Security · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/network.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/network.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="network" data-course-number="05" data-view="lesson" data-lesson-id="network.segmentation" style="--course-accent:var(--map-amber)">
+<body class="learning-page" data-course="network" data-course-number="05" data-view="lesson" data-lesson-id="network.segmentation" data-path="" style="--course-accent:var(--map-amber)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -85,14 +86,15 @@
               <span class="lesson-dot" data-dot="network.event-time-windows" aria-hidden="true"></span><span>사건 시각·지연 도착과 세션 경계<small class="completion-label" data-completion="network.event-time-windows"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/network.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">02 · 경계와 정책 설계 · 5 / 19</div><h1>망 분리·신뢰 경계·관리 경로</h1><p class="lesson-objective">서비스 간 필요한 연결만 남기는 구간 구조를 설계합니다.</p></div></header>
           <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>센서에 기록이 없다는 사실이 통신이 없었다는 뜻인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>센서 위치·필터·손실·시간 범위를 확인해야 합니다. 관측되지 않은 경로가 남아 있을 수 있습니다.</p><a href="../../guides/bridges.html#network">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>망·운영 흐름 설계 · 편집기</strong></p><ul><li>design.md와 policy.json을 읽는 설계 실습입니다. 실제 라우터·방화벽 변경은 하지 않습니다.</li><li>JSON은 교육 모델이며 운영 장비에 가져올 수 있는 설정 파일이 아닙니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>망·운영 흐름 설계 · 편집기</strong></p><ul><li>design.md와 policy.json을 읽는 설계 실습입니다. 실제 라우터·방화벽 변경은 하지 않습니다.</li><li>JSON은 교육 모델이며 운영 장비에 가져올 수 있는 설정 파일이 아닙니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="addressing.html">네트워크 보안 · 계층·CIDR·관측 위치 ↗</a></li><li><a href="transport.html">네트워크 보안 · DNS·TCP 연결과 실패 분류 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>Web이 인터넷 요청을 받더라도 DB를 인터넷에 직접 공개할 필요는 없습니다. Web→DB의 특정 서비스만 허용하고 관리 경로를 별도 구간·신원 검사로 분리하면 한 지점의 침해가 전 구간으로 퍼지는 범위를 줄일 수 있습니다.</p><figure class="learning-visual" data-visual-id="network.segmentation"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 구조도</span><h3>공개·데이터·관리 경로를 따로 설계합니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="공개·데이터·관리 경로를 따로 설계합니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" width="760" height="460" role="img" aria-labelledby="visual-network-segmentation-title visual-network-segmentation-desc" focusable="false"><title id="visual-network-segmentation-title">공개·데이터·관리 경로를 따로 설계합니다</title><desc id="visual-network-segmentation-desc">공개 요청은 Internet에서 Web의 443 포트로 들어갑니다. Web은 DB의 5432 포트로 필요한 데이터 통신만 수행합니다. Internet에서 DB로 직접 접근하는 경로는 거부합니다. 관리자는 신원과 장치를 검증하는 별도 관리 경로를 사용하며 나머지는 기본 거부를 출발점으로 검토합니다.</desc><defs><marker id="visual-network-segmentation-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><path class="v-edge " d="M196 144C247 144 247 144 298 144" marker-end="url(#visual-network-segmentation-arrow)"/><path class="v-edge " d="M462 144C513 144 513 144 564 144" marker-end="url(#visual-network-segmentation-arrow)"/><path class="v-edge " d="M380 330C380 265 380 265 380 200" marker-end="url(#visual-network-segmentation-arrow)"/><path class="v-edge danger v-dashed" d="M112 88L112 32L648 32L648 88" marker-end="url(#visual-network-segmentation-arrow)"/><g class="v-tone "><rect class="v-node" x="28" y="88" width="168" height="112" rx="12"/><rect class="v-accent" x="29" y="101" width="3" height="86" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="116">Internet</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="147">공개 요청</tspan></text></g><g class="v-tone "><rect class="v-node" x="298" y="88" width="164" height="112" rx="12"/><rect class="v-accent" x="299" y="101" width="3" height="86" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="315" y="116">Web</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="315" y="147">서비스 접점</tspan></text></g><g class="v-tone "><rect class="v-node" x="564" y="88" width="168" height="112" rx="12"/><rect class="v-accent" x="565" y="101" width="3" height="86" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="581" y="116">DB</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="581" y="147">데이터 계층</tspan></text></g><g class="v-tone "><rect class="v-node" x="284" y="330" width="192" height="108" rx="12"/><rect class="v-accent" x="285" y="343" width="3" height="82" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="301" y="358">관리자</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="301" y="389">검증된 관리 경로</tspan></text></g><rect class="v-label-bg" x="226.84" y="125" width="40.32" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="247" y="139">443</tspan></text><rect class="v-label-bg" x="489.12" y="125" width="47.76" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="513" y="139">5432</tspan></text><rect class="v-label-bg" x="313.52" y="264" width="132.95999999999998" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="380" y="278">신원·장치·권한 확인</tspan></text><rect class="v-label-bg" x="281.6" y="14" width="196.79999999999998" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="380" y="28">Internet → DB 직접 접근 거부</tspan></text></svg></div><figcaption><span class="visual-takeaway">업무에 필요한 허용 흐름을 먼저 적고, 관리·DNS·백업 등 운영 흐름도 빠뜨리지 마세요.</span><small class="visual-note">포트와 역할을 설명하는 설계도입니다. 실습 evaluate.py는 실제 stateful 방화벽이 아닌 단순 정책 모형입니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>공개 요청은 Internet에서 Web의 443 포트로 들어갑니다. Web은 DB의 5432 포트로 필요한 데이터 통신만 수행합니다. Internet에서 DB로 직접 접근하는 경로는 거부합니다. 관리자는 신원과 장치를 검증하는 별도 관리 경로를 사용하며 나머지는 기본 거부를 출발점으로 검토합니다.</p></details></figure><p>VLAN이나 서브넷을 나눴다고 접근 통제가 자동 적용되지는 않습니다. 실제 라우팅과 필터 정책을 확인해야 합니다. 백업, 모니터링, DNS, 시간 동기화, 배포 경로도 필요한 흐름이므로 모두 차단하는 정책은 운영을 망가뜨릴 수 있습니다.</p><p>신뢰 경계는 서로 다른 권한이나 위험을 가진 구간 사이의 접점입니다. 인터넷 요청을 처리하는 Web과 데이터가 있는 DB를 나누면 Web 침해 뒤 접근할 수 있는 범위를 줄일 수 있습니다. 구간 이름보다 실제 흐름과 허용 근거가 중요합니다.</p><p>관리 접속은 일반 사용자 경로와 필요한 권한이 다릅니다. 관리 출발지 제한뿐 아니라 관리자 인증, 장치 상태, 짧은 자격 증명, 작업 기록을 검토합니다. DB가 비공개라고 해서 Web의 과도한 DB 권한이 자동 해결되지는 않습니다.</p><p>기본 거부를 설계할 때는 필수 운영 트래픽도 목록화합니다. DNS·시간 동기화·백업·모니터링·배포가 멈추면 장애나 관측 공백이 생길 수 있습니다. 필요한 흐름을 좁게 허용하고 차단 변경의 영향과 복구 경로를 미리 적습니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>VLAN 분리만으로 모든 횡적 이동이 차단됐다고 한다.</dt><dd>구간 사이 라우팅·필터·주체 권한을 실제로 점검합니다.</dd><dt>운영을 위해 0.0.0.0/0 모든 포트를 허용한다.</dt><dd>필요한 DNS·백업·배포의 대상·포트·업무 근거를 따로 작성합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -143,15 +145,16 @@ Web → DB:5432
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="tls.html"><small>← 이전 차시</small>TLS와 보이는 정보의 경계</a>
             <a href="policy.html"><small>다음 차시 →</small>방화벽 정책과 회귀 검증</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://csrc.nist.gov/pubs/sp/800/207/final" target="_blank" rel="noopener noreferrer">NIST SP 800-207 · 리소스와 접근 경계 ↗</a></li>
         <li><a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html" target="_blank" rel="noopener noreferrer">AWS VPC · 보안 그룹 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

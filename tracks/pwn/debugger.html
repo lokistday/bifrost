@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/pwn/debugger.html">
 <title>GDB 중단점과 변수 — Pwn / System · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/pwn.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/pwn.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="pwn.debugger" style="--course-accent:var(--map-violet)">
+<body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="pwn.debugger" data-path="" style="--course-accent:var(--map-violet)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -86,14 +87,15 @@
               <span class="lesson-dot" data-dot="pwn.atomic-open" aria-hidden="true"></span><span>파일 열기·TOCTOU·객체 검증<small class="completion-label" data-completion="pwn.atomic-open"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/pwn.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">02 · 관찰·진단·완화 · 4 / 16</div><h1>GDB 중단점과 변수</h1><p class="lesson-objective">실행을 멈추고 현재 코드와 변수의 값을 비교합니다.</p></div></header>
           <div class="lesson-meta"><span>기초</span><span>학습 45–80분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>버퍼 크기, 유효한 데이터 길이, 문자열 길이를 구분할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>할당 용량과 채워진 바이트 수는 다르고 strlen은 첫 NUL까지만 셉니다. 읽기 전에 경계와 객체 수명을 확인합니다.</p><a href="../../guides/bridges.html#c">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Ubuntu/WSL · GDB · -g -O0 빌드</strong></p><ul><li>gdb --version을 확인합니다. GDB가 없다면 Foundation 환경 준비의 Ubuntu 설치 단계를 완료합니다.</li><li>GDB 프롬프트에서 입력할 명령과 Bash에서 입력할 컴파일 명령을 구분합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Ubuntu/WSL · GDB · -g -O0 빌드</strong></p><ul><li>gdb --version을 확인합니다. GDB가 없다면 Foundation 환경 준비의 Ubuntu 설치 단계를 완료합니다.</li><li>GDB 프롬프트에서 입력할 명령과 Bash에서 입력할 컴파일 명령을 구분합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="build.html">시스템 보안 · 소스·컴파일·실행 파일 ↗</a></li><li><a href="lifetime.html">시스템 보안 · 스택·힙과 수명 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>중단점은 지정한 위치에 도달하면 실행을 멈춥니다. next는 현재 소스 줄을 실행하고 다음 줄로 가며 step은 함수 안으로 들어갈 수 있습니다. print는 현재 멈춘 프레임에서 변수를 평가합니다.</p><figure class="learning-visual" data-visual-id="pwn.debugger"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 타임라인</span><h3>중단한 시점에 따라 읽을 수 있는 값이 달라집니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="중단한 시점에 따라 읽을 수 있는 값이 달라집니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" width="760" height="460" role="img" aria-labelledby="visual-pwn-debugger-title visual-pwn-debugger-desc" focusable="false"><title id="visual-pwn-debugger-title">중단한 시점에 따라 읽을 수 있는 값이 달라집니다</title><desc id="visual-pwn-debugger-desc">break main과 run으로 main에서 중단한 뒤 list로 소스 위치를 확인합니다. next를 사용해 local = 7 대입이 실행된 뒤에 print local을 실행해야 7이라는 값을 확인할 수 있습니다. continue는 다음 중단점 또는 프로그램 종료까지 실행을 이어갑니다.</desc><defs><marker id="visual-pwn-debugger-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><path class="v-edge " d="M166 40V434" marker-end="url(#visual-pwn-debugger-arrow)"/><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="57">중단</tspan></text><circle class="v-point" cx="166" cy="52" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="26" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="39" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="54">break main → run</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="85">프로그램이 main에서 멈춤</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="163">위치</tspan></text><circle class="v-point" cx="166" cy="158" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="132" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="145" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="160">list</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="191">현재 실행 위치와 주변 소스 확인</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="269">실행</tspan></text><circle class="v-point" cx="166" cy="264" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="238" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="251" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="266">next</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="297">local = 7 대입을 지나도록 실행</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="375">관찰</tspan></text><circle class="v-point" cx="166" cy="370" r="6"/><g class="v-tone positive"><rect class="v-node" x="202" y="344" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="357" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="372">print local</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="403">대입 후 값 7 확인 → continue</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">print 결과를 해석하기 전에 현재 줄과 대입이 실행됐는지부터 확인하세요.</span><small class="visual-note">main 첫 중단 위치와 필요한 next 횟수는 컴파일러·소스 줄 배치에 따라 달라집니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>break main과 run으로 main에서 중단한 뒤 list로 소스 위치를 확인합니다. next를 사용해 local = 7 대입이 실행된 뒤에 print local을 실행해야 7이라는 값을 확인할 수 있습니다. continue는 다음 중단점 또는 프로그램 종료까지 실행을 이어갑니다.</p></details></figure><p>main 시작 시점에는 아직 초기화되지 않은 변수도 있습니다. 값을 읽기 전에 해당 대입 줄이 실행됐는지 확인하세요. 주소는 ASLR 등에 따라 바뀌므로 같은 주소 숫자가 나온다는 것을 완료 기준으로 삼지 않습니다.</p><p>GDB에서 멈춘 줄은 보통 다음에 실행할 위치입니다. 줄이 화면에 보인다는 이유만으로 그 줄의 대입이 이미 수행됐다고 생각하면 초기화 전 값을 읽을 수 있습니다. list로 소스를 보고 next 실행 전후 위치와 값을 묶어 기록합니다.</p><p>print heap은 포인터 값이고 print *heap은 그 위치의 정수입니다. malloc 성공과 *heap 초기화가 끝난 시점을 먼저 확인해야 대상 내용을 유효하게 해석할 수 있습니다. 현재 스택 프레임에서 보이는 변수라는 조건도 필요합니다.</p><p>디버거는 전체 프로그램을 증명하는 도구가 아니라 멈춘 실행의 상태를 관찰하는 도구입니다. 보고서에는 사용한 입력·빌드 옵션·중단 위치·실행한 스텝·관찰값을 남깁니다. 주소 숫자가 달라도 같은 대입과 값 관계를 재현할 수 있습니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>Bash에 break main을 입력하거나 GDB 안에 gcc 명령을 그대로 입력한다.</dt><dd>각 명령의 실행 주체를 프롬프트로 구분합니다.</dd><dt>해제 후 *heap을 찍어 값이 보이는지로 수명을 판단한다.</dt><dd>수명은 프로그램의 계약으로 판단합니다. 유효한 사용 구간에서만 대상 값을 관찰합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -158,15 +160,16 @@ quit</code></pre></div><div class="step-observation"><strong>관찰할 결과</s
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="bounds.html"><small>← 이전 차시</small>배열 경계와 길이</a>
             <a href="errors.html"><small>다음 차시 →</small>Sanitizer로 경계 오류 찾기</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://sourceware.org/gdb/current/onlinedocs/gdb.html/Continuing-and-Stepping.html" target="_blank" rel="noopener noreferrer">GDB · 실행 계속과 단계 실행 ↗</a></li>
         <li><a href="https://sourceware.org/gdb/current/onlinedocs/gdb.html/Variables.html" target="_blank" rel="noopener noreferrer">GDB · 현재 프레임의 변수 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

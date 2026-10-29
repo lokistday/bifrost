@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="브라우저가 문서를 해석하는 과정과 데이터가 코드가 되는 지점을 구분합니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="HTML·DOM과 요청 흐름 — 웹의 동작부터 안전한 상태 관리까지 · Bifrost">
+<meta property="og:description" content="브라우저가 문서를 해석하는 과정과 데이터가 코드가 되는 지점을 구분합니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/paths/web-defense/web.flow.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/paths/web-defense/web.flow.html">
+<title>HTML·DOM과 요청 흐름 — 웹의 동작부터 안전한 상태 관리까지 · Bifrost</title>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/web.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-paths.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/path-progress.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
+</head>
+<body class="learning-page" data-course="web" data-course-number="08" data-view="lesson" data-lesson-id="web.flow" data-path="web-defense" style="--course-accent:var(--map-blue)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#pathOutline">웹 보안 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="web.flow">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../learn/">학습 경로</a><span aria-hidden="true">/</span><a href="./">웹의 동작부터 안전한 상태 관리까지</a><span aria-hidden="true">/</span><span aria-current="page">4단계</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar path-sidebar"><a class="back-link" href="./">← 웹의 동작부터 안전한 상태 관리까지 목차</a>
+        <div class="course-stats"><span data-path-count></span><div class="course-meter" role="progressbar" aria-label="웹의 동작부터 안전한 상태 관리까지 차시 완료 진도" aria-valuemin="0" aria-valuemax="100" data-path-meter><span></span></div></div>
+        <nav aria-label="웹의 동작부터 안전한 상태 관리까지 경로 목차"><details ><summary>Foundation<span class="caption">1–3단계</span></summary><ol><li><a class="side-lesson" href="foundation.environment.html" >
+          <span class="path-step-number">1</span><span><small>공통 기초 · 권장 선행</small>실습 환경 준비와 첫 실행<small class="completion-label" data-completion="foundation.environment"></small></span></a></li><li><a class="side-lesson" href="foundation.network.html" >
+          <span class="path-step-number">2</span><span><small>공통 기초 · 권장 선행</small>IP·포트·DNS와 전송<small class="completion-label" data-completion="foundation.network"></small></span></a></li><li><a class="side-lesson" href="foundation.http.html" >
+          <span class="path-step-number">3</span><span><small>공통 기초 · 권장 선행</small>HTTP 요청과 응답 읽기<small class="completion-label" data-completion="foundation.http"></small></span></a></li>
+          </ol></details><details open><summary>Web Hacking<span class="caption">4–4단계</span></summary><ol><li><a class="side-lesson" href="web.flow.html" aria-current="page">
+          <span class="path-step-number">4</span><span><small>웹 보안 · 경로 핵심</small>HTML·DOM과 요청 흐름<small class="completion-label" data-completion="web.flow"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">5–6단계</span></summary><ol><li><a class="side-lesson" href="foundation.python-values.html" >
+          <span class="path-step-number">5</span><span><small>공통 기초 · 권장 선행</small>변수·문자열·자료형<small class="completion-label" data-completion="foundation.python-values"></small></span></a></li><li><a class="side-lesson" href="foundation.python-flow.html" >
+          <span class="path-step-number">6</span><span><small>공통 기초 · 권장 선행</small>조건·반복·함수<small class="completion-label" data-completion="foundation.python-flow"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">7–14단계</span></summary><ol><li><a class="side-lesson" href="web.sql.html" >
+          <span class="path-step-number">7</span><span><small>웹 보안 · 경로 핵심</small>SELECT·WHERE와 매개변수<small class="completion-label" data-completion="web.sql"></small></span></a></li><li><a class="side-lesson" href="web.sessions.html" >
+          <span class="path-step-number">8</span><span><small>웹 보안 · 경로 핵심</small>쿠키·세션·인증<small class="completion-label" data-completion="web.sessions"></small></span></a></li><li><a class="side-lesson" href="web.authorization.html" >
+          <span class="path-step-number">9</span><span><small>웹 보안 · 경로 핵심</small>리소스 단위 인가<small class="completion-label" data-completion="web.authorization"></small></span></a></li><li><a class="side-lesson" href="web.sql-injection.html" >
+          <span class="path-step-number">10</span><span><small>웹 보안 · 경로 핵심</small>SQL Injection과 바인딩<small class="completion-label" data-completion="web.sql-injection"></small></span></a></li><li><a class="side-lesson" href="web.output.html" >
+          <span class="path-step-number">11</span><span><small>웹 보안 · 경로 핵심</small>출력 컨텍스트와 XSS 방어<small class="completion-label" data-completion="web.output"></small></span></a></li><li><a class="side-lesson" href="web.csrf.html" >
+          <span class="path-step-number">12</span><span><small>웹 보안 · 경로 핵심</small>CSRF와 상태 변경 요청<small class="completion-label" data-completion="web.csrf"></small></span></a></li><li><a class="side-lesson" href="web.cors.html" >
+          <span class="path-step-number">13</span><span><small>웹 보안 · 경로 핵심</small>동일 출처·CORS·응답 읽기 권한<small class="completion-label" data-completion="web.cors"></small></span></a></li><li><a class="side-lesson" href="web.csp.html" >
+          <span class="path-step-number">14</span><span><small>웹 보안 · 경로 핵심</small>CSP·보안 헤더와 적용 범위<small class="completion-label" data-completion="web.csp"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">15–22단계</span></summary><ol><li><a class="side-lesson" href="foundation.paths.html" >
+          <span class="path-step-number">15</span><span><small>공통 기초 · 권장 선행</small>경로와 작업용 사본<small class="completion-label" data-completion="foundation.paths"></small></span></a></li><li><a class="side-lesson" href="foundation.python-files.html" >
+          <span class="path-step-number">16</span><span><small>공통 기초 · 권장 선행</small>CSV 읽기와 오류 좁히기<small class="completion-label" data-completion="foundation.python-files"></small></span></a></li><li><a class="side-lesson" href="foundation.text-bytes.html" >
+          <span class="path-step-number">17</span><span><small>공통 기초 · 권장 선행</small>문자열·바이트·UTF-8의 경계<small class="completion-label" data-completion="foundation.text-bytes"></small></span></a></li><li><a class="side-lesson" href="foundation.structured-data.html" >
+          <span class="path-step-number">18</span><span><small>공통 기초 · 권장 선행</small>JSON 파싱과 데이터 계약<small class="completion-label" data-completion="foundation.structured-data"></small></span></a></li><li><a class="side-lesson" href="foundation.exceptions.html" >
+          <span class="path-step-number">19</span><span><small>공통 기초 · 권장 선행</small>예외·오류 메시지·종료 상태<small class="completion-label" data-completion="foundation.exceptions"></small></span></a></li><li><a class="side-lesson" href="foundation.cli.html" >
+          <span class="path-step-number">20</span><span><small>공통 기초 · 권장 선행</small>재사용 가능한 명령행 도구<small class="completion-label" data-completion="foundation.cli"></small></span></a></li><li><a class="side-lesson" href="foundation.unit-tests.html" >
+          <span class="path-step-number">21</span><span><small>공통 기초 · 권장 선행</small>경계값 테스트와 실패 실험<small class="completion-label" data-completion="foundation.unit-tests"></small></span></a></li><li><a class="side-lesson" href="foundation.mutable-data.html" >
+          <span class="path-step-number">22</span><span><small>공통 기초 · 권장 선행</small>변경 가능한 자료와 방어적 복사<small class="completion-label" data-completion="foundation.mutable-data"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">23–23단계</span></summary><ol><li><a class="side-lesson" href="web.mass-assignment.html" >
+          <span class="path-step-number">23</span><span><small>웹 보안 · 경로 핵심</small>요청 계약과 Mass Assignment<small class="completion-label" data-completion="web.mass-assignment"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">24–24단계</span></summary><ol><li><a class="side-lesson" href="foundation.config-precedence.html" >
+          <span class="path-step-number">24</span><span><small>공통 기초 · 권장 선행</small>설정 우선순위와 출처 추적<small class="completion-label" data-completion="foundation.config-precedence"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">25–25단계</span></summary><ol><li><a class="side-lesson" href="web.session-lifecycle.html" >
+          <span class="path-step-number">25</span><span><small>웹 보안 · 경로 핵심</small>세션 갱신·만료·서버 무효화<small class="completion-label" data-completion="web.session-lifecycle"></small></span></a></li>
+          </ol></details><details ><summary>Cryptography<span class="caption">26–27단계</span></summary><ol><li><a class="side-lesson" href="crypto.representation.html" >
+          <span class="path-step-number">26</span><span><small>암호학 · 권장 선행</small>바이트·Hex·Base64<small class="completion-label" data-completion="crypto.representation"></small></span></a></li><li><a class="side-lesson" href="crypto.hash.html" >
+          <span class="path-step-number">27</span><span><small>암호학 · 권장 선행</small>SHA-256과 파일 무결성<small class="completion-label" data-completion="crypto.hash"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">28–31단계</span></summary><ol><li><a class="side-lesson" href="web.reset-tokens.html" >
+          <span class="path-step-number">28</span><span><small>웹 보안 · 경로 핵심</small>일회 토큰·목적 결합·만료<small class="completion-label" data-completion="web.reset-tokens"></small></span></a></li><li><a class="side-lesson" href="web.private-caching.html" >
+          <span class="path-step-number">29</span><span><small>웹 보안 · 경로 핵심</small>개인 응답·공유 캐시·Cache-Control<small class="completion-label" data-completion="web.private-caching"></small></span></a></li><li><a class="side-lesson" href="web.regression.html" >
+          <span class="path-step-number">30</span><span><small>웹 보안 · 권장 선행</small>수정·반례·회귀 테스트<small class="completion-label" data-completion="web.regression"></small></span></a></li><li><a class="side-lesson" href="web.idempotency.html" >
+          <span class="path-step-number">31</span><span><small>웹 보안 · 경로 핵심</small>거래 불변 조건·트랜잭션·재시도<small class="completion-label" data-completion="web.idempotency"></small></span></a></li>
+          </ol></details><a class="side-lesson path-project-link" href="project.html"><span class="path-step-number">✦</span><span>마지막 · 종합 프로젝트</span></a></nav>
+        <a class="back-link" href="../../learn/#paths">다른 학습 경로 보기 ↗</a></aside><article class="lesson-article">
+          <nav class="path-location" aria-label="현재 학습 경로"><a href="./">웹 보안</a><strong>4 / 31단계</strong><a href="./#pathOutline">경로 목차 ↗</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/web.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">Web Hacking · 01 · 웹의 동작과 데이터 · 4 / 31</div><h1>HTML·DOM과 요청 흐름</h1><p class="lesson-objective">브라우저가 문서를 해석하는 과정과 데이터가 코드가 되는 지점을 구분합니다.</p></div></header>
+          <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>인증과 대상 자원의 인가는 같은 검사인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>인증은 주체 확인, 인가는 주체·대상·행동의 허용 판단입니다. 세션이 유효해도 타인의 자원은 거부해야 합니다.</p><a href="../../guides/bridges.html#web">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>브라우저 · 개발자 도구 Elements</strong></p><ul><li>browser.html을 내려받아 파일로 엽니다. 서버나 Python 설치는 필요 없습니다.</li><li>텍스트 편집기로 browser.html의 고정 문자열을 바꾼 뒤 저장하고 브라우저에서 새로고침합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="foundation.http.html">공통 기초 · HTTP 요청과 응답 읽기 ↗</a></li></ul>
+            </details>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>HTML은 문서 구조, CSS는 표현, JavaScript는 동작을 담당합니다. 브라우저는 HTML을 DOM이라는 노드 구조로 만듭니다. 서버가 문자열을 반환하는 일과 브라우저가 그것을 HTML로 해석하는 일은 서로 다른 단계입니다.</p><figure class="learning-visual" data-visual-id="web.flow"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 구조도</span><h3>같은 문자열도 DOM에 넣는 방법에 따라 달라집니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="같은 문자열도 DOM에 넣는 방법에 따라 달라집니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 424" width="760" height="424" role="img" aria-labelledby="visual-web-flow-title visual-web-flow-desc" focusable="false"><title id="visual-web-flow-title">같은 문자열도 DOM에 넣는 방법에 따라 달라집니다</title><desc id="visual-web-flow-desc">입력 문자열은 &lt;b&gt;Bifrost&lt;/b&gt;입니다. textContent로 넣으면 텍스트 노드가 되어 태그까지 문자로 보입니다. innerHTML로 넣으면 HTML 파서가 b 요소를 만들고 Bifrost가 굵게 보입니다. DOM을 만드는 방식이 데이터 해석을 바꿉니다.</desc><defs><marker id="visual-web-flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><path class="v-edge " d="M380 124C380 164 186 164 186 204" marker-end="url(#visual-web-flow-arrow)"/><path class="v-edge " d="M380 124C380 164 574 164 574 204" marker-end="url(#visual-web-flow-arrow)"/><path class="v-edge " d="M186 308C186 324 186 324 186 340" marker-end="url(#visual-web-flow-arrow)"/><path class="v-edge " d="M574 308C574 324 574 324 574 340" marker-end="url(#visual-web-flow-arrow)"/><g class="v-tone "><rect class="v-node" x="246" y="20" width="268" height="104" rx="12"/><rect class="v-accent" x="247" y="33" width="3" height="78" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="263" y="48">같은 입력 문자열</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="263" y="79">&lt;b&gt;Bifrost&lt;/b&gt;</tspan></text></g><g class="v-tone positive"><rect class="v-node" x="28" y="204" width="316" height="104" rx="12"/><rect class="v-accent" x="29" y="217" width="3" height="78" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="232">textContent</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="263">텍스트 노드로 넣음</tspan></text></g><g class="v-tone warning"><rect class="v-node" x="416" y="204" width="316" height="104" rx="12"/><rect class="v-accent" x="417" y="217" width="3" height="78" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="433" y="232">innerHTML</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="433" y="263">HTML 파서가 b 요소 생성</tspan></text></g><g class="v-tone "><rect class="v-node" x="28" y="340" width="316" height="64" rx="12"/><rect class="v-accent" x="29" y="353" width="3" height="38" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="368">화면: &lt;b&gt;Bifrost&lt;/b&gt;</tspan></text></g><g class="v-tone "><rect class="v-node" x="416" y="340" width="316" height="64" rx="12"/><rect class="v-accent" x="417" y="353" width="3" height="38" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="433" y="368">화면: 굵은 Bifrost</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">입력값이 단순 문자로 남는 지점과 HTML 구조로 해석되는 지점을 구분하세요.</span><small class="visual-note">교육용 고정 문자열의 DOM 비교입니다. 신뢰하지 않는 입력을 innerHTML에 직접 넣지 않습니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>입력 문자열은 &lt;b&gt;Bifrost&lt;/b&gt;입니다. textContent로 넣으면 텍스트 노드가 되어 태그까지 문자로 보입니다. innerHTML로 넣으면 HTML 파서가 b 요소를 만들고 Bifrost가 굵게 보입니다. DOM을 만드는 방식이 데이터 해석을 바꿉니다.</p></details></figure><p>browser.html은 같은 문자열을 textContent와 innerHTML에 넣습니다. 전자는 문자 그대로 표시하고 후자는 태그를 해석합니다. 예제는 고정된 문자열만 사용합니다. 사용자 데이터를 innerHTML에 넣는 습관이 왜 위험한지는 출력 차시에서 이어 봅니다.</p><p>브라우저의 Elements 화면은 현재 DOM을 보여 줍니다. 원본 HTML에 비어 있던 p 요소도 JavaScript 실행 후에는 자식을 가질 수 있습니다. 따라서 원본 파일을 읽은 결과와 실행 뒤 DOM 관찰을 같은 것으로 취급하지 않습니다.</p><p>서버가 있는 웹에서는 사용자 동작 → HTTP 요청 → 서버 처리와 필요한 DB 조회 → 응답 → DOM 갱신 같은 흐름이 생깁니다. 이 파일 예제는 마지막 DOM 해석의 차이를 따로 떼어 관찰합니다. DB를 직접 브라우저가 읽는 것처럼 화살표를 그리지 않도록 요청 경계를 표시하세요.</p><p>같은 데이터라도 어느 API로 어느 위치에 넣느냐에 따라 의미가 달라집니다. 굵은 글씨가 보인다는 사실만으로 스크립트 실행을 입증한 것은 아닙니다. 이번 비교의 관찰 결론은 태그 해석 유무입니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>Elements와 원본 파일이 언제나 동일하다고 생각한다.</dt><dd>JavaScript 실행과 사용자 동작으로 DOM이 달라질 수 있으므로 관찰 시점을 적습니다.</dd><dt>고정된 b 태그의 해석을 곧바로 XSS 성공이라고 부른다.</dt><dd>이번 결과는 HTML 해석 여부입니다. 신뢰 경계와 실행 가능한 문맥은 출력 보안 차시에서 추가로 검토합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/web.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/web/browser.html" download>browser.html ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>관찰 절차·자료 예시 · 그대로 셸에 붙여 넣지 말고 본문 안내를 따라 확인</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">browser.html을 브라우저에서 엽니다.
+개발자 도구 Elements에서 #text와 #markup의 자식 노드를 비교합니다.</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>첫 줄에는 &lt;b&gt;Bifrost&lt;/b&gt;라는 문자, 두 번째에는 굵은 Bifrost가 보입니다.</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>같은 입력값을 확인하기</h3><p>browser.html의 sample이 두 대입문에서 동일하게 사용되는지 읽습니다. 입력을 고정하면 출력 차이가 자료 자체가 아니라 API 선택에서 왔음을 비교하기 쉽습니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>JavaScript · 안내된 HTML의 script 부분 또는 같은 개발자 도구 콘솔</span></div><pre><code>const sample = &#39;&lt;b&gt;Bifrost&lt;/b&gt;&#39;;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>두 대상에 같은 문자열을 전달합니다.</pre></div></li><li><h3>화면과 DOM을 함께 보기</h3><p>Elements에서 p#text를 펼치면 태그 기호가 포함된 텍스트가 보이고 p#markup 아래에는 b 요소가 생깁니다. 화면의 굵기와 DOM 요소의 존재를 같은 기록에 남깁니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>JavaScript · 안내된 HTML의 script 부분 또는 같은 개발자 도구 콘솔</span></div><pre><code>document.querySelector(&quot;#text&quot;).textContent = sample;
+document.querySelector(&quot;#markup&quot;).innerHTML = sample;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>첫 결과는 &lt;b&gt;Bifrost&lt;/b&gt; 문자, 두 번째는 b 요소 안의 Bifrost입니다.</pre></div></li><li><h3>한 가지 태그로 재확인하기</h3><p>sample의 b를 em으로 바꾼 뒤 저장하고 새로고침합니다. #text는 &lt;em&gt;Bifrost&lt;/em&gt;를 표시하고 #markup에는 em 요소가 생깁니다. 기울기 모양은 스타일에 따라 다를 수 있으므로 DOM을 근거로 삼습니다.</p>
+        </li></ol></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>고정 문자열의 b를 em으로 바꾸세요. 화면과 DOM의 차이를 적고 브라우저→서버→DB→응답 흐름을 별도로 그립니다.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>file://로 연 문서는 HTTP 서버에서 내려받은 문서가 아닙니다. 이 실습의 관찰 범위를 DOM 해석으로 한정합니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>const sample = &#39;&lt;em&gt;Bifrost&lt;/em&gt;&#39;;로 변경하고 두 API는 그대로 유지합니다.</li><li>Elements에서 #text 아래의 텍스트와 #markup 아래의 em 요소를 구분해서 기록합니다.</li><li>별도 도식은 브라우저 → HTTP 요청 → 서버 → DB 조회 → 서버 응답 → 브라우저 DOM으로 그립니다. 파일 실습에서 서버·DB 단계는 실제 실행하지 않았다고 표시합니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>#text는 태그 문자를 그대로 보여 주고 #markup에는 em 자식 요소가 있습니다. HTTP·DB 흐름 도식과 이번 로컬 DOM 관찰 범위를 구분해야 합니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>고정 문자열을 &lt;strong&gt;notice&lt;/strong&gt;로 바꾸고 textContent와 innerHTML 결과를 DOM 노드 종류로 설명하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>textContent는 태그 문자가 있는 텍스트, innerHTML은 strong 요소입니다. 실행된 스크립트나 서버 동작은 이 실험의 결론이 아닙니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>DOM의 텍스트와 요소 노드를 구분했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>파일 열기와 HTTP 요청의 차이를 설명했다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/web/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. 같은 문자열을 넣었는데 #markup 아래에 b 요소가 생겼습니다. 가장 직접적인 근거는?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>파일 이름에 browser가 들어 있다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>Elements에서 b 자식 노드를 확인했다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>브라우저 창이 열렸다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: Elements에서 b 자식 노드를 확인했다.</strong></p><p>요소의 생성 여부는 현재 DOM에서 확인할 수 있습니다. 파일 이름이나 창의 존재는 태그가 해석됐다는 근거가 아닙니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. browser.html을 file://로 열어 DOM 차이를 관찰했습니다. 이 실험만으로 확인했다고 말할 수 없는 것은?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>textContent의 문자 표시</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>innerHTML의 고정 태그 해석</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>실제 서버가 DB 권한 검사를 수행했다는 사실</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 실제 서버가 DB 권한 검사를 수행했다는 사실</strong></p><p>이 파일에는 서버나 DB 요청이 없습니다. 실제로 수행한 DOM 관찰과 일반적인 웹 구조 설명을 분리해야 합니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>DOM의 텍스트와 요소 노드를 구분했다.</li><li>파일 열기와 HTTP 요청의 차이를 설명했다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="경로의 이전·다음 단계"><a href="foundation.http.html"><small>← 이전 단계</small>HTTP 요청과 응답 읽기</a>
+            <a href="foundation.python-values.html"><small>다음 단계 →</small>변수·문자열·자료형</a></nav>
+          <p class="caption"><a href="../../tracks/web/flow.html">이 차시를 Web Hacking 분야 과정으로 보기 ↗</a></p>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent" target="_blank" rel="noopener noreferrer">MDN · Node.textContent ↗</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML" target="_blank" rel="noopener noreferrer">MDN · Element.innerHTML ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

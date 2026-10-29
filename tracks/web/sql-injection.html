@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/web/sql-injection.html">
 <title>SQL Injection과 바인딩 — Web Hacking · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/web.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/web.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="web" data-course-number="08" data-view="lesson" data-lesson-id="web.sql-injection" style="--course-accent:var(--map-blue)">
+<body class="learning-page" data-course="web" data-course-number="08" data-view="lesson" data-lesson-id="web.sql-injection" data-path="" style="--course-accent:var(--map-blue)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -87,14 +88,15 @@
               <span class="lesson-dot" data-dot="web.idempotency" aria-hidden="true"></span><span>거래 불변 조건·트랜잭션·재시도<small class="completion-label" data-completion="web.idempotency"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/web.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">02 · 권한·입력 처리·검증 · 5 / 17</div><h1>SQL Injection과 바인딩</h1><p class="lesson-objective">입력이 쿼리 문법에 섞이는 경우와 값으로만 전달되는 경우를 비교합니다.</p></div></header>
           <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>인증과 대상 자원의 인가는 같은 검사인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>인증은 주체 확인, 인가는 주체·대상·행동의 허용 판단입니다. 세션이 유효해도 타인의 자원은 거부해야 합니다.</p><a href="../../guides/bridges.html#web">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Python 3 · sqlite3 메모리 DB</strong></p><ul><li>내려받은 demo.py의 사본을 수정합니다. 이 실습은 자신의 두 행짜리 가상 DB에서만 실행합니다.</li><li>기존 demo.py 출력은 SQL·HTML·권한·테스트 순으로 나옵니다. 첫 두 줄이 이 차시의 주요 결과입니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Python 3 · sqlite3 메모리 DB</strong></p><ul><li>내려받은 demo.py의 사본을 수정합니다. 이 실습은 자신의 두 행짜리 가상 DB에서만 실행합니다.</li><li>기존 demo.py 출력은 SQL·HTML·권한·테스트 순으로 나옵니다. 첫 두 줄이 이 차시의 주요 결과입니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="sql.html">웹 보안 · SELECT·WHERE와 매개변수 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>문자열 연결로 SQL을 만들면 따옴표나 연산자가 쿼리 구조를 바꿀 수 있습니다. demo.py는 가상 사용자 두 행을 만든 후 같은 입력을 연결 쿼리와 매개변수 쿼리에 넣습니다. 외부 DB나 서비스에 접속하지 않습니다.</p><figure class="learning-visual" data-visual-id="web.sql-injection"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교도</span><h3>입력이 SQL 문법에 섞이는 경로를 끊습니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="입력이 SQL 문법에 섞이는 경로를 끊습니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" role="img" aria-labelledby="visual-web-sql-injection-title visual-web-sql-injection-desc" focusable="false"><title id="visual-web-sql-injection-title">입력이 SQL 문법에 섞이는 경로를 끊습니다</title><desc id="visual-web-sql-injection-desc">동일한 교육용 입력을 문자열 결합 방식과 매개변수 바인딩 방식으로 조회합니다. 문자열 결합은 입력이 조건식의 일부로 해석되어 두 행을 반환합니다. 바인딩은 입력 전체를 하나의 값으로 취급하여 일치하는 행이 0개입니다. 정상 입력 alice는 한 행을 반환해야 합니다.</desc><defs><marker id="visual-web-sql-injection-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone danger"><rect class="v-node" x="28" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="29" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="45" y="55">문자열 결합</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="84">입력 처리</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="107">SQL 문자열 안에 직접 이어 붙임</tspan></text><path class="v-separator" d="M45 128H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="148">관찰 결과</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="171">unsafe_rows=2</tspan></text><path class="v-separator" d="M45 192H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="212">문제 지점</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="235">입력이 값과 문법의 경계를 넘음</tspan></text></g><g class="v-tone positive"><rect class="v-node" x="392" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="393" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="409" y="55">매개변수 바인딩</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="84">입력 처리</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="107">고정 SQL과 값 목록을 따로 전달</tspan></text><path class="v-separator" d="M409 128H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="148">관찰 결과</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="171">safe_rows=0</tspan></text><path class="v-separator" d="M409 192H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="212">정상 기능 확인</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="235">alice_rows=1</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">공격성 입력의 결과뿐 아니라 정상 입력 alice가 여전히 한 행을 찾는지도 확인하세요.</span><small class="visual-note">제공된 로컬 SQLite 예제의 결과입니다. 바인딩으로 테이블 이름 등 동적 SQL 구조까지 자동 검증되는 것은 아닙니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>동일한 교육용 입력을 문자열 결합 방식과 매개변수 바인딩 방식으로 조회합니다. 문자열 결합은 입력이 조건식의 일부로 해석되어 두 행을 반환합니다. 바인딩은 입력 전체를 하나의 값으로 취급하여 일치하는 행이 0개입니다. 정상 입력 alice는 한 행을 반환해야 합니다.</p></details></figure><p>바인딩은 입력에서 나쁜 글자를 지우는 방식이 아니라 문법과 데이터를 분리하는 방식입니다. 정상 이름, 존재하지 않는 이름, 따옴표를 포함한 이름을 함께 검증해야 수정이 정상 기능을 망가뜨리지 않았는지도 알 수 있습니다.</p><p>제공 입력은 작은따옴표로 값의 경계를 닫고 OR 1=1 조건을 덧붙이며 --로 남은 부분을 주석으로 만듭니다. 연결 방식에서는 사용자가 준 문자가 SQL 구조 일부로 해석됩니다. 바인딩 방식에서는 동일한 문자 전체가 이름 한 개의 값이므로 일치하는 사용자가 없어 0행입니다.</p><p>따옴표가 있다는 이유만으로 악의적인 데이터는 아닙니다. O&#39;Brien처럼 정상 이름에도 들어갈 수 있습니다. 나쁜 글자 삭제는 정상 데이터를 손상시키기 쉬우며 DB·문맥에 따른 해석 차이를 모두 해결하지 못합니다. 문법과 값을 분리하고 정상값도 유지되는지 확인합니다.</p><p>현재 두 사용자는 alice와 bob뿐입니다. O&#39;Brien 조회가 0행이라는 사실은 특수문자가 차단됐다는 뜻이 아니라 그 이름이 없다는 뜻입니다. 추가 실험으로 그 이름의 행을 바인딩 INSERT한 뒤 1행 조회를 확인하면 저장과 조회가 모두 데이터로 처리되는지 검증할 수 있습니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>따옴표 포함 입력을 전부 공격이라고 보고 삭제한다.</dt><dd>정상 데이터도 같은 문자를 포함합니다. 문법·값 분리와 정상 동작 검증을 유지합니다.</dd><dt>바인딩만 있으면 인증과 인가도 해결된다고 생각한다.</dt><dd>바인딩은 SQL 문법 경계를 보호합니다. 누가 어떤 자료를 읽는지는 별도 정책입니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -151,15 +153,16 @@ O&#39;Brien 0</pre></div></li></ol></section>
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="authorization.html"><small>← 이전 차시</small>리소스 단위 인가</a>
             <a href="output.html"><small>다음 차시 →</small>출력 컨텍스트와 XSS 방어</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://docs.python.org/3/library/sqlite3.html#how-to-use-placeholders-to-bind-values-in-sql-queries" target="_blank" rel="noopener noreferrer">Python · sqlite3 바인딩 ↗</a></li>
         <li><a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html" target="_blank" rel="noopener noreferrer">OWASP · SQL Injection 예방 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

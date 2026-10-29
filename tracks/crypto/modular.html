@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/crypto/modular.html">
 <title>나머지와 모듈러 역원 — Cryptography · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/crypto.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/crypto.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.modular" style="--course-accent:var(--map-pink)">
+<body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.modular" data-path="" style="--course-accent:var(--map-pink)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -85,14 +86,15 @@
               <span class="lesson-dot" data-dot="crypto.unbiased-randomness" aria-hidden="true"></span><span>난수의 예측 가능성과 나머지 편향<small class="completion-label" data-completion="crypto.unbiased-randomness"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/crypto.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">01 · 표현·수학·고전 암호 · 2 / 19</div><h1>나머지와 모듈러 역원</h1><p class="lesson-objective">순환하는 값의 연산과 역원이 존재하는 조건을 확인합니다.</p></div></header>
           <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>암호학적 검증 성공이면 현재 요청을 처리해도 되나요?</p><details><summary>판단 기준과 보충 자료</summary><p>인증된 바이트와 현재 권한·문맥·재전송·만료는 다른 검증입니다. 목적과 상태를 함께 확인합니다.</p><a href="../../guides/bridges.html#bytes">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>나머지·역원 · Python 3.8 이상</strong></p><ul><li>음수 지수 pow(a, -1, n)은 Python 3.8 이상에서 모듈러 역원을 계산합니다.</li><li>작은 정수로 수학 구조를 배우는 차시이며 실제 공개키 암호 구현을 직접 작성하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>나머지·역원 · Python 3.8 이상</strong></p><ul><li>음수 지수 pow(a, -1, n)은 Python 3.8 이상에서 모듈러 역원을 계산합니다.</li><li>작은 정수로 수학 구조를 배우는 차시이며 실제 공개키 암호 구현을 직접 작성하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="../foundation/python-values.html">공통 기초 · 변수·문자열·자료형 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>a mod n은 n으로 나눈 나머지입니다. 알파벳 26개에서 이동하면 25 다음에 0으로 돌아가는 계산을 모듈러로 표현할 수 있습니다. 덧셈 이동을 되돌리는 것과 곱셈을 되돌리는 역원은 다른 연산입니다.</p><figure class="learning-visual" data-visual-id="crypto.modular"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 연산 모형</span><h3>한 바퀴를 돌고 남은 값과, 곱해서 1이 되는 수</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="한 바퀴를 돌고 남은 값과, 곱해서 1이 되는 수 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" width="760" height="320" role="img" aria-labelledby="visual-crypto-modular-title visual-crypto-modular-desc" focusable="false"><title id="visual-crypto-modular-title">한 바퀴를 돌고 남은 값과, 곱해서 1이 되는 수</title><desc id="visual-crypto-modular-desc">17을 5로 나누면 세 바퀴인 15를 지나 나머지 2가 됩니다. 모듈러 역원은 다른 질문입니다. 3 곱하기 9는 27이고 26으로 나눈 나머지가 1이므로 26을 기준으로 3의 역원은 9입니다. 두 수가 서로소일 때 곱셈 역원이 존재합니다.</desc><defs><marker id="visual-crypto-modular-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><circle class="v-zone" cx="190" cy="160" r="113"/><circle class="v-step-circle" cx="190" cy="69" r="19"/><text class="v-wheel-number" x="190" y="74" text-anchor="middle">0</text><circle class="v-step-circle" cx="276.54614298285895" cy="131.87945351187977" r="19"/><text class="v-wheel-number" x="276.54614298285895" y="136.87945351187977" text-anchor="middle">1</text><circle class="v-highlight-circle" cx="243.48845795861507" cy="233.62054648812023" r="19"/><text class="v-wheel-number" x="243.48845795861507" y="238.62054648812023" text-anchor="middle">2</text><circle class="v-step-circle" cx="136.51154204138496" cy="233.62054648812023" r="19"/><text class="v-wheel-number" x="136.51154204138496" y="238.62054648812023" text-anchor="middle">3</text><circle class="v-step-circle" cx="103.45385701714102" cy="131.8794535118798" r="19"/><text class="v-wheel-number" x="103.45385701714102" y="136.8794535118798" text-anchor="middle">4</text><path class="v-edge " d="M195 91Q203 170 235 214" marker-end="url(#visual-crypto-modular-arrow)"/><rect class="v-label-bg" x="188.76" y="151" width="72.47999999999999" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="225" y="165">17칸 → 2</tspan></text><text class="v-text v-heading" font-size="14" text-anchor="middle"><tspan x="190" y="303">17 = 5 × 3 + 2</tspan></text><g class="v-tone "><rect class="v-node" x="355" y="48" width="377" height="232" rx="12"/><rect class="v-accent" x="356" y="61" width="3" height="206" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="372" y="76">역원은 곱한 나머지가 1</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="372" y="107">기준: mod 26</tspan><tspan x="372" y="127">3 × 9 = 27 → 나머지 1</tspan><tspan x="372" y="147">따라서 3의 역원은 9</tspan><tspan x="372" y="167">존재 조건: gcd(3, 26) = 1</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">나머지 연산의 기준값을 먼저 읽으세요. 17 % 5와 3의 mod 26 역원은 서로 다른 계산입니다.</span><small class="visual-note">실습 출력 2 9는 차례대로 나머지 2와 역원 9입니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>17을 5로 나누면 세 바퀴인 15를 지나 나머지 2가 됩니다. 모듈러 역원은 다른 질문입니다. 3 곱하기 9는 27이고 26으로 나눈 나머지가 1이므로 26을 기준으로 3의 역원은 9입니다. 두 수가 서로소일 때 곱셈 역원이 존재합니다.</p></details></figure><p>3의 mod 26 역원은 9입니다. 3×9=27이므로 26으로 나눈 나머지가 1입니다. 두 수가 서로소일 때 역원이 존재하며, 2와 26처럼 공약수가 있으면 곱셈 역원이 없습니다.</p><p>17 % 5가 2인 이유는 17=3×5+2이기 때문입니다. mod n에서는 n만큼 떨어진 수를 같은 나머지로 봅니다. 알파벳 이동이나 시계처럼 경계에서 처음으로 돌아오는 계산을 표현하기 좋습니다.</p><p>덧셈 이동을 되돌리려면 이동량을 빼면 됩니다. 곱셈을 되돌리려면 a×b≡1 (mod n)을 만족하는 b가 필요합니다. 이 b가 역원이며 일반적인 실수 나눗셈 1/a와 다릅니다.</p><p>a와 n의 최대공약수가 1일 때만 곱셈 역원이 존재합니다. 2와 26은 공약수 2가 있어 어떤 정수를 곱해도 나머지 1을 만들 수 없습니다. Python이 ValueError를 내는 것은 코드 오타가 아니라 수학적 조건 불충족일 수 있습니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>역원을 일반 나눗셈의 소수 결과로 계산한다.</dt><dd>정수 모듈러의 곱셈 관계 a*b % n == 1로 검증합니다.</dd><dt>작은 모듈러 예제를 그대로 현대 암호 구현으로 확장한다.</dt><dd>이 차시는 수학 기초입니다. 실제 알고리즘·난수·검증·부채널 처리는 검증된 라이브러리의 영역입니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -150,15 +152,16 @@ inverse does not exist</pre></div></li></ol></section>
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="representation.html"><small>← 이전 차시</small>바이트·Hex·Base64</a>
             <a href="classical.html"><small>다음 차시 →</small>치환과 작은 키 공간</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://docs.python.org/3/library/functions.html#pow" target="_blank" rel="noopener noreferrer">Python pow · 모듈러 역원 ↗</a></li>
         <li><a href="https://docs.python.org/3/library/math.html#math.gcd" target="_blank" rel="noopener noreferrer">Python math.gcd ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

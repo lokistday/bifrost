@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/rev/assembly.html">
 <title>명령어·비교·호출 읽기 — Reverse Engineering · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/rev.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/rev.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="rev" data-course-number="07" data-view="lesson" data-lesson-id="rev.assembly" style="--course-accent:var(--map-red)">
+<body class="learning-page" data-course="rev" data-course-number="07" data-view="lesson" data-lesson-id="rev.assembly" data-path="" style="--course-accent:var(--map-red)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -85,14 +86,15 @@
               <span class="lesson-dot" data-dot="rev.state-machine" aria-hidden="true"></span><span>입력 순서로 상태기계 복원<small class="completion-label" data-completion="rev.state-machine"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/rev.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">01 · 바이너리와 정적 관찰 · 2 / 15</div><h1>명령어·비교·호출 읽기</h1><p class="lesson-objective">기계어 목록에서 호출과 조건 분기를 찾아 고수준 의미를 연결합니다.</p></div></header>
           <div class="lesson-meta"><span>기초</span><span>학습 45–80분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>문자열이 있다는 사실만으로 그 기능이 실행됐다고 말할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>문자열은 단서입니다. 도달 가능한 분기·실제 입력·출력을 연결해 가설을 검증해야 합니다.</p><a href="../../guides/bridges.html#c">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Ubuntu/WSL · GNU objdump · -g -O0 check</strong></p><ul><li>먼저 rev.binary와 같은 옵션으로 check를 빌드합니다. disassembly.txt는 명령 출력에서 생성합니다.</li><li>uname -m과 file check를 기록하고 x86-64 또는 AArch64 등 자신의 명령어 체계를 구분합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Ubuntu/WSL · GNU objdump · -g -O0 check</strong></p><ul><li>먼저 rev.binary와 같은 옵션으로 check를 빌드합니다. disassembly.txt는 명령 출력에서 생성합니다.</li><li>uname -m과 file check를 기록하고 x86-64 또는 AArch64 등 자신의 명령어 체계를 구분합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="binary.html">리버싱 · ELF·심볼·컴파일 옵션 ↗</a></li><li><a href="../pwn/debugger.html">시스템 보안 · GDB 중단점과 변수 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>어셈블리는 CPU 명령을 읽을 수 있는 표기로 나타냅니다. 레지스터는 CPU의 작은 저장소이며 비교와 분기는 계산 결과에 따라 다음 실행 위치를 고릅니다. 함수 인자·반환값 전달 방식은 해당 플랫폼의 ABI가 정합니다.</p><figure class="learning-visual" data-visual-id="rev.assembly"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 구조도</span><h3>길이와 문자열 비교가 반환값으로 이어집니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="길이와 문자열 비교가 반환값으로 이어집니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 382" width="760" height="382" role="img" aria-labelledby="visual-rev-assembly-title visual-rev-assembly-desc" focusable="false"><title id="visual-rev-assembly-title">길이와 문자열 비교가 반환값으로 이어집니다</title><desc id="visual-rev-assembly-desc">check 함수는 먼저 strlen(text) == 7을 검사합니다. 길이가 다르면 문자열 비교를 실행하지 않고 거짓을 반환합니다. 길이가 7이면 strcmp(text, &quot;BIFROST&quot;) == 0을 검사하고, 일치하면 참을 반환합니다. main은 반환값에 따라 match 또는 no match를 출력합니다.</desc><defs><marker id="visual-rev-assembly-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><path class="v-edge " d="M196 184C228 184 228 88 260 88" marker-end="url(#visual-rev-assembly-arrow)"/><path class="v-edge " d="M375 146C375 191 375 191 375 236" marker-end="url(#visual-rev-assembly-arrow)"/><path class="v-edge " d="M490 88C528 88 528 88 566 88" marker-end="url(#visual-rev-assembly-arrow)"/><path class="v-edge " d="M490 294C528 294 528 294 566 294" marker-end="url(#visual-rev-assembly-arrow)"/><path class="v-edge  v-dashed" d="M490 312L530 312L530 128L566 128" marker-end="url(#visual-rev-assembly-arrow)"/><g class="v-tone "><rect class="v-node" x="28" y="128" width="168" height="112" rx="12"/><rect class="v-accent" x="29" y="141" width="3" height="86" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="156">text</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="187">검사할 입력</tspan></text></g><g class="v-tone "><rect class="v-node" x="260" y="30" width="230" height="116" rx="12"/><rect class="v-accent" x="261" y="43" width="3" height="90" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="277" y="58">strlen == 7</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="277" y="89">길이 조건</tspan></text></g><g class="v-tone "><rect class="v-node" x="260" y="236" width="230" height="116" rx="12"/><rect class="v-accent" x="261" y="249" width="3" height="90" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="277" y="264">strcmp == 0</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="277" y="295">문자열 일치 조건</tspan></text></g><g class="v-tone danger"><rect class="v-node" x="566" y="30" width="166" height="116" rx="12"/><rect class="v-accent" x="567" y="43" width="3" height="90" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="583" y="58">거짓 반환</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="583" y="89">no match</tspan></text></g><g class="v-tone positive"><rect class="v-node" x="566" y="236" width="166" height="116" rx="12"/><rect class="v-accent" x="567" y="249" width="3" height="90" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="583" y="264">참 반환</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="583" y="295">match</tspan></text></g><rect class="v-label-bg" x="348.24" y="183" width="53.519999999999996" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="375" y="197">길이 7</tspan></text><rect class="v-label-bg" x="507" y="68" width="42" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="528" y="82">아님</tspan></text><rect class="v-label-bg" x="507" y="274" width="42" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="528" y="288">일치</tspan></text><rect class="v-label-bg" x="503" y="183" width="54" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="530" y="197">불일치</tspan></text></svg></div><figcaption><span class="visual-takeaway">특정 명령어 이름을 외우기보다, 조건 검사와 분기·반환의 관계를 소스와 연결하세요.</span><small class="visual-note">제공 소스의 논리 흐름입니다. 실제 명령어·함수 호출 형태는 CPU·컴파일 옵션에 따라 달라집니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>check 함수는 먼저 strlen(text) == 7을 검사합니다. 길이가 다르면 문자열 비교를 실행하지 않고 거짓을 반환합니다. 길이가 7이면 strcmp(text, &quot;BIFROST&quot;) == 0을 검사하고, 일치하면 참을 반환합니다. main은 반환값에 따라 match 또는 no match를 출력합니다.</p></details></figure><p>이 예제에서는 strlen 결과와 7의 비교, strcmp 호출 또는 이에 대응하는 코드, 참/거짓 반환을 찾아봅니다. 최적화가 켜지면 라이브러리 호출이 변형되거나 상수 비교로 바뀔 수 있으므로 특정 명령 줄이 반드시 나와야 한다고 가정하지 않습니다.</p><p>처음에는 모든 명령을 번역하려 하지 말고 함수 시작, 호출, 비교, 조건 분기, 반환을 표시합니다. 소스의 &amp;&amp;는 앞 조건이 거짓이면 뒤 비교를 수행할 필요가 없는 단락 평가입니다. 길이가 7이 아닌 입력에서 문자열 비교 쪽을 건너뛰는 경로를 찾아보세요.</p><p>strcmp는 두 문자열이 같을 때 0을 반환합니다. 이 소스는 strcmp(...) == 0이라는 추가 판정으로 참을 만듭니다. strlen은 널 종료 바이트를 제외한 바이트 수를 반환합니다. 예시의 BIFROST는 ASCII 7바이트이며 한글 화면 글자 수와 같은 개념으로 일반화하지 않습니다.</p><p>호출 규약은 함수가 인자를 어디에 받고 결과를 어디에 두는지 정한 약속입니다. Ubuntu x86-64의 System V AMD64에서는 첫 포인터 인자를 RDI로, int 결과를 EAX로 읽는 경우를 확인할 수 있습니다. AArch64의 AAPCS64에서는 첫 포인터 인자는 X0, int 결과는 W0에 대응합니다. 도구가 함수 내부 저장소로 옮긴 뒤에는 원래 인자 레지스터만 계속 읽지 않도록 데이터 이동도 따라갑니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>AT&amp;T 표기와 Intel 표기의 피연산자 순서를 확인하지 않는다.</dt><dd>objdump가 사용하는 문법과 CPU를 먼저 적고 데이터 이동 방향을 읽습니다.</dd><dt>함수 진입 인자 레지스터가 함수가 끝날 때까지 그대로일 것으로 가정한다.</dt><dd>호출이나 임시값 사용으로 바뀔 수 있으므로 저장·복원과 값 이동을 따라갑니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -142,16 +144,17 @@
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="binary.html"><small>← 이전 차시</small>ELF·심볼·컴파일 옵션</a>
             <a href="static.html"><small>다음 차시 →</small>문자열은 단서, 결론은 가설</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://sourceware.org/binutils/docs/binutils/objdump.html" target="_blank" rel="noopener noreferrer">GNU Binutils · objdump 디스어셈블 ↗</a></li>
         <li><a href="https://gitlab.com/x86-psABIs/x86-64-ABI" target="_blank" rel="noopener noreferrer">System V AMD64 ABI · 공식 소스 ↗</a></li>
         <li><a href="https://github.com/ARM-software/abi-aa/blob/main/aapcs64/aapcs64.rst" target="_blank" rel="noopener noreferrer">Arm · AAPCS64 호출 규약 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

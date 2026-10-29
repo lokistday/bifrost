@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/pwn/struct-layout.html">
 <title>구조체 배치와 명시적 직렬화 — Pwn / System · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/pwn.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/pwn.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="pwn.struct-layout" style="--course-accent:var(--map-violet)">
+<body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="pwn.struct-layout" data-path="" style="--course-accent:var(--map-violet)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -86,14 +87,15 @@
               <span class="lesson-dot" data-dot="pwn.atomic-open" aria-hidden="true"></span><span>파일 열기·TOCTOU·객체 검증<small class="completion-label" data-completion="pwn.atomic-open"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/pwn.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">05 · 메모리 표현과 데이터 계약 · 12 / 16</div><h1>구조체 배치와 명시적 직렬화</h1><p class="lesson-objective">호스트 구조체의 padding·오프셋과 전송 형식의 바이트 계약을 분리합니다.</p></div></header>
           <div class="lesson-meta"><span>심화 연결</span><span>학습 60–100분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>버퍼 크기, 유효한 데이터 길이, 문자열 길이를 구분할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>할당 용량과 채워진 바이트 수는 다르고 strlen은 첫 NUL까지만 셉니다. 읽기 전에 경계와 객체 수명을 확인합니다.</p><a href="../../guides/bridges.html#c">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Ubuntu/WSL · GCC · C11 · 로컬 시스템 실습</strong></p><ul><li>Pwn ZIP을 풀고 pwn 폴더에서 실행합니다. Windows에서는 WSL 터미널을 사용합니다. gcc --version을 확인하고 -std=c11 -Wall -Wextra -Werror -Wformat=2 -g -O0로 빌드합니다.</li><li>FD·open 차시는 Linux/POSIX API와 자기 mkstemp/mkdtemp 파일만 사용합니다. 다른 사용자 파일이나 시스템 설정을 변경하지 않습니다. 기본 출력은 재현 가능하지만 --layout의 구조체 크기·오프셋은 ABI에 따라 달라집니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Ubuntu/WSL · GCC · C11 · 로컬 시스템 실습</strong></p><ul><li>Pwn ZIP을 풀고 pwn 폴더에서 실행합니다. Windows에서는 WSL 터미널을 사용합니다. gcc --version을 확인하고 -std=c11 -Wall -Wextra -Werror -Wformat=2 -g -O0로 빌드합니다.</li><li>FD·open 차시는 Linux/POSIX API와 자기 mkstemp/mkdtemp 파일만 사용합니다. 다른 사용자 파일이나 시스템 설정을 변경하지 않습니다. 기본 출력은 재현 가능하지만 --layout의 구조체 크기·오프셋은 ABI에 따라 달라집니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="binary-parser.html">시스템 보안 · 바이너리 길이·엔디언·파서 경계 ↗</a></li><li><a href="allocation-size.html">시스템 보안 · 할당 크기와 정수 wrap 방지 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>C struct는 필드를 묶지만 메모리에 필드 크기의 합만큼 빽빽하게 저장된다고 보장하지 않습니다. ABI와 정렬 때문에 필드 사이·끝에 padding이 들어갈 수 있습니다. sizeof와 offsetof로 관찰한 배치는 그 실행 환경의 사실이며 다른 컴파일러·플랫폼의 전송 명세가 아닙니다.</p><figure class="learning-visual" data-visual-id="pwn.struct-layout"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 데이터 모형</span><h3>전송 형식은 명시적으로 7바이트입니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="전송 형식은 명시적으로 7바이트입니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 160" width="760" height="160" role="img" aria-labelledby="visual-pwn-struct-layout-title visual-pwn-struct-layout-desc" focusable="false"><title id="visual-pwn-struct-layout-title">전송 형식은 명시적으로 7바이트입니다</title><desc id="visual-pwn-struct-layout-desc">type 01, code 01 02 03 04, count 05 06을 순서대로 전송합니다. 호스트 struct의 padding은 읽지 않습니다. --layout의 실제 크기와 오프셋은 별도 관찰입니다.</desc><defs><marker id="visual-pwn-struct-layout-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="28" y="30">명시적 전송 바이트</tspan></text><g class="v-tone "><rect class="v-node" x="28" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="75.78571428571428" y="54">type</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="75.78571428571428" y="102">01</tspan></text></g><g class="v-tone "><rect class="v-node" x="128.57142857142856" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="176.35714285714283" y="54">code 0</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="176.35714285714283" y="102">01</tspan></text></g><g class="v-tone "><rect class="v-node" x="229.14285714285714" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="276.92857142857144" y="54">code 1</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="276.92857142857144" y="102">02</tspan></text></g><g class="v-tone "><rect class="v-node" x="329.7142857142857" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="377.5" y="54">code 2</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="377.5" y="102">03</tspan></text></g><g class="v-tone "><rect class="v-node" x="430.2857142857143" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="478.07142857142856" y="54">code 3</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="478.07142857142856" y="102">04</tspan></text></g><g class="v-tone "><rect class="v-node" x="530.8571428571429" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="578.6428571428572" y="54">count 0</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="578.6428571428572" y="102">05</tspan></text></g><g class="v-tone "><rect class="v-node" x="631.4285714285714" y="65" width="95.57142857142857" height="62" rx="7"/><text class="v-text v-secondary" font-size="11" text-anchor="middle"><tspan x="679.2142857142858" y="54">count 1</tspan></text><text class="v-text v-heading" font-size="16" text-anchor="middle"><tspan x="679.2142857142858" y="102">06</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">독립된 전송 표본과 왕복을 둘 다 검증하세요.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>type 01, code 01 02 03 04, count 05 06을 순서대로 전송합니다. 호스트 struct의 padding은 읽지 않습니다. --layout의 실제 크기와 오프셋은 별도 관찰입니다.</p></details></figure><p>구조체 전체를 그대로 전송하면 padding·엔디언·정수 표현 같은 호스트 세부가 신뢰 경계를 넘습니다. 초기화한 멤버 값만 보고 모든 padding 값도 의미 있게 정해졌다고 가정하지 않습니다. 구조체 비교를 memcmp 하나로 대체하는 것도 논리 필드 비교와 다를 수 있습니다.</p><p>이 실습의 가상 전송 형식은 type 1바이트, code 4바이트 big-endian, count 2바이트 big-endian으로 정확히 7바이트입니다. encode는 멤버 값을 비트 연산으로 바이트에 넣고 decode는 명세대로 복원합니다. 구조체의 실제 sizeof가 얼마든 전송 크기는 계약으로 정합니다.</p><p>decode는 필드 접근 전에 입력 크기가 정확히 7인지 확인합니다. 이전 파서 차시의 길이 검사를 유지하면서, 이번에는 유효한 바이트를 호스트 값으로 옮기는 단계를 배웁니다. 직렬화 성공은 메시지 인증·권한·값의 업무 범위까지 검증한 것은 아닙니다.</p><p>기본 모드는 의미 있는 멤버만 출력하고 padding을 덤프하지 않습니다. --layout은 sizeof와 offsetof의 관찰용입니다. 바이트 순서와 자료형 크기 계약을 바꾸면 인코더·디코더·표본·테스트를 함께 바꿔야 하며 packed 옵션만으로 모든 이식성을 얻는다고 가정하지 않습니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>sizeof(struct)가 곧 네트워크 메시지 길이라고 생각한다.</dt><dd>호스트 배치와 전송 형식을 따로 정하고 명시적으로 직렬화합니다.</dd><dt>멤버를 초기화했으니 padding도 안전한 의미를 가진다고 가정한다.</dt><dd>padding은 논리 필드가 아닙니다. 신뢰 경계를 넘길 때 멤버를 정한 형식으로 인코딩합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -145,15 +147,16 @@ short=REJECT</pre></div></li><li><h3>실제 메모리 배치를 별도 관찰하
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="binary-parser.html"><small>← 이전 차시</small>바이너리 길이·엔디언·파서 경계</a>
             <a href="binary-strings.html"><small>다음 차시 →</small>바이너리 길이와 중간 NUL</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/declarations-and-initialization-dcl/dcl39-c/" target="_blank" rel="noopener noreferrer">SEI CERT C · 구조체 경계의 정보 노출 ↗</a></li>
         <li><a href="https://man7.org/linux/man-pages/man3/offsetof.3.html" target="_blank" rel="noopener noreferrer">Linux man-pages · offsetof ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

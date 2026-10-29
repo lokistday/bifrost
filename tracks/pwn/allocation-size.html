@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/pwn/allocation-size.html">
 <title>할당 크기와 정수 wrap 방지 — Pwn / System · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/pwn.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/pwn.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="pwn.allocation-size" style="--course-accent:var(--map-violet)">
+<body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="pwn.allocation-size" data-path="" style="--course-accent:var(--map-violet)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -86,14 +87,15 @@
               <span class="lesson-dot" data-dot="pwn.atomic-open" aria-hidden="true"></span><span>파일 열기·TOCTOU·객체 검증<small class="completion-label" data-completion="pwn.atomic-open"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/pwn.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">03 · 정수와 출력의 경계 · 8 / 16</div><h1>할당 크기와 정수 wrap 방지</h1><p class="lesson-objective">개수·원소 크기·헤더의 계산을 수행하기 전에 곱셈과 덧셈의 범위를 검증합니다.</p></div></header>
           <div class="lesson-meta"><span>응용</span><span>학습 60–100분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>버퍼 크기, 유효한 데이터 길이, 문자열 길이를 구분할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>할당 용량과 채워진 바이트 수는 다르고 strlen은 첫 NUL까지만 셉니다. 읽기 전에 경계와 객체 수명을 확인합니다.</p><a href="../../guides/bridges.html#c">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Ubuntu/WSL · GCC · C11 · 로컬 소스 실습</strong></p><ul><li>Pwn ZIP을 풀고 pwn 폴더에서 실행합니다. gcc --version을 확인합니다. Windows PowerShell에서 C 명령을 직접 실행하지 않고 WSL의 같은 폴더에서 실행합니다.</li><li>새로운 소스는 안전한 조건 분기만 실행하며 시스템 보호를 끄지 않습니다. gcc -std=c11 -Wall -Wextra -Werror -Wformat=2 -g -O0로 빌드합니다. 주소·진단의 세부 형식은 도구별로 달라질 수 있습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Ubuntu/WSL · GCC · C11 · 로컬 소스 실습</strong></p><ul><li>Pwn ZIP을 풀고 pwn 폴더에서 실행합니다. gcc --version을 확인합니다. Windows PowerShell에서 C 명령을 직접 실행하지 않고 WSL의 같은 폴더에서 실행합니다.</li><li>새로운 소스는 안전한 조건 분기만 실행하며 시스템 보호를 끄지 않습니다. gcc -std=c11 -Wall -Wextra -Werror -Wformat=2 -g -O0로 빌드합니다. 주소·진단의 세부 형식은 도구별로 달라질 수 있습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="integer-input.html">시스템 보안 · 숫자 입력·부호·범위 검증 ↗</a></li><li><a href="lifetime.html">시스템 보안 · 스택·힙과 수명 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>메모리 크기는 흔히 header + count * element로 계산합니다. count가 정상적인 양수여도 곱셈과 덧셈 결과가 size_t에 들어가지 않으면 작은 값으로 돌아갈 수 있습니다. 입력 숫자 파싱과 크기 연산 검사는 서로 다른 단계입니다.</p><figure class="learning-visual" data-visual-id="pwn.allocation-size"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교표</span><h3>계산 가능한 크기와 할당 성공은 다릅니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="계산 가능한 크기와 할당 성공은 다릅니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 330" width="760" height="330" role="img" aria-labelledby="visual-pwn-allocation-size-title visual-pwn-allocation-size-desc" focusable="false"><title id="visual-pwn-allocation-size-title">계산 가능한 크기와 할당 성공은 다릅니다</title><desc id="visual-pwn-allocation-size-desc">allocation_size의 작은 사례는 8+3×4=20이고, SIZE_MAX 개수는 연산 전에 거부됩니다. 빈 개수는 헤더 8바이트이며 원소 크기 0은 거부됩니다.</desc><defs><marker id="visual-pwn-allocation-size-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone "><rect class="v-table-head" x="28" y="20" width="230" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="41" y="47">count · element · header</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="258" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="271" y="47">결과</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="495" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="508" y="47">이유</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="78" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="105">3 · 4 · 8</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="105">OK · 20</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="105">범위 내</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="136" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="163">SIZE_MAX · 4 · 8</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="163">REJECT</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="163">계산 전 제한</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="194" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="221">0 · 4 · 8</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="221">OK · 8</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="221">헤더만 남음</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="252" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="279">1 · 0 · 8</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="252" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="279">REJECT</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="252" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="279">원소 크기 0</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">큰 값을 먼저 계산하지 말고 허용 조건부터 확인하세요.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>allocation_size의 작은 사례는 8+3×4=20이고, SIZE_MAX 개수는 연산 전에 거부됩니다. 빈 개수는 헤더 8바이트이며 원소 크기 0은 거부됩니다.</p></details></figure><p>unsigned 정수는 표현 범위를 넘을 때 모듈러 연산으로 돌아갈 수 있습니다. 언어가 그 계산을 정의한다고 프로그램 목적에도 올바른 것은 아닙니다. 작은 크기만 할당한 뒤 원래 큰 개수로 복사하면 경계 오류로 이어질 수 있으므로 결과를 쓰기 전에 원인을 막습니다.</p><p>결과를 계산한 다음 비교하려고 하면 이미 정보가 사라졌을 수 있습니다. element가 0이 아님을 먼저 확인하고 count &lt;= (SIZE_MAX - header) / element를 검사하면 곱셈과 덧셈을 하기 전에 전체 크기의 표현 가능성을 판단할 수 있습니다.</p><p>size_t는 바이트 수에 쓰는 부호 없는 타입이고 sizeof의 결과 타입입니다. SIZE_MAX 값은 플랫폼마다 달라질 수 있어 숫자를 32비트나 64비트라고 하드코딩하지 않습니다. 예제는 SIZE_MAX 자체를 입력으로 넣어 경계 초과를 재현합니다.</p><p>표현 가능한 크기라는 사실이 실제 메모리를 할당할 수 있다는 뜻은 아닙니다. 운영 코드에는 업무 상한·자원 예산·malloc 실패 처리도 필요합니다. 이 실습은 큰 메모리를 할당하지 않고 크기 계산 함수의 정상·거부 결과만 관찰합니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>size_t는 unsigned이므로 크기 연산은 무조건 안전하다고 생각한다.</dt><dd>정의된 wrap도 크기 계산의 의미를 깨뜨릴 수 있습니다. 연산 전에 범위를 검사합니다.</dd><dt>연산 범위에 들어가면 시스템 메모리도 충분하다고 판단한다.</dt><dd>타입의 표현 가능성과 실제 자원 가용성은 다릅니다. 업무 상한과 할당 실패도 처리합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -146,15 +148,16 @@ zero-element=REJECT</pre></div></li><li><h3>큰 개수의 검사 위치 읽기</
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="integer-input.html"><small>← 이전 차시</small>숫자 입력·부호·범위 검증</a>
             <a href="format-strings.html"><small>다음 차시 →</small>서식 문자열·데이터·출력 잘림</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/integers-int/int30-c/" target="_blank" rel="noopener noreferrer">SEI CERT C · unsigned 연산과 wrap ↗</a></li>
         <li><a href="https://cmu-sei.github.io/secure-coding-standards/sei-cert-c-coding-standard/rules/arrays-arr/arr30-c/" target="_blank" rel="noopener noreferrer">SEI CERT C · 배열과 포인터 경계 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

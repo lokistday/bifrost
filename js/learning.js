@@ -9,7 +9,10 @@
   const root = document.getElementById('learningContent');
   if (!course || !root) return;
   const lessons = all(course);
-  const view = window.BifrostLearningView.create(courses, window.BifrostVisuals);
+  const paths = window.BifrostPaths || {};
+  const pathId = document.body.dataset.path;
+  const route = Object.prototype.hasOwnProperty.call(paths, pathId) ? paths[pathId] : null;
+  const view = window.BifrostLearningView.create(courses, window.BifrostVisuals, route);
   const lessonHref = id => view.lessonHref(id, key);
   const firstIncomplete = () => lessons.find(lesson => !progress.has(lesson.id));
   const isLesson = document.body.dataset.view === 'lesson';
@@ -24,7 +27,7 @@
     root.innerHTML = view.overview(key);
   }
   if (isLesson) {
-    document.title = lesson ? `${lesson.title} — ${course.title} · Bifrost` : '차시를 찾을 수 없습니다 — Bifrost';
+    document.title = lesson ? `${lesson.title} — ${route ? route.title : course.title} · Bifrost` : '차시를 찾을 수 없습니다 — Bifrost';
     if (lesson) {
       document.querySelector('meta[name="description"]').content = lesson.goal;
       const canonical = document.querySelector('link[rel="canonical"]');

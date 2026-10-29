@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/crypto/mac.html">
 <title>HMAC과 태그 검증 — Cryptography · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/crypto.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/crypto.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.mac" style="--course-accent:var(--map-pink)">
+<body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.mac" data-path="" style="--course-accent:var(--map-pink)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -85,14 +86,15 @@
               <span class="lesson-dot" data-dot="crypto.unbiased-randomness" aria-hidden="true"></span><span>난수의 예측 가능성과 나머지 편향<small class="completion-label" data-completion="crypto.unbiased-randomness"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/crypto.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">02 · 무결성과 진위 · 5 / 19</div><h1>HMAC과 태그 검증</h1><p class="lesson-objective">공유 키가 있는 변경 검출과 단순 해시를 비교합니다.</p></div></header>
           <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>암호학적 검증 성공이면 현재 요청을 처리해도 되나요?</p><details><summary>판단 기준과 보충 자료</summary><p>인증된 바이트와 현재 권한·문맥·재전송·만료는 다른 검증입니다. 목적과 상태를 함께 확인합니다.</p><a href="../../guides/bridges.html#bytes">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>HMAC 검증 · Python 3</strong></p><ul><li>lab.py의 공개된 DEMO-KEY는 동작 설명용입니다. 실제 비밀 값이나 서비스 키를 사용하지 않습니다.</li><li>표준 hmac과 hashlib만 필요합니다. 비교에는 hmac.compare_digest를 사용합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>HMAC 검증 · Python 3</strong></p><ul><li>lab.py의 공개된 DEMO-KEY는 동작 설명용입니다. 실제 비밀 값이나 서비스 키를 사용하지 않습니다.</li><li>표준 hmac과 hashlib만 필요합니다. 비교에는 hmac.compare_digest를 사용합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="hash.html">암호학 · SHA-256과 파일 무결성 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>MAC은 비밀키를 가진 쪽이 만든 태그를 검증해 메시지의 무결성과 키 보유자에 대한 인증을 제공합니다. HMAC은 해시 함수를 기반으로 한 MAC 구성입니다. 메시지 내용 자체를 숨기는 암호화는 아닙니다.</p><figure class="learning-visual" data-visual-id="crypto.mac"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 구조도</span><h3>공유 키로 태그를 만들고, 받은 내용으로 다시 검증합니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="공유 키로 태그를 만들고, 받은 내용으로 다시 검증합니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 432" width="760" height="432" role="img" aria-labelledby="visual-crypto-mac-title visual-crypto-mac-desc" focusable="false"><title id="visual-crypto-mac-title">공유 키로 태그를 만들고, 받은 내용으로 다시 검증합니다</title><desc id="visual-crypto-mac-desc">송신자와 검증자는 비밀키 K를 미리 공유합니다. 송신자는 HMAC(K, 메시지)로 태그를 만들고 메시지와 태그를 전달합니다. 검증자는 받은 메시지로 HMAC을 다시 계산해 compare_digest로 태그를 비교합니다. 예제에서 원본 검증은 True, 내용 변경 후 검증은 False입니다.</desc><defs><marker id="visual-crypto-mac-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><path class="v-edge  v-dashed" d="M380 126C380 175 178 175 178 224" marker-end="url(#visual-crypto-mac-arrow)"/><path class="v-edge  v-dashed" d="M380 126C380 175 582 175 582 224" marker-end="url(#visual-crypto-mac-arrow)"/><path class="v-edge " d="M328 309C380 309 380 309 432 309" marker-end="url(#visual-crypto-mac-arrow)"/><g class="v-tone "><rect class="v-node" x="270" y="20" width="220" height="106" rx="12"/><rect class="v-accent" x="271" y="33" width="3" height="80" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="287" y="48">공유 비밀키 K</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="287" y="79">전달 데이터와 분리</tspan></text></g><g class="v-tone "><rect class="v-node" x="28" y="224" width="300" height="170" rx="12"/><rect class="v-accent" x="29" y="237" width="3" height="144" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="252">보내는 쪽</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="283">tag = HMAC(K, message)</tspan><tspan x="45" y="303">메시지와 태그 전달</tspan></text></g><g class="v-tone positive"><rect class="v-node" x="432" y="224" width="300" height="170" rx="12"/><rect class="v-accent" x="433" y="237" width="3" height="144" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="449" y="252">검증하는 쪽</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="449" y="283">받은 내용으로 재계산</tspan><tspan x="449" y="303">compare_digest로 비교</tspan><tspan x="449" y="323">원본 True · 변경 False</tspan></text></g><rect class="v-label-bg" x="337.28" y="289" width="85.44" height="20" rx="5"/><text class="v-text v-edge-label" font-size="12" text-anchor="middle"><tspan x="380" y="303">메시지·태그</tspan></text></svg></div><figcaption><span class="visual-takeaway">키가 없는 단순 해시 비교와, 공유 키를 가진 쪽만 태그를 만들 수 있는 검증을 구분하세요.</span><small class="visual-note">HMAC은 메시지를 암호화하지 않습니다. 같은 키를 공유한 검증자도 태그를 만들 수 있어 공개 검증 서명과 다릅니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>송신자와 검증자는 비밀키 K를 미리 공유합니다. 송신자는 HMAC(K, 메시지)로 태그를 만들고 메시지와 태그를 전달합니다. 검증자는 받은 메시지로 HMAC을 다시 계산해 compare_digest로 태그를 비교합니다. 예제에서 원본 검증은 True, 내용 변경 후 검증은 False입니다.</p></details></figure><p>검증은 받은 메시지로 태그를 다시 계산해 비교합니다. 예제는 hmac.compare_digest를 사용합니다. 공유 키를 가진 어느 쪽도 태그를 만들 수 있으므로 제3자에게 누가 서명했는지 증명하는 디지털 서명과 동일하지 않습니다.</p><p>보내는 쪽은 비밀키와 메시지로 태그를 계산하고 받는 쪽은 같은 키와 받은 메시지로 다시 계산합니다. 태그가 맞아야 같은 키를 가진 쪽이 만든 데이터로 받아들일 근거가 생깁니다. 키가 유출되면 공격자도 유효한 태그를 만들 수 있습니다.</p><p>메시지와 태그는 함께 전송해도 되지만 키는 별도 비밀로 보관해야 합니다. 메시지가 평문이면 누구나 내용을 읽을 수 있으므로 HMAC만 추가해 기밀성을 얻었다고 말하지 않습니다. 필요한 경우 인증된 암호화와 목적을 구분합니다.</p><p>검증 대상 바이트를 정확히 정해야 합니다. JSON 공백·필드 순서·줄바꿈이 달라지면 의미가 같아 보여도 다른 태그가 나올 수 있습니다. 응용에서는 직렬화 규칙·버전·대상 범위를 정하고, 태그가 맞아도 재전송·인가 문제는 별도 확인합니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>태그 검증만 하면 재전송과 과도한 작업 권한도 해결된다고 한다.</dt><dd>시각·순서·nonce 및 실제 주체의 인가 정책을 별도로 설계합니다.</dd><dt>검증 전에 수신 메시지의 공백을 임의 정리한다.</dt><dd>인증할 바이트의 직렬화 규칙을 송수신 양쪽에서 동일하게 정의합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -145,15 +147,16 @@ print(hmac.compare_digest(tag, hmac.digest(b&quot;training-key-B&quot;, message,
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="hash.html"><small>← 이전 차시</small>SHA-256과 파일 무결성</a>
             <a href="symmetric.html"><small>다음 차시 →</small>대칭키·AEAD·인증 태그</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://docs.python.org/3/library/hmac.html" target="_blank" rel="noopener noreferrer">Python hmac · compare_digest ↗</a></li>
         <li><a href="https://www.rfc-editor.org/rfc/rfc2104.html" target="_blank" rel="noopener noreferrer">RFC 2104 · HMAC ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

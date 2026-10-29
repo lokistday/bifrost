@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="세션 만료와 중복 예약을 분리해서 검사하세요. 만료한 요청은 예약 DB에 도달하지 않아야 하고 같은 요청의 재전송은 재고를 두 번 줄이면 안 됩니다.">
+<meta name="theme-color" content="#0b1220">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:title" content="세션과 재시도를 함께 검증하는 예약 서비스 — 웹의 동작부터 안전한 상태 관리까지 · Bifrost">
+<meta property="og:description" content="세션 만료와 중복 예약을 분리해서 검사하세요. 만료한 요청은 예약 DB에 도달하지 않아야 하고 같은 요청의 재전송은 재고를 두 번 줄이면 안 됩니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/paths/web-defense/project.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/paths/web-defense/project.html">
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<title>세션과 재시도를 함께 검증하는 예약 서비스 — 웹의 동작부터 안전한 상태 관리까지 · Bifrost</title>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
+<link rel="stylesheet" href="../../css/main.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/learning.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script><script src="../../js/learning-paths.js?v=learning-cbb98497ecac" defer></script><script src="../../js/progress.js" defer></script><script src="../../js/path-progress.js?v=learning-cbb98497ecac" defer></script>
+</head>
+<body class="learning-page study-page" data-path="web-defense">
+<a class="skip-link" href="#studyContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav"><a class="brand" href="../../index.html"><span class="brand-mark">✦</span><span>BIFROST</span></a><nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">학습 지도</a><a href="../../learn/">검색 · 학습 경로</a><a href="../../guides/bridges.html">기초 연결</a></nav><button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button></div></header>
+<main class="study-wrap" id="studyContent" tabindex="-1">
+      <nav class="breadcrumb" aria-label="현재 위치"><a href="../../learn/">학습 경로</a><span>/</span><a href="./">웹의 동작부터 안전한 상태 관리까지</a><span>/ 종합 프로젝트</span></nav>
+      <section class="path-context-banner"><a href="./">웹의 동작부터 안전한 상태 관리까지</a><strong>마지막 단계 · 종합 프로젝트</strong><p>이 경로에서 배운 내용을 근거와 결과물로 연결합니다.</p><div class="course-stats"><span data-path-count></span><div class="course-meter" role="progressbar" aria-label="경로 차시 완료 진도" aria-valuemin="0" aria-valuemax="100" data-path-meter><span></span></div></div><a href="web.idempotency.html">← 마지막 차시 돌아보기</a></section>
+      <header class="study-hero"><div class="overline">Web Hacking / FINAL PROJECT</div><h1>세션과 재시도를 함께 검증하는 예약 서비스</h1><p>세션 만료와 중복 예약을 분리해서 검사하세요. 만료한 요청은 예약 DB에 도달하지 않아야 하고 같은 요청의 재전송은 재고를 두 번 줄이면 안 됩니다.</p><div class="lesson-meta"><span>150–240분 · 설치 제외 저자 추정</span><span>로컬 표본 · 계정 불필요</span><span>A/B 변형 + 근거 보고서</span></div></header>
+      <ol class="project-flow" aria-label="프로젝트 진행 흐름"><li><b>01 · PREDICT</b><span>자료와 계약 읽기<br>실행 전 예상</span></li><li><b>02 · BUILD</b><span>A 표본 독립 풀이<br>정상·거부 검사</span></li><li><b>03 · TRANSFER</b><span>B 표본 재검증<br>새 반례 추가</span></li><li><b>04 · EXPLAIN</b><span>근거 보고서<br>루브릭 검토</span></li></ol>
+      <nav class="study-jumps" aria-label="프로젝트 항목"><a href="#ready">준비 ↓</a><a href="#assignment">과제 ↓</a><a href="#check">검사 ↓</a><a href="#rubric">평가 ↓</a></nav>
+      <section id="ready" class="study-section"><h2>먼저 준비할 것</h2><p>ZIP 전체를 풀고 원본을 보관하세요. 폴더 전체의 작업 사본에서 진행합니다. 모든 자료는 직접 만든 교육용 표본이며 외부 서비스에 접속할 필요가 없습니다.</p><ul><li><a href="web.authorization.html">리소스 단위 인가</a></li><li><a href="web.session-lifecycle.html">세션 갱신·만료·서버 무효화</a></li><li><a href="web.reset-tokens.html">일회 토큰·목적 결합·만료</a></li><li><a href="web.private-caching.html">개인 응답·공유 캐시·Cache-Control</a></li><li><a href="web.idempotency.html">거래 불변 조건·트랜잭션·재시도</a></li></ul><div class="project-files"><a class="learning-button primary" href="../../labs/web.zip" download>실습과 프로젝트 ZIP ↓</a><a class="learning-button" href="../../labs/web/project-brief.md" download>과제 안내 ↓</a><a class="learning-button" href="../../labs/web/project-report.md" download>보고서 양식 ↓</a></div><details><summary>표본·보조 파일 목록</summary><ul><li><a href="../../labs/web/project-input-a.json" download>project-input-a.json ↓</a></li><li><a href="../../labs/web/project-input-b.json" download>project-input-b.json ↓</a></li></ul><p>각 파일을 따로 받으면 의존 파일이 빠질 수 있습니다. 실행할 때는 ZIP 전체를 사용하세요.</p></details></section>
+      <section id="assignment" class="study-section"><h2>수행할 과제</h2><ol><li>세션 판정과 DB 상태 변경의 경계를 그림으로 그립니다.</li><li>web_state.Checkout을 사용해 시나리오를 순서대로 실행하는 드라이버를 작성합니다.</li><li>A/B 결과를 제출하고 만료 경계·수량 변경 재시도·타인 사용자 키를 반례로 확인합니다.</li><li>개인 응답 캐시와 복구 토큰을 이 서비스에 붙인다면 추가할 정상·거부 검사 4개를 설계합니다.</li></ol><div class="baseline-note"><h3>출력 계약</h3><p>현재 신뢰한 세션의 expires보다 now가 작을 때만 예약합니다. 만료는 UNAUTHENTICATED입니다. 그 외에는 제공된 Checkout.reserve의 사용자별 키·수량 계약을 적용합니다. outcomes는 요청 순서, stock과 orders는 최종 상태입니다.</p><p>project-answer-template.json의 필드와 타입은 유지하고 직접 계산한 결과를 새 answers-a.json·answers-b.json에 넣습니다. 빈 목록과 0은 자리표시자입니다.</p></div></section>
+      <section id="check" class="study-section"><h2>결과를 확인하는 방법</h2><p>각 분야 작업 폴더의 터미널에서 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용하세요. Crypto는 가상 환경에 requirements.txt 설치가 필요합니다.</p><div class="code-shell"><pre><code>python3 project.py check answers-a.json --variant a
+python3 project.py check answers-b.json --variant b</code></pre></div>
+      
+      
+      <p>결과 검사기는 답안 JSON만 읽습니다. 코드를 실행하거나 서버로 제출하지 않습니다. 결과 일치(0)·불일치(1)·답안 입력 오류(2)를 구분합니다. 코드 품질과 보고서의 사실성은 아래 기준으로 별도 검토하세요.</p><details class="solution"><summary>독립 시도 후, 참고 결과와 풀이 읽기</summary><p>공개된 참조 구현입니다. 답을 본 뒤에는 새로운 반례를 직접 만들어 설명할 수 있는지 확인하세요.</p><div class="code-shell"><pre><code>python3 project.py example --variant a
+python3 project.py example --variant b</code></pre></div><a href="../../labs/web/project_reference.py" download>참조 구현 읽기 ↓</a></details></section>
+      <section id="rubric" class="study-section"><h2>완주를 판단하는 기준</h2><p>항목별 0 = 근거 없음 · 1 = 설명만 가능 · 2 = 재현할 근거 있음. 8점은 자기 평가 척도이며 인증 점수가 아닙니다. 각 항목에 해당하는 파일·명령·이벤트 위치를 보고서에 연결하세요.</p><ol><li>두 표본의 상태 전이를 재현하고 만료 요청이 재고를 바꾸지 않는다.</li><li>REPLAY·CONFLICT·OUT_OF_STOCK을 구분한다.</li><li>실패·재시도 후 재고와 주문의 불변 조건을 확인한다.</li><li>인가·CSRF·캐시·토큰 검증을 서로 대체하지 않고 제안한다.</li></ol><h3>보고서에 남길 것</h3><p>범위·환경 → 예상 → 실제 관찰 → A/B 차이 → 반례와 수정 → 미확인 사항. 해시·종료 상태·테스트 결과만으로 모든 결론을 증명했다고 표현하지 마세요.</p><p>1–3일 뒤 답안 없이 B를 다시 풀거나 새 입력을 만들어 확인하세요. 설명이 막히면 해당 선행 차시로 돌아가 필요한 부분을 보충합니다.</p></section>
+      <section class="study-section"><h2>실제 형식으로 연결하기</h2><p>Checkout의 실제 SQLite 테이블을 SELECT로 읽고 상태 전이 표와 비교합니다. 브라우저 테스트는 별도의 격리된 자체 서비스에서만 확장합니다.</p><h3>이 프로젝트의 범위</h3><p>오프라인 단일 SQLite 연결 모형입니다. 실제 HTTP·로그인·결제·동시 트랜잭션을 구현하거나 안전하다고 보증하는 프로젝트가 아닙니다.</p><a class="learning-button" href="./">경로 전체 돌아보기 ↗</a></section></main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#resources">외부 참고 자료 ↗</a></div></footer>
+</body></html>

@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/web/idempotency.html">
 <title>거래 불변 조건·트랜잭션·재시도 — Web Hacking · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/web.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/web.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="web" data-course-number="08" data-view="lesson" data-lesson-id="web.idempotency" style="--course-accent:var(--map-blue)">
+<body class="learning-page" data-course="web" data-course-number="08" data-view="lesson" data-lesson-id="web.idempotency" data-path="" style="--course-accent:var(--map-blue)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -87,14 +88,15 @@
               <span class="lesson-dot" data-dot="web.idempotency" aria-hidden="true"></span><span>거래 불변 조건·트랜잭션·재시도<small class="completion-label" data-completion="web.idempotency"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/web.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">06 · 공유와 거래의 일관성 · 17 / 17</div><h1>거래 불변 조건·트랜잭션·재시도</h1><p class="lesson-objective">재고 변경과 주문 기록을 함께 처리하고 같은 요청의 재시도를 중복 효과 없이 검증합니다.</p></div></header>
           <div class="lesson-meta"><span>심화 연결</span><span>학습 50–80분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>인증과 대상 자원의 인가는 같은 검사인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>인증은 주체 확인, 인가는 주체·대상·행동의 허용 판단입니다. 세션이 유효해도 타인의 자원은 거부해야 합니다.</p><a href="../../guides/bridges.html#web">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Python 3.10 이상 · 오프라인 상태 모형 · Web ZIP</strong></p><ul><li>web 폴더에서 web_state.py를 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. Checkout 차시는 Python 배포판에 포함된 sqlite3를 사용합니다.</li><li>공개 표본 ID·토큰과 고정 시각을 사용하는 독립 실습입니다. 실제 계정·로그인·이메일·결제·HTTP 서버를 만들거나 사이트의 진도 저장 방식을 바꾸지 않습니다. 소스를 바꿀 때는 사본을 사용합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Python 3.10 이상 · 오프라인 상태 모형 · Web ZIP</strong></p><ul><li>web 폴더에서 web_state.py를 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. Checkout 차시는 Python 배포판에 포함된 sqlite3를 사용합니다.</li><li>공개 표본 ID·토큰과 고정 시각을 사용하는 독립 실습입니다. 실제 계정·로그인·이메일·결제·HTTP 서버를 만들거나 사이트의 진도 저장 방식을 바꾸지 않습니다. 소스를 바꿀 때는 사본을 사용합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="sql.html">웹 보안 · SELECT·WHERE와 매개변수 ↗</a></li><li><a href="regression.html">웹 보안 · 수정·반례·회귀 테스트 ↗</a></li><li><a href="mass-assignment.html">웹 보안 · 요청 계약과 Mass Assignment ↗</a></li><li><a href="../foundation/exceptions.html">공통 기초 · 예외·오류 메시지·종료 상태 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>정상 기능도 요청 순서와 재시도에서 보안 문제가 생길 수 있습니다. 재고가 음수가 되지 않음, 주문 하나와 재고 차감이 함께 남음, 같은 요청 키의 같은 내용은 한 번만 효과를 냄 같은 불변 조건을 먼저 정하면 경계가 명확해집니다.</p><figure class="learning-visual" data-visual-id="web.idempotency"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 타임라인</span><h3>재시도 횟수보다 상태의 불변 조건을 봅니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="재시도 횟수보다 상태의 불변 조건을 봅니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" width="760" height="460" role="img" aria-labelledby="visual-web-idempotency-title visual-web-idempotency-desc" focusable="false"><title id="visual-web-idempotency-title">재시도 횟수보다 상태의 불변 조건을 봅니다</title><desc id="visual-web-idempotency-desc">재고 3에서 alice의 2개 예약은 재고 1·주문 1을 만듭니다. 동일 재시도는 추가 차감 없이 REPLAY, 수량 변경은 CONFLICT이며 중간 실패는 롤백합니다.</desc><defs><marker id="visual-web-idempotency-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><path class="v-edge " d="M166 40V434" marker-end="url(#visual-web-idempotency-arrow)"/><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="57">첫 요청</tspan></text><circle class="v-point" cx="166" cy="52" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="26" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="39" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="54">RESERVED</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="85">재고 1 · 주문 1</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="163">같은 요청</tspan></text><circle class="v-point" cx="166" cy="158" r="6"/><g class="v-tone positive"><rect class="v-node" x="202" y="132" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="145" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="160">REPLAY</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="191">추가 차감 없음</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="269">수량 변경</tspan></text><circle class="v-point" cx="166" cy="264" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="238" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="251" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="266">CONFLICT</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="297">기존 상태 유지</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="375">중간 실패</tspan></text><circle class="v-point" cx="166" cy="370" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="344" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="357" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="372">ROLLBACK</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="403">새 변경을 취소</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">결과 이름과 실제 재고·주문 수를 함께 확인하세요.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>재고 3에서 alice의 2개 예약은 재고 1·주문 1을 만듭니다. 동일 재시도는 추가 차감 없이 REPLAY, 수량 변경은 CONFLICT이며 중간 실패는 롤백합니다.</p></details></figure><p>Checkout은 제품 kit 하나의 재고 3을 관리하는 메모리 SQLite 모형입니다. UPDATE에 stock&gt;=quantity 조건을 넣고 실제 변경 행 수를 확인합니다. 먼저 재고를 읽고 나중에 무조건 차감하는 두 단계와 달리 조건을 변경 문장에 결합합니다.</p><p>재고 차감과 주문 INSERT는 BEGIN IMMEDIATE와 COMMIT 사이에 있습니다. 둘 사이에서 예외가 나면 ROLLBACK하고 같은 예외를 다시 올립니다. 예외를 넓게 잡는 이유는 정리이며, 실패를 삼키고 성공을 반환하는 동작과 다릅니다.</p><p>주문 키는 user와 request_key의 조합이고 같은 키의 quantity가 같으면 REPLAY, 다르면 CONFLICT입니다. 동일 효과를 반복하지 않는 멱등성은 인증·인가와 다르며 요청 키 자체도 비밀 인증 정보가 아닙니다. 제품·주소·가격이 늘어나면 어떤 요청 내용을 비교할지 계약을 넓혀야 합니다.</p><p>이 표본은 단일 연결·고정 제품·순차 호출입니다. 실제 결제·다중 서비스의 정확히 한 번 효과·여러 서버 동시성·재시도 보관 기간을 증명하지 않습니다. SQLite의 실제 트랜잭션과 제약은 사용하지만 운영 규모의 동시 부하 검증은 별도입니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>같은 요청 키면 수량이 바뀌어도 이전 성공을 그대로 적용한다.</dt><dd>동일 키의 요청 내용이 같은지 비교합니다. 바뀐 요청은 충돌로 처리하는 계약을 정합니다.</dd><dt>except에서 롤백했으니 예외를 숨기고 성공을 반환해도 된다고 생각한다.</dt><dd>정리 후 원래 실패를 다시 전달합니다. 원자적 복구와 성공 보고는 다른 문제입니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -167,16 +169,17 @@ orders=0</pre></div></li></ol></section>
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="private-caching.html"><small>← 이전 차시</small>개인 응답·공유 캐시·Cache-Control</a>
             <a href="../../projects/web.html"><small>다음 단계 →</small>분야 종합 프로젝트</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://www.sqlite.org/lang_transaction.html" target="_blank" rel="noopener noreferrer">SQLite · 트랜잭션 ↗</a></li>
         <li><a href="https://www.sqlite.org/lang_createtable.html" target="_blank" rel="noopener noreferrer">SQLite · UNIQUE·CHECK 제약 ↗</a></li>
         <li><a href="https://docs.python.org/3/library/sqlite3.html" target="_blank" rel="noopener noreferrer">Python · sqlite3 인터페이스 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/rev/binary.html">
 <title>ELF·심볼·컴파일 옵션 — Reverse Engineering · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/rev.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/rev.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="rev" data-course-number="07" data-view="lesson" data-lesson-id="rev.binary" style="--course-accent:var(--map-red)">
+<body class="learning-page" data-course="rev" data-course-number="07" data-view="lesson" data-lesson-id="rev.binary" data-path="" style="--course-accent:var(--map-red)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -85,14 +86,15 @@
               <span class="lesson-dot" data-dot="rev.state-machine" aria-hidden="true"></span><span>입력 순서로 상태기계 복원<small class="completion-label" data-completion="rev.state-machine"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/rev.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">01 · 바이너리와 정적 관찰 · 1 / 15</div><h1>ELF·심볼·컴파일 옵션</h1><p class="lesson-objective">실행 파일의 정보와 분석 환경을 식별합니다.</p></div></header>
           <div class="lesson-meta"><span>기초</span><span>학습 45–80분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>문자열이 있다는 사실만으로 그 기능이 실행됐다고 말할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>문자열은 단서입니다. 도달 가능한 분기·실제 입력·출력을 연결해 가설을 검증해야 합니다.</p><a href="../../guides/bridges.html#c">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>Ubuntu/WSL · GCC · GNU nm · file</strong></p><ul><li>내려받은 check.c를 직접 빌드한 실행 파일만 사용합니다. 타인의 미확인 바이너리를 실행하지 않습니다.</li><li>같은 디렉터리에서 check.c와 생성한 check를 구분하고 GCC·CPU·빌드 옵션을 기록합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Ubuntu/WSL · GCC · GNU nm · file</strong></p><ul><li>내려받은 check.c를 직접 빌드한 실행 파일만 사용합니다. 타인의 미확인 바이너리를 실행하지 않습니다.</li><li>같은 디렉터리에서 check.c와 생성한 check를 구분하고 GCC·CPU·빌드 옵션을 기록합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="../foundation/c-memory.html">공통 기초 · C 컴파일과 주소·포인터 ↗</a></li><li><a href="../pwn/build.html">시스템 보안 · 소스·컴파일·실행 파일 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>실행 파일에는 기계어 외에 헤더, 섹션, 문자열, 심볼 등이 들어갈 수 있습니다. ELF는 Linux에서 쓰이는 실행 파일 형식이고 PE는 Windows에서 흔한 형식입니다. 형식과 아키텍처가 분석 도구의 해석에 영향을 줍니다.</p><figure class="learning-visual" data-visual-id="rev.binary"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 흐름도</span><h3>분석 대상이 어떤 빌드인지 먼저 고정합니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="분석 대상이 어떤 빌드인지 먼저 고정합니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 222" width="760" height="222" role="img" aria-labelledby="visual-rev-binary-title visual-rev-binary-desc" focusable="false"><title id="visual-rev-binary-title">분석 대상이 어떤 빌드인지 먼저 고정합니다</title><desc id="visual-rev-binary-desc">check.c를 gcc -g -O0로 빌드한 check 실행 파일을 분석합니다. file로 대상 형식을 보고 nm으로 심볼을 확인합니다. 이어 BIFROST와 WRONG 입력을 실행해 각각 match와 no match를 관찰합니다. 분석 결과는 그 빌드와 입력에 연결해야 합니다.</desc><defs><marker id="visual-rev-binary-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><circle class="v-step-circle" cx="42" cy="27" r="13"/><text class="v-step-number" x="42" y="31" text-anchor="middle">1</text><g class="v-tone "><rect class="v-node" x="28" y="54" width="214.66666666666666" height="144" rx="12"/><rect class="v-accent" x="29" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="82">소스와 빌드</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="113">check.c</tspan><tspan x="45" y="133">gcc -g -O0</tspan></text></g><circle class="v-step-circle" cx="286.66666666666663" cy="27" r="13"/><text class="v-step-number" x="286.66666666666663" y="31" text-anchor="middle">2</text><g class="v-tone "><rect class="v-node" x="272.66666666666663" y="54" width="214.66666666666666" height="144" rx="12"/><rect class="v-accent" x="273.66666666666663" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="289.66666666666663" y="82">대상 식별</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="289.66666666666663" y="113">file check</tspan><tspan x="289.66666666666663" y="133">nm check</tspan></text></g><path class="v-edge " d="M246.66666666666663 126H267.66666666666663" marker-end="url(#visual-rev-binary-arrow)"/><circle class="v-step-circle" cx="531.3333333333333" cy="27" r="13"/><text class="v-step-number" x="531.3333333333333" y="31" text-anchor="middle">3</text><g class="v-tone positive"><rect class="v-node" x="517.3333333333333" y="54" width="214.66666666666666" height="144" rx="12"/><rect class="v-accent" x="518.3333333333333" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="534.3333333333333" y="82">입력 비교</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="534.3333333333333" y="113">BIFROST → match</tspan><tspan x="534.3333333333333" y="133">WRONG → no match</tspan></text></g><path class="v-edge " d="M491.33333333333326 126H512.3333333333333" marker-end="url(#visual-rev-binary-arrow)"/></svg></div><figcaption><span class="visual-takeaway">파일 이름이 같아도 다른 빌드일 수 있으므로 옵션과 대상 식별 정보를 함께 남기세요.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>check.c를 gcc -g -O0로 빌드한 check 실행 파일을 분석합니다. file로 대상 형식을 보고 nm으로 심볼을 확인합니다. 이어 BIFROST와 WRONG 입력을 실행해 각각 match와 no match를 관찰합니다. 분석 결과는 그 빌드와 입력에 연결해야 합니다.</p></details></figure><p>제공한 check.c를 -O0 -g로 빌드하면 학습용 함수와 소스 대응을 관찰하기 쉽습니다. 심볼은 사람이 읽는 이름과 주소를 연결합니다. 심볼이 없다고 코드가 없는 것은 아닙니다.</p><p>심볼 check는 소스 파일 이름 check.c나 실행 파일 이름 check와 구분합니다. nm의 T 같은 표시는 심볼의 종류에 관한 정보이며 그 함수가 이번 입력에서 실행됐다는 뜻은 아닙니다. 정적 존재와 실제 실행을 분리해 기록합니다.</p><p>이 프로그램에서 check 함수의 판정값과 main의 종료 상태는 다릅니다. BIFROST이면 check는 참을 반환하고 match를 출력하지만 main은 입력이 하나 주어진 두 경우 모두 0을 반환합니다. 인자 개수가 다를 때만 사용법을 출력하고 2로 종료합니다.</p><p>실행 파일의 형식·아키텍처·심볼 상태를 먼저 알면 어떤 도구로 어느 수준까지 관찰할지 정할 수 있습니다. 디버깅 정보가 있다고 원본 프로젝트 전체가 포함된 것은 아니며, 심볼이 없다고 분석 자체가 불가능한 것도 아닙니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>실행 파일 check와 함수 check를 같은 이름이라는 이유로 같은 개념으로 읽는다.</dt><dd>파일·함수·프로세스 단계를 구분해서 표기합니다.</dd><dt>모든 no match를 비정상 프로세스 종료라고 기록한다.</dt><dd>메시지와 종료 상태를 각 실행에서 따로 관찰합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -154,15 +156,16 @@ echo $?</code></pre></div><div class="step-observation"><strong>관찰할 결과
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="./"><small>← 전체 과정</small>분야 목차로</a>
             <a href="assembly.html"><small>다음 차시 →</small>명령어·비교·호출 읽기</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://sourceware.org/binutils/docs/binutils/nm.html" target="_blank" rel="noopener noreferrer">GNU Binutils · nm 심볼 출력 ↗</a></li>
         <li><a href="https://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html" target="_blank" rel="noopener noreferrer">GCC · 디버깅 정보 옵션 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

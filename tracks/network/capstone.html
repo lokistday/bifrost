@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/network/capstone.html">
 <title>중간 종합: 작은 서비스 방어 설계 — Network Security · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/network.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/network.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="network" data-course-number="05" data-view="lesson" data-lesson-id="network.capstone" style="--course-accent:var(--map-amber)">
+<body class="learning-page" data-course="network" data-course-number="05" data-view="lesson" data-lesson-id="network.capstone" data-path="" style="--course-accent:var(--map-amber)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -85,14 +86,15 @@
               <span class="lesson-dot" data-dot="network.event-time-windows" aria-hidden="true"></span><span>사건 시각·지연 도착과 세션 경계<small class="completion-label" data-completion="network.event-time-windows"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/network.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">03 · 탐지와 통합 방어 · 9 / 19</div><h1>중간 종합: 작은 서비스 방어 설계</h1><p class="lesson-objective">분석 결과를 정책 변경·탐지·검증·롤백으로 연결합니다.</p></div></header>
           <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>센서에 기록이 없다는 사실이 통신이 없었다는 뜻인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>센서 위치·필터·손실·시간 범위를 확인해야 합니다. 관측되지 않은 경로가 남아 있을 수 있습니다.</p><a href="../../guides/bridges.html#network">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>종합 설계 검증 · Python 3와 편집기</strong></p><ul><li>network 폴더 전체를 작업 사본으로 복사하고 design.md를 작성합니다. 원본 PCAP·CSV를 보존합니다.</li><li>정책과 탐지기는 각각 별도 모델입니다. PCAP과 flows.csv가 동일 실제 세션이라는 가정은 하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>종합 설계 검증 · Python 3와 편집기</strong></p><ul><li>network 폴더 전체를 작업 사본으로 복사하고 design.md를 작성합니다. 원본 PCAP·CSV를 보존합니다.</li><li>정책과 탐지기는 각각 별도 모델입니다. PCAP과 flows.csv가 동일 실제 세션이라는 가정은 하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="tls.html">네트워크 보안 · TLS와 보이는 정보의 경계 ↗</a></li><li><a href="policy.html">네트워크 보안 · 방화벽 정책과 회귀 검증 ↗</a></li><li><a href="detection.html">네트워크 보안 · 탐지 기준·오탐·추가 증거 ↗</a></li><li><a href="zero-trust.html">네트워크 보안 · 신원과 자산 중심의 Zero Trust ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>이 종합 과제는 Web, DB, 관리 경로가 있는 가상 서비스입니다. PCAP은 정상 프로토콜 관찰용, flows.csv는 별도의 합성 정책 검토용입니다. 두 파일을 같은 실제 세션의 증거로 결합해서는 안 됩니다.</p><figure class="learning-visual" data-visual-id="network.capstone"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 흐름도</span><h3>관찰 결과를 변경·검증·복구까지 연결합니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="관찰 결과를 변경·검증·복구까지 연결합니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 222" width="760" height="222" role="img" aria-labelledby="visual-network-capstone-title visual-network-capstone-desc" focusable="false"><title id="visual-network-capstone-title">관찰 결과를 변경·검증·복구까지 연결합니다</title><desc id="visual-network-capstone-desc">PCAP과 흐름 표에서 현재 경로를 확인합니다. 설계 사본에서 필요한 정책을 좁혀 변경하고 N01·N02 정상 업무, N03~N05 거부, N06 처리 근거를 재검증합니다. detect.py의 조사 신호도 해석하고 실패 시 되돌릴 설정과 기준을 기록합니다.</desc><defs><marker id="visual-network-capstone-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><circle class="v-step-circle" cx="42" cy="27" r="13"/><text class="v-step-number" x="42" y="31" text-anchor="middle">1</text><g class="v-tone "><rect class="v-node" x="28" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="29" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="82">현재 상태</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="113">캡처·흐름·신원</tspan><tspan x="45" y="133">관찰 위치 기록</tspan></text></g><circle class="v-step-circle" cx="225.5" cy="27" r="13"/><text class="v-step-number" x="225.5" y="31" text-anchor="middle">2</text><g class="v-tone "><rect class="v-node" x="211.5" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="212.5" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="228.5" y="82">변경 설계</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="228.5" y="113">최소 허용 정책</tspan><tspan x="228.5" y="133">N06 업무 근거</tspan></text></g><path class="v-edge " d="M185.5 126H206.5" marker-end="url(#visual-network-capstone-arrow)"/><circle class="v-step-circle" cx="409" cy="27" r="13"/><text class="v-step-number" x="409" y="31" text-anchor="middle">3</text><g class="v-tone "><rect class="v-node" x="395" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="396" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="412" y="82">재검증</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="412" y="113">정상·거부·탐지</tspan><tspan x="412" y="133">변경 전후 비교</tspan></text></g><path class="v-edge " d="M369 126H390" marker-end="url(#visual-network-capstone-arrow)"/><circle class="v-step-circle" cx="592.5" cy="27" r="13"/><text class="v-step-number" x="592.5" y="31" text-anchor="middle">4</text><g class="v-tone positive"><rect class="v-node" x="578.5" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="579.5" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="595.5" y="82">복구와 보고</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="595.5" y="113">롤백 조건·절차</tspan><tspan x="595.5" y="133">미검증 범위 기록</tspan></text></g><path class="v-edge " d="M552.5 126H573.5" marker-end="url(#visual-network-capstone-arrow)"/></svg></div><figcaption><span class="visual-takeaway">방어 설계의 결과물에는 정책 그림뿐 아니라 정상·거부 테스트와 롤백 근거가 필요합니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>PCAP과 흐름 표에서 현재 경로를 확인합니다. 설계 사본에서 필요한 정책을 좁혀 변경하고 N01·N02 정상 업무, N03~N05 거부, N06 처리 근거를 재검증합니다. detect.py의 조사 신호도 해석하고 실패 시 되돌릴 설정과 기준을 기록합니다.</p></details></figure><p>결과물은 통신 구조도, 최소 허용표, N06 판단 근거, 탐지 조건과 오탐, 신원 검사, 변경 검증과 롤백 계획입니다. 클라우드 구성과 Web 인가 원칙을 참고해 한 계층의 통제만으로 끝내지 않습니다.</p><p>먼저 보호할 자산·업무·위협을 정합니다. 사용자가 Web을 이용하고 Web이 DB를 읽는 정상 기능을 유지하면서 인터넷→DB와 과도한 관리 접근을 줄이는 것이 이 과제의 목표입니다. 통제의 개수보다 어떤 위험을 줄이는지가 중요합니다.</p><p>설계의 주장은 확인 방법과 짝을 이룹니다. “DB는 비공개”에는 외부 경로·필터·리슨·권한 검증, “변조를 막음”에는 TLS·응용 검증, “이상을 감지함”에는 기준선·경계값·오탐 검토를 붙입니다. 현재 자료로 확인하지 못하는 항목은 계획으로 남깁니다.</p><p>변경 계획에는 롤백 조건이 있어야 합니다. 정상 N01·N02가 실패하거나 관측 경로가 사라지면 어떤 설정으로 되돌리고 어떤 로그로 회복을 확인할지 적습니다. 미관측 영역과 운영 환경에서 추가로 필요한 자료를 남기는 것이 완성도의 일부입니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>출력 캡처만 붙이고 설계 근거를 쓰지 않는다.</dt><dd>위험·변경·예상 효과·검증·한계를 연결합니다.</dd><dt>모델 PASS/MATCH를 운영 안전성 인증으로 사용한다.</dt><dd>모델이 다루는 조건과 실제 환경의 추가 검증을 명확히 분리합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -142,15 +144,16 @@ python3 detect.py
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="zero-trust.html"><small>← 이전 차시</small>신원과 자산 중심의 Zero Trust</a>
             <a href="routing.html"><small>다음 차시 →</small>최장 접두사와 돌아오는 경로</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://csrc.nist.gov/pubs/sp/800/207/final" target="_blank" rel="noopener noreferrer">NIST SP 800-207 · 접근 설계 ↗</a></li>
         <li><a href="https://www.wireshark.org/docs/wsug_html_chunked/ChAdvFollowStreamSection.html" target="_blank" rel="noopener noreferrer">Wireshark · 스트림 분석 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

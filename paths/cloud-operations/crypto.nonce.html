@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="같은 키 아래 nonce 제약을 어겼을 때 보장이 깨질 수 있음을 설명합니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="난수·nonce와 재사용 — 클라우드 방어와 복구 검증 · Bifrost">
+<meta property="og:description" content="같은 키 아래 nonce 제약을 어겼을 때 보장이 깨질 수 있음을 설명합니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/paths/cloud-operations/crypto.nonce.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/paths/cloud-operations/crypto.nonce.html">
+<title>난수·nonce와 재사용 — 클라우드 방어와 복구 검증 · Bifrost</title>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/crypto.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-paths.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/path-progress.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
+</head>
+<body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.nonce" data-path="cloud-operations" style="--course-accent:var(--map-pink)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#pathOutline">클라우드 보안 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="crypto.nonce">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../learn/">학습 경로</a><span aria-hidden="true">/</span><a href="./">클라우드 방어와 복구 검증</a><span aria-hidden="true">/</span><span aria-current="page">47단계</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar path-sidebar"><a class="back-link" href="./">← 클라우드 방어와 복구 검증 목차</a>
+        <div class="course-stats"><span data-path-count></span><div class="course-meter" role="progressbar" aria-label="클라우드 방어와 복구 검증 차시 완료 진도" aria-valuemin="0" aria-valuemax="100" data-path-meter><span></span></div></div>
+        <nav aria-label="클라우드 방어와 복구 검증 경로 목차"><details ><summary>Foundation<span class="caption">1–3단계</span></summary><ol><li><a class="side-lesson" href="foundation.environment.html" >
+          <span class="path-step-number">1</span><span><small>공통 기초 · 권장 선행</small>실습 환경 준비와 첫 실행<small class="completion-label" data-completion="foundation.environment"></small></span></a></li><li><a class="side-lesson" href="foundation.network.html" >
+          <span class="path-step-number">2</span><span><small>공통 기초 · 권장 선행</small>IP·포트·DNS와 전송<small class="completion-label" data-completion="foundation.network"></small></span></a></li><li><a class="side-lesson" href="foundation.python-values.html" >
+          <span class="path-step-number">3</span><span><small>공통 기초 · 권장 선행</small>변수·문자열·자료형<small class="completion-label" data-completion="foundation.python-values"></small></span></a></li>
+          </ol></details><details ><summary>Network Security<span class="caption">4–4단계</span></summary><ol><li><a class="side-lesson" href="network.addressing.html" >
+          <span class="path-step-number">4</span><span><small>네트워크 보안 · 권장 선행</small>계층·CIDR·관측 위치<small class="completion-label" data-completion="network.addressing"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">5–5단계</span></summary><ol><li><a class="side-lesson" href="foundation.http.html" >
+          <span class="path-step-number">5</span><span><small>공통 기초 · 권장 선행</small>HTTP 요청과 응답 읽기<small class="completion-label" data-completion="foundation.http"></small></span></a></li>
+          </ol></details><details ><summary>Network Security<span class="caption">6–8단계</span></summary><ol><li><a class="side-lesson" href="network.pcap.html" >
+          <span class="path-step-number">6</span><span><small>네트워크 보안 · 권장 선행</small>PCAP·필터·스트림<small class="completion-label" data-completion="network.pcap"></small></span></a></li><li><a class="side-lesson" href="network.transport.html" >
+          <span class="path-step-number">7</span><span><small>네트워크 보안 · 권장 선행</small>DNS·TCP 연결과 실패 분류<small class="completion-label" data-completion="network.transport"></small></span></a></li><li><a class="side-lesson" href="network.segmentation.html" >
+          <span class="path-step-number">8</span><span><small>네트워크 보안 · 경로 핵심</small>망 분리·신뢰 경계·관리 경로<small class="completion-label" data-completion="network.segmentation"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">9–11단계</span></summary><ol><li><a class="side-lesson" href="foundation.python-flow.html" >
+          <span class="path-step-number">9</span><span><small>공통 기초 · 권장 선행</small>조건·반복·함수<small class="completion-label" data-completion="foundation.python-flow"></small></span></a></li><li><a class="side-lesson" href="foundation.paths.html" >
+          <span class="path-step-number">10</span><span><small>공통 기초 · 권장 선행</small>경로와 작업용 사본<small class="completion-label" data-completion="foundation.paths"></small></span></a></li><li><a class="side-lesson" href="foundation.python-files.html" >
+          <span class="path-step-number">11</span><span><small>공통 기초 · 권장 선행</small>CSV 읽기와 오류 좁히기<small class="completion-label" data-completion="foundation.python-files"></small></span></a></li>
+          </ol></details><details ><summary>Network Security<span class="caption">12–14단계</span></summary><ol><li><a class="side-lesson" href="network.policy.html" >
+          <span class="path-step-number">12</span><span><small>네트워크 보안 · 경로 핵심</small>방화벽 정책과 회귀 검증<small class="completion-label" data-completion="network.policy"></small></span></a></li><li><a class="side-lesson" href="network.routing.html" >
+          <span class="path-step-number">13</span><span><small>네트워크 보안 · 권장 선행</small>최장 접두사와 돌아오는 경로<small class="completion-label" data-completion="network.routing"></small></span></a></li><li><a class="side-lesson" href="network.ipv6-boundaries.html" >
+          <span class="path-step-number">14</span><span><small>네트워크 보안 · 경로 핵심</small>IPv6 주소 범위와 정책의 빈틈<small class="completion-label" data-completion="network.ipv6-boundaries"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">15–15단계</span></summary><ol><li><a class="side-lesson" href="foundation.permissions.html" >
+          <span class="path-step-number">15</span><span><small>공통 기초 · 권장 선행</small>Linux 권한과 파이프<small class="completion-label" data-completion="foundation.permissions"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">16–16단계</span></summary><ol><li><a class="side-lesson" href="cloud.responsibility.html" >
+          <span class="path-step-number">16</span><span><small>클라우드 보안 · 경로 핵심</small>IaaS·PaaS·SaaS와 공동 책임<small class="completion-label" data-completion="cloud.responsibility"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">17–18단계</span></summary><ol><li><a class="side-lesson" href="web.sessions.html" >
+          <span class="path-step-number">17</span><span><small>웹 보안 · 권장 선행</small>쿠키·세션·인증<small class="completion-label" data-completion="web.sessions"></small></span></a></li><li><a class="side-lesson" href="web.authorization.html" >
+          <span class="path-step-number">18</span><span><small>웹 보안 · 권장 선행</small>리소스 단위 인가<small class="completion-label" data-completion="web.authorization"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">19–19단계</span></summary><ol><li><a class="side-lesson" href="cloud.iam.html" >
+          <span class="path-step-number">19</span><span><small>클라우드 보안 · 경로 핵심</small>IAM 최소 권한과 명시적 거부<small class="completion-label" data-completion="cloud.iam"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">20–20단계</span></summary><ol><li><a class="side-lesson" href="foundation.git.html" >
+          <span class="path-step-number">20</span><span><small>공통 기초 · 권장 선행</small>Git과 재현 가능한 README<small class="completion-label" data-completion="foundation.git"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">21–22단계</span></summary><ol><li><a class="side-lesson" href="cloud.secrets.html" >
+          <span class="path-step-number">21</span><span><small>클라우드 보안 · 권장 선행</small>장기 키·임시 신원·교체<small class="completion-label" data-completion="cloud.secrets"></small></span></a></li><li><a class="side-lesson" href="cloud.workload-trust.html" >
+          <span class="path-step-number">22</span><span><small>클라우드 보안 · 경로 핵심</small>워크로드 신원과 역할 신뢰 조건<small class="completion-label" data-completion="cloud.workload-trust"></small></span></a></li>
+          </ol></details><details ><summary>Forensic<span class="caption">23–25단계</span></summary><ol><li><a class="side-lesson" href="forensic.integrity.html" >
+          <span class="path-step-number">23</span><span><small>디지털 포렌식 · 권장 선행</small>원본·작업 사본·해시<small class="completion-label" data-completion="forensic.integrity"></small></span></a></li><li><a class="side-lesson" href="forensic.logs.html" >
+          <span class="path-step-number">24</span><span><small>디지털 포렌식 · 권장 선행</small>로그 필드와 사건 가설<small class="completion-label" data-completion="forensic.logs"></small></span></a></li><li><a class="side-lesson" href="forensic.timeline.html" >
+          <span class="path-step-number">25</span><span><small>디지털 포렌식 · 권장 선행</small>UTC로 타임라인 맞추기<small class="completion-label" data-completion="forensic.timeline"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">26–28단계</span></summary><ol><li><a class="side-lesson" href="cloud.audit.html" >
+          <span class="path-step-number">26</span><span><small>클라우드 보안 · 권장 선행</small>감사 로그와 공개 변경 추적<small class="completion-label" data-completion="cloud.audit"></small></span></a></li><li><a class="side-lesson" href="cloud.audit-coverage.html" >
+          <span class="path-step-number">27</span><span><small>클라우드 보안 · 경로 핵심</small>중앙 감사 로그의 범위와 중복<small class="completion-label" data-completion="cloud.audit-coverage"></small></span></a></li><li><a class="side-lesson" href="cloud.vpc.html" >
+          <span class="path-step-number">28</span><span><small>클라우드 보안 · 권장 선행</small>VPC·서브넷·보안 경계<small class="completion-label" data-completion="cloud.vpc"></small></span></a></li>
+          </ol></details><details ><summary>Cryptography<span class="caption">29–32단계</span></summary><ol><li><a class="side-lesson" href="crypto.representation.html" >
+          <span class="path-step-number">29</span><span><small>암호학 · 권장 선행</small>바이트·Hex·Base64<small class="completion-label" data-completion="crypto.representation"></small></span></a></li><li><a class="side-lesson" href="crypto.hash.html" >
+          <span class="path-step-number">30</span><span><small>암호학 · 권장 선행</small>SHA-256과 파일 무결성<small class="completion-label" data-completion="crypto.hash"></small></span></a></li><li><a class="side-lesson" href="crypto.mac.html" >
+          <span class="path-step-number">31</span><span><small>암호학 · 권장 선행</small>HMAC과 태그 검증<small class="completion-label" data-completion="crypto.mac"></small></span></a></li><li><a class="side-lesson" href="crypto.symmetric.html" >
+          <span class="path-step-number">32</span><span><small>암호학 · 권장 선행</small>대칭키·AEAD·인증 태그<small class="completion-label" data-completion="crypto.symmetric"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">33–33단계</span></summary><ol><li><a class="side-lesson" href="cloud.storage.html" >
+          <span class="path-step-number">33</span><span><small>클라우드 보안 · 권장 선행</small>오브젝트 저장소와 데이터 공개<small class="completion-label" data-completion="cloud.storage"></small></span></a></li>
+          </ol></details><details ><summary>Network Security<span class="caption">34–37단계</span></summary><ol><li><a class="side-lesson" href="network.tls.html" >
+          <span class="path-step-number">34</span><span><small>네트워크 보안 · 권장 선행</small>TLS와 보이는 정보의 경계<small class="completion-label" data-completion="network.tls"></small></span></a></li><li><a class="side-lesson" href="network.detection.html" >
+          <span class="path-step-number">35</span><span><small>네트워크 보안 · 권장 선행</small>탐지 기준·오탐·추가 증거<small class="completion-label" data-completion="network.detection"></small></span></a></li><li><a class="side-lesson" href="network.zero-trust.html" >
+          <span class="path-step-number">36</span><span><small>네트워크 보안 · 권장 선행</small>신원과 자산 중심의 Zero Trust<small class="completion-label" data-completion="network.zero-trust"></small></span></a></li><li><a class="side-lesson" href="network.capstone.html" >
+          <span class="path-step-number">37</span><span><small>네트워크 보안 · 권장 선행</small>중간 종합: 작은 서비스 방어 설계<small class="completion-label" data-completion="network.capstone"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">38–42단계</span></summary><ol><li><a class="side-lesson" href="cloud.capstone.html" >
+          <span class="path-step-number">38</span><span><small>클라우드 보안 · 권장 선행</small>중간 종합: 구성 수정과 검증 계획<small class="completion-label" data-completion="cloud.capstone"></small></span></a></li><li><a class="side-lesson" href="cloud.iac-review.html" >
+          <span class="path-step-number">39</span><span><small>클라우드 보안 · 권장 선행</small>인프라 변경 계획과 영향 범위<small class="completion-label" data-completion="cloud.iac-review"></small></span></a></li><li><a class="side-lesson" href="cloud.recovery-exercise.html" >
+          <span class="path-step-number">40</span><span><small>클라우드 보안 · 경로 핵심</small>백업 무결성과 RPO·RTO 복구 연습<small class="completion-label" data-completion="cloud.recovery-exercise"></small></span></a></li><li><a class="side-lesson" href="cloud.effective-permissions.html" >
+          <span class="path-step-number">41</span><span><small>클라우드 보안 · 권장 선행</small>실효 권한과 허용 범위의 교집합<small class="completion-label" data-completion="cloud.effective-permissions"></small></span></a></li><li><a class="side-lesson" href="cloud.kubernetes-rbac.html" >
+          <span class="path-step-number">42</span><span><small>클라우드 보안 · 경로 핵심</small>Kubernetes 네임스페이스와 RBAC<small class="completion-label" data-completion="cloud.kubernetes-rbac"></small></span></a></li>
+          </ol></details><details ><summary>Network Security<span class="caption">43–43단계</span></summary><ol><li><a class="side-lesson" href="network.dns-cache.html" >
+          <span class="path-step-number">43</span><span><small>네트워크 보안 · 권장 선행</small>DNS TTL과 부정 응답 캐시<small class="completion-label" data-completion="network.dns-cache"></small></span></a></li>
+          </ol></details><details ><summary>Cloud Security<span class="caption">44–45단계</span></summary><ol><li><a class="side-lesson" href="cloud.private-endpoint-paths.html" >
+          <span class="path-step-number">44</span><span><small>클라우드 보안 · 경로 핵심</small>프라이빗 엔드포인트와 DNS 경로<small class="completion-label" data-completion="cloud.private-endpoint-paths"></small></span></a></li><li><a class="side-lesson" href="cloud.breakglass-access.html" >
+          <span class="path-step-number">45</span><span><small>클라우드 보안 · 경로 핵심</small>긴급 접근의 만료·회수·증거<small class="completion-label" data-completion="cloud.breakglass-access"></small></span></a></li>
+          </ol></details><details open><summary>Cryptography<span class="caption">46–52단계</span></summary><ol><li><a class="side-lesson" href="crypto.public-key.html" >
+          <span class="path-step-number">46</span><span><small>암호학 · 권장 선행</small>공개키 암호화와 서명<small class="completion-label" data-completion="crypto.public-key"></small></span></a></li><li><a class="side-lesson" href="crypto.nonce.html" aria-current="page">
+          <span class="path-step-number">47</span><span><small>암호학 · 권장 선행</small>난수·nonce와 재사용<small class="completion-label" data-completion="crypto.nonce"></small></span></a></li><li><a class="side-lesson" href="crypto.key-lifecycle.html" >
+          <span class="path-step-number">48</span><span><small>암호학 · 경로 핵심</small>키 상태·교체·침해 대응<small class="completion-label" data-completion="crypto.key-lifecycle"></small></span></a></li><li><a class="side-lesson" href="crypto.password.html" >
+          <span class="path-step-number">49</span><span><small>암호학 · 권장 선행</small>비밀번호 KDF·salt·비용<small class="completion-label" data-completion="crypto.password"></small></span></a></li><li><a class="side-lesson" href="crypto.hkdf-context.html" >
+          <span class="path-step-number">50</span><span><small>암호학 · 권장 선행</small>HKDF 추출·확장과 용도 분리<small class="completion-label" data-completion="crypto.hkdf-context"></small></span></a></li><li><a class="side-lesson" href="crypto.message-encoding.html" >
+          <span class="path-step-number">51</span><span><small>암호학 · 권장 선행</small>메시지 경계와 인증할 바이트<small class="completion-label" data-completion="crypto.message-encoding"></small></span></a></li><li><a class="side-lesson" href="crypto.aad-record-binding.html" >
+          <span class="path-step-number">52</span><span><small>암호학 · 경로 핵심</small>AEAD와 레코드 문맥의 결합<small class="completion-label" data-completion="crypto.aad-record-binding"></small></span></a></li>
+          </ol></details><a class="side-lesson path-project-link" href="project.html"><span class="path-step-number">✦</span><span>마지막 · 종합 프로젝트</span></a></nav>
+        <a class="back-link" href="../../learn/#paths">다른 학습 경로 보기 ↗</a></aside><article class="lesson-article">
+          <nav class="path-location" aria-label="현재 학습 경로"><a href="./">클라우드 보안</a><strong>47 / 52단계</strong><a href="./#pathOutline">경로 목차 ↗</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/crypto.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">Cryptography · 03 · 현대 암호 설계와 키 수명 · 47 / 52</div><h1>난수·nonce와 재사용</h1><p class="lesson-objective">같은 키 아래 nonce 제약을 어겼을 때 보장이 깨질 수 있음을 설명합니다.</p></div></header>
+          <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>암호학적 검증 성공이면 현재 요청을 처리해도 되나요?</p><details><summary>판단 기준과 보충 자료</summary><p>인증된 바이트와 현재 권한·문맥·재전송·만료는 다른 검증입니다. 목적과 상태를 함께 확인합니다.</p><a href="../../guides/bridges.html#bytes">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>재사용 원리 · Python 3</strong></p><ul><li>기본 lab.py nonce는 표준 라이브러리로 실행하는 장난감 XOR 모델입니다. AES-GCM 구현이 아닙니다.</li><li>실제 AEAD의 변조·nonce 불일치 검증은 aead.py를 비교 참고합니다. 공개 교육 키로 새 데이터를 보호하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="crypto.symmetric.html">암호학 · 대칭키·AEAD·인증 태그 ↗</a></li><li><a href="foundation.python-flow.html">공통 기초 · 조건·반복·함수 ↗</a></li></ul>
+            </details>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>nonce는 해당 알고리즘이 요구하는 재사용 방지 조건을 만족해야 합니다. 비밀일 필요는 없지만 같은 키에서 유일해야 하는 경우가 많습니다. 구체적인 길이와 생성 규칙은 알고리즘과 라이브러리 문서를 따라야 합니다.</p><figure class="learning-visual" data-visual-id="crypto.nonce"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교도</span><h3>키스트림을 재사용하면 숨긴 내용끼리 관계가 드러납니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="키스트림을 재사용하면 숨긴 내용끼리 관계가 드러납니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" role="img" aria-labelledby="visual-crypto-nonce-title visual-crypto-nonce-desc" focusable="false"><title id="visual-crypto-nonce-title">키스트림을 재사용하면 숨긴 내용끼리 관계가 드러납니다</title><desc id="visual-crypto-nonce-desc">교육용 XOR 모형에서 C1 = P1 XOR S, C2 = P2 XOR S처럼 같은 키스트림 S를 사용하면 C1 XOR C2 = P1 XOR P2가 됩니다. 실습의 True는 이 관계를 확인한 결과입니다. 실제 알고리즘에서는 같은 키 아래 nonce 유일성 등 지정된 제약을 지켜야 합니다.</desc><defs><marker id="visual-crypto-nonce-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone danger"><rect class="v-node" x="28" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="29" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="45" y="55">같은 키스트림 재사용</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="84">첫 암호문</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="107">C1 = P1 XOR S</tspan></text><path class="v-separator" d="M45 128H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="148">둘째 암호문</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="171">C2 = P2 XOR S</tspan></text><path class="v-separator" d="M45 192H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="212">서로 XOR하면</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="235">C1 XOR C2 = P1 XOR P2</tspan></text></g><g class="v-tone positive"><rect class="v-node" x="392" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="393" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="409" y="55">설계에서 확인할 것</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="84">범위</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="107">같은 키 아래의 nonce 제약</tspan></text><path class="v-separator" d="M409 128H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="148">생성·보관</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="171">알고리즘 규격과 충돌·재시작 관리</tspan></text><path class="v-separator" d="M409 192H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="212">수명</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="235">키 교체와 카운터·사용량 한계</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">난수로 보인다는 인상 대신 알고리즘의 nonce 길이·유일성·재시작 시 관리 조건을 확인하세요.</span><small class="visual-note">XOR 모형은 재사용 위험을 보이는 장난감 예제이며 배포용 암호가 아닙니다. nonce 요구사항은 알고리즘마다 다릅니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>교육용 XOR 모형에서 C1 = P1 XOR S, C2 = P2 XOR S처럼 같은 키스트림 S를 사용하면 C1 XOR C2 = P1 XOR P2가 됩니다. 실습의 True는 이 관계를 확인한 결과입니다. 실제 알고리즘에서는 같은 키 아래 nonce 유일성 등 지정된 제약을 지켜야 합니다.</p></details></figure><p>lab.py nonce는 같은 XOR 스트림을 두 메시지에 쓰면 암호문끼리 XOR한 값이 평문끼리 XOR한 값과 같아지는 장난감 모델입니다. 실제 AES-GCM 구현이나 완전한 공격 실습은 아닙니다. 난수 생성에는 일반 random 대신 보안용 생성기를 사용합니다.</p><p>nonce의 유일성과 예측 불가능성은 같은 조건이 아닙니다. 알고리즘이 요구하는 조건에 따라 카운터나 난수 생성 등 방식을 선택합니다. AES-GCM에서는 동일 키에 nonce 재사용을 피해야 하며 길이·사용량 제한은 라이브러리·규격을 확인합니다.</p><p>XOR는 같은 값으로 두 번 연산하면 상쇄됩니다. C1=P1 XOR S, C2=P2 XOR S이면 C1 XOR C2=P1 XOR P2입니다. 키 스트림이 재사용되면 암호문 사이에 평문 관계가 새어 나온다는 핵심을 작은 예제로 관찰합니다.</p><p>난수를 쓴다고 중복 확률이 수학적으로 0인 것은 아닙니다. 생성량과 공간 크기를 고려하고, 카운터라면 재시작·동시 프로세스·백업 복원에서 되감기지 않게 관리합니다. 키를 바꾸면 중복 관리 범위도 그 키 식별자와 연결해야 합니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>secrets로 생성하면 무한히 생성해도 중복은 절대 없다고 한다.</dt><dd>안전한 난수 생성과 중복 확률·알고리즘 사용량 제한을 함께 고려합니다.</dd><dt>nonce를 숨기면 재사용해도 괜찮다고 한다.</dt><dd>비밀 여부가 아니라 해당 키에서의 재사용 조건을 지켜야 합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/crypto.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/crypto/lab.py" download>lab.py ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 재사용 원리 · Python 3</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 lab.py nonce
+python3 -c &quot;import secrets; print(len(secrets.token_bytes(16)))&quot;</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>True
+16</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>상쇄되는 XOR를 따라가기</h3><p>lab.py의 a·b·stream으로 각 암호문을 만들고 두 암호문 XOR가 두 평문 XOR와 같아지는지 봅니다. 이것은 평문 관계 누출 예시입니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 재사용 원리 · Python 3</span></div><pre><code>python3 lab.py nonce</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>True</pre></div></li><li><h3>스트림을 바꿔 비교</h3><p>한쪽 스트림만 바꾸면 상쇄되던 항이 남습니다. 아래 고정된 작은 예에서는 등식이 False가 됩니다. 두 스트림 사용 자체가 운영 암호 구현은 아닙니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>Python 부분 코드 · 앞 단계의 변수·객체를 유지한 같은 스크립트 · 재사용 원리 · Python 3</span></div><pre><code>xor = lambda x, y: bytes(a ^ b for a, b in zip(x, y))
+a, b = b&quot;YES&quot;, b&quot;NO!&quot;
+s1, s2 = bytes([31,22,9]), bytes([30,22,9])
+print(xor(xor(a,s1),xor(b,s2)) == xor(a,b))</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>False</pre></div></li><li><h3>수명주기 반례 설계</h3><p>nonce를 0부터 세다가 재시작하는 경우, 두 프로세스가 같은 범위를 쓰는 경우, 예전 백업으로 복원하는 경우를 표로 씁니다. 키별 고유 범위·원자적 할당·키 교체 조건을 검토합니다.</p>
+        <div class="step-observation"><strong>관찰할 결과</strong><pre>생성 방법뿐 아니라 중복을 막는 운영 조건이 남습니다.</pre></div></li></ol></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>장난감 코드의 stream을 두 메시지에서 다르게 했을 때 등식이 유지되는지 확인하세요. 프로세스 재시작·동시 실행·키 교체 시 nonce 중복을 어떻게 피할지 설계합니다.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>랜덤 값은 충분한 길이와 사용량 관리가 필요합니다. 무조건 중복이 불가능하다고 쓰지 마세요.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>같은 스트림의 두 번 XOR 상쇄를 식과 실행 결과로 확인합니다.</li><li>다른 스트림 예에서는 False임을 기록하고 이것이 AES-GCM 전체 공격 구현이 아님을 적습니다.</li><li>재시작·동시 실행·복구의 중복 위험을 키별 nonce 관리와 연결합니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>nonce 공개 가능성과 재사용 금지를 구분합니다. 일반 random이나 고정 상수를 새 암호화 nonce로 반복하지 않습니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>두 프로세스가 같은 키로 독립적인 0부터 카운터 nonce를 쓰는 설계를 검토하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>각 프로세스 내부에서 증가해도 서로 중복됩니다. 키별 유일성을 공유 상태·범위 분할·검증된 설계로 보장해야 합니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>예제의 한계와 실제 nonce 요구를 구분했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>재시작·동시성까지 고려한 생성 방침을 적었다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/crypto/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. AES-GCM nonce의 핵심 조건은?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>항상 비밀이어야 하므로 저장하면 안 된다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>같은 키에서 재사용하지 않아야 한다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>암호문과 같은 길이여야 한다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 같은 키에서 재사용하지 않아야 한다.</strong></p><p>nonce는 암호문 옆에 저장할 수 있지만 같은 키에서 중복되면 안전성이 손상됩니다. 구체적 길이·사용 제한은 규격을 따릅니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. 카운터 nonce가 재시작 때 0으로 돌아오면 무엇을 검토해야 하나요?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>키가 같다면 이전 nonce와 중복될 수 있으므로 지속 상태·범위·키 교체를 검토한다.</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>다시 켰으니 암호학적으로 항상 새 값이다.</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>Base64로 바꾸면 중복이 사라진다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 키가 같다면 이전 nonce와 중복될 수 있으므로 지속 상태·범위·키 교체를 검토한다.</strong></p><p>프로세스 수명과 키 수명은 다릅니다. 같은 키를 유지한 채 카운터를 되감으면 이미 쓴 nonce를 재사용할 수 있습니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>예제의 한계와 실제 nonce 요구를 구분했다.</li><li>재시작·동시성까지 고려한 생성 방침을 적었다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="경로의 이전·다음 단계"><a href="crypto.public-key.html"><small>← 이전 단계</small>공개키 암호화와 서명</a>
+            <a href="crypto.key-lifecycle.html"><small>다음 단계 →</small>키 상태·교체·침해 대응</a></nav>
+          <p class="caption"><a href="../../tracks/crypto/nonce.html">이 차시를 Cryptography 분야 과정으로 보기 ↗</a></p>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://cryptography.io/en/stable/hazmat/primitives/aead/" target="_blank" rel="noopener noreferrer">cryptography · AEAD nonce 경고 ↗</a></li>
+        <li><a href="https://docs.python.org/3/library/secrets.html" target="_blank" rel="noopener noreferrer">Python secrets · 보안용 난수 ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="명령을 입력할 환경과 도구 버전을 구분하고 Python 예제를 실행합니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="실습 환경 준비와 첫 실행 — DFIR 입문: 근거에서 판단까지 · Bifrost">
+<meta property="og:description" content="명령을 입력할 환경과 도구 버전을 구분하고 Python 예제를 실행합니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/paths/dfir/foundation.environment.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/paths/dfir/foundation.environment.html">
+<title>실습 환경 준비와 첫 실행 — DFIR 입문: 근거에서 판단까지 · Bifrost</title>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/foundation.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-paths.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/path-progress.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
+</head>
+<body class="learning-page" data-course="foundation" data-course-number="00" data-view="lesson" data-lesson-id="foundation.environment" data-path="dfir" style="--course-accent:var(--map-cyan)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#pathOutline">DFIR 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="foundation.environment">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../learn/">학습 경로</a><span aria-hidden="true">/</span><a href="./">DFIR 입문: 근거에서 판단까지</a><span aria-hidden="true">/</span><span aria-current="page">1단계</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar path-sidebar"><a class="back-link" href="./">← DFIR 입문: 근거에서 판단까지 목차</a>
+        <div class="course-stats"><span data-path-count></span><div class="course-meter" role="progressbar" aria-label="DFIR 입문: 근거에서 판단까지 차시 완료 진도" aria-valuemin="0" aria-valuemax="100" data-path-meter><span></span></div></div>
+        <nav aria-label="DFIR 입문: 근거에서 판단까지 경로 목차"><details open><summary>Foundation<span class="caption">1–5단계</span></summary><ol><li><a class="side-lesson" href="foundation.environment.html" aria-current="page">
+          <span class="path-step-number">1</span><span><small>공통 기초 · 권장 선행</small>실습 환경 준비와 첫 실행<small class="completion-label" data-completion="foundation.environment"></small></span></a></li><li><a class="side-lesson" href="foundation.paths.html" >
+          <span class="path-step-number">2</span><span><small>공통 기초 · 권장 선행</small>경로와 작업용 사본<small class="completion-label" data-completion="foundation.paths"></small></span></a></li><li><a class="side-lesson" href="foundation.python-values.html" >
+          <span class="path-step-number">3</span><span><small>공통 기초 · 권장 선행</small>변수·문자열·자료형<small class="completion-label" data-completion="foundation.python-values"></small></span></a></li><li><a class="side-lesson" href="foundation.python-flow.html" >
+          <span class="path-step-number">4</span><span><small>공통 기초 · 권장 선행</small>조건·반복·함수<small class="completion-label" data-completion="foundation.python-flow"></small></span></a></li><li><a class="side-lesson" href="foundation.python-files.html" >
+          <span class="path-step-number">5</span><span><small>공통 기초 · 권장 선행</small>CSV 읽기와 오류 좁히기<small class="completion-label" data-completion="foundation.python-files"></small></span></a></li>
+          </ol></details><details ><summary>Forensic<span class="caption">6–18단계</span></summary><ol><li><a class="side-lesson" href="forensic.integrity.html" >
+          <span class="path-step-number">6</span><span><small>디지털 포렌식 · 경로 핵심</small>원본·작업 사본·해시<small class="completion-label" data-completion="forensic.integrity"></small></span></a></li><li><a class="side-lesson" href="forensic.logs.html" >
+          <span class="path-step-number">7</span><span><small>디지털 포렌식 · 경로 핵심</small>로그 필드와 사건 가설<small class="completion-label" data-completion="forensic.logs"></small></span></a></li><li><a class="side-lesson" href="forensic.timeline.html" >
+          <span class="path-step-number">8</span><span><small>디지털 포렌식 · 경로 핵심</small>UTC로 타임라인 맞추기<small class="completion-label" data-completion="forensic.timeline"></small></span></a></li><li><a class="side-lesson" href="forensic.metadata.html" >
+          <span class="path-step-number">9</span><span><small>디지털 포렌식 · 권장 선행</small>파일 정보와 시간의 한계<small class="completion-label" data-completion="forensic.metadata"></small></span></a></li><li><a class="side-lesson" href="forensic.report.html" >
+          <span class="path-step-number">10</span><span><small>디지털 포렌식 · 권장 선행</small>근거가 추적되는 사건 보고서<small class="completion-label" data-completion="forensic.report"></small></span></a></li><li><a class="side-lesson" href="forensic.collection-plan.html" >
+          <span class="path-step-number">11</span><span><small>디지털 포렌식 · 경로 핵심</small>수집 우선순위와 증거 인계 기록<small class="completion-label" data-completion="forensic.collection-plan"></small></span></a></li><li><a class="side-lesson" href="forensic.browser-sqlite.html" >
+          <span class="path-step-number">12</span><span><small>디지털 포렌식 · 경로 핵심</small>SQLite 방문 기록과 행위 해석의 한계<small class="completion-label" data-completion="forensic.browser-sqlite"></small></span></a></li><li><a class="side-lesson" href="forensic.host-triage.html" >
+          <span class="path-step-number">13</span><span><small>디지털 포렌식 · 권장 선행</small>프로세스·부모·연결의 교차 확인<small class="completion-label" data-completion="forensic.host-triage"></small></span></a></li><li><a class="side-lesson" href="forensic.log-correlation.html" >
+          <span class="path-step-number">14</span><span><small>디지털 포렌식 · 경로 핵심</small>호스트·세션을 잇는 다중 로그 상관<small class="completion-label" data-completion="forensic.log-correlation"></small></span></a></li><li><a class="side-lesson" href="forensic.windows-events.html" >
+          <span class="path-step-number">15</span><span><small>디지털 포렌식 · 경로 핵심</small>Windows 이벤트 XML의 원시 필드 읽기<small class="completion-label" data-completion="forensic.windows-events"></small></span></a></li><li><a class="side-lesson" href="forensic.incident-response.html" >
+          <span class="path-step-number">16</span><span><small>디지털 포렌식 · 경로 핵심</small>사건 범위·격리·복구 검증 계획<small class="completion-label" data-completion="forensic.incident-response"></small></span></a></li><li><a class="side-lesson" href="forensic.linux-auth.html" >
+          <span class="path-step-number">17</span><span><small>디지털 포렌식 · 경로 핵심</small>Linux 인증과 sudo 요청의 증거 연결<small class="completion-label" data-completion="forensic.linux-auth"></small></span></a></li><li><a class="side-lesson" href="forensic.evidence-coverage.html" >
+          <span class="path-step-number">18</span><span><small>디지털 포렌식 · 경로 핵심</small>시계 오차·관측 범위·사건 순서<small class="completion-label" data-completion="forensic.evidence-coverage"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">19–19단계</span></summary><ol><li><a class="side-lesson" href="foundation.network.html" >
+          <span class="path-step-number">19</span><span><small>공통 기초 · 권장 선행</small>IP·포트·DNS와 전송<small class="completion-label" data-completion="foundation.network"></small></span></a></li>
+          </ol></details><details ><summary>Network Security<span class="caption">20–20단계</span></summary><ol><li><a class="side-lesson" href="network.addressing.html" >
+          <span class="path-step-number">20</span><span><small>네트워크 보안 · 권장 선행</small>계층·CIDR·관측 위치<small class="completion-label" data-completion="network.addressing"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">21–21단계</span></summary><ol><li><a class="side-lesson" href="foundation.http.html" >
+          <span class="path-step-number">21</span><span><small>공통 기초 · 권장 선행</small>HTTP 요청과 응답 읽기<small class="completion-label" data-completion="foundation.http"></small></span></a></li>
+          </ol></details><details ><summary>Network Security<span class="caption">22–30단계</span></summary><ol><li><a class="side-lesson" href="network.pcap.html" >
+          <span class="path-step-number">22</span><span><small>네트워크 보안 · 경로 핵심</small>PCAP·필터·스트림<small class="completion-label" data-completion="network.pcap"></small></span></a></li><li><a class="side-lesson" href="network.transport.html" >
+          <span class="path-step-number">23</span><span><small>네트워크 보안 · 권장 선행</small>DNS·TCP 연결과 실패 분류<small class="completion-label" data-completion="network.transport"></small></span></a></li><li><a class="side-lesson" href="network.segmentation.html" >
+          <span class="path-step-number">24</span><span><small>네트워크 보안 · 권장 선행</small>망 분리·신뢰 경계·관리 경로<small class="completion-label" data-completion="network.segmentation"></small></span></a></li><li><a class="side-lesson" href="network.routing.html" >
+          <span class="path-step-number">25</span><span><small>네트워크 보안 · 권장 선행</small>최장 접두사와 돌아오는 경로<small class="completion-label" data-completion="network.routing"></small></span></a></li><li><a class="side-lesson" href="network.nat-correlation.html" >
+          <span class="path-step-number">26</span><span><small>네트워크 보안 · 권장 선행</small>NAT 주소·포트·시간으로 로그 연결<small class="completion-label" data-completion="network.nat-correlation"></small></span></a></li><li><a class="side-lesson" href="network.policy.html" >
+          <span class="path-step-number">27</span><span><small>네트워크 보안 · 권장 선행</small>방화벽 정책과 회귀 검증<small class="completion-label" data-completion="network.policy"></small></span></a></li><li><a class="side-lesson" href="network.detection.html" >
+          <span class="path-step-number">28</span><span><small>네트워크 보안 · 권장 선행</small>탐지 기준·오탐·추가 증거<small class="completion-label" data-completion="network.detection"></small></span></a></li><li><a class="side-lesson" href="network.detection-metrics.html" >
+          <span class="path-step-number">29</span><span><small>네트워크 보안 · 권장 선행</small>정밀도·재현율과 탐지 임계값<small class="completion-label" data-completion="network.detection-metrics"></small></span></a></li><li><a class="side-lesson" href="network.incident-correlation.html" >
+          <span class="path-step-number">30</span><span><small>네트워크 보안 · 경로 핵심</small>네트워크 증거 연결과 대응 판단<small class="completion-label" data-completion="network.incident-correlation"></small></span></a></li>
+          </ol></details><a class="side-lesson path-project-link" href="project.html"><span class="path-step-number">✦</span><span>마지막 · 종합 프로젝트</span></a></nav>
+        <a class="back-link" href="../../learn/#paths">다른 학습 경로 보기 ↗</a></aside><article class="lesson-article">
+          <nav class="path-location" aria-label="현재 학습 경로"><a href="./">DFIR</a><strong>1 / 30단계</strong><a href="./#pathOutline">경로 목차 ↗</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/foundation.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">Foundation · 01 · 실습 환경과 파일 · 1 / 30</div><h1>실습 환경 준비와 첫 실행</h1><p class="lesson-objective">명령을 입력할 환경과 도구 버전을 구분하고 Python 예제를 실행합니다.</p></div></header>
+          <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 30–90분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>파일의 위치와 실행 결과를 따로 설명할 수 있나요?</p><details><summary>판단 기준과 보충 자료</summary><p>셸의 현재 폴더·파일 경로·프로그램 출력을 구별합니다. 환경 준비와 경로 차시에서 확인하세요.</p><a href="../../guides/bridges.html#python">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
+          <details class="lesson-preparation" aria-label="이 차시 준비" open><summary>준비 환경과 선행 학습 확인</summary><p><strong>Ubuntu/WSL 터미널과 Python 3</strong></p><ul><li>ZIP을 내려받아 압축을 푼 뒤 foundation 폴더에서 시작합니다. ZIP 안의 파일을 직접 실행하지 않습니다.</li><li>Ubuntu 설치 명령에는 인터넷이 필요합니다. 도구 설치 후 hello.py 실행은 오프라인으로 가능합니다.</li><li>Windows 기본 Python에서는 py -3 hello.py로 실행할 수 있습니다. C·Linux 차시는 Ubuntu/WSL 환경을 준비합니다.</li></ul><p class="caption">별도 선행 차시 없이 시작할 수 있습니다.</p>
+            <a href="../../guides/linux.html">Windows에서 Linux 시작하기 ↗</a></details>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>터미널은 명령을 입력하는 창이고, 셸은 그 명령을 해석하는 프로그램입니다. PowerShell과 Ubuntu의 Bash는 문법과 경로가 다릅니다. 아래 설치 명령은 Ubuntu에서만 실행합니다. Windows에서 Ubuntu가 아직 없다면 먼저 Linux 시작 가이드를 따라 준비하세요.</p><figure class="learning-visual" data-visual-id="foundation.environment"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 흐름도</span><h3>명령을 입력한 뒤, 누가 파일을 실행할까?</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="명령을 입력한 뒤, 누가 파일을 실행할까? 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 222" width="760" height="222" role="img" aria-labelledby="visual-foundation-environment-title visual-foundation-environment-desc" focusable="false"><title id="visual-foundation-environment-title">명령을 입력한 뒤, 누가 파일을 실행할까?</title><desc id="visual-foundation-environment-desc">사용자가 터미널에 python3 hello.py를 입력하면 셸이 명령을 해석하고 Python 인터프리터를 실행합니다. Python이 hello.py를 읽어 출력합니다. 터미널, 셸, 인터프리터, 소스 파일은 서로 다른 역할입니다.</desc><defs><marker id="visual-foundation-environment-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><circle class="v-step-circle" cx="42" cy="27" r="13"/><text class="v-step-number" x="42" y="31" text-anchor="middle">1</text><g class="v-tone "><rect class="v-node" x="28" y="54" width="214.66666666666666" height="144" rx="12"/><rect class="v-accent" x="29" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="82">터미널</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="113">명령을 입력하는 창</tspan></text></g><circle class="v-step-circle" cx="286.66666666666663" cy="27" r="13"/><text class="v-step-number" x="286.66666666666663" y="31" text-anchor="middle">2</text><g class="v-tone "><rect class="v-node" x="272.66666666666663" y="54" width="214.66666666666666" height="144" rx="12"/><rect class="v-accent" x="273.66666666666663" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="289.66666666666663" y="82">셸</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="289.66666666666663" y="113">python3 hello.py</tspan><tspan x="289.66666666666663" y="133">명령 해석과 실행</tspan></text></g><path class="v-edge " d="M246.66666666666663 126H267.66666666666663" marker-end="url(#visual-foundation-environment-arrow)"/><circle class="v-step-circle" cx="531.3333333333333" cy="27" r="13"/><text class="v-step-number" x="531.3333333333333" y="31" text-anchor="middle">3</text><g class="v-tone positive"><rect class="v-node" x="517.3333333333333" y="54" width="214.66666666666666" height="144" rx="12"/><rect class="v-accent" x="518.3333333333333" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="534.3333333333333" y="82">Python</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="534.3333333333333" y="113">hello.py를 읽고</tspan><tspan x="534.3333333333333" y="133">Hello, Bifrost 출력</tspan></text></g><path class="v-edge " d="M491.33333333333326 126H512.3333333333333" marker-end="url(#visual-foundation-environment-arrow)"/></svg></div><figcaption><span class="visual-takeaway">명령이 실패하면 현재 셸, Python 설치, 파일 위치를 각각 확인하세요.</span><small class="visual-note">Ubuntu/WSL의 python3 예시입니다. Windows PowerShell의 Python 실행은 py -3를 사용합니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>사용자가 터미널에 python3 hello.py를 입력하면 셸이 명령을 해석하고 Python 인터프리터를 실행합니다. Python이 hello.py를 읽어 출력합니다. 터미널, 셸, 인터프리터, 소스 파일은 서로 다른 역할입니다.</p></details></figure><p>python3는 Python 인터프리터, gcc는 C 컴파일러, gdb는 디버거입니다. 버전 출력은 설치 확인이지 학습 완료 자체는 아닙니다. 실습 ZIP을 풀고 foundation 폴더를 터미널의 현재 위치로 만든 뒤 hello.py를 실행합니다. Windows Python만 쓸 때는 python3 대신 py -3를 사용합니다.</p><p>명령은 보통 프로그램 이름, 옵션, 인자 순서입니다. python3 --version의 --version은 버전을 묻는 옵션이고 python3 hello.py의 hello.py는 실행할 파일입니다. 문서에 보이는 $나 &gt;&gt;&gt;는 입력 위치를 나타내는 프롬프트일 수 있으므로 명령에 함께 붙이지 않습니다.</p><p>설치가 끝났는지, 입력 파일이 있는지, 실행이 성공했는지는 따로 확인합니다. command not found는 명령 탐색 문제이고 can&#39;t open file은 Python은 실행됐지만 파일 경로를 찾지 못한 상황입니다. 처음부터 재설치하기보다 어느 단계에서 막혔는지를 기록하세요.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>문서의 $ 또는 &gt;&gt;&gt;까지 복사한다.</dt><dd>프롬프트와 명령 본문을 구분하고 python3부터 입력합니다.</dd><dt>출력이 안 나오면 모든 설치를 반복한다.</dt><dd>명령을 못 찾는지, 파일을 못 찾는지, 프로그램 내부 오류인지 마지막 오류 줄로 나눕니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/foundation.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/foundation/hello.py" download>hello.py ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Ubuntu/WSL 터미널과 Python 3</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">sudo apt update
+sudo apt install python3 build-essential gdb binutils git
+python3 --version
+gcc --version
+python3 hello.py</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>Hello, Bifrost
+Study: 30 minutes
+(버전 번호와 설치 메시지는 환경마다 다릅니다.)</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>셸과 위치를 먼저 적기</h3><p>Ubuntu 터미널인지 PowerShell인지 창의 이름을 확인합니다. Ubuntu에서는 아래 두 명령으로 현재 위치와 파일 목록을 봅니다. hello.py가 보이는 폴더에서 실행해야 합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Ubuntu/WSL 터미널과 Python 3</span></div><pre><code>pwd
+ls</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>현재 경로와 파일 목록이 나오며 목록에 hello.py가 있어야 합니다.</pre></div></li><li><h3>인터프리터와 입력 파일 구분하기</h3><p>버전 확인이 성공하면 Python을 사용할 수 있습니다. 이어 hello.py를 실행합니다. 설치 명령을 매번 반복할 필요는 없습니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Ubuntu/WSL 터미널과 Python 3</span></div><pre><code>python3 --version
+python3 hello.py</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>Python 3.x.x
+Hello, Bifrost
+Study: 30 minutes</pre></div></li><li><h3>한 가지 값만 바꾸고 재실행하기</h3><p>텍스트 편집기에서 hello.py의 name을 Mina로 바꾸고 저장합니다. 같은 파일을 다시 실행해 이름만 바뀌는지 확인하면 편집한 파일과 실행한 파일이 같다는 것도 확인할 수 있습니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Ubuntu/WSL 터미널과 Python 3</span></div><pre><code>python3 hello.py</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>Hello, Mina
+Study: 30 minutes</pre></div></li></ol></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>hello.py의 name을 바꾸고 다시 실행하세요. 설치에 사용한 셸, OS, Python 버전, 실행 명령을 노트에 남깁니다.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>파일을 찾을 수 없으면 먼저 pwd와 ls로 위치를 확인하세요. Ubuntu 설치는 별도 Linux 가이드를 참고합니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>hello.py에서 name = &quot;Bifrost&quot;를 name = &quot;Mina&quot;로 바꾸고 파일을 저장합니다. minutes는 그대로 두어 변경 원인을 하나로 제한합니다.</li><li>터미널의 현재 폴더, 실제 실행 명령, Python 버전, 두 줄의 출력을 함께 기록합니다.</li><li>출력이 안 바뀌면 편집기의 파일 경로와 터미널의 경로를 비교하고 저장 여부를 확인합니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>이름을 Mina로 바꾼 경우 Hello, Mina / Study: 30 minutes가 나옵니다. 기록만 보고 같은 파일을 다시 실행할 수 있어야 합니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>학습 시간을 25로 바꾸고 인사 이름은 유지하세요. 터미널을 새로 연 뒤에도 같은 파일을 실행해 결과를 비교하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>인사 이름은 그대로, Study는 50 minutes입니다. 현재 폴더와 파일 경로를 기록해 다른 hello.py를 실행한 경우를 구분합니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>사용 중인 셸을 말할 수 있다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>이름을 바꾼 출력과 실행 명령이 남아 있다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/foundation/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. python3 --version은 성공했지만 python3 hello.py에서 파일을 찾을 수 없다고 합니다. 다음 확인으로 가장 알맞은 것은?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>컴퓨터 전체의 Python을 삭제한다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>현재 폴더와 hello.py의 실제 위치를 확인한다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>gcc 버전이 Python 버전과 같은지 확인한다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 현재 폴더와 hello.py의 실제 위치를 확인한다.</strong></p><p>버전 출력은 Python 실행을 확인했습니다. 이번 오류의 대상은 hello.py 경로이므로 pwd와 ls로 입력 파일부터 찾습니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. Ubuntu의 sudo apt install 명령을 PowerShell에 그대로 입력하면 안 되는 이유는?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>둘 다 터미널이므로 언제나 같다.</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>Python 파일은 Windows에서 열 수 없다.</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>패키지 관리자와 셸 환경이 다르기 때문이다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 패키지 관리자와 셸 환경이 다르기 때문이다.</strong></p><p>터미널 창이 있다는 사실만으로 명령 체계가 같아지지 않습니다. apt는 Ubuntu 환경에서 사용하는 도구이며 Windows Python 실행은 별도로 가능합니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>사용 중인 셸을 말할 수 있다.</li><li>이름을 바꾼 출력과 실행 명령이 남아 있다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="경로의 이전·다음 단계"><a href="./"><small>← 학습 경로</small>경로 목차로</a>
+            <a href="foundation.paths.html"><small>다음 단계 →</small>경로와 작업용 사본</a></nav>
+          <p class="caption"><a href="../../tracks/foundation/environment.html">이 차시를 Foundation 분야 과정으로 보기 ↗</a></p>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://learn.microsoft.com/ko-kr/windows/wsl/setup/environment" target="_blank" rel="noopener noreferrer">Microsoft · WSL 개발 환경 준비 ↗</a></li>
+        <li><a href="https://docs.python.org/3/tutorial/interpreter.html" target="_blank" rel="noopener noreferrer">Python · 인터프리터 사용 ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

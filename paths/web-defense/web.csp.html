@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<meta name="description" content="정책 전달·보고 전용·브라우저 집행을 구분하고 CSP의 보완 역할을 검토합니다.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="CSP·보안 헤더와 적용 범위 — 웹의 동작부터 안전한 상태 관리까지 · Bifrost">
+<meta property="og:description" content="정책 전달·보고 전용·브라우저 집행을 구분하고 CSP의 보완 역할을 검토합니다.">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/paths/web-defense/web.csp.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/paths/web-defense/web.csp.html">
+<title>CSP·보안 헤더와 적용 범위 — 웹의 동작부터 안전한 상태 관리까지 · Bifrost</title>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
+<link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/web.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/progress.js" defer></script>
+
+<script src="../../js/learning-paths.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/path-progress.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
+</head>
+<body class="learning-page" data-course="web" data-course-number="08" data-view="lesson" data-lesson-id="web.csp" data-path="web-defense" style="--course-accent:var(--map-blue)">
+<a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav">
+  <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#pathOutline">웹 보안 목차</a></nav>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
+  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+</div></header>
+<main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="web.csp">
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../learn/">학습 경로</a><span aria-hidden="true">/</span><a href="./">웹의 동작부터 안전한 상태 관리까지</a><span aria-hidden="true">/</span><span aria-current="page">14단계</span></nav>
+        <div class="lesson-layout"><aside class="course-sidebar path-sidebar"><a class="back-link" href="./">← 웹의 동작부터 안전한 상태 관리까지 목차</a>
+        <div class="course-stats"><span data-path-count></span><div class="course-meter" role="progressbar" aria-label="웹의 동작부터 안전한 상태 관리까지 차시 완료 진도" aria-valuemin="0" aria-valuemax="100" data-path-meter><span></span></div></div>
+        <nav aria-label="웹의 동작부터 안전한 상태 관리까지 경로 목차"><details ><summary>Foundation<span class="caption">1–3단계</span></summary><ol><li><a class="side-lesson" href="foundation.environment.html" >
+          <span class="path-step-number">1</span><span><small>공통 기초 · 권장 선행</small>실습 환경 준비와 첫 실행<small class="completion-label" data-completion="foundation.environment"></small></span></a></li><li><a class="side-lesson" href="foundation.network.html" >
+          <span class="path-step-number">2</span><span><small>공통 기초 · 권장 선행</small>IP·포트·DNS와 전송<small class="completion-label" data-completion="foundation.network"></small></span></a></li><li><a class="side-lesson" href="foundation.http.html" >
+          <span class="path-step-number">3</span><span><small>공통 기초 · 권장 선행</small>HTTP 요청과 응답 읽기<small class="completion-label" data-completion="foundation.http"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">4–4단계</span></summary><ol><li><a class="side-lesson" href="web.flow.html" >
+          <span class="path-step-number">4</span><span><small>웹 보안 · 경로 핵심</small>HTML·DOM과 요청 흐름<small class="completion-label" data-completion="web.flow"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">5–6단계</span></summary><ol><li><a class="side-lesson" href="foundation.python-values.html" >
+          <span class="path-step-number">5</span><span><small>공통 기초 · 권장 선행</small>변수·문자열·자료형<small class="completion-label" data-completion="foundation.python-values"></small></span></a></li><li><a class="side-lesson" href="foundation.python-flow.html" >
+          <span class="path-step-number">6</span><span><small>공통 기초 · 권장 선행</small>조건·반복·함수<small class="completion-label" data-completion="foundation.python-flow"></small></span></a></li>
+          </ol></details><details open><summary>Web Hacking<span class="caption">7–14단계</span></summary><ol><li><a class="side-lesson" href="web.sql.html" >
+          <span class="path-step-number">7</span><span><small>웹 보안 · 경로 핵심</small>SELECT·WHERE와 매개변수<small class="completion-label" data-completion="web.sql"></small></span></a></li><li><a class="side-lesson" href="web.sessions.html" >
+          <span class="path-step-number">8</span><span><small>웹 보안 · 경로 핵심</small>쿠키·세션·인증<small class="completion-label" data-completion="web.sessions"></small></span></a></li><li><a class="side-lesson" href="web.authorization.html" >
+          <span class="path-step-number">9</span><span><small>웹 보안 · 경로 핵심</small>리소스 단위 인가<small class="completion-label" data-completion="web.authorization"></small></span></a></li><li><a class="side-lesson" href="web.sql-injection.html" >
+          <span class="path-step-number">10</span><span><small>웹 보안 · 경로 핵심</small>SQL Injection과 바인딩<small class="completion-label" data-completion="web.sql-injection"></small></span></a></li><li><a class="side-lesson" href="web.output.html" >
+          <span class="path-step-number">11</span><span><small>웹 보안 · 경로 핵심</small>출력 컨텍스트와 XSS 방어<small class="completion-label" data-completion="web.output"></small></span></a></li><li><a class="side-lesson" href="web.csrf.html" >
+          <span class="path-step-number">12</span><span><small>웹 보안 · 경로 핵심</small>CSRF와 상태 변경 요청<small class="completion-label" data-completion="web.csrf"></small></span></a></li><li><a class="side-lesson" href="web.cors.html" >
+          <span class="path-step-number">13</span><span><small>웹 보안 · 경로 핵심</small>동일 출처·CORS·응답 읽기 권한<small class="completion-label" data-completion="web.cors"></small></span></a></li><li><a class="side-lesson" href="web.csp.html" aria-current="page">
+          <span class="path-step-number">14</span><span><small>웹 보안 · 경로 핵심</small>CSP·보안 헤더와 적용 범위<small class="completion-label" data-completion="web.csp"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">15–22단계</span></summary><ol><li><a class="side-lesson" href="foundation.paths.html" >
+          <span class="path-step-number">15</span><span><small>공통 기초 · 권장 선행</small>경로와 작업용 사본<small class="completion-label" data-completion="foundation.paths"></small></span></a></li><li><a class="side-lesson" href="foundation.python-files.html" >
+          <span class="path-step-number">16</span><span><small>공통 기초 · 권장 선행</small>CSV 읽기와 오류 좁히기<small class="completion-label" data-completion="foundation.python-files"></small></span></a></li><li><a class="side-lesson" href="foundation.text-bytes.html" >
+          <span class="path-step-number">17</span><span><small>공통 기초 · 권장 선행</small>문자열·바이트·UTF-8의 경계<small class="completion-label" data-completion="foundation.text-bytes"></small></span></a></li><li><a class="side-lesson" href="foundation.structured-data.html" >
+          <span class="path-step-number">18</span><span><small>공통 기초 · 권장 선행</small>JSON 파싱과 데이터 계약<small class="completion-label" data-completion="foundation.structured-data"></small></span></a></li><li><a class="side-lesson" href="foundation.exceptions.html" >
+          <span class="path-step-number">19</span><span><small>공통 기초 · 권장 선행</small>예외·오류 메시지·종료 상태<small class="completion-label" data-completion="foundation.exceptions"></small></span></a></li><li><a class="side-lesson" href="foundation.cli.html" >
+          <span class="path-step-number">20</span><span><small>공통 기초 · 권장 선행</small>재사용 가능한 명령행 도구<small class="completion-label" data-completion="foundation.cli"></small></span></a></li><li><a class="side-lesson" href="foundation.unit-tests.html" >
+          <span class="path-step-number">21</span><span><small>공통 기초 · 권장 선행</small>경계값 테스트와 실패 실험<small class="completion-label" data-completion="foundation.unit-tests"></small></span></a></li><li><a class="side-lesson" href="foundation.mutable-data.html" >
+          <span class="path-step-number">22</span><span><small>공통 기초 · 권장 선행</small>변경 가능한 자료와 방어적 복사<small class="completion-label" data-completion="foundation.mutable-data"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">23–23단계</span></summary><ol><li><a class="side-lesson" href="web.mass-assignment.html" >
+          <span class="path-step-number">23</span><span><small>웹 보안 · 경로 핵심</small>요청 계약과 Mass Assignment<small class="completion-label" data-completion="web.mass-assignment"></small></span></a></li>
+          </ol></details><details ><summary>Foundation<span class="caption">24–24단계</span></summary><ol><li><a class="side-lesson" href="foundation.config-precedence.html" >
+          <span class="path-step-number">24</span><span><small>공통 기초 · 권장 선행</small>설정 우선순위와 출처 추적<small class="completion-label" data-completion="foundation.config-precedence"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">25–25단계</span></summary><ol><li><a class="side-lesson" href="web.session-lifecycle.html" >
+          <span class="path-step-number">25</span><span><small>웹 보안 · 경로 핵심</small>세션 갱신·만료·서버 무효화<small class="completion-label" data-completion="web.session-lifecycle"></small></span></a></li>
+          </ol></details><details ><summary>Cryptography<span class="caption">26–27단계</span></summary><ol><li><a class="side-lesson" href="crypto.representation.html" >
+          <span class="path-step-number">26</span><span><small>암호학 · 권장 선행</small>바이트·Hex·Base64<small class="completion-label" data-completion="crypto.representation"></small></span></a></li><li><a class="side-lesson" href="crypto.hash.html" >
+          <span class="path-step-number">27</span><span><small>암호학 · 권장 선행</small>SHA-256과 파일 무결성<small class="completion-label" data-completion="crypto.hash"></small></span></a></li>
+          </ol></details><details ><summary>Web Hacking<span class="caption">28–31단계</span></summary><ol><li><a class="side-lesson" href="web.reset-tokens.html" >
+          <span class="path-step-number">28</span><span><small>웹 보안 · 경로 핵심</small>일회 토큰·목적 결합·만료<small class="completion-label" data-completion="web.reset-tokens"></small></span></a></li><li><a class="side-lesson" href="web.private-caching.html" >
+          <span class="path-step-number">29</span><span><small>웹 보안 · 경로 핵심</small>개인 응답·공유 캐시·Cache-Control<small class="completion-label" data-completion="web.private-caching"></small></span></a></li><li><a class="side-lesson" href="web.regression.html" >
+          <span class="path-step-number">30</span><span><small>웹 보안 · 권장 선행</small>수정·반례·회귀 테스트<small class="completion-label" data-completion="web.regression"></small></span></a></li><li><a class="side-lesson" href="web.idempotency.html" >
+          <span class="path-step-number">31</span><span><small>웹 보안 · 경로 핵심</small>거래 불변 조건·트랜잭션·재시도<small class="completion-label" data-completion="web.idempotency"></small></span></a></li>
+          </ol></details><a class="side-lesson path-project-link" href="project.html"><span class="path-step-number">✦</span><span>마지막 · 종합 프로젝트</span></a></nav>
+        <a class="back-link" href="../../learn/#paths">다른 학습 경로 보기 ↗</a></aside><article class="lesson-article">
+          <nav class="path-location" aria-label="현재 학습 경로"><a href="./">웹 보안</a><strong>14 / 31단계</strong><a href="./#pathOutline">경로 목차 ↗</a></nav>
+          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/web.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">Web Hacking · 03 · 브라우저와 서버의 신뢰 경계 · 14 / 31</div><h1>CSP·보안 헤더와 적용 범위</h1><p class="lesson-objective">정책 전달·보고 전용·브라우저 집행을 구분하고 CSP의 보완 역할을 검토합니다.</p></div></header>
+          <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
+        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>인증과 대상 자원의 인가는 같은 검사인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>인증은 주체 확인, 인가는 주체·대상·행동의 허용 판단입니다. 세션이 유효해도 타인의 자원은 거부해야 합니다.</p><a href="../../guides/bridges.html#web">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Python 3.10 이상 · 오프라인 웹 정책 모형</strong></p><ul><li>Web ZIP을 풀고 web 폴더에서 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 python3 대신 py -3를 사용합니다. 외부 요청·브라우저 서버·계정은 필요하지 않습니다.</li><li>web_controls.py는 입력과 정책 결과를 비교하는 순수 모형입니다. 실제 쿠키·CORS·CSP의 브라우저 집행이나 운영 웹 서버의 안전성을 증명하지 않습니다. .invalid 주소와 공개 토큰은 교육용 표본입니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+        <ul><li><a href="web.output.html">웹 보안 · 출력 컨텍스트와 XSS 방어 ↗</a></li><li><a href="web.cors.html">웹 보안 · 동일 출처·CORS·응답 읽기 권한 ↗</a></li></ul>
+            </details>
+          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>CSP는 문서가 불러오거나 실행할 수 있는 리소스의 출처 등을 브라우저에 지시합니다. XSS 위험을 줄이는 추가 층이지만 입력을 안전하게 출력하는 코드와 서버 인가를 고쳐 주지는 않습니다. 허용 출처에 공격자가 파일을 올릴 수 있다면 단순한 self 허용도 별도 검토가 필요합니다.</p><figure class="learning-visual" data-visual-id="web.csp"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교표</span><h3>정책 내용과 헤더 이름을 함께 봅니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="정책 내용과 헤더 이름을 함께 봅니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 272" width="760" height="272" role="img" aria-labelledby="visual-web-csp-title visual-web-csp-desc" focusable="false"><title id="visual-web-csp-title">정책 내용과 헤더 이름을 함께 봅니다</title><desc id="visual-web-csp-desc">동일한 다섯 지시문이어도 집행 헤더와 보고 전용 헤더의 목적은 다릅니다. unsafe-inline을 더한 정책은 이 실습 체크리스트에서 REVIEW입니다.</desc><defs><marker id="visual-web-csp-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone "><rect class="v-table-head" x="28" y="20" width="230" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="41" y="47">표본</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="258" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="271" y="47">모형 출력</tspan></text></g><g class="v-tone "><rect class="v-table-head" x="495" y="20" width="237" height="58" rx="0"/><text class="v-text v-heading" font-size="14" text-anchor="start"><tspan x="508" y="47">확인 범위</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="78" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="105">집행 헤더</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="105">CHECKLIST_PASS</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="78" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="105">고정 항목만</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="136" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="163">보고 전용</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="163">REPORT_ONLY</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="136" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="163">차단 주장 불가</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="28" y="194" width="230" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="41" y="221">inline 추가</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="258" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="271" y="221">REVIEW</tspan></text></g><g class="v-tone "><rect class="v-table-cell" x="495" y="194" width="237" height="58" rx="0"/><text class="v-text " font-size="13" text-anchor="start"><tspan x="508" y="221">정책 검토 필요</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">체크리스트 통과와 실제 브라우저 집행을 구분하세요.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>동일한 다섯 지시문이어도 집행 헤더와 보고 전용 헤더의 목적은 다릅니다. unsafe-inline을 더한 정책은 이 실습 체크리스트에서 REVIEW입니다.</p></details></figure><p>Content-Security-Policy 헤더는 집행 정책을, Content-Security-Policy-Report-Only는 위반 관찰을 위한 정책을 전달합니다. 보고 전용 헤더를 설정했다고 스크립트 실행을 차단한 것으로 기록하면 안 됩니다. 실제 보고 수집도 별도의 설정과 검증이 필요합니다.</p><p>예제의 default-src는 지정하지 않은 여러 리소스 지시문의 기본값이고 script-src는 스크립트 정책입니다. object-src none은 플러그인 객체, base-uri none은 base URL 변경, frame-ancestors none은 문서를 삽입할 상위 프레임을 제한합니다. 모든 지시문이 default-src로 대체되는 것은 아닙니다.</p><p>이 체크리스트는 다섯 개의 고정 문자열과 unsafe-inline 포함 여부를 확인합니다. 일반 CSP 파서도 브라우저도 아니어서 중복 지시문·문법·nonce·해시·리다이렉트 등의 실제 의미를 완전하게 해석하지 않습니다. CHECKLIST_PASS는 표본 체크리스트 충족만 뜻합니다.</p><p>실제 사이트에 정책을 넣을 때에는 필요한 정상 스크립트·스타일·이미지·폼을 먼저 목록화하고 단계적으로 검증해야 합니다. nonce나 해시 기반 정책도 고려합니다. 이 실습은 response-policy.txt를 읽는 오프라인 검토이며 Bifrost의 응답 헤더를 변경하지 않습니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>Report-Only를 설정하고 스크립트가 차단된다고 주장한다.</dt><dd>보고 전용은 집행 정책과 다릅니다. 헤더 이름과 실제 위반 관찰을 구분합니다.</dd><dt>문자열 체크리스트 PASS가 모든 CSP 문법과 XSS 방어를 증명한다고 믿는다.</dt><dd>이 검사는 고정 표본의 항목만 확인합니다. 실제 파싱·브라우저 집행·안전한 출력 처리는 별도로 검증합니다.</dd></dl></aside></section>
+          <section id="materials" class="materials">
+        <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
+        <a class="learning-button" href="../../labs/web.zip" download>전체 실습 ZIP 받기 ↓</a>
+        <ul><li><a href="../../labs/web/web_controls.py" download>web_controls.py ↓</a></li><li><a href="../../labs/web/response-policy.txt" download>response-policy.txt ↓</a></li><li><a href="../../labs/web/LAB-GUIDE.md" download>LAB-GUIDE.md ↓</a></li></ul>
+      </section>
+          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+            <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Python 3.10 이상 · 오프라인 웹 정책 모형</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 web_controls.py csp</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>고정 체크리스트 통과·보고 전용·검토 필요를 분리하고 실제 브라우저 집행은 검증하지 않았다고 출력합니다.</pre></div>
+            <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>집행·관찰·검토 상태 비교하기</h3><p>csp 모드는 같은 기본 정책의 헤더 이름을 바꾸거나 script-src에 unsafe-inline을 추가한 세 사례를 비교합니다. 마지막 줄이 실제 브라우저 검증 미실시를 명시합니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Python 3.10 이상 · 오프라인 웹 정책 모형</span></div><pre><code>python3 web_controls.py csp</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>enforced=CHECKLIST_PASS
+report-only=REPORT_ONLY
+inline=REVIEW
+browser_enforcement=NOT_TESTED</pre></div></li><li><h3>헤더 파일과 체크 항목 연결하기</h3><p>response-policy.txt의 다섯 CSP 지시문을 찾아 역할을 적습니다. nosniff·Referrer-Policy·Content-Type·CORS 헤더는 CSP와 다른 역할의 설정입니다. 파일 자체는 응답 서버 설정이 아닙니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Python 3.10 이상 · 오프라인 웹 정책 모형</span></div><pre><code>python3 -c &quot;from pathlib import Path; print(next(line for line in Path(&#39;response-policy.txt&#39;).read_text().splitlines() if line.startswith(&#39;Content-Security-Policy:&#39;)))&quot;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>Content-Security-Policy: default-src &#39;self&#39;; script-src &#39;self&#39;; object-src &#39;none&#39;; base-uri &#39;none&#39;; frame-ancestors &#39;none&#39;</pre></div></li><li><h3>필요한 지시문이 빠진 사본 확인하기</h3><p>고정 체크리스트에서 base-uri를 제거하면 REVIEW가 나와야 합니다. 이 결과는 실제 브라우저 취약성의 확정 판정이 아니라 검토 항목이 빠졌다는 의미입니다.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>Python 부분 코드 · 앞 단계의 변수·객체를 유지한 같은 스크립트 · Python 3.10 이상 · 오프라인 웹 정책 모형</span></div><pre><code>from pathlib import Path
+from web_controls import review_csp
+line = next(s for s in Path(&quot;response-policy.txt&quot;).read_text().splitlines()
+            if s.startswith(&quot;Content-Security-Policy:&quot;))
+policy = line.split(&quot;: &quot;, 1)[1].replace(&quot;; base-uri &#39;none&#39;&quot;, &quot;&quot;)
+print(review_csp(&quot;Content-Security-Policy&quot;, policy))</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>policy_probe.py로 저장하고 python3 policy_probe.py로 실행하면 REVIEW입니다.</pre></div></li></ol></section>
+          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>정책 사본에서 base-uri를 제거한 경우와 헤더 이름을 Report-Only로 바꾼 경우를 비교하세요. 실제 배포 전에 확인할 정상 리소스 세 가지와 브라우저 검증 항목을 적으세요.</p>
+            <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>default-src가 frame-ancestors나 base-uri까지 대신한다고 가정하지 마세요. 체크리스트 결과와 브라우저가 실제로 적용한 정책은 별도 근거입니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
+        <ol><li>기본 정책에서 base-uri none만 빼면 REVIEW, 동일한 기본 정책을 Report-Only로 넘기면 REPORT_ONLY임을 확인합니다.</li><li>정상 JavaScript·CSS·이미지의 출처와 인라인 사용 여부를 기록하고, 실제 HTTPS 환경에서 개발자 도구의 응답 헤더·콘솔 위반·기능 동작을 검사할 계획을 세웁니다.</li><li>보안 보고에는 체크리스트 통과와 실제 집행 확인을 구분하고, XSS의 원인인 출력 컨텍스트 처리도 유지해야 한다고 적습니다.</li></ol>
+        
+        <h3>결과를 판단하는 기준</h3><pre>REVIEW와 REPORT_ONLY를 다른 원인으로 설명합니다. 정상 기능 검증 계획과 실제 브라우저 집행 미검증이라는 한계를 함께 기록해야 합니다.</pre>
+      </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+        <p>외부 스크립트를 막는 CSP와 같은 출처 스크립트가 손상된 상황을 비교하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>script-src &#39;self&#39;는 같은 출처 코드를 신뢰합니다. CSP만으로 공급된 코드의 안전성이나 모든 DOM 결함이 검증되지는 않습니다.</p></details>
+        <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
+          <tr><th scope="row">개념</th><td>CSP 지시문·헤더 이름·집행 범위를 구분했다. — 자기 말로 설명</td></tr>
+          <tr><th scope="row">실행·관찰</th><td>문자열 점검 결과를 실제 브라우저 보안 증명으로 확대하지 않았다. — 명령·입력·출력 또는 자료 위치</td></tr>
+          <tr><th scope="row">조건 변경</th><td>독립 과제의 예상과 결과, 판단 기준과 다른 점</td></tr>
+          <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
+        <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
+        <a href="../../labs/web/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
+        <fieldset class="question" data-question="0">
+          <legend>1. CHECKLIST_PASS와 browser_enforcement=NOT_TESTED가 함께 나왔습니다. 올바른 해석은?</legend>
+          <label class="question-option"><input type="radio" name="question-0" value="0"><span>사이트에서 모든 XSS가 차단되었다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>표본 체크 항목은 충족했지만 실제 브라우저 집행은 확인하지 않았다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>모든 브라우저에 같은 정책이 자동 설치되었다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 표본 체크 항목은 충족했지만 실제 브라우저 집행은 확인하지 않았다.</strong></p><p>실습 도구가 확인한 범위를 넘겨 주장하지 않습니다. 실제 HTTP 응답·브라우저 동작·정상 기능을 추가 검증해야 합니다.</p></details>
+        </fieldset><fieldset class="question" data-question="1">
+          <legend>2. 동일 정책을 Content-Security-Policy-Report-Only로 전달하면?</legend>
+          <label class="question-option"><input type="radio" name="question-1" value="0"><span>정책 관찰에 쓰이며 그 헤더만으로 실행 차단을 주장할 수 없다.</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>항상 모든 스크립트를 차단한다.</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>서버 인가가 자동으로 적용된다.</span></label>
+          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
+          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
+          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 정책 관찰에 쓰이며 그 헤더만으로 실행 차단을 주장할 수 없다.</strong></p><p>집행과 보고 전용은 목적이 다릅니다. 실제 보고 수집과 집행 정책은 각각 설정하고 확인해야 합니다.</p></details>
+        </fieldset></div>
+            <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>CSP 지시문·헤더 이름·집행 범위를 구분했다.</li><li>문자열 점검 결과를 실제 브라우저 보안 증명으로 확대하지 않았다.</li></ul>
+            <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
+          <nav class="lesson-pagination" aria-label="경로의 이전·다음 단계"><a href="web.cors.html"><small>← 이전 단계</small>동일 출처·CORS·응답 읽기 권한</a>
+            <a href="foundation.paths.html"><small>다음 단계 →</small>경로와 작업용 사본</a></nav>
+          <p class="caption"><a href="../../tracks/web/csp.html">이 차시를 Web Hacking 분야 과정으로 보기 ↗</a></p>
+          <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP" target="_blank" rel="noopener noreferrer">MDN · CSP 안내 ↗</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy" target="_blank" rel="noopener noreferrer">MDN · Content-Security-Policy 헤더 ↗</a></li>
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
+        <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
+        <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
+          <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
+        <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
+        </article></div>
+</main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+</body>
+</html>

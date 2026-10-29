@@ -17,21 +17,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/network/incident-correlation.html">
 <title>네트워크 증거 연결과 대응 판단 — Network Security · Bifrost</title>
-<script src="../../js/theme.js"></script>
+<script src="../../js/theme.js?v=learning-cbb98497ecac"></script>
 <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../css/main.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/theme.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-cbb98497ecac">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-8294bd57e0e8">
-<link rel="stylesheet" href="../../css/study.css?v=learning-8294bd57e0e8">
-<script src="../../js/catalog.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/courses/network.js?v=learning-8294bd57e0e8" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-cbb98497ecac">
+<link rel="stylesheet" href="../../css/study.css?v=learning-cbb98497ecac">
+<script src="../../js/catalog.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/courses/network.js?v=learning-cbb98497ecac" defer></script>
 <script src="../../js/progress.js" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-8294bd57e0e8" defer></script>
-<script src="../../js/learning.js" defer></script>
+
+<script src="../../js/learning-view.js?v=learning-cbb98497ecac" defer></script>
+<script src="../../js/learning.js?v=learning-cbb98497ecac" defer></script>
 </head>
-<body class="learning-page" data-course="network" data-course-number="05" data-view="lesson" data-lesson-id="network.incident-correlation" style="--course-accent:var(--map-amber)">
+<body class="learning-page" data-course="network" data-course-number="05" data-view="lesson" data-lesson-id="network.incident-correlation" data-path="" style="--course-accent:var(--map-amber)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
   <a class="brand" href="../../index.html"><span class="brand-mark"><svg class="bifrost-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 24 15 36 20 24 24 20 36 16 24 4 20 16 15Z" fill="currentColor"/><path d="M31 5 32.4 9.2 36.6 10.6 32.4 12 31 16.2 29.6 12 25.4 10.6 29.6 9.2Z" fill="#d3e3ff"/></svg></span><span>BIFROST</span></a>
@@ -85,14 +86,15 @@
               <span class="lesson-dot" data-dot="network.event-time-windows" aria-hidden="true"></span><span>사건 시각·지연 도착과 세션 경계<small class="completion-label" data-completion="network.event-time-windows"></small></span></a></li></ol>
           </details></nav><a class="back-link" href="../../index.html#mindmap">모든 분야 보기 ↗</a>
       </aside><article class="lesson-article">
+          
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/network.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">04 · 경로·상태·운영 검증 · 14 / 19</div><h1>네트워크 증거 연결과 대응 판단</h1><p class="lesson-objective">여러 관측 지점을 연결해 접속 시도와 실제 영향을 구분합니다.</p></div></header>
           <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–30분</span></div>
         <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>센서에 기록이 없다는 사실이 통신이 없었다는 뜻인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>센서 위치·필터·손실·시간 범위를 확인해야 합니다. 관측되지 않은 경로가 남아 있을 수 있습니다.</p><a href="../../guides/bridges.html#network">막힌 기초를 짧게 연결하기 ↗</a></details></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <section class="lesson-preparation" aria-label="이 차시 준비"><h2>준비와 연결</h2><p><strong>오프라인 모델 실습 · Python 3.10 이상</strong></p><ul><li>network ZIP을 풀고 defense_models.py와 defense-models.json가 있는 폴더에서 실행합니다. 추가 패키지나 외부 계정이 필요하지 않습니다.</li><li>Linux/WSL/macOS 명령은 python3입니다. Windows PowerShell에서는 python3 부분을 py -3로 바꿉니다.</li><li>파일 변경 과제는 복사본과 --input 옵션을 사용합니다. 결과는 교육 모형에 한정하며 운영 보안 검증을 대신하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>오프라인 모델 실습 · Python 3.10 이상</strong></p><ul><li>network ZIP을 풀고 defense_models.py와 defense-models.json가 있는 폴더에서 실행합니다. 추가 패키지나 외부 계정이 필요하지 않습니다.</li><li>Linux/WSL/macOS 명령은 python3입니다. Windows PowerShell에서는 python3 부분을 py -3로 바꿉니다.</li><li>파일 변경 과제는 복사본과 --input 옵션을 사용합니다. 결과는 교육 모형에 한정하며 운영 보안 검증을 대신하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="nat-correlation.html">네트워크 보안 · NAT 주소·포트·시간으로 로그 연결 ↗</a></li><li><a href="detection-metrics.html">네트워크 보안 · 정밀도·재현율과 탐지 임계값 ↗</a></li><li><a href="../forensic/timeline.html">디지털 포렌식 · UTC로 타임라인 맞추기 ↗</a></li></ul>
-            </section>
+            </details>
           <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>DNS 질의, 방화벽 허용, 웹 응답은 서로 다른 관측입니다. DNS 성공은 이름 해석, allow는 해당 지점의 전달 정책, HTTP 401은 애플리케이션이 인증을 요구하거나 실패를 반환한 결과입니다. 어느 하나만으로 침해 성공이나 데이터 유출을 증명하지 않습니다.</p><figure class="learning-visual" data-visual-id="network.incident-correlation"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 흐름도</span><h3>관측 사실과 영향 가설 분리하기</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="관측 사실과 영향 가설 분리하기 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 222" width="760" height="222" role="img" aria-labelledby="visual-network-incident-correlation-title visual-network-incident-correlation-desc" focusable="false"><title id="visual-network-incident-correlation-title">관측 사실과 영향 가설 분리하기</title><desc id="visual-network-incident-correlation-desc">R-17의 DNS·방화벽·앱 기록을 연결합니다. 401은 리소스 접근 성공의 증거가 아니며 R-18의 200은 다른 요청입니다.</desc><defs><marker id="visual-network-incident-correlation-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><circle class="v-step-circle" cx="42" cy="27" r="13"/><text class="v-step-number" x="42" y="31" text-anchor="middle">1</text><g class="v-tone "><rect class="v-node" x="28" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="29" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="82">DNS</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="113">10:00:00</tspan><tspan x="45" y="133">resolved</tspan></text></g><circle class="v-step-circle" cx="225.5" cy="27" r="13"/><text class="v-step-number" x="225.5" y="31" text-anchor="middle">2</text><g class="v-tone "><rect class="v-node" x="211.5" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="212.5" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="228.5" y="82">방화벽</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="228.5" y="113">10:00:01 allow</tspan></text></g><path class="v-edge " d="M185.5 126H206.5" marker-end="url(#visual-network-incident-correlation-arrow)"/><circle class="v-step-circle" cx="409" cy="27" r="13"/><text class="v-step-number" x="409" y="31" text-anchor="middle">3</text><g class="v-tone "><rect class="v-node" x="395" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="396" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="412" y="82">앱</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="412" y="113">10:00:02 401</tspan></text></g><path class="v-edge " d="M369 126H390" marker-end="url(#visual-network-incident-correlation-arrow)"/><circle class="v-step-circle" cx="592.5" cy="27" r="13"/><text class="v-step-number" x="592.5" y="31" text-anchor="middle">4</text><g class="v-tone positive"><rect class="v-node" x="578.5" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="579.5" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="595.5" y="82">현재 결론</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="595.5" y="113">시도 관측 · 영향</tspan><tspan x="595.5" y="133">미확인</tspan></text></g><path class="v-edge " d="M552.5 126H573.5" marker-end="url(#visual-network-incident-correlation-arrow)"/></svg></div><figcaption><span class="visual-takeaway">연결 근거가 있는 기록만 묶고 영향을 추가 검증합니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>R-17의 DNS·방화벽·앱 기록을 연결합니다. 401은 리소스 접근 성공의 증거가 아니며 R-18의 200은 다른 요청입니다.</p></details></figure><p>표본은 R-17이라는 요청 ID가 각 자료에 연결되어 있다고 가정합니다. 실제 DNS와 방화벽 로그에 애플리케이션 ID가 자동으로 생기지는 않습니다. 주소·포트·시간·프록시 ID 등 연결 근거와 오차를 별도로 기록해야 합니다.</p><p>R-17의 세 기록을 시각순으로 정렬하면 resolved→allow→401입니다. 다른 R-18의 200을 같은 요청의 성공으로 합치지 않습니다. 비슷한 시간이나 같은 IP만으로 다른 요청을 섞으면 잘못된 사건 이야기를 만들 수 있습니다.</p><p>영향 판단에는 인증 성공, 리소스 접근, 전송량·데이터 범위, 호스트와 클라우드 증거가 더 필요합니다. 격리·차단을 검토할 때 서비스 영향, 증거 손실, 승인과 되돌리기 조건도 정합니다. 실습은 수동 판단 자료이며 자동 차단 도구가 아닙니다.</p>
             <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>같은 시간대의 HTTP 200을 모두 같은 요청에 합친다.</dt><dd>요청 ID나 다른 명시적 연결 근거를 먼저 검증합니다.</dd><dt>의심 IP 차단으로 대응이 끝난다.</dt><dd>업무 영향과 증거 보존, 관리 경로, 검증과 복구 조건을 함께 정합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
@@ -146,15 +148,16 @@ correlated=3 conclusion=attempt_observed impact=UNCONFIRMED</pre></div></li><li>
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="detection-metrics.html"><small>← 이전 차시</small>정밀도·재현율과 탐지 임계값</a>
             <a href="ipv6-boundaries.html"><small>다음 차시 →</small>IPv6 주소 범위와 정책의 빈틈</a></nav>
+          
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2><ul class="source-list">
         <li><a href="https://csrc.nist.gov/pubs/sp/800/61/r3/final" target="_blank" rel="noopener noreferrer">NIST SP 800-61r3 · 사고 대응 ↗</a></li>
         <li><a href="https://csrc.nist.gov/pubs/sp/800/41/r1/final" target="_blank" rel="noopener noreferrer">NIST SP 800-41r1 · 경계 정책 ↗</a></li>
-      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><section class="storage-panel js-only" hidden aria-label="브라우저 진도 저장">
+      </ul><p class="caption">무료로 읽는 공식 참고 문서입니다. 필요한 절을 찾아 본문의 설명과 함께 확인하세요.</p></section><details class="storage-panel js-only" hidden aria-label="브라우저 진도 저장"><summary>학습 기록 · 백업과 가져오기</summary>
         <strong>내 브라우저에 저장되는 학습 기록</strong><p id="storageNotice"></p><p id="legacyNotice"></p>
         <div class="backup-actions"><button class="learning-button small" type="button" id="exportProgress">진도 백업 받기</button>
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
-        <p class="feedback" role="status" id="backupFeedback"></p></section>
+        <p class="feedback" role="status" id="backupFeedback"></p></details>
         </article></div>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>

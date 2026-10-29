@@ -24,10 +24,11 @@ function fill(source, values) {
     return values[key];
   });
 }
-function page(course, lesson, legacy = false) {
-  const title = lesson ? `${lesson.title} — ${course.title} · Bifrost` : `${course.title} — Bifrost`;
-  const route = `tracks/${course.id}/${lesson ? `${slug(lesson.id)}.html` : ''}`;
-  const content = lesson ? view.lesson(course.id, lesson.id) : view.overview(course.id);
+function page(course, lesson, legacy = false, learningPath = null) {
+  const title = lesson ? `${lesson.title} — ${learningPath ? learningPath.title : course.title} · Bifrost` : `${course.title} — Bifrost`;
+  const route = learningPath ? `paths/${learningPath.id}/${lesson.id}.html` : `tracks/${course.id}/${lesson ? `${slug(lesson.id)}.html` : ''}`;
+  const lessonView = learningPath ? create(courses,context.window.BifrostVisuals,learningPath) : view;
+  const content = lesson ? lessonView.lesson(course.id, lesson.id) : view.overview(course.id);
   const note = legacy
     ? '<noscript><p class="environment-note">이전 형식의 차시 주소입니다. 아래 목차에서 차시를 선택하면 JavaScript 없이도 본문을 읽을 수 있습니다.</p></noscript>'
     : '<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript>';
@@ -35,13 +36,25 @@ function page(course, lesson, legacy = false) {
     TITLE: esc(title), DESCRIPTION: esc(lesson ? lesson.goal : course.subtitle),
     CANONICAL: esc(site.url + route), SITE_URL: esc(site.url), CONTENT_VERSION: contentVersion,
     COURSE: course.id, NUMBER: course.number, VIEW: lesson || legacy ? 'lesson' : 'course',
-    LESSON_ID: lesson?.id || '', ACCENT: course.accent, LABEL: esc(course.label), STAR: star,
+    LESSON_ID: lesson?.id || '', ACCENT: course.accent, LABEL: esc(learningPath ? learningPath.label : course.label), STAR: star,
+    PATH_ID: learningPath?.id || '', OUTLINE_HREF: learningPath ? './#pathOutline' : './#courseModules',
+    PATH_SCRIPTS: learningPath ? `<script src="../../js/learning-paths.js?v=${contentVersion}" defer></script>\n<script src="../../js/path-progress.js?v=${contentVersion}" defer></script>` : '',
     RENDERED: legacy ? 'legacy' : lesson?.id || 'course', CONTENT: note + content,
     VISUAL_SCRIPTS: legacy ? `<script src="../../js/visual-data.js?v=${contentVersion}" defer></script>\n<script src="../../js/visuals.js?v=${contentVersion}" defer></script>` : ''
   });
 }
 const routes = ['', 'guides/linux.html'];
 routes.push(...require('./render_study.cjs')({ ROOT, courses, site, fill, write }));
+const learningPaths = JSON.parse(read('content/generated-paths.json'));
+const lookup = Object.fromEntries(Object.values(courses).flatMap(c=>all(c).map(l=>[l.id,{course:c,lesson:l}])));
+for (const route of learningPaths) {
+  fs.mkdirSync(path.join(ROOT,'paths',route.id),{recursive:true});
+  for (const id of route.sequence) {
+    const filename = `paths/${route.id}/${id}.html`;
+    write(filename,page(lookup[id].course,lookup[id].lesson,false,route));
+    routes.push(filename);
+  }
+}
 let count = 0;
 for (const course of Object.values(courses)) {
   fs.mkdirSync(path.join(ROOT, 'tracks', course.id), { recursive: true });
