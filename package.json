@@ -4,7 +4,7 @@
   "description": "Static GitHub Pages learning site; dependencies are for development tests only.",
   "scripts": {
     "build": "python scripts/build_labs.py && python scripts/build_pages.py",
-    "test": "node tests/learning.test.cjs && node tests/teaching.test.cjs && node tests/visuals.test.cjs && node tests/splash.test.cjs && node tests/static.test.cjs && node tests/study.test.cjs && node tests/paths.test.cjs",
+    "test": "node tests/learning.test.cjs && node tests/teaching.test.cjs && node tests/visuals.test.cjs && node tests/splash.test.cjs && node tests/static.test.cjs && node tests/study.test.cjs && node tests/paths.test.cjs && node tests/workspace.test.cjs",
     "test:visuals": "node tests/visuals.test.cjs",
     "test:labs": "python tests/labs_test.py && python -m unittest discover -s tests -p \"*_expansion_test.py\" -v && python tests/learning_revision_test.py"
   },

@@ -10,6 +10,7 @@
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved === 'dark' || saved === 'light') return saved;
     } catch (_) { /* Storage can be disabled; use system preference instead. */ }
+    if (root.dataset.defaultTheme === 'dark') return 'dark';
     return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 
@@ -25,7 +26,7 @@
         ? '<span class="theme-icon" aria-hidden="true">☀</span><span class="theme-label">라이트 모드</span>'
         : '<span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">다크 모드</span>';
     }
-    if (metaThemeColor) metaThemeColor.content = selected === 'dark' ? '#0b1220' : '#f6f8fb';
+    if (metaThemeColor) metaThemeColor.content = selected === 'dark' ? '#0c1012' : '#f6f8fb';
     if (persist) {
       try { localStorage.setItem(STORAGE_KEY, selected); } catch (_) { /* Theme still applies for this visit. */ }
     }

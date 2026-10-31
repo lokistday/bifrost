@@ -1,0 +1,46 @@
+/* Integration boundaries introduced by the workspace: search, tabs, shared progress. */
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
+const { parseHTML } = require('linkedom');
+const root = path.resolve(__dirname,'..');
+const read = name => fs.readFileSync(path.join(root,name),'utf8');
+function open(seed) {
+  const {document,Event,CustomEvent} = parseHTML(read('index.html'));
+  const listeners = new Map(), saved = new Map(seed ? [['bifrost_progress_v2',seed]] : []);
+  let destination;
+  const window = { addEventListener(type, fn) { const list=listeners.get(type)||[];list.push(fn);listeners.set(type,list); }, dispatchEvent(event) { (listeners.get(event.type)||[]).forEach(fn=>fn(event)); } };
+  const context = {document,window,Event,CustomEvent,URL,location:{href:'https://example.test/bifrost/',assign:value=>destination=value},localStorage:{getItem:key=>saved.get(key)||null,setItem:(key,value)=>saved.set(key,value)}};
+  for (const file of ['catalog.js','learning-paths.js','progress.js','workspace.js']) vm.runInNewContext(read('js/'+file),context);
+  return {document,window,Event,saved,destination:()=>destination};
+}
+const page=open(), doc=page.document, route=page.window.BifrostPaths.start, progress=page.window.BifrostProgress;
+assert.equal(doc.getElementById('homeProgressCount').textContent,`0 / ${route.sequence.length}`);
+assert.equal(doc.getElementById('homeContinue').getAttribute('href'),`paths/start/${route.sequence[0]}.html`);
+progress.set(route.sequence[0],true);
+assert.equal(doc.getElementById('homeProgressCount').textContent,`1 / ${route.sequence.length}`);
+assert.equal(doc.getElementById('homeContinue').getAttribute('href'),`paths/start/${route.sequence[1]}.html`);
+const reopened=open(page.saved.get('bifrost_progress_v2'));
+assert.equal(reopened.document.getElementById('homeProgressCount').textContent,`1 / ${route.sequence.length}`);
+route.sequence.forEach(id=>progress.set(id,true));
+assert.equal(doc.getElementById('homeContinue').getAttribute('href'),'paths/start/project.html');
+const malformed=open('{invalid');
+assert.match(malformed.document.getElementById('homeProgressNote').textContent,/저장할 수 없는/);
+assert.equal(malformed.saved.get('bifrost_progress_v2'),'{invalid');
+const input=doc.getElementById('workspaceQuery');
+input.value='세션 & #<script>';
+doc.getElementById('workspaceSearch').dispatchEvent(new page.Event('submit',{cancelable:true}));
+const target=new URL(page.destination());
+assert.equal(target.pathname,'/bifrost/learn/');
+assert.equal(target.search,'');
+assert.equal(new URLSearchParams(target.hash.slice(8)).get('q'),input.value);
+assert.equal(doc.querySelectorAll('.code-window,.terrain-window').length,0);
+assert.ok(doc.querySelector('.workspace-preview > .progress-window'));
+const library=parseHTML(read('learn/index.html')).document;
+for (const id of ['searchCourse','searchLevel']) Object.defineProperty(library.getElementById(id),'value',{value:'',writable:true});
+vm.runInNewContext(read('js/study-search.js'),{document:library,URLSearchParams,location:{search:'',hash:'#search?q='+encodeURIComponent('세션')}});
+assert.equal(library.getElementById('searchQuery').value,'세션');
+assert.ok([...library.querySelectorAll('[data-search-item]')].filter(el=>!el.hidden).length>0);
+assert.ok(library.getElementById('catalogResults').open);
+console.log('PASS: workspace search fragments, real progress, reload, completed route, corrupt storage and preview tabs.');

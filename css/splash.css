@@ -8,7 +8,7 @@ html.splash-active { overflow: hidden; }
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: #050912;
+  background: #0c1012;
   color: #edf7ff;
   font-family: Manrope, "Noto Sans KR", system-ui, sans-serif;
   isolation: isolate;
@@ -40,14 +40,14 @@ html.splash-active { overflow: hidden; }
   width: clamp(230px, 30vw, 340px);
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, #b9b8ff26, #8ebaff10 38%, transparent 68%);
+  background: radial-gradient(circle, #c9f76a16, #c9f76a06 38%, transparent 68%);
   pointer-events: none;
 }
 .startup-splash__star {
   width: clamp(112px, 15vw, 176px);
   height: clamp(112px, 15vw, 176px);
   overflow: visible;
-  filter: drop-shadow(0 0 3px #e1eaffad) drop-shadow(0 0 13px #aab5ffad) drop-shadow(0 0 34px #8e9cff70);
+  filter: drop-shadow(0 0 24px #c9f76a18);
 }
 .startup-splash__star path { stroke: #eef2ff99; stroke-width: .12; paint-order: stroke fill; }
 .startup-splash__name {
@@ -56,7 +56,8 @@ html.splash-active { overflow: hidden; }
   font-weight: 800;
   line-height: 1;
   letter-spacing: .16em;
-  text-shadow: 0 0 12px #c5d5ff45, 0 0 36px #9eb5ff26;
+  font-family: "Cascadia Code", Consolas, monospace;
+  text-shadow: none;
 }
 .splash-leaving .startup-splash { opacity: 0; }
 .splash-leaving .startup-splash__zoom { transform: scale(4.5); }

@@ -84,6 +84,6 @@ for(const route of routes)check(library.querySelector(`#path-${route.id} > a`).g
 check(!library.getElementById('catalogResults').hasAttribute('open'),'Full catalog collapsed by default');
 check(!library.querySelector('#projects details').hasAttribute('open'),'Project collection collapsed by default');
 const home=parseHTML(read('index.html')).document;
-check(home.querySelector('.mindmap-stage') && !home.querySelector('.map-explorer'),'Original field map remains visible');
+check(home.querySelectorAll('.subject-card').length === 9 && home.querySelector('a[href="paths/start/"]'),'Workspace preserves all fields and a direct beginner path');
 check(!home.querySelector('link[href*="editorial.css"]'),'Cancelled redesign is not loaded');
 console.log(`PASS: ${checks} path navigation, reload, shared progress and information density checks.`);

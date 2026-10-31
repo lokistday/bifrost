@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" data-default-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,7 @@
 <meta property="og:url" content="{{CANONICAL}}">
 <meta property="og:image" content="{{SITE_URL}}og-image.png">
 <link rel="canonical" href="{{CANONICAL}}">
-<link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/logo.svg?v={{CONTENT_VERSION}}" type="image/svg+xml">
 <title>{{TITLE}}</title>
 <script src="../js/theme.js?v={{CONTENT_VERSION}}"></script>
 <link rel="stylesheet" href="../css/main.css?v={{CONTENT_VERSION}}">
@@ -23,7 +23,7 @@
 </head>
 <body class="learning-page study-page">
 <a class="skip-link" href="#studyContent">학습 본문으로 건너뛰기</a>
-<header class="topbar"><div class="wrap nav"><a class="brand" href="../index.html"><span class="brand-mark">✦</span><span>BIFROST</span></a><nav class="navlinks" aria-label="주 메뉴"><a href="../index.html#mindmap">학습 지도</a><a href="../learn/">검색 · 학습 경로</a><a href="../guides/bridges.html">기초 연결</a></nav><button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button></div></header>
+<header class="topbar"><div class="wrap nav"><a class="brand" href="../index.html"><span class="brand-mark"><img class="brand-logo" src="../assets/logo.svg?v={{CONTENT_VERSION}}" width="34" height="34" alt=""></span><span>BIFROST</span></a><nav class="navlinks" aria-label="주 메뉴"><a href="../index.html#mindmap">학습 지도</a><a href="../learn/">검색 · 학습 경로</a><a href="../guides/bridges.html">기초 연결</a></nav><button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button></div></header>
 <main class="study-wrap" id="studyContent" tabindex="-1">{{CONTENT}}</main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../index.html#resources">외부 참고 자료 ↗</a></div></footer>
 </body></html>

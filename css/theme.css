@@ -42,25 +42,25 @@
 
 html[data-theme="dark"] {
   color-scheme: dark;
-  --ink: #e7edf7;
-  --muted: #a9b8cc;
-  --line: #344257;
-  --paper: #0b1121;
-  --surface: #151f2e;
-  --surface-raised: #192638;
-  --surface-soft: #1b2938;
-  --ink-soft: #c8d5e6;
-  --teal: #69dce2;
-  --teal-soft: #17363d;
+  --ink: #eff2f3;
+  --muted: #9aa7b4;
+  --line: #283138;
+  --paper: #0c1012;
+  --surface: #101619;
+  --surface-raised: #171e22;
+  --surface-soft: #1c252b;
+  --ink-soft: #bfc9d3;
+  --teal: #c9f76a;
+  --teal-soft: #1a2319;
   --blue: #a9b2ff;
   --blue-soft: #252b49;
   --amber: #f0c579;
   --amber-soft: #382d1f;
   --purple: #c2b3ff;
   --purple-soft: #302747;
-  --navy: #0b1220;
-  --navy2: #111d30;
-  --white: #151f2e;
+  --navy: #0c1012;
+  --navy2: #12191d;
+  --white: #101619;
   --radius: 18px;
   --shadow: 0 12px 35px rgba(0,0,0,.28);
   --atlas-haze: #8593ff12;
@@ -69,7 +69,7 @@ html[data-theme="dark"] {
   --atlas-card-shadow: 0 10px 30px #00000018;
   --map-node-surface: #111b30;
   --map-core-surface: #14213a;
-  --map-muted: #a9b8cc;
+  --map-muted: #9aa7b4;
   --map-cyan: #5ce1e6;
   --map-blue: #73b5ff;
   --map-green: #67d6a0;
@@ -92,7 +92,7 @@ body {
 }
 
 html[data-theme="dark"] .topbar {
-  background: rgba(11,18,32,.96);
+  background: rgba(12,16,18,.96);
   border-color: var(--line);
 }
 
@@ -135,7 +135,7 @@ html[data-theme="dark"] p, html[data-theme="dark"] li, html[data-theme="dark"] d
   color: var(--muted);
 }
 
-html[data-theme="dark"] a {
+html[data-theme="dark"] :where(body:not(.workspace-page)) a {
   color: var(--teal);
 }
 
@@ -144,7 +144,7 @@ html[data-theme="dark"] .footer a {
 }
 
 html[data-theme="dark"] input, html[data-theme="dark"] textarea, html[data-theme="dark"] select, html[data-theme="dark"] option, html[data-theme="dark"] pre, html[data-theme="dark"] code {
-  background-color: #101a2a;
+  background-color: var(--surface);
   color: var(--ink);
   border-color: var(--line);
 }
@@ -162,13 +162,13 @@ html[data-theme="dark"] table th {
 html[data-theme="dark"] .theme-toggle {
   background: var(--surface-soft);
   color: var(--ink);
-  border-color: #43536b;
+  border-color: var(--line);
 }
 
 html[data-theme="dark"] .btn.primary, html[data-theme="dark"] .hero-actions .btn.primary {
-  background: #5ce1e6;
+  background: var(--teal);
   color: #081521;
-  border-color: #5ce1e6;
+  border-color: var(--teal);
 }
 
 html[data-theme="dark"] .hero-actions .btn:not(.primary) {
@@ -246,3 +246,10 @@ body, .learning-canvas, .topbar, .card, .resource, .practice-card, #linuxGuideOv
     transition: none;
   }
 }
+
+/* Syntax and action contrast when the user chooses the light palette. */
+html[data-theme="light"] .workspace-primary { color: #fff; }
+html[data-theme="light"] .syntax-pink { color: #a02f70; }
+html[data-theme="light"] .syntax-purple { color: #6c42a1; }
+html[data-theme="light"] .syntax-cyan { color: #1b667d; }
+html[data-theme="light"] .syntax-green { color: #35702b; }

@@ -28,7 +28,9 @@
       catalog.querySelector('summary span').textContent = `${count}개 차시`;
     }
   }
-  query.value = (new URLSearchParams(location.search).get('q') || '').slice(0, 120);
+  const fragment = location.hash || '';
+  const incoming = fragment.startsWith('#search?') ? fragment.slice(8) : location.search;
+  query.value = (new URLSearchParams(incoming).get('q') || '').slice(0, 120);
   form.hidden = false;
   form.addEventListener('submit', event => { event.preventDefault(); filter(); });
   query.addEventListener('input', filter);
@@ -38,4 +40,5 @@
     query.value = ''; course.value = ''; level.value = ''; filter(); query.focus();
   });
   filter();
+  if (fragment.startsWith('#search?')) document.getElementById('search')?.scrollIntoView?.();
 })();
