@@ -16,7 +16,7 @@ def build(courses):
            *[ROOT/n for n in ('js/learning-view.js','js/learning.js','js/path-progress.js','js/study-search.js','css/study.css','css/theme.css','js/theme.js','assets/logo.svg','assets/logo-mark.svg','css/splash.css','css/main.css','css/workspace.css','js/workspace.js','scripts/render_home.cjs','scripts/render_pages.cjs','scripts/render_study.cjs','scripts/learning_design.py','scripts/site_security.cjs')]]
     digest=hashlib.sha256()
     for file in sorted(files, key=lambda p: p.relative_to(ROOT).as_posix()):
-        digest.update(file.relative_to(ROOT).as_posix().encode('utf-8')+b'\0'+file.read_bytes())
+        digest.update(file.relative_to(ROOT).as_posix().encode('utf-8')+b'\0'+file.read_bytes().replace(b'\r\n', b'\n'))
     metrics['contentVersion']='learning-'+digest.hexdigest()[:12]
     (ROOT/'content/site-metrics.json').write_text(json.dumps(metrics,indent=2)+'\n',encoding='utf-8',newline='\n')
     values={key.upper():str(value) for key,value in metrics.items()}
