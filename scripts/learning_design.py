@@ -5,16 +5,6 @@ import ast
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-READINESS = {
- 'foundation': ('파일의 위치와 실행 결과를 따로 설명할 수 있나요?', '셸의 현재 폴더·파일 경로·프로그램 출력을 구별합니다. 환경 준비와 경로 차시에서 확인하세요.', 'python'),
- 'web': ('인증과 대상 자원의 인가는 같은 검사인가요?', '인증은 주체 확인, 인가는 주체·대상·행동의 허용 판단입니다. 세션이 유효해도 타인의 자원은 거부해야 합니다.', 'web'),
- 'pwn': ('버퍼 크기, 유효한 데이터 길이, 문자열 길이를 구분할 수 있나요?', '할당 용량과 채워진 바이트 수는 다르고 strlen은 첫 NUL까지만 셉니다. 읽기 전에 경계와 객체 수명을 확인합니다.', 'c'),
- 'rev': ('문자열이 있다는 사실만으로 그 기능이 실행됐다고 말할 수 있나요?', '문자열은 단서입니다. 도달 가능한 분기·실제 입력·출력을 연결해 가설을 검증해야 합니다.', 'c'),
- 'forensic': ('해시 일치와 파일 출처의 진위는 같은 것인가요?', '해시는 기준 바이트와의 일치를 확인합니다. 기준의 신뢰·보관 이력·수집 범위는 별도 근거가 필요합니다.', 'evidence'),
- 'network': ('센서에 기록이 없다는 사실이 통신이 없었다는 뜻인가요?', '센서 위치·필터·손실·시간 범위를 확인해야 합니다. 관측되지 않은 경로가 남아 있을 수 있습니다.', 'network'),
- 'crypto': ('암호학적 검증 성공이면 현재 요청을 처리해도 되나요?', '인증된 바이트와 현재 권한·문맥·재전송·만료는 다른 검증입니다. 목적과 상태를 함께 확인합니다.', 'bytes'),
- 'misc': ('화면에 보이는 문자열과 파일의 원시 바이트는 같나요?', '인코딩·컨테이너·압축을 거치며 표현이 달라집니다. 변환 순서·크기 제한·중간 검증을 기록합니다.', 'bytes'),
- 'cloud': ('사설 네트워크에 있으면 자원 접근 권한도 생기나요?', '경로 도달과 자원 인가는 별개입니다. 신원·정책·서비스 설정을 함께 확인해야 합니다.', 'network')}
 
 
 def code_context(code, environment, partial=False):
@@ -41,6 +31,7 @@ def code_context(code, environment, partial=False):
 
 
 def attach(courses):
+    plans = json.loads((ROOT/'content/lesson-plans.json').read_text(encoding='utf-8'))
     exercises = {}
     for line in (ROOT/'content/transfer-exercises.txt').read_text(encoding='utf-8').splitlines():
         if not line or line.startswith('#'):
@@ -51,6 +42,7 @@ def attach(courses):
     projects = json.loads((ROOT/'content/projects.json').read_text(encoding='utf-8'))
     lessons = {l['id']:l for c in courses.values() for m in c['modules'] for l in m['lessons']}
     assert set(exercises) == set(lessons), 'Every lesson needs its own transfer exercise'
+    assert set(plans) == set(lessons), 'Every lesson needs an individually authored plan'
     assert set(projects) == set(courses), 'Every course needs a final project'
     for key, course in courses.items():
         project = projects[key]
@@ -59,13 +51,14 @@ def attach(courses):
         course['project'] = project
         for mi, module in enumerate(course['modules']):
             for lesson in module['lessons']:
-                level = '기초' if mi < 2 else ('응용' if mi < 4 else '심화 연결')
-                minutes = [25,45] if level == '기초' else ([40,65] if level == '응용' else [50,80])
-                if key in ('pwn','rev'): minutes=[45,80] if mi<2 else [60,100]
-                question, answer, bridge = READINESS[key]
+                plan = plans[lesson['id']]
+                level, minutes = plan['level'], plan['minutes']
+                assert level in ('기초','응용','심화 연결')
+                assert len(minutes)==2 and all(type(n) is int and n>0 for n in minutes) and minutes[0]<=minutes[1]
+                assert plan['troubleshooting'] and plan['diagnostic']['options']
                 lesson['learning'] = dict(**exercises[lesson['id']], level=level, minutes=minutes,
-                    setup=[30,90] if lesson['id']=='foundation.environment' else [0,30],
-                    readiness=question, readinessAnswer=answer, bridge=bridge,
+                    setup=plan['setup'], readiness=plan['readiness'], readinessAnswer=plan['readinessAnswer'], bridge=plan['bridge'],
+                    diagnostic=plan['diagnostic'], support=plan['support'], troubleshooting=plan['troubleshooting'], estimateBasis=plan['estimateBasis'],
                     tags=[course['label'],level,*lesson['title'].replace('·',' ').replace('·',' ').split()],
                     codeContext=code_context(lesson['code'],lesson['environment']['label']))
                 for step in lesson['walkthrough']:
@@ -93,4 +86,12 @@ def paths(courses):
         for key in route['lessons']: visit(key,[])
         for key in courses[route['project']]['project']['prerequisites']: visit(key,[])
         route['sequence']=sequence
+        route['milestones'] = []
+        for start in range(0,len(sequence),5):
+            ids = sequence[start:start+5]
+            last = lessons[ids[-1]]
+            route['milestones'].append(dict(number=len(route['milestones'])+1, lessons=ids,
+                title=last['title']+'까지', outcome=last['goal'],
+                artifact='해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: '+last['checks'][0],
+                minutes=[sum(lessons[k]['learning']['minutes'][i] for k in ids) for i in (0,1)]))
     return result

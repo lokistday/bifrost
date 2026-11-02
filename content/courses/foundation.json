@@ -16,12 +16,12 @@
           "title": "실습 환경 준비와 첫 실행",
           "goal": "명령을 입력할 환경과 도구 버전을 구분하고 Python 예제를 실행합니다.",
           "concepts": [
-            "터미널은 명령을 입력하는 창이고, 셸은 그 명령을 해석하는 프로그램입니다. PowerShell과 Ubuntu의 Bash는 문법과 경로가 다릅니다. 아래 설치 명령은 Ubuntu에서만 실행합니다. Windows에서 Ubuntu가 아직 없다면 먼저 Linux 시작 가이드를 따라 준비하세요.",
-            "python3는 Python 인터프리터, gcc는 C 컴파일러, gdb는 디버거입니다. 버전 출력은 설치 확인이지 학습 완료 자체는 아닙니다. 실습 ZIP을 풀고 foundation 폴더를 터미널의 현재 위치로 만든 뒤 hello.py를 실행합니다. Windows Python만 쓸 때는 python3 대신 py -3를 사용합니다.",
+            "처음에는 Python으로 이름을 바꾼 결과 하나를 만드는 것이 목표입니다. Windows의 PowerShell에서는 py -3, Linux/macOS 터미널에서는 python3를 사용합니다. 지금 WSL·C 컴파일러·디버거를 모두 설치할 필요는 없습니다.",
+            "Python은 hello.py에 적힌 코드를 읽어 실행하는 인터프리터입니다. 아래 코드는 파일 안의 내용입니다. ZIP을 풀고 편집기로 hello.py를 연 뒤 확인하세요. Windows는 py -3 hello.py, Linux/macOS는 python3 hello.py로 실행합니다.",
             "명령은 보통 프로그램 이름, 옵션, 인자 순서입니다. python3 --version의 --version은 버전을 묻는 옵션이고 python3 hello.py의 hello.py는 실행할 파일입니다. 문서에 보이는 $나 >>>는 입력 위치를 나타내는 프롬프트일 수 있으므로 명령에 함께 붙이지 않습니다.",
             "설치가 끝났는지, 입력 파일이 있는지, 실행이 성공했는지는 따로 확인합니다. command not found는 명령 탐색 문제이고 can't open file은 Python은 실행됐지만 파일 경로를 찾지 못한 상황입니다. 처음부터 재설치하기보다 어느 단계에서 막혔는지를 기록하세요."
           ],
-          "code": "sudo apt update\nsudo apt install python3 build-essential gdb binutils git\npython3 --version\ngcc --version\npython3 hello.py",
+          "code": "name = \"Bifrost\"\nminutes = 15\nprint(f\"Hello, {name}\")\nprint(f\"Study: {minutes * 2} minutes\")",
           "expected": "Hello, Bifrost\nStudy: 30 minutes\n(버전 번호와 설치 메시지는 환경마다 다릅니다.)",
           "task": "hello.py의 name을 바꾸고 다시 실행하세요. 설치에 사용한 셸, OS, Python 버전, 실행 명령을 노트에 남깁니다.",
           "hint": "파일을 찾을 수 없으면 먼저 pwd와 ls로 위치를 확인하세요. Ubuntu 설치는 별도 Linux 가이드를 참고합니다.",
@@ -34,30 +34,30 @@
           ],
           "prerequisites": [],
           "environment": {
-            "label": "Ubuntu/WSL 터미널과 Python 3",
+            "label": "Python 3와 텍스트 편집기 · Windows는 PowerShell, Linux/macOS는 터미널",
             "details": [
-              "ZIP을 내려받아 압축을 푼 뒤 foundation 폴더에서 시작합니다. ZIP 안의 파일을 직접 실행하지 않습니다.",
-              "Ubuntu 설치 명령에는 인터넷이 필요합니다. 도구 설치 후 hello.py 실행은 오프라인으로 가능합니다.",
-              "Windows 기본 Python에서는 py -3 hello.py로 실행할 수 있습니다. C·Linux 차시는 Ubuntu/WSL 환경을 준비합니다."
+              "Python과 편집기만 준비합니다. C 컴파일러·GDB·WSL은 해당 차시에서 설치합니다.",
+              "Windows는 py -3 hello.py, Linux/macOS는 python3 hello.py를 실행합니다.",
+              "Python이 없다면 공식 설치 안내에서 자신의 OS에 맞게 설치하고 터미널을 다시 엽니다. Ubuntu는 sudo apt install python3로 준비할 수 있습니다."
             ]
           },
           "walkthrough": [
             {
               "title": "1. 셸과 위치를 먼저 적기",
-              "explanation": "Ubuntu 터미널인지 PowerShell인지 창의 이름을 확인합니다. Ubuntu에서는 아래 두 명령으로 현재 위치와 파일 목록을 봅니다. hello.py가 보이는 폴더에서 실행해야 합니다.",
-              "code": "pwd\nls",
+              "explanation": "압축을 푼 foundation 폴더를 편집기에서 엽니다. PowerShell은 Get-Location과 Get-ChildItem, Linux/macOS는 pwd와 ls로 hello.py 위치를 확인합니다.",
+              "code": "# PowerShell\nGet-Location\nGet-ChildItem\n# Linux/macOS\npwd\nls",
               "expected": "현재 경로와 파일 목록이 나오며 목록에 hello.py가 있어야 합니다."
             },
             {
               "title": "2. 인터프리터와 입력 파일 구분하기",
-              "explanation": "버전 확인이 성공하면 Python을 사용할 수 있습니다. 이어 hello.py를 실행합니다. 설치 명령을 매번 반복할 필요는 없습니다.",
-              "code": "python3 --version\npython3 hello.py",
+              "explanation": "자신의 OS 명령 한 가지를 골라 실행합니다. Windows는 py -3 hello.py, Linux/macOS는 python3 hello.py입니다.",
+              "code": "# Windows PowerShell에서 사용할 명령\npy -3 --version\npy -3 hello.py\n# Linux/macOS에서 사용할 명령\npython3 --version\npython3 hello.py",
               "expected": "Python 3.x.x\nHello, Bifrost\nStudy: 30 minutes"
             },
             {
               "title": "3. 한 가지 값만 바꾸고 재실행하기",
               "explanation": "텍스트 편집기에서 hello.py의 name을 Mina로 바꾸고 저장합니다. 같은 파일을 다시 실행해 이름만 바뀌는지 확인하면 편집한 파일과 실행한 파일이 같다는 것도 확인할 수 있습니다.",
-              "code": "python3 hello.py",
+              "code": "# Windows: py -3 hello.py\n# Linux/macOS: python3 hello.py",
               "expected": "Hello, Mina\nStudy: 30 minutes"
             }
           ],
@@ -73,9 +73,9 @@
             {
               "prompt": "python3 --version은 성공했지만 python3 hello.py에서 파일을 찾을 수 없다고 합니다. 다음 확인으로 가장 알맞은 것은?",
               "options": [
-                "컴퓨터 전체의 Python을 삭제한다.",
+                "Python이 파일을 찾는 기준을 바꾸기 위해 다시 설치한다.",
                 "현재 폴더와 hello.py의 실제 위치를 확인한다.",
-                "gcc 버전이 Python 버전과 같은지 확인한다."
+                "명령이 실행됐으므로 파일도 같은 폴더에 있다고 가정한다."
               ],
               "answer": 1,
               "explanation": "버전 출력은 Python 실행을 확인했습니다. 이번 오류의 대상은 hello.py 경로이므로 pwd와 ls로 입력 파일부터 찾습니다."
@@ -83,8 +83,8 @@
             {
               "prompt": "Ubuntu의 sudo apt install 명령을 PowerShell에 그대로 입력하면 안 되는 이유는?",
               "options": [
-                "둘 다 터미널이므로 언제나 같다.",
-                "Python 파일은 Windows에서 열 수 없다.",
+                "프롬프트 모양이 같으면 패키지 관리자도 동일하다.",
+                "Python 실행 명령이 다르므로 .py 파일도 호환되지 않는다.",
                 "패키지 관리자와 셸 환경이 다르기 때문이다."
               ],
               "answer": 2,
@@ -109,6 +109,10 @@
             [
               "Python · 인터프리터 사용",
               "https://docs.python.org/3/tutorial/interpreter.html"
+            ],
+            [
+              "Python 설치와 실행",
+              "https://docs.python.org/ko/3/using/index.html"
             ]
           ]
         },
@@ -253,6 +257,12 @@
           },
           "walkthrough": [
             {
+              "title": "0. 출력 한 줄을 먼저 예측하기",
+              "explanation": "변수는 값을 붙잡는 이름입니다. 아래 두 줄을 새 파일에 적고, 실행 전에 출력할 이름을 종이에 적으세요.",
+              "code": "name = \"Mina\"\nprint(name)",
+              "expected": "Mina"
+            },
+            {
               "title": "1. 값과 자료형을 나란히 보기",
               "explanation": "따옴표 유무를 바꾸어 같은 기호 20이 어떤 값으로 취급되는지 확인합니다. 새 파일에 코드를 저장하고 실행하세요.",
               "code": "print(type(20).__name__)\nprint(type(\"20\").__name__)",
@@ -354,22 +364,22 @@
           },
           "walkthrough": [
             {
-              "title": "1. 한 번의 판정부터 실행하기",
-              "explanation": "목록과 함수를 잠시 제외하고 문자열 비교가 분기 조건으로 쓰이는지 봅니다. denied를 ok로 바꾸면 어떤 줄이 생략되는지 예측합니다.",
-              "code": "status = \"denied\"\nprint(status == \"denied\")\nif status == \"denied\":\n    print(\"blocked\")",
-              "expected": "True\nblocked"
+              "title": "1. 조건 판정 하나",
+              "explanation": "함수와 반복을 넣기 전에 denied 비교가 True인지 예측합니다. ok로 바꾼 경우도 비교하세요.",
+              "code": "status = \"denied\"\nprint(status == \"denied\")",
+              "expected": "True; ok이면 False"
             },
             {
-              "title": "2. 목록을 돌며 누적하기",
-              "explanation": "for는 왼쪽부터 한 항목씩 status에 넣습니다. 아래 출력은 매 회차의 누적 상태이므로 네 번 나옵니다. count = 0의 들여쓰기를 눈여겨봅니다.",
-              "code": "count = 0\nfor status in [\"ok\", \"denied\", \"ok\", \"denied\"]:\n    if status == \"denied\":\n        count += 1\n    print(status, count)",
-              "expected": "ok 0\ndenied 1\nok 1\ndenied 2"
+              "title": "2. 반복만 붙이기",
+              "explanation": "같은 비교를 목록의 각 항목에 적용합니다. 각 회차의 status와 출력값을 적으세요.",
+              "code": "for status in [\"ok\", \"denied\"]:\n    print(status == \"denied\")",
+              "expected": "False\nTrue"
             },
             {
-              "title": "3. 판정을 함수로 옮기기",
-              "explanation": "반복과 무관한 판정을 함수로 묶고 입력 하나를 넣어 반환값부터 확인합니다. 본문 예제는 이 반환값을 if에 사용합니다.",
-              "code": "def is_denied(status):\n    return status == \"denied\"\n\nprint(is_denied(\"denied\"))\nprint(is_denied(\"unknown\"))",
-              "expected": "True\nFalse"
+              "title": "3. 누적하고 함수로 묶기",
+              "explanation": "위의 기준 예제로 돌아가 count가 언제 바뀌는지 표로 적습니다. 마지막에 판정을 is_denied 함수로 묶으세요.",
+              "code": "def is_denied(status):\n    return status == \"denied\"\n\ncount = 0\nfor status in [\"ok\", \"denied\", \"ok\", \"denied\"]:\n    if is_denied(status):\n        count += 1\nprint(count)",
+              "expected": "2"
             }
           ],
           "solution": {

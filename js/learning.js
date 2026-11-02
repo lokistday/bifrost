@@ -40,6 +40,20 @@
           ? (done ? '완료로 저장했습니다. 다음 차시에서 이어가세요.' : '완료 표시를 해제했습니다.')
           : '화면에는 반영했지만 브라우저 저장에 실패했습니다. 진도를 백업해 두세요.';
       });
+      document.querySelectorAll('[data-mastery]').forEach(button => button.addEventListener('click', () => {
+        progress.recordStage(currentId, button.dataset.mastery);
+      }));
+      document.querySelectorAll('input[name="readiness"]').forEach(input => input.addEventListener('change', () => {
+        document.getElementById('readinessFeedback').textContent = '';
+      }));
+      const readinessButton = document.getElementById('checkReadiness');
+      if (readinessButton) readinessButton.addEventListener('click', () => {
+        const selected = document.querySelector('input[name="readiness"]:checked');
+        const feedback = document.getElementById('readinessFeedback');
+        if (!selected) { feedback.textContent = '보기를 하나 고르세요.'; return; }
+        const q = lesson.learning.diagnostic;
+        feedback.textContent = (Number(selected.value) === q.answer ? '이미 알고 있는 개념입니다. 독립 과제로 바로 확인해도 됩니다. ' : '본문과 선행 차시에서 이 개념을 먼저 확인하세요. ') + q.explanation;
+      });
       document.getElementById('copyExample').addEventListener('click', async event => {
         try { await navigator.clipboard.writeText(lesson.code); event.target.textContent = '복사됨'; }
         catch (_) { event.target.textContent = '코드를 선택해 복사하세요'; }
@@ -91,6 +105,11 @@
       continueLink.href = lessonHref(next ? next.id : lessons[0].id);
       continueLink.textContent = next ? `${progress.count(lessons) || last ? '이어서' : '첫 차시'} 학습하기 →` : '완료한 과정 다시 보기 →';
     }
+    const mastery = progress.mastery(currentId);
+    const labels = {read:'읽음',guided:'따라 함',independent:'독립 해결',review:'재도전 필요'};
+    document.querySelectorAll('[data-mastery]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.mastery===mastery?.stage)));
+    const masteryFeedback = document.getElementById('masteryFeedback');
+    if (masteryFeedback) masteryFeedback.textContent = mastery ? `${labels[mastery.stage]} · ${new Date(mastery.reviewAt).toLocaleDateString('ko-KR')} 복습 예정${progress.available() ? '' : ' · 브라우저 저장 실패, 백업이 필요합니다.'}` : '아직 수행 수준을 기록하지 않았습니다.';
     const complete = document.getElementById('completeLesson');
     if (complete) {
       const done = progress.has(currentId);

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko" data-default-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="S7 세션의 흔적">
+<meta name="theme-color" content="#0b1220">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:title" content="S7 세션의 흔적 · Bifrost">
+<meta property="og:description" content="S7 세션의 흔적">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/wargame/forensic-session.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/wargame/forensic-session.html">
+<link rel="icon" href="../assets/logo.svg?v=learning-dcac82a7ff60" type="image/svg+xml">
+<title>S7 세션의 흔적 · Bifrost</title>
+<script src="../js/theme.js?v=learning-dcac82a7ff60"></script>
+<link rel="stylesheet" href="../css/main.css?v=learning-dcac82a7ff60">
+<link rel="stylesheet" href="../css/theme.css?v=learning-dcac82a7ff60">
+<link rel="stylesheet" href="../css/learning.css?v=learning-dcac82a7ff60">
+<link rel="stylesheet" href="../css/study.css?v=learning-dcac82a7ff60">
+<script src="../js/wargames.js?v=learning-dcac82a7ff60" defer></script><script src="../js/wargame.js?v=learning-dcac82a7ff60" defer></script>
+</head>
+<body class="learning-page study-page">
+<a class="skip-link" href="#studyContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav"><a class="brand" href="../index.html"><span class="brand-mark"><img class="brand-logo" src="../assets/logo.svg?v=learning-dcac82a7ff60" width="34" height="34" alt=""></span><span>BIFROST</span></a><nav class="navlinks" aria-label="주 메뉴"><a href="../index.html#mindmap">학습 지도</a><a href="../learn/">검색 · 학습 경로</a><a href="../guides/bridges.html">기초 연결</a><a href="../wargame/">워게임</a><a href="../learn/review.html">내 복습</a></nav><button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button></div></header>
+<main class="study-wrap" id="studyContent" tabindex="-1">
+    <nav class="breadcrumb"><a href="./">워게임</a><span>/ Forensic</span><span>/ 기초</span></nav>
+    <header class="study-hero"><div class="overline">Forensic / 기초</div><h1>S7 세션의 흔적</h1><p>실제 SQLite 파일 events.sqlite에서 session=S7이며 action=read인 기록의 fragment를 seq 순서로 복원하세요. 원본 복사본을 읽기 전용으로 조사하세요.</p></header>
+    <section class="study-section"><h2>해결 목표</h2><p>SQL 필터와 순서를 근거로 FLAG를 복원합니다.</p><p>FLAG 형식은 <code>BIFROST{...}</code>입니다. 대소문자와 중괄호를 그대로 입력하세요.</p><a class="learning-button primary" href="files/forensic-session.zip" download>문제 자료 ZIP ↓</a><details><summary>다운로드 무결성 확인</summary><p class="artifact-hash">SHA-256: b6bd459ad2aebf9bba193564d8dc577d31ed3a308a8d141bdac749e10abc9103</p></details></section>
+    <section class="study-section"><h2>막히면 먼저 볼 차시</h2><ul><li><a href="../tracks/forensic/browser-sqlite.html">SQLite 방문 기록과 행위 해석의 한계 ↗</a></li><li><a href="../tracks/forensic/timeline.html">UTC로 타임라인 맞추기 ↗</a></li></ul><p><a href="../guides/troubleshooting.html">실행 환경·파일·출력이 예상과 다를 때 ↗</a></p></section>
+    <section class="flag-panel" data-challenge="forensic-session"><h2>FLAG 제출</h2><span data-solved-label="forensic-session">미해결</span><form id="flagForm" hidden><label for="flagInput">찾은 FLAG<input id="flagInput" type="text" autocomplete="off" spellcheck="false" maxlength="256" placeholder="BIFROST{...}" required></label><button class="learning-button primary" type="submit">제출하기</button></form><noscript><p>FLAG 검증과 해결 기록에는 JavaScript가 필요합니다. 문제와 자료는 그대로 읽고 내려받을 수 있습니다.</p></noscript><p id="flagFeedback" role="status" aria-live="polite"></p><p id="attemptCount" class="caption"></p><p class="caption">개인 학습용 문제입니다. 해결 기록은 이 브라우저에 저장됩니다. FLAG 일치와 독립 풀이 능력은 별도로 확인하세요.</p></section>
+    <section class="study-section"><h2>단계별 힌트</h2><p>먼저 시도한 내용과 막힌 위치를 적고 필요한 힌트만 여세요.</p><details class="challenge-hint"><summary>힌트 1</summary><p>Python sqlite3 또는 SQLite 도구로 events 테이블을 확인하세요.</p></details><details class="challenge-hint"><summary>힌트 2</summary><p>WHERE session=&#39;S7&#39; AND action=&#39;read&#39; 조건이 필요합니다.</p></details><details class="challenge-hint"><summary>힌트 3</summary><p>ORDER BY seq를 적용하고 fragment만 결합하세요. 파일에 보이는 문자열 순서와 사건 순서를 혼동하지 마세요.</p></details><details class="challenge-solution"><summary>시도 후 풀이 확인</summary><p>SELECT fragment FROM events WHERE session=&#39;S7&#39; AND action=&#39;read&#39; ORDER BY seq. 관찰된 세션 기록에서 복원했으며 실제 사용자 의도까지 증명하지 않습니다.</p><p>풀이를 읽었다면 새 입력으로 재현한 뒤 관련 차시에 독립 수행 여부를 기록하세요.</p></details></section><details class="practice-limits"><summary>채점과 기록의 범위</summary><p>정적 사이트의 브라우저 검증이므로 자료·검증 정보는 공개되어 있으며 우회가 가능합니다. 공개 경쟁·실력 인증용 채점이 아닙니다. 계정 동기화는 없고 브라우저 데이터 삭제 전 기록을 백업하세요.</p></details></main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../index.html#resources">외부 참고 자료 ↗</a></div></footer>
+</body></html>

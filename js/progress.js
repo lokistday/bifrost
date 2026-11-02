@@ -16,11 +16,18 @@
   };
   let available = true;
   let readable = true;
-  const empty = () => ({ version: 2, completed: {}, lastLesson: null, legacyImported: false, legacy: {} });
+  const stages = ['read','guided','independent','review'];
+  const empty = () => ({ version: 2, completed: {}, mastery: {}, lastLesson: null, legacyImported: false, legacy: {} });
   function clean(value) {
     if (!value || value.version !== 2 || !value.completed || typeof value.completed !== 'object' || Array.isArray(value.completed)) throw new Error('진도 파일 형식이 올바르지 않습니다.');
     const state = empty();
     for (const id of validIds) if (value.completed[id] === true) state.completed[id] = true;
+    for (const id of validIds) {
+      const item = value.mastery?.[id];
+      if (item && stages.includes(item.stage) && Number.isSafeInteger(item.updatedAt) && item.updatedAt >= 0 && Number.isSafeInteger(item.reviewAt) && item.reviewAt >= 0 && item.reviewAt <= 8640000000000000) {
+        state.mastery[id] = {stage:item.stage, updatedAt:item.updatedAt, reviewAt:item.reviewAt};
+      }
+    }
     if (validIds.has(value.lastLesson)) state.lastLesson = value.lastLesson;
     state.legacyImported = value.legacyImported === true;
     const legacy = value.legacy;
@@ -84,6 +91,22 @@
       persist();
     },
     count: lessons => lessons.filter(l => state.completed[l.id] === true).length,
+    mastery: id => state.mastery[id] ? {...state.mastery[id]} : null,
+    recordStage(id, stage) {
+      if (!validIds.has(id) || !stages.includes(stage)) return;
+      if (available) state = read();
+      const now = Date.now(), delay = stage === 'review' ? 1 : stage === 'independent' ? 3 : 2;
+      state.mastery[id] = {stage, updatedAt:now, reviewAt:now + delay * 86400000};
+      persist();
+    },
+    reviewLater(id) {
+      if (!validIds.has(id)) return;
+      if (available) state = read();
+      if (!state.mastery[id]) return;
+      state.mastery[id].reviewAt = Date.now() + 7 * 86400000;
+      state.mastery[id].updatedAt = Date.now();
+      persist();
+    },
     last: () => state.lastLesson,
     available: () => available,
     legacyCount: () => Object.values(state.legacy).reduce((n, a) => n + a.length, 0),
@@ -95,6 +118,9 @@
       readable = true;
       // Import merges completion records; existing completed work stays checked.
       Object.assign(state.completed, incoming.completed);
+      for (const [id,item] of Object.entries(incoming.mastery)) {
+        if (!state.mastery[id] || item.updatedAt > state.mastery[id].updatedAt) state.mastery[id] = item;
+      }
       if (incoming.lastLesson) state.lastLesson = incoming.lastLesson;
       for (const key of Object.keys(migration)) state.legacy[key] = [...new Set([...(state.legacy[key] || []), ...(incoming.legacy[key] || [])])];
       state.legacyImported = true;

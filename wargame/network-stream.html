@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko" data-default-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="두 패킷의 메시지">
+<meta name="theme-color" content="#0b1220">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:title" content="두 패킷의 메시지 · Bifrost">
+<meta property="og:description" content="두 패킷의 메시지">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/wargame/network-stream.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/wargame/network-stream.html">
+<link rel="icon" href="../assets/logo.svg?v=learning-dcac82a7ff60" type="image/svg+xml">
+<title>두 패킷의 메시지 · Bifrost</title>
+<script src="../js/theme.js?v=learning-dcac82a7ff60"></script>
+<link rel="stylesheet" href="../css/main.css?v=learning-dcac82a7ff60">
+<link rel="stylesheet" href="../css/theme.css?v=learning-dcac82a7ff60">
+<link rel="stylesheet" href="../css/learning.css?v=learning-dcac82a7ff60">
+<link rel="stylesheet" href="../css/study.css?v=learning-dcac82a7ff60">
+<script src="../js/wargames.js?v=learning-dcac82a7ff60" defer></script><script src="../js/wargame.js?v=learning-dcac82a7ff60" defer></script>
+</head>
+<body class="learning-page study-page">
+<a class="skip-link" href="#studyContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav"><a class="brand" href="../index.html"><span class="brand-mark"><img class="brand-logo" src="../assets/logo.svg?v=learning-dcac82a7ff60" width="34" height="34" alt=""></span><span>BIFROST</span></a><nav class="navlinks" aria-label="주 메뉴"><a href="../index.html#mindmap">학습 지도</a><a href="../learn/">검색 · 학습 경로</a><a href="../guides/bridges.html">기초 연결</a><a href="../wargame/">워게임</a><a href="../learn/review.html">내 복습</a></nav><button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button></div></header>
+<main class="study-wrap" id="studyContent" tabindex="-1">
+    <nav class="breadcrumb"><a href="./">워게임</a><span>/ Network Security</span><span>/ 기초</span></nav>
+    <header class="study-hero"><div class="overline">Network Security / 기초</div><h1>두 패킷의 메시지</h1><p>Wireshark에서 capture.pcap을 열고 192.0.2.8에서 목적지 UDP 9000으로 보낸 페이로드를 순서대로 읽으세요. 모두 합성 문서용 주소이며 실제 통신은 하지 않습니다.</p></header>
+    <section class="study-section"><h2>해결 목표</h2><p>출발지·포트 필터와 페이로드 순서를 이용해 FLAG를 복원합니다.</p><p>FLAG 형식은 <code>BIFROST{...}</code>입니다. 대소문자와 중괄호를 그대로 입력하세요.</p><a class="learning-button primary" href="files/network-stream.zip" download>문제 자료 ZIP ↓</a><details><summary>다운로드 무결성 확인</summary><p class="artifact-hash">SHA-256: cbd846d0f3513187466b9a8ffe05c8119c4c7d37508a0015a542365358eabcf0</p></details></section>
+    <section class="study-section"><h2>막히면 먼저 볼 차시</h2><ul><li><a href="../tracks/network/pcap.html">PCAP·필터·스트림 ↗</a></li><li><a href="../tracks/network/transport.html">DNS·TCP 연결과 실패 분류 ↗</a></li></ul><p><a href="../guides/troubleshooting.html">실행 환경·파일·출력이 예상과 다를 때 ↗</a></p></section>
+    <section class="flag-panel" data-challenge="network-stream"><h2>FLAG 제출</h2><span data-solved-label="network-stream">미해결</span><form id="flagForm" hidden><label for="flagInput">찾은 FLAG<input id="flagInput" type="text" autocomplete="off" spellcheck="false" maxlength="256" placeholder="BIFROST{...}" required></label><button class="learning-button primary" type="submit">제출하기</button></form><noscript><p>FLAG 검증과 해결 기록에는 JavaScript가 필요합니다. 문제와 자료는 그대로 읽고 내려받을 수 있습니다.</p></noscript><p id="flagFeedback" role="status" aria-live="polite"></p><p id="attemptCount" class="caption"></p><p class="caption">개인 학습용 문제입니다. 해결 기록은 이 브라우저에 저장됩니다. FLAG 일치와 독립 풀이 능력은 별도로 확인하세요.</p></section>
+    <section class="study-section"><h2>단계별 힌트</h2><p>먼저 시도한 내용과 막힌 위치를 적고 필요한 힌트만 여세요.</p><details class="challenge-hint"><summary>힌트 1</summary><p>ip.src == 192.0.2.8 &amp;&amp; udp.dstport == 9000으로 필터링합니다.</p></details><details class="challenge-hint"><summary>힌트 2</summary><p>UDP 상세 아래 Data 또는 Follow UDP Stream을 확인하세요.</p></details><details class="challenge-hint"><summary>힌트 3</summary><p>선택한 두 프레임의 데이터만 시간 순서대로 결합합니다.</p></details><details class="challenge-solution"><summary>시도 후 풀이 확인</summary><p>지정된 출발지의 두 UDP 데이터 조각을 이어 붙입니다. 다른 출발지의 noise는 제외합니다. 암호화되지 않은 UDP 표본입니다.</p><p>풀이를 읽었다면 새 입력으로 재현한 뒤 관련 차시에 독립 수행 여부를 기록하세요.</p></details></section><details class="practice-limits"><summary>채점과 기록의 범위</summary><p>정적 사이트의 브라우저 검증이므로 자료·검증 정보는 공개되어 있으며 우회가 가능합니다. 공개 경쟁·실력 인증용 채점이 아닙니다. 계정 동기화는 없고 브라우저 데이터 삭제 전 기록을 백업하세요.</p></details></main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../index.html#resources">외부 참고 자료 ↗</a></div></footer>
+</body></html>

@@ -154,3 +154,5 @@
 .workspace-footer > span { display:none; }
 @media(max-width:1000px) { .workspace-hero { gap:28px; } .workspace-preview { display:block; } .workspace-rail { height:510px; } }
 @media(max-width:700px) { .workspace-hero { padding:28px 20px; } .progress-window { padding:18px; } .progress-heading { flex-wrap:wrap; gap:8px; } .progress-heading a { font-size:12px; } .home-lessons a { font-size:12px; min-height:42px; } .directory-header h2 em { display:block; margin:8px 0 0; } }
+
+@media(max-width:700px) { .workspace-nav { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); } .workspace-nav a { justify-content:center; padding:9px 2px; } }

@@ -2,6 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://lokistday.github.io/bifrost/</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/guides/linux.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/wargame/</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/wargame/foundation-log.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/wargame/web-notes.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/wargame/pwn-length.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/wargame/rev-lock.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/wargame/forensic-session.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/wargame/network-stream.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/wargame/crypto-xor.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/wargame/misc-container.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/wargame/cloud-policy.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/learn/review.html</loc></url>
+  <url><loc>https://lokistday.github.io/bifrost/guides/troubleshooting.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/learn/</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/projects/foundation.html</loc></url>
   <url><loc>https://lokistday.github.io/bifrost/paths/start/project.html</loc></url>

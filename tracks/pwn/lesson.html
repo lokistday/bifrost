@@ -17,27 +17,27 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/pwn/">
 <title>Pwn / System — Bifrost</title>
-<script src="../../js/theme.js?v=learning-91164da9fa95"></script>
-<link rel="icon" href="../../assets/logo.svg?v=learning-91164da9fa95" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-91164da9fa95">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-91164da9fa95">
+<script src="../../js/theme.js?v=learning-dcac82a7ff60"></script>
+<link rel="icon" href="../../assets/logo.svg?v=learning-dcac82a7ff60" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-dcac82a7ff60">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-dcac82a7ff60">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-91164da9fa95">
-<link rel="stylesheet" href="../../css/study.css?v=learning-91164da9fa95">
-<script src="../../js/catalog.js?v=learning-91164da9fa95" defer></script>
-<script src="../../js/courses/pwn.js?v=learning-91164da9fa95" defer></script>
-<script src="../../js/progress.js" defer></script>
-<script src="../../js/visual-data.js?v=learning-91164da9fa95" defer></script>
-<script src="../../js/visuals.js?v=learning-91164da9fa95" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-dcac82a7ff60">
+<link rel="stylesheet" href="../../css/study.css?v=learning-dcac82a7ff60">
+<script src="../../js/catalog.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/courses/pwn.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/progress.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/visual-data.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/visuals.js?v=learning-dcac82a7ff60" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-91164da9fa95" defer></script>
-<script src="../../js/learning.js?v=learning-91164da9fa95" defer></script>
+<script src="../../js/learning-view.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/learning.js?v=learning-dcac82a7ff60" defer></script>
 </head>
 <body class="learning-page" data-course="pwn" data-course-number="01" data-view="lesson" data-lesson-id="" data-path="" style="--course-accent:var(--map-violet)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-91164da9fa95" width="34" height="34" alt=""></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">시스템 보안 목차</a></nav>
+  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-dcac82a7ff60" width="34" height="34" alt=""></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">시스템 보안 목차</a><a href="../../wargame/">워게임</a><a href="../../learn/review.html">내 복습</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -55,7 +55,7 @@
           <p class="field-question">프로그램과 운영체제 내부에서 무슨 일이 일어날까?</p><dl><dt>주로 다루는 문제</dt><dd>메모리 오류, 프로그램 실행 흐름, 권한 경계, 시스템 수준의 취약점</dd><dt>만나는 개념</dt><dd>C·포인터, 스택·힙, 디버거, 정수·크기 검증, 서식 문자열, 소유권, 완화 기법</dd><dt>잘 맞을 수 있는 관심</dt><dd>낮은 수준의 동작을 파고들고, 오류가 발생하는 정확한 조건을 추적하는 것이 좋다.</dd><dt>도움 되는 기초</dt><dd>C 문법, 주소·메모리 개념, Linux 터미널. 생소하면 C 기초부터 천천히 시작한다.</dd><dt>첫 실습</dt><dd>자신이 만든 작은 C 프로그램을 디버거로 실행하고 변수·주소·실행 흐름이 어떻게 바뀌는지 관찰한다.</dd></dl>
           <div class="field-path"><b>학습 경로</b> C·메모리·진단 → 입력·소유권·파싱 → 구조체·문자열·파일 기술자 → 부분 I/O·파일 열기 경계</div>
         </div></section><figure class="learning-visual course-visual" data-visual-id="pwn"><header class="visual-heading"><span class="visual-kicker">이 분야의 학습 흐름 · 흐름도</span><h3>빌드한 프로그램의 메모리를 관찰하고 고칩니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="빌드한 프로그램의 메모리를 관찰하고 고칩니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 222" width="760" height="222" role="img" aria-labelledby="visual-course-pwn-title visual-course-pwn-desc" focusable="false"><title id="visual-course-pwn-title">빌드한 프로그램의 메모리를 관찰하고 고칩니다</title><desc id="visual-course-pwn-desc">메모리·진단·입력·소유권·파싱에서 구조체와 문자열 표현으로 이어집니다. 파일 기술자, 부분 I/O와 파일 열기의 조건을 관찰하고 운영체제 경계의 가정을 검증합니다.</desc><defs><marker id="visual-course-pwn-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><circle class="v-step-circle" cx="42" cy="27" r="13"/><text class="v-step-number" x="42" y="31" text-anchor="middle">1</text><g class="v-tone "><rect class="v-node" x="28" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="29" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="82">실행 모형</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="113">빌드·수명</tspan><tspan x="45" y="133">스택·힙</tspan></text></g><circle class="v-step-circle" cx="188.8" cy="27" r="13"/><text class="v-step-number" x="188.8" y="31" text-anchor="middle">2</text><g class="v-tone "><rect class="v-node" x="174.8" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="175.8" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="191.8" y="82">오류 관찰</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="191.8" y="113">경계·GDB</tspan><tspan x="191.8" y="133">오류 진단</tspan></text></g><path class="v-edge " d="M148.8 126H169.8" marker-end="url(#visual-course-pwn-arrow)"/><circle class="v-step-circle" cx="335.6" cy="27" r="13"/><text class="v-step-number" x="335.6" y="31" text-anchor="middle">3</text><g class="v-tone "><rect class="v-node" x="321.6" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="322.6" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="338.6" y="82">보호와 한계</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="338.6" y="113">보호 기법</tspan><tspan x="338.6" y="133">오류 수정</tspan></text></g><path class="v-edge " d="M295.6 126H316.6" marker-end="url(#visual-course-pwn-arrow)"/><circle class="v-step-circle" cx="482.40000000000003" cy="27" r="13"/><text class="v-step-number" x="482.40000000000003" y="31" text-anchor="middle">4</text><g class="v-tone "><rect class="v-node" x="468.40000000000003" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="469.40000000000003" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="485.40000000000003" y="82">입력과 수명</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="485.40000000000003" y="113">정수·서식</tspan><tspan x="485.40000000000003" y="133">소유권·길이</tspan></text></g><path class="v-edge " d="M442.40000000000003 126H463.40000000000003" marker-end="url(#visual-course-pwn-arrow)"/><circle class="v-step-circle" cx="629.2" cy="27" r="13"/><text class="v-step-number" x="629.2" y="31" text-anchor="middle">5</text><g class="v-tone "><rect class="v-node" x="615.2" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="616.2" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="632.2" y="82">OS 경계</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="632.2" y="113">표현·FD</tspan><tspan x="632.2" y="133">I/O·열기</tspan></text></g><path class="v-edge " d="M589.2 126H610.2" marker-end="url(#visual-course-pwn-arrow)"/></svg></div><figcaption><span class="visual-takeaway">각 단계에서 만든 기록과 결과물을 다음 차시의 판단 근거로 이어가세요.</span><small class="visual-note">학습의 큰 흐름입니다. 차시는 목차에서 자유롭게 선택하고 필요한 기초로 돌아갈 수 있습니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>메모리·진단·입력·소유권·파싱에서 구조체와 문자열 표현으로 이어집니다. 파일 기술자, 부분 I/O와 파일 열기의 조건을 관찰하고 운영체제 경계의 가정을 검증합니다.</p></details></figure>
-        <section class="learning-path-panel"><div><span class="overline">LEARN → APPLY → EXPLAIN</span><h2>이 과정의 완주 기준</h2><p>차시별 독립 과제에서 조건을 바꿔 보고, 마지막에는 두 표본을 분석한 결과와 근거 보고서를 완성합니다.</p></div><a class="learning-button" href="../../learn/">차시 검색 · 목표별 경로 ↗</a></section>
+        <section class="learning-path-panel"><div><span class="overline">LEARN → APPLY → EXPLAIN</span><h2>이 과정의 완주 기준</h2><p><a href="../../wargame/">실습으로 FLAG 문제 풀기 ↗</a></p><p>차시별 독립 과제에서 조건을 바꿔 보고, 마지막에는 두 표본을 분석한 결과와 근거 보고서를 완성합니다.</p></div><a class="learning-button" href="../../learn/">차시 검색 · 목표별 경로 ↗</a></section>
         <div class="overview-layout"><div>
           <section class="outcome-panel"><div class="overline">WHAT YOU WILL BUILD</div><h2>이 과정을 마치면</h2><p>명시적 자료 계약과 시스템 호출 반환값을 바탕으로 파싱·수명·진행량·파일 객체 검증의 근거와 한계를 설명합니다.</p></section>
           <section class="module-list" id="courseModules" aria-label="모듈별 차시">

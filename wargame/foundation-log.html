@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko" data-default-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="쉼표 뒤에 숨은 기록">
+<meta name="theme-color" content="#0b1220">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bifrost">
+<meta property="og:title" content="쉼표 뒤에 숨은 기록 · Bifrost">
+<meta property="og:description" content="쉼표 뒤에 숨은 기록">
+<meta property="og:url" content="https://lokistday.github.io/bifrost/wargame/foundation-log.html">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<link rel="canonical" href="https://lokistday.github.io/bifrost/wargame/foundation-log.html">
+<link rel="icon" href="../assets/logo.svg?v=learning-dcac82a7ff60" type="image/svg+xml">
+<title>쉼표 뒤에 숨은 기록 · Bifrost</title>
+<script src="../js/theme.js?v=learning-dcac82a7ff60"></script>
+<link rel="stylesheet" href="../css/main.css?v=learning-dcac82a7ff60">
+<link rel="stylesheet" href="../css/theme.css?v=learning-dcac82a7ff60">
+<link rel="stylesheet" href="../css/learning.css?v=learning-dcac82a7ff60">
+<link rel="stylesheet" href="../css/study.css?v=learning-dcac82a7ff60">
+<script src="../js/wargames.js?v=learning-dcac82a7ff60" defer></script><script src="../js/wargame.js?v=learning-dcac82a7ff60" defer></script>
+</head>
+<body class="learning-page study-page">
+<a class="skip-link" href="#studyContent">학습 본문으로 건너뛰기</a>
+<header class="topbar"><div class="wrap nav"><a class="brand" href="../index.html"><span class="brand-mark"><img class="brand-logo" src="../assets/logo.svg?v=learning-dcac82a7ff60" width="34" height="34" alt=""></span><span>BIFROST</span></a><nav class="navlinks" aria-label="주 메뉴"><a href="../index.html#mindmap">학습 지도</a><a href="../learn/">검색 · 학습 경로</a><a href="../guides/bridges.html">기초 연결</a><a href="../wargame/">워게임</a><a href="../learn/review.html">내 복습</a></nav><button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button></div></header>
+<main class="study-wrap" id="studyContent" tabindex="-1">
+    <nav class="breadcrumb"><a href="./">워게임</a><span>/ Foundation</span><span>/ 입문</span></nav>
+    <header class="study-hero"><div class="overline">Foundation / 입문</div><h1>쉼표 뒤에 숨은 기록</h1><p>감사 로그에서 status=denied인 레코드만 골라 seq 순서대로 fragment를 이어 붙이세요. 따옴표 안의 쉼표는 열 구분자가 아닙니다.</p></header>
+    <section class="study-section"><h2>해결 목표</h2><p>CSV를 올바르게 읽고 조건에 맞는 기록을 정렬해 FLAG를 복원합니다.</p><p>FLAG 형식은 <code>BIFROST{...}</code>입니다. 대소문자와 중괄호를 그대로 입력하세요.</p><a class="learning-button primary" href="files/foundation-log.zip" download>문제 자료 ZIP ↓</a><details><summary>다운로드 무결성 확인</summary><p class="artifact-hash">SHA-256: fd78685f2d6152868ed7454e09af643c13929bc7fa2c695d3bca94352258d94e</p></details></section>
+    <section class="study-section"><h2>막히면 먼저 볼 차시</h2><ul><li><a href="../tracks/foundation/python-files.html">CSV 읽기와 오류 좁히기 ↗</a></li><li><a href="../tracks/foundation/python-flow.html">조건·반복·함수 ↗</a></li></ul><p><a href="../guides/troubleshooting.html">실행 환경·파일·출력이 예상과 다를 때 ↗</a></p></section>
+    <section class="flag-panel" data-challenge="foundation-log"><h2>FLAG 제출</h2><span data-solved-label="foundation-log">미해결</span><form id="flagForm" hidden><label for="flagInput">찾은 FLAG<input id="flagInput" type="text" autocomplete="off" spellcheck="false" maxlength="256" placeholder="BIFROST{...}" required></label><button class="learning-button primary" type="submit">제출하기</button></form><noscript><p>FLAG 검증과 해결 기록에는 JavaScript가 필요합니다. 문제와 자료는 그대로 읽고 내려받을 수 있습니다.</p></noscript><p id="flagFeedback" role="status" aria-live="polite"></p><p id="attemptCount" class="caption"></p><p class="caption">개인 학습용 문제입니다. 해결 기록은 이 브라우저에 저장됩니다. FLAG 일치와 독립 풀이 능력은 별도로 확인하세요.</p></section>
+    <section class="study-section"><h2>단계별 힌트</h2><p>먼저 시도한 내용과 막힌 위치를 적고 필요한 힌트만 여세요.</p><details class="challenge-hint"><summary>힌트 1</summary><p>먼저 csv 모듈의 DictReader로 각 레코드를 출력하세요.</p></details><details class="challenge-hint"><summary>힌트 2</summary><p>status가 denied인 레코드만 남기고 seq를 정수로 정렬합니다.</p></details><details class="challenge-hint"><summary>힌트 3</summary><p>fragment를 공백 없이 이어 붙입니다. user의 쉼표를 split으로 나누지 마세요.</p></details><details class="challenge-solution"><summary>시도 후 풀이 확인</summary><p>DictReader → denied 필터 → int(seq) 정렬 → fragment 결합. 거부 기록은 세 개이며 OK 기록의 decoy를 제외합니다.</p><p>풀이를 읽었다면 새 입력으로 재현한 뒤 관련 차시에 독립 수행 여부를 기록하세요.</p></details></section><details class="practice-limits"><summary>채점과 기록의 범위</summary><p>정적 사이트의 브라우저 검증이므로 자료·검증 정보는 공개되어 있으며 우회가 가능합니다. 공개 경쟁·실력 인증용 채점이 아닙니다. 계정 동기화는 없고 브라우저 데이터 삭제 전 기록을 백업하세요.</p></details></main>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../index.html#resources">외부 참고 자료 ↗</a></div></footer>
+</body></html>

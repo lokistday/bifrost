@@ -89,3 +89,34 @@
   .learning-path-panel { align-items: flex-start; flex-direction: column; }
   .study-wrap { padding: 24px 18px 56px; }
 }
+
+/* Practice, diagnostic feedback and private review tools. */
+.study-page [hidden] { display:none !important; }
+.readiness-diagnostic { border:1px solid var(--line); border-radius:8px; padding:16px; margin:14px 0; }
+.readiness-diagnostic label { display:block; margin:8px 0; }
+.written-check { margin:24px 0; border:1px solid var(--line); padding:16px; border-radius:8px; }
+.written-check label { display:block; margin:12px 0 8px; }
+.written-check textarea { width:100%; font:inherit; padding:12px; border:1px solid var(--line); border-radius:6px; resize:vertical; }
+.mastery-panel { margin:24px 0; padding:18px; border:1px solid var(--line); border-radius:8px; }
+.mastery-actions { display:flex; flex-wrap:wrap; gap:8px; }
+.mastery-actions [aria-pressed="true"] { background:var(--teal); color:var(--paper); border-color:var(--teal); }
+.troubleshooting dt { font-weight:700; margin-top:14px; }
+.troubleshooting dd { margin:6px 0 14px; }
+.challenge-filters { display:flex; flex-wrap:wrap; gap:18px; margin:24px 0; }
+.challenge-filters select { margin-left:8px; padding:8px; font:inherit; border:1px solid var(--line); border-radius:6px; }
+.challenge-card h2 { font-size:21px; }
+.challenge-card [data-solved-label] { display:block; margin:14px 0; color:var(--teal); }
+.flag-panel { margin:30px 0; padding:24px; border:1px solid var(--teal); border-radius:10px; background:var(--surface); }
+.flag-panel form { display:flex; align-items:end; flex-wrap:wrap; gap:14px; margin-top:16px; }
+.flag-panel label { flex:1; min-width:0; }
+.flag-panel input { display:block; width:100%; padding:12px; margin-top:8px; font:16px Consolas,monospace; border:1px solid var(--line); border-radius:6px; }
+.flag-panel [role="status"] { min-height:2em; }
+.challenge-hint,.challenge-solution,.practice-limits,.project-review { margin:14px 0; padding:14px 18px; border:1px solid var(--line); border-radius:8px; }
+.artifact-hash { overflow-wrap:anywhere; font-family:Consolas,monospace; font-size:12px; }
+.review-item { padding:20px; margin:14px 0; border:1px solid var(--line); border-radius:8px; }
+.review-item > a { font-size:18px; font-weight:700; }
+.review-item p { color:var(--muted); }
+button:disabled { cursor:wait; opacity:.65; }
+@media(max-width:600px) { .flag-panel { padding:18px; } .flag-panel form { display:block; } .flag-panel button { margin-top:14px; width:100%; } }
+
+.support-panel { margin:16px 0; padding:14px 18px; border:1px solid var(--line); border-radius:8px; }

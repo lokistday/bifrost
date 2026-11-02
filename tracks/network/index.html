@@ -17,26 +17,26 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/network/">
 <title>Network Security — Bifrost</title>
-<script src="../../js/theme.js?v=learning-91164da9fa95"></script>
-<link rel="icon" href="../../assets/logo.svg?v=learning-91164da9fa95" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-91164da9fa95">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-91164da9fa95">
+<script src="../../js/theme.js?v=learning-dcac82a7ff60"></script>
+<link rel="icon" href="../../assets/logo.svg?v=learning-dcac82a7ff60" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-dcac82a7ff60">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-dcac82a7ff60">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-91164da9fa95">
-<link rel="stylesheet" href="../../css/study.css?v=learning-91164da9fa95">
-<script src="../../js/catalog.js?v=learning-91164da9fa95" defer></script>
-<script src="../../js/courses/network.js?v=learning-91164da9fa95" defer></script>
-<script src="../../js/progress.js" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-dcac82a7ff60">
+<link rel="stylesheet" href="../../css/study.css?v=learning-dcac82a7ff60">
+<script src="../../js/catalog.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/courses/network.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/progress.js?v=learning-dcac82a7ff60" defer></script>
 
 
-<script src="../../js/learning-view.js?v=learning-91164da9fa95" defer></script>
-<script src="../../js/learning.js?v=learning-91164da9fa95" defer></script>
+<script src="../../js/learning-view.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/learning.js?v=learning-dcac82a7ff60" defer></script>
 </head>
 <body class="learning-page" data-course="network" data-course-number="05" data-view="course" data-lesson-id="" data-path="" style="--course-accent:var(--map-amber)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-91164da9fa95" width="34" height="34" alt=""></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">네트워크 보안 목차</a></nav>
+  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-dcac82a7ff60" width="34" height="34" alt=""></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">네트워크 보안 목차</a><a href="../../wargame/">워게임</a><a href="../../learn/review.html">내 복습</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -54,7 +54,7 @@
           <p class="field-question">네트워크 통신을 관찰하고 위협을 찾아 방어할 수 있을까?</p><dl><dt>주로 다루는 문제</dt><dd>프로토콜 이해, 트래픽 분석, 서비스 노출과 통신 보안, 네트워크 방어</dd><dt>만나는 개념</dt><dd>TCP/IP·DNS·TLS, PCAP, 라우팅·NAT·연결 상태, 방화벽, 탐지 지표, 증거 상관관계</dd><dt>잘 맞을 수 있는 관심</dt><dd>통신이 오가는 과정을 추적하고, 시스템 간 연결과 방어 방법을 이해하는 일이 흥미롭다.</dd><dt>도움 되는 기초</dt><dd>IP·HTTP·Linux 기초에서 시작해 웹 인가·클라우드 네트워크를 연결한다. 설계 모듈은 여러 분야를 함께 보는 중급 과정이다.</dd><dt>첫 실습</dt><dd>교육용 PCAP에서 DNS 질의와 TCP 연결을 찾아 흐름을 정리하고, 관찰 가능한 정보와 암호화로 보이지 않는 정보를 구분한다.</dd></dl>
           <div class="field-path"><b>학습 경로</b> 패킷·정책·경로 → IPv6·TCP 재조립 → DNS 캐시·MTU → 시간 창과 관측 결과 검증</div>
         </div></section><figure class="learning-visual course-visual" data-visual-id="network"><header class="visual-heading"><span class="visual-kicker">이 분야의 학습 흐름 · 흐름도</span><h3>패킷 관찰을 망 정책과 통합 방어로 연결합니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="패킷 관찰을 망 정책과 통합 방어로 연결합니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 222" width="760" height="222" role="img" aria-labelledby="visual-course-network-title visual-course-network-desc" focusable="false"><title id="visual-course-network-title">패킷 관찰을 망 정책과 통합 방어로 연결합니다</title><desc id="visual-course-network-desc">패킷·정책·경로와 탐지 지표를 검토한 뒤 IPv6, TCP 재조립, DNS 캐시와 MTU를 연결합니다. 지연 도착과 시간 창이 결과에 미치는 영향을 확인하고 관측의 범위를 함께 보고합니다.</desc><defs><marker id="visual-course-network-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><circle class="v-step-circle" cx="42" cy="27" r="13"/><text class="v-step-number" x="42" y="31" text-anchor="middle">1</text><g class="v-tone "><rect class="v-node" x="28" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="29" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="82">통신 관찰</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="113">주소·PCAP</tspan><tspan x="45" y="133">DNS·TLS</tspan></text></g><circle class="v-step-circle" cx="188.8" cy="27" r="13"/><text class="v-step-number" x="188.8" y="31" text-anchor="middle">2</text><g class="v-tone "><rect class="v-node" x="174.8" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="175.8" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="191.8" y="82">경계 설계</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="191.8" y="113">망 분리</tspan><tspan x="191.8" y="133">정책 검사</tspan></text></g><path class="v-edge " d="M148.8 126H169.8" marker-end="url(#visual-course-network-arrow)"/><circle class="v-step-circle" cx="335.6" cy="27" r="13"/><text class="v-step-number" x="335.6" y="31" text-anchor="middle">3</text><g class="v-tone "><rect class="v-node" x="321.6" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="322.6" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="338.6" y="82">통합 방어</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="338.6" y="113">탐지·신원</tspan><tspan x="338.6" y="133">변경·복구</tspan></text></g><path class="v-edge " d="M295.6 126H316.6" marker-end="url(#visual-course-network-arrow)"/><circle class="v-step-circle" cx="482.40000000000003" cy="27" r="13"/><text class="v-step-number" x="482.40000000000003" y="31" text-anchor="middle">4</text><g class="v-tone "><rect class="v-node" x="468.40000000000003" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="469.40000000000003" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="485.40000000000003" y="82">운영 검증</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="485.40000000000003" y="113">경로·NAT</tspan><tspan x="485.40000000000003" y="133">연결·지표</tspan></text></g><path class="v-edge " d="M442.40000000000003 126H463.40000000000003" marker-end="url(#visual-course-network-arrow)"/><circle class="v-step-circle" cx="629.2" cy="27" r="13"/><text class="v-step-number" x="629.2" y="31" text-anchor="middle">5</text><g class="v-tone "><rect class="v-node" x="615.2" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="616.2" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="632.2" y="82">관측 확장</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="632.2" y="113">IPv6·TCP</tspan><tspan x="632.2" y="133">캐시·MTU</tspan></text></g><path class="v-edge " d="M589.2 126H610.2" marker-end="url(#visual-course-network-arrow)"/></svg></div><figcaption><span class="visual-takeaway">각 단계에서 만든 기록과 결과물을 다음 차시의 판단 근거로 이어가세요.</span><small class="visual-note">학습의 큰 흐름입니다. 차시는 목차에서 자유롭게 선택하고 필요한 기초로 돌아갈 수 있습니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>패킷·정책·경로와 탐지 지표를 검토한 뒤 IPv6, TCP 재조립, DNS 캐시와 MTU를 연결합니다. 지연 도착과 시간 창이 결과에 미치는 영향을 확인하고 관측의 범위를 함께 보고합니다.</p></details></figure>
-        <section class="learning-path-panel"><div><span class="overline">LEARN → APPLY → EXPLAIN</span><h2>이 과정의 완주 기준</h2><p>차시별 독립 과제에서 조건을 바꿔 보고, 마지막에는 두 표본을 분석한 결과와 근거 보고서를 완성합니다.</p></div><a class="learning-button" href="../../learn/">차시 검색 · 목표별 경로 ↗</a></section>
+        <section class="learning-path-panel"><div><span class="overline">LEARN → APPLY → EXPLAIN</span><h2>이 과정의 완주 기준</h2><p><a href="../../wargame/">실습으로 FLAG 문제 풀기 ↗</a></p><p>차시별 독립 과제에서 조건을 바꿔 보고, 마지막에는 두 표본을 분석한 결과와 근거 보고서를 완성합니다.</p></div><a class="learning-button" href="../../learn/">차시 검색 · 목표별 경로 ↗</a></section>
         <div class="overview-layout"><div>
           <section class="outcome-panel"><div class="overline">WHAT YOU WILL BUILD</div><h2>이 과정을 마치면</h2><p>통신 경로와 상태를 설명하고 오탐·미탐과 사건 영향의 불확실성을 포함한 방어 검증안을 만듭니다.</p></section>
           <section class="module-list" id="courseModules" aria-label="모듈별 차시">

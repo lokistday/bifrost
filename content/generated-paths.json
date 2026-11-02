@@ -35,6 +35,59 @@
       "foundation.git",
       "foundation.config-precedence",
       "foundation.structured-logging"
+    ],
+    "milestones": [
+      {
+        "number": 1,
+        "lessons": [
+          "foundation.environment",
+          "foundation.paths",
+          "foundation.python-values",
+          "foundation.python-flow",
+          "foundation.python-files"
+        ],
+        "title": "CSV 읽기와 오류 좁히기까지",
+        "outcome": "파일을 행 단위 데이터로 읽고 조건에 맞는 항목을 추출합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: CSV의 열 이름과 행을 구분했다.",
+        "minutes": [
+          115,
+          190
+        ]
+      },
+      {
+        "number": 2,
+        "lessons": [
+          "foundation.text-bytes",
+          "foundation.structured-data",
+          "foundation.exceptions",
+          "foundation.cli",
+          "foundation.unit-tests"
+        ],
+        "title": "경계값 테스트와 실패 실험까지",
+        "outcome": "고정된 기대값으로 경계를 검사하고 고의 오류를 넣어 테스트의 검출력을 확인합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 고정 기대값과 구현을 별도로 검토했다.",
+        "minutes": [
+          160,
+          255
+        ]
+      },
+      {
+        "number": 3,
+        "lessons": [
+          "foundation.network",
+          "foundation.http",
+          "foundation.git",
+          "foundation.config-precedence",
+          "foundation.structured-logging"
+        ],
+        "title": "구조화 로그·허용 필드·민감 정보까지",
+        "outcome": "사건을 고정된 필드로 기록하고 비밀 노출과 줄바꿈 주입을 구분해서 검증합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 필드 선택·값 검증·줄 경계를 따로 검사했다.",
+        "minutes": [
+          155,
+          245
+        ]
+      }
     ]
   },
   {
@@ -91,6 +144,123 @@
       "web.private-caching",
       "web.regression",
       "web.idempotency"
+    ],
+    "milestones": [
+      {
+        "number": 1,
+        "lessons": [
+          "foundation.environment",
+          "foundation.network",
+          "foundation.http",
+          "web.flow",
+          "foundation.python-values"
+        ],
+        "title": "변수·문자열·자료형까지",
+        "outcome": "이름에 값을 담고 숫자 계산과 문자열 출력을 구분합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 숫자 덧셈과 문자열 연결의 차이를 설명했다.",
+        "minutes": [
+          110,
+          180
+        ]
+      },
+      {
+        "number": 2,
+        "lessons": [
+          "foundation.python-flow",
+          "web.sql",
+          "web.sessions",
+          "web.authorization",
+          "web.sql-injection"
+        ],
+        "title": "SQL Injection과 바인딩까지",
+        "outcome": "입력이 쿼리 문법에 섞이는 경우와 값으로만 전달되는 경우를 비교합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 취약한 쿼리에서 조건이 달라지는 이유를 설명했다.",
+        "minutes": [
+          170,
+          275
+        ]
+      },
+      {
+        "number": 3,
+        "lessons": [
+          "web.output",
+          "web.csrf",
+          "web.cors",
+          "web.csp",
+          "foundation.paths"
+        ],
+        "title": "경로와 작업용 사본까지",
+        "outcome": "현재 경로를 기준으로 파일을 만들고 사본을 구분합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 절대·상대 경로를 각각 예로 들었다.",
+        "minutes": [
+          170,
+          275
+        ]
+      },
+      {
+        "number": 4,
+        "lessons": [
+          "foundation.python-files",
+          "foundation.text-bytes",
+          "foundation.structured-data",
+          "foundation.exceptions",
+          "foundation.cli"
+        ],
+        "title": "재사용 가능한 명령행 도구까지",
+        "outcome": "입력 파일과 옵션을 명시하고 도움말·정상 동작·잘못된 옵션을 검증합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 도움말·기본값·인자 해석 기준을 설명했다.",
+        "minutes": [
+          155,
+          245
+        ]
+      },
+      {
+        "number": 5,
+        "lessons": [
+          "foundation.unit-tests",
+          "foundation.mutable-data",
+          "web.mass-assignment",
+          "foundation.config-precedence",
+          "web.session-lifecycle"
+        ],
+        "title": "세션 갱신·만료·서버 무효화까지",
+        "outcome": "로그인 전후 식별자 교체와 로그아웃·만료의 서버 측 상태 변화를 추적합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 갱신·이전 키 제거·로그아웃·만료를 따로 검사했다.",
+        "minutes": [
+          195,
+          315
+        ]
+      },
+      {
+        "number": 6,
+        "lessons": [
+          "crypto.representation",
+          "crypto.hash",
+          "web.reset-tokens",
+          "web.private-caching",
+          "web.regression"
+        ],
+        "title": "수정·반례·회귀 테스트까지",
+        "outcome": "취약한 동작만 막는 것이 아니라 정상 기능도 유지되는지 확인합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 의도적으로 고장낸 함수에서 테스트가 실패했다.",
+        "minutes": [
+          190,
+          310
+        ]
+      },
+      {
+        "number": 7,
+        "lessons": [
+          "web.idempotency"
+        ],
+        "title": "거래 불변 조건·트랜잭션·재시도까지",
+        "outcome": "재고 변경과 주문 기록을 함께 처리하고 같은 요청의 재시도를 중복 효과 없이 검증합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 재고·주문·재시도의 불변 조건을 함께 검사했다.",
+        "minutes": [
+          60,
+          90
+        ]
+      }
     ]
   },
   {
@@ -144,6 +314,110 @@
       "network.detection",
       "network.detection-metrics",
       "network.incident-correlation"
+    ],
+    "milestones": [
+      {
+        "number": 1,
+        "lessons": [
+          "foundation.environment",
+          "foundation.paths",
+          "foundation.python-values",
+          "foundation.python-flow",
+          "foundation.python-files"
+        ],
+        "title": "CSV 읽기와 오류 좁히기까지",
+        "outcome": "파일을 행 단위 데이터로 읽고 조건에 맞는 항목을 추출합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: CSV의 열 이름과 행을 구분했다.",
+        "minutes": [
+          115,
+          190
+        ]
+      },
+      {
+        "number": 2,
+        "lessons": [
+          "forensic.integrity",
+          "forensic.logs",
+          "forensic.timeline",
+          "forensic.metadata",
+          "forensic.report"
+        ],
+        "title": "근거가 추적되는 사건 보고서까지",
+        "outcome": "각 결론을 증거와 연결하고 확인되지 않은 사항을 분리합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 결론마다 증거 ID를 연결했다.",
+        "minutes": [
+          155,
+          255
+        ]
+      },
+      {
+        "number": 3,
+        "lessons": [
+          "forensic.collection-plan",
+          "forensic.browser-sqlite",
+          "forensic.host-triage",
+          "forensic.log-correlation",
+          "forensic.windows-events"
+        ],
+        "title": "Windows 이벤트 XML의 원시 필드 읽기까지",
+        "outcome": "네임스페이스와 이름 있는 필드로 이벤트를 읽고 시각·로그온 유형·기록 범위를 구분합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 필드 이름과 네임스페이스로 읽었다.",
+        "minutes": [
+          230,
+          365
+        ]
+      },
+      {
+        "number": 4,
+        "lessons": [
+          "forensic.incident-response",
+          "forensic.linux-auth",
+          "forensic.evidence-coverage",
+          "foundation.network",
+          "network.addressing"
+        ],
+        "title": "계층·CIDR·관측 위치까지",
+        "outcome": "주소 범위와 관측 지점을 나누어 통신 경로를 설명합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: CIDR 소속을 계산했다.",
+        "minutes": [
+          220,
+          345
+        ]
+      },
+      {
+        "number": 5,
+        "lessons": [
+          "foundation.http",
+          "network.pcap",
+          "network.transport",
+          "network.segmentation",
+          "network.routing"
+        ],
+        "title": "최장 접두사와 돌아오는 경로까지",
+        "outcome": "라우팅의 최장 접두사 선택과 보안 정책의 허용 판정을 구분합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 결과의 근거와 반례를 설명하고 과제의 변경 결과를 기록했다.",
+        "minutes": [
+          195,
+          315
+        ]
+      },
+      {
+        "number": 6,
+        "lessons": [
+          "network.nat-correlation",
+          "network.policy",
+          "network.detection",
+          "network.detection-metrics",
+          "network.incident-correlation"
+        ],
+        "title": "네트워크 증거 연결과 대응 판단까지",
+        "outcome": "여러 관측 지점을 연결해 접속 시도와 실제 영향을 구분합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 결과의 근거와 반례를 설명하고 과제의 변경 결과를 기록했다.",
+        "minutes": [
+          250,
+          395
+        ]
+      }
     ]
   },
   {
@@ -212,6 +486,160 @@
       "network.transport",
       "network.segmentation",
       "rev.integer-views"
+    ],
+    "milestones": [
+      {
+        "number": 1,
+        "lessons": [
+          "foundation.environment",
+          "foundation.network",
+          "foundation.http",
+          "web.sessions",
+          "foundation.python-values"
+        ],
+        "title": "변수·문자열·자료형까지",
+        "outcome": "이름에 값을 담고 숫자 계산과 문자열 출력을 구분합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 숫자 덧셈과 문자열 연결의 차이를 설명했다.",
+        "minutes": [
+          115,
+          190
+        ]
+      },
+      {
+        "number": 2,
+        "lessons": [
+          "foundation.python-flow",
+          "web.authorization",
+          "web.sql",
+          "web.sql-injection",
+          "foundation.paths"
+        ],
+        "title": "경로와 작업용 사본까지",
+        "outcome": "현재 경로를 기준으로 파일을 만들고 사본을 구분합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 절대·상대 경로를 각각 예로 들었다.",
+        "minutes": [
+          155,
+          250
+        ]
+      },
+      {
+        "number": 3,
+        "lessons": [
+          "web.file-boundary",
+          "web.flow",
+          "web.output",
+          "web.csrf",
+          "web.cors"
+        ],
+        "title": "동일 출처·CORS·응답 읽기 권한까지",
+        "outcome": "브라우저의 교차 출처 응답 접근과 서버의 인증·인가를 분리해서 설명합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: Origin과 site를 혼동하지 않고 정책 단위를 적었다.",
+        "minutes": [
+          180,
+          290
+        ]
+      },
+      {
+        "number": 4,
+        "lessons": [
+          "web.ssrf",
+          "foundation.c-memory",
+          "foundation.permissions",
+          "pwn.build",
+          "pwn.lifetime"
+        ],
+        "title": "스택·힙과 수명까지",
+        "outcome": "지역 변수와 동적 할당 메모리의 수명을 구분합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 포인터 변수와 동적 영역을 별도 칸에 그렸다.",
+        "minutes": [
+          190,
+          320
+        ]
+      },
+      {
+        "number": 5,
+        "lessons": [
+          "pwn.bounds",
+          "pwn.debugger",
+          "foundation.python-files",
+          "foundation.text-bytes",
+          "foundation.structured-data"
+        ],
+        "title": "JSON 파싱과 데이터 계약까지",
+        "outcome": "JSON 문법이 맞는 것과 학습 데이터의 구조·자료형이 맞는 것을 별도로 검증합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 문법·구조·자료형·범위 오류를 구분했다.",
+        "minutes": [
+          175,
+          285
+        ]
+      },
+      {
+        "number": 6,
+        "lessons": [
+          "foundation.exceptions",
+          "foundation.cli",
+          "pwn.integer-input",
+          "pwn.allocation-size",
+          "pwn.binary-parser"
+        ],
+        "title": "바이너리 길이·엔디언·파서 경계까지",
+        "outcome": "작은 바이너리 형식의 헤더를 바이트 단위로 읽고 잘린 입력과 여분 바이트를 거부합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 최소 헤더 검사를 필드 접근보다 앞에 두었다.",
+        "minutes": [
+          220,
+          355
+        ]
+      },
+      {
+        "number": 7,
+        "lessons": [
+          "rev.binary",
+          "rev.assembly",
+          "rev.static",
+          "rev.dynamic",
+          "rev.byte-order"
+        ],
+        "title": "바이트 순서와 길이 필드 복원까지",
+        "outcome": "파일의 원시 바이트를 명시적 형식으로 해석하고 길이 가설을 반례로 검증합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 오프셋·길이·endian을 분리했다.",
+        "minutes": [
+          220,
+          355
+        ]
+      },
+      {
+        "number": 8,
+        "lessons": [
+          "rev.data-flow",
+          "rev.differential",
+          "rev.control-flow",
+          "rev.state-machine",
+          "network.addressing"
+        ],
+        "title": "계층·CIDR·관측 위치까지",
+        "outcome": "주소 범위와 관측 지점을 나누어 통신 경로를 설명합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: CIDR 소속을 계산했다.",
+        "minutes": [
+          285,
+          445
+        ]
+      },
+      {
+        "number": 9,
+        "lessons": [
+          "network.pcap",
+          "network.transport",
+          "network.segmentation",
+          "rev.integer-views"
+        ],
+        "title": "부호 해석·확장·비트 필드 복원까지",
+        "outcome": "같은 비트열의 signed/unsigned 해석과 확장 방법을 구분하고 마스크를 검증합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 부호와 폭을 명시했다.",
+        "minutes": [
+          175,
+          280
+        ]
+      }
     ]
   },
   {
@@ -288,6 +716,192 @@
       "crypto.hkdf-context",
       "crypto.message-encoding",
       "crypto.aad-record-binding"
+    ],
+    "milestones": [
+      {
+        "number": 1,
+        "lessons": [
+          "foundation.environment",
+          "foundation.network",
+          "foundation.python-values",
+          "network.addressing",
+          "foundation.http"
+        ],
+        "title": "HTTP 요청과 응답 읽기까지",
+        "outcome": "메서드·경로·헤더·본문을 실제 형식에서 찾습니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 요청과 응답에서 헤더를 각각 찾았다.",
+        "minutes": [
+          120,
+          195
+        ]
+      },
+      {
+        "number": 2,
+        "lessons": [
+          "network.pcap",
+          "network.transport",
+          "network.segmentation",
+          "foundation.python-flow",
+          "foundation.paths"
+        ],
+        "title": "경로와 작업용 사본까지",
+        "outcome": "현재 경로를 기준으로 파일을 만들고 사본을 구분합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 절대·상대 경로를 각각 예로 들었다.",
+        "minutes": [
+          170,
+          275
+        ]
+      },
+      {
+        "number": 3,
+        "lessons": [
+          "foundation.python-files",
+          "network.policy",
+          "network.routing",
+          "network.ipv6-boundaries",
+          "foundation.permissions"
+        ],
+        "title": "Linux 권한과 파이프까지",
+        "outcome": "파일의 읽기·쓰기 권한과 명령 사이의 데이터 흐름을 확인합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 600 권한을 세 그룹으로 풀어 설명했다.",
+        "minutes": [
+          205,
+          335
+        ]
+      },
+      {
+        "number": 4,
+        "lessons": [
+          "cloud.responsibility",
+          "web.sessions",
+          "web.authorization",
+          "cloud.iam",
+          "foundation.git"
+        ],
+        "title": "Git과 재현 가능한 README까지",
+        "outcome": "변경 내용을 커밋하고 다른 사람이 따라 할 실행 기록을 만듭니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: status와 diff로 변경을 확인했다.",
+        "minutes": [
+          160,
+          255
+        ]
+      },
+      {
+        "number": 5,
+        "lessons": [
+          "cloud.secrets",
+          "cloud.workload-trust",
+          "forensic.integrity",
+          "forensic.logs",
+          "forensic.timeline"
+        ],
+        "title": "UTC로 타임라인 맞추기까지",
+        "outcome": "오프셋을 포함한 시각을 같은 기준으로 정렬합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: E05를 00:02 UTC로 변환했다.",
+        "minutes": [
+          170,
+          280
+        ]
+      },
+      {
+        "number": 6,
+        "lessons": [
+          "cloud.audit",
+          "cloud.audit-coverage",
+          "cloud.vpc",
+          "crypto.representation",
+          "crypto.hash"
+        ],
+        "title": "SHA-256과 파일 무결성까지",
+        "outcome": "해시의 길이와 입력 변경 효과를 확인합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 256비트·32바이트·64 Hex문자를 연결했다.",
+        "minutes": [
+          190,
+          305
+        ]
+      },
+      {
+        "number": 7,
+        "lessons": [
+          "crypto.mac",
+          "crypto.symmetric",
+          "cloud.storage",
+          "network.tls",
+          "network.detection"
+        ],
+        "title": "탐지 기준·오탐·추가 증거까지",
+        "outcome": "거부 이벤트의 반복을 신호로 만들고 해석의 한계를 검증합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 탐지 임계값의 경계 입력을 시험했다.",
+        "minutes": [
+          220,
+          350
+        ]
+      },
+      {
+        "number": 8,
+        "lessons": [
+          "network.zero-trust",
+          "network.capstone",
+          "cloud.capstone",
+          "cloud.iac-review",
+          "cloud.recovery-exercise"
+        ],
+        "title": "백업 무결성과 RPO·RTO 복구 연습까지",
+        "outcome": "복구 가능한 데이터 시점과 서비스 복구 시간을 별도로 검증합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 결과의 근거와 반례를 설명하고 과제의 변경 결과를 기록했다.",
+        "minutes": [
+          265,
+          415
+        ]
+      },
+      {
+        "number": 9,
+        "lessons": [
+          "cloud.effective-permissions",
+          "cloud.kubernetes-rbac",
+          "network.dns-cache",
+          "cloud.private-endpoint-paths",
+          "cloud.breakglass-access"
+        ],
+        "title": "긴급 접근의 만료·회수·증거까지",
+        "outcome": "사고 대응 권한의 범위와 시간 경계를 정하고 사용 후 검토까지 계획합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 원본의 예상 결과와 변경 과제의 결과를 근거로 비교했다.",
+        "minutes": [
+          275,
+          440
+        ]
+      },
+      {
+        "number": 10,
+        "lessons": [
+          "crypto.public-key",
+          "crypto.nonce",
+          "crypto.key-lifecycle",
+          "crypto.password",
+          "crypto.hkdf-context"
+        ],
+        "title": "HKDF 추출·확장과 용도 분리까지",
+        "outcome": "공통 비밀에서 서로 다른 용도의 키를 유도하고 표준 시험 벡터로 확인합니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 결과의 근거와 반례를 설명하고 과제의 변경 결과를 기록했다.",
+        "minutes": [
+          255,
+          405
+        ]
+      },
+      {
+        "number": 11,
+        "lessons": [
+          "crypto.message-encoding",
+          "crypto.aad-record-binding"
+        ],
+        "title": "AEAD와 레코드 문맥의 결합까지",
+        "outcome": "암호문을 테넌트·문서·버전에 연결하고 인증 실패 시 평문을 사용하지 않습니다.",
+        "artifact": "해설을 닫고 다음 기준을 보여 주는 명령·입력·출력 또는 분석 기록을 남기세요: 원본의 예상 결과와 변경 과제의 결과를 근거로 비교했다.",
+        "minutes": [
+          105,
+          165
+        ]
+      }
     ]
   }
 ]

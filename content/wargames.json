@@ -1,0 +1,191 @@
+[
+  {
+    "id": "foundation-log",
+    "title": "쉼표 뒤에 숨은 기록",
+    "course": "foundation",
+    "level": "입문",
+    "description": "감사 로그에서 status=denied인 레코드만 골라 seq 순서대로 fragment를 이어 붙이세요. 따옴표 안의 쉼표는 열 구분자가 아닙니다.",
+    "objective": "CSV를 올바르게 읽고 조건에 맞는 기록을 정렬해 FLAG를 복원합니다.",
+    "archive": "foundation-log.zip",
+    "sha256": "fd78685f2d6152868ed7454e09af643c13929bc7fa2c695d3bca94352258d94e",
+    "flagHash": "d33e4f6ef3a20592b638503bcf365bd172d3c9d806778619a2db6e5e4eb980c5",
+    "hints": [
+      "먼저 csv 모듈의 DictReader로 각 레코드를 출력하세요.",
+      "status가 denied인 레코드만 남기고 seq를 정수로 정렬합니다.",
+      "fragment를 공백 없이 이어 붙입니다. user의 쉼표를 split으로 나누지 마세요."
+    ],
+    "lessons": [
+      "foundation.python-files",
+      "foundation.python-flow"
+    ],
+    "solution": "DictReader → denied 필터 → int(seq) 정렬 → fragment 결합. 거부 기록은 세 개이며 OK 기록의 decoy를 제외합니다."
+  },
+  {
+    "id": "web-notes",
+    "title": "다른 사람의 노트",
+    "course": "web",
+    "level": "입문",
+    "description": "ZIP의 server.py를 python3 server.py(Windows: py -3 server.py)로 실행하고 /notes/1을 여세요. 주소의 숫자를 바꾸면 다른 사용자의 노트가 보이는지 확인하세요. 종료는 Ctrl+C입니다.",
+    "objective": "객체 식별자와 소유자 인가의 차이를 설명하고 유출된 FLAG를 찾습니다.",
+    "archive": "web-notes.zip",
+    "sha256": "6c0a7082b6356855e575b049946b2b403faae073fbc80cd0297169888a5ac2dd",
+    "flagHash": "5c4dbbeefefeb0c04ffcc61e3d8a999873e0821c4c69a38c7b6180089907f052",
+    "hints": [
+      "127.0.0.1:8899는 직접 실행한 내 컴퓨터의 실습 서버입니다.",
+      "/notes/1의 숫자를 바꾸어 응답을 비교하세요.",
+      "찾은 뒤 소유자를 확인하지 않는 do_GET의 위치를 찾아 수정 방향을 적으세요."
+    ],
+    "lessons": [
+      "web.authorization",
+      "web.sessions"
+    ],
+    "solution": "/notes/2에서 FLAG를 얻습니다. 실제 수정에는 신뢰한 세션 주체와 노트 소유자를 서버에서 비교하는 검사가 필요합니다. URL을 숨기는 것으로 해결되지 않습니다."
+  },
+  {
+    "id": "pwn-length",
+    "title": "좁아지는 길이",
+    "course": "pwn",
+    "level": "기초",
+    "description": "Ubuntu/WSL의 GCC로 gate.c를 gcc -std=c11 -Wall -Wextra gate.c -o gate로 빌드합니다. ./gate에 정수 하나를 입력해 requested는 크지만 accepted는 0이 되게 하세요. 메모리 손상은 일으키지 않는 정수 변환 모형입니다.",
+    "objective": "32비트 입력을 16비트로 줄일 때의 값 변화를 계산해 FLAG를 출력합니다.",
+    "archive": "pwn-length.zip",
+    "sha256": "076a1416bbd1bcd726f92969488ec99b50ee92e8953fb518ad96464f5ad84759",
+    "flagHash": "8b6ba17386dd7571fa25f17bbf6b318b406bd5d902f45ced324f762cc6e9150f",
+    "hints": [
+      "uint16_t가 표현할 수 있는 정수 범위를 계산하세요.",
+      "unsigned 변환 후에는 2의 16제곱을 기준으로 값이 남습니다.",
+      "65536을 입력한 경우를 종이에 계산한 뒤 실행하세요."
+    ],
+    "lessons": [
+      "pwn.integer-input",
+      "pwn.allocation-size"
+    ],
+    "solution": "65536은 uint16_t로 변환하면 0입니다. 원래 크기를 검증한 뒤 변환해야 합니다. 이 문제는 임의 코드 실행을 재현하는 문제가 아닙니다."
+  },
+  {
+    "id": "rev-lock",
+    "title": "변환을 거꾸로",
+    "course": "rev",
+    "level": "기초",
+    "description": "python3 lock.py로 프로그램을 실행하세요. 비교 직전의 바이트 변환을 역으로 적용해 올바른 key를 찾아 입력하세요.",
+    "objective": "역순과 XOR의 역연산으로 입력을 복원합니다.",
+    "archive": "rev-lock.zip",
+    "sha256": "fd927cb11ee8002be792787c2e61e605ac859746072eb93ff7c86893208984c7",
+    "flagHash": "b635a23a04a786c282353d78eaf0e25820b539ece6db01181345a5bd6529192a",
+    "hints": [
+      "비교 대상은 평문 문자열이 아니라 변환된 바이트 목록입니다.",
+      "XOR 0x23을 다시 적용하면 원래 바이트가 됩니다.",
+      "XOR을 되돌린 뒤 바이트 순서를 뒤집고 ASCII로 읽으세요."
+    ],
+    "lessons": [
+      "rev.static",
+      "rev.data-flow"
+    ],
+    "solution": "비교 목록의 각 값에 0x23을 XOR하고 역순으로 읽으면 BRIDGE입니다. 입력해 출력된 FLAG를 제출합니다."
+  },
+  {
+    "id": "forensic-session",
+    "title": "S7 세션의 흔적",
+    "course": "forensic",
+    "level": "기초",
+    "description": "실제 SQLite 파일 events.sqlite에서 session=S7이며 action=read인 기록의 fragment를 seq 순서로 복원하세요. 원본 복사본을 읽기 전용으로 조사하세요.",
+    "objective": "SQL 필터와 순서를 근거로 FLAG를 복원합니다.",
+    "archive": "forensic-session.zip",
+    "sha256": "b6bd459ad2aebf9bba193564d8dc577d31ed3a308a8d141bdac749e10abc9103",
+    "flagHash": "951f178015c7d1222c30dd994856792f2f900b228bc09dc51a5ab8371ffdda72",
+    "hints": [
+      "Python sqlite3 또는 SQLite 도구로 events 테이블을 확인하세요.",
+      "WHERE session='S7' AND action='read' 조건이 필요합니다.",
+      "ORDER BY seq를 적용하고 fragment만 결합하세요. 파일에 보이는 문자열 순서와 사건 순서를 혼동하지 마세요."
+    ],
+    "lessons": [
+      "forensic.browser-sqlite",
+      "forensic.timeline"
+    ],
+    "solution": "SELECT fragment FROM events WHERE session='S7' AND action='read' ORDER BY seq. 관찰된 세션 기록에서 복원했으며 실제 사용자 의도까지 증명하지 않습니다."
+  },
+  {
+    "id": "network-stream",
+    "title": "두 패킷의 메시지",
+    "course": "network",
+    "level": "기초",
+    "description": "Wireshark에서 capture.pcap을 열고 192.0.2.8에서 목적지 UDP 9000으로 보낸 페이로드를 순서대로 읽으세요. 모두 합성 문서용 주소이며 실제 통신은 하지 않습니다.",
+    "objective": "출발지·포트 필터와 페이로드 순서를 이용해 FLAG를 복원합니다.",
+    "archive": "network-stream.zip",
+    "sha256": "cbd846d0f3513187466b9a8ffe05c8119c4c7d37508a0015a542365358eabcf0",
+    "flagHash": "9c35c9ba64971b2d559a24041a7b79a1d6a9f98fa9911817846078056625da65",
+    "hints": [
+      "ip.src == 192.0.2.8 && udp.dstport == 9000으로 필터링합니다.",
+      "UDP 상세 아래 Data 또는 Follow UDP Stream을 확인하세요.",
+      "선택한 두 프레임의 데이터만 시간 순서대로 결합합니다."
+    ],
+    "lessons": [
+      "network.pcap",
+      "network.transport"
+    ],
+    "solution": "지정된 출발지의 두 UDP 데이터 조각을 이어 붙입니다. 다른 출발지의 noise는 제외합니다. 암호화되지 않은 UDP 표본입니다."
+  },
+  {
+    "id": "crypto-xor",
+    "title": "한 바이트의 열쇠",
+    "course": "crypto",
+    "level": "입문",
+    "description": "cipher.hex는 ASCII 메시지의 모든 바이트에 같은 1바이트 키를 XOR한 결과입니다. 메시지가 BIFROST{로 시작한다는 단서를 이용하세요. 실제 보안 암호화가 아닌 고전적인 모형입니다.",
+    "objective": "알려진 평문의 첫 바이트로 XOR 키를 구하고 전체 메시지를 복원합니다.",
+    "archive": "crypto-xor.zip",
+    "sha256": "40dd40a7fbca00f774099beefaacb72e374289a8c56a2ed4b24eb8a8dac2cea4",
+    "flagHash": "b2757d4caed3e936e00ea97b000401277b3cdf21c455cb302fdffd2ebb1fb8c6",
+    "hints": [
+      "bytes.fromhex로 hex 문자열을 바이트로 바꿉니다.",
+      "첫 암호 바이트 XOR ord('B')가 키입니다.",
+      "구한 키를 모든 바이트에 XOR하고 ASCII로 읽습니다."
+    ],
+    "lessons": [
+      "crypto.representation",
+      "crypto.classical"
+    ],
+    "solution": "키는 0x37입니다. bytes(b ^ key for b in cipher)를 복호합니다. Base64·XOR과 현대 인증 암호의 보장을 구분하세요."
+  },
+  {
+    "id": "misc-container",
+    "title": "작은 컨테이너",
+    "course": "misc",
+    "level": "기초",
+    "description": "sample.bf의 형식은 BF01(4바이트), 압축 전 길이(4바이트 big-endian), zlib 데이터입니다. 길이를 읽고 본문을 최대 4096바이트로 제한해 해제하세요.",
+    "objective": "헤더·길이·압축 본문의 경계를 읽어 FLAG를 복원합니다.",
+    "archive": "misc-container.zip",
+    "sha256": "756fc1aea5884cd572ac14da9f94d48f2de8d05cda92744dd939db0e8bd30ed2",
+    "flagHash": "992d561080471508b4cf2d73c9a09e80baaedd1abfc7a0bcfe11b45f5c1996ae",
+    "hints": [
+      "파일 전체를 UTF-8로 읽지 말고 read_bytes로 읽으세요.",
+      "int.from_bytes(raw[4:8],'big')가 선언 길이입니다.",
+      "raw[8:]을 decompressobj().decompress(data,4096)로 해제하고 eof·길이·남은 데이터를 확인하세요."
+    ],
+    "lessons": [
+      "misc.bounded-decompression",
+      "foundation.text-bytes"
+    ],
+    "solution": "magic 확인 → big-endian 길이 → 한도 있는 zlib 해제 → 길이·eof 확인. 출력 한도가 있다는 이유만으로 모든 파일을 안전하게 처리한다고 일반화하지 않습니다."
+  },
+  {
+    "id": "cloud-policy",
+    "title": "허용 뒤의 거부",
+    "course": "cloud",
+    "level": "입문",
+    "description": "policy.json과 policy.py는 명시적 거부를 우선하는 작은 로컬 정책 모형입니다. python3 policy.py를 실행해 guest와 auditor의 차이를 비교하고, 읽을 수 있는 주체로 FLAG를 얻으세요.",
+    "objective": "명시적 거부와 넓은 허용의 조합을 설명합니다. 실제 클라우드 계정은 사용하지 않습니다.",
+    "archive": "cloud-policy.zip",
+    "sha256": "1c84848afbb17b7c0e4e1556db3696cc48abec9ed01ab65799caf5fe54d02d97",
+    "flagHash": "000b7a0a871bc25c569e490c3fdeadddc8cbc9e12f516cc3d36c6183298c7a51",
+    "hints": [
+      "규칙 순서가 아니라 매칭된 Deny의 존재를 먼저 확인하세요.",
+      "guest에는 Allow와 Deny가 모두 매칭됩니다.",
+      "auditor로 읽기를 시도한 뒤 왜 다른 결과인지 설명하세요."
+    ],
+    "lessons": [
+      "cloud.iam",
+      "cloud.effective-permissions"
+    ],
+    "solution": "auditor는 Allow만 매칭되어 FLAG가 나옵니다. guest는 Deny 때문에 거부됩니다. 이 엔진이 특정 공급자의 전체 정책 평가를 구현한 것은 아닙니다."
+  }
+]

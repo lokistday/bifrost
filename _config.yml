@@ -1,0 +1,12 @@
+# Keep source material and developer notes out of the legacy Pages/Jekyll build too.
+exclude:
+  - developer-notes
+  - docs
+  - scripts
+  - tests
+  - templates
+  - content
+  - output
+  - node_modules
+  - .lab-test-deps
+  - _site

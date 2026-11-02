@@ -33,7 +33,7 @@ for (const route of JSON.parse(read('content/generated-paths.json'))) {
 }
 for (const key of Object.keys(courses)) {
   const doc=parseHTML(read(`projects/${key}.html`)).document;
-  check(doc.querySelectorAll('#rubric ol li').length===4, `${key}: project rubric`);
+  check(doc.querySelectorAll('#rubric > ol > li').length===4, `${key}: project rubric`);
   check(doc.getElementById('assignment').textContent.includes('출력 계약'),`${key}: exact result contract`);
   check(doc.getElementById('check').textContent.includes('--variant b'),`${key}: transfer case required`);
   check(doc.querySelector('.project-flow').getAttribute('aria-label'),`${key}: accessible workflow`);

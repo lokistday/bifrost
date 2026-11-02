@@ -17,27 +17,27 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/paths/dfir/forensic.windows-events.html">
 <title>Windows 이벤트 XML의 원시 필드 읽기 — DFIR 입문: 근거에서 판단까지 · Bifrost</title>
-<script src="../../js/theme.js?v=learning-91164da9fa95"></script>
-<link rel="icon" href="../../assets/logo.svg?v=learning-91164da9fa95" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-91164da9fa95">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-91164da9fa95">
+<script src="../../js/theme.js?v=learning-dcac82a7ff60"></script>
+<link rel="icon" href="../../assets/logo.svg?v=learning-dcac82a7ff60" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-dcac82a7ff60">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-dcac82a7ff60">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-91164da9fa95">
-<link rel="stylesheet" href="../../css/study.css?v=learning-91164da9fa95">
-<script src="../../js/catalog.js?v=learning-91164da9fa95" defer></script>
-<script src="../../js/courses/forensic.js?v=learning-91164da9fa95" defer></script>
-<script src="../../js/progress.js" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-dcac82a7ff60">
+<link rel="stylesheet" href="../../css/study.css?v=learning-dcac82a7ff60">
+<script src="../../js/catalog.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/courses/forensic.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/progress.js?v=learning-dcac82a7ff60" defer></script>
 
-<script src="../../js/learning-paths.js?v=learning-91164da9fa95" defer></script>
-<script src="../../js/path-progress.js?v=learning-91164da9fa95" defer></script>
-<script src="../../js/learning-view.js?v=learning-91164da9fa95" defer></script>
-<script src="../../js/learning.js?v=learning-91164da9fa95" defer></script>
+<script src="../../js/learning-paths.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/path-progress.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/learning-view.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/learning.js?v=learning-dcac82a7ff60" defer></script>
 </head>
 <body class="learning-page" data-course="forensic" data-course-number="02" data-view="lesson" data-lesson-id="forensic.windows-events" data-path="dfir" style="--course-accent:var(--map-green)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-91164da9fa95" width="34" height="34" alt=""></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#pathOutline">DFIR 목차</a></nav>
+  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-dcac82a7ff60" width="34" height="34" alt=""></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#pathOutline">DFIR 목차</a><a href="../../wargame/">워게임</a><a href="../../learn/review.html">내 복습</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -85,9 +85,9 @@
         <a class="back-link" href="../../learn/#paths">다른 학습 경로 보기 ↗</a></aside><article class="lesson-article">
           <nav class="path-location" aria-label="현재 학습 경로"><a href="./">DFIR</a><strong>15 / 30단계</strong><a href="./#pathOutline">경로 목차 ↗</a></nav>
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/forensic.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">Forensic · 05 · 운영체제 기록의 의미 · 15 / 30</div><h1>Windows 이벤트 XML의 원시 필드 읽기</h1><p class="lesson-objective">네임스페이스와 이름 있는 필드로 이벤트를 읽고 시각·로그온 유형·기록 범위를 구분합니다.</p></div></header>
-          <div class="lesson-meta"><span>심화 연결</span><span>학습 50–80분</span><span>처음 준비 0–30분</span></div>
-        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
-        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>해시 일치와 파일 출처의 진위는 같은 것인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>해시는 기준 바이트와의 일치를 확인합니다. 기준의 신뢰·보관 이력·수집 범위는 별도 근거가 필요합니다.</p><a href="../../guides/bridges.html#evidence">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <div class="lesson-meta"><span>응용</span><span>학습 45–75분</span><span>처음 준비 0–10분</span></div>
+        <p class="caption">개념 수·도구 전환·독립 과제를 고려한 편집자 추정이며 학습자 실측 전입니다.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>두 번째 EventData의 순서를 바꾸면 값은 어떻게 찾아야 하나요?</p><fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend><label><input type="radio" name="readiness" value="0"> 세 번째 값을 사용자로 고정</label><label><input type="radio" name="readiness" value="1"> Data의 Name 속성으로 조회</label><label><input type="radio" name="readiness" value="2"> XML 파일명에서 추론</label><button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset><details><summary>판단 기준과 보충 자료</summary><p>이름 기반 조회는 필드의 표시 순서 변화와 의미를 분리합니다.</p><a href="../../guides/bridges.html#evidence">막힌 기초를 짧게 연결하기 ↗</a></details></details><details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl><dt>명령 실행 또는 입력 파일 찾기에서 막힘</dt><dd>오프라인 · Python 3.10 이상 · 표준 라이브러리인지 확인합니다. artifacts_round2.py이 있는 작업 사본 폴더에서 실행하고 원본과 편집한 파일의 위치를 비교하세요.</dd><dt>4624를 사람이 직접 데스크톱에 들어온 증거로 단정한다.</dt><dd>로그온 유형·계정·관련 활동과 관찰 한계를 확인합니다.</dd></dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
           <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>오프라인 · Python 3.10 이상 · 표준 라이브러리</strong></p><ul><li>forensic ZIP을 풀고 해당 폴더로 이동합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿔 실행하세요.</li><li>원본은 보관하고 변경 과제에는 사본을 사용합니다. 제공한 작은 합성 입력만 오프라인에서 다루며 계정·외부 자원·실제 개인정보를 사용하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="forensic.logs.html">디지털 포렌식 · 로그 필드와 사건 가설 ↗</a></li><li><a href="forensic.log-correlation.html">디지털 포렌식 · 호스트·세션을 잇는 다중 로그 상관 ↗</a></li></ul>
@@ -114,7 +114,7 @@ records=2 format=synthetic-xml</pre></div>
         
         <h3>결과를 판단하는 기준</h3><pre>이름 기반 추출·UTC 변환·단일 출처의 중복 범위와 실제 EVTX를 지원하지 않는다는 한계가 분명해야 합니다.</pre>
       </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
-        <p>서로 다른 채널에서 같은 EventRecordID를 가진 두 기록의 중복 처리 기준을 쓰세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <p class="caption">빈 파일 또는 최소 입력에서 시작하세요. 해설·기준 예제는 시도 후에 열고, 새 입력으로 다시 확인합니다.</p><p>서로 다른 채널에서 같은 EventRecordID를 가진 두 기록의 중복 처리 기준을 쓰세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
         <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>호스트·채널·수집 맥락을 포함해야 합니다. 단일 로그 안의 식별자를 모든 Windows 이벤트의 전역 키로 취급하지 않습니다.</p></details>
         <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
           <tr><th scope="row">개념</th><td>필드 이름과 네임스페이스로 읽었다. — 자기 말로 설명</td></tr>
@@ -136,7 +136,7 @@ records=2 format=synthetic-xml</pre></div>
           <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
           <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
           <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 출처/컴퓨터/채널을 포함해 다른 기록일 수 있다</strong></p><p>기록 번호는 전 세계적으로 유일하지 않습니다. 출처 범위를 포함한 식별이 필요합니다.</p></details>
-        </fieldset></div>
+        </fieldset><details class="written-check"><summary>고르기에서 끝내지 않고 직접 설명하기</summary><p>해설을 닫고 다음 과제의 예상 결과와 근거를 먼저 적으세요.</p><p>서로 다른 채널에서 같은 EventRecordID를 가진 두 기록의 중복 처리 기준을 쓰세요.</p><label for="reasoningNote">내 예상 · 근거 · 확인할 반례</label><textarea id="reasoningNote" rows="4" maxlength="4000" placeholder="이 메모는 저장되지 않습니다. 필요한 기록은 과제 양식에 옮기세요."></textarea><details><summary>작성한 뒤 비교할 기준</summary><p>호스트·채널·수집 맥락을 포함해야 합니다. 단일 로그 안의 식별자를 모든 Windows 이벤트의 전역 키로 취급하지 않습니다.</p><p>예상·실제 출력·차이의 원인이 연결됐는지 확인하세요. 글을 썼다는 사실로 자동 완료되지 않습니다.</p></details></details></div><section class="mastery-panel js-only" hidden><h3>지금 혼자 할 수 있는 수준 기록</h3><p>완료 표시와 별개입니다. 답을 보면서 푼 경우는 ‘따라 함’으로 기록하세요.</p><div class="mastery-actions"><button type="button" class="learning-button small" data-mastery="read" aria-pressed="false">읽음</button><button type="button" class="learning-button small" data-mastery="guided" aria-pressed="false">따라 함</button><button type="button" class="learning-button small" data-mastery="independent" aria-pressed="false">독립 해결</button><button type="button" class="learning-button small" data-mastery="review" aria-pressed="false">재도전 필요</button></div><p id="masteryFeedback" role="status"></p><a href="../../learn/review.html">내 복습 목록 ↗</a></section>
             <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>필드 이름과 네임스페이스로 읽었다.</li><li>기록 번호가 유일한 출처 범위를 명시했다.</li></ul>
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="경로의 이전·다음 단계"><a href="forensic.log-correlation.html"><small>← 이전 단계</small>호스트·세션을 잇는 다중 로그 상관</a>

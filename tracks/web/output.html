@@ -17,26 +17,26 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/web/output.html">
 <title>출력 컨텍스트와 XSS 방어 — Web Hacking · Bifrost</title>
-<script src="../../js/theme.js?v=learning-91164da9fa95"></script>
-<link rel="icon" href="../../assets/logo.svg?v=learning-91164da9fa95" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-91164da9fa95">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-91164da9fa95">
+<script src="../../js/theme.js?v=learning-dcac82a7ff60"></script>
+<link rel="icon" href="../../assets/logo.svg?v=learning-dcac82a7ff60" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-dcac82a7ff60">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-dcac82a7ff60">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-91164da9fa95">
-<link rel="stylesheet" href="../../css/study.css?v=learning-91164da9fa95">
-<script src="../../js/catalog.js?v=learning-91164da9fa95" defer></script>
-<script src="../../js/courses/web.js?v=learning-91164da9fa95" defer></script>
-<script src="../../js/progress.js" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-dcac82a7ff60">
+<link rel="stylesheet" href="../../css/study.css?v=learning-dcac82a7ff60">
+<script src="../../js/catalog.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/courses/web.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/progress.js?v=learning-dcac82a7ff60" defer></script>
 
 
-<script src="../../js/learning-view.js?v=learning-91164da9fa95" defer></script>
-<script src="../../js/learning.js?v=learning-91164da9fa95" defer></script>
+<script src="../../js/learning-view.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/learning.js?v=learning-dcac82a7ff60" defer></script>
 </head>
 <body class="learning-page" data-course="web" data-course-number="08" data-view="lesson" data-lesson-id="web.output" data-path="" style="--course-accent:var(--map-blue)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-91164da9fa95" width="34" height="34" alt=""></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">웹 보안 목차</a></nav>
+  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-dcac82a7ff60" width="34" height="34" alt=""></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">웹 보안 목차</a><a href="../../wargame/">워게임</a><a href="../../learn/review.html">내 복습</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -90,9 +90,9 @@
       </aside><article class="lesson-article">
           
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/web.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">02 · 권한·입력 처리·검증 · 6 / 17</div><h1>출력 컨텍스트와 XSS 방어</h1><p class="lesson-objective">브라우저에서 데이터를 코드로 해석하지 않도록 출력 방법을 고릅니다.</p></div></header>
-          <div class="lesson-meta"><span>기초</span><span>학습 25–45분</span><span>처음 준비 0–30분</span></div>
-        <p class="caption">시간은 설치 경험에 따라 달라지는 저자 추정입니다. 목표별 경로에서 핵심 차시를 고르거나 이 분야를 순서대로 진행하세요.</p>
-        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>인증과 대상 자원의 인가는 같은 검사인가요?</p><details><summary>판단 기준과 보충 자료</summary><p>인증은 주체 확인, 인가는 주체·대상·행동의 허용 판단입니다. 세션이 유효해도 타인의 자원은 거부해야 합니다.</p><a href="../../guides/bridges.html#web">막힌 기초를 짧게 연결하기 ↗</a></details></details>
+          <div class="lesson-meta"><span>응용</span><span>학습 40–65분</span><span>처음 준비 0–10분</span></div>
+        <p class="caption">개념 수·도구 전환·독립 과제를 고려한 편집자 추정이며 학습자 실측 전입니다.</p>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>일반 사용자 닉네임을 글자로 표시하는 데 가장 직접적인 API는?</p><fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend><label><input type="radio" name="readiness" value="0"> 임의 문자열을 innerHTML에 넣는다.</label><label><input type="radio" name="readiness" value="1"> textContent로 텍스트를 넣는다.</label><label><input type="radio" name="readiness" value="2"> 문자열 앞에 script 태그를 붙인다.</label><button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset><details><summary>판단 기준과 보충 자료</summary><p>닉네임에 HTML 해석이 필요 없으므로 텍스트 API가 목적에 맞습니다. 입력의 태그 모양을 코드로 해석할 이유가 없습니다.</p><a href="../../guides/bridges.html#web">막힌 기초를 짧게 연결하기 ↗</a></details></details><details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl><dt>명령 실행 또는 입력 파일 찾기에서 막힘</dt><dd>브라우저와 Python 3 · 출력 비교인지 확인합니다. browser.html이 있는 작업 사본 폴더에서 실행하고 원본과 편집한 파일의 위치를 비교하세요.</dd><dt>이미 인코딩된 값을 매번 다시 인코딩한다.</dt><dd>어느 출력 경계에서 변환하는지 정하고 원본 데이터와 표시용 표현을 구분합니다.</dd></dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
           <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>브라우저와 Python 3 · 출력 비교</strong></p><ul><li>browser.html과 demo.py를 각각 준비합니다. 브라우저 예제와 Python 출력은 서로 다른 관찰 단계입니다.</li><li>이 차시는 고정된 무해한 태그만 비교합니다. 외부 페이지나 사용자 계정에 입력을 보내지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="flow.html">웹 보안 · HTML·DOM과 요청 흐름 ↗</a></li><li><a href="sql-injection.html">웹 보안 · SQL Injection과 바인딩 ↗</a></li></ul>
@@ -118,7 +118,7 @@
         
         <h3>결과를 판단하는 기준</h3><pre>두 p의 textContent는 같은 문자열이고 DOM에 sample에서 생긴 b 요소가 없어야 합니다. HTML 텍스트·URL·스크립트 문맥의 차이도 서술해야 합니다.</pre>
       </div></details><p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p><section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
-        <p>동일 문자열을 HTML 본문·속성·URL에 넣는 세 상황의 처리 방법을 비교하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
+        <p class="caption">빈 파일 또는 최소 입력에서 시작하세요. 해설·기준 예제는 시도 후에 열고, 새 입력으로 다시 확인합니다.</p><p>동일 문자열을 HTML 본문·속성·URL에 넣는 세 상황의 처리 방법을 비교하세요.</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
         <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>본문 textContent, 안전한 DOM 속성 사용, URL 스킴·목적 검증을 구별합니다. 한 종류의 HTML 이스케이프를 모든 문맥의 해결책으로 쓰지 않습니다.</p></details>
         <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
           <tr><th scope="row">개념</th><td>HTML 해석 여부를 DOM에서 확인했다. — 자기 말로 설명</td></tr>
@@ -140,7 +140,7 @@
           <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
           <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
           <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 아니다. 주소의 스킴과 허용 정책을 별도로 검사해야 한다.</strong></p><p>HTML 표현과 URL 의미 검증은 다른 경계입니다. 인코딩은 위험한 주소 스킴 자체를 허용·거부하는 정책이 아닙니다.</p></details>
-        </fieldset></div>
+        </fieldset><details class="written-check"><summary>고르기에서 끝내지 않고 직접 설명하기</summary><p>해설을 닫고 다음 과제의 예상 결과와 근거를 먼저 적으세요.</p><p>동일 문자열을 HTML 본문·속성·URL에 넣는 세 상황의 처리 방법을 비교하세요.</p><label for="reasoningNote">내 예상 · 근거 · 확인할 반례</label><textarea id="reasoningNote" rows="4" maxlength="4000" placeholder="이 메모는 저장되지 않습니다. 필요한 기록은 과제 양식에 옮기세요."></textarea><details><summary>작성한 뒤 비교할 기준</summary><p>본문 textContent, 안전한 DOM 속성 사용, URL 스킴·목적 검증을 구별합니다. 한 종류의 HTML 이스케이프를 모든 문맥의 해결책으로 쓰지 않습니다.</p><p>예상·실제 출력·차이의 원인이 연결됐는지 확인하세요. 글을 썼다는 사실로 자동 완료되지 않습니다.</p></details></details></div><section class="mastery-panel js-only" hidden><h3>지금 혼자 할 수 있는 수준 기록</h3><p>완료 표시와 별개입니다. 답을 보면서 푼 경우는 ‘따라 함’으로 기록하세요.</p><div class="mastery-actions"><button type="button" class="learning-button small" data-mastery="read" aria-pressed="false">읽음</button><button type="button" class="learning-button small" data-mastery="guided" aria-pressed="false">따라 함</button><button type="button" class="learning-button small" data-mastery="independent" aria-pressed="false">독립 해결</button><button type="button" class="learning-button small" data-mastery="review" aria-pressed="false">재도전 필요</button></div><p id="masteryFeedback" role="status"></p><a href="../../learn/review.html">내 복습 목록 ↗</a></section>
             <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>HTML 해석 여부를 DOM에서 확인했다.</li><li>HTML 인코딩의 적용 범위와 한계를 적었다.</li></ul>
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="sql-injection.html"><small>← 이전 차시</small>SQL Injection과 바인딩</a>
