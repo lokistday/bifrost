@@ -17,28 +17,28 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/paths/cloud-operations/cloud.iac-review.html">
 <title>인프라 변경 계획과 영향 범위 — 클라우드 방어와 복구 검증 · Bifrost</title>
-<script src="../../js/theme.js?v=learning-d45d76f7835a"></script>
-<script src="../../js/pointer-trail.js?v=learning-d45d76f7835a" defer></script>
-<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-d45d76f7835a">
-<link rel="icon" href="../../assets/logo.svg?v=learning-d45d76f7835a" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-d45d76f7835a">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-d45d76f7835a">
+<script src="../../js/theme.js?v=learning-df5000eecc77"></script>
+<script src="../../js/pointer-trail.js?v=learning-df5000eecc77" defer></script>
+<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-df5000eecc77">
+<link rel="icon" href="../../assets/logo.svg?v=learning-df5000eecc77" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-df5000eecc77">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-df5000eecc77">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-d45d76f7835a">
-<link rel="stylesheet" href="../../css/study.css?v=learning-d45d76f7835a">
-<script src="../../js/catalog.js?v=learning-d45d76f7835a" defer></script>
-<script src="../../js/courses/cloud.js?v=learning-d45d76f7835a" defer></script>
-<script src="../../js/progress.js?v=learning-d45d76f7835a" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-df5000eecc77">
+<link rel="stylesheet" href="../../css/study.css?v=learning-df5000eecc77">
+<script src="../../js/catalog.js?v=learning-df5000eecc77" defer></script>
+<script src="../../js/courses/cloud.js?v=learning-df5000eecc77" defer></script>
+<script src="../../js/progress.js?v=learning-df5000eecc77" defer></script>
 
-<script src="../../js/learning-paths.js?v=learning-d45d76f7835a" defer></script>
-<script src="../../js/path-progress.js?v=learning-d45d76f7835a" defer></script>
-<script src="../../js/learning-view.js?v=learning-d45d76f7835a" defer></script>
-<script src="../../js/learning.js?v=learning-d45d76f7835a" defer></script>
+<script src="../../js/learning-paths.js?v=learning-df5000eecc77" defer></script>
+<script src="../../js/path-progress.js?v=learning-df5000eecc77" defer></script>
+<script src="../../js/learning-view.js?v=learning-df5000eecc77" defer></script>
+<script src="../../js/learning.js?v=learning-df5000eecc77" defer></script>
 </head>
 <body class="learning-page" data-course="cloud" data-course-number="04" data-view="lesson" data-lesson-id="cloud.iac-review" data-path="cloud-operations" style="--course-accent:var(--map-sky)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-d45d76f7835a" width="34" height="34" alt=""></span><span>BIFROST</span></a>
+  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-df5000eecc77" width="34" height="34" alt=""></span><span>BIFROST</span></a>
   <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">학습 경로</a><a href="./#pathOutline">클라우드 보안 목차</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
@@ -152,8 +152,15 @@ web-replicas CHANGE_REVIEW
 changes=3 automatic_apply=NO</pre></div></li><li><h3>삭제 변경 분리</h3><p>데이터를 잃을 수 있는 항목만 별도로 추려 복원 시험을 계획합니다.</p>
         <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 오프라인 모델 실습 · Python 3.10 이상</span></div><pre><code>python3 -c &quot;from operations import load;print([r[&#39;resource&#39;] for r in load()[&#39;changes&#39;] if r[&#39;operation&#39;]==&#39;delete&#39;])&quot;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>[&#39;notes-data&#39;]</pre></div></li><li><h3>실제 정책 문서 변경 검토 · 준비</h3><p>ZIP 전체의 cloud 폴더에서 실제 형식 문서와 함께 실행합니다. 표준 라이브러리 오프라인 부분집합 판정입니다. 전체 IAM/클러스터를 검증한 결과가 아닙니다.</p>
         <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 오프라인 모델 실습 · Python 3.10 이상</span></div><pre><code>python3 policy_workshop.py iam
-python3 policy_workshop.py rbac</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>기본 예제는 각각 ALLOW_MODEL이며 scope=offline subset이 함께 나옵니다. 미지원 정책은 종료 2입니다.</pre></div></li><li><h3>실제 정책 문서 변경 검토 · 독립 검증</h3><p>정상 pods 읽기를 유지하면서 비밀 조회를 거부하는 정책 사본과 변경 전후 검증표를 작성하세요. 실행 전 예상, 실제 응답·정책 근거, 차이, 미확인 범위를 적습니다. 자세한 단계는 POLICY-WORKSHOP.md를 확인하세요.</p>
-        <div class="step-observation"><strong>관찰할 결과</strong><pre>정상·거부 사례와 판정 범위가 구분된 기록을 남깁니다.</pre></div></li></ol></section>
+python3 policy_workshop.py rbac</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>ALLOW_MODEL
+scope=offline subset; production permission NOT verified
+ALLOW_MODEL
+scope=offline subset; production permission NOT verified</pre></div></li><li><h3>실제 정책 문서 변경 검토 · 독립 검증</h3><p>정상 pods 읽기를 유지하면서 비밀 조회를 거부하는 정책 사본과 변경 전후 검증표를 작성하세요. 실행 전 예상, 실제 응답·정책 근거, 차이, 미확인 범위를 적습니다. 자세한 단계는 POLICY-WORKSHOP.md를 확인하세요.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 오프라인 모델 실습 · Python 3.10 이상</span></div><pre><code>python3 policy_workshop.py iam --action s3:DeleteObject
+python3 policy_workshop.py rbac --resource secrets</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>IMPLICIT_DENY_MODEL
+scope=offline subset; production permission NOT verified
+NO_ALLOW_IN_THIS_DOCUMENT
+scope=offline subset; production permission NOT verified</pre></div></li></ol></section>
           <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>각 변경에 목적, 영향을 받는 자산, 정상·거부 시험, 승인자, 되돌리기 조건을 쓰세요. notes-data 삭제는 단순 재생성으로 원래 데이터를 복원할 수 있는지도 구분합니다. 정상 pods 읽기를 유지하면서 비밀 조회를 거부하는 정책 사본과 변경 전후 검증표를 작성하세요.</p>
             <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>자원 모양을 되돌리는 것과 삭제된 데이터를 되살리는 것은 다릅니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
         <ol><li>admin-ingress는 지정 관리망 밖의 거부 시험과 대체 관리 경로를 적습니다.</li><li>notes-data는 백업 시점·복원 가능한 데이터 범위·복원 시험을 요구합니다.</li><li>web-replicas도 용량·비용·상태 공유·롤백을 검토하며 승인된 계획과 적용 대상을 일치시킵니다.</li></ol>

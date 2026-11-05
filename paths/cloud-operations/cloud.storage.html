@@ -17,28 +17,28 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/paths/cloud-operations/cloud.storage.html">
 <title>오브젝트 저장소와 데이터 공개 — 클라우드 방어와 복구 검증 · Bifrost</title>
-<script src="../../js/theme.js?v=learning-d45d76f7835a"></script>
-<script src="../../js/pointer-trail.js?v=learning-d45d76f7835a" defer></script>
-<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-d45d76f7835a">
-<link rel="icon" href="../../assets/logo.svg?v=learning-d45d76f7835a" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-d45d76f7835a">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-d45d76f7835a">
+<script src="../../js/theme.js?v=learning-df5000eecc77"></script>
+<script src="../../js/pointer-trail.js?v=learning-df5000eecc77" defer></script>
+<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-df5000eecc77">
+<link rel="icon" href="../../assets/logo.svg?v=learning-df5000eecc77" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-df5000eecc77">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-df5000eecc77">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-d45d76f7835a">
-<link rel="stylesheet" href="../../css/study.css?v=learning-d45d76f7835a">
-<script src="../../js/catalog.js?v=learning-d45d76f7835a" defer></script>
-<script src="../../js/courses/cloud.js?v=learning-d45d76f7835a" defer></script>
-<script src="../../js/progress.js?v=learning-d45d76f7835a" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-df5000eecc77">
+<link rel="stylesheet" href="../../css/study.css?v=learning-df5000eecc77">
+<script src="../../js/catalog.js?v=learning-df5000eecc77" defer></script>
+<script src="../../js/courses/cloud.js?v=learning-df5000eecc77" defer></script>
+<script src="../../js/progress.js?v=learning-df5000eecc77" defer></script>
 
-<script src="../../js/learning-paths.js?v=learning-d45d76f7835a" defer></script>
-<script src="../../js/path-progress.js?v=learning-d45d76f7835a" defer></script>
-<script src="../../js/learning-view.js?v=learning-d45d76f7835a" defer></script>
-<script src="../../js/learning.js?v=learning-d45d76f7835a" defer></script>
+<script src="../../js/learning-paths.js?v=learning-df5000eecc77" defer></script>
+<script src="../../js/path-progress.js?v=learning-df5000eecc77" defer></script>
+<script src="../../js/learning-view.js?v=learning-df5000eecc77" defer></script>
+<script src="../../js/learning.js?v=learning-df5000eecc77" defer></script>
 </head>
 <body class="learning-page" data-course="cloud" data-course-number="04" data-view="lesson" data-lesson-id="cloud.storage" data-path="cloud-operations" style="--course-accent:var(--map-sky)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-d45d76f7835a" width="34" height="34" alt=""></span><span>BIFROST</span></a>
+  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-df5000eecc77" width="34" height="34" alt=""></span><span>BIFROST</span></a>
   <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">학습 경로</a><a href="./#pathOutline">클라우드 보안 목차</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
@@ -147,8 +147,15 @@ python3 review.py config-work.json</code></pre></div><div class="expected-output
         <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 가상 저장소 정책 검토 · Python 3.10 이상</span></div><pre><code>python3 review.py config-work.json</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>storage.public과 storage.encrypted가 PASS입니다. 문자열로 바꾸면 자료형 오류로 INVALID입니다.</pre></div></li><li><h3>복원 검증 추가</h3><p>삭제/덮어쓰기/권한 변경을 사고 시나리오로 정하고 어느 버전·백업으로 누가 복원할지 씁니다. 복원 뒤 해시·읽기 권한도 확인하도록 설계합니다.</p>
         <div class="step-observation"><strong>관찰할 결과</strong><pre>접근 통제·암호화·보존·복원이 다른 항목으로 기록됩니다.</pre></div></li><li><h3>버킷과 객체 권한 구분 · 준비</h3><p>ZIP 전체의 cloud 폴더에서 실제 형식 문서와 함께 실행합니다. 표준 라이브러리 오프라인 부분집합 판정입니다. 전체 IAM/클러스터를 검증한 결과가 아닙니다.</p>
         <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 가상 저장소 정책 검토 · Python 3.10 이상</span></div><pre><code>python3 policy_workshop.py iam
-python3 policy_workshop.py rbac</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>기본 예제는 각각 ALLOW_MODEL이며 scope=offline subset이 함께 나옵니다. 미지원 정책은 종료 2입니다.</pre></div></li><li><h3>버킷과 객체 권한 구분 · 독립 검증</h3><p>객체 읽기·목록 조회·다른 버킷·private 경로의 허용 여부를 먼저 예측하고 비교하세요. 실행 전 예상, 실제 응답·정책 근거, 차이, 미확인 범위를 적습니다. 자세한 단계는 POLICY-WORKSHOP.md를 확인하세요.</p>
-        <div class="step-observation"><strong>관찰할 결과</strong><pre>정상·거부 사례와 판정 범위가 구분된 기록을 남깁니다.</pre></div></li></ol></section>
+python3 policy_workshop.py rbac</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>ALLOW_MODEL
+scope=offline subset; production permission NOT verified
+ALLOW_MODEL
+scope=offline subset; production permission NOT verified</pre></div></li><li><h3>버킷과 객체 권한 구분 · 독립 검증</h3><p>객체 읽기·목록 조회·다른 버킷·private 경로의 허용 여부를 먼저 예측하고 비교하세요. 실행 전 예상, 실제 응답·정책 근거, 차이, 미확인 범위를 적습니다. 자세한 단계는 POLICY-WORKSHOP.md를 확인하세요.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 가상 저장소 정책 검토 · Python 3.10 이상</span></div><pre><code>python3 policy_workshop.py iam --action s3:DeleteObject
+python3 policy_workshop.py rbac --resource secrets</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>IMPLICIT_DENY_MODEL
+scope=offline subset; production permission NOT verified
+NO_ALLOW_IN_THIS_DOCUMENT
+scope=offline subset; production permission NOT verified</pre></div></li></ol></section>
           <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>공개 자료와 비공개 학습 노트의 읽기 주체·보존·백업·복원 시험을 표로 작성하세요. 객체 읽기·목록 조회·다른 버킷·private 경로의 허용 여부를 먼저 예측하고 비교하세요.</p>
             <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>암호화 활성화만으로 공개 접근 문제가 사라지는 것은 아닙니다.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
         <ol><li>비공개 노트라는 모델 가정에 따라 익명 접근을 막고 저장 암호화 의도를 켭니다.</li><li>정상 권한 읽기 성공·익명 읽기 거부·무권한 변경 거부를 실제 검증 항목으로 씁니다.</li><li>보존·버전·독립 백업·복원 권한/시험을 표로 정하고 로컬 검사로 완료되지 않았음을 표시합니다.</li></ol>

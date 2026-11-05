@@ -17,28 +17,28 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/paths/cloud-operations/cloud.kubernetes-rbac.html">
 <title>Kubernetes 네임스페이스와 RBAC — 클라우드 방어와 복구 검증 · Bifrost</title>
-<script src="../../js/theme.js?v=learning-d45d76f7835a"></script>
-<script src="../../js/pointer-trail.js?v=learning-d45d76f7835a" defer></script>
-<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-d45d76f7835a">
-<link rel="icon" href="../../assets/logo.svg?v=learning-d45d76f7835a" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-d45d76f7835a">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-d45d76f7835a">
+<script src="../../js/theme.js?v=learning-df5000eecc77"></script>
+<script src="../../js/pointer-trail.js?v=learning-df5000eecc77" defer></script>
+<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-df5000eecc77">
+<link rel="icon" href="../../assets/logo.svg?v=learning-df5000eecc77" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-df5000eecc77">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-df5000eecc77">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-d45d76f7835a">
-<link rel="stylesheet" href="../../css/study.css?v=learning-d45d76f7835a">
-<script src="../../js/catalog.js?v=learning-d45d76f7835a" defer></script>
-<script src="../../js/courses/cloud.js?v=learning-d45d76f7835a" defer></script>
-<script src="../../js/progress.js?v=learning-d45d76f7835a" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-df5000eecc77">
+<link rel="stylesheet" href="../../css/study.css?v=learning-df5000eecc77">
+<script src="../../js/catalog.js?v=learning-df5000eecc77" defer></script>
+<script src="../../js/courses/cloud.js?v=learning-df5000eecc77" defer></script>
+<script src="../../js/progress.js?v=learning-df5000eecc77" defer></script>
 
-<script src="../../js/learning-paths.js?v=learning-d45d76f7835a" defer></script>
-<script src="../../js/path-progress.js?v=learning-d45d76f7835a" defer></script>
-<script src="../../js/learning-view.js?v=learning-d45d76f7835a" defer></script>
-<script src="../../js/learning.js?v=learning-d45d76f7835a" defer></script>
+<script src="../../js/learning-paths.js?v=learning-df5000eecc77" defer></script>
+<script src="../../js/path-progress.js?v=learning-df5000eecc77" defer></script>
+<script src="../../js/learning-view.js?v=learning-df5000eecc77" defer></script>
+<script src="../../js/learning.js?v=learning-df5000eecc77" defer></script>
 </head>
 <body class="learning-page" data-course="cloud" data-course-number="04" data-view="lesson" data-lesson-id="cloud.kubernetes-rbac" data-path="cloud-operations" style="--course-accent:var(--map-sky)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-d45d76f7835a" width="34" height="34" alt=""></span><span>BIFROST</span></a>
+  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-df5000eecc77" width="34" height="34" alt=""></span><span>BIFROST</span></a>
   <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">학습 경로</a><a href="./#pathOutline">클라우드 보안 목차</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
@@ -152,8 +152,15 @@ K4 DENY</pre></div></li><li><h3>역할이 허용한 자원 읽기</h3><p>get/lis
         <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 로컬 파일 실습 · Python 3.10 이상</span></div><pre><code>python3 -c &quot;from boundary_models import load;r=load()[&#39;role&#39;];print(r[&#39;namespace&#39;],r[&#39;rules&#39;][0][&#39;resource&#39;],r[&#39;rules&#39;][0][&#39;verbs&#39;])&quot;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>learn pods [&#39;get&#39;, &#39;list&#39;]</pre></div></li><li><h3>다른 네임스페이스의 주체 연결</h3><p>주체를 명시적으로 other/viewer로 바꾸면 K4가 맞습니다.</p>
         <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 로컬 파일 실습 · Python 3.10 이상</span></div><pre><code>python3 -c &quot;from boundary_models import load,rbac_allowed;d=load();b={**d[&#39;binding&#39;],&#39;subject&#39;:{&#39;namespace&#39;:&#39;other&#39;,&#39;name&#39;:&#39;viewer&#39;}};print(rbac_allowed(d[&#39;rbac_requests&#39;][0],d[&#39;role&#39;],b),rbac_allowed(d[&#39;rbac_requests&#39;][3],d[&#39;role&#39;],b))&quot;</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>False True</pre></div></li><li><h3>Role YAML에서 실제 인가 질의까지 · 준비</h3><p>ZIP 전체의 cloud 폴더에서 실제 형식 문서와 함께 실행합니다. 표준 라이브러리 오프라인 부분집합 판정입니다. 전체 IAM/클러스터를 검증한 결과가 아닙니다.</p>
         <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 로컬 파일 실습 · Python 3.10 이상</span></div><pre><code>python3 policy_workshop.py iam
-python3 policy_workshop.py rbac</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>기본 예제는 각각 ALLOW_MODEL이며 scope=offline subset이 함께 나옵니다. 미지원 정책은 종료 2입니다.</pre></div></li><li><h3>Role YAML에서 실제 인가 질의까지 · 독립 검증</h3><p>pods/get, secrets/get, 다른 네임스페이스의 3개 요청을 비교하세요. 선택 실습은 지정한 새 교육 클러스터에서만 진행하고 정리합니다. 실행 전 예상, 실제 응답·정책 근거, 차이, 미확인 범위를 적습니다. 자세한 단계는 POLICY-WORKSHOP.md를 확인하세요.</p>
-        <div class="step-observation"><strong>관찰할 결과</strong><pre>정상·거부 사례와 판정 범위가 구분된 기록을 남깁니다.</pre></div></li></ol></section>
+python3 policy_workshop.py rbac</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>ALLOW_MODEL
+scope=offline subset; production permission NOT verified
+ALLOW_MODEL
+scope=offline subset; production permission NOT verified</pre></div></li><li><h3>Role YAML에서 실제 인가 질의까지 · 독립 검증</h3><p>pods/get, secrets/get, 다른 네임스페이스의 3개 요청을 비교하세요. 선택 실습은 지정한 새 교육 클러스터에서만 진행하고 정리합니다. 실행 전 예상, 실제 응답·정책 근거, 차이, 미확인 범위를 적습니다. 자세한 단계는 POLICY-WORKSHOP.md를 확인하세요.</p>
+        <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 로컬 파일 실습 · Python 3.10 이상</span></div><pre><code>python3 policy_workshop.py iam --action s3:DeleteObject
+python3 policy_workshop.py rbac --resource secrets</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>IMPLICIT_DENY_MODEL
+scope=offline subset; production permission NOT verified
+NO_ALLOW_IN_THIS_DOCUMENT
+scope=offline subset; production permission NOT verified</pre></div></li></ol></section>
           <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>Role에 secrets/get을 추가하는 제안의 영향을 적으세요. binding의 subject.namespace를 other로 바꾸면 K1과 K4 중 어느 요청이 허용되는지도 사본에서 확인합니다. pods/get, secrets/get, 다른 네임스페이스의 3개 요청을 비교하세요. 선택 실습은 지정한 새 교육 클러스터에서만 진행하고 정리합니다.</p>
             <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>바인딩이 적용되는 네임스페이스와 주체 ServiceAccount의 네임스페이스를 분리해 읽으세요.</p></details><details class="solution"><summary>과제 해설과 예시 답안 보기</summary><div class="solution-body">
         <ol><li>현재 역할은 pods만 허용하므로 secrets 요청 K3은 DENY라고 적습니다.</li><li>secrets 읽기는 민감한 자격 정보 접근을 넓힐 수 있어 목적·대상·대체 신원·감사를 검토합니다.</li><li>subject를 other로 바꾼 사본은 K1 DENY, K4 ALLOW_MODEL이며 대상 자원은 여전히 learn 범위임을 확인합니다.</li></ol>
