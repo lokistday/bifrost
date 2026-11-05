@@ -4,6 +4,7 @@ import importlib.util
 import subprocess
 import sys
 import unittest
+from pwn_exam_answers_test import SystemExamTest
 import tempfile
 from pathlib import Path
 

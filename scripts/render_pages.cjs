@@ -2,6 +2,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
+const crypto = require('node:crypto');
 const ROOT = path.resolve(__dirname, '..');
 const { create, esc, all, slug } = require('../js/learning-view.js');
 const site = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/site.json'), 'utf8'));
@@ -32,7 +33,7 @@ function page(course, lesson, legacy = false, learningPath = null) {
   const note = legacy
     ? '<noscript><p class="environment-note">이전 형식의 차시 주소입니다. 아래 목차에서 차시를 선택하면 JavaScript 없이도 본문을 읽을 수 있습니다.</p></noscript>'
     : '<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript>';
-  return fill(template, {
+  const html = fill(template, {
     TITLE: esc(title), DESCRIPTION: esc(lesson ? lesson.goal : course.subtitle),
     CANONICAL: esc(site.url + route), SITE_URL: esc(site.url), CONTENT_VERSION: contentVersion,
     COURSE: course.id, NUMBER: course.number, VIEW: lesson || legacy ? 'lesson' : 'course',
@@ -42,6 +43,10 @@ function page(course, lesson, legacy = false, learningPath = null) {
     RENDERED: legacy ? 'legacy' : lesson?.id || 'course', CONTENT: note + content,
     VISUAL_SCRIPTS: legacy ? `<script src="../../js/visual-data.js?v=${contentVersion}" defer></script>\n<script src="../../js/visuals.js?v=${contentVersion}" defer></script>` : ''
   });
+  // New subject exams change their course bundle without invalidating every page.
+  const scoped = course.id !== 'foundation' && course.modules.some(m => m.exam);
+  const courseVersion = scoped ? 'course-' + crypto.createHash('sha256').update(read(`js/courses/${course.id}.js`)).digest('hex').slice(0,12) : contentVersion;
+  return html.replace(`js/courses/${course.id}.js?v=${contentVersion}`, `js/courses/${course.id}.js?v=${courseVersion}`);
 }
 const routes = ['', 'guides/linux.html'];
 routes.push(...require('./render_learning_tools.cjs')({ ROOT, courses, site, fill, write }));

@@ -102,12 +102,14 @@ for(const id of ['foundation.environment','foundation.paths']){
 }
 assert.ok(read('sitemap.xml').includes('exams/foundation-01.html'));
 const foundation=JSON.parse(read('content/courses/foundation.json'));
-assert.equal(examFiles.length,5,'All five Foundation modules have an exam');
+assert.equal(examFiles.filter(f=>f.startsWith('foundation-')).length,5,'All five Foundation modules have an exam');
+assert.equal(examFiles.filter(f=>f.startsWith('pwn-')).length,6,'All six System Security modules have an exam');
 const authoredIds=new Set();
 for(const file of examFiles){
   const exam=JSON.parse(read('content/exams/'+file));
   assert.equal(exam.questions.length,25);
-  const module=foundation.modules[exam.module-1];
+  const course=JSON.parse(read(`content/courses/${exam.course}.json`));
+  const module=course.modules[exam.module-1];
   assert.deepEqual([...new Set(exam.questions.map(q=>q.lesson))].sort(),module.lessons.map(l=>l.id).sort());
   const balance=[0,0,0,0];
   for(const q of exam.questions){
@@ -127,7 +129,7 @@ for(const file of examFiles){
   newPage.click('wrongOnly');
   assert.equal([...newPage.document.querySelectorAll('[data-exam-question]')].filter(f=>!f.hidden).length,3);
   for(const lesson of module.lessons){
-    const doc=parseHTML(read(`tracks/foundation/${lesson.id.split('.')[1]}.html`)).document;
+    const doc=parseHTML(read(`tracks/${exam.course}/${lesson.id.split('.')[1]}.html`)).document;
     assert.equal(doc.querySelectorAll('[data-question]').length,0);
     assert.ok(doc.querySelector('.module-exam-link a').getAttribute('href').endsWith(exam.id+'.html'));
     assert.equal(doc.querySelector('#exampleCode').textContent,lesson.code,'Guided exercise code is preserved');

@@ -1,6 +1,7 @@
 /* Module-level mock exams. Only complete, authored banks become available. */
 const fs = require('node:fs');
 const path = require('node:path');
+const crypto = require('node:crypto');
 const {esc, slug} = require('../js/learning-view.js');
 module.exports = ({ROOT, courses, site, fill, write}) => {
   const banks = fs.readdirSync(path.join(ROOT, 'content/exams')).filter(f => f.endsWith('.json'))
@@ -35,8 +36,9 @@ module.exports = ({ROOT, courses, site, fill, write}) => {
       <form id="examForm"><div id="examQuestions">${bank.questions.map((q,i)=>`<fieldset class="exam-question" id="exam-q-${q.id}" data-exam-question="${q.id}"><legend><span class="overline">QUESTION ${String(i+1).padStart(2,'0')}</span><span class="exam-prompt">${i+1}. ${esc(q.prompt)}</span></legend>${q.code?`<pre class="exam-code"><code>${esc(q.code)}</code></pre>`:''}${q.options.map((o,n)=>`<label class="exam-option"><input type="radio" name="${q.id}" value="${n}"><span><b>${n+1}</b> ${esc(o)}</span></label>`).join('')}<div class="exam-explanation" data-explanation="${q.id}" hidden></div></fieldset>`).join('')}</div><div id="examSubmit" class="exam-submit"><p id="examFeedback" role="status" aria-live="polite"></p><button type="submit" class="learning-button primary" id="submitExam">25문항 제출하고 채점하기</button></div></form></div></div>`;
     // Each detail page loads only its own question bank.
     write(`js/exams/${bank.id}.js`, '/* Generated from content/exams; do not edit. */\nwindow.BifrostExam = ' + JSON.stringify({...bank,lessonTitles:Object.fromEntries(m.lessons.map(l=>[l.id,l.title]))}) + ';\n');
+    const bankVersion = bank.course === 'foundation' ? version : 'exam-' + crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT, `js/exams/${bank.id}.js`))).digest('hex').slice(0,12);
     emit(bank.id+'.html', bank.title+' 모의고사', `${c.label} 모듈 ${bank.module} · 25문항 모의고사`, content,
-      `<script src="../js/exams/${bank.id}.js?v=${version}" defer></script>\n<script src="../js/exam.js?v=${version}" defer></script>`);
+      `<script src="../js/exams/${bank.id}.js?v=${bankVersion}" defer></script>\n<script src="../js/exam.js?v=${version}" defer></script>`);
   }
   return routes;
 };
