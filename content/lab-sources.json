@@ -20,7 +20,12 @@
     "project-role.json",
     "project_reference.py",
     "responsibility.csv",
-    "review.py"
+    "review.py",
+    "policy_workshop.py",
+    "iam-reader.json",
+    "rbac-resources.json",
+    "role-example.yaml",
+    "POLICY-WORKSHOP.md"
   ],
   "crypto": [
     "ADVANCED-GUIDE.md",
@@ -211,6 +216,13 @@
     "requests.txt",
     "response-policy.txt",
     "web_controls.py",
-    "web_state.py"
+    "web_state.py",
+    "http_workshop.py",
+    "http-workshop.html",
+    "http-workshop.js",
+    "http-workshop.css",
+    "cors-probe.html",
+    "cors-probe.js",
+    "HTTP-WORKSHOP.md"
   ]
 }

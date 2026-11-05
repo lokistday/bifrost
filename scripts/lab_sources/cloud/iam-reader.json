@@ -1,0 +1,7 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {"Sid":"ReadTrainingObjects","Effect":"Allow","Action":["s3:GetObject"],"Resource":["arn:aws:s3:::bifrost-training-notes/*"]},
+    {"Sid":"KeepPrivatePrefixDenied","Effect":"Deny","Action":["s3:GetObject"],"Resource":["arn:aws:s3:::bifrost-training-notes/private/*"]}
+  ]
+}

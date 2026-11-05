@@ -2,7 +2,7 @@
 
 Python 3.10 이상의 표준 라이브러리만 사용합니다. 압축을 푼 web 폴더에서
 Linux/WSL/macOS는 `python3`, Windows PowerShell은 `py -3`로 실행합니다.
-외부 요청·서버·실제 쿠키·계정은 없습니다. `.invalid` 주소와 토큰은 공개 교육 표본입니다.
+기존 아래 모형에는 외부 요청·서버·실제 쿠키·계정이 없습니다. 별도 HTTP-WORKSHOP.md에서는 실제 로컬 HTTP·쿠키·교육용 계정을 다룹니다. `.invalid` 주소와 토큰은 공개 교육 표본입니다.
 
 ## CSRF: 인증된 사용자와 변경 의도
 
