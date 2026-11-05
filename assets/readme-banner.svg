@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" fill="none">
+  <rect width="1200" height="320" rx="18" fill="#0c1012"/>
+  <g stroke="#c9f76a" stroke-opacity=".17">
+    <path d="M690-70C850 120 1060-50 1220 130M720-80C880 100 1080-65 1250 110M750-90C910 80 1100-80 1280 90"/>
+    <path d="m940 105 100-57 100 57v114l-100 57-100-57zm0 0 100 57 100-57m-100 57v114m-50-142 100-57"/>
+  </g>
+  <rect x="64" y="62" width="4" height="22" fill="#c9f76a"/>
+  <text x="80" y="79" fill="#c9f76a" font-family="monospace" font-size="14" letter-spacing="3">CYBERSECURITY LEARNING PLATFORM</text>
+  <text x="60" y="196" fill="#eff2f3" font-family="Arial, sans-serif" font-size="96" font-weight="800" letter-spacing="-4">BIFROST</text>
+  <rect x="505" y="179" width="17" height="17" fill="#c9f76a"/>
+  <text x="65" y="255" fill="#aab5bd" font-family="Arial, sans-serif" font-size="17" letter-spacing="4">LEARN. PRACTICE. BUILD.</text>
+</svg>

@@ -24,7 +24,8 @@ def build(courses):
     (ROOT/'content/site-metrics.json').write_text(json.dumps(metrics,indent=2)+'\n',encoding='utf-8',newline='\n')
     values={key.upper():str(value) for key,value in metrics.items()}
     values['COURSE_TABLE']='\n'.join(f'| {c["title"]} | {sum(len(m["lessons"]) for m in c["modules"])} |' for c in courses.values())
-    for source,dest in [('templates/README.md','README.md'),('templates/og-image.svg','assets/og-image.svg')]:
+    # The repository introduction is authored directly in README.md.
+    for source,dest in [('templates/og-image.svg','assets/og-image.svg')]:
         text=(ROOT/source).read_text(encoding='utf-8')
         for key,value in values.items(): text=text.replace('{{'+key+'}}',value)
         assert '{{' not in text, f'Unfilled metadata template: {source}'
