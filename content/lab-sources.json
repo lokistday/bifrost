@@ -72,7 +72,10 @@
     "project_reference.py",
     "response.json",
     "snapshot.json",
-    "timeline.py"
+    "timeline.py",
+    "signature_lab.py",
+    "signature-fixtures.json",
+    "SIGNATURE-GUIDE.md"
   ],
   "foundation": [
     "LAB-GUIDE.md",

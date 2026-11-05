@@ -40,6 +40,7 @@ jobs:
         run: |
           pnpm test
           python tests/exam_answers_test.py
+          python tests/forensic_signatures_test.py
           python tests/labs_test.py
           python -m unittest discover -s tests -p '*_expansion_test.py' -v
           python tests/learning_revision_test.py
