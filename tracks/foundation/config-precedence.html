@@ -17,26 +17,28 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/foundation/config-precedence.html">
 <title>설정 우선순위와 출처 추적 — Foundation · Bifrost</title>
-<script src="../../js/theme.js?v=learning-dcac82a7ff60"></script>
-<link rel="icon" href="../../assets/logo.svg?v=learning-dcac82a7ff60" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-dcac82a7ff60">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-dcac82a7ff60">
+<script src="../../js/theme.js?v=learning-54a8dcdd07dd"></script>
+<script src="../../js/pointer-trail.js?v=learning-54a8dcdd07dd" defer></script>
+<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-54a8dcdd07dd">
+<link rel="icon" href="../../assets/logo.svg?v=learning-54a8dcdd07dd" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-54a8dcdd07dd">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-54a8dcdd07dd">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-dcac82a7ff60">
-<link rel="stylesheet" href="../../css/study.css?v=learning-dcac82a7ff60">
-<script src="../../js/catalog.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/courses/foundation.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/progress.js?v=learning-dcac82a7ff60" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-54a8dcdd07dd">
+<link rel="stylesheet" href="../../css/study.css?v=learning-54a8dcdd07dd">
+<script src="../../js/catalog.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/courses/foundation.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/progress.js?v=learning-54a8dcdd07dd" defer></script>
 
 
-<script src="../../js/learning-view.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/learning.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/learning-view.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/learning.js?v=learning-54a8dcdd07dd" defer></script>
 </head>
 <body class="learning-page" data-course="foundation" data-course-number="00" data-view="lesson" data-lesson-id="foundation.config-precedence" data-path="" style="--course-accent:var(--map-cyan)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-dcac82a7ff60" width="34" height="34" alt=""></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">공통 기초 목차</a><a href="../../wargame/">워게임</a><a href="../../learn/review.html">내 복습</a></nav>
+  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-54a8dcdd07dd" width="34" height="34" alt=""></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">학습 경로</a><a href="./#courseModules">공통 기초 목차</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -91,7 +93,7 @@
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/foundation.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">05 · 상태와 실행 경계 다루기 · 18 / 20</div><h1>설정 우선순위와 출처 추적</h1><p class="lesson-objective">기본값·파일·환경·명령행의 우선순위를 명시하고 잘못된 설정을 조용히 숨기지 않습니다.</p></div></header>
           <div class="lesson-meta"><span>응용</span><span>학습 35–55분</span><span>처음 준비 0–10분</span></div>
         <p class="caption">개념 수·도구 전환·독립 과제를 고려한 편집자 추정이며 학습자 실측 전입니다.</p>
-        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>파일=10, 환경=&quot;20&quot;, CLI 미지정입니다. 이번 계약의 결과는?</p><fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend><label><input type="radio" name="readiness" value="0"> 10, 파일</label><label><input type="radio" name="readiness" value="1"> 20, 환경</label><label><input type="radio" name="readiness" value="2"> 5, 기본값</label><button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset><details><summary>판단 기준과 보충 자료</summary><p>우선순위는 기본값 &lt; 파일 &lt; 환경 &lt; CLI입니다. 환경값은 자료형·범위를 검증한 후 선택됩니다.</p><a href="../../guides/bridges.html#python">막힌 기초를 짧게 연결하기 ↗</a></details></details><details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl><dt>명령 실행 또는 입력 파일 찾기에서 막힘</dt><dd>Python 3.10 이상 · 표준 라이브러리 · Foundation ZIP인지 확인합니다. workflow.py이 있는 작업 사본 폴더에서 실행하고 원본과 편집한 파일의 위치를 비교하세요.</dd><dt>env.get(key) or default로 빈 설정과 누락을 같은 의미로 처리한다.</dt><dd>빈 문자열을 오류로 볼지 계약을 정하고 키 존재 여부와 값 검증을 분리합니다.</dd></dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>파일=10, 환경=&quot;20&quot;, CLI 미지정입니다. 이번 계약의 결과는?</p><fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend><label><input type="radio" name="readiness" value="0"> 10, 파일</label><label><input type="radio" name="readiness" value="1"> 20, 환경</label><label><input type="radio" name="readiness" value="2"> 5, 기본값</label><button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset><details><summary>판단 기준과 보충 자료</summary><p>우선순위는 기본값 &lt; 파일 &lt; 환경 &lt; CLI입니다. 환경값은 자료형·범위를 검증한 후 선택됩니다.</p></details></details><details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl><dt>명령 실행 또는 입력 파일 찾기에서 막힘</dt><dd>Python 3.10 이상 · 표준 라이브러리 · Foundation ZIP인지 확인합니다. workflow.py이 있는 작업 사본 폴더에서 실행하고 원본과 편집한 파일의 위치를 비교하세요.</dd><dt>env.get(key) or default로 빈 설정과 누락을 같은 의미로 처리한다.</dt><dd>빈 문자열을 오류로 볼지 계약을 정하고 키 존재 여부와 값 검증을 분리합니다.</dd></dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
           <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Python 3.10 이상 · 표준 라이브러리 · Foundation ZIP</strong></p><ul><li>압축을 풀고 foundation 폴더에서 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell에서는 같은 명령의 python3를 py -3로 바꿉니다.</li><li>workflow.py와 argv_worker.py를 같은 폴더에 둡니다. 예제는 자신이 만든 임시 폴더만 사용하며 외부 계정·접속·설치 패키지를 요구하지 않습니다. 수정 실험은 사본에서 진행합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="cli.html">공통 기초 · 재사용 가능한 명령행 도구 ↗</a></li><li><a href="structured-data.html">공통 기초 · JSON 파싱과 데이터 계약 ↗</a></li></ul>
@@ -129,20 +131,8 @@ empty_environment=INVALID</pre></div></li><li><h3>CLI 값만 제거해서 승자
           <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
         <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
         <a href="../../labs/foundation/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
-          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
-        <fieldset class="question" data-question="0">
-          <legend>1. 파일=10, 환경=&quot;20&quot;, CLI 미지정입니다. 이번 계약의 결과는?</legend>
-          <label class="question-option"><input type="radio" name="question-0" value="0"><span>10, 파일</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>20, 환경</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>5, 기본값</span></label>
-          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
-          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
-          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 20, 환경</strong></p><p>우선순위는 기본값 &lt; 파일 &lt; 환경 &lt; CLI입니다. 환경값은 자료형·범위를 검증한 후 선택됩니다.</p></details>
-        </fieldset><fieldset class="question" data-question="1">
-          <legend>2. 파일 timeout=-1이고 CLI=30입니다. 이번 엄격한 계약에서는?</legend>
-          <label class="question-option"><input type="radio" name="question-1" value="0"><span>파일 계층의 오류를 숨기지 않고 거부한다.</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>CLI만 맞으면 낮은 계층 오류는 항상 무시한다.</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>환경 전체를 출력하고 성공한다.</span></label>
-          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
-          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
-          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 파일 계층의 오류를 숨기지 않고 거부한다.</strong></p><p>이 실습은 모든 명시 계층을 검증하는 정책입니다. 다른 정책을 선택할 때도 요구 사항과 검증을 일치시켜야 합니다.</p></details>
-        </fieldset><details class="written-check"><summary>고르기에서 끝내지 않고 직접 설명하기</summary><p>해설을 닫고 다음 과제의 예상 결과와 근거를 먼저 적으세요.</p><p>설정 파일 값 10, 환경 변수 20, CLI 값 0을 조합하세요. 0을 누락으로 오해하지 않는 우선순위를 구현하세요.</p><label for="reasoningNote">내 예상 · 근거 · 확인할 반례</label><textarea id="reasoningNote" rows="4" maxlength="4000" placeholder="이 메모는 저장되지 않습니다. 필요한 기록은 과제 양식에 옮기세요."></textarea><details><summary>작성한 뒤 비교할 기준</summary><p>명시적 CLI 0이 유효한 계약이라면 최종 값은 0입니다. if value 대신 None 등 누락 표식을 검사하고 출처도 CLI로 기록합니다.</p><p>예상·실제 출력·차이의 원인이 연결됐는지 확인하세요. 글을 썼다는 사실로 자동 완료되지 않습니다.</p></details></details></div><section class="mastery-panel js-only" hidden><h3>지금 혼자 할 수 있는 수준 기록</h3><p>완료 표시와 별개입니다. 답을 보면서 푼 경우는 ‘따라 함’으로 기록하세요.</p><div class="mastery-actions"><button type="button" class="learning-button small" data-mastery="read" aria-pressed="false">읽음</button><button type="button" class="learning-button small" data-mastery="guided" aria-pressed="false">따라 함</button><button type="button" class="learning-button small" data-mastery="independent" aria-pressed="false">독립 해결</button><button type="button" class="learning-button small" data-mastery="review" aria-pressed="false">재도전 필요</button></div><p id="masteryFeedback" role="status"></p><a href="../../learn/review.html">내 복습 목록 ↗</a></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3>
+        <p class="module-exam-link">이 모듈의 확인 문제는 별도 모의고사에서 풀어보세요. <a href="../../exams/foundation-05.html">상태와 실행 경계 다루기 · 25문항 모의고사 →</a></p><details class="written-check"><summary>고르기에서 끝내지 않고 직접 설명하기</summary><p>해설을 닫고 다음 과제의 예상 결과와 근거를 먼저 적으세요.</p><p>설정 파일 값 10, 환경 변수 20, CLI 값 0을 조합하세요. 0을 누락으로 오해하지 않는 우선순위를 구현하세요.</p><label for="reasoningNote">내 예상 · 근거 · 확인할 반례</label><textarea id="reasoningNote" rows="4" maxlength="4000" placeholder="이 메모는 저장되지 않습니다. 필요한 기록은 과제 양식에 옮기세요."></textarea><details><summary>작성한 뒤 비교할 기준</summary><p>명시적 CLI 0이 유효한 계약이라면 최종 값은 0입니다. if value 대신 None 등 누락 표식을 검사하고 출처도 CLI로 기록합니다.</p><p>예상·실제 출력·차이의 원인이 연결됐는지 확인하세요. 글을 썼다는 사실로 자동 완료되지 않습니다.</p></details></details></div><section class="mastery-panel js-only" hidden><h3>지금 혼자 할 수 있는 수준 기록</h3><p>완료 표시와 별개입니다. 답을 보면서 푼 경우는 ‘따라 함’으로 기록하세요.</p><div class="mastery-actions"><button type="button" class="learning-button small" data-mastery="read" aria-pressed="false">읽음</button><button type="button" class="learning-button small" data-mastery="guided" aria-pressed="false">따라 함</button><button type="button" class="learning-button small" data-mastery="independent" aria-pressed="false">독립 해결</button><button type="button" class="learning-button small" data-mastery="review" aria-pressed="false">재도전 필요</button></div><p id="masteryFeedback" role="status"></p></section>
             <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>미지정·빈 값·형식·범위 오류를 구분했다.</li><li>최종값과 출처를 함께 기록했다.</li></ul>
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="atomic-output.html"><small>← 이전 차시</small>자원 종료와 원자적 파일 교체</a>

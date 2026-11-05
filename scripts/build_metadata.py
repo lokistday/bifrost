@@ -11,9 +11,12 @@ def build(courses):
     metrics=dict(courses=len(courses),modules=sum(len(c['modules']) for c in courses.values()),
                  lessons=lesson_count,projects=len(courses),visuals=len(courses)+lesson_count)
     files=[*sorted((ROOT/'content/courses').glob('*.json')),
-           *[ROOT/'content'/n for n in ('fields.json','visuals.json','transfer-exercises.txt','projects.json','learning-paths.json','lesson-plans.json','wargames.json')],
+           *[ROOT/'content'/n for n in ('fields.json','visuals.json','transfer-exercises.txt','projects.json','learning-paths.json','lesson-plans.json')],
            *sorted((ROOT/'templates').glob('*')),
-           *[ROOT/n for n in ('js/progress.js','js/wargame.js','js/wargames.js','js/review.js','scripts/build_wargames.py','scripts/render_learning_tools.cjs','js/learning-view.js','js/learning.js','js/path-progress.js','js/study-search.js','css/study.css','css/theme.css','js/theme.js','assets/logo.svg','assets/logo-mark.svg','css/splash.css','css/main.css','css/workspace.css','js/workspace.js','scripts/render_home.cjs','scripts/render_pages.cjs','scripts/render_study.cjs','scripts/learning_design.py','scripts/site_security.cjs')]]
+           *sorted((ROOT/'content/exams').glob('*.json')),
+           *sorted((ROOT/'assets/projects').glob('*.webp')),
+           ROOT/'scripts/render_exams.cjs', ROOT/'scripts/render_wordmark.cjs', ROOT/'scripts/render_backdrop.cjs', ROOT/'js/wordmark-motion.js', ROOT/'js/pointer-trail.js', ROOT/'css/pointer-trail.css', ROOT/'js/exam.js', ROOT/'js/exam-catalog.js', ROOT/'css/exams.css',
+           *[ROOT/n for n in ('js/progress.js','scripts/render_learning_tools.cjs','js/learning-view.js','js/learning.js','js/path-progress.js','css/study.css','css/projects.css','css/theme.css','js/theme.js','assets/logo.svg','assets/logo-mark.svg','css/splash.css','css/main.css','css/workspace.css','js/workspace.js','scripts/render_home.cjs','scripts/render_pages.cjs','scripts/render_study.cjs','scripts/learning_design.py','scripts/site_security.cjs')]]
     digest=hashlib.sha256()
     for file in sorted(files, key=lambda p: p.relative_to(ROOT).as_posix()):
         digest.update(file.relative_to(ROOT).as_posix().encode('utf-8')+b'\0'+file.read_bytes().replace(b'\r\n', b'\n'))

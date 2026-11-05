@@ -29,12 +29,15 @@
 
 <link rel="stylesheet" href="css/main.css?v={{CONTENT_VERSION}}">
 <link rel="stylesheet" href="css/theme.css?v={{CONTENT_VERSION}}">
+<link rel="stylesheet" href="css/pointer-trail.css?v={{CONTENT_VERSION}}">
 
 <link rel="stylesheet" href="css/workspace.css?v={{CONTENT_VERSION}}">
 <script src="js/catalog.js?v={{CONTENT_VERSION}}" defer></script>
 <script src="js/progress.js?v={{CONTENT_VERSION}}" defer></script>
 <script src="js/learning-paths.js?v={{CONTENT_VERSION}}" defer></script>
 <script src="js/workspace.js?v={{CONTENT_VERSION}}" defer></script>
+<script src="js/wordmark-motion.js?v={{CONTENT_VERSION}}" defer></script>
+<script src="js/pointer-trail.js?v={{CONTENT_VERSION}}" defer></script>
 </head>
 <body class="workspace-page">
 <div class="startup-splash" id="startupSplash" hidden aria-hidden="true">
@@ -48,28 +51,16 @@
 <a class="workspace-skip" href="#home">학습 본문으로 건너뛰기</a>
 <header class="workspace-header">
   <a class="workspace-brand" href="./" aria-label="Bifrost 홈"><img class="workspace-logo" src="assets/logo.svg?v={{CONTENT_VERSION}}" width="36" height="36" alt=""><strong>BIFROST</strong><span>CYBERSECURITY<br>LEARNING PLATFORM</span></a>
-  <nav class="workspace-nav" aria-label="주 메뉴"><a href="./" aria-current="page">학습 홈</a><a href="#mindmap">분야 탐색</a><a href="learn/#paths">학습 경로</a><a href="learn/#projects">프로젝트</a><a href="wargame/">워게임</a><a href="learn/review.html">내 복습</a></nav>
-  <form class="workspace-search" id="workspaceSearch" role="search" hidden>
-    <button type="submit" aria-label="차시 검색">{{ICON_SEARCH}}</button><label class="sr-only" for="workspaceQuery">학습 차시 검색</label><input id="workspaceQuery" type="search" name="q" maxlength="120" placeholder="기술, 주제, 프로젝트를 검색해 보세요." autocomplete="off"><kbd aria-hidden="true">Ctrl K</kbd>
-  </form>
-  <noscript><a href="learn/#search">전체 차시 보기 →</a></noscript>
 </header>
 <aside class="workspace-rail" aria-label="빠른 이동">
-  <nav><a href="./" aria-current="page">{{ICON_HOME}}<span>홈</span></a><a href="#mindmap">{{ICON_BOOK}}<span>분야 탐색</span></a><a href="learn/#paths">{{ICON_ROUTE}}<span>학습 경로</span></a><a href="learn/#projects">{{ICON_BOX}}<span>프로젝트</span></a></nav>
-  <div class="rail-caption">EXPLORE<br>PRACTICE<br>BUILD<br>BIFROST</div>
+  <nav aria-label="주 메뉴"><a href="./" aria-current="page">{{ICON_HOME}}<span>홈</span></a><a href="learn/">{{ICON_ROUTE}}<span>학습 경로</span></a><a href="projects/">{{ICON_BOX}}<span>프로젝트</span></a><a href="exams/">{{ICON_EXAM}}<span>모의고사</span></a></nav>
 </aside>
 <main id="home" tabindex="-1">
   <section class="workspace-hero" aria-labelledby="workspace-title">
     <div class="hero-copy">
-      <p class="workspace-eyebrow">LEARN / PRACTICE / BUILD &nbsp;›</p>
-      <h1 id="workspace-title">보안을 배우는 <em>다음 단계</em></h1>
-      <p class="hero-description">기초부터 실습까지, 나에게 맞는 경로로.</p>
-      <div class="workspace-actions"><a class="workspace-primary" href="paths/start/">학습 시작하기 {{ICON_ARROW}}</a><a class="hero-search-link" href="learn/#search">{{ICON_SEARCH}}<span>전체 차시 검색</span></a></div>
-      <div class="learning-steps" aria-label="학습 흐름">
-        <a class="learning-step" href="tracks/foundation/"><span class="step-number">01</span>{{ICON_BOOK}}<div><strong>공통 기초</strong></div><span class="step-arrow" aria-hidden="true">›</span></a>
-        <a class="learning-step" href="#mindmap"><span class="step-number">02</span>{{ICON_GLOBE}}<div><strong>관심 분야 탐색</strong></div><span class="step-arrow" aria-hidden="true">›</span></a>
-        <a class="learning-step" href="learn/#projects"><span class="step-number">03</span>{{ICON_BOX}}<div><strong>종합 프로젝트</strong></div><span class="step-arrow" aria-hidden="true">›</span></a>
-      </div>
+      {{BRAND_BACKDROP}}
+      <h1 id="workspace-title" aria-label="BIFROST.">{{BRAND_WIREFRAME}}</h1>
+      <div class="workspace-actions"><a class="workspace-primary" href="learn/">학습 시작하기 {{ICON_ARROW}}</a></div>
     </div>
     <div class="workspace-preview">
         <section class="progress-window" aria-label="보안 입문 경로 진도">
@@ -82,10 +73,10 @@
     </div>
   </section>
   <section class="subject-directory" id="mindmap" aria-labelledby="directory-title">
-    <div class="directory-header"><div><div class="workspace-eyebrow">SUBJECT DIRECTORY</div><h2 id="directory-title">분야 탐색 <em>{{COURSE_COUNT}}개 분야 · {{LESSON_COUNT}}개 차시</em></h2></div><a class="directory-more" href="learn/#search">ALL DISCIPLINES {{ICON_ARROW}}</a></div>
+    <div class="directory-header"><div><div class="workspace-eyebrow">SUBJECT DIRECTORY</div><h2 id="directory-title">분야 탐색 <em>{{COURSE_COUNT}}개 분야 · {{LESSON_COUNT}}개 차시</em></h2></div></div>
     <div class="subject-grid">{{MAP_NODES}}</div>
   </section>
-  <section class="workspace-guide" id="practice" aria-labelledby="practice-title"><div><h2 id="practice-title">이해하고, 실행하고, 근거를 남기기.</h2><p>개념이 막히면 <a href="guides/bridges.html">기초 연결 연습 ↗</a>으로 보충하세요. 실습은 소유하거나 허가받은 환경에서 진행합니다.</p></div><nav class="workspace-resources" id="resources" aria-label="외부 참고 자료"><a href="https://dreamhack.io/" target="_blank" rel="noopener">Dreamhack ↗</a><a href="https://ctftime.org/" target="_blank" rel="noopener">CTFtime ↗</a><a href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP ↗</a></nav></section>
+  <section class="workspace-guide" id="practice" aria-labelledby="practice-title"><div><h2 id="practice-title">이해하고, 실행하고, 근거를 남기기.</h2><p>실습은 소유하거나 허가받은 환경에서 진행합니다.</p></div><nav class="workspace-resources" id="resources" aria-label="외부 참고 자료"><a href="https://dreamhack.io/" target="_blank" rel="noopener">Dreamhack ↗</a><a href="https://ctftime.org/" target="_blank" rel="noopener">CTFtime ↗</a><a href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP ↗</a></nav></section>
 </main>
 <footer class="workspace-footer"><strong>BIFROST <small>/ by. Loki</small></strong><span>LEARN THE CONCEPT. PRACTICE WITH INTENT. DOCUMENT WHAT YOU DISCOVER.</span><button class="theme-toggle" id="themeToggle" type="button" aria-label="라이트 모드로 전환" aria-pressed="true">테마 전환</button></footer>
 

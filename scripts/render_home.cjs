@@ -12,9 +12,11 @@ const drawings = {
   code: '<path d="m7 6-5 6 5 6m10-12 5 6-5 6M14 3l-4 18"/>',
   grid: '<path d="M3 3h6v6H3zm12 0h6v6h-6zM3 15h6v6H3zm12 0h6v6h-6z"/>',
   box: '<path d="m12 2 10 5v10l-10 5-10-5V7Zm0 10v10M2 7l10 5 10-5M7 4.5l10 5V15"/>',
-  search: '<circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/>',
   arrow: '<path d="M4 12h16m-6-6 6 6-6 6"/>',
   route: '<circle cx="5" cy="5" r="3"/><circle cx="19" cy="19" r="3"/><path d="M5 8v9a3 3 0 0 0 3 3h8M8 5h8a3 3 0 0 1 0 6H9"/>',
+  exam: '<rect x="5" y="4" width="14" height="18" rx="2"/><path d="M9 2h6v4H9zM8 12l2 2 5-5M9 18h6"/>',
+  flag: '<path d="M5 22V3m0 1c5-4 9 4 14 0v10c-5 4-9-4-14 0"/>',
+  review: '<path d="M3 11a9 9 0 1 1 2 7M3 4v7h7m2-4v6l4 2"/>',
   moon: '<path d="M20 15A9 9 0 0 1 9 3a9 9 0 1 0 11 12Z"/>'
 };
 const icon = (name, cls = '') => `<svg class="ui-icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${drawings[name]}</svg>`;
@@ -35,5 +37,7 @@ module.exports = function home({ courses, paths }) {
   const lookup = Object.fromEntries(Object.values(courses).flatMap(c=>all(c).map(l=>[l.id,l])));
   const lessons = route.sequence.slice(0,5).map((id,i)=>`<li data-home-lesson="${id}"><a href="paths/start/${id}.html"><span class="lesson-dot" aria-hidden="true"></span><span class="lesson-number">${String(i+1).padStart(2,'0')}</span><span>${esc(lookup[id].title)}</span><span class="lesson-state sr-only">미완료</span></a></li>`).join('');
   return { MAP_NODES:nodes, START_LESSONS:lessons, START_COUNT:route.sequence.length,
-    ICON_HOME:icon('home'), ICON_BOOK:icon('book'), ICON_ROUTE:icon('route'), ICON_BOX:icon('box'), ICON_SEARCH:icon('search'), ICON_ARROW:icon('arrow'), ICON_GLOBE:icon('globe') };
+    BRAND_WIREFRAME:require('./render_wordmark.cjs')(),
+    BRAND_BACKDROP:require('./render_backdrop.cjs')(),
+    ICON_HOME:icon('home'), ICON_BOOK:icon('book'), ICON_ROUTE:icon('route'), ICON_BOX:icon('box'), ICON_ARROW:icon('arrow'), ICON_GLOBE:icon('globe'), ICON_EXAM:icon('exam'), ICON_FLAG:icon('flag'), ICON_REVIEW:icon('review') };
 };

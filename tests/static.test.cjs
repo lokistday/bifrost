@@ -9,10 +9,15 @@ let checks = 0;
 const check = (value, message) => { assert.ok(value, message); checks++; };
 const walk = directory => fs.readdirSync(directory, { withFileTypes: true }).flatMap(item =>
   item.isDirectory() ? walk(path.join(directory, item.name)) : [path.join(directory, item.name)]);
-const htmlFiles = ['index.html', ...['tracks','guides','learn','projects','paths','wargame'].flatMap(folder => walk(path.join(ROOT, folder))).filter(file => file.endsWith('.html')).map(file => path.relative(ROOT, file))];
+const htmlFiles = ['index.html', ...['tracks','guides','learn','projects','paths','exams'].flatMap(folder => walk(path.join(ROOT, folder))).filter(file => file.endsWith('.html')).map(file => path.relative(ROOT, file))];
 const documents = new Map(htmlFiles.map(file => [path.resolve(ROOT, file), parseHTML(fs.readFileSync(path.join(ROOT, file), 'utf8')).document]));
 const illustratedAssets = new Set();
 for (const [file, doc] of documents) {
+  check(!doc.querySelector('a[href$="/review.html"], script[src*="/review.js"], a[href*="learn/search.html"], [role="search"], script[src*="study-search.js"]'), `${file}: removed review and search stay absent`);
+  check(!doc.querySelector('a[href*="guides/bridges.html"]'), `${file}: retired bridge page is not linked`);
+  check(!doc.querySelector('a[href*="wargame/"], script[src*="wargame"]'), `${file}: deferred wargame is not exposed`);
+  check([...doc.querySelectorAll('script[src]')].filter(e=>e.getAttribute('src').split('?')[0].endsWith('/pointer-trail.js')).length===1, `${file}: exactly one shared pointer trail`);
+  check([...doc.querySelectorAll('link[rel="stylesheet"]')].filter(e=>e.getAttribute('href').split('?')[0].endsWith('/pointer-trail.css')).length===1, `${file}: shared trail styling`);
   for (const element of doc.querySelectorAll('[href],[src]')) {
     const value = element.getAttribute('href') || element.getAttribute('src');
     if (!value || /^(https?:|data:|mailto:)/.test(value)) continue;
@@ -42,7 +47,7 @@ for (const file of illustratedAssets) {
   artBytes += bytes.length;
 }
 check(artBytes < 1000000, 'The complete illustration collection stays under 1 MB');
-for (const file of ['main.css', 'theme.css', 'mindmap.css', 'learning.css', 'visuals.css', 'linux-guide.css', 'splash.css', 'overlays.css', 'study.css', 'workspace.css']) {
+for (const file of ['main.css', 'theme.css', 'mindmap.css', 'learning.css', 'visuals.css', 'linux-guide.css', 'splash.css', 'overlays.css', 'study.css', 'workspace.css', 'exams.css', 'projects.css', 'pointer-trail.css']) {
   const source = fs.readFileSync(path.join(ROOT, 'css', file), 'utf8');
   check(!/var\([^)]*\)[\da-f]{2,}/i.test(source), `No malformed color suffix: ${file}`);
   check(CSSOM.parse(source).cssRules.length > 0, `Stylesheet parses: ${file}`);
@@ -58,6 +63,11 @@ const png = fs.readFileSync(path.join(ROOT, 'og-image.png'));
 check(png.subarray(0, 8).equals(Buffer.from([137,80,78,71,13,10,26,10])), 'Sharing image is a PNG');
 check(png.readUInt32BE(16) === 1200 && png.readUInt32BE(20) === 630, 'Sharing image has promised dimensions');
 const home = documents.get(path.join(ROOT, 'index.html'));
+const studyLibrary=documents.get(path.join(ROOT,'learn/index.html'));
+check(!studyLibrary.querySelector('#search, #projects') && studyLibrary.querySelector('#paths'),'Learning paths have a dedicated page');
+const projectLibrary=documents.get(path.join(ROOT,'projects/index.html'));
+check(projectLibrary.querySelectorAll('#projects .project-panel').length===9 && !projectLibrary.querySelector('#projects details'),'Project index always shows all nine project cards');
+check(!fs.existsSync(path.join(ROOT,'learn/search.html')) && !fs.existsSync(path.join(ROOT,'js/study-search.js')), 'Search page and script are removed');
 // Evaluate matching display declarations, including !important and specificity.
 // A class-only splash test misses an overlay hidden by another stylesheet.
 function displayFromStyles(element, files) {
@@ -98,8 +108,12 @@ const sitemap = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
 const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/site.json'), 'utf8'));
 const lessonRegistry = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/lesson-ids.json'), 'utf8'));
 const learningPaths = JSON.parse(fs.readFileSync(path.join(ROOT,'content/generated-paths.json'),'utf8'));
-check((sitemap.match(/<loc>/g) || []).length === 16 + 2 * manifest.courses.length + lessonRegistry.length + learningPaths.reduce((sum,r)=>sum+r.sequence.length+2,0), 'Sitemap includes standalone learning paths, route lessons/projects and permanent course pages');
+const examCount=fs.readdirSync(path.join(ROOT,'content/exams')).filter(f=>f.endsWith('.json')).length;
+check((sitemap.match(/<loc>/g) || []).length === 6 + examCount + 2 * manifest.courses.length + lessonRegistry.length + learningPaths.reduce((sum,r)=>sum+r.sequence.length+2,0), 'Sitemap includes module exams, standalone learning paths, route lessons/projects and permanent course pages');
 check(!sitemap.includes('lesson.html?id='), 'Sitemap uses permanent static pages');
+check(!sitemap.includes('/wargame/'), 'Deferred wargame routes are absent from sitemap');
+check(!fs.existsSync(path.join(ROOT,'wargame'))&&!fs.existsSync(path.join(ROOT,'js/wargame.js'))&&!fs.existsSync(path.join(ROOT,'js/wargames.js')), 'Retired pages and grading scripts are removed');
+check(fs.existsSync(path.join(ROOT,'developer-notes/wargame-design.md')), 'Future wargame design is retained outside published assets');
 
 const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/pages.yml'), 'utf8');
 check(workflow.includes('needs: verify') && workflow.includes('pnpm test') && workflow.includes('python tests/labs_test.py'), 'Deployment requires teaching and lab verification');

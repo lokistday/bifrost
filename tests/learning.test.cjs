@@ -104,7 +104,7 @@ check(home.document.querySelector('#directory-title').textContent.includes(`${le
 
 // The former radial geometry contract was retired with the workspace redesign.
 check(home.document.querySelector('.subject-grid') && !home.document.querySelector('.mindmap-stage'), 'One semantic subject directory replaces the radial map');
-check(home.document.querySelector('.workspace-primary').getAttribute('href') === 'paths/start/', 'Primary action opens the actual beginner route');
+check(home.document.querySelector('.workspace-primary').getAttribute('href') === 'learn/', 'Primary action opens the learning path catalog');
 check(!home.document.querySelector('.code-window') && home.document.querySelector('.workspace-preview > .progress-window'), 'Progress replaces the decorative code preview');
 
 const store = new Storage();

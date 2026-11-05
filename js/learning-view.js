@@ -71,7 +71,7 @@
         <nav aria-label="${esc(route.title)} 경로 목차">${groups.map(group=>`<details ${group.items.some(item=>item.id===current)?'open':''}><summary>${esc(group.course.title)}<span class="caption">${group.items[0].index+1}–${group.items.at(-1).index+1}단계</span></summary><ol>${group.items.map(({id,index})=>`<li><a class="side-lesson" href="${lessonHref(id)}" ${current===id?'aria-current="page"':''}>
           <span class="path-step-number">${index+1}</span><span><small>${esc(lookup[id].course.label)} · ${route.lessons.includes(id)?'경로 핵심':'권장 선행'}</small>${esc(lookup[id].lesson.title)}<small class="completion-label" data-completion="${id}"></small></span></a></li>`).join('')}
           </ol></details>`).join('')}<a class="side-lesson path-project-link" href="project.html"><span class="path-step-number">✦</span><span>마지막 · 종합 프로젝트</span></a></nav>
-        <a class="back-link" href="../../learn/#paths">다른 학습 경로 보기 ↗</a></aside>`;
+        <a class="back-link" href="../../learn/">다른 학습 경로 보기 ↗</a></aside>`;
       return `<aside class="course-sidebar"><a class="back-link" href="./">← ${esc(course.title)} 전체 과정</a>${stats(course)}
         <nav aria-label="차시 목차">${course.modules.map((module, index) => `
           <details ${module.lessons.some(lesson => lesson.id === current) ? 'open' : ''}>
@@ -91,12 +91,12 @@
         </section>
         <nav class="course-jump-links" aria-label="과정 안내 바로가기"><a href="#courseIntroduction">분야 소개 ↓</a><a href="#courseModules">강의 목차 바로 보기 ↓</a></nav>
         ${introduction(course)}${visuals.renderCourse(key)}
-        <section class="learning-path-panel"><div><span class="overline">LEARN → APPLY → EXPLAIN</span><h2>이 과정의 완주 기준</h2><p><a href="../../wargame/">실습으로 FLAG 문제 풀기 ↗</a></p><p>차시별 독립 과제에서 조건을 바꿔 보고, 마지막에는 두 표본을 분석한 결과와 근거 보고서를 완성합니다.</p></div><a class="learning-button" href="../../learn/">차시 검색 · 목표별 경로 ↗</a></section>
+        <section class="learning-path-panel"><div><span class="overline">LEARN → APPLY → EXPLAIN</span><h2>이 과정의 완주 기준</h2><p>차시별 독립 과제에서 조건을 바꿔 보고, 마지막에는 두 표본을 분석한 결과와 근거 보고서를 완성합니다.</p></div><a class="learning-button" href="../../learn/">차시 검색 · 목표별 경로 ↗</a></section>
         <div class="overview-layout"><div>
           <section class="outcome-panel"><div class="overline">WHAT YOU WILL BUILD</div><h2>이 과정을 마치면</h2><p>${esc(course.outcome)}</p></section>
           <section class="module-list" id="courseModules" aria-label="모듈별 차시">${course.modules.map((module, index) => `
             <section class="module-card"><div class="module-heading"><h2>${esc(module.title)}</h2><span class="caption" data-module-count="${index}"></span></div><p>${esc(module.intro)}</p>
-              <ol>${module.lessons.map(lesson => `<li><a class="lesson-row" href="${lessonHref(lesson.id, key)}"><span class="lesson-dot" data-dot="${lesson.id}" aria-hidden="true"></span>
+              ${module.exam ? `<p><a class="learning-button small" href="../../exams/${esc(module.exam.id)}.html">모듈 모의고사 · 25문항 →</a></p>` : ''}<ol>${module.lessons.map(lesson => `<li><a class="lesson-row" href="${lessonHref(lesson.id, key)}"><span class="lesson-dot" data-dot="${lesson.id}" aria-hidden="true"></span>
                 <span><strong>${esc(lesson.title)}</strong><small>${esc(lesson.goal)}</small><small class="completion-label" data-completion="${lesson.id}"></small></span><span aria-hidden="true">↗</span></a></li>`).join('')}</ol>
             </section>`).join('')}</section>
           ${course.project ? `<section class="project-callout" id="finalProject"><span class="overline">FINAL PROJECT</span><h2>${esc(course.project.title)}</h2><p>${esc(course.project.problem)}</p><p class="caption">${course.project.minutes.join('–')}분 · 설치 제외 저자 추정 · A/B 표본 + 결과 검사 + 보고서 평가</p><a class="learning-button primary" href="../../projects/${key}.html">종합 프로젝트 시작하기 →</a></section>` : ''}</div>
@@ -122,7 +122,7 @@
       if (!plan) return '';
       return `<div class="lesson-meta"><span>${esc(plan.level)}</span><span>학습 ${plan.minutes.join('–')}분</span><span>처음 준비 ${plan.setup.join('–')}분</span></div>
         <p class="caption">${esc(plan.estimateBasis || "설치 제외 저자 추정입니다.")}</p>
-        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>${esc(plan.readiness)}</p>${plan.diagnostic ? `<fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend>${plan.diagnostic.options.map((option,i)=>`<label><input type="radio" name="readiness" value="${i}"> ${esc(option)}</label>`).join('')}<button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset>` : ''}<details><summary>판단 기준과 보충 자료</summary><p>${esc(plan.readinessAnswer)}</p><a href="../../guides/bridges.html#${esc(plan.bridge)}">막힌 기초를 짧게 연결하기 ↗</a></details></details>`;
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>${esc(plan.readiness)}</p>${plan.diagnostic ? `<fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend>${plan.diagnostic.options.map((option,i)=>`<label><input type="radio" name="readiness" value="${i}"> ${esc(option)}</label>`).join('')}<button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset>` : ''}<details><summary>판단 기준과 보충 자료</summary><p>${esc(plan.readinessAnswer)}</p></details></details>`;
     }
 
     function transfer(lesson) {
@@ -140,9 +140,9 @@
         <a href="../../labs/${lesson.id.split('.')[0]}/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section>`;
     }
 
-    function questions(lesson) {
-      return `<div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
-        ${(lesson.questions || []).map((question, index) => `<fieldset class="question" data-question="${index}">
+    function questions(lesson, exam = null) {
+      return `<div class="self-check"><h3>이해한 내용을 점검하기</h3>${exam ? '' : '<p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>'}
+        ${exam ? `<p class="module-exam-link">이 모듈의 확인 문제는 별도 모의고사에서 풀어보세요. <a href="../../exams/${esc(exam.id)}.html">${esc(exam.title)} · 25문항 모의고사 →</a></p>` : (lesson.questions || []).map((question, index) => `<fieldset class="question" data-question="${index}">
           <legend>${index + 1}. ${esc(question.prompt)}</legend>
           ${question.options.map((option, n) => `<label class="question-option"><input type="radio" name="question-${index}" value="${n}"><span>${esc(option)}</span></label>`).join('')}
           <button class="learning-button small js-only" hidden type="button" data-check-question="${index}">답 확인</button>
@@ -182,7 +182,7 @@
             <h3>이제 단계별로 바꾸고 관찰하기</h3>${walkthrough(lesson)}</section>
           <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>${esc(lesson.task)}</p>
             <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>${esc(lesson.hint)}</p></details>${solution(lesson)}<p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p>${transfer(lesson)}</section>
-          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2>${questions(lesson)}<section class="mastery-panel js-only" hidden><h3>지금 혼자 할 수 있는 수준 기록</h3><p>완료 표시와 별개입니다. 답을 보면서 푼 경우는 ‘따라 함’으로 기록하세요.</p><div class="mastery-actions">${[["read","읽음"],["guided","따라 함"],["independent","독립 해결"],["review","재도전 필요"]].map(([value,label])=>`<button type="button" class="learning-button small" data-mastery="${value}" aria-pressed="false">${label}</button>`).join('')}</div><p id="masteryFeedback" role="status"></p><a href="../../learn/review.html">내 복습 목록 ↗</a></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2>${questions(lesson, module.exam)}<section class="mastery-panel js-only" hidden><h3>지금 혼자 할 수 있는 수준 기록</h3><p>완료 표시와 별개입니다. 답을 보면서 푼 경우는 ‘따라 함’으로 기록하세요.</p><div class="mastery-actions">${[["read","읽음"],["guided","따라 함"],["independent","독립 해결"],["review","재도전 필요"]].map(([value,label])=>`<button type="button" class="learning-button small" data-mastery="${value}" aria-pressed="false">${label}</button>`).join('')}</div><p id="masteryFeedback" role="status"></p></section>
             <h3>내 결과물 확인하기</h3><ul class="evidence-list">${lesson.checks.map(check => `<li>${esc(check)}</li>`).join('')}</ul>
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="${route?'경로의 이전·다음 단계':'이전·다음 차시'}">${index > 0 ? `<a href="${lessonHref(lessons[index - 1].id, key)}"><small>← 이전 ${route?'단계':'차시'}</small>${esc(lessons[index - 1].title)}</a>` : `<a href="./"><small>← ${route?'학습 경로':'전체 과정'}</small>${route?'경로':'분야'} 목차로</a>`}

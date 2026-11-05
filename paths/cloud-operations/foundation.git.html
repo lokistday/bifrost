@@ -17,27 +17,29 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/paths/cloud-operations/foundation.git.html">
 <title>Git과 재현 가능한 README — 클라우드 방어와 복구 검증 · Bifrost</title>
-<script src="../../js/theme.js?v=learning-dcac82a7ff60"></script>
-<link rel="icon" href="../../assets/logo.svg?v=learning-dcac82a7ff60" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-dcac82a7ff60">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-dcac82a7ff60">
+<script src="../../js/theme.js?v=learning-54a8dcdd07dd"></script>
+<script src="../../js/pointer-trail.js?v=learning-54a8dcdd07dd" defer></script>
+<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-54a8dcdd07dd">
+<link rel="icon" href="../../assets/logo.svg?v=learning-54a8dcdd07dd" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-54a8dcdd07dd">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-54a8dcdd07dd">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-dcac82a7ff60">
-<link rel="stylesheet" href="../../css/study.css?v=learning-dcac82a7ff60">
-<script src="../../js/catalog.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/courses/foundation.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/progress.js?v=learning-dcac82a7ff60" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-54a8dcdd07dd">
+<link rel="stylesheet" href="../../css/study.css?v=learning-54a8dcdd07dd">
+<script src="../../js/catalog.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/courses/foundation.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/progress.js?v=learning-54a8dcdd07dd" defer></script>
 
-<script src="../../js/learning-paths.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/path-progress.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/learning-view.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/learning.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/learning-paths.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/path-progress.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/learning-view.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/learning.js?v=learning-54a8dcdd07dd" defer></script>
 </head>
 <body class="learning-page" data-course="foundation" data-course-number="00" data-view="lesson" data-lesson-id="foundation.git" data-path="cloud-operations" style="--course-accent:var(--map-cyan)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-dcac82a7ff60" width="34" height="34" alt=""></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#pathOutline">클라우드 보안 목차</a><a href="../../wargame/">워게임</a><a href="../../learn/review.html">내 복습</a></nav>
+  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-54a8dcdd07dd" width="34" height="34" alt=""></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">학습 경로</a><a href="./#pathOutline">클라우드 보안 목차</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -119,12 +121,12 @@
           <span class="path-step-number">51</span><span><small>암호학 · 권장 선행</small>메시지 경계와 인증할 바이트<small class="completion-label" data-completion="crypto.message-encoding"></small></span></a></li><li><a class="side-lesson" href="crypto.aad-record-binding.html" >
           <span class="path-step-number">52</span><span><small>암호학 · 경로 핵심</small>AEAD와 레코드 문맥의 결합<small class="completion-label" data-completion="crypto.aad-record-binding"></small></span></a></li>
           </ol></details><a class="side-lesson path-project-link" href="project.html"><span class="path-step-number">✦</span><span>마지막 · 종합 프로젝트</span></a></nav>
-        <a class="back-link" href="../../learn/#paths">다른 학습 경로 보기 ↗</a></aside><article class="lesson-article">
+        <a class="back-link" href="../../learn/">다른 학습 경로 보기 ↗</a></aside><article class="lesson-article">
           <nav class="path-location" aria-label="현재 학습 경로"><a href="./">클라우드 보안</a><strong>20 / 52단계</strong><a href="./#pathOutline">경로 목차 ↗</a></nav>
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/foundation.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">Foundation · 03 · 시스템·통신·기록 · 20 / 52</div><h1>Git과 재현 가능한 README</h1><p class="lesson-objective">변경 내용을 커밋하고 다른 사람이 따라 할 실행 기록을 만듭니다.</p></div></header>
           <div class="lesson-meta"><span>기초</span><span>학습 30–45분</span><span>처음 준비 0–10분</span></div>
         <p class="caption">개념 수·도구 전환·독립 과제를 고려한 편집자 추정이며 학습자 실측 전입니다.</p>
-        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>git add README.md 후 README를 더 수정했습니다. 다음 커밋에 최신 수정도 넣으려면?</p><fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend><label><input type="radio" name="readiness" value="0"> git add README.md를 다시 실행하고 staged diff를 확인한다.</label><label><input type="radio" name="readiness" value="1"> 이미 add했으므로 언제나 자동 포함된다.</label><label><input type="radio" name="readiness" value="2"> git log만 실행하면 포함된다.</label><button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset><details><summary>판단 기준과 보충 자료</summary><p>스테이징은 add 시점의 내용을 선택합니다. 이후 작업 폴더 변경은 별도이며 다시 선택해야 합니다.</p><a href="../../guides/bridges.html#python">막힌 기초를 짧게 연결하기 ↗</a></details></details><details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl><dt>명령 실행 또는 입력 파일 찾기에서 막힘</dt><dd>Ubuntu/WSL · Git · 로컬 저장소인지 확인합니다. 본문의 코드 실행 문맥을 확인하고 부분 코드는 앞 단계와 같은 파일에서 실행하세요.</dd><dt>git commit을 하면 자동으로 GitHub에 공개된다고 생각한다.</dt><dd>이 실습의 commit은 로컬 기록입니다. 원격 전송은 별도의 작업입니다.</dd></dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>git add README.md 후 README를 더 수정했습니다. 다음 커밋에 최신 수정도 넣으려면?</p><fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend><label><input type="radio" name="readiness" value="0"> git add README.md를 다시 실행하고 staged diff를 확인한다.</label><label><input type="radio" name="readiness" value="1"> 이미 add했으므로 언제나 자동 포함된다.</label><label><input type="radio" name="readiness" value="2"> git log만 실행하면 포함된다.</label><button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset><details><summary>판단 기준과 보충 자료</summary><p>스테이징은 add 시점의 내용을 선택합니다. 이후 작업 폴더 변경은 별도이며 다시 선택해야 합니다.</p></details></details><details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl><dt>명령 실행 또는 입력 파일 찾기에서 막힘</dt><dd>Ubuntu/WSL · Git · 로컬 저장소인지 확인합니다. 본문의 코드 실행 문맥을 확인하고 부분 코드는 앞 단계와 같은 파일에서 실행하세요.</dd><dt>git commit을 하면 자동으로 GitHub에 공개된다고 생각한다.</dt><dd>이 실습의 commit은 로컬 기록입니다. 원격 전송은 별도의 작업입니다.</dd></dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
           <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Ubuntu/WSL · Git · 로컬 저장소</strong></p><ul><li>git --version을 확인합니다. 새 bifrost-notes 폴더를 사용하고 기존 프로젝트 폴더 안에서 시작하지 않습니다.</li><li>원격 저장소·GitHub 계정·네트워크 연결 없이 진행합니다. 신원 설정은 이 저장소 범위에서 할 수 있습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="foundation.paths.html">공통 기초 · 경로와 작업용 사본 ↗</a></li></ul>
@@ -169,20 +171,8 @@ git log --oneline</code></pre></div><div class="step-observation"><strong>관찰
           <tr><th scope="row">한계·전이</th><td>새 반례, 확정할 수 없는 결론, 다음 확인 자료</td></tr></tbody></table></div>
         <p class="caption">각 항목: 0 근거 없음 · 1 설명만 가능 · 2 재현 근거 있음. 모든 항목의 근거를 갖추는 것을 목표로 하세요. 1–3일 뒤 예제를 닫고 다시 풀어보세요.</p>
         <a href="../../labs/foundation/lesson-workbook.md" download>이 분야의 과제 기록 양식 받기 ↓</a></section></section>
-          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3><p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>
-        <fieldset class="question" data-question="0">
-          <legend>1. git add README.md 후 README를 더 수정했습니다. 다음 커밋에 최신 수정도 넣으려면?</legend>
-          <label class="question-option"><input type="radio" name="question-0" value="0"><span>git add README.md를 다시 실행하고 staged diff를 확인한다.</span></label><label class="question-option"><input type="radio" name="question-0" value="1"><span>이미 add했으므로 언제나 자동 포함된다.</span></label><label class="question-option"><input type="radio" name="question-0" value="2"><span>git log만 실행하면 포함된다.</span></label>
-          <button class="learning-button small js-only" hidden type="button" data-check-question="0">답 확인</button>
-          <p class="question-feedback feedback" role="status" id="questionFeedback0"></p>
-          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: git add README.md를 다시 실행하고 staged diff를 확인한다.</strong></p><p>스테이징은 add 시점의 내용을 선택합니다. 이후 작업 폴더 변경은 별도이며 다시 선택해야 합니다.</p></details>
-        </fieldset><fieldset class="question" data-question="1">
-          <legend>2. 실행 기록에서 재현에 가장 도움이 되는 조합은?</legend>
-          <label class="question-option"><input type="radio" name="question-1" value="0"><span>성공했다는 문장 하나</span></label><label class="question-option"><input type="radio" name="question-1" value="1"><span>도구 환경, 입력 파일, 실행 명령, 실제 출력과 해석</span></label><label class="question-option"><input type="radio" name="question-1" value="2"><span>완료 표시 색과 날짜만</span></label>
-          <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
-          <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
-          <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 도구 환경, 입력 파일, 실행 명령, 실제 출력과 해석</strong></p><p>재현에는 조건과 절차가 필요합니다. 결과 문장만 있으면 다른 사람이 무엇을 실행했는지 확인할 수 없습니다.</p></details>
-        </fieldset><details class="written-check"><summary>고르기에서 끝내지 않고 직접 설명하기</summary><p>해설을 닫고 다음 과제의 예상 결과와 근거를 먼저 적으세요.</p><p>임시 연습 저장소에서 README의 한 줄만 수정하고 커밋 전 diff와 커밋 후 log를 연결해 기록하세요.</p><label for="reasoningNote">내 예상 · 근거 · 확인할 반례</label><textarea id="reasoningNote" rows="4" maxlength="4000" placeholder="이 메모는 저장되지 않습니다. 필요한 기록은 과제 양식에 옮기세요."></textarea><details><summary>작성한 뒤 비교할 기준</summary><p>diff는 미커밋 변경, log는 커밋 이력을 보여 줍니다. 파일 경로와 커밋 식별자가 다른 사람의 재현에 충분해야 합니다.</p><p>예상·실제 출력·차이의 원인이 연결됐는지 확인하세요. 글을 썼다는 사실로 자동 완료되지 않습니다.</p></details></details></div><section class="mastery-panel js-only" hidden><h3>지금 혼자 할 수 있는 수준 기록</h3><p>완료 표시와 별개입니다. 답을 보면서 푼 경우는 ‘따라 함’으로 기록하세요.</p><div class="mastery-actions"><button type="button" class="learning-button small" data-mastery="read" aria-pressed="false">읽음</button><button type="button" class="learning-button small" data-mastery="guided" aria-pressed="false">따라 함</button><button type="button" class="learning-button small" data-mastery="independent" aria-pressed="false">독립 해결</button><button type="button" class="learning-button small" data-mastery="review" aria-pressed="false">재도전 필요</button></div><p id="masteryFeedback" role="status"></p><a href="../../learn/review.html">내 복습 목록 ↗</a></section>
+          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2><div class="self-check"><h3>이해한 내용을 점검하기</h3>
+        <p class="module-exam-link">이 모듈의 확인 문제는 별도 모의고사에서 풀어보세요. <a href="../../exams/foundation-03.html">시스템·통신·기록 · 25문항 모의고사 →</a></p><details class="written-check"><summary>고르기에서 끝내지 않고 직접 설명하기</summary><p>해설을 닫고 다음 과제의 예상 결과와 근거를 먼저 적으세요.</p><p>임시 연습 저장소에서 README의 한 줄만 수정하고 커밋 전 diff와 커밋 후 log를 연결해 기록하세요.</p><label for="reasoningNote">내 예상 · 근거 · 확인할 반례</label><textarea id="reasoningNote" rows="4" maxlength="4000" placeholder="이 메모는 저장되지 않습니다. 필요한 기록은 과제 양식에 옮기세요."></textarea><details><summary>작성한 뒤 비교할 기준</summary><p>diff는 미커밋 변경, log는 커밋 이력을 보여 줍니다. 파일 경로와 커밋 식별자가 다른 사람의 재현에 충분해야 합니다.</p><p>예상·실제 출력·차이의 원인이 연결됐는지 확인하세요. 글을 썼다는 사실로 자동 완료되지 않습니다.</p></details></details></div><section class="mastery-panel js-only" hidden><h3>지금 혼자 할 수 있는 수준 기록</h3><p>완료 표시와 별개입니다. 답을 보면서 푼 경우는 ‘따라 함’으로 기록하세요.</p><div class="mastery-actions"><button type="button" class="learning-button small" data-mastery="read" aria-pressed="false">읽음</button><button type="button" class="learning-button small" data-mastery="guided" aria-pressed="false">따라 함</button><button type="button" class="learning-button small" data-mastery="independent" aria-pressed="false">독립 해결</button><button type="button" class="learning-button small" data-mastery="review" aria-pressed="false">재도전 필요</button></div><p id="masteryFeedback" role="status"></p></section>
             <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>status와 diff로 변경을 확인했다.</li><li>README만 보고 실습을 다시 실행했다.</li></ul>
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="경로의 이전·다음 단계"><a href="cloud.iam.html"><small>← 이전 단계</small>IAM 최소 권한과 명시적 거부</a>

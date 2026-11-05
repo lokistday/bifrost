@@ -46,6 +46,7 @@ function page(course, lesson, legacy = false, learningPath = null) {
 const routes = ['', 'guides/linux.html'];
 routes.push(...require('./render_learning_tools.cjs')({ ROOT, courses, site, fill, write }));
 routes.push(...require('./render_study.cjs')({ ROOT, courses, site, fill, write }));
+routes.push(...require('./render_exams.cjs')({ ROOT, courses, site, fill, write }));
 const learningPaths = JSON.parse(read('content/generated-paths.json'));
 const lookup = Object.fromEntries(Object.values(courses).flatMap(c=>all(c).map(l=>[l.id,{course:c,lesson:l}])));
 for (const route of learningPaths) {

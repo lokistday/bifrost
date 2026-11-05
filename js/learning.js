@@ -109,7 +109,7 @@
     const labels = {read:'읽음',guided:'따라 함',independent:'독립 해결',review:'재도전 필요'};
     document.querySelectorAll('[data-mastery]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.mastery===mastery?.stage)));
     const masteryFeedback = document.getElementById('masteryFeedback');
-    if (masteryFeedback) masteryFeedback.textContent = mastery ? `${labels[mastery.stage]} · ${new Date(mastery.reviewAt).toLocaleDateString('ko-KR')} 복습 예정${progress.available() ? '' : ' · 브라우저 저장 실패, 백업이 필요합니다.'}` : '아직 수행 수준을 기록하지 않았습니다.';
+    if (masteryFeedback) masteryFeedback.textContent = mastery ? `${labels[mastery.stage]} · 기록됨${progress.available() ? '' : ' · 브라우저 저장 실패, 백업이 필요합니다.'}` : '아직 수행 수준을 기록하지 않았습니다.';
     const complete = document.getElementById('completeLesson');
     if (complete) {
       const done = progress.has(currentId);

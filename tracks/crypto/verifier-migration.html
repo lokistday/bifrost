@@ -17,26 +17,28 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/crypto/verifier-migration.html">
 <title>비밀번호 검증값의 버전과 재해시 — Cryptography · Bifrost</title>
-<script src="../../js/theme.js?v=learning-dcac82a7ff60"></script>
-<link rel="icon" href="../../assets/logo.svg?v=learning-dcac82a7ff60" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-dcac82a7ff60">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-dcac82a7ff60">
+<script src="../../js/theme.js?v=learning-54a8dcdd07dd"></script>
+<script src="../../js/pointer-trail.js?v=learning-54a8dcdd07dd" defer></script>
+<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-54a8dcdd07dd">
+<link rel="icon" href="../../assets/logo.svg?v=learning-54a8dcdd07dd" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-54a8dcdd07dd">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-54a8dcdd07dd">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-dcac82a7ff60">
-<link rel="stylesheet" href="../../css/study.css?v=learning-dcac82a7ff60">
-<script src="../../js/catalog.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/courses/crypto.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/progress.js?v=learning-dcac82a7ff60" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-54a8dcdd07dd">
+<link rel="stylesheet" href="../../css/study.css?v=learning-54a8dcdd07dd">
+<script src="../../js/catalog.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/courses/crypto.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/progress.js?v=learning-54a8dcdd07dd" defer></script>
 
 
-<script src="../../js/learning-view.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/learning.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/learning-view.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/learning.js?v=learning-54a8dcdd07dd" defer></script>
 </head>
 <body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.verifier-migration" data-path="" style="--course-accent:var(--map-pink)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-dcac82a7ff60" width="34" height="34" alt=""></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">암호학 목차</a><a href="../../wargame/">워게임</a><a href="../../learn/review.html">내 복습</a></nav>
+  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-54a8dcdd07dd" width="34" height="34" alt=""></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">학습 경로</a><a href="./#courseModules">암호학 목차</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -90,7 +92,7 @@
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/crypto.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">05 · 암호 레코드와 안전한 사용 · 16 / 19</div><h1>비밀번호 검증값의 버전과 재해시</h1><p class="lesson-objective">저장 형식을 검증하고 성공한 후보만 새 정책으로 이전합니다.</p></div></header>
           <div class="lesson-meta"><span>심화 연결</span><span>학습 60–90분</span><span>처음 준비 0–10분</span></div>
         <p class="caption">개념 수·도구 전환·독립 과제를 고려한 편집자 추정이며 학습자 실측 전입니다.</p>
-        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>비밀번호 후보가 틀렸는데 정책이 오래됐습니다. 재해시하나요?</p><fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend><label><input type="radio" name="readiness" value="0"> 아니며 검증 성공을 먼저 요구한다.</label><label><input type="radio" name="readiness" value="1"> 틀린 후보를 새 비밀번호로 저장한다.</label><label><input type="radio" name="readiness" value="2"> salt를 지우면 된다.</label><button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset><details><summary>판단 기준과 보충 자료</summary><p>성공하지 않은 후보로 저장값을 바꾸면 인증 의미가 무너집니다.</p><a href="../../guides/bridges.html#bytes">막힌 기초를 짧게 연결하기 ↗</a></details></details><details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl><dt>명령 실행 또는 입력 파일 찾기에서 막힘</dt><dd>로컬 파일 실습 · Python 3.10 이상인지 확인합니다. record_crypto.py이 있는 작업 사본 폴더에서 실행하고 원본과 편집한 파일의 위치를 비교하세요.</dd><dt>형식·비용을 외부 입력대로 무제한 실행한다.</dt><dd>지원 형식과 비용 상한을 검사하고 실제 용량 정책을 적용합니다.</dd></dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>비밀번호 후보가 틀렸는데 정책이 오래됐습니다. 재해시하나요?</p><fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend><label><input type="radio" name="readiness" value="0"> 아니며 검증 성공을 먼저 요구한다.</label><label><input type="radio" name="readiness" value="1"> 틀린 후보를 새 비밀번호로 저장한다.</label><label><input type="radio" name="readiness" value="2"> salt를 지우면 된다.</label><button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset><details><summary>판단 기준과 보충 자료</summary><p>성공하지 않은 후보로 저장값을 바꾸면 인증 의미가 무너집니다.</p></details></details><details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl><dt>명령 실행 또는 입력 파일 찾기에서 막힘</dt><dd>로컬 파일 실습 · Python 3.10 이상인지 확인합니다. record_crypto.py이 있는 작업 사본 폴더에서 실행하고 원본과 편집한 파일의 위치를 비교하세요.</dd><dt>형식·비용을 외부 입력대로 무제한 실행한다.</dt><dd>지원 형식과 비용 상한을 검사하고 실제 용량 정책을 적용합니다.</dd></dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
           <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>로컬 파일 실습 · Python 3.10 이상</strong></p><ul><li>crypto ZIP 전체를 풀고 record_crypto.py와 round2-crypto.json가 있는 폴더에서 실행합니다. 외부 서버·클라우드 계정·실제 네트워크 접속은 없습니다.</li><li>Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. 변경 실험은 원본을 보관하고 사본과 --input 옵션을 사용합니다.</li><li>Python 3.10 이상 표준 라이브러리만 사용합니다. 추가 패키지가 필요하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="password.html">암호학 · 비밀번호 KDF·salt·비용 ↗</a></li><li><a href="key-lifecycle.html">암호학 · 키 상태·교체·침해 대응 ↗</a></li></ul>
@@ -141,7 +143,7 @@ updated_valid=True iterations=2000 needs_rehash=False</pre></div></li><li><h3>�
           <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
           <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
           <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 정상 검증 후 비용을 낮추지 않는다.</strong></p><p>재해시 조건은 저장 비용이 목표보다 낮을 때이며 더 높은 비용의 강제 하향을 하지 않습니다.</p></details>
-        </fieldset><details class="written-check"><summary>고르기에서 끝내지 않고 직접 설명하기</summary><p>해설을 닫고 다음 과제의 예상 결과와 근거를 먼저 적으세요.</p><p>잘못된 비밀번호와 낮은 비용의 검증값이 함께 있을 때 재해시를 수행해도 되나요?</p><label for="reasoningNote">내 예상 · 근거 · 확인할 반례</label><textarea id="reasoningNote" rows="4" maxlength="4000" placeholder="이 메모는 저장되지 않습니다. 필요한 기록은 과제 양식에 옮기세요."></textarea><details><summary>작성한 뒤 비교할 기준</summary><p>인증이 성공한 후보만 새 salt·비용으로 갱신합니다. 틀린 후보로 저장값을 덮어쓰면 계정 접근을 훼손합니다.</p><p>예상·실제 출력·차이의 원인이 연결됐는지 확인하세요. 글을 썼다는 사실로 자동 완료되지 않습니다.</p></details></details></div><section class="mastery-panel js-only" hidden><h3>지금 혼자 할 수 있는 수준 기록</h3><p>완료 표시와 별개입니다. 답을 보면서 푼 경우는 ‘따라 함’으로 기록하세요.</p><div class="mastery-actions"><button type="button" class="learning-button small" data-mastery="read" aria-pressed="false">읽음</button><button type="button" class="learning-button small" data-mastery="guided" aria-pressed="false">따라 함</button><button type="button" class="learning-button small" data-mastery="independent" aria-pressed="false">독립 해결</button><button type="button" class="learning-button small" data-mastery="review" aria-pressed="false">재도전 필요</button></div><p id="masteryFeedback" role="status"></p><a href="../../learn/review.html">내 복습 목록 ↗</a></section>
+        </fieldset><details class="written-check"><summary>고르기에서 끝내지 않고 직접 설명하기</summary><p>해설을 닫고 다음 과제의 예상 결과와 근거를 먼저 적으세요.</p><p>잘못된 비밀번호와 낮은 비용의 검증값이 함께 있을 때 재해시를 수행해도 되나요?</p><label for="reasoningNote">내 예상 · 근거 · 확인할 반례</label><textarea id="reasoningNote" rows="4" maxlength="4000" placeholder="이 메모는 저장되지 않습니다. 필요한 기록은 과제 양식에 옮기세요."></textarea><details><summary>작성한 뒤 비교할 기준</summary><p>인증이 성공한 후보만 새 salt·비용으로 갱신합니다. 틀린 후보로 저장값을 덮어쓰면 계정 접근을 훼손합니다.</p><p>예상·실제 출력·차이의 원인이 연결됐는지 확인하세요. 글을 썼다는 사실로 자동 완료되지 않습니다.</p></details></details></div><section class="mastery-panel js-only" hidden><h3>지금 혼자 할 수 있는 수준 기록</h3><p>완료 표시와 별개입니다. 답을 보면서 푼 경우는 ‘따라 함’으로 기록하세요.</p><div class="mastery-actions"><button type="button" class="learning-button small" data-mastery="read" aria-pressed="false">읽음</button><button type="button" class="learning-button small" data-mastery="guided" aria-pressed="false">따라 함</button><button type="button" class="learning-button small" data-mastery="independent" aria-pressed="false">독립 해결</button><button type="button" class="learning-button small" data-mastery="review" aria-pressed="false">재도전 필요</button></div><p id="masteryFeedback" role="status"></p></section>
             <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>원본의 예상 결과와 변경 과제의 결과를 근거로 비교했다.</li><li>실제로 검증한 보장과 모형에서 생략한 조건을 나누어 기록했다.</li></ul>
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="aad-record-binding.html"><small>← 이전 차시</small>AEAD와 레코드 문맥의 결합</a>

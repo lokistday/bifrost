@@ -1,22 +1,6 @@
 /* Small enhancements for the homepage; every learning link is static. */
 (() => {
   'use strict';
-  const form = document.getElementById('workspaceSearch');
-  const input = document.getElementById('workspaceQuery');
-  form.hidden = false;
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    const destination = new URL('learn/', location.href);
-    const query = input.value.trim().slice(0,120);
-    // Fragments stay in the browser: the static host never receives the query.
-    destination.hash = query ? `search?q=${encodeURIComponent(query)}` : 'search';
-    location.assign(destination.href);
-  });
-  document.addEventListener('keydown', event => {
-    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
-      event.preventDefault(); input.focus();
-    }
-  });
   const progress = window.BifrostProgress, route = window.BifrostPaths?.start;
   if (!progress || !route) return;
   const lessons = route.sequence.map(id=>({id}));

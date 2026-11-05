@@ -17,26 +17,28 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/misc/constraint-solving.html">
 <title>제약 조건과 해의 유일성 검증 — Misc · Bifrost</title>
-<script src="../../js/theme.js?v=learning-dcac82a7ff60"></script>
-<link rel="icon" href="../../assets/logo.svg?v=learning-dcac82a7ff60" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-dcac82a7ff60">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-dcac82a7ff60">
+<script src="../../js/theme.js?v=learning-54a8dcdd07dd"></script>
+<script src="../../js/pointer-trail.js?v=learning-54a8dcdd07dd" defer></script>
+<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-54a8dcdd07dd">
+<link rel="icon" href="../../assets/logo.svg?v=learning-54a8dcdd07dd" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-54a8dcdd07dd">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-54a8dcdd07dd">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-dcac82a7ff60">
-<link rel="stylesheet" href="../../css/study.css?v=learning-dcac82a7ff60">
-<script src="../../js/catalog.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/courses/misc.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/progress.js?v=learning-dcac82a7ff60" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-54a8dcdd07dd">
+<link rel="stylesheet" href="../../css/study.css?v=learning-54a8dcdd07dd">
+<script src="../../js/catalog.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/courses/misc.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/progress.js?v=learning-54a8dcdd07dd" defer></script>
 
 
-<script src="../../js/learning-view.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/learning.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/learning-view.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/learning.js?v=learning-54a8dcdd07dd" defer></script>
 </head>
 <body class="learning-page" data-course="misc" data-course-number="03" data-view="lesson" data-lesson-id="misc.constraint-solving" data-path="" style="--course-accent:var(--map-orange)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-dcac82a7ff60" width="34" height="34" alt=""></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">문제 해결·자동화 목차</a><a href="../../wargame/">워게임</a><a href="../../learn/review.html">내 복습</a></nav>
+  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-54a8dcdd07dd" width="34" height="34" alt=""></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">학습 경로</a><a href="./#courseModules">문제 해결·자동화 목차</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -89,7 +91,7 @@
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/misc.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">04 · 제약과 재현성 · 8 / 14</div><h1>제약 조건과 해의 유일성 검증</h1><p class="lesson-objective">작은 후보 공간을 완전 탐색하고 조건 부족·모순·유일해를 구분합니다.</p></div></header>
           <div class="lesson-meta"><span>응용</span><span>학습 50–80분</span><span>처음 준비 0–10분</span></div>
         <p class="caption">개념 수·도구 전환·독립 과제를 고려한 편집자 추정이며 학습자 실측 전입니다.</p>
-        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>조건을 만족하는 첫 답을 찾았습니다. 유일해라고 말할 수 있나요?</p><fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend><label><input type="radio" name="readiness" value="0"> 예, 첫 답은 항상 유일하다</label><label><input type="radio" name="readiness" value="1"> 아니요, 나머지 후보도 확인해야 한다</label><label><input type="radio" name="readiness" value="2"> 사람이 세 명이면 무조건 가능</label><button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset><details><summary>판단 기준과 보충 자료</summary><p>한 해의 존재와 해의 유일성은 서로 다른 주장입니다. 전체 후보 또는 유일성 검증이 필요합니다.</p><a href="../../guides/bridges.html#bytes">막힌 기초를 짧게 연결하기 ↗</a></details></details><details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl><dt>명령 실행 또는 입력 파일 찾기에서 막힘</dt><dd>오프라인 · Python 3.10 이상 · 표준 라이브러리인지 확인합니다. toolbox.py이 있는 작업 사본 폴더에서 실행하고 원본과 편집한 파일의 위치를 비교하세요.</dd><dt>답 하나가 나오면 모든 조건이 충분하다고 결론 낸다.</dt><dd>해 개수를 세어 유일성과 조건 부족을 확인합니다.</dd></dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>조건을 만족하는 첫 답을 찾았습니다. 유일해라고 말할 수 있나요?</p><fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend><label><input type="radio" name="readiness" value="0"> 예, 첫 답은 항상 유일하다</label><label><input type="radio" name="readiness" value="1"> 아니요, 나머지 후보도 확인해야 한다</label><label><input type="radio" name="readiness" value="2"> 사람이 세 명이면 무조건 가능</label><button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset><details><summary>판단 기준과 보충 자료</summary><p>한 해의 존재와 해의 유일성은 서로 다른 주장입니다. 전체 후보 또는 유일성 검증이 필요합니다.</p></details></details><details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl><dt>명령 실행 또는 입력 파일 찾기에서 막힘</dt><dd>오프라인 · Python 3.10 이상 · 표준 라이브러리인지 확인합니다. toolbox.py이 있는 작업 사본 폴더에서 실행하고 원본과 편집한 파일의 위치를 비교하세요.</dd><dt>답 하나가 나오면 모든 조건이 충분하다고 결론 낸다.</dt><dd>해 개수를 세어 유일성과 조건 부족을 확인합니다.</dd></dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
           <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>오프라인 · Python 3.10 이상 · 표준 라이브러리</strong></p><ul><li>해당 분야 ZIP을 풀고 misc 폴더에서 실행합니다. Linux/macOS는 python3, Windows PowerShell은 아래 python3를 py -3로 바꿉니다.</li><li>파일은 합성 교육 자료입니다. 실습은 로컬 파일/메모리만 처리하며 실제 계정·서버·개인정보를 사용하지 않습니다. 원본은 보관하고 변경 과제에는 사본을 사용합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="graph-search.html">문제 해결·자동화 · 그래프 탐색과 최단 경로의 조건 ↗</a></li><li><a href="../foundation/python-flow.html">공통 기초 · 조건·반복·함수 ↗</a></li></ul>
@@ -138,7 +140,7 @@ solutions=1</pre></div></li><li><h3>조건을 덜 주었을 때 비교</h3><p>�
           <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
           <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
           <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 엄격한 선후 조건이 모순이라 해가 없다</strong></p><p>서로 반대인 엄격 부등식은 같은 배치에서 동시에 참일 수 없습니다.</p></details>
-        </fieldset><details class="written-check"><summary>고르기에서 끝내지 않고 직접 설명하기</summary><p>해설을 닫고 다음 과제의 예상 결과와 근거를 먼저 적으세요.</p><p>두 후보가 모든 조건을 만족하는 문제에서 첫 후보만 출력한 결과를 평가하세요.</p><label for="reasoningNote">내 예상 · 근거 · 확인할 반례</label><textarea id="reasoningNote" rows="4" maxlength="4000" placeholder="이 메모는 저장되지 않습니다. 필요한 기록은 과제 양식에 옮기세요."></textarea><details><summary>작성한 뒤 비교할 기준</summary><p>해 하나의 존재와 유일성은 다릅니다. 전체 후보 수나 추가 제약을 제시해야 유일한 답이라고 말할 수 있습니다.</p><p>예상·실제 출력·차이의 원인이 연결됐는지 확인하세요. 글을 썼다는 사실로 자동 완료되지 않습니다.</p></details></details></div><section class="mastery-panel js-only" hidden><h3>지금 혼자 할 수 있는 수준 기록</h3><p>완료 표시와 별개입니다. 답을 보면서 푼 경우는 ‘따라 함’으로 기록하세요.</p><div class="mastery-actions"><button type="button" class="learning-button small" data-mastery="read" aria-pressed="false">읽음</button><button type="button" class="learning-button small" data-mastery="guided" aria-pressed="false">따라 함</button><button type="button" class="learning-button small" data-mastery="independent" aria-pressed="false">독립 해결</button><button type="button" class="learning-button small" data-mastery="review" aria-pressed="false">재도전 필요</button></div><p id="masteryFeedback" role="status"></p><a href="../../learn/review.html">내 복습 목록 ↗</a></section>
+        </fieldset><details class="written-check"><summary>고르기에서 끝내지 않고 직접 설명하기</summary><p>해설을 닫고 다음 과제의 예상 결과와 근거를 먼저 적으세요.</p><p>두 후보가 모든 조건을 만족하는 문제에서 첫 후보만 출력한 결과를 평가하세요.</p><label for="reasoningNote">내 예상 · 근거 · 확인할 반례</label><textarea id="reasoningNote" rows="4" maxlength="4000" placeholder="이 메모는 저장되지 않습니다. 필요한 기록은 과제 양식에 옮기세요."></textarea><details><summary>작성한 뒤 비교할 기준</summary><p>해 하나의 존재와 유일성은 다릅니다. 전체 후보 수나 추가 제약을 제시해야 유일한 답이라고 말할 수 있습니다.</p><p>예상·실제 출력·차이의 원인이 연결됐는지 확인하세요. 글을 썼다는 사실로 자동 완료되지 않습니다.</p></details></details></div><section class="mastery-panel js-only" hidden><h3>지금 혼자 할 수 있는 수준 기록</h3><p>완료 표시와 별개입니다. 답을 보면서 푼 경우는 ‘따라 함’으로 기록하세요.</p><div class="mastery-actions"><button type="button" class="learning-button small" data-mastery="read" aria-pressed="false">읽음</button><button type="button" class="learning-button small" data-mastery="guided" aria-pressed="false">따라 함</button><button type="button" class="learning-button small" data-mastery="independent" aria-pressed="false">독립 해결</button><button type="button" class="learning-button small" data-mastery="review" aria-pressed="false">재도전 필요</button></div><p id="masteryFeedback" role="status"></p></section>
             <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>해 존재와 유일성을 구분했다.</li><li>조건 부족과 모순을 입력으로 재현했다.</li></ul>
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="이전·다음 차시"><a href="graph-search.html"><small>← 이전 차시</small>그래프 탐색과 최단 경로의 조건</a>

@@ -17,27 +17,29 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/paths/red-foundations/web.flow.html">
 <title>HTML·DOM과 요청 흐름 — 레드팀 관심자를 위한 분석 기초 · Bifrost</title>
-<script src="../../js/theme.js?v=learning-dcac82a7ff60"></script>
-<link rel="icon" href="../../assets/logo.svg?v=learning-dcac82a7ff60" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-dcac82a7ff60">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-dcac82a7ff60">
+<script src="../../js/theme.js?v=learning-54a8dcdd07dd"></script>
+<script src="../../js/pointer-trail.js?v=learning-54a8dcdd07dd" defer></script>
+<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-54a8dcdd07dd">
+<link rel="icon" href="../../assets/logo.svg?v=learning-54a8dcdd07dd" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-54a8dcdd07dd">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-54a8dcdd07dd">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-dcac82a7ff60">
-<link rel="stylesheet" href="../../css/study.css?v=learning-dcac82a7ff60">
-<script src="../../js/catalog.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/courses/web.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/progress.js?v=learning-dcac82a7ff60" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-54a8dcdd07dd">
+<link rel="stylesheet" href="../../css/study.css?v=learning-54a8dcdd07dd">
+<script src="../../js/catalog.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/courses/web.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/progress.js?v=learning-54a8dcdd07dd" defer></script>
 
-<script src="../../js/learning-paths.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/path-progress.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/learning-view.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/learning.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/learning-paths.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/path-progress.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/learning-view.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/learning.js?v=learning-54a8dcdd07dd" defer></script>
 </head>
 <body class="learning-page" data-course="web" data-course-number="08" data-view="lesson" data-lesson-id="web.flow" data-path="red-foundations" style="--course-accent:var(--map-blue)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-dcac82a7ff60" width="34" height="34" alt=""></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#pathOutline">레드팀 기초 목차</a><a href="../../wargame/">워게임</a><a href="../../learn/review.html">내 복습</a></nav>
+  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-54a8dcdd07dd" width="34" height="34" alt=""></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">학습 경로</a><a href="./#pathOutline">레드팀 기초 목차</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -103,12 +105,12 @@
           </ol></details><details ><summary>Reverse Engineering<span class="caption">44–44단계</span></summary><ol><li><a class="side-lesson" href="rev.integer-views.html" >
           <span class="path-step-number">44</span><span><small>리버싱 · 권장 선행</small>부호 해석·확장·비트 필드 복원<small class="completion-label" data-completion="rev.integer-views"></small></span></a></li>
           </ol></details><a class="side-lesson path-project-link" href="project.html"><span class="path-step-number">✦</span><span>마지막 · 종합 프로젝트</span></a></nav>
-        <a class="back-link" href="../../learn/#paths">다른 학습 경로 보기 ↗</a></aside><article class="lesson-article">
+        <a class="back-link" href="../../learn/">다른 학습 경로 보기 ↗</a></aside><article class="lesson-article">
           <nav class="path-location" aria-label="현재 학습 경로"><a href="./">레드팀 기초</a><strong>12 / 44단계</strong><a href="./#pathOutline">경로 목차 ↗</a></nav>
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/web.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">Web Hacking · 01 · 웹의 동작과 데이터 · 12 / 44</div><h1>HTML·DOM과 요청 흐름</h1><p class="lesson-objective">브라우저가 문서를 해석하는 과정과 데이터가 코드가 되는 지점을 구분합니다.</p></div></header>
           <div class="lesson-meta"><span>기초</span><span>학습 25–40분</span><span>처음 준비 0–10분</span></div>
         <p class="caption">개념 수·도구 전환·독립 과제를 고려한 편집자 추정이며 학습자 실측 전입니다.</p>
-        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>같은 문자열을 넣었는데 #markup 아래에 b 요소가 생겼습니다. 가장 직접적인 근거는?</p><fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend><label><input type="radio" name="readiness" value="0"> 파일 이름에 browser가 들어 있다.</label><label><input type="radio" name="readiness" value="1"> Elements에서 b 자식 노드를 확인했다.</label><label><input type="radio" name="readiness" value="2"> 브라우저 창이 열렸다.</label><button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset><details><summary>판단 기준과 보충 자료</summary><p>요소의 생성 여부는 현재 DOM에서 확인할 수 있습니다. 파일 이름이나 창의 존재는 태그가 해석됐다는 근거가 아닙니다.</p><a href="../../guides/bridges.html#web">막힌 기초를 짧게 연결하기 ↗</a></details></details><details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl><dt>명령 실행 또는 입력 파일 찾기에서 막힘</dt><dd>브라우저 · 개발자 도구 Elements인지 확인합니다. browser.html이 있는 작업 사본 폴더에서 실행하고 원본과 편집한 파일의 위치를 비교하세요.</dd><dt>Elements와 원본 파일이 언제나 동일하다고 생각한다.</dt><dd>JavaScript 실행과 사용자 동작으로 DOM이 달라질 수 있으므로 관찰 시점을 적습니다.</dd></dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>
+        <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>같은 문자열을 넣었는데 #markup 아래에 b 요소가 생겼습니다. 가장 직접적인 근거는?</p><fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend><label><input type="radio" name="readiness" value="0"> 파일 이름에 browser가 들어 있다.</label><label><input type="radio" name="readiness" value="1"> Elements에서 b 자식 노드를 확인했다.</label><label><input type="radio" name="readiness" value="2"> 브라우저 창이 열렸다.</label><button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset><details><summary>판단 기준과 보충 자료</summary><p>요소의 생성 여부는 현재 DOM에서 확인할 수 있습니다. 파일 이름이나 창의 존재는 태그가 해석됐다는 근거가 아닙니다.</p></details></details><details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl><dt>명령 실행 또는 입력 파일 찾기에서 막힘</dt><dd>브라우저 · 개발자 도구 Elements인지 확인합니다. browser.html이 있는 작업 사본 폴더에서 실행하고 원본과 편집한 파일의 위치를 비교하세요.</dd><dt>Elements와 원본 파일이 언제나 동일하다고 생각한다.</dt><dd>JavaScript 실행과 사용자 동작으로 DOM이 달라질 수 있으므로 관찰 시점을 적습니다.</dd></dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
           <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>브라우저 · 개발자 도구 Elements</strong></p><ul><li>browser.html을 내려받아 파일로 엽니다. 서버나 Python 설치는 필요 없습니다.</li><li>텍스트 편집기로 browser.html의 고정 문자열을 바꾼 뒤 저장하고 브라우저에서 새로고침합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="foundation.http.html">공통 기초 · HTTP 요청과 응답 읽기 ↗</a></li></ul>
@@ -157,7 +159,7 @@ document.querySelector(&quot;#markup&quot;).innerHTML = sample;</code></pre></di
           <button class="learning-button small js-only" hidden type="button" data-check-question="1">답 확인</button>
           <p class="question-feedback feedback" role="status" id="questionFeedback1"></p>
           <details class="question-answer"><summary>정답과 이유 읽기</summary><p><strong>정답: 실제 서버가 DB 권한 검사를 수행했다는 사실</strong></p><p>이 파일에는 서버나 DB 요청이 없습니다. 실제로 수행한 DOM 관찰과 일반적인 웹 구조 설명을 분리해야 합니다.</p></details>
-        </fieldset><details class="written-check"><summary>고르기에서 끝내지 않고 직접 설명하기</summary><p>해설을 닫고 다음 과제의 예상 결과와 근거를 먼저 적으세요.</p><p>고정 문자열을 &lt;strong&gt;notice&lt;/strong&gt;로 바꾸고 textContent와 innerHTML 결과를 DOM 노드 종류로 설명하세요.</p><label for="reasoningNote">내 예상 · 근거 · 확인할 반례</label><textarea id="reasoningNote" rows="4" maxlength="4000" placeholder="이 메모는 저장되지 않습니다. 필요한 기록은 과제 양식에 옮기세요."></textarea><details><summary>작성한 뒤 비교할 기준</summary><p>textContent는 태그 문자가 있는 텍스트, innerHTML은 strong 요소입니다. 실행된 스크립트나 서버 동작은 이 실험의 결론이 아닙니다.</p><p>예상·실제 출력·차이의 원인이 연결됐는지 확인하세요. 글을 썼다는 사실로 자동 완료되지 않습니다.</p></details></details></div><section class="mastery-panel js-only" hidden><h3>지금 혼자 할 수 있는 수준 기록</h3><p>완료 표시와 별개입니다. 답을 보면서 푼 경우는 ‘따라 함’으로 기록하세요.</p><div class="mastery-actions"><button type="button" class="learning-button small" data-mastery="read" aria-pressed="false">읽음</button><button type="button" class="learning-button small" data-mastery="guided" aria-pressed="false">따라 함</button><button type="button" class="learning-button small" data-mastery="independent" aria-pressed="false">독립 해결</button><button type="button" class="learning-button small" data-mastery="review" aria-pressed="false">재도전 필요</button></div><p id="masteryFeedback" role="status"></p><a href="../../learn/review.html">내 복습 목록 ↗</a></section>
+        </fieldset><details class="written-check"><summary>고르기에서 끝내지 않고 직접 설명하기</summary><p>해설을 닫고 다음 과제의 예상 결과와 근거를 먼저 적으세요.</p><p>고정 문자열을 &lt;strong&gt;notice&lt;/strong&gt;로 바꾸고 textContent와 innerHTML 결과를 DOM 노드 종류로 설명하세요.</p><label for="reasoningNote">내 예상 · 근거 · 확인할 반례</label><textarea id="reasoningNote" rows="4" maxlength="4000" placeholder="이 메모는 저장되지 않습니다. 필요한 기록은 과제 양식에 옮기세요."></textarea><details><summary>작성한 뒤 비교할 기준</summary><p>textContent는 태그 문자가 있는 텍스트, innerHTML은 strong 요소입니다. 실행된 스크립트나 서버 동작은 이 실험의 결론이 아닙니다.</p><p>예상·실제 출력·차이의 원인이 연결됐는지 확인하세요. 글을 썼다는 사실로 자동 완료되지 않습니다.</p></details></details></div><section class="mastery-panel js-only" hidden><h3>지금 혼자 할 수 있는 수준 기록</h3><p>완료 표시와 별개입니다. 답을 보면서 푼 경우는 ‘따라 함’으로 기록하세요.</p><div class="mastery-actions"><button type="button" class="learning-button small" data-mastery="read" aria-pressed="false">읽음</button><button type="button" class="learning-button small" data-mastery="guided" aria-pressed="false">따라 함</button><button type="button" class="learning-button small" data-mastery="independent" aria-pressed="false">독립 해결</button><button type="button" class="learning-button small" data-mastery="review" aria-pressed="false">재도전 필요</button></div><p id="masteryFeedback" role="status"></p></section>
             <h3>내 결과물 확인하기</h3><ul class="evidence-list"><li>DOM의 텍스트와 요소 노드를 구분했다.</li><li>파일 열기와 HTTP 요청의 차이를 설명했다.</li></ul>
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="경로의 이전·다음 단계"><a href="web.file-boundary.html"><small>← 이전 단계</small>파일 이름·경로 이탈·저장 경계</a>

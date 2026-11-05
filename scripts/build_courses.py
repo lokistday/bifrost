@@ -83,6 +83,29 @@ def load_courses(strict=True):
 
         for key in lessons:
             check_prerequisites(key, [])
+    # Publish a module exam only after its complete question bank is validated.
+    exam_ids = set()
+    for source in sorted((ROOT / 'content/exams').glob('*.json')):
+        exam = json.loads(source.read_text(encoding='utf-8'))
+        eid = exam['id']
+        assert re.fullmatch(r'[a-z][a-z0-9-]*', eid) and eid not in exam_ids
+        exam_ids.add(eid)
+        assert source.stem == eid and type(exam['version']) is int and exam['version'] > 0
+        course = courses[exam['course']]
+        assert type(exam['module']) is int and 1 <= exam['module'] <= len(course['modules'])
+        module = course['modules'][exam['module'] - 1]
+        assert 'exam' not in module, 'Duplicate exam for a module'
+        module_ids = {l['id'] for l in module['lessons']}
+        questions = exam['questions']
+        assert len(questions) == 25 and len({q['id'] for q in questions}) == 25, eid
+        assert len({q['prompt'] for q in questions}) == 25, 'Duplicate exam prompt'
+        assert {q['lesson'] for q in questions} == module_ids, 'Exam must cover every lesson in its module'
+        for q in questions:
+            assert q['lesson'] in module_ids and q['prompt'].strip() and q['explanation'].strip()
+            assert re.fullmatch(r'[a-z][a-z0-9-]*', q['id'])
+            assert len(q['options']) == 4 and len(set(q['options'])) == 4 and all(o.strip() for o in q['options'])
+            assert type(q['answer']) is int and 0 <= q['answer'] < 4
+        module['exam'] = dict(id=eid, title=exam['title'], count=25)
     attach(courses)
     return site, courses
 

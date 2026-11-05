@@ -1,4 +1,4 @@
-/* Learning-path navigation, independent practice and secure search behavior. */
+/* Learning-path navigation, independent practice. */
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
@@ -39,32 +39,7 @@ for (const key of Object.keys(courses)) {
   check(doc.querySelector('.project-flow').getAttribute('aria-label'),`${key}: accessible workflow`);
 }
 
-const {document,Event}=parseHTML(read('learn/index.html'));
-check(document.querySelectorAll('[data-search-item]').length===all.length,'Static catalog complete without JavaScript');
-check(document.getElementById('lessonSearch').hasAttribute('hidden'),'Nonfunctional search hidden before enhancement');
-// linkedom select elements expose read-only value; model the DOM selection value.
-for (const id of ['searchCourse','searchLevel']) Object.defineProperty(document.getElementById(id),'value',{value:'',writable:true});
-vm.runInNewContext(read('js/study-search.js'),{document,URLSearchParams,location:{search:'?q='+encodeURIComponent('<img src=x onerror=alert(1)>')}});
-check(document.querySelectorAll('img[onerror]').length===0,'Search input cannot become HTML');
-check(!document.getElementById('searchEmpty').hidden,'Hostile/unknown query produces empty state');
-const q=document.getElementById('searchQuery');
-q.value='세션';q.dispatchEvent(new Event('input'));
-const shown=()=>[...document.querySelectorAll('[data-search-item]')].filter(r=>!r.hidden);
-check(shown().some(r=>r.dataset.course==='web'),'Korean query finds session lessons');
-document.getElementById('searchCourse').value='web'; document.getElementById('searchCourse').dispatchEvent(new Event('change'));
-check(shown().length>0 && shown().every(r=>r.dataset.course==='web'),'Course filter combines with query');
-q.value='SQL';q.dispatchEvent(new Event('input'));
-check(shown().some(r=>r.textContent.includes('SQL')),'Case-normalized English search');
-document.getElementById('searchLevel').value='심화 연결';document.getElementById('searchLevel').dispatchEvent(new Event('change'));
-check(shown().every(r=>r.dataset.level==='심화 연결'),'Difficulty filter');
-document.getElementById('searchReset').click();
-check(shown().length===all.length,'Reset restores every lesson');
-check(!document.getElementById('catalogResults').open,'Reset collapses the long catalog');
-q.value='로그';q.dispatchEvent(new Event('input'));
-check(document.getElementById('catalogResults').open,'Search automatically reveals its results');
-check(!/innerHTML|fetch\(|eval\(|localStorage/.test(read('js/study-search.js')),'Search is text-only and does not transmit/store queries');
-
-const html=['index.html','guides/linux.html','guides/bridges.html','learn/index.html',...Object.keys(courses).flatMap(k=>[`projects/${k}.html`,`tracks/${k}/lesson.html`]),...all.map(l=>`tracks/${l.id.replace('.','/')}.html`)];
+const html=['index.html','guides/linux.html','learn/index.html',...Object.keys(courses).flatMap(k=>[`projects/${k}.html`,`tracks/${k}/lesson.html`]),...all.map(l=>`tracks/${l.id.replace('.','/')}.html`)];
 for (const file of html) {
   const source=read(file), doc=parseHTML(source).document;
   const csp=doc.querySelector('meta[http-equiv="Content-Security-Policy"]');
@@ -75,4 +50,4 @@ for (const file of html) {
   check([...doc.querySelectorAll('*')].every(el=>[...el.attributes].every(a=>!/^on/i.test(a.name))),`${file}: no inline event handler`);
   check(source.indexOf('Content-Security-Policy')<source.indexOf('<script'),`${file}: policy precedes scripts`);
 }
-console.log(`PASS: ${checks} learning revision, static practice, search and CSP checks.`);
+console.log(`PASS: ${checks} learning revision, static practice and CSP checks.`);

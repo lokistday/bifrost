@@ -17,27 +17,29 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/web/">
 <title>Web Hacking — Bifrost</title>
-<script src="../../js/theme.js?v=learning-dcac82a7ff60"></script>
-<link rel="icon" href="../../assets/logo.svg?v=learning-dcac82a7ff60" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-dcac82a7ff60">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-dcac82a7ff60">
+<script src="../../js/theme.js?v=learning-54a8dcdd07dd"></script>
+<script src="../../js/pointer-trail.js?v=learning-54a8dcdd07dd" defer></script>
+<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-54a8dcdd07dd">
+<link rel="icon" href="../../assets/logo.svg?v=learning-54a8dcdd07dd" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-54a8dcdd07dd">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-54a8dcdd07dd">
 <link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-dcac82a7ff60">
-<link rel="stylesheet" href="../../css/study.css?v=learning-dcac82a7ff60">
-<script src="../../js/catalog.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/courses/web.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/progress.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/visual-data.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/visuals.js?v=learning-dcac82a7ff60" defer></script>
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-54a8dcdd07dd">
+<link rel="stylesheet" href="../../css/study.css?v=learning-54a8dcdd07dd">
+<script src="../../js/catalog.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/courses/web.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/progress.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/visual-data.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/visuals.js?v=learning-54a8dcdd07dd" defer></script>
 
-<script src="../../js/learning-view.js?v=learning-dcac82a7ff60" defer></script>
-<script src="../../js/learning.js?v=learning-dcac82a7ff60" defer></script>
+<script src="../../js/learning-view.js?v=learning-54a8dcdd07dd" defer></script>
+<script src="../../js/learning.js?v=learning-54a8dcdd07dd" defer></script>
 </head>
 <body class="learning-page" data-course="web" data-course-number="08" data-view="lesson" data-lesson-id="" data-path="" style="--course-accent:var(--map-blue)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-dcac82a7ff60" width="34" height="34" alt=""></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">검색 · 학습 경로</a><a href="./#courseModules">웹 보안 목차</a><a href="../../wargame/">워게임</a><a href="../../learn/review.html">내 복습</a></nav>
+  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-54a8dcdd07dd" width="34" height="34" alt=""></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">학습 경로</a><a href="./#courseModules">웹 보안 목차</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
   <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
   <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
 </div></header>
@@ -55,7 +57,7 @@
           <p class="field-question">웹 서비스가 왜 안전하지 않게 동작할까?</p><dl><dt>주로 다루는 문제</dt><dd>인증·인가, 입력과 출력 처리, 요청 위조, 파일 접근, 서버의 외부 요청 경계</dd><dt>만나는 개념</dt><dd>HTTP·세션, SQL·XSS, CSRF, CORS·CSP, 경로 검증, SSRF</dd><dt>잘 맞을 수 있는 관심</dt><dd>웹사이트가 동작하는 방식, 사용자와 서버 사이의 흐름, 문제를 수정해 확인하는 과정이 재미있다.</dd><dt>도움 되는 기초</dt><dd>HTTP 기초와 Python 또는 JavaScript 입문. 처음부터 고급 코딩을 알 필요는 없다.</dd><dt>첫 실습</dt><dd>제공된 오프라인 요청 표본과 로컬 모형에서 취약한 입력 처리와 안전한 수정의 차이를 기록한다.</dd></dl>
           <div class="field-path"><b>학습 경로</b> 요청·인가·입출력 → 브라우저·서버 경계 → 세션·토큰·캐시 → 거래 상태·회귀 검증</div>
         </div></section><figure class="learning-visual course-visual" data-visual-id="web"><header class="visual-heading"><span class="visual-kicker">이 분야의 학습 흐름 · 흐름도</span><h3>브라우저의 해석부터 서버의 권한 검사까지</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="브라우저의 해석부터 서버의 권한 검사까지 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 222" width="760" height="222" role="img" aria-labelledby="visual-course-web-title visual-course-web-desc" focusable="false"><title id="visual-course-web-title">브라우저의 해석부터 서버의 권한 검사까지</title><desc id="visual-course-web-desc">요청·인가·입출력과 브라우저·서버 경계를 배운 뒤 세션의 교체·무효화, 토큰 만료, 공유 캐시와 거래 상태를 검토합니다. 정상·거부·반복 요청을 서로 다른 조건으로 검증합니다.</desc><defs><marker id="visual-course-web-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><circle class="v-step-circle" cx="42" cy="27" r="13"/><text class="v-step-number" x="42" y="31" text-anchor="middle">1</text><g class="v-tone "><rect class="v-node" x="28" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="29" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="82">동작 이해</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="113">DOM·SQL</tspan><tspan x="45" y="133">요청·세션</tspan></text></g><circle class="v-step-circle" cx="188.8" cy="27" r="13"/><text class="v-step-number" x="188.8" y="31" text-anchor="middle">2</text><g class="v-tone "><rect class="v-node" x="174.8" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="175.8" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="191.8" y="82">경계 보호</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="191.8" y="113">인가 검사</tspan><tspan x="191.8" y="133">입출력 처리</tspan></text></g><path class="v-edge " d="M148.8 126H169.8" marker-end="url(#visual-course-web-arrow)"/><circle class="v-step-circle" cx="335.6" cy="27" r="13"/><text class="v-step-number" x="335.6" y="31" text-anchor="middle">3</text><g class="v-tone "><rect class="v-node" x="321.6" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="322.6" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="338.6" y="82">수정 검증</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="338.6" y="113">정상·거부</tspan><tspan x="338.6" y="133">회귀 검사</tspan></text></g><path class="v-edge " d="M295.6 126H316.6" marker-end="url(#visual-course-web-arrow)"/><circle class="v-step-circle" cx="482.40000000000003" cy="27" r="13"/><text class="v-step-number" x="482.40000000000003" y="31" text-anchor="middle">4</text><g class="v-tone "><rect class="v-node" x="468.40000000000003" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="469.40000000000003" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="485.40000000000003" y="82">요청 경계</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="485.40000000000003" y="113">브라우저</tspan><tspan x="485.40000000000003" y="133">파일·URL</tspan></text></g><path class="v-edge " d="M442.40000000000003 126H463.40000000000003" marker-end="url(#visual-course-web-arrow)"/><circle class="v-step-circle" cx="629.2" cy="27" r="13"/><text class="v-step-number" x="629.2" y="31" text-anchor="middle">5</text><g class="v-tone "><rect class="v-node" x="615.2" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="616.2" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="632.2" y="82">서비스 상태</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="632.2" y="113">세션·캐시</tspan><tspan x="632.2" y="133">토큰·거래</tspan></text></g><path class="v-edge " d="M589.2 126H610.2" marker-end="url(#visual-course-web-arrow)"/></svg></div><figcaption><span class="visual-takeaway">각 단계에서 만든 기록과 결과물을 다음 차시의 판단 근거로 이어가세요.</span><small class="visual-note">학습의 큰 흐름입니다. 차시는 목차에서 자유롭게 선택하고 필요한 기초로 돌아갈 수 있습니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>요청·인가·입출력과 브라우저·서버 경계를 배운 뒤 세션의 교체·무효화, 토큰 만료, 공유 캐시와 거래 상태를 검토합니다. 정상·거부·반복 요청을 서로 다른 조건으로 검증합니다.</p></details></figure>
-        <section class="learning-path-panel"><div><span class="overline">LEARN → APPLY → EXPLAIN</span><h2>이 과정의 완주 기준</h2><p><a href="../../wargame/">실습으로 FLAG 문제 풀기 ↗</a></p><p>차시별 독립 과제에서 조건을 바꿔 보고, 마지막에는 두 표본을 분석한 결과와 근거 보고서를 완성합니다.</p></div><a class="learning-button" href="../../learn/">차시 검색 · 목표별 경로 ↗</a></section>
+        <section class="learning-path-panel"><div><span class="overline">LEARN → APPLY → EXPLAIN</span><h2>이 과정의 완주 기준</h2><p>차시별 독립 과제에서 조건을 바꿔 보고, 마지막에는 두 표본을 분석한 결과와 근거 보고서를 완성합니다.</p></div><a class="learning-button" href="../../learn/">차시 검색 · 목표별 경로 ↗</a></section>
         <div class="overview-layout"><div>
           <section class="outcome-panel"><div class="overline">WHAT YOU WILL BUILD</div><h2>이 과정을 마치면</h2><p>로컬 표본으로 필드·권한·수명·공유·재시도의 경계를 분석하고 정상 기능과 거부·복구 상태를 함께 검증합니다.</p></section>
           <section class="module-list" id="courseModules" aria-label="모듈별 차시">

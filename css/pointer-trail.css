@@ -1,0 +1,5 @@
+/* Shared decorative layer; never intercepts clicks or keyboard focus. */
+.pointer-trail { position:fixed; inset:0; width:100%; height:100%; z-index:60; pointer-events:none; color:var(--teal); overflow:hidden; }
+.pointer-trail[hidden] { display:none !important; }
+.pointer-trail path { fill:none; stroke:currentColor; stroke-width:1; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 0 2px currentColor); }
+@media(prefers-reduced-motion:reduce),(hover:none),(pointer:coarse){.pointer-trail{display:none !important;}}

@@ -8,6 +8,7 @@ const ROOT = path.resolve(__dirname, '..');
 const site = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/site.json'), 'utf8'));
 const registry = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/lesson-ids.json'), 'utf8'));
 const { create } = require('../js/learning-view.js');
+const migratedLessons = new Set(fs.readdirSync(path.join(ROOT, 'content/exams')).filter(f=>f.endsWith('.json')).flatMap(f=>JSON.parse(fs.readFileSync(path.join(ROOT,'content/exams',f),'utf8')).questions.map(q=>q.lesson)));
 let checks = 0;
 const check = (value, message) => { assert.ok(value, message); checks++; };
 
@@ -53,7 +54,8 @@ for (const item of site.courses) {
     canonicalURLs.add(canonical);
     check(doc.querySelector('meta[property="og:url"]').content === canonical, 'Open Graph shares canonical route');
     check(doc.querySelector('.solution') && doc.querySelectorAll('.walkthrough > li').length >= 2, 'Authored solution and steps');
-    check(doc.querySelectorAll('.question-answer').length === lesson.questions.length, 'Answers readable without JS');
+    check(doc.querySelectorAll('.question-answer').length === (migratedLessons.has(lesson.id)?0:lesson.questions.length), 'Unmigrated checks remain readable; published module exams replace inline questions');
+    if(migratedLessons.has(lesson.id)) check(doc.querySelector('.module-exam-link a'), 'Migrated lesson links to its published module exam');
     check(doc.querySelector('.lesson-preparation').textContent.includes(lesson.environment.label), 'Tailored environment present');
     check(doc.querySelectorAll('.reference-panel li').length === lesson.references.length, 'Lesson-specific references');
     const names = [...doc.querySelectorAll('[id]')].map(element => element.id);
@@ -64,7 +66,7 @@ for (const item of site.courses) {
     check(Object.values(page.window.BifrostCourses).flatMap(c => c.modules.flatMap(m => m.lessons)).length === registry.length, 'Production catalog retains every permanent ID');
     check(!page.document.getElementById('completeLesson').hidden, 'Completion enabled only after JS');
     const savedBefore = page.saved.get('bifrost_progress_v2');
-    lesson.questions.forEach((question, index) => {
+    (migratedLessons.has(lesson.id)?[]:lesson.questions).forEach((question, index) => {
       const field = page.document.querySelector(`[data-question="${index}"]`);
       const button = page.document.querySelector(`[data-check-question="${index}"]`);
       const feedback = page.document.getElementById(`questionFeedback${index}`);

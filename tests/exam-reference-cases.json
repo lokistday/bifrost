@@ -1,0 +1,137 @@
+[
+  {
+    "exam": "foundation-02",
+    "question": "m2-q01",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-02",
+    "question": "m2-q02",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-02",
+    "question": "m2-q03",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-02",
+    "question": "m2-q04",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-02",
+    "question": "m2-q05",
+    "kind": "exception"
+  },
+  {
+    "exam": "foundation-02",
+    "question": "m2-q06",
+    "kind": "exception"
+  },
+  {
+    "exam": "foundation-02",
+    "question": "m2-q07",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-02",
+    "question": "m2-q08",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-02",
+    "question": "m2-q09",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-02",
+    "question": "m2-q10",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-02",
+    "question": "m2-q11",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-02",
+    "question": "m2-q13",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-02",
+    "question": "m2-q14",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-02",
+    "question": "m2-q15",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-02",
+    "question": "m2-q16",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-04",
+    "question": "m4-q01",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-04",
+    "question": "m4-q03",
+    "kind": "exception"
+  },
+  {
+    "exam": "foundation-04",
+    "question": "m4-q07",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-04",
+    "question": "m4-q16",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-04",
+    "question": "m4-q17",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-05",
+    "question": "m5-q01",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-05",
+    "question": "m5-q02",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-05",
+    "question": "m5-q03",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-05",
+    "question": "m5-q04",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-05",
+    "question": "m5-q19",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-05",
+    "question": "m5-q22",
+    "kind": "stdout"
+  },
+  {
+    "exam": "foundation-05",
+    "question": "m5-q24",
+    "kind": "stdout"
+  }
+]

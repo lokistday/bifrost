@@ -1,4 +1,4 @@
-/* Integration boundaries introduced by the workspace: search, tabs, shared progress. */
+/* Integration boundaries introduced by the workspace: layout and shared progress. */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -28,19 +28,7 @@ assert.equal(doc.getElementById('homeContinue').getAttribute('href'),'paths/star
 const malformed=open('{invalid');
 assert.match(malformed.document.getElementById('homeProgressNote').textContent,/저장할 수 없는/);
 assert.equal(malformed.saved.get('bifrost_progress_v2'),'{invalid');
-const input=doc.getElementById('workspaceQuery');
-input.value='세션 & #<script>';
-doc.getElementById('workspaceSearch').dispatchEvent(new page.Event('submit',{cancelable:true}));
-const target=new URL(page.destination());
-assert.equal(target.pathname,'/bifrost/learn/');
-assert.equal(target.search,'');
-assert.equal(new URLSearchParams(target.hash.slice(8)).get('q'),input.value);
 assert.equal(doc.querySelectorAll('.code-window,.terrain-window').length,0);
 assert.ok(doc.querySelector('.workspace-preview > .progress-window'));
-const library=parseHTML(read('learn/index.html')).document;
-for (const id of ['searchCourse','searchLevel']) Object.defineProperty(library.getElementById(id),'value',{value:'',writable:true});
-vm.runInNewContext(read('js/study-search.js'),{document:library,URLSearchParams,location:{search:'',hash:'#search?q='+encodeURIComponent('세션')}});
-assert.equal(library.getElementById('searchQuery').value,'세션');
-assert.ok([...library.querySelectorAll('[data-search-item]')].filter(el=>!el.hidden).length>0);
-assert.ok(library.getElementById('catalogResults').open);
-console.log('PASS: workspace search fragments, real progress, reload, completed route, corrupt storage and preview tabs.');
+assert.equal(doc.querySelector('[role="search"], #workspaceSearch, .hero-search-link'),null);
+console.log('PASS: workspace progress, reload, completed route, corrupt storage and layout.');
