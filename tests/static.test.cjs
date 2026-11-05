@@ -66,6 +66,9 @@ const home = documents.get(path.join(ROOT, 'index.html'));
 const studyLibrary=documents.get(path.join(ROOT,'learn/index.html'));
 check(!studyLibrary.querySelector('#search, #projects') && studyLibrary.querySelector('#paths'),'Learning paths have a dedicated page');
 const projectLibrary=documents.get(path.join(ROOT,'projects/index.html'));
+const projectStyle=projectLibrary.querySelector('link[href*="/projects.css"]').getAttribute('href');
+const projectMotion=projectLibrary.querySelector('script[src*="/project-motion.js"]').getAttribute('src');
+check(/v=project-[a-f0-9]{12}$/.test(projectStyle) && projectStyle.split('?')[1]===projectMotion.split('?')[1], 'Project CSS and motion share a scoped cache fingerprint');
 check(projectLibrary.querySelectorAll('#projects .project-panel').length===9 && !projectLibrary.querySelector('#projects details'),'Project index always shows all nine project cards');
 check(!fs.existsSync(path.join(ROOT,'learn/search.html')) && !fs.existsSync(path.join(ROOT,'js/study-search.js')), 'Search page and script are removed');
 // Evaluate matching display declarations, including !important and specificity.

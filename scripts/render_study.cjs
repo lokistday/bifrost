@@ -1,9 +1,11 @@
 /* Static, account-free study library, final projects and prerequisite bridges. */
 const fs = require('node:fs');
 const path = require('node:path');
+const crypto = require('node:crypto');
 const { esc, all, slug } = require('../js/learning-view.js');
 
 module.exports = function renderStudy({ ROOT, courses, site, fill, write }) {
+  const projectVersion = 'project-' + crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,'css/projects.css'))).update(fs.readFileSync(path.join(ROOT,'js/project-motion.js'))).digest('hex').slice(0,12);
   const template = fs.readFileSync(path.join(ROOT, 'templates/study.html'), 'utf8');
   const routes = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/generated-paths.json'), 'utf8'));
   const lookup = Object.fromEntries(Object.values(courses).flatMap(c => all(c).map(l => [l.id, { course:c, lesson:l }])));
@@ -56,7 +58,7 @@ module.exports = function renderStudy({ ROOT, courses, site, fill, write }) {
         </article>`;}).join('')}
       </section>
       <p class="project-catalog-note">9개 분야의 종합 과제 · 예상 시간은 설치를 제외한 저자 추정입니다.</p>
-    </div>`, `<link rel="stylesheet" href="../css/projects.css?v=${esc(site.contentVersion)}">`);
+    </div>`, `<link rel="stylesheet" href="../css/projects.css?v=${projectVersion}"><script src="../js/project-motion.js?v=${projectVersion}" defer></script>`);
 
   for (const c of Object.values(courses)) {
     for (const activePath of [null,...routes.filter(r=>r.project===c.id)]) {
