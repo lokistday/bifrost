@@ -103,7 +103,7 @@ home.documentElement.classList.remove('splash-active');
 const courseDocument = documents.get(path.join(ROOT, 'tracks/web/sessions.html'));
 const courseStyles = [...courseDocument.querySelectorAll('link[rel="stylesheet"]')].map(link => path.join('tracks/web', link.getAttribute('href')));
 check(displayFromStyles(courseDocument.getElementById('completeLesson'), courseStyles) === 'none', 'Learning controls remain hidden before JavaScript enhancement');
-check(home.querySelector('meta[property="og:image"]').content.endsWith('/bifrost/og-image.png'), 'Sharing image URL matches published path');
+check(home.querySelector('meta[property="og:image"]').content.split('?')[0].endsWith('/bifrost/og-image.png'), 'Sharing image URL matches published path');
 const sitemap = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
 const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/site.json'), 'utf8'));
 const lessonRegistry = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/lesson-ids.json'), 'utf8'));

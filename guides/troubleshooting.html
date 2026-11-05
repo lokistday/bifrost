@@ -12,22 +12,22 @@
 <meta property="og:title" content="막혔을 때 확인 순서 · Bifrost">
 <meta property="og:description" content="막혔을 때 확인 순서">
 <meta property="og:url" content="https://lokistday.github.io/bifrost/guides/troubleshooting.html">
-<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png">
+<meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png?v=20261105-bifrost">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/guides/troubleshooting.html">
-<link rel="icon" href="../assets/logo.svg?v=learning-616a438ba3c1" type="image/svg+xml">
+<link rel="icon" href="../assets/logo.svg?v=learning-75c1e5e104a4" type="image/svg+xml">
 <title>막혔을 때 확인 순서 · Bifrost</title>
-<script src="../js/theme.js?v=learning-616a438ba3c1"></script>
-<script src="../js/pointer-trail.js?v=learning-616a438ba3c1" defer></script>
-<link rel="stylesheet" href="../css/pointer-trail.css?v=learning-616a438ba3c1">
-<link rel="stylesheet" href="../css/main.css?v=learning-616a438ba3c1">
-<link rel="stylesheet" href="../css/theme.css?v=learning-616a438ba3c1">
-<link rel="stylesheet" href="../css/learning.css?v=learning-616a438ba3c1">
-<link rel="stylesheet" href="../css/study.css?v=learning-616a438ba3c1">
+<script src="../js/theme.js?v=learning-75c1e5e104a4"></script>
+<script src="../js/pointer-trail.js?v=learning-75c1e5e104a4" defer></script>
+<link rel="stylesheet" href="../css/pointer-trail.css?v=learning-75c1e5e104a4">
+<link rel="stylesheet" href="../css/main.css?v=learning-75c1e5e104a4">
+<link rel="stylesheet" href="../css/theme.css?v=learning-75c1e5e104a4">
+<link rel="stylesheet" href="../css/learning.css?v=learning-75c1e5e104a4">
+<link rel="stylesheet" href="../css/study.css?v=learning-75c1e5e104a4">
 
 </head>
 <body class="learning-page study-page">
 <a class="skip-link" href="#studyContent">학습 본문으로 건너뛰기</a>
-<header class="topbar"><div class="wrap nav"><a class="brand" href="../index.html"><span class="brand-mark"><img class="brand-logo" src="../assets/logo.svg?v=learning-616a438ba3c1" width="34" height="34" alt=""></span><span>BIFROST</span></a><nav class="navlinks" aria-label="주 메뉴"><a href="../index.html#mindmap">학습 지도</a><a href="../learn/">학습 경로</a><a href="../projects/">프로젝트</a><a href="../exams/">모의고사</a></nav><button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button></div></header>
+<header class="topbar"><div class="wrap nav"><a class="brand" href="../index.html"><span class="brand-mark"><img class="brand-logo" src="../assets/logo.svg?v=learning-75c1e5e104a4" width="34" height="34" alt=""></span><span>BIFROST</span></a><nav class="navlinks" aria-label="주 메뉴"><a href="../index.html#mindmap">학습 지도</a><a href="../learn/">학습 경로</a><a href="../projects/">프로젝트</a><a href="../exams/">모의고사</a></nav><button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button></div></header>
 <main class="study-wrap" id="studyContent" tabindex="-1"><header class="study-hero"><div class="overline">FIND THE BLOCKER</div><h1>막힌 지점부터 구분하세요.</h1><p>재설치하기 전에 오류 메시지와 실행한 위치를 기록합니다.</p></header><section class="bridge-card"><h2>명령을 찾을 수 없음</h2><p><strong>증상:</strong> command not found, python3 또는 gcc를 인식할 수 없음</p><p><strong>다음 확인:</strong> 자신의 OS와 셸을 확인하고 버전 명령부터 실행하세요. Windows Python은 py -3 --version, Linux/macOS는 python3 --version입니다. 설치 후 터미널을 다시 열고 필요한 도구만 설치합니다.</p></section><section class="bridge-card"><h2>입력 파일을 찾을 수 없음</h2><p><strong>증상:</strong> No such file, can’t open file</p><p><strong>다음 확인:</strong> 현재 폴더의 파일 목록을 봅니다. PowerShell: Get-Location / Get-ChildItem. Linux/macOS: pwd / ls. ZIP 안에서 직접 실행하지 말고 압축을 푼 작업 사본으로 이동합니다.</p></section><section class="bridge-card"><h2>문법·들여쓰기 오류</h2><p><strong>증상:</strong> SyntaxError, IndentationError, 컴파일 오류</p><p><strong>다음 확인:</strong> 오류 줄과 바로 앞 줄의 괄호·따옴표·들여쓰기를 확인합니다. 셸 명령을 Python에 넣거나 C 조각을 터미널에 넣지 않았는지 코드 상자의 실행 문맥을 확인합니다.</p></section><section class="bridge-card"><h2>실행은 되지만 결과가 다름</h2><p><strong>증상:</strong> 출력이 예전과 같음, 행 수가 다름</p><p><strong>다음 확인:</strong> 파일을 저장했는지, 같은 경로를 편집·실행했는지 확인합니다. C는 다시 컴파일합니다. 원본 결과를 먼저 확인한 후 입력 하나만 바꾸고 예상·실제를 나란히 기록합니다.</p></section><section class="bridge-card"><h2>동작은 재현했지만 이유를 설명하지 못함</h2><p><strong>증상:</strong> 해설을 보면 알겠지만 혼자 시작하지 못함</p><p><strong>다음 확인:</strong> 한 번에 한 조건만 예측합니다. 차시의 준비 진단과 선행 차시로 돌아가고, 빈 파일에서 작은 예제를 만든 뒤 독립 과제를 다시 풉니다. 수행 수준은 따라 함 또는 재도전 필요로 기록합니다.</p></section><a href="../learn/">학습으로 돌아가기 →</a></main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../index.html#resources">외부 참고 자료 ↗</a></div></footer>
 </body></html>
