@@ -104,6 +104,7 @@ assert.ok(read('sitemap.xml').includes('exams/foundation-01.html'));
 const foundation=JSON.parse(read('content/courses/foundation.json'));
 assert.equal(examFiles.filter(f=>f.startsWith('foundation-')).length,5,'All five Foundation modules have an exam');
 assert.equal(examFiles.filter(f=>f.startsWith('pwn-')).length,6,'All six System Security modules have an exam');
+assert.equal(examFiles.filter(f=>f.startsWith('forensic-')).length,6,'All six Forensic modules have an exam');
 const authoredIds=new Set();
 for(const file of examFiles){
   const exam=JSON.parse(read('content/exams/'+file));

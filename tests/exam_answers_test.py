@@ -5,6 +5,7 @@ import subprocess
 import sys
 import unittest
 from pwn_exam_answers_test import SystemExamTest
+from forensic_exam_answers_test import ForensicExamTest
 import tempfile
 from pathlib import Path
 
