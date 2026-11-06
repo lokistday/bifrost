@@ -6,6 +6,7 @@ import sys
 import unittest
 from pwn_exam_answers_test import SystemExamTest
 from forensic_exam_answers_test import ForensicExamTest
+from exam_review_test import ExamReviewTest
 import tempfile
 from pathlib import Path
 

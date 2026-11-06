@@ -4,9 +4,11 @@
   const bank = window.BifrostExam, root = document.querySelector('[data-exam]');
   if (!bank || root?.dataset.exam !== bank.id) return;
   const key = `bifrost_exam_${bank.id}_v${bank.version}`;
+  const previousKey = Number.isInteger(bank.previousVersion) && bank.previousVersion < bank.version
+    ? `bifrost_exam_${bank.id}_v${bank.previousVersion}` : null;
   const byId = id => document.getElementById(id);
   const fields = [...document.querySelectorAll('[data-exam-question]')];
-  let writable = true, started = false, wrongOnly = false, current = 0;
+  let writable = true, started = false, wrongOnly = false, current = 0, migrated = false;
   // ESSENTIAL-style workspace: one question, previous/next, and an answer sheet.
   const layout=document.createElement('div');layout.className='exam-solving-layout';
   const pane=document.createElement('div');pane.className='exam-question-pane';
@@ -43,9 +45,26 @@
     if (Object.keys(clean.answers).length!==25) clean.submitted=false;
     return clean;
   }
-  try { const raw=localStorage.getItem(key); if(raw) state=sanitize(JSON.parse(raw)); }
+  try {
+    const raw=localStorage.getItem(key);
+    if(raw !== null) state=sanitize(JSON.parse(raw));
+    else if(previousKey) {
+      const legacy=localStorage.getItem(previousKey);
+      if(legacy !== null) {
+        const restored=sanitize(JSON.parse(legacy)), translated={};
+        for(const q of bank.questions) {
+          const map=bank.previousAnswerMap?.[q.id];
+          if(!Array.isArray(map) || map.length!==4 || new Set(map).size!==4 || !map.every(n=>Number.isInteger(n)&&n>=0&&n<4)) throw Error('Invalid answer migration');
+          if(Number.isInteger(restored.answers[q.id])) translated[q.id]=map[restored.answers[q.id]];
+        }
+        state={...restored,answers:translated};migrated=true;
+        // Keep v1 untouched. An interrupted write can retry from the same source.
+        localStorage.setItem(key,JSON.stringify(state));
+      }
+    }
+  }
   catch (_) { writable=false; }
-  function notice() { byId('examStorage').textContent=writable?'답안과 결과는 이 브라우저에만 저장됩니다.':'브라우저 기록을 읽거나 저장할 수 없습니다. 이번 화면에서만 응시할 수 있으며 창을 닫으면 새 답안이 사라집니다.'; }
+  function notice() { byId('examStorage').textContent=writable?(migrated?'이전 답안과 결과를 이어서 불러왔습니다. 답안과 결과는 이 브라우저에만 저장됩니다.':'답안과 결과는 이 브라우저에만 저장됩니다.'):'브라우저 기록을 읽거나 저장할 수 없습니다. 이번 화면에서만 응시할 수 있으며 창을 닫으면 새 답안이 사라집니다.'; }
   function save() { if(writable) try { localStorage.setItem(key,JSON.stringify(state)); } catch(_){writable=false;} notice(); }
   function correctCount() { return bank.questions.filter(q=>state.answers[q.id]===q.answer).length; }
   function progress() {

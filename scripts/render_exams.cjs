@@ -8,6 +8,7 @@ module.exports = ({ROOT, courses, site, fill, write}) => {
     .map(f => JSON.parse(fs.readFileSync(path.join(ROOT, 'content/exams', f), 'utf8')));
   const template = fs.readFileSync(path.join(ROOT, 'templates/study.html'), 'utf8');
   const version = esc(site.contentVersion), routes = [];
+  const runtimeVersion = 'exam-ui-' + crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT, 'js/exam.js'))).digest('hex').slice(0,12);
   fs.mkdirSync(path.join(ROOT, 'exams'), {recursive:true});
   fs.mkdirSync(path.join(ROOT, 'js/exams'), {recursive:true});
   const lessons = Object.fromEntries(Object.values(courses).flatMap(c => c.modules.flatMap(m => m.lessons.map(l => [l.id,l]))));
@@ -36,9 +37,9 @@ module.exports = ({ROOT, courses, site, fill, write}) => {
       <form id="examForm"><div id="examQuestions">${bank.questions.map((q,i)=>`<fieldset class="exam-question" id="exam-q-${q.id}" data-exam-question="${q.id}"><legend><span class="overline">QUESTION ${String(i+1).padStart(2,'0')}</span><span class="exam-prompt">${i+1}. ${esc(q.prompt)}</span></legend>${q.code?`<pre class="exam-code"><code>${esc(q.code)}</code></pre>`:''}${q.options.map((o,n)=>`<label class="exam-option"><input type="radio" name="${q.id}" value="${n}"><span><b>${n+1}</b> ${esc(o)}</span></label>`).join('')}<div class="exam-explanation" data-explanation="${q.id}" hidden></div></fieldset>`).join('')}</div><div id="examSubmit" class="exam-submit"><p id="examFeedback" role="status" aria-live="polite"></p><button type="submit" class="learning-button primary" id="submitExam">25문항 제출하고 채점하기</button></div></form></div></div>`;
     // Each detail page loads only its own question bank.
     write(`js/exams/${bank.id}.js`, '/* Generated from content/exams; do not edit. */\nwindow.BifrostExam = ' + JSON.stringify({...bank,lessonTitles:Object.fromEntries(m.lessons.map(l=>[l.id,l.title]))}) + ';\n');
-    const bankVersion = bank.course === 'foundation' ? version : 'exam-' + crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT, `js/exams/${bank.id}.js`))).digest('hex').slice(0,12);
+    const bankVersion = 'exam-' + crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT, `js/exams/${bank.id}.js`))).digest('hex').slice(0,12);
     emit(bank.id+'.html', bank.title+' 모의고사', `${c.label} 모듈 ${bank.module} · 25문항 모의고사`, content,
-      `<script src="../js/exams/${bank.id}.js?v=${bankVersion}" defer></script>\n<script src="../js/exam.js?v=${version}" defer></script>`);
+      `<script src="../js/exams/${bank.id}.js?v=${bankVersion}" defer></script>\n<script src="../js/exam.js?v=${runtimeVersion}" defer></script>`);
   }
   return routes;
 };

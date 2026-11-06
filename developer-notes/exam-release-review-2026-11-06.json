@@ -1,0 +1,3406 @@
+{
+  "version": 2,
+  "exams": 17,
+  "questions": [
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q01",
+      "lesson": "forensic.integrity",
+      "answer": 2,
+      "question_sha256": "ab4e51a9b7f5bfd712e01c8664273b0704f396a8e3947822b58430122e2a0fa1"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q02",
+      "lesson": "forensic.integrity",
+      "answer": 2,
+      "question_sha256": "692eb7050d93a2728a6443c958f65d79d5a2eda11cdea99ebeba9ca17c42ba03"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q03",
+      "lesson": "forensic.integrity",
+      "answer": 0,
+      "question_sha256": "32df401fb2976e5374455df7359b5ddcb5be0171ecb0be50fedaeae8d4a43a07"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q04",
+      "lesson": "forensic.integrity",
+      "answer": 0,
+      "question_sha256": "e2b31b352f2ee0c29a8e2faf10b4c91c7df954763ecaeb288c200bad7fd4d85f"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q05",
+      "lesson": "forensic.integrity",
+      "answer": 3,
+      "question_sha256": "5593bc6864eaaf15b7eaa55b792c7495101b38ac35a112ce2658a0df2e69a4bc"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q06",
+      "lesson": "forensic.integrity",
+      "answer": 1,
+      "question_sha256": "0c9f6f116ec7b4c172a22d3e58e4e48941feaa7ece3947f885cf0fc1cd1e010d"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q07",
+      "lesson": "forensic.integrity",
+      "answer": 0,
+      "question_sha256": "b7ff0ad164cd7aa62ed26e14ace3bfb71eda3aee343ef0e889931c387fcb2959"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q08",
+      "lesson": "forensic.integrity",
+      "answer": 0,
+      "question_sha256": "5168a275cc39a77e4bc0beb7210e25976184ffb90b38bffc4b70ba5c6c83d6d8"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q09",
+      "lesson": "forensic.logs",
+      "answer": 3,
+      "question_sha256": "edd88d2c8c8272b52c32c1f296f7ba0521b397643ed154a8de315d76590caa19"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q10",
+      "lesson": "forensic.logs",
+      "answer": 3,
+      "question_sha256": "ec5baf4f171a5ebadf9ad0bccf752cc6e52f936e836cf3d1c9e0e73fbb4152f4"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q11",
+      "lesson": "forensic.logs",
+      "answer": 1,
+      "question_sha256": "80c196b231fdd3b68b833d56b4300b720ca29281fbd470d04de361b19b3daaa7"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q12",
+      "lesson": "forensic.logs",
+      "answer": 2,
+      "question_sha256": "ff634dea2bff5e1b0fa4a4a70cc86d2842e66b1c0ddd23654bb4a66e39b857a6"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q13",
+      "lesson": "forensic.logs",
+      "answer": 1,
+      "question_sha256": "cc5f6b20ac09ca6754d0e16b131c38ee079649d850c6520d7834d90948f1ef1e"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q14",
+      "lesson": "forensic.logs",
+      "answer": 1,
+      "question_sha256": "3ccf1be902abb7796a08fddb459fb4230a081a087d26eec8712f1588e60a6601"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q15",
+      "lesson": "forensic.logs",
+      "answer": 3,
+      "question_sha256": "fd77e9f0cf97acb7c9c0204d4dec34ae4bf0403a70437d67e92339db4512f82f"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q16",
+      "lesson": "forensic.logs",
+      "answer": 2,
+      "question_sha256": "7f5a3e0bf09eb018404909171e009cb1e7feac4c7353dd8d630df42ba1d46cde"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q17",
+      "lesson": "forensic.logs",
+      "answer": 2,
+      "question_sha256": "8e738122d6f2ae81575cc637d9bc1175def28bb98c27befb5b5aa87f7d2e742a"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q18",
+      "lesson": "forensic.metadata",
+      "answer": 1,
+      "question_sha256": "15f784c9debe53c8d4117375bb2e7870df94401b41fb6a7a27ca15050d115134"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q19",
+      "lesson": "forensic.metadata",
+      "answer": 3,
+      "question_sha256": "66910ca142efe599afd5a680e9952a1023b55f41b3afeb58cf2b991d2db44ed9"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q20",
+      "lesson": "forensic.metadata",
+      "answer": 2,
+      "question_sha256": "2638f2ff9be07f568e321b1e3710e658cb7b71f0e4dfcc2df24ca4468a141989"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q21",
+      "lesson": "forensic.metadata",
+      "answer": 2,
+      "question_sha256": "7ec86eba9d5da23e3dec2ec122e35fb3e4ac247f1c591107dc06b4a74fc3cdf7"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q22",
+      "lesson": "forensic.metadata",
+      "answer": 1,
+      "question_sha256": "285e5f45988c80b05cef65167757c9f7d77af80ce7032e711d01e3915352b7de"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q23",
+      "lesson": "forensic.metadata",
+      "answer": 3,
+      "question_sha256": "499247e1ac38b71fead7039974e81047eb65cfc9957d7fbf2bb4d874c75027b1"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q24",
+      "lesson": "forensic.metadata",
+      "answer": 0,
+      "question_sha256": "5939cf3af8bac3aa9cd80ebd7f50724bcac737c084bc87c5ec83ba43d36a735a"
+    },
+    {
+      "exam": "forensic-01",
+      "version": 2,
+      "question": "forensic-m01-q25",
+      "lesson": "forensic.metadata",
+      "answer": 0,
+      "question_sha256": "c8b81ecda40cb5c53ca72bc20b8684da62e225f6c5da3ddb9adba86571b4317e"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q01",
+      "lesson": "forensic.timeline",
+      "answer": 0,
+      "question_sha256": "6755498bee912f95ad00ab025628d13c12afbe99436106f0dfdddab64eafc16b"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q02",
+      "lesson": "forensic.timeline",
+      "answer": 3,
+      "question_sha256": "06e7fc93abd1d9e69a375c4617a0a983e3843be9e756d37bd03fe7f978661d98"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q03",
+      "lesson": "forensic.timeline",
+      "answer": 0,
+      "question_sha256": "e831812a539cfcfab9a203906d0b63487fc707c7dc654698d89609b98057da57"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q04",
+      "lesson": "forensic.timeline",
+      "answer": 2,
+      "question_sha256": "f0ab4ea5bc97f701d816bdda0d60bf69f49b20c0f1d0d3bb0a4a21859d8ef5f3"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q05",
+      "lesson": "forensic.timeline",
+      "answer": 3,
+      "question_sha256": "896853646a02fb304a2e4f193a346ef2121ee141ea35a8e7fdc1d9e3b4188864"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q06",
+      "lesson": "forensic.timeline",
+      "answer": 0,
+      "question_sha256": "cee479c511e37f1dd4cfcf7ef2d390ef4748d38b84d68b55915452a41ae6f1f4"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q07",
+      "lesson": "forensic.timeline",
+      "answer": 1,
+      "question_sha256": "cedcd581c813cb52d9d6f70aaa271159e794c6805cffb4fc31cda1656347f7cd"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q08",
+      "lesson": "forensic.timeline",
+      "answer": 0,
+      "question_sha256": "c00d15383ca2ca1d9b3e2890b51fa7540992444b34f2035eeef220e7d244df62"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q09",
+      "lesson": "forensic.timeline",
+      "answer": 1,
+      "question_sha256": "fd80acd8c2f5ae83004820060692690adb0fe09a5560ec3b85d58799c0a9646b"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q10",
+      "lesson": "forensic.timeline",
+      "answer": 0,
+      "question_sha256": "95a6d562a91772287f72c3d3be39bf4c109887233680f438ef0faaac5e61ab7a"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q11",
+      "lesson": "forensic.timeline",
+      "answer": 2,
+      "question_sha256": "7ddf0a51766de8803b7df292c766ac78bbce537217ac840b39404bcea537521d"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q12",
+      "lesson": "forensic.timeline",
+      "answer": 0,
+      "question_sha256": "05372ecace6f4f00370e7eadf5e2b9d35122a9aae333c42d27c5e2eac727aab8"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q13",
+      "lesson": "forensic.timeline",
+      "answer": 2,
+      "question_sha256": "b2e3f1470b3f6188700ac1fa54b1668e47d333ded9ef08ff2b78e2c69d1e8cd2"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q14",
+      "lesson": "forensic.report",
+      "answer": 1,
+      "question_sha256": "190aeabcc18a0d8f6d3c127043b2679776fc1b42fa554cdd2ad81bd3fe117eb3"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q15",
+      "lesson": "forensic.report",
+      "answer": 2,
+      "question_sha256": "ed36298c669e4942d634c7a720bded1314d808ec315d7215ca9097fd412a4213"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q16",
+      "lesson": "forensic.report",
+      "answer": 1,
+      "question_sha256": "18b0433c47747a6433f4be0427eddbe78d9cd627934ec92780833d3c12905109"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q17",
+      "lesson": "forensic.report",
+      "answer": 1,
+      "question_sha256": "89c5b9008615661fbdc7d6c4ff38b9a400991a4ed87018de01a5a7c0cc2bdd01"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q18",
+      "lesson": "forensic.report",
+      "answer": 3,
+      "question_sha256": "94c9f78106df1989d7abcf66ce08102726397726cc3e083753702e53c4998161"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q19",
+      "lesson": "forensic.report",
+      "answer": 2,
+      "question_sha256": "0cad9eb780148e7b666f5ba5a707e138e3e0dc23cdefd1b769ccfb1f8c43dc85"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q20",
+      "lesson": "forensic.report",
+      "answer": 3,
+      "question_sha256": "5e9319e1c20299308ea258f44a6eb355f0dd254215aded1cdb29f8eeb3f5442a"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q21",
+      "lesson": "forensic.report",
+      "answer": 2,
+      "question_sha256": "d64cc6f3849583bb4fa4cf946fb30e1dceac25c2be02ed71951a80886ebcf5bf"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q22",
+      "lesson": "forensic.report",
+      "answer": 0,
+      "question_sha256": "ea680311a0cf9c71e9b2eb4c3fbe5d7486ee5d4e8184920915f08f76bb3ac9af"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q23",
+      "lesson": "forensic.report",
+      "answer": 1,
+      "question_sha256": "36036d0f3b8156ca844a96921b36fa9817f29cc745cf0761e6e9c8f1f607e30a"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q24",
+      "lesson": "forensic.report",
+      "answer": 3,
+      "question_sha256": "5a20de1536d67253adf932264b54de482d24f05c043b1a5777bb9ddcef690a53"
+    },
+    {
+      "exam": "forensic-02",
+      "version": 2,
+      "question": "forensic-m02-q25",
+      "lesson": "forensic.report",
+      "answer": 3,
+      "question_sha256": "ae9d962a70716703594fe29b3e54ab0245b850df8516f1d67e028cc94d4e6472"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q01",
+      "lesson": "forensic.collection-plan",
+      "answer": 2,
+      "question_sha256": "3edb05d8d299ae36616f44eaa572ba1448f62adda5948894dec68aee5880ec69"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q02",
+      "lesson": "forensic.collection-plan",
+      "answer": 1,
+      "question_sha256": "f26821f3504fab24f99be13b4322ded8287b7c4e564f617b98ca123f62c49d94"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q03",
+      "lesson": "forensic.collection-plan",
+      "answer": 3,
+      "question_sha256": "4cfd4d0765c9dd65272a1094adacb5978df3856359c82ba41965380441b217e0"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q04",
+      "lesson": "forensic.collection-plan",
+      "answer": 1,
+      "question_sha256": "d7f84523879e23b1e77518ff17961bb24a711a5b279e9d5c7a5b8fcfb60b5da6"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q05",
+      "lesson": "forensic.collection-plan",
+      "answer": 1,
+      "question_sha256": "284cb70467081ada94b1244c3e612e9e7bc7087c21e2969c0033eaeed9184de0"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q06",
+      "lesson": "forensic.collection-plan",
+      "answer": 0,
+      "question_sha256": "4a7603a8181fb56dedb8d30ab174e0aeb2a605ec06822dd6779e71c5757f027e"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q07",
+      "lesson": "forensic.collection-plan",
+      "answer": 1,
+      "question_sha256": "eeababbb9f0a6a2f5e62c35502a0ea7166b3371dd94663e50d84388387a0ab96"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q08",
+      "lesson": "forensic.collection-plan",
+      "answer": 1,
+      "question_sha256": "008a2fac4049687bf569fe85996ee42d28a7f39cb466359d3243ef2cdca84b16"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q09",
+      "lesson": "forensic.host-triage",
+      "answer": 3,
+      "question_sha256": "4d1a7cf1fdcc30410b530dc6865fc628aaa2c68dfe9ae034ef8f4a6f193be2b6"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q10",
+      "lesson": "forensic.host-triage",
+      "answer": 1,
+      "question_sha256": "018680f83e40f5b0e09b4c4aada3dbc1fceb78b83463e8034736879bb086332a"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q11",
+      "lesson": "forensic.host-triage",
+      "answer": 3,
+      "question_sha256": "9777e53c6f78d75b22608b24d57e706578dbcb77b666b0a1f96839a23c437fa2"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q12",
+      "lesson": "forensic.host-triage",
+      "answer": 2,
+      "question_sha256": "1f6634ccd5671080183d25768d4c3160acea7b71c194c853a7611dbaf89c30ae"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q13",
+      "lesson": "forensic.host-triage",
+      "answer": 2,
+      "question_sha256": "ea0fd7e0639d3d3be28d7aaa188dc6377db5cbe51898d2cd337ccf2e44b38cd1"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q14",
+      "lesson": "forensic.host-triage",
+      "answer": 0,
+      "question_sha256": "d89adaf0d422104b4785ca810cf2af843692471b1fc1f1ca658e0f6f2b4e1856"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q15",
+      "lesson": "forensic.host-triage",
+      "answer": 0,
+      "question_sha256": "247682805a367c4b05bf104ac77f899aeb910dacfd3995c7334aff9d5a2becd4"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q16",
+      "lesson": "forensic.host-triage",
+      "answer": 2,
+      "question_sha256": "f4f5721d0802afb4bf472902fbb606c52da3bdb8590a8d11a68698676fff5607"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q17",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 0,
+      "question_sha256": "93a788532d7b69fbfcadfdd1d9bd21648d263eba1e9c5c48c94cd6a7cdf19339"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q18",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 3,
+      "question_sha256": "05562c3a245fcbb9366bd21e2e13516b66abe586abb392cbcf0ed6e27d22235a"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q19",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 2,
+      "question_sha256": "eae4280b83027614e57cf45d354fd1550e9cd068bfee3d9bd2f7f62e930fff88"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q20",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 0,
+      "question_sha256": "f7096ae924c40ef18dcfa5ee865838e92f1238466cdb589470b9527ff19f7986"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q21",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 2,
+      "question_sha256": "0a356085ec6b01af92434d43bf8fb9df41b8df77fcaefd63504ff6bf95cf0499"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q22",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 3,
+      "question_sha256": "1cd32f44f24a8c0a503756c37b7be9a542b039a4806630ee3775189c704fa793"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q23",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 0,
+      "question_sha256": "0a8b4b26e22a3ef1bc4ad1182648e0d926b18ade6c808f834349fe31f1887762"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q24",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 1,
+      "question_sha256": "dc3517308d355d5d70001707ec8a3097482dd4c0989af6d5b57f42dffc480903"
+    },
+    {
+      "exam": "forensic-03",
+      "version": 2,
+      "question": "forensic-m03-q25",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 3,
+      "question_sha256": "266ce94c01fcea732d6e8959542589cf2bd166ac4e276c1f5b8660da534efd08"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q01",
+      "lesson": "forensic.file-signatures",
+      "answer": 0,
+      "question_sha256": "615aa19fbd2413867bee48467feb831e7eb1630ca85d02871529ef4c38e81790"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q02",
+      "lesson": "forensic.file-signatures",
+      "answer": 3,
+      "question_sha256": "3c67911cab8edbb1407331abd3deb8bc9650041658157e040e0edce7c42b9cdf"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q03",
+      "lesson": "forensic.file-signatures",
+      "answer": 0,
+      "question_sha256": "6182df2df433d17c8f001cb26b4f9329d816122a1e4d5e0db5e41d6dc9f7e3f0"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q04",
+      "lesson": "forensic.file-signatures",
+      "answer": 1,
+      "question_sha256": "b367288a0128b4d191a04ba34b2eae711ef3c4c481d5020304275de07020663a"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q05",
+      "lesson": "forensic.file-signatures",
+      "answer": 1,
+      "question_sha256": "25a59f07608af182b3dd8c2df067e6615c0aea6e3afd79d1a9188a9221263f7c"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q06",
+      "lesson": "forensic.file-signatures",
+      "answer": 1,
+      "question_sha256": "e7c4562b295ed3770daea31f57b6085e03a983556b90bb9e3b43ca53ff7e56e0"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q07",
+      "lesson": "forensic.file-signatures",
+      "answer": 0,
+      "question_sha256": "645e91db8decc1d8300945321b3cb4ff72426b6959a3a45cb578723e035dfee4"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q08",
+      "lesson": "forensic.file-signatures",
+      "answer": 1,
+      "question_sha256": "76cc226fb4ce9c3367a7b689cf3df746763e1f91df4406d6cfccc56ae0516e0e"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q09",
+      "lesson": "forensic.file-signatures",
+      "answer": 1,
+      "question_sha256": "2031ed46fd2760cb8b3c9611bdd032fe580132ce42b5d8c946a313354067e977"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q10",
+      "lesson": "forensic.file-signatures",
+      "answer": 3,
+      "question_sha256": "2a490de2e5a13d5585a5f5d29386b9459215b91b3470026fdd3f448bcfe86f48"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q11",
+      "lesson": "forensic.file-signatures",
+      "answer": 0,
+      "question_sha256": "f97fb01030022f225129d0d12a0ababe0d901ae444d2ce1e096a16335e0616e0"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q12",
+      "lesson": "forensic.file-signatures",
+      "answer": 2,
+      "question_sha256": "8fb2fb7ce4dc404633b2da008c211933b2c1f760abc40668fe51de576bbfd9bb"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q13",
+      "lesson": "forensic.file-signatures",
+      "answer": 1,
+      "question_sha256": "88bdcd718afd44bb193ce060561e573a9f28c7e6d3bbc4afc3daba66b0c06913"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q14",
+      "lesson": "forensic.file-signatures",
+      "answer": 0,
+      "question_sha256": "f01c6c332a507aecb71f8767089b24b353da37c914eeb7e6bac60ba16b0ccda5"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q15",
+      "lesson": "forensic.file-signatures",
+      "answer": 2,
+      "question_sha256": "cb9c7f755f878022b5dfbec5ea01bd4d3d09a26f5b4ebc0642c2eaf6f883415b"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q16",
+      "lesson": "forensic.log-correlation",
+      "answer": 1,
+      "question_sha256": "11179ef7e6764c844fe8e8150325604ca50a9f41a57dba64199f0c87f54661be"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q17",
+      "lesson": "forensic.log-correlation",
+      "answer": 3,
+      "question_sha256": "2a92502fd7065b81727d2ec5b13bdbc5906bd22b7cb7307304845fef2c90c54e"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q18",
+      "lesson": "forensic.log-correlation",
+      "answer": 0,
+      "question_sha256": "1067c3c13ee2c01796c01e2eae6238cddb9660ee3c987fa782175b7b7c6f1897"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q19",
+      "lesson": "forensic.log-correlation",
+      "answer": 3,
+      "question_sha256": "caa0e66917e85b2cb5121dd01160b4727f9423718971b744255e69da5c22cbae"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q20",
+      "lesson": "forensic.log-correlation",
+      "answer": 3,
+      "question_sha256": "e1d1c45a485dab24ebc1d713328bb47aac06f75ee9668512c00d8433491baff2"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q21",
+      "lesson": "forensic.incident-response",
+      "answer": 2,
+      "question_sha256": "058198d1fbbcc3fee5724865863a01885bdf910aa990478640e3d15069b431bf"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q22",
+      "lesson": "forensic.incident-response",
+      "answer": 3,
+      "question_sha256": "f79f409cee6a2fa9a6bb15a600fb2709f3b44af62fa08efcba82b70950cccfbb"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q23",
+      "lesson": "forensic.incident-response",
+      "answer": 2,
+      "question_sha256": "4d27cc4700c76354e80da77bf0541669ee3cd81171fae19306e04289e260d49a"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q24",
+      "lesson": "forensic.incident-response",
+      "answer": 2,
+      "question_sha256": "ed39d627c7f272ec1214aa703199e69cd27965d7c76e386c1e29c6b090854e49"
+    },
+    {
+      "exam": "forensic-04",
+      "version": 2,
+      "question": "forensic-m04-q25",
+      "lesson": "forensic.incident-response",
+      "answer": 2,
+      "question_sha256": "c01dd58b15838bddb378d56de5b2e0232d72b41eef543e4abade0a58c4183e78"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q01",
+      "lesson": "forensic.windows-events",
+      "answer": 0,
+      "question_sha256": "1c28b25a90ab1546cd0defd648541d035062b65ff69c9944f9851542c8bca4a1"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q02",
+      "lesson": "forensic.windows-events",
+      "answer": 2,
+      "question_sha256": "17f08fef0250a854da25afe49db23ee5cb796203eafa3d7fabed9615cc84cd21"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q03",
+      "lesson": "forensic.windows-events",
+      "answer": 2,
+      "question_sha256": "82a692c8b53ad038269db7607492a658e80a2c72deac2e73d304fe619b162b4e"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q04",
+      "lesson": "forensic.windows-events",
+      "answer": 1,
+      "question_sha256": "d7ce303de0048c629a40173a8949ebe1a80d26488a3b159e55e6c8f6107669e1"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q05",
+      "lesson": "forensic.windows-events",
+      "answer": 2,
+      "question_sha256": "ae8c577aa9befa5fca0bcfc2bd49ac35f1256f42f0efbe42e257988e8c16f9e0"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q06",
+      "lesson": "forensic.windows-events",
+      "answer": 0,
+      "question_sha256": "76f9f107ddbce1a39faaf04a9ed2cd88e7f7f589e5692456745f7d676ecf953b"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q07",
+      "lesson": "forensic.windows-events",
+      "answer": 0,
+      "question_sha256": "bdfa50701713461c50c4494dea66d61ae3984fae50771a7eefd82a0960f16984"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q08",
+      "lesson": "forensic.windows-events",
+      "answer": 3,
+      "question_sha256": "7794fc24f565ad8f2ca5b5f544c6b22df09eb7ec458a235ff502755aeb4078b3"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q09",
+      "lesson": "forensic.windows-events",
+      "answer": 3,
+      "question_sha256": "0f8fb70c2cddc941d2fe0306cea8cfe7f796c34ed12c0e2afd49fe199e68e426"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q10",
+      "lesson": "forensic.linux-auth",
+      "answer": 0,
+      "question_sha256": "d70dcb0d8de6bfcde99c7f45c75aa2c154a8d8033f3392835c91e6a59c99bf2b"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q11",
+      "lesson": "forensic.linux-auth",
+      "answer": 2,
+      "question_sha256": "3d993bc09ef9e34e149c846c1930a3b5e7cebae8a331a402966879b87c303d73"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q12",
+      "lesson": "forensic.linux-auth",
+      "answer": 3,
+      "question_sha256": "3b76c463bc06883dedca595820c0b4566753be008751635ca513e8214941f005"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q13",
+      "lesson": "forensic.linux-auth",
+      "answer": 3,
+      "question_sha256": "fa322319ae44bf55baaa3f25351e02cb34f511514961104a96ccd61ffb63baed"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q14",
+      "lesson": "forensic.linux-auth",
+      "answer": 0,
+      "question_sha256": "214251c3edf5fc2112142c926fba5aabd4c016adcfa3ea144b987df48e92de85"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q15",
+      "lesson": "forensic.linux-auth",
+      "answer": 1,
+      "question_sha256": "007a90095688a47087cb33fd6ec598cd8a583a31365a04e7367d26e040bba2c4"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q16",
+      "lesson": "forensic.linux-auth",
+      "answer": 0,
+      "question_sha256": "eaac50ea4be05be43e72e4943219a7a742fc8849a9bff0212a24c008cb788813"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q17",
+      "lesson": "forensic.linux-auth",
+      "answer": 1,
+      "question_sha256": "12bae3aa2601d9e60f71419f2646310f51ccc69275f0121e2e07574d4340e3f2"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q18",
+      "lesson": "forensic.filesystem-records",
+      "answer": 3,
+      "question_sha256": "51fdc107f9bf36a8c5f7b659c42a70255bb9c3b70d425082863c121f2a062fc6"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q19",
+      "lesson": "forensic.filesystem-records",
+      "answer": 1,
+      "question_sha256": "41f88b241e2a5284b2da20fa18fd80c08fde4a65872d4bc42bdea3fa5db09cd7"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q20",
+      "lesson": "forensic.filesystem-records",
+      "answer": 1,
+      "question_sha256": "1a7eabf5fe6ba2d90fc1b6aa9e6969b721d674feb9331436b110bb2b2ee8b7b8"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q21",
+      "lesson": "forensic.filesystem-records",
+      "answer": 0,
+      "question_sha256": "e4010847f50828e0a19e576183839ee8a741a2a888725747a6a32329bb51b99d"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q22",
+      "lesson": "forensic.filesystem-records",
+      "answer": 3,
+      "question_sha256": "2eebff76eda8a16741b0351280513e20f54e5eb9734f049ed3682dc536307acd"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q23",
+      "lesson": "forensic.filesystem-records",
+      "answer": 2,
+      "question_sha256": "69b18901455993e66bb848b29551c0676d2cebb90fa4d6be025aaf701f6137e6"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q24",
+      "lesson": "forensic.filesystem-records",
+      "answer": 2,
+      "question_sha256": "f22685a68aa26d6d56e42b1086ae897398bfd25a57bb454db69e53b885e00ca8"
+    },
+    {
+      "exam": "forensic-05",
+      "version": 2,
+      "question": "forensic-m05-q25",
+      "lesson": "forensic.filesystem-records",
+      "answer": 1,
+      "question_sha256": "15241ad4b59d202f808622e4060753f98a44f28dc0db237f50dcfcdf4f286a45"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q01",
+      "lesson": "forensic.memory-triage",
+      "answer": 2,
+      "question_sha256": "a09628f1fa99f99eaa12dc0215fdbfb0f639fae57d646d2e3bcbc06af34782aa"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q02",
+      "lesson": "forensic.memory-triage",
+      "answer": 0,
+      "question_sha256": "d5687a9e1f53836e6f52c508cfb66737e0ddc53cf24e148d77a33d9efb2b026a"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q03",
+      "lesson": "forensic.memory-triage",
+      "answer": 3,
+      "question_sha256": "1784448191101b9371546b4fbcd84e30538d461838ceec899509c6d9aaa31ebf"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q04",
+      "lesson": "forensic.memory-triage",
+      "answer": 3,
+      "question_sha256": "6ad3063f954d84d8a985aa1c57cf872d45e2e6e0c6a1303a1e772ebb1af8569f"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q05",
+      "lesson": "forensic.memory-triage",
+      "answer": 2,
+      "question_sha256": "88574f33fba651f087daffbf9a6869992fcf0dab9de0b397c8212599d3f21811"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q06",
+      "lesson": "forensic.memory-triage",
+      "answer": 3,
+      "question_sha256": "281f052541913d8fce0ad5dd0df32c90fe0034669ecffdb1ae7e04d97153cc01"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q07",
+      "lesson": "forensic.memory-triage",
+      "answer": 2,
+      "question_sha256": "aa5ff64d7c6362c3ab52b9081019d6aefee9809bfe3c5fc249cf3bf6e3a737b3"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q08",
+      "lesson": "forensic.memory-triage",
+      "answer": 1,
+      "question_sha256": "4e0ada0ce288a440e1e87a218b5fe5fa80ad66a8d0c0c5f4c400128f27ee76b8"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q09",
+      "lesson": "forensic.memory-triage",
+      "answer": 0,
+      "question_sha256": "b11f7cfae3f8e6cdfb1b953782b182ec1fb7c1cd0cabe87da653bb75754d7422"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q10",
+      "lesson": "forensic.memory-triage",
+      "answer": 1,
+      "question_sha256": "f148c8615bdf655443921fb39531f428ec7437398e25b42400205b1336e53208"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q11",
+      "lesson": "forensic.memory-triage",
+      "answer": 0,
+      "question_sha256": "90f4e421c3aed50a283f78f4cad5d47a3083f2b06bf04caf8c02c3f108926925"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q12",
+      "lesson": "forensic.memory-triage",
+      "answer": 2,
+      "question_sha256": "fdaf07cee1fbe9cea64a02d7a95db1e5531df2f8a74bae7f4f4bbbd0451e517e"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q13",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 1,
+      "question_sha256": "22751b9f0538c789a5134cae692aff954379263cef51792343904a8147d4ad3c"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q14",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 3,
+      "question_sha256": "cf37ce5484a6a9adb2427f851105f7570b3562384ec122765dd63525302ff469"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q15",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 1,
+      "question_sha256": "8e1ea272d37b8f73d8b4df2fe68c7583be00bfe34632a2b9cd62042f2e2d43ac"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q16",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 3,
+      "question_sha256": "d5b51be7a439f67230045e44dcab0233e87e2cba184ea5bc4af19465b4903a9e"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q17",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 0,
+      "question_sha256": "90fe160ed4cb5f9421f98a304e0f5dafa12b1346f4e42bef1ccb51221e60120f"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q18",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 2,
+      "question_sha256": "e50572c080a1ec4e4328e120c884beb0a3ed0ab4d32b74f398e597ef0adb0654"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q19",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 0,
+      "question_sha256": "6dfb99d27a7e76978afcd80b32b936dc0f54692a1b1c49af3dd1614131f57893"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q20",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 0,
+      "question_sha256": "b936c786abc3a20e9d7b7c574f3319fe125f941e8d14e64b919afdd3093f1093"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q21",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 1,
+      "question_sha256": "1a54e3935c9da18ed8476dd13f9d262db3076d2adef89eb85eb73067323ae2b3"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q22",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 2,
+      "question_sha256": "1880294060acf55658fcc347e4d69cfe49af0e155634be878628de116a6d04a3"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q23",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 3,
+      "question_sha256": "fc9ab74a95d95aa76e8d55377ddc5cf753b4a42b050f6f5364c91f2ae5655388"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q24",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 2,
+      "question_sha256": "f76574a1f3e9a1a5c2c6b87a379a96835d024d62a1cf388d4e68cc4a6825d141"
+    },
+    {
+      "exam": "forensic-06",
+      "version": 2,
+      "question": "forensic-m06-q25",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 1,
+      "question_sha256": "ab2ab16a9c3f4f776b86103d8ee8ac3701b544394ca0156723b3a74417b46f34"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "env-01",
+      "lesson": "foundation.environment",
+      "answer": 0,
+      "question_sha256": "d952efa38548252abec8ce8a87eede48d16354abad5cd368e2c491305593055a"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "env-02",
+      "lesson": "foundation.environment",
+      "answer": 2,
+      "question_sha256": "bad111f7d43bc5b979014f541a66ed6bfe0b831e8ae2357d608d3246d353789c"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "env-03",
+      "lesson": "foundation.environment",
+      "answer": 3,
+      "question_sha256": "3ee6607c9ba9bedc90a704de81fe03fea253c2e8cab01a8e1a2cbad9666cd467"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "env-04",
+      "lesson": "foundation.environment",
+      "answer": 3,
+      "question_sha256": "13ef9a1bf56343a933437b5aa0b424f1de911eaa1c7e4385a2e71da2645f14cc"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "env-05",
+      "lesson": "foundation.environment",
+      "answer": 3,
+      "question_sha256": "543a451885e232a9efdf7046b63bc2fd716b3602e6138b8532bcc39ee8489464"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "env-06",
+      "lesson": "foundation.environment",
+      "answer": 0,
+      "question_sha256": "5c8c9c42cb54e2c3b7028447e2bdcd2ced4d008236e6fa392db1e6d630be9c18"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "env-07",
+      "lesson": "foundation.environment",
+      "answer": 0,
+      "question_sha256": "186c40d27bdd390cc5611458a2d5d4a0f6ef1e7c45e708664f8880b60c28cf5f"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "env-08",
+      "lesson": "foundation.environment",
+      "answer": 2,
+      "question_sha256": "029cc8dcf33ced43bb0fb5244f882f0e68715f8aedf10151f5085bc9772d4d31"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "env-09",
+      "lesson": "foundation.environment",
+      "answer": 2,
+      "question_sha256": "e10a2631ce6b02c3733858fdb7b6d5919ef46244d96ac9450bb2211d7b04c5e3"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "env-10",
+      "lesson": "foundation.environment",
+      "answer": 1,
+      "question_sha256": "709eaa8143d32fe450bf5943527dfed8542542b5dce0e36e479ba953c48e9de4"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "env-11",
+      "lesson": "foundation.environment",
+      "answer": 1,
+      "question_sha256": "005572b649eea9edcb2bd54fe38ad5e45e56c94024d16f3b4557943d5d5e21fe"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "env-12",
+      "lesson": "foundation.environment",
+      "answer": 2,
+      "question_sha256": "a001e5eb01079393fb293873beb293382aac1ad95a196db398e2647c9572596a"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "paths-01",
+      "lesson": "foundation.paths",
+      "answer": 0,
+      "question_sha256": "772b6d23e05ce71fa53bcb9946c8296a350988ec669160f5880edd3c8a3022b4"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "paths-02",
+      "lesson": "foundation.paths",
+      "answer": 1,
+      "question_sha256": "c5d6734404b73538fc8ec400fc54a96e7bb18fad9e0cac84fc226f49493e60ea"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "paths-03",
+      "lesson": "foundation.paths",
+      "answer": 3,
+      "question_sha256": "14e64637e818a5963a6b8a0be2c47b86d8b21855dae221a6eb8890cfb5a76abd"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "paths-04",
+      "lesson": "foundation.paths",
+      "answer": 0,
+      "question_sha256": "164271df9cb030bbb80dfb03fe5df0a7aac75b5668b8f2dea4127647b6352631"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "paths-05",
+      "lesson": "foundation.paths",
+      "answer": 0,
+      "question_sha256": "2174d71bdbc1b4c9c81888cae6ca718819723350c4b3d19bca9cc06ccca5581f"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "paths-06",
+      "lesson": "foundation.paths",
+      "answer": 1,
+      "question_sha256": "186693dca2f491d453f4f30ba748f56a93e6d781e31fe22d6eb572fa5be46e86"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "paths-07",
+      "lesson": "foundation.paths",
+      "answer": 1,
+      "question_sha256": "cdb9443ffac54f10acda9fe96db2e0f4e6c26592fa18b33659745043dbe1dbf0"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "paths-08",
+      "lesson": "foundation.paths",
+      "answer": 3,
+      "question_sha256": "f3e134cd7040c663763cef5196b955364873cf0d0372542c320befd2b70bac27"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "paths-09",
+      "lesson": "foundation.paths",
+      "answer": 3,
+      "question_sha256": "81f7b331e6678e16e9a6734614e9a6f13e2cd1298a574d8f8aad5f74a79ddc0b"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "paths-10",
+      "lesson": "foundation.paths",
+      "answer": 2,
+      "question_sha256": "90b81ec8e4b3150b66268ca21a13e9c94bc32dd54635743f1baf76a8b4063ad8"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "paths-11",
+      "lesson": "foundation.paths",
+      "answer": 2,
+      "question_sha256": "4717b011797f74dfb45035e77968a2e5688120bdc704f78d94be0a1fe380f68b"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "paths-12",
+      "lesson": "foundation.paths",
+      "answer": 1,
+      "question_sha256": "0c4075dd3621e7bdead7d0b1f3e648efcc2f717ba82b8bd577668cb8f96ba4a9"
+    },
+    {
+      "exam": "foundation-01",
+      "version": 2,
+      "question": "paths-13",
+      "lesson": "foundation.paths",
+      "answer": 1,
+      "question_sha256": "f3470e6b641a80f01cc8eaf67053453255edfaa19a70dfa9a8c2a302b03f79a3"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q01",
+      "lesson": "foundation.python-values",
+      "answer": 1,
+      "question_sha256": "fa6700cd739943856bbbc65d6cb8de937657f19c5abf7144e3679fd0db57c511"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q02",
+      "lesson": "foundation.python-values",
+      "answer": 0,
+      "question_sha256": "f5f42c23ec944439a6e4943fe23e90ade0a3633699229b33f48e3a2b61c178ae"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q03",
+      "lesson": "foundation.python-values",
+      "answer": 2,
+      "question_sha256": "79ee45d1af9028ce65a084af4ba20c05ff60c1b4fbef1c756e99da162af69971"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q04",
+      "lesson": "foundation.python-values",
+      "answer": 0,
+      "question_sha256": "7c9f89ce9829e3f20b7f21e8351bee0d361e56b187a33e5ff4e4a2e0bb41d0e0"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q05",
+      "lesson": "foundation.python-values",
+      "answer": 1,
+      "question_sha256": "6c4be97a3e2c80ca77c655d61eada43f01e2fed3c49bbb9afc83f3446e2a1f25"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q06",
+      "lesson": "foundation.python-values",
+      "answer": 3,
+      "question_sha256": "a527180e6830ec0e1c6f5fe18b61b80cf8cdf531dfd3a3090d2ad2c14e90de6f"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q07",
+      "lesson": "foundation.python-values",
+      "answer": 2,
+      "question_sha256": "5df3899d657721d698f211668d5d37f586dc5a0c487572cd02de14e355fb0d24"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q08",
+      "lesson": "foundation.python-values",
+      "answer": 3,
+      "question_sha256": "cd9ca925a7e1f44ccdd603a6e041747365846fe9e8b31b5b99f54c2213309626"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q09",
+      "lesson": "foundation.python-values",
+      "answer": 2,
+      "question_sha256": "e195b19f4d526fc0a1fefe5352a2abeafcbd7a94aebe65d636989b02c11bd64b"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q10",
+      "lesson": "foundation.python-flow",
+      "answer": 0,
+      "question_sha256": "0805f67de224af41d794f33bb51344df3689f3ee19f2354139c597137b32115f"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q11",
+      "lesson": "foundation.python-flow",
+      "answer": 2,
+      "question_sha256": "000fa072579a3f65fb81e8b86b14b2da9dd7653ffad8a3a082b6659484af7d38"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q12",
+      "lesson": "foundation.python-flow",
+      "answer": 0,
+      "question_sha256": "5c9449be10b192bd2073f5859da6dbe1c1745294a7fb730bd373653dce748ff6"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q13",
+      "lesson": "foundation.python-flow",
+      "answer": 3,
+      "question_sha256": "f5d7e88bce3f95d9b4dc6ffb75ce1f77e3c35ffd151be74db0ef34d115c59d64"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q14",
+      "lesson": "foundation.python-flow",
+      "answer": 2,
+      "question_sha256": "69c8ff2397ccd434b69eafca82d44ca77a0148627f90498c76cb77fef37ae874"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q15",
+      "lesson": "foundation.python-flow",
+      "answer": 0,
+      "question_sha256": "7a5504271c67b81a1c281655c1d6de0279fc703734e731bcd930d45c3c1621e8"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q16",
+      "lesson": "foundation.python-flow",
+      "answer": 2,
+      "question_sha256": "eb6e90a0f7737cd37fd7dda1e145e6f21d9a20242b9dc6c05c89f1d658df2b76"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q17",
+      "lesson": "foundation.python-flow",
+      "answer": 2,
+      "question_sha256": "ae9b9b5342c7a5140bb0bf305ef5346f76f4f9f55bd3bd1c0c431d9912193ed8"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q18",
+      "lesson": "foundation.python-files",
+      "answer": 1,
+      "question_sha256": "1380e330d6861ec506fb136ac615a0f299d3dabf2f2c1830eb945bcb8fff24f9"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q19",
+      "lesson": "foundation.python-files",
+      "answer": 1,
+      "question_sha256": "22e931938822133d79ffa8f41274dbcfdcba0f0a16212c830652b254f5a52976"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q20",
+      "lesson": "foundation.python-files",
+      "answer": 3,
+      "question_sha256": "40f27b471a8db52803d613bd2428b98b1e925e13bad40dc005aa96e89b515aa0"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q21",
+      "lesson": "foundation.python-files",
+      "answer": 0,
+      "question_sha256": "4304b1bf34db7f2c06f2fce278eb5641655be6ab70b3e9e71815238be7d43421"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q22",
+      "lesson": "foundation.python-files",
+      "answer": 3,
+      "question_sha256": "7eb385de55ef14c47ff92f46eb15726c478b3abb9fbde4fa07b4c89becb8ff36"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q23",
+      "lesson": "foundation.python-files",
+      "answer": 1,
+      "question_sha256": "7053f7a3b4a632918cfb8a9297fa562fedc99413e91870f13651615aa58d756e"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q24",
+      "lesson": "foundation.python-files",
+      "answer": 1,
+      "question_sha256": "32ec700849e66f490832c42e8ab6efe0818a062dce44a0638bb268475a497f83"
+    },
+    {
+      "exam": "foundation-02",
+      "version": 2,
+      "question": "m2-q25",
+      "lesson": "foundation.python-files",
+      "answer": 3,
+      "question_sha256": "ebb7cf8e768bcc8dc26b13983b209516d6e525c030e1a42780759aed3124dc50"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q01",
+      "lesson": "foundation.c-memory",
+      "answer": 3,
+      "question_sha256": "f91607ecfe18109d4e1300b42640c40194647564197ab0506318c6c5952b7a81"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q02",
+      "lesson": "foundation.c-memory",
+      "answer": 2,
+      "question_sha256": "570e94bfee18f063c4ffd5dc562ae470195fcd2839e9d0bc22427b63429b31dc"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q03",
+      "lesson": "foundation.c-memory",
+      "answer": 2,
+      "question_sha256": "b57c9bc4eed609166f24a912b906120236d1d9acfe35dfdd88c759a4d7482841"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q04",
+      "lesson": "foundation.c-memory",
+      "answer": 0,
+      "question_sha256": "dee5393c805e65d4a61a4167671eda07da18c10acdc0de9d2732e90b3177e827"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q05",
+      "lesson": "foundation.c-memory",
+      "answer": 3,
+      "question_sha256": "af4d0a32c88cc67ad6815b0e9517b39b9fbcf43f312e96df4ab91232479a8bc8"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q06",
+      "lesson": "foundation.permissions",
+      "answer": 0,
+      "question_sha256": "96a7e7a075ca79f436a4f490f36ab1eb9644e4f1b6c0914dba017e7380f41a5a"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q07",
+      "lesson": "foundation.permissions",
+      "answer": 1,
+      "question_sha256": "6dd13e6127ab170ee38f9f66884b777b950bc9c553f9fbf42b410fc2277ac2ed"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q08",
+      "lesson": "foundation.permissions",
+      "answer": 1,
+      "question_sha256": "5b0fa8a13d0647f9d8264f68b8d864bc7bd48ba24c25753ebf0c96e27f3a4148"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q09",
+      "lesson": "foundation.permissions",
+      "answer": 0,
+      "question_sha256": "aaa292d5048ab2da1914dea982e5e64cb8a75f6d695d11877ff314ccdea9aa4c"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q10",
+      "lesson": "foundation.permissions",
+      "answer": 1,
+      "question_sha256": "47cc2a38a153b7f17e98250c1ac63aaabf4673f03b054439e99c9f40ffa451df"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q11",
+      "lesson": "foundation.network",
+      "answer": 1,
+      "question_sha256": "0fb2146ca03cfb5ead5ba28fc501836a6328a341600639b54f75512b04f2b8e1"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q12",
+      "lesson": "foundation.network",
+      "answer": 1,
+      "question_sha256": "18edfd98fefaef77fdb55b7880fde8e250641eb6ae5f149b6412351f69fcf209"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q13",
+      "lesson": "foundation.network",
+      "answer": 0,
+      "question_sha256": "0100c4b22b4e9b4ceda6edcce5f4e41f46e8bf30779d86a4855ea3733c01003d"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q14",
+      "lesson": "foundation.network",
+      "answer": 2,
+      "question_sha256": "a258267e4f898e1ea9e4cbfe8fa1d58a084112c29e9bccff324bee509afc871e"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q15",
+      "lesson": "foundation.network",
+      "answer": 1,
+      "question_sha256": "5f2cc90a34059b6772aa9e6e783685c016355e26bc0d8ac9d79c9addebaad182"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q16",
+      "lesson": "foundation.http",
+      "answer": 3,
+      "question_sha256": "8cf8846ab592c6c7b9bc3469d3cadedf749b3d9f742761c4fe3c3f0dd2cb4a26"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q17",
+      "lesson": "foundation.http",
+      "answer": 2,
+      "question_sha256": "867d8ed01cfaa740b80fcdbf7516877a95ccaad71fd685bc72f2189a506bc833"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q18",
+      "lesson": "foundation.http",
+      "answer": 0,
+      "question_sha256": "6eaddd060cffade7e47432dac28426cd2fcc56ab808d805e7183e9ef74e09f01"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q19",
+      "lesson": "foundation.http",
+      "answer": 2,
+      "question_sha256": "80cf0e0c5f50bd0c0750e459a260af7eff3714991f8176f76f4ce187e368b9e2"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q20",
+      "lesson": "foundation.http",
+      "answer": 3,
+      "question_sha256": "fcd58df50a742951d57a5c5e6eebd3937a773c57971c3e525cfbd2cfc23520ec"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q21",
+      "lesson": "foundation.git",
+      "answer": 3,
+      "question_sha256": "07f1d2ae297b6991ee92637379282b6a35db86320399310f92cdceba2b25cb02"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q22",
+      "lesson": "foundation.git",
+      "answer": 0,
+      "question_sha256": "d3a66af4d310e4f9d707373d24198aa0932395b7fb0577b74362d2e6489bf645"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q23",
+      "lesson": "foundation.git",
+      "answer": 3,
+      "question_sha256": "1d0c432ae874d93e7acf8cf73c80236f607066ea220f448e08d97719772d1316"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q24",
+      "lesson": "foundation.git",
+      "answer": 2,
+      "question_sha256": "3092cbc926fc6f3b57ff71e644b4e520b5da3f93009c89ca6bbb152b5826c45f"
+    },
+    {
+      "exam": "foundation-03",
+      "version": 2,
+      "question": "m3-q25",
+      "lesson": "foundation.git",
+      "answer": 3,
+      "question_sha256": "34aad1b12537ed160713eccdcce52bdf6b1d0233fee515192688d2cb12909d95"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q01",
+      "lesson": "foundation.text-bytes",
+      "answer": 1,
+      "question_sha256": "48cd135460da3fcfd58a462b61fe76c66dff87cf0dfde1cc60eae625428721ef"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q02",
+      "lesson": "foundation.text-bytes",
+      "answer": 2,
+      "question_sha256": "6d1cf2d9ce37bc7516ffe7cd3dfad09b1ed4aea95e479b18a48e66e282304a5e"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q03",
+      "lesson": "foundation.text-bytes",
+      "answer": 0,
+      "question_sha256": "8f1d899609247075756ca18ab04c494c453dc25588c091c8ba484eef8e09e52e"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q04",
+      "lesson": "foundation.text-bytes",
+      "answer": 3,
+      "question_sha256": "e4c1ca03aa3f2079ae13065c9265b0b85c3b67c2473f9389c52a70d33740efa0"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q05",
+      "lesson": "foundation.text-bytes",
+      "answer": 3,
+      "question_sha256": "71ebce9a6472bb08dec4fd3dbb4c26544773e7c3018f96c8ef31718ec6d51205"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q06",
+      "lesson": "foundation.structured-data",
+      "answer": 1,
+      "question_sha256": "9b10908efd24ad3e48355f7eda0638df6b065212573da271bce9a514f9443109"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q07",
+      "lesson": "foundation.structured-data",
+      "answer": 2,
+      "question_sha256": "10e973edb8555105af2fc30bb78e423b604fafcb34981fe6d1fa5368d1ea0821"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q08",
+      "lesson": "foundation.structured-data",
+      "answer": 1,
+      "question_sha256": "1784b1215421b01e580de84151394a3a155efa257fcc25c1ddf9e7e3fad1e228"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q09",
+      "lesson": "foundation.structured-data",
+      "answer": 2,
+      "question_sha256": "34330c350e6cc6b45f04ca3fe9cd02b8c8a1d8c137a0f512195085b025230242"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q10",
+      "lesson": "foundation.structured-data",
+      "answer": 0,
+      "question_sha256": "25c3aacc92c7315ff70f20d7876b6242937fcfd25d26a795a373ffbf6cf8110d"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q11",
+      "lesson": "foundation.exceptions",
+      "answer": 1,
+      "question_sha256": "0c1606b3a6b5650f46445e9e861a20bd05425b4cb800a17d32d5502678f987dc"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q12",
+      "lesson": "foundation.exceptions",
+      "answer": 3,
+      "question_sha256": "c2bbba5485ad13c95b4e79c5279f3e000bad3ebe1bd8e17a7b68ee20f3f9f520"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q13",
+      "lesson": "foundation.exceptions",
+      "answer": 1,
+      "question_sha256": "b847b2ccf8c9905c10c62c3e36b69a87b1bae49ee128abb232fbafc3f570f45f"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q14",
+      "lesson": "foundation.exceptions",
+      "answer": 3,
+      "question_sha256": "26f0678ca45a0ce1d46661660db3e0eee8d5a046c4a5651f8add863c9155fedd"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q15",
+      "lesson": "foundation.exceptions",
+      "answer": 2,
+      "question_sha256": "5f8b6b1300aaf66e88436ad5c55304beb4fe6268fa1fa7e843029e4ae1fcadcd"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q16",
+      "lesson": "foundation.cli",
+      "answer": 3,
+      "question_sha256": "b19c430f7647f26159cfb75d3c6389d2aa6a2ff418ba5bf10bbc71ec492b3e28"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q17",
+      "lesson": "foundation.cli",
+      "answer": 0,
+      "question_sha256": "29132638c63d65562e7ef1912d82cb93ff35d403902745ad16aba9b9baba2647"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q18",
+      "lesson": "foundation.cli",
+      "answer": 2,
+      "question_sha256": "39e864340f6daf5f2bcfd1c21ad3168e6ad143cfaa9209a745968646b6f73ecd"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q19",
+      "lesson": "foundation.cli",
+      "answer": 0,
+      "question_sha256": "9689931bf5bf228c6549c871e8a10e5d02d2b18b1d1e951e21cd6a9be56af34b"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q20",
+      "lesson": "foundation.cli",
+      "answer": 3,
+      "question_sha256": "d66f8c42da302a3290c91e7a1e3d01287ef3e5d24d483f8782913b2af1ed3b65"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q21",
+      "lesson": "foundation.unit-tests",
+      "answer": 2,
+      "question_sha256": "1b7f33eab5f13e4fde424cc83d157fcc6a7cf49aa4ae93c4efdf245bf6ed6b49"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q22",
+      "lesson": "foundation.unit-tests",
+      "answer": 0,
+      "question_sha256": "3d177c19178e6ff9a44115adf47be815ed31521211bf5d3abb5725c6fcf08f62"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q23",
+      "lesson": "foundation.unit-tests",
+      "answer": 0,
+      "question_sha256": "6e35f9ff5f8c91c51699b4808d9e50e281915f94fd9b80cead3da207b99acbad"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q24",
+      "lesson": "foundation.unit-tests",
+      "answer": 1,
+      "question_sha256": "2cf1675097939a238a3ad12887a8f89086cae31f42c6ea88282e473c96d6f362"
+    },
+    {
+      "exam": "foundation-04",
+      "version": 2,
+      "question": "m4-q25",
+      "lesson": "foundation.unit-tests",
+      "answer": 0,
+      "question_sha256": "9ba31803bdf728cd7bb8247b5f8cde7133c936d2242a7c6fc2684dbab4ba4400"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q01",
+      "lesson": "foundation.mutable-data",
+      "answer": 3,
+      "question_sha256": "a84363cabf233bcc4169b7c557d22c824e8a85e4bb1d1b7b15be8f3b38d63c7f"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q02",
+      "lesson": "foundation.mutable-data",
+      "answer": 3,
+      "question_sha256": "c6bcddbca9045600317eb332a383e3b736e91611a60c64be5f4a1d25e812c00f"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q03",
+      "lesson": "foundation.mutable-data",
+      "answer": 1,
+      "question_sha256": "23f0438c58fb6507078b38e78a1b51bbb52eac7b6bde45f4dbb28e1c6431f8ea"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q04",
+      "lesson": "foundation.mutable-data",
+      "answer": 1,
+      "question_sha256": "a5a32dc0bd456e3e9844591136b2f448be6975b35a918ed42563946c105ef827"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q05",
+      "lesson": "foundation.mutable-data",
+      "answer": 3,
+      "question_sha256": "1fed62005655aaf574e5abc9bb21e502ee7f9fcc4f8cebc821059a16565fca9e"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q06",
+      "lesson": "foundation.atomic-output",
+      "answer": 1,
+      "question_sha256": "ab07f21f3623dc44983263006a2145bdbd9a299f034b61533e51d1b03d5f9aa8"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q07",
+      "lesson": "foundation.atomic-output",
+      "answer": 2,
+      "question_sha256": "fb699127a3c52edd0ed49aeaf225f3eca4084b82ac9ff64ae048c0915184eb60"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q08",
+      "lesson": "foundation.atomic-output",
+      "answer": 0,
+      "question_sha256": "6aa5686bacf374921e2aa6403f6ebb4d48ac9d93deef70d6941997f600e50c16"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q09",
+      "lesson": "foundation.atomic-output",
+      "answer": 2,
+      "question_sha256": "6bba4de405588307c308d12c2975df121b77fbccaae80f5d7843459790f1449e"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q10",
+      "lesson": "foundation.atomic-output",
+      "answer": 0,
+      "question_sha256": "9568a9d95c246ea3a6c5da7079a9147687ae7f7cadffba166791d216a1c721cb"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q11",
+      "lesson": "foundation.config-precedence",
+      "answer": 2,
+      "question_sha256": "d50306c0d932cd8bab83441a4161cec076a9a97e67d6b7bd7f91d6f872a78935"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q12",
+      "lesson": "foundation.config-precedence",
+      "answer": 2,
+      "question_sha256": "e703494c92249463ba23f32e2124d6ddd0113a209f23c660c37297033f481676"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q13",
+      "lesson": "foundation.config-precedence",
+      "answer": 2,
+      "question_sha256": "d649ec4ce0ff5bb4cbb7d94c176a87929da63d3f4fe821e38c4182a596ac9d31"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q14",
+      "lesson": "foundation.config-precedence",
+      "answer": 1,
+      "question_sha256": "5b2b27ccf321bced60b94cf38a08496b9bfeb5a5c936288de47f0b4faa8b6e7e"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q15",
+      "lesson": "foundation.config-precedence",
+      "answer": 3,
+      "question_sha256": "f7de0875a31befb6cfd1e2096d3ffe83ca495a899f38e9f5f0047872c684ee37"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q16",
+      "lesson": "foundation.subprocess",
+      "answer": 2,
+      "question_sha256": "a84fb0958fb1f1c41bc3cfbf01cbeae2800c63e6f2cac147baf6ac4bf7fad1e7"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q17",
+      "lesson": "foundation.subprocess",
+      "answer": 2,
+      "question_sha256": "465c9246b6dee0d9ea4042e381d94afc7fb4f42abcbaeb0d55f321abfdbc249f"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q18",
+      "lesson": "foundation.subprocess",
+      "answer": 0,
+      "question_sha256": "d07f7480c88afeac8d36cc23b0a12fb8ccc959342a724559f5dc44dfc91cf959"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q19",
+      "lesson": "foundation.subprocess",
+      "answer": 1,
+      "question_sha256": "d3fe91289ac563f633eed136d6fd583e35767cefb353d18102cd111187301c6c"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q20",
+      "lesson": "foundation.subprocess",
+      "answer": 3,
+      "question_sha256": "c672803c01cab07d40635f4e067dd99d87059a41c7e82610c1660a75a18075c1"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q21",
+      "lesson": "foundation.structured-logging",
+      "answer": 3,
+      "question_sha256": "8a2a14b7b3df12f8918e08304f809f74a0c368cbe2d1d435a199b3ba0e17d37c"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q22",
+      "lesson": "foundation.structured-logging",
+      "answer": 0,
+      "question_sha256": "b943c597ad952ac5fa7009e59c0e11e6102f2a3f839b24d8b88d922ff10fa0a5"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q23",
+      "lesson": "foundation.structured-logging",
+      "answer": 0,
+      "question_sha256": "1501b4c19728c075d4a14ee3f20ca60989b2cf212a24deee816c8cbed4387d4e"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q24",
+      "lesson": "foundation.structured-logging",
+      "answer": 1,
+      "question_sha256": "e39fe6a1b504c9ddb343f77db6eb4930c9ebb38802ef9e26f2330207cb7776f1"
+    },
+    {
+      "exam": "foundation-05",
+      "version": 2,
+      "question": "m5-q25",
+      "lesson": "foundation.structured-logging",
+      "answer": 0,
+      "question_sha256": "765de852357deec0865aa7952dde0c5e35ca9f53c4c9f5ce54bc1811adef640f"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q01",
+      "lesson": "pwn.build",
+      "answer": 2,
+      "question_sha256": "42cc8183efe17070ade95ac3242776856cbc72acd2dc9f4bae6922dfc2302c56"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q02",
+      "lesson": "pwn.build",
+      "answer": 0,
+      "question_sha256": "5672393d6975cdcd3c28468d51a7226c8ea99cc5eef404b5bfc300faeb383ecf"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q03",
+      "lesson": "pwn.build",
+      "answer": 3,
+      "question_sha256": "d0410357596eac79231eeb76007a6f9a023b5735fc68d3e2490594eee89a9435"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q04",
+      "lesson": "pwn.build",
+      "answer": 1,
+      "question_sha256": "3d98b67b6789da84de4d30f61fd9cb55f1616c0631c975e8eae42c5fec7a8f2b"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q05",
+      "lesson": "pwn.build",
+      "answer": 0,
+      "question_sha256": "4554af4dea3edbd0ba61441634c3ab576d3f38f6f00d2b1d0308506b9a3c6662"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q06",
+      "lesson": "pwn.build",
+      "answer": 3,
+      "question_sha256": "82617cf0542db1afcef4527444580d4531f304802d49556195c2be4b2e6ce21c"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q07",
+      "lesson": "pwn.build",
+      "answer": 0,
+      "question_sha256": "91368b791ab5df6d44d25257b9ea3aaf968f61fe28d3ab5fe8254ce4def21bc3"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q08",
+      "lesson": "pwn.build",
+      "answer": 1,
+      "question_sha256": "69816274e6936a057a19e5d9889a331807483a7355c9b377e5c153eecbd93855"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q09",
+      "lesson": "pwn.lifetime",
+      "answer": 1,
+      "question_sha256": "3ac35346ecc25893554fdf6f64050ce9f53209e8b1f1d61ecaa869609210bc4c"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q10",
+      "lesson": "pwn.lifetime",
+      "answer": 1,
+      "question_sha256": "3c77738b04af813c8486a98a243d1c21c61c777d53182bf39f4795ac4ca4948c"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q11",
+      "lesson": "pwn.lifetime",
+      "answer": 3,
+      "question_sha256": "78676c942545bbf600717eecac03699758277783090b6cfda012b5a3005f92e9"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q12",
+      "lesson": "pwn.lifetime",
+      "answer": 3,
+      "question_sha256": "96dd865821f526ab70253d1e603494887a4f36ae142e12d6ce311157573b98ea"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q13",
+      "lesson": "pwn.lifetime",
+      "answer": 2,
+      "question_sha256": "c38e91a711c6fae7c0022f68e496144fd89ff024624ad03b3d77e5522e12e05a"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q14",
+      "lesson": "pwn.lifetime",
+      "answer": 1,
+      "question_sha256": "38c75431941fb6d0f1625a8f4ccd434c1402a0a1b20a47c1b6f684d7701dfd9d"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q15",
+      "lesson": "pwn.lifetime",
+      "answer": 2,
+      "question_sha256": "e05fda0ed3c8fd4c58e5530a82b427a868ef543d14b63686ff8bd466914523dc"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q16",
+      "lesson": "pwn.lifetime",
+      "answer": 2,
+      "question_sha256": "1bffc7de56277ce23cd38bfc47a2a2fbe6eac2d4b593bbbd027312fdddd571dd"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q17",
+      "lesson": "pwn.bounds",
+      "answer": 2,
+      "question_sha256": "0988a82f1782440e064a17e7f367d89a787816e95a9c25d45af94cfa5c538b0f"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q18",
+      "lesson": "pwn.bounds",
+      "answer": 3,
+      "question_sha256": "d3f94f2a8f5a23fecc87e5bd6ef99a49c9e4e004c3962ad59cc9f0f5d02649b2"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q19",
+      "lesson": "pwn.bounds",
+      "answer": 0,
+      "question_sha256": "d0f353278fa5fc5248a8df7189fcc3cbc44b41edefa02136a8d20d85015f3c14"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q20",
+      "lesson": "pwn.bounds",
+      "answer": 2,
+      "question_sha256": "d44319c346e0faa2de1d437d9f6da2694336d6394be24d02e701a8f32369da6f"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q21",
+      "lesson": "pwn.bounds",
+      "answer": 0,
+      "question_sha256": "1af55d38d19e4bfea45b517ace4a68d99074618859fe4d9905eb6cfd88b608fd"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q22",
+      "lesson": "pwn.bounds",
+      "answer": 1,
+      "question_sha256": "24931dc1959e8cf7b298d529916fecd8aaca0531942a50cb0d4f74c4516b9891"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q23",
+      "lesson": "pwn.bounds",
+      "answer": 3,
+      "question_sha256": "cb218ca626ade0eca7252c9df3ecdfed38ffb61c5402d8feb055f4cfc83b0d84"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q24",
+      "lesson": "pwn.bounds",
+      "answer": 3,
+      "question_sha256": "a82a0b2b1fa9cf255b7aff94e955d187b79487ee3115e1dbbea132a0c0f146f0"
+    },
+    {
+      "exam": "pwn-01",
+      "version": 2,
+      "question": "pwn-m01-q25",
+      "lesson": "pwn.bounds",
+      "answer": 0,
+      "question_sha256": "3167b8e206933c0109e26d7e2e7b62d5c38647c2a762be7286e8f51f9f017c52"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q01",
+      "lesson": "pwn.debugger",
+      "answer": 0,
+      "question_sha256": "09e3dd3084c9de23a88b49a777e4eedb427cada2d7ed70c5b02a7b8c9d823c3d"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q02",
+      "lesson": "pwn.debugger",
+      "answer": 2,
+      "question_sha256": "1501ccf561838cc1bc40b0f7901fb6b0b73b6d3e1c507d4e8ad006fed3b39188"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q03",
+      "lesson": "pwn.debugger",
+      "answer": 2,
+      "question_sha256": "f840db2a0142c7a223851fd3d70430812204d6b94b2a444fd83df927dc196464"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q04",
+      "lesson": "pwn.debugger",
+      "answer": 2,
+      "question_sha256": "dd76cafd9d392d2ac72fbab476f3e2e4d1d755458695547833540b663fe263c2"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q05",
+      "lesson": "pwn.debugger",
+      "answer": 0,
+      "question_sha256": "43fb48b16c53f259bc1b2d67f3ba11684690983701782d65f13d53039f60d4d2"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q06",
+      "lesson": "pwn.debugger",
+      "answer": 3,
+      "question_sha256": "dc9079e59229cda0fff4fbda6b86b65111c87edf11b1fdcbe61a8b76f97adb47"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q07",
+      "lesson": "pwn.debugger",
+      "answer": 1,
+      "question_sha256": "ba30d2cca044150cff3db4eb473869b967a8df451d1645b8527e382eeb0993db"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q08",
+      "lesson": "pwn.debugger",
+      "answer": 1,
+      "question_sha256": "27bac6a12638f2e5cbdcece8dcce6072b27c0d0e74f164cc6bc06155f50b7692"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q09",
+      "lesson": "pwn.errors",
+      "answer": 2,
+      "question_sha256": "51c2089ffcd35f4280e951e485ad4f72dd1f688c79d4255732060bc7bfad928a"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q10",
+      "lesson": "pwn.errors",
+      "answer": 0,
+      "question_sha256": "4c09e8081e501d0503db23af6297cfaf644a351c2c9d9143595775b9683b804e"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q11",
+      "lesson": "pwn.errors",
+      "answer": 2,
+      "question_sha256": "da8f042c3443cc5c178a0674d365d467229e16900de083601bf9abf255083088"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q12",
+      "lesson": "pwn.errors",
+      "answer": 3,
+      "question_sha256": "1f48f62464144355a4ec33538ddc23a2da61a3a6769e2ae5f07de7825f6270bf"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q13",
+      "lesson": "pwn.errors",
+      "answer": 1,
+      "question_sha256": "011563c58163ac8fcf484bca0ca505107ec409bf6252b74268ede6f791e69794"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q14",
+      "lesson": "pwn.errors",
+      "answer": 3,
+      "question_sha256": "bd441f6eee1b7f93d60b4408e0e0ba37d0783b6c3ef5d43bcc9a5e7338a8863b"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q15",
+      "lesson": "pwn.errors",
+      "answer": 2,
+      "question_sha256": "0758955da436e0ba5276b40fcf257d7f341d0d178d62c05c0924d6eaf2b3ed74"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q16",
+      "lesson": "pwn.errors",
+      "answer": 0,
+      "question_sha256": "44a548262b3726d5d6d2779cd7d529ff0e4686b52dd310fa9aa1329deb1f5393"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q17",
+      "lesson": "pwn.mitigations",
+      "answer": 1,
+      "question_sha256": "13cfcb86a9a29000758bd0356a18c35f4ecfef0c27639064b871683e1c0dd93d"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q18",
+      "lesson": "pwn.mitigations",
+      "answer": 0,
+      "question_sha256": "86f607ffb959a27c576478a515a47915c5723d7a8b21e34d6c9a7a1f49e95b78"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q19",
+      "lesson": "pwn.mitigations",
+      "answer": 1,
+      "question_sha256": "edd9a0f8251e8c2d2a23e836c6675cfb88bc47051182871108825fe25f6d6010"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q20",
+      "lesson": "pwn.mitigations",
+      "answer": 2,
+      "question_sha256": "3a1359537d3d66e7343c7d4af15768a698609af2c897092f0a51ed62b398b098"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q21",
+      "lesson": "pwn.mitigations",
+      "answer": 3,
+      "question_sha256": "eb1338b78ed97eb4f9962bddd491d5c61dadc1301418191f49ccd7c1c20fc8a8"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q22",
+      "lesson": "pwn.mitigations",
+      "answer": 1,
+      "question_sha256": "d88f68cf191da168f8e22fa9df0fb8cf59261299dcd7399e511f6059f3605705"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q23",
+      "lesson": "pwn.mitigations",
+      "answer": 3,
+      "question_sha256": "f36c3d56e0826e478b77db714811576cfff0ff30816e4aa4cca6a637f9c535ba"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q24",
+      "lesson": "pwn.mitigations",
+      "answer": 3,
+      "question_sha256": "347286d887168b6780c6a7255b33cefb48b85088d982b5acf22a43f22f7d12af"
+    },
+    {
+      "exam": "pwn-02",
+      "version": 2,
+      "question": "pwn-m02-q25",
+      "lesson": "pwn.mitigations",
+      "answer": 0,
+      "question_sha256": "ee49e1972b99e352f28afe8392cae40ea91ebd879cd49ff969f493e885e39dda"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q01",
+      "lesson": "pwn.integer-input",
+      "answer": 3,
+      "question_sha256": "b3814a14b57daa8a61a1c9fb3338310dd84ee1532585799b24302effa5e82fe1"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q02",
+      "lesson": "pwn.integer-input",
+      "answer": 0,
+      "question_sha256": "3e78de0adfca85aeb3d39840fff8457d0508187daface3d607bba6b8cffe7170"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q03",
+      "lesson": "pwn.integer-input",
+      "answer": 2,
+      "question_sha256": "98fa7daf8bf47a2137f3f594fbcfb182fb163511ef21c5fd8f4a6be7a8990f4c"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q04",
+      "lesson": "pwn.integer-input",
+      "answer": 0,
+      "question_sha256": "c9ac249f3bb9af686ae18a275113220da66efd92c9230e1cb51e44f55e3090db"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q05",
+      "lesson": "pwn.integer-input",
+      "answer": 2,
+      "question_sha256": "17b46190e6eda9db008d0d4f9e4d900ff141d6e2788f09f3602af8b372ccd54f"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q06",
+      "lesson": "pwn.integer-input",
+      "answer": 0,
+      "question_sha256": "efa74b72631bff689475372eb0493d2012931d9ae78305e47ec66ce185d67039"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q07",
+      "lesson": "pwn.integer-input",
+      "answer": 1,
+      "question_sha256": "08854721ed17340f0bcb38b33d7ec1f00e58e24f92d01a2ba561c31f6b553fee"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q08",
+      "lesson": "pwn.integer-input",
+      "answer": 0,
+      "question_sha256": "eef44c17b7107ab7184913f09a0205914d119d5900ecd9552f9a7c17cd9eab62"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q09",
+      "lesson": "pwn.allocation-size",
+      "answer": 0,
+      "question_sha256": "51aa70221e6baeb227c55aa60bfd29c0e76ec138a87ee7e94ac2b20c64752ff0"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q10",
+      "lesson": "pwn.allocation-size",
+      "answer": 1,
+      "question_sha256": "9daf7067f5d019468fcbf706f81d0144fadbc74eb66d8e548c0ce053943f6122"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q11",
+      "lesson": "pwn.allocation-size",
+      "answer": 3,
+      "question_sha256": "ac674dbb6531f1aaf0ae11c0a5320e2d6678810be471c5d3a8ad4677a5e65a8b"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q12",
+      "lesson": "pwn.allocation-size",
+      "answer": 1,
+      "question_sha256": "bdecf056b1c30c6efbce5c4dd2e7ebb2a0f4f864588490c783193afe48eb6c4e"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q13",
+      "lesson": "pwn.allocation-size",
+      "answer": 2,
+      "question_sha256": "ffb764e79069d4d02b915896b4884e9bb6018d594d8695ca835faa7e742018b9"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q14",
+      "lesson": "pwn.allocation-size",
+      "answer": 2,
+      "question_sha256": "73fa63e0d137cae0b47d123bb21cd272ea3301cdb7a4f3afacce46b22de2e2cb"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q15",
+      "lesson": "pwn.allocation-size",
+      "answer": 0,
+      "question_sha256": "c69fb7abc63d39644c1794f3fe6422b11b0e8e04d4819c78f75de1221b7c9003"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q16",
+      "lesson": "pwn.allocation-size",
+      "answer": 3,
+      "question_sha256": "25970d3c669a284e728430b63647fe3e9b07cd15316d6238f160466ab0fd17a4"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q17",
+      "lesson": "pwn.format-strings",
+      "answer": 2,
+      "question_sha256": "77e9a7fde8f3d189cd604933faa21d0af2ff671ff8cebb69d30a38ba31b11058"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q18",
+      "lesson": "pwn.format-strings",
+      "answer": 3,
+      "question_sha256": "594cb0f0adfa98300769197b98ac011e5844efb71b355177dfb5fec76d6ff9a4"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q19",
+      "lesson": "pwn.format-strings",
+      "answer": 1,
+      "question_sha256": "67ef7b05318c55b45c28dfb40fee38f8f04fdc97faac525e151b985da35db98a"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q20",
+      "lesson": "pwn.format-strings",
+      "answer": 2,
+      "question_sha256": "4f91d4466fd764d88772452ea9421000c07245f314be119dd36ee26cbbd20192"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q21",
+      "lesson": "pwn.format-strings",
+      "answer": 1,
+      "question_sha256": "591affc056f3b916a1e4fc2eecbfa45d6637e733a1876bfae9c96fce7c4a75f7"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q22",
+      "lesson": "pwn.format-strings",
+      "answer": 1,
+      "question_sha256": "5e1f6d9a123906056eeba595178885896b8297b9e6e43e37dc5ed002a6727a28"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q23",
+      "lesson": "pwn.format-strings",
+      "answer": 3,
+      "question_sha256": "f31da1bb5f4cab179a581643ba48f6026bf2579cf9bbbdc655e7eab637d08fc3"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q24",
+      "lesson": "pwn.format-strings",
+      "answer": 3,
+      "question_sha256": "53d0e395a25cb4eb615cac7529d5e060f6f12fc06ba8985695b9d402838eef2a"
+    },
+    {
+      "exam": "pwn-03",
+      "version": 2,
+      "question": "pwn-m03-q25",
+      "lesson": "pwn.format-strings",
+      "answer": 0,
+      "question_sha256": "324d195c2b6a83b22cc0ce717c5d2a395aba431e84a27ed311c5c6628ae0f9c8"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q01",
+      "lesson": "pwn.ownership",
+      "answer": 3,
+      "question_sha256": "0b89df728fb5363c0175d8b91c601328f46591fc04eae6d6767c522b6d292072"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q02",
+      "lesson": "pwn.ownership",
+      "answer": 0,
+      "question_sha256": "c1298c637c1279858c6898222d2227c3eeeac5d98c6757a4286b0f96569ab628"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q03",
+      "lesson": "pwn.ownership",
+      "answer": 0,
+      "question_sha256": "8da5b05603eb966bb5ea8d1383a3d1cf550665148496f9c137c78ed342ab4c68"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q04",
+      "lesson": "pwn.ownership",
+      "answer": 1,
+      "question_sha256": "fdebcd9da7b95e47a05a1841064a254916f71ad836ce00c8d40a48a0fb43a845"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q05",
+      "lesson": "pwn.ownership",
+      "answer": 1,
+      "question_sha256": "1fbedef2847299299729b06b03ba6a513722e380412ccc6d0be36d7c8683dff1"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q06",
+      "lesson": "pwn.ownership",
+      "answer": 0,
+      "question_sha256": "b5fb0478d88abc1eda2a6876510f927774da72f12a905d0f24b9af81a4d8bd16"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q07",
+      "lesson": "pwn.ownership",
+      "answer": 2,
+      "question_sha256": "540eebddf458800592e623d88e2decc950dddade32820ef4a45112337c31af6e"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q08",
+      "lesson": "pwn.ownership",
+      "answer": 2,
+      "question_sha256": "ad2128abcd5edb27070ea1a20c34533d179ec044ee5164868ef05ef7757e6fa3"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q09",
+      "lesson": "pwn.ownership",
+      "answer": 3,
+      "question_sha256": "aab9fe091011879b772e964dab0afe72292d22c5baeae0449185ec0a6a30b08e"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q10",
+      "lesson": "pwn.ownership",
+      "answer": 2,
+      "question_sha256": "6ba1781a9d1cd71742c5d3cc409faa0b849811c85ae644a495008299186d3b03"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q11",
+      "lesson": "pwn.ownership",
+      "answer": 3,
+      "question_sha256": "bc82390003b47df1799e0badd576a358af04230db3811a369b9757bd626271d2"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q12",
+      "lesson": "pwn.ownership",
+      "answer": 0,
+      "question_sha256": "8baa6b705c4af6d107aab64a99c1633676ecaadd45533b9399cce8344bd5b0f0"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q13",
+      "lesson": "pwn.binary-parser",
+      "answer": 1,
+      "question_sha256": "f78fdf6cd195d934dd48e7b0572ee5ba71f7828aedaa1c42ed6a75d745f23ca2"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q14",
+      "lesson": "pwn.binary-parser",
+      "answer": 3,
+      "question_sha256": "4c5188579238cd681c0ec7d87df03ec647cffec04307ade29366b19ab83ebd75"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q15",
+      "lesson": "pwn.binary-parser",
+      "answer": 2,
+      "question_sha256": "189a0698dbdd624a788236ab7f3b6b81f358c0dbc21212ed3c61f2403b973881"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q16",
+      "lesson": "pwn.binary-parser",
+      "answer": 3,
+      "question_sha256": "df26f274dd73d1788b067988915953be12138c488d76c97afbd8f334a6238063"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q17",
+      "lesson": "pwn.binary-parser",
+      "answer": 1,
+      "question_sha256": "4c4e50468fd4a64dc816c346aaf95b4a3ecfe69fcf72c882da881c716b48136c"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q18",
+      "lesson": "pwn.binary-parser",
+      "answer": 2,
+      "question_sha256": "868ad812201c043c7a401337a36aa987c7486aedd8ec7347d887ddc1333b1807"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q19",
+      "lesson": "pwn.binary-parser",
+      "answer": 3,
+      "question_sha256": "38a6c193e87ac4490c1c770e2407dedfd3799eea9762e16e937474dad606ba47"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q20",
+      "lesson": "pwn.binary-parser",
+      "answer": 1,
+      "question_sha256": "06d7fb12430231bc39b3216d4ecc437edb7b5fd2e2a58841e4c45656975520da"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q21",
+      "lesson": "pwn.binary-parser",
+      "answer": 0,
+      "question_sha256": "4f6bdf245ecbce1967f202685b1e85d904deb2d97ddecb7e85141bc2f76f0a04"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q22",
+      "lesson": "pwn.binary-parser",
+      "answer": 2,
+      "question_sha256": "7094f5bf8d0329c5f8c32705179bf033e0983dd9d4aef0c9f8aec3fd578aacde"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q23",
+      "lesson": "pwn.binary-parser",
+      "answer": 1,
+      "question_sha256": "c125dc2a60c0f260dc1effe6f1e94c9dcef0f7b7810c169990382d32a84d6d42"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q24",
+      "lesson": "pwn.binary-parser",
+      "answer": 0,
+      "question_sha256": "284f0b78a8b587b8357d2237cd33d0da558571ea8a153060f6403cdaa0ed64f9"
+    },
+    {
+      "exam": "pwn-04",
+      "version": 2,
+      "question": "pwn-m04-q25",
+      "lesson": "pwn.binary-parser",
+      "answer": 3,
+      "question_sha256": "eb088a1706fabf6c31dfc48fe48e899dca7457eceea2187133fb43109546df1a"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q01",
+      "lesson": "pwn.struct-layout",
+      "answer": 0,
+      "question_sha256": "b5b3d5b6f2bb319cad7ad32efb099511eb84c6cd3a32df7e72ce536d6b84be32"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q02",
+      "lesson": "pwn.struct-layout",
+      "answer": 0,
+      "question_sha256": "d5721deafcc84dc5cd6e457f98ec829c300a27ae90c796fe72b2c3aebd283929"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q03",
+      "lesson": "pwn.struct-layout",
+      "answer": 3,
+      "question_sha256": "1495f7d1872cb4e17cd77406a53de653ceb4e166993e71ed98cd42259c2b7fda"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q04",
+      "lesson": "pwn.struct-layout",
+      "answer": 2,
+      "question_sha256": "785dafc91854ab5d8e92aeffc304d1d66efbf47ca149b1010c2f2b7a7ca3a919"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q05",
+      "lesson": "pwn.struct-layout",
+      "answer": 0,
+      "question_sha256": "bcac6ea647deae0d60aacdadadb3deae4c76f1935f268947bda5e985d818b109"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q06",
+      "lesson": "pwn.struct-layout",
+      "answer": 3,
+      "question_sha256": "56bfc6a21d8b30d61a9ae2f00de139bf94fa2475c1a8febc1d859f08adbfd6e8"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q07",
+      "lesson": "pwn.struct-layout",
+      "answer": 1,
+      "question_sha256": "3328999753addb9dc1cea3ded3defdeb84b91f315807176010a418455f866d39"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q08",
+      "lesson": "pwn.struct-layout",
+      "answer": 0,
+      "question_sha256": "68d3b4833e57661c89292b9720d76fa9a9d98a1b38c73507d40673ecb2a3e529"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q09",
+      "lesson": "pwn.struct-layout",
+      "answer": 1,
+      "question_sha256": "bcda9590ee4ad1c9e563b7edb483c607ed791d5f42a479c4560da0499fac1826"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q10",
+      "lesson": "pwn.struct-layout",
+      "answer": 0,
+      "question_sha256": "761155caa99492fdb54812fbfcbc6c4b2b688a8f8b4f4ae49b4d1627d90aa952"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q11",
+      "lesson": "pwn.struct-layout",
+      "answer": 1,
+      "question_sha256": "73b8fa94c4a078080524cd3381111621a4978eab08ea9db4c4985371ceb2aba2"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q12",
+      "lesson": "pwn.struct-layout",
+      "answer": 3,
+      "question_sha256": "39965d5fab957d01d5dfdd770c89fb030c568475a0df123374bc6bbbd5a5055d"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q13",
+      "lesson": "pwn.binary-strings",
+      "answer": 0,
+      "question_sha256": "b1abfb25afe0de7b7a4e853c42f032123c5099397b58a26e8b0cbc74005fcc7d"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q14",
+      "lesson": "pwn.binary-strings",
+      "answer": 2,
+      "question_sha256": "d8c72bd1c38923da23fb2bc548929cc6a6c1497fd4fb06b566d92fc13aa9bc7e"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q15",
+      "lesson": "pwn.binary-strings",
+      "answer": 1,
+      "question_sha256": "3e6763ac467bb6303c530f6e56ffed0245f2d7beaa660b0c4fdcd8d65c3061d2"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q16",
+      "lesson": "pwn.binary-strings",
+      "answer": 3,
+      "question_sha256": "019ed4a9d26e967c1b654a800011effc25422112bba3ee5ddc602f3acf5015f8"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q17",
+      "lesson": "pwn.binary-strings",
+      "answer": 1,
+      "question_sha256": "549802ca0ca666d36271856328673fbc142b6d8bb1ce8578e9f0fd2a174bb569"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q18",
+      "lesson": "pwn.binary-strings",
+      "answer": 1,
+      "question_sha256": "0b66932a21072d8dc56698d5a8fecbc5098ba6efb5f52328d0d96eac7ffd0aa6"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q19",
+      "lesson": "pwn.binary-strings",
+      "answer": 2,
+      "question_sha256": "2b9a8c28803a10509d4946218a42b4097df3f5a19f299ed434e842f49661b74d"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q20",
+      "lesson": "pwn.binary-strings",
+      "answer": 1,
+      "question_sha256": "565f0f893fc430e04c115d35460031a7eae5094f5a058e9ce773af8665781af5"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q21",
+      "lesson": "pwn.binary-strings",
+      "answer": 3,
+      "question_sha256": "b4eefdd45b834ca79aad1521347a87de8ced840b2942af9a17c0c536f22a3cd0"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q22",
+      "lesson": "pwn.binary-strings",
+      "answer": 2,
+      "question_sha256": "8d067db9995e01f17afdfa703d242ae0a8362a51732070c8aad0a13794410c57"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q23",
+      "lesson": "pwn.binary-strings",
+      "answer": 3,
+      "question_sha256": "8af8514a70a423014e8789f30f88afe6b0d94326fdebf1a5c405c72f2c06f12a"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q24",
+      "lesson": "pwn.binary-strings",
+      "answer": 2,
+      "question_sha256": "e7a101c7f1c7a7ae0e6e5b539dd9eaaf1fcd043e638d620e2cd9829b3eba3007"
+    },
+    {
+      "exam": "pwn-05",
+      "version": 2,
+      "question": "pwn-m05-q25",
+      "lesson": "pwn.binary-strings",
+      "answer": 2,
+      "question_sha256": "a2a52d572114d521d6f145650527597543cab404a84d3c5f781da1a4b0ead68f"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q01",
+      "lesson": "pwn.file-descriptors",
+      "answer": 3,
+      "question_sha256": "d20a9e67dd6c61331d808b2f3e82da5544839653936e912665cbe462593e119f"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q02",
+      "lesson": "pwn.file-descriptors",
+      "answer": 1,
+      "question_sha256": "7225e247c4e8ae9ca5e5480be709e7b3c7f8ef579ece1550aae2292fafcb3619"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q03",
+      "lesson": "pwn.file-descriptors",
+      "answer": 3,
+      "question_sha256": "282cd3d6f4a776e744d4b54f91b4e7418f02eab013354d2c00f2385fe14ef709"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q04",
+      "lesson": "pwn.file-descriptors",
+      "answer": 1,
+      "question_sha256": "ae65c2892d9a94991fd552507ed9542d9ee313e52fd88d1d8053e1ded9d8ba37"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q05",
+      "lesson": "pwn.file-descriptors",
+      "answer": 3,
+      "question_sha256": "efdb80c9b5cb6c568b695a6076616c3a0f15eaaad01d6981d5c8bb345fe6ac52"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q06",
+      "lesson": "pwn.file-descriptors",
+      "answer": 0,
+      "question_sha256": "afcc2045d476db359a5b6e704e745d9c181da031a61236ec9dddf08628349e16"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q07",
+      "lesson": "pwn.file-descriptors",
+      "answer": 0,
+      "question_sha256": "812c7dc6ecb8b5af7677f7ac20f0b385953d4f16d5ee816d1fbdafbe0353d745"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q08",
+      "lesson": "pwn.file-descriptors",
+      "answer": 0,
+      "question_sha256": "f91a5d87ae06ac4e109799411da589dc953f0d27d5bb08122d1ab094052d5a5e"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q09",
+      "lesson": "pwn.partial-io",
+      "answer": 2,
+      "question_sha256": "9595d0b50b9f64147414f11ab3b19807270b195071faa3c00b702245a5276f33"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q10",
+      "lesson": "pwn.partial-io",
+      "answer": 2,
+      "question_sha256": "31aca51f460cab59ce6a906f08efce4bb7dc7e3c158d42dc5b8f524e07d28cf6"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q11",
+      "lesson": "pwn.partial-io",
+      "answer": 2,
+      "question_sha256": "6c6c09da4604aef0ab2fa7ee17bb507db3fb81c3a36722ecc1b3d4b537a56dfb"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q12",
+      "lesson": "pwn.partial-io",
+      "answer": 1,
+      "question_sha256": "68cf919a091383b6391f416fe465271f42068209cfa0dc3b283b578786e41fc2"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q13",
+      "lesson": "pwn.partial-io",
+      "answer": 2,
+      "question_sha256": "5cab25d81dd4ec000cfe47c1adf854ddfd2d10f3965933ba67b9b4233dd04c28"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q14",
+      "lesson": "pwn.partial-io",
+      "answer": 3,
+      "question_sha256": "173b89aabaf5cc96960614713790b650b8fe5e2ebed5ee3cde4f01dc89b5c6bc"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q15",
+      "lesson": "pwn.partial-io",
+      "answer": 3,
+      "question_sha256": "f92bcf6823ead82727b56c8006d3daafdcf521e9b9ca534a369d62448c5ea426"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q16",
+      "lesson": "pwn.partial-io",
+      "answer": 0,
+      "question_sha256": "f93fea5f441516c5a4d4d9af4a9aaebf04a7ebea0572f297d510fa45f04ab455"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q17",
+      "lesson": "pwn.atomic-open",
+      "answer": 1,
+      "question_sha256": "727f3b28f920192ee239fb9058043f925deb08cc4fbc7a9007f335a67cde9252"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q18",
+      "lesson": "pwn.atomic-open",
+      "answer": 1,
+      "question_sha256": "ade8d90f825638a1781f282fc76bbae322857e51fb1506b79517e834e2e32beb"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q19",
+      "lesson": "pwn.atomic-open",
+      "answer": 0,
+      "question_sha256": "d9613e4a016553dcc060d1bb180bc236c4ec2fac03f81a75c98c789bde9bd280"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q20",
+      "lesson": "pwn.atomic-open",
+      "answer": 2,
+      "question_sha256": "76a57cf63f3cfafda0a026e20476cd707457f4c1c11df65452410e635f5a259c"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q21",
+      "lesson": "pwn.atomic-open",
+      "answer": 3,
+      "question_sha256": "d4888c15f00d519995873a6946a08b8e667e8dd14970d73f6c79399b081aa52b"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q22",
+      "lesson": "pwn.atomic-open",
+      "answer": 0,
+      "question_sha256": "6a53181b7e988262d213ea2e1ee677b25e8b0fd714f9c55bcf876eabb387049b"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q23",
+      "lesson": "pwn.atomic-open",
+      "answer": 2,
+      "question_sha256": "396b9c55540aa915133762839e55a41c128af867567ef47150fb13b97a6996f6"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q24",
+      "lesson": "pwn.atomic-open",
+      "answer": 1,
+      "question_sha256": "a0a7514c95bee979d85291ff8ffc7c1250d0a278cc05dfb3bec85ed2ed74131e"
+    },
+    {
+      "exam": "pwn-06",
+      "version": 2,
+      "question": "pwn-m06-q25",
+      "lesson": "pwn.atomic-open",
+      "answer": 2,
+      "question_sha256": "0b233fa0190e97b125e3a7b762463f76f44b8cefa37fef26df85d51920a993f0"
+    }
+  ]
+}

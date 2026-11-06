@@ -1,0 +1,6400 @@
+{
+  "date": "2026-11-06",
+  "baseline_commit": "3839d6da3e24946046f1c472df83ef0713136e48",
+  "published": false,
+  "clarified_questions": 7,
+  "answer_index_changes": 0,
+  "format_only_baseline": {
+    "foundation": {
+      "longest_first_tie_correct": 50,
+      "questions": 125
+    },
+    "pwn": {
+      "longest_first_tie_correct": 88,
+      "questions": 150
+    },
+    "forensic": {
+      "longest_first_tie_correct": 84,
+      "questions": 150
+    }
+  },
+  "questions": [
+    {
+      "exam": "foundation-01",
+      "question": "env-01",
+      "lesson": "foundation.environment",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "fe914ce390a02e0b596b39ef5b2c0350ae005f161462b6ee7e5b43296e827b7f"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "env-02",
+      "lesson": "foundation.environment",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "19f6266f1d66d92f7043017ab0d9a0ca896d183682828376d881a6c1614df4e3"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "env-03",
+      "lesson": "foundation.environment",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "2ba2f1118a68ab32f8fad0d5fc5cf46c66128752511b6c097a9c870ce506eaa1"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "env-04",
+      "lesson": "foundation.environment",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "25a7eaa8a26c3f1e485ea961cd662de20a2738a898fb7308b63f15eb511430d0"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "env-05",
+      "lesson": "foundation.environment",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "769b31cf9ef9fe853b61e872f6bbad047134885d5e18b812cb7437f65bc47818"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "env-06",
+      "lesson": "foundation.environment",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "79a58ad3f44316e5cc8b650801840c732dcbf37a4ac773a205e146fd37eba90a"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "env-07",
+      "lesson": "foundation.environment",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "3cfb2f65b1a5dbe088851daab8df4a68ed500378ef356290e6f74f4a4ac2af4c"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "env-08",
+      "lesson": "foundation.environment",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "1ae8dcb76813384a4ed8d221ac1607f8841d6fdd249cd9f6918a81b4773fd5a2"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "env-09",
+      "lesson": "foundation.environment",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "0d7f8e50fb12598bc435e282fd8951c4a6f5d749d1ac98cd1c8898996ef0a700"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "env-10",
+      "lesson": "foundation.environment",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "59a929a68eb242105ec762f2265e7f51cd654e8eabeb39f8615a378c2e90edb3"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "env-11",
+      "lesson": "foundation.environment",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "1d2501e8c0ed42e66426339a7c9bac9d24a17612b24d3fcc0af332b64fee56fa"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "env-12",
+      "lesson": "foundation.environment",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "44502b0db46bfed9c7874cfa0b888a7145b88bf55bcb1fffec08dac407dfb500"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "paths-01",
+      "lesson": "foundation.paths",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e1f56d379f0b373efbee408f32ef3bb8fa792cd3ae087c995231fb8bc8e147d1"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "paths-02",
+      "lesson": "foundation.paths",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "36162a83a82d34852dc2d4e417b9afb03564d9c3482b2da0ab54b3944cc14c20"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "paths-03",
+      "lesson": "foundation.paths",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "4115394a134eb78ca561cff345b1b2a66ce09ed685392710ebaecb842a153475"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "paths-04",
+      "lesson": "foundation.paths",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "92a3367ed9f5cf09d0e61e244d16aadc50debb851e2cda0582173b029e64bd02"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "paths-05",
+      "lesson": "foundation.paths",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "696b5f0b6854492f3a3cead3048ed822c9a6b82d8af8580a1130ddd6b32980e5"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "paths-06",
+      "lesson": "foundation.paths",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "3c3fbdff30f70f99e4b2ba0b5adb0f3e70820cd4d0772c132fbf98ba1a59723c"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "paths-07",
+      "lesson": "foundation.paths",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c34bf947ad1f6faa21e44099c3c92fa9a9d5de9b0e3d9efe2a3d4c3c56d24d9b"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "paths-08",
+      "lesson": "foundation.paths",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "eb59d7879b04df3c46c28e29574812b489f185cfc0138ec8e094374138edb2bf"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "paths-09",
+      "lesson": "foundation.paths",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "40f3a2fca47ae5298136d55b98340bba187dbf72e15554ba1dcb9b39457475cd"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "paths-10",
+      "lesson": "foundation.paths",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "09d92526315509887552b86ce1d73bb721766d26b81db4cd65aa8fbc0d3efae8"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "paths-11",
+      "lesson": "foundation.paths",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "fd2f7daae72be7129a517f918b182d348bf81bae856c4a21515932f3af018198"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "paths-12",
+      "lesson": "foundation.paths",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "4c79178ccb8a6291b5c4393d3e6daf0575c24f1e91e3bb56ead5b0fb14aa1006"
+    },
+    {
+      "exam": "foundation-01",
+      "question": "paths-13",
+      "lesson": "foundation.paths",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "bcda9b5e437f07be6f73f4f2884079630b2683200823bdc51b4f8ff627bd2f85"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q01",
+      "lesson": "foundation.python-values",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "0e5aff3b72635ed2810f61fa4d22626bc88d5a966e8f3677737ee604f913e7e4"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q02",
+      "lesson": "foundation.python-values",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "38407fa31e2c99544900d97e3d6e8050ef1aca578fb42e48f833a8c14fe810b0"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q03",
+      "lesson": "foundation.python-values",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "8e63749efb174b189580929df5b54af29739543822c5ba77eca94815668d2ccb"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q04",
+      "lesson": "foundation.python-values",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "4352cf54dd5822460662136f181a4a87f756ca9596386f692fc3dcdd2e99610d"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q05",
+      "lesson": "foundation.python-values",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6c54a595de9decd9aff8ec6399171d4c3f6c9a191c1f49423e354cae2e8bf2d9"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q06",
+      "lesson": "foundation.python-values",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "b2a7897da4c06f48cebed486d8811dd60e19aa0f9b4ce8e702f40cec825bc764"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q07",
+      "lesson": "foundation.python-values",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "0ccfed661cc95ceb41198884a2103220eb93cc7380d6a3caeaa8b70a05fee695"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q08",
+      "lesson": "foundation.python-values",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "da8f1a6c7a44276faecb11d89dbbe2c5e95289676ffbf9e9963c884cfd15682e"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q09",
+      "lesson": "foundation.python-values",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "221fe8e32bec604adb6376d837940afaf62b92310e5a2936f519e6c398e6760e"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q10",
+      "lesson": "foundation.python-flow",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "4b6fa0ccd699a99b66117d49d4a59da6c0d3af6d6d607245c96f90bbcbc47552"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q11",
+      "lesson": "foundation.python-flow",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "7978384a52874455bb2c0813ab0da603372e394a5bb646d6d7696f94fc4fdfca"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q12",
+      "lesson": "foundation.python-flow",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ef9819a4e8ad276ae5f59ea594d3da78be478b2b44afee8878c441fc6ae4901d"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q13",
+      "lesson": "foundation.python-flow",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e45f438e5e70ddb0d0cdecd7c7b99918daed504e18bc0b60d4bc08bc36554a5e"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q14",
+      "lesson": "foundation.python-flow",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "728d6f3ce3ec5a937b2054597411e1bbc8f851875a6342bfb0bda1ca4ede9ffb"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q15",
+      "lesson": "foundation.python-flow",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e7423f4388b669d83d797806dccdc4928fd43a17ee01561ec2d61cfe80ab1620"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q16",
+      "lesson": "foundation.python-flow",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "382754cf4a2f5800427f1d77cf15b477c2304b35b97265720ebffe72090a14c2"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q17",
+      "lesson": "foundation.python-flow",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "cde2e52b7978859cadf5150f9a534cd52e8ddef8f2f7466bc2834b7ddf4179b2"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q18",
+      "lesson": "foundation.python-files",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6743ed843ded0e9552f64c2f339eb6fded2401ac67d3d11d3adff29503721021"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q19",
+      "lesson": "foundation.python-files",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "eca1d0223898af7f8c20e19dd9e62c34973dda2544cb9997810d048e35d61634"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q20",
+      "lesson": "foundation.python-files",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "63700a10f4d77ad970f2c70510214eae298167126d517a7d678b0222f41ea04d"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q21",
+      "lesson": "foundation.python-files",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d2f9b36ac12420b717cb89825759329746ce5f52fb3a99a096e45f9deff701d8"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q22",
+      "lesson": "foundation.python-files",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "8a640cd2605208928efb4fcc2cf75bcaa1a795e513528a23b0048de7b204b50d"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q23",
+      "lesson": "foundation.python-files",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "19232e3bc48dd697ff90214525fd5edcf504b9fd7d8dbf8f67be68fa41f962a9"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q24",
+      "lesson": "foundation.python-files",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "5fe3ee186b8bd69f66c1339594dcb7d91b6dfe173e7600bd741051eb2c53990c"
+    },
+    {
+      "exam": "foundation-02",
+      "question": "m2-q25",
+      "lesson": "foundation.python-files",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "f492e55afe23bf0f0a560f0688edcf424f8a89488071540147246fe4639b823e"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q01",
+      "lesson": "foundation.c-memory",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "1695d453e6a8aa55dce7e7b66e06376fac28b6dd8bb936ce11a423990292c078"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q02",
+      "lesson": "foundation.c-memory",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "bfe30a8243481660dc41e1c40103756f9390956d5f3444c2a966e74175200482"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q03",
+      "lesson": "foundation.c-memory",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6be8626c13a370c26529cdb03e6653d7d215c39b5900ebc9bd0cf2075a2d8105"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q04",
+      "lesson": "foundation.c-memory",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "44fba8412f6588c0b8046c6a456641bb35affa18d348a70197067b66aafbedbe"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q05",
+      "lesson": "foundation.c-memory",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "93403d205d7ffd041373e07ed17f4844a8731387c9ddd9aab4312e3bff7cfb1f"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q06",
+      "lesson": "foundation.permissions",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ba5a5b3825b0b5b2f94acb7f3b9cc45b498cd58b719432608b0e420e6e04ffe7"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q07",
+      "lesson": "foundation.permissions",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "814f3415d88dccaf34331a9348a8297e49b0c267b4b67144f6b8ce7eb0d50ff4"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q08",
+      "lesson": "foundation.permissions",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "603d3aab280ca56a996ff2bd12b6c9013376f5107cf04c5a674b331063fc6ce4"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q09",
+      "lesson": "foundation.permissions",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d07f09df3a3167b11984aa1f55441369e587401e6b61d8590b87bab27957a077"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q10",
+      "lesson": "foundation.permissions",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "79061124aef6ec2a454b2302d063ebc1faaefaa45731de4146e502a2450e9a7c"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q11",
+      "lesson": "foundation.network",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "973725935a1e8861281ee591dc9b0590960db718a123d26971d7d0c1b81725dc"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q12",
+      "lesson": "foundation.network",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e173ce42e475eaf215af85939a10bc04be82d2fe9e5d8a0382f6a00b7b7e9d3a"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q13",
+      "lesson": "foundation.network",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "3c90e825ab1b20086605b7a311c99e7e0baa2c3e32e4511a062ffb0379041585"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q14",
+      "lesson": "foundation.network",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "612fbbb50e7fa36ec6f770a3dfbe4a2d91f25e24c8f255693dc1a52b8a4fc145"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q15",
+      "lesson": "foundation.network",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6b7a73fad23ad3959e6998c367ab2b956b1a0e3f0b12ec1cbb4f7681ce03c1fd"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q16",
+      "lesson": "foundation.http",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "9398adbf485aa27c735a2774a354ab17cd86ac3689842beee07d55a79a66d80b"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q17",
+      "lesson": "foundation.http",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "4040d48ea601b7f48c5bde57508eb8b15cb5c07dedd476043eadea17a96d62ce"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q18",
+      "lesson": "foundation.http",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e4ad74ef390ba3550378b07427b8d397bd17ef391aa669b1f7931cbed5113e06"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q19",
+      "lesson": "foundation.http",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d6f81ec1807a5eedd98ed7046cd6708d680bc42c4b808a0864b7cb03e4faab49"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q20",
+      "lesson": "foundation.http",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "77dd9acbd2bbcb4317fa1e0a911fd82d70a60748bf6b4198175f2e253088fb1a"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q21",
+      "lesson": "foundation.git",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "8e89f171f3b4c62f2de4e3c9e335484bbe4ab77a89b448ffc1171d71198dbe1d"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q22",
+      "lesson": "foundation.git",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ab3116770cf8c54230c7f201ce368a93a5c13642f8106241cbbbc269e9224dfa"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q23",
+      "lesson": "foundation.git",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "3a7a4ffda5a8f1489ff683419ee4cc4e4ed297c75e63ccf41be28d9f6281bc39"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q24",
+      "lesson": "foundation.git",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "7b350c9aef993da9c21e9fd5a595ce04c1c93c41be5d6e1b21b51dc99509c92c"
+    },
+    {
+      "exam": "foundation-03",
+      "question": "m3-q25",
+      "lesson": "foundation.git",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "eac5839c6c35cd9310e09c65362fadef5b7462eb09aeb6db78aab274af10032b"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q01",
+      "lesson": "foundation.text-bytes",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "df5ad0abfd78ebe7f17ad88106bb6a8fa7952bebfa09b54dc8d350ff5b51ebac"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q02",
+      "lesson": "foundation.text-bytes",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "8aa48e6326aa40ecc8bb6b3888078d0bb5f6fed8b368ea75e536e0d16f487326"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q03",
+      "lesson": "foundation.text-bytes",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "08cd3c475d28c8dd38b659c207e00d8f9a055d4b1e5c1169dc2aec8bacae55ed"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q04",
+      "lesson": "foundation.text-bytes",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6038f7821bd41ec5c0fa3af46357d51816efd15fe12fbe176f34ce5a7ea33367"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q05",
+      "lesson": "foundation.text-bytes",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "3aa795e46c49687a9a38658d02934cdd6ab33afa52fa568ec558f3dcb3728f30"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q06",
+      "lesson": "foundation.structured-data",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "55a1db20eddc4e6b5451a28ff54bed412a6c848cd219831468fd569647d332a6"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q07",
+      "lesson": "foundation.structured-data",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "bdbc875ef3b09d26ab1de83119edc5deb73a8a6cfd06060ce6fa78dd51b0d828"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q08",
+      "lesson": "foundation.structured-data",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "8a46001de2140036701bf1ffc51346559066811451165a64f71a09d2ae0a88b9"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q09",
+      "lesson": "foundation.structured-data",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "b96030c56403e29899a461beca010eebf0773b89869101afb782a152d5e35c96"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q10",
+      "lesson": "foundation.structured-data",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "00a7cd7c8c8820f0be0fe78279efd8c86129678322cd0d1d32fcedbc80d129b6"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q11",
+      "lesson": "foundation.exceptions",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "f9d221819a925ba87e41bf4d301a53d5e556a4b028aca0916d32138bf59120a8"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q12",
+      "lesson": "foundation.exceptions",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "63399416775cb6351e29839dc3802c8c7ec1bebc4c39dfe1116f3dde108d8724"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q13",
+      "lesson": "foundation.exceptions",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "970a9909511c72eb379d8f311a9b5d80edb36a979bcfa236eafdefd28851c0a9"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q14",
+      "lesson": "foundation.exceptions",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d0a5b489a1b8dc50ea96cf7567a2b38cf5bf1a49961fed7ef02db5ac5b6357ea"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q15",
+      "lesson": "foundation.exceptions",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "bff3cf1cf80e2e2a88269383b608c4f2ef2b6a2aa3631ba311568571ea33df2c"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q16",
+      "lesson": "foundation.cli",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "50a598738d838200e2abce4e3c0dc6b4461388de66c1bd2c2ba3d4509796d8a9"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q17",
+      "lesson": "foundation.cli",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6b3ac8b23a97c7558d8941dfd54ae6548d119028c1761e6fd95ce7eccd683ec7"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q18",
+      "lesson": "foundation.cli",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "0b163ef710c12a2ae70a242aafc949f9a73a92b53780e9ff4355846e38a1feeb"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q19",
+      "lesson": "foundation.cli",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d9e461bc137ac850f957f10babcb946dc0e930b13719fad5a96d3c197216707a"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q20",
+      "lesson": "foundation.cli",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d7f7cd4dae6dcee89ccc03d74bfcb8aa71ad25bb0f72176dd61d5b14467efb48"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q21",
+      "lesson": "foundation.unit-tests",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ed9e2345e06f55d765db0edac72eca0f249f524c6450148f938aed7ef853d2d9"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q22",
+      "lesson": "foundation.unit-tests",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "a213bf53a9f3c18ba44f6fe0cdc23bc682ce72c1261d06afc7ea804c54d71c82"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q23",
+      "lesson": "foundation.unit-tests",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e08b88c29aae2b00ca3f88164960108f9e3a2af5e351fd2979ab38ac8fdc2c1b"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q24",
+      "lesson": "foundation.unit-tests",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "2cf1675097939a238a3ad12887a8f89086cae31f42c6ea88282e473c96d6f362"
+    },
+    {
+      "exam": "foundation-04",
+      "question": "m4-q25",
+      "lesson": "foundation.unit-tests",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "a3e27bbd357c299e31fe5ddd6da889420241e7dfacb134d88add569854e5f8e7"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q01",
+      "lesson": "foundation.mutable-data",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "5d5125239b1f7b323b7b34a5129c7b79247fdd4802f188601f5f699dddd5f8d1"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q02",
+      "lesson": "foundation.mutable-data",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e7a763e8a1ceac5cfaec5e43d55e5ef8644114fbb0ecc001a4f03726b38c878b"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q03",
+      "lesson": "foundation.mutable-data",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "80b19cca232c6c168079a4de2dd40714480cfc5a022d708eff3f176cd53bc83a"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q04",
+      "lesson": "foundation.mutable-data",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "05000ed0f89dfd693154f3de506cf9661e7b6e4426dc9d8a55a320e6cd1d33ac"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q05",
+      "lesson": "foundation.mutable-data",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "34adaf45ea6907f4aebceb093de0aca2dab16e23b1195e21be0888e87d962cb3"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q06",
+      "lesson": "foundation.atomic-output",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c1326089d9311dc87dfb4675459e53aeb72bb6e8b08e319a90e90774dd5806de"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q07",
+      "lesson": "foundation.atomic-output",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "bab2e00d72487fa74c4fd0c37616e650575052e3293337386f77c1c17541e925"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q08",
+      "lesson": "foundation.atomic-output",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "5123e46cc25e78e38f5014db5b78c681ad985caf143350c080fd154613b0c4df"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q09",
+      "lesson": "foundation.atomic-output",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "bd48660587edda41917ae1b0c518ef650225424d1432142af9f024b18d72d353"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q10",
+      "lesson": "foundation.atomic-output",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "28b2b879566e78837503783f34687ee74294d759118e2c16c223fa8eabecd10e"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q11",
+      "lesson": "foundation.config-precedence",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "1e5976f0c8f18b0fafb8833be865fa551b62d55f56364a92f2c7d30e2283106c"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q12",
+      "lesson": "foundation.config-precedence",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "aa3cd67181ed1bcf7d2ada8f9254b5314b263d80ae41eead4516a034f78f7c72"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q13",
+      "lesson": "foundation.config-precedence",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "0dc46fb2f2434046fcfec21370ef60b70b3d085744e978425067037098225934"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q14",
+      "lesson": "foundation.config-precedence",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "7816db3f5503be8093b39a81968208c1866cbd0e9dc935f6f23c6b495bc873e8"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q15",
+      "lesson": "foundation.config-precedence",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ec4340992b7f7a3bed75e95df4494dfc87682294eea19dea46026a4735f7b77c"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q16",
+      "lesson": "foundation.subprocess",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "38ea47a3c0c2001ce9aa1688fa8acc7aab8d774927bae6ffe8b263461477c26a"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q17",
+      "lesson": "foundation.subprocess",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "465c9246b6dee0d9ea4042e381d94afc7fb4f42abcbaeb0d55f321abfdbc249f"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q18",
+      "lesson": "foundation.subprocess",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "945707b75ec8d9639cf9b3e44fa196b6ed82c40ec083f92e17ddc459e87a3a7b"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q19",
+      "lesson": "foundation.subprocess",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "cb403496d4ea15babf5572cdc1372acdadbea44cdacdbd5105eec58ea7ce3b63"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q20",
+      "lesson": "foundation.subprocess",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "903ca0f451a52595008f478c8d236706967135f4d81323c50f0b4e418a0cf9c4"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q21",
+      "lesson": "foundation.structured-logging",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "96a92acb3407625c2270c42af90ed939939049fffd7af009ff8e604b180e2b6c"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q22",
+      "lesson": "foundation.structured-logging",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "71c4acbc80172bf2c606c9b4db2af46af5fab22ac0022202a9d7de3705e763d6"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q23",
+      "lesson": "foundation.structured-logging",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "944d6ce7364e929359efe3fc4d0b25cf515e07e40191dee7670f109a9ea110bf"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q24",
+      "lesson": "foundation.structured-logging",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6cc059cfbb25f17a0f071b8c70372a6e1321cfeab6624abe7df5adf4fcc3207d"
+    },
+    {
+      "exam": "foundation-05",
+      "question": "m5-q25",
+      "lesson": "foundation.structured-logging",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "68d2c2e738611cf8a1e06e0bcc4da0b17dd668cab2fcd59e42233099abc47451"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q01",
+      "lesson": "pwn.build",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c9bac794bacbe05ce0cc7fa59f32cc8debcb08c522dbf9d42124a376e6071b5e"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q02",
+      "lesson": "pwn.build",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "7db1620b17b00000e75bdd1a8f8dd13d6e8c9973c9223421fe770697d8c070dc"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q03",
+      "lesson": "pwn.build",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "35df6a27c493ce29862cea678bf2c317e96d7ab9d324e6834019745a555beb55"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q04",
+      "lesson": "pwn.build",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "eafb087e08f2471bfbe4ffe4b2ae3e4d458d4bec726a17e52db7c6e3fcee5714"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q05",
+      "lesson": "pwn.build",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "4554af4dea3edbd0ba61441634c3ab576d3f38f6f00d2b1d0308506b9a3c6662"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q06",
+      "lesson": "pwn.build",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "39eb0ea173b5808dcff31f9d40bddb460555b9713ddd380d20d1bf7f438e91f9"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q07",
+      "lesson": "pwn.build",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "21555e6db80828f5da0fbd91b657665021aa1e40b84b2832778f4059ffc2d114"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q08",
+      "lesson": "pwn.build",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "27c4dd1f18628d785141cdc86a461743677dd9e168bd30d4f75f4d36519b9c23"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q09",
+      "lesson": "pwn.lifetime",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "7e73325df67c19eda235f38656651516584b60d2f2a469d3166ef084b7af7680"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q10",
+      "lesson": "pwn.lifetime",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "f4289ac92627974f8d0badbcb2cffc31ebf44112fa12aef2b181f9837566f76f"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q11",
+      "lesson": "pwn.lifetime",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "4e6a2609461861f29a0315997c6716004e09da72438cbab00b4c4cb45c1326ae"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q12",
+      "lesson": "pwn.lifetime",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "96dd865821f526ab70253d1e603494887a4f36ae142e12d6ce311157573b98ea"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q13",
+      "lesson": "pwn.lifetime",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "1ab1f500f3ae60dde0a6ca7109d832c22d867095ac5d193a586b6ae130ede96c"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q14",
+      "lesson": "pwn.lifetime",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "26a94ec853e88c00b35b9191b7ea4b79f17474dc53bc31278e91ee5994f60b9d"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q15",
+      "lesson": "pwn.lifetime",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ab5be0abc0dbde3abb94efcf3d438f505c24182c6e5518e1002daac8ae0d189e"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q16",
+      "lesson": "pwn.lifetime",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "0ba5bcbf896264d5de3efe7c4111051114c50879b33483f7f9685d4557b83b28"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q17",
+      "lesson": "pwn.bounds",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "238b106aa30ac7df19a9039f8c8f8a20f7400243ba6a58eeb04da130fea014c8"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q18",
+      "lesson": "pwn.bounds",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "a018a0bb59df68fe15d5530fe47a0feb0630db7187018c333e0558b93739a63f"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q19",
+      "lesson": "pwn.bounds",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "eae75d2a9a239ec0cec9386503862fa2f4241b9ba92661a5ac11aef17a7f5711"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q20",
+      "lesson": "pwn.bounds",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "b09375520e2488ff5f77ffb03cf67af85a1d7a4d8903247ddcabf002aeec8f3f"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q21",
+      "lesson": "pwn.bounds",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "38c91417f28588af6588219f2c14941dcfb43c5232fda82b10b931337bdc4e01"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q22",
+      "lesson": "pwn.bounds",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "9e583fc590a48ee707543eb2ec4771b495772fa8b41e9da083ddeea7ad3faced"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q23",
+      "lesson": "pwn.bounds",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "355be88bf56a0b86340816d352740c013b0d97f39a32dfce51794f1e56b4bb56"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q24",
+      "lesson": "pwn.bounds",
+      "answer": 1,
+      "status": "clarified",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c670f9f115b2d86c50a78e62573b883d0f5255cc0fd92f3ebe93400bdfc3584b"
+    },
+    {
+      "exam": "pwn-01",
+      "question": "pwn-m01-q25",
+      "lesson": "pwn.bounds",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "0f50b37f0c0c1802c6252a74f795aa4282ff251e8d6c9556093ffe7ed3cc2956"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q01",
+      "lesson": "pwn.debugger",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ebd83791bd7c42f5a9aae709e2818b0bfaaadd88468206fc43904df672a3981c"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q02",
+      "lesson": "pwn.debugger",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "65bc445a867c82333bf1070b3a93c158f64f798c1d0ec304f0cc6cd5eaad65ad"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q03",
+      "lesson": "pwn.debugger",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ed5b116220e2e904c6a7c34699cc1337048912e2610cd1a4732892430e86a4c5"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q04",
+      "lesson": "pwn.debugger",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "672152a0fbfbd32cd6b3915d1c8224abe1f1f7c26eb40f4a03e2b9d220f08f7f"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q05",
+      "lesson": "pwn.debugger",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "b048002757e3b771ba31d389d6b10a36c9ab66082142d9a50fd41d35dd1fcf02"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q06",
+      "lesson": "pwn.debugger",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "0a4292967c5ca5caad7bfe592b7012d1588a68fd501b0840a63991d6600b67c3"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q07",
+      "lesson": "pwn.debugger",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6e04da698c2c4816636d85a0f22ab467625512d7cedb3ad31aba7d51dd06102d"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q08",
+      "lesson": "pwn.debugger",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "cf176245a057f9deb146c2d99fa544f49e7603db84894bf3cbf3b2a211a7aebf"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q09",
+      "lesson": "pwn.errors",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e3c64ee286c000b3437f078b7bc4943358a3313aa8db43b7cf87322c50cc71e5"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q10",
+      "lesson": "pwn.errors",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "4f1d080810199708dd49a249b3b8103c5d4fe91ccec482aa9b05680eb05c0f73"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q11",
+      "lesson": "pwn.errors",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e349a806b91db43c6303f3b8b63f8f0103dbd9fade007aef2c6413865cb1d0cc"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q12",
+      "lesson": "pwn.errors",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "be90dfbd949da3b2b8c8c3d1805a171b51c3fc7d787bdd88dab9c4f6888ec203"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q13",
+      "lesson": "pwn.errors",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "0aff6d5a1c526185b5f3f0d37b2f3c5eac7cd3ae7510efefc8b5535ccf86c628"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q14",
+      "lesson": "pwn.errors",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "bd441f6eee1b7f93d60b4408e0e0ba37d0783b6c3ef5d43bcc9a5e7338a8863b"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q15",
+      "lesson": "pwn.errors",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d0ed02d9076673b4984ca6d0143387c3b28b0bd825a9ebe4159c4a1302044a67"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q16",
+      "lesson": "pwn.errors",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "2e2fa6c7efa628046f67c5881ec63da268c48198d673cf546492a9c7b21f2303"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q17",
+      "lesson": "pwn.mitigations",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d725a34004cffd3bb54b68e21f890faa1000ced6140edea84694b3945ac7e898"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q18",
+      "lesson": "pwn.mitigations",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "00f1b2bb95b331cb14ae1f56a62503eb60b84ba324ac27be2720b2b42fd6832f"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q19",
+      "lesson": "pwn.mitigations",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "80ba17a6948534da6ac67885413efe012531eb973012df65d7cb278685dea7f3"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q20",
+      "lesson": "pwn.mitigations",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "109ac86d5c9b7d37fc402f492c4e6cdd1a1da424d1f29288913569e5025397e9"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q21",
+      "lesson": "pwn.mitigations",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "64e5829204cbb50998a29294db3b247170eb2f27682aeda13d2e394fb644ba08"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q22",
+      "lesson": "pwn.mitigations",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "af142b166379374adf9f79138c9c0f49565acf88d614ee6ec60d29adc629b9d2"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q23",
+      "lesson": "pwn.mitigations",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "db125d3838fafbc732ca2bf87c4ff187759ef09a870c658c4924782d063cd1a5"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q24",
+      "lesson": "pwn.mitigations",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "7fe63e9bcd8a84c7cb6a8c409cfe6337f5eb5728f66de8ad6be0f5eac891735c"
+    },
+    {
+      "exam": "pwn-02",
+      "question": "pwn-m02-q25",
+      "lesson": "pwn.mitigations",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6bb119f68016f1327e6f7a4bbb728a252e531f0465b075009d1ab0e92fe92803"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q01",
+      "lesson": "pwn.integer-input",
+      "answer": 0,
+      "status": "clarified",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "f26304294ed6170f5c5c71b8b6897f10ae759954da7efc25aa7413b970c022b0"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q02",
+      "lesson": "pwn.integer-input",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c1266f5d0e50956302725166ff650f0e9aeb71abdfaccafe6cf5e970708e95af"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q03",
+      "lesson": "pwn.integer-input",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ca39581e224fd1112ac05df512a509af317ac690effcd7877b6c64326e57fdec"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q04",
+      "lesson": "pwn.integer-input",
+      "answer": 3,
+      "status": "clarified",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "a66ca02b5255044a4da1be4b55391fb3d5125ad2b64dbe5cc58c4f772147bfdd"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q05",
+      "lesson": "pwn.integer-input",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "7c7b0fd56d3220044664a972de0cd203f0ba3cf9ff4d9dd11acf47f29e1c08fd"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q06",
+      "lesson": "pwn.integer-input",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d72c0dd65a7e94e379f48de133e83c42a8610a83e9b37e781051ef76cd4e0603"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q07",
+      "lesson": "pwn.integer-input",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "88b5424c2b6274b7db2f924adc45b00413878ae0db7c1d498d64e7503791791b"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q08",
+      "lesson": "pwn.integer-input",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "49b8e1779a8fafae2742681a8b9aa2cccef3a807534fcaf130b1713f2d21fa8c"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q09",
+      "lesson": "pwn.allocation-size",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e92b9457c3b99dfdefc2aa870c4faa38aff87831210aa9c22ca166b7e5436ef2"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q10",
+      "lesson": "pwn.allocation-size",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "8160ea943022b6a1b4a48d55d975d295788e6ee4e32dd90a58e82305efcd48fc"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q11",
+      "lesson": "pwn.allocation-size",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "659f765773a0b06487f72bd30ba485cf8860c5f84f599844a48f00ed38019101"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q12",
+      "lesson": "pwn.allocation-size",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "bf53fa589ff3c8aeb2965e86c4f6a6ef24fd5421f0967cc2d87b3f65b800ea12"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q13",
+      "lesson": "pwn.allocation-size",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "42e5237b69fce0866e51433583e105e48c6a1982c656eeeaece3fd28bccad4c8"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q14",
+      "lesson": "pwn.allocation-size",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "a9535898aef376c1ebe1704e5ab3801960962daa847da81faf67368af8109815"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q15",
+      "lesson": "pwn.allocation-size",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "85822b809dae61a2c900be1f8c23bc75c61df689abecb38553e7447fb4489a39"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q16",
+      "lesson": "pwn.allocation-size",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "b5eb06f21e6c82ddbefdee3fe3a92c67e65b0e39fb697cf4234c0349ca276bf5"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q17",
+      "lesson": "pwn.format-strings",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "77cca4b7a365c0c69845362a7a2709e1dea3454c5531cdf44e51c239095b47e6"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q18",
+      "lesson": "pwn.format-strings",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d4056508c7fabc98363c45b6bb5155cf860434359d704d244470588982196d1f"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q19",
+      "lesson": "pwn.format-strings",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "255041e4d990352ba2f7635c55dcf9ff53db8b977cc14f1d0c412f582c5d47e8"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q20",
+      "lesson": "pwn.format-strings",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "8fe89157e4571a849d5adc35601cbbcd46ebea0ab5ae4c881a7af9cec7f0ae27"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q21",
+      "lesson": "pwn.format-strings",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e626c6ba2b48b581025fe89672c89f6a65d30ab01da9b9533159f06cef7205a3"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q22",
+      "lesson": "pwn.format-strings",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c80c233bd2e099cfa2c8ff5face6aa1fd1bf73533af3c6d7f9c9c9acce96d4c0"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q23",
+      "lesson": "pwn.format-strings",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "9249af22601362e3f6aa9659079ee1dc95081973c5880d88dcbd6a440e9882a1"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q24",
+      "lesson": "pwn.format-strings",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "b844cc932ee5bab0f150600a0fe9ac367221035fecb343ec40cf0ead31d8e373"
+    },
+    {
+      "exam": "pwn-03",
+      "question": "pwn-m03-q25",
+      "lesson": "pwn.format-strings",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "342ef689a571c5cd17aca8299c2fd7fae12f8ca159bf2d5ffddfd52930b5a6b4"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q01",
+      "lesson": "pwn.ownership",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "79755ce7c075cb1b30a8c051677d322b9a6adaa5f29269fba6bc5a556f8675f9"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q02",
+      "lesson": "pwn.ownership",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c1298c637c1279858c6898222d2227c3eeeac5d98c6757a4286b0f96569ab628"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q03",
+      "lesson": "pwn.ownership",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "400172ae5d67293483d53f2a9403b0eb35731381f1c27b2f7c3ba611c07a68f2"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q04",
+      "lesson": "pwn.ownership",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "fdbc22b2e801bb990e25745748e2fb51f487b489316d86ca5e27e4da763c8beb"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q05",
+      "lesson": "pwn.ownership",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "2f7e40917dec560c974169899b9d352047477808f69cf52f3a3c21bc1ad6783c"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q06",
+      "lesson": "pwn.ownership",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "539a050c2717136378b0a320f534c1999a792ee7077e0187b55fc1873e6b5364"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q07",
+      "lesson": "pwn.ownership",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "540eebddf458800592e623d88e2decc950dddade32820ef4a45112337c31af6e"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q08",
+      "lesson": "pwn.ownership",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "04326269d7069cf1c8ccd1ff89bc75910e98d5cca9ec1f4fa17ea6dd1351b8b4"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q09",
+      "lesson": "pwn.ownership",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ab818fe9a413625ff2612705947de40be815177726f736807de3bb9ede575d69"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q10",
+      "lesson": "pwn.ownership",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "157723d4419d689689db7e233a42816a6f112d4632c2562ef9954b8b9e400ad7"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q11",
+      "lesson": "pwn.ownership",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e65a116d5b77dbc8f24a11d33a204bf0d692ef5c69a9bee3760f5306f71b1dbf"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q12",
+      "lesson": "pwn.ownership",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6b0d54fddd85d89a29c0e967751b24d616d3a864bfbc705e2014e0c5ce4cbae0"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q13",
+      "lesson": "pwn.binary-parser",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "3e613dab50d5274123a2aa9b8c6a77be37e96e734645aa1b397a5df1c5602a4c"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q14",
+      "lesson": "pwn.binary-parser",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ba5e3a102b55851f6abb8c79d09a1052f2a53db4105c97e92f87a4c5c46585ad"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q15",
+      "lesson": "pwn.binary-parser",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "819235b29ec2179d483b0f7573a33f637b3b450210a02879479590f1aa1df4f7"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q16",
+      "lesson": "pwn.binary-parser",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "2ddd086e77dbfc1120fd1f6bcdb87f628190dfbbf8acec0a535d1313cec7a426"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q17",
+      "lesson": "pwn.binary-parser",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e84b54bd98df0dee502fea8b1d27b7e664f8460cbdd7dfac2b9374ddb5e76dd0"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q18",
+      "lesson": "pwn.binary-parser",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "74b007b70e4b4d2a992b192b2b9dcb5de8dbf2ea82407fc02078f8a12f34f467"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q19",
+      "lesson": "pwn.binary-parser",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ccb33cbf4356b3d0c44f02c88119b0281bc1a14afa2ff2c01a0b78cd9ec60b57"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q20",
+      "lesson": "pwn.binary-parser",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "a027b7c777de93ab827a60842f79258e2ef40ed14b7278ce0f98da0f8b5efc26"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q21",
+      "lesson": "pwn.binary-parser",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d2d9904f637d1976af44095eb7c337f7cce14867b6791da304ceebf389049fc4"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q22",
+      "lesson": "pwn.binary-parser",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6a360db692c0f31baf6e2ef4f106892d0b6bc37b5a5cd4725adb568c5374c6b0"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q23",
+      "lesson": "pwn.binary-parser",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "a40e92344001a75fb46d1e644c35f131e89a1acda4a2c025401b3db26c0dfece"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q24",
+      "lesson": "pwn.binary-parser",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ac98fef56e9cd99f422be5a47dcc1bcd3794958c58192d959f27d0248994ef95"
+    },
+    {
+      "exam": "pwn-04",
+      "question": "pwn-m04-q25",
+      "lesson": "pwn.binary-parser",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ca5abde29e11b9f6080aaf540efae083e5fba9c602c45ac88f55082353a19b85"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q01",
+      "lesson": "pwn.struct-layout",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "96b3673587196b4ee917c374ea5739b2adfc6ecd34ea1fa9d238823296267f72"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q02",
+      "lesson": "pwn.struct-layout",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c3e8b8576d97dfd8263e20a66a2ca910bb3a944a29e7de9aef190f3bfeae7d12"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q03",
+      "lesson": "pwn.struct-layout",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "a524d998b668d12e59d739bb38812cd10025b55fc06b7c012b6a4c9710782504"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q04",
+      "lesson": "pwn.struct-layout",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "07b7a08c91b3aee3bcfe49aa6ee93f7a7be6ca63e09d7d87c65ce37a77e868f2"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q05",
+      "lesson": "pwn.struct-layout",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "a4094de632179c0e0b87589bd0994e073e8598b273348ad24a5d6eea83eade20"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q06",
+      "lesson": "pwn.struct-layout",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "81f1c89e0fbd489ec0003d51e1924802ad0e6571c6f7dbfccf405b4622ee8266"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q07",
+      "lesson": "pwn.struct-layout",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "853555ddb7cabca4f12e272eb5152799fd5b71d50a01cc7562eedcdbd426f51d"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q08",
+      "lesson": "pwn.struct-layout",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "a7ec9a3b84f713d7a286976d62fa29005c1ca83245d1d63070d11fee05eee68f"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q09",
+      "lesson": "pwn.struct-layout",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "55d697eb37b6207dd9fcf7d8c49f20bedf2c57684c081f33617ba0a09f59ab6b"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q10",
+      "lesson": "pwn.struct-layout",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d5bfd80825501217cedc858df14732f22847a9772adf9c4f05bc50c3e040b706"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q11",
+      "lesson": "pwn.struct-layout",
+      "answer": 2,
+      "status": "clarified",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6285358149f8daf526e619a745a955726b4dd0a9630887e45ae4a4eacabae66a"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q12",
+      "lesson": "pwn.struct-layout",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "fb200b455c020e2102410200ba8be4741ec1dbe16ac92bbbf82bd1524345bdcd"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q13",
+      "lesson": "pwn.binary-strings",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c8003a2a816b0ec1a466756a1dd377bd569d75932a6c63b44c5857c2df12b55b"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q14",
+      "lesson": "pwn.binary-strings",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e52b5e4392f56cb3a8bb71ee5414238341e03be782b6d58693bf2c6d7b4e002e"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q15",
+      "lesson": "pwn.binary-strings",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "72854bcd3ef23eab6c1d244bb72e46eb4d3145d39defe8ffa75182790499f7e2"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q16",
+      "lesson": "pwn.binary-strings",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ae00ef1c5560e3ac2f5ac71988359115c4ed460f7d8c92faf369ac50d89c2ee5"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q17",
+      "lesson": "pwn.binary-strings",
+      "answer": 1,
+      "status": "clarified",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "b16600df896692b73b10145eba646f21bf1518c1ac3ac11affa49abcc6c5b71b"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q18",
+      "lesson": "pwn.binary-strings",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "48299d9b022cb32d3c3afad3ba228006ffa1743aac2873452483d04eda4d7185"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q19",
+      "lesson": "pwn.binary-strings",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "66af27d8a9dcd09b893b008e30d181c6b74b09553fdd63269ce089320f1d2297"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q20",
+      "lesson": "pwn.binary-strings",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "8d315245acb516a2064bf07a0f2327e701047cf9c097bafb7d0f49bf5f92c345"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q21",
+      "lesson": "pwn.binary-strings",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "2f71a9ab7a55fc048af6ecf4676a1a4aae06cbb76bb6e172cc18393f7ea7e95f"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q22",
+      "lesson": "pwn.binary-strings",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6eca521ca965c19d508edb0c52a6d005a56a8b9f14c457b9d8f7ae684d925f3c"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q23",
+      "lesson": "pwn.binary-strings",
+      "answer": 1,
+      "status": "clarified",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "2feafdb9ae88a10faaac6965ba52ea90599bda750065525fbd0faa0cf1d7cc66"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q24",
+      "lesson": "pwn.binary-strings",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "78215e5b02a9eb58f4c6e51dcd7e62240c36d03cf7679cbc0091f5b13b743f1b"
+    },
+    {
+      "exam": "pwn-05",
+      "question": "pwn-m05-q25",
+      "lesson": "pwn.binary-strings",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e236ffd9347831c2689232925aec467ebe39ac839beed0f91c6027380499c066"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q01",
+      "lesson": "pwn.file-descriptors",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "82dde14198c2edb852ad7fb497f7ff05f3124fc5b2c09db94333a8f96382db91"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q02",
+      "lesson": "pwn.file-descriptors",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "4bc11dc161949b96c222b7d4a7c987575aae3994732e1658af8dfaf834f78103"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q03",
+      "lesson": "pwn.file-descriptors",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "3f9c65ffec017a2bfb5116513fc476ae40a4afb4c2b5626953951bc1c32903b8"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q04",
+      "lesson": "pwn.file-descriptors",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6ee3c3f13f27a38c1b1de0e13313949cbdc79561d4371f678a026e2646689c8e"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q05",
+      "lesson": "pwn.file-descriptors",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "4c4154218c50c3e9329585a89b6a93c36f06a6900c21b48fb60b5b868171f820"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q06",
+      "lesson": "pwn.file-descriptors",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "a5aec5b422a92686cdd473842a83744f086c32896a87cdad442ccaf9ba557e82"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q07",
+      "lesson": "pwn.file-descriptors",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "bbf84602fc89966d3ad565c039ed6e5f915b13363257ff13defeb879fd3c4e21"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q08",
+      "lesson": "pwn.file-descriptors",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "db986535f2b95226922e3025f2c7e08e453ffee1906130d000876d562be068f9"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q09",
+      "lesson": "pwn.partial-io",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "93d7f5a5d80c25514ca1986675a40b44519cdfeeaf19d4b38bc5c0ebc0d6c0c6"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q10",
+      "lesson": "pwn.partial-io",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "f60806611754d0cd3e3be2994d5eeec9a48e97793a43d438e70cd5e1094d8f5a"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q11",
+      "lesson": "pwn.partial-io",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ea76da500cfd729cb1cbc557bb1b8e30d7c76da70b851ad5eb63821ee2424a12"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q12",
+      "lesson": "pwn.partial-io",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "166b4ddfacb57603a5263f659bc2d874afd9f2135b2c471446e4e64856384c1e"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q13",
+      "lesson": "pwn.partial-io",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d21c3a8ba22fbc2af39e78d73837dbfa485de8d7c259e295237441082507c462"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q14",
+      "lesson": "pwn.partial-io",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "3d65cc6ca656131f964d51f45629557f3b231cea3566b4c07d7c0ced18319a0f"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q15",
+      "lesson": "pwn.partial-io",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "8040f649fd2ceda0e7fc9b1e52c096d6acc284349cc41557f3c369dfebed17ee"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q16",
+      "lesson": "pwn.partial-io",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ecd07fae9fdaaaaaeb87fb52adec4901edadc96a18edbac0ab5e985ba1aca3bb"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q17",
+      "lesson": "pwn.atomic-open",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d5b9cc32872f5ed2a76dac85978271549740c977de6968db0c2b2ff998c4f30a"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q18",
+      "lesson": "pwn.atomic-open",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "1e6615a33855342a01f45dc90da685f9a1d1602a054dee941e6ffb723351e6a2"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q19",
+      "lesson": "pwn.atomic-open",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "fb528f8bc06a0c45d18007921b0d5d715c8521b30ac88210dc13b8e6d6432e20"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q20",
+      "lesson": "pwn.atomic-open",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e8f30814bd43b78bff8358f8f850389e4a4164f22fbf0ca9b97aaa5b4dfe1f54"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q21",
+      "lesson": "pwn.atomic-open",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "2ebff0630831d13ea09579377364b83659110cca2bbaaa90f369f455adb4771d"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q22",
+      "lesson": "pwn.atomic-open",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "2dad32787ec62b1e94c9b2cd2e6c86864f360ceab2ca1324e0d6d4cf9680ee5e"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q23",
+      "lesson": "pwn.atomic-open",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c46367b006f810294c9306e95245510c613713f1605dcf195781788b1c63314c"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q24",
+      "lesson": "pwn.atomic-open",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "81504117308cb9b860c6dbadaf1f50722cca5edce8fb83b7a40e53adda9aea25"
+    },
+    {
+      "exam": "pwn-06",
+      "question": "pwn-m06-q25",
+      "lesson": "pwn.atomic-open",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "2bb87353781aaf4c8ac67af7ebf71b96bf6d1273d0bef2b511f505ca4e8395d6"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q01",
+      "lesson": "forensic.integrity",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d3825b1a60510adc7899fca247605b080a40aa3fd6cccddb7bc594b4564bc6e8"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q02",
+      "lesson": "forensic.integrity",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "be5f2b3d0f84ab6972babd4e75e01500024984b96cc32c555af8ba4fbd1312fd"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q03",
+      "lesson": "forensic.integrity",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "0b39e46234c2eebd7b1ea80db03bc85637cb5075c2665e5afc82b75f103da826"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q04",
+      "lesson": "forensic.integrity",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "2fa08390b34f722baf3ae0067181c74aefba3e8dd18eda0a145d6586e9268902"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q05",
+      "lesson": "forensic.integrity",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "10f0d02156d51a6db786aa66d4f6b4fe3b30f815d53279acc3027fb7883908ba"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q06",
+      "lesson": "forensic.integrity",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "9a959af6e2258ebdaf0f8bb5bf960c23ce0a9e5b0324a0c135d31f0b147e035f"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q07",
+      "lesson": "forensic.integrity",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "25dafc416efbb615499c6f550ff0341d0c40bee173b5dee453239c88c2c9eb05"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q08",
+      "lesson": "forensic.integrity",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "0fab8dd5050da87e13d41c41aa954b2c81855e324dfcefa4a365660ad45f137a"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q09",
+      "lesson": "forensic.logs",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "9e6b53465d69c0012d91c47efedfd01ff4bff66db40f958d62a5c9160c9d20cc"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q10",
+      "lesson": "forensic.logs",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c5ca2e1af9178829dbfe5ed5ab6a89c55aed33e034e9fa25987a2bb608ca77e2"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q11",
+      "lesson": "forensic.logs",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6bb20b1522de49960671085c46c4284f4ad013d71806470d395dd6ce9a7e01a2"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q12",
+      "lesson": "forensic.logs",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "40ab457da8dc82fb379c927941c96f9edf15d18c1eaeaf6c69e638969a2b51f8"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q13",
+      "lesson": "forensic.logs",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c4f91c025cb0717442aca9f4da1bdf05474ac954ffec2ab21b589ba37223225b"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q14",
+      "lesson": "forensic.logs",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ce1af9b1f2bfcd26eaabb8976b937a4de94a25ca27e309df4599f30c6b787c0a"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q15",
+      "lesson": "forensic.logs",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "745b77aac4958fd6f605ebe265af817dd8e32ece5f8dd34a065e73f1741c4dca"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q16",
+      "lesson": "forensic.logs",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "1f41dd5440dd8d407cfa0ec19ef90efbb3a4a6366c80dadf5fd2ddcdb276080b"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q17",
+      "lesson": "forensic.logs",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "8b2cc79cc356133acd19be90d4f92d5d3a65c8cf475a842c3060ecf0cd8f2b78"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q18",
+      "lesson": "forensic.metadata",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c1945875892f65169ad50b3e628fd35a00d4853ab21bcbb96fba2dc4863b1e99"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q19",
+      "lesson": "forensic.metadata",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "090cf0546d31fed229e3293e6f2a0634c737fe598c6b2a9db5fee53abad33c85"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q20",
+      "lesson": "forensic.metadata",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "7e2fbf4636f1d7e64387f6cdc447d34b378602eed32c4933fd504faef4174555"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q21",
+      "lesson": "forensic.metadata",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "8700d49a1a3e44b8eb0b9da26f8fb0e6e9606a3785141d4c2a65382a61743392"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q22",
+      "lesson": "forensic.metadata",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "a89cd9ed1158b297bb7cb2aff93be5ec9dbbf3d7442c51ad406852da553922a9"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q23",
+      "lesson": "forensic.metadata",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d160344e9f7c4fadc8635fdce067cfc97143dcc83430629548b971fdde614c94"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q24",
+      "lesson": "forensic.metadata",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "b68650fc760835b1e953501ed5000ec7cecce1fd2a4b1b14fc41015c595a1ba4"
+    },
+    {
+      "exam": "forensic-01",
+      "question": "forensic-m01-q25",
+      "lesson": "forensic.metadata",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "162f1a4e94a98b6a7fba519ddb2cd12bb1616a3657e87cf973c15a38f6b579e0"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q01",
+      "lesson": "forensic.timeline",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "af286533edb2668ff3f03263c0e10662746582448df97b01d533ae812aca5e94"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q02",
+      "lesson": "forensic.timeline",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e97a5195a81051734d2adb505796fd1c90abd7d85842d1c9f1fd8a24cb932d9d"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q03",
+      "lesson": "forensic.timeline",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e831812a539cfcfab9a203906d0b63487fc707c7dc654698d89609b98057da57"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q04",
+      "lesson": "forensic.timeline",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "cc637fbf45422cab5d5f3125981a5cebcdee1c9959432d8ee42fadd3d8d950d3"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q05",
+      "lesson": "forensic.timeline",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "fc18c6b61c5bc60a97b0a1caef28c3d79b5f040526987f828db0feb00f0c67d0"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q06",
+      "lesson": "forensic.timeline",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "7bacf05e4b95015e037a9c8d2053f50822a48bad9fae1970fe0cef6204a9a1f4"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q07",
+      "lesson": "forensic.timeline",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d84c5434cfcedddb7a7545513df486b0edd51f570d3d5593ec994a9bb0da2d17"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q08",
+      "lesson": "forensic.timeline",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "51d0082359fa8c01c95bf43d07a30111af1a45516571a39cb9755adf8a045de7"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q09",
+      "lesson": "forensic.timeline",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "1b9dde017b29c4f84e017bcb2107fedf9c370899e5796c8bcad4e16e1c4d7473"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q10",
+      "lesson": "forensic.timeline",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "a1509346945ce91dc5f38c231a6e4dee3b48cfcc816a9d89eb38450bbdd6859d"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q11",
+      "lesson": "forensic.timeline",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "7ddf0a51766de8803b7df292c766ac78bbce537217ac840b39404bcea537521d"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q12",
+      "lesson": "forensic.timeline",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c9b674f9ad90347d5b4da722858e3713ca4ee148bd4356fd098e0bdb348cdd2c"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q13",
+      "lesson": "forensic.timeline",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "dfd14fcde0e33342249a5b9cdf7538d5f61a3d9a7280951a9decda9cffd31c9d"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q14",
+      "lesson": "forensic.report",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ad81e69c020a28b085bf3d27616b45e7a55af4381aeedd681dc35c68f557b74e"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q15",
+      "lesson": "forensic.report",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "0315fd890c714e8e3218ea929d6194df1612c59c0abb179a645c12f5ec101d8e"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q16",
+      "lesson": "forensic.report",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "db4b02a8fb24c3f0101c95b7cb68247ea4975afe68c629e88e21c32c56b51dc9"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q17",
+      "lesson": "forensic.report",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "89c5b9008615661fbdc7d6c4ff38b9a400991a4ed87018de01a5a7c0cc2bdd01"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q18",
+      "lesson": "forensic.report",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "f26673e28f2578a4996ad04b841f3eb89195f43477291d618ec60fe59e6afcb9"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q19",
+      "lesson": "forensic.report",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e272535d9cfbb644bafab131e239371170caac65d6a8c2ad9311bb7fefad3157"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q20",
+      "lesson": "forensic.report",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "87b3c8ad6566b97d06bb229da1e2d3998ff6313827dd6557fac02185cdbc3a72"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q21",
+      "lesson": "forensic.report",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "134d91b72cb261a18ab73df9c3fbf449602aa0db4bc77c7a5cb7ba700338eaa1"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q22",
+      "lesson": "forensic.report",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "8d3f34c390ca8ee0b456b1da33e5ae95669e0fe921fce11c47ee37cea2744e50"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q23",
+      "lesson": "forensic.report",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6d7c13fe45939a2b26955466388e503f8f3d1507c66c26d76218192ec9206d30"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q24",
+      "lesson": "forensic.report",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "15d696f044f6c2248b20dd0e3a3dc78bdd9eae6b39b8ad4af37718fbcb5d12a8"
+    },
+    {
+      "exam": "forensic-02",
+      "question": "forensic-m02-q25",
+      "lesson": "forensic.report",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c8554d89a3bb6494c6a9ebde1d840f8bdd02b6ba7cbc6b3e3fe4fb3a37bb0f43"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q01",
+      "lesson": "forensic.collection-plan",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "4529234f28e9646e223d6b3ed643a701819a35a28c52f52fa5fbd60d06d261a7"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q02",
+      "lesson": "forensic.collection-plan",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "cbf8ef98f6e9d5cf103575f2ce376c46f7a9a2e598afca189506a71c445da74e"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q03",
+      "lesson": "forensic.collection-plan",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "cd13f08d6c211834ad43e9364136a9bbfe847c4e16f26642cd2b3e75b5c3fb0c"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q04",
+      "lesson": "forensic.collection-plan",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "84859101fc3bfd89b54623d0a802ff195dfde40b87af9d2e331cb627fa4ce3d5"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q05",
+      "lesson": "forensic.collection-plan",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "b64cf070d85224b520904a3ce0beb54f9d7e910d494dbb5b897be42fe8baa99e"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q06",
+      "lesson": "forensic.collection-plan",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "cf61352e6fc2b9d73f4994cbebfc47cfe8d0c35f50e9c90a6ee799fc6fe7cf9f"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q07",
+      "lesson": "forensic.collection-plan",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "697e00b86c962e2afa63c91fabe5d63c08b2772df4da030f4b96a79a1977bb6e"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q08",
+      "lesson": "forensic.collection-plan",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "3f852fa92fcd1ef25e3936075ef231cffb76025462d97975e8be7d8a0e430a29"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q09",
+      "lesson": "forensic.host-triage",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "f86476f99b7b9ab9b5ab24e3509f13821b93b43a61c4c60261b5de85c61870cd"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q10",
+      "lesson": "forensic.host-triage",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "bee7c1f36ee2ec7e3b0e50f98b7b3b35373cff3ff6a6cab2cdb5c32bda54b676"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q11",
+      "lesson": "forensic.host-triage",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "5d2ac513980570a2301f9b5e4895bb0860e97fb18b6106762d48fc1864c89595"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q12",
+      "lesson": "forensic.host-triage",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "beee58b265e349d275479f0635988464e5f494eae739e14995ff7c1583718fb1"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q13",
+      "lesson": "forensic.host-triage",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "bacb39f941f564acb801dcb71682efc1d19e14fc1637254b8023df84507adc13"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q14",
+      "lesson": "forensic.host-triage",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "926f60a33e20d93119e5e0697f44c902d7ac31f42f888d0baf9c41ed54f4c275"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q15",
+      "lesson": "forensic.host-triage",
+      "answer": 2,
+      "status": "clarified",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "1b7e222f128a9e8cade38418bddbb18fc2899dbbcd808f5cf20d962dd571620a"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q16",
+      "lesson": "forensic.host-triage",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "7c9298e9e3ab5aff4b453e54927a6e8ae94a6addb803d8edd0c4c4a2ebc909e5"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q17",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "931f5ff347a52834db230384efb5a11eaf4860d122b3e604f0d0fc2ca1bea979"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q18",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "2c4890011c728658889cfea662cd70163f66d939f69a1face7d14d104b5104dc"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q19",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "d37535a969049ac02b3640a82868915774c219b45e90b35cfcf948efde79a413"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q20",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "54cec8ffe1d29130fe316e04a23e28a34791da81d8ed0560b0ebd0e943f59969"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q21",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "1ea81770fca13225456c6417225a129bc1bd251b5c2b4625b8870089c33d15a5"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q22",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "f61510e4255a9d611cff5391b9fd2e6b2449c4c80e679b47868674cd8a04a086"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q23",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c32a6e9ec9b67bd383d8eee348e7a37a0694b1eabfafb2ad792403a1bbbc2e3a"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q24",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6a9f82d2bfcef5cc79fc41323def47caee728d1feed58c99b66718b0558bd131"
+    },
+    {
+      "exam": "forensic-03",
+      "question": "forensic-m03-q25",
+      "lesson": "forensic.browser-sqlite",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "be8f99f2a718d0f9a1189dc4f5e8d3ce9f3f0e276d67eae4929ac455268f9d04"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q01",
+      "lesson": "forensic.file-signatures",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "91dd29e2740a71d6ddaec5e97a433615b257ce49ad1503d9bab72d26ce1ca89c"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q02",
+      "lesson": "forensic.file-signatures",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "9317891c339fcd68b1d89fc2a9306f3462f1d32ce628376388dd17782d0fadf4"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q03",
+      "lesson": "forensic.file-signatures",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "a1919a734f569175795cca62a8922a0ef3393ca72b9ce1b38fa50cb534eb44cc"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q04",
+      "lesson": "forensic.file-signatures",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "a8094ab9232452c453cf3233c41e3689d059c254b779dc9a40aaec84ab0a0963"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q05",
+      "lesson": "forensic.file-signatures",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "da7145b3f06952730be4fd010848a4657c00fb0327c4fd4025a43b5087c07fe9"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q06",
+      "lesson": "forensic.file-signatures",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "954a74362de681079d70918ead17239c1a5102b7aff12e0f19be31cd14f918ea"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q07",
+      "lesson": "forensic.file-signatures",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "7a5f081dd73db132be799632050a824f73882b74d768fb735456fb83efffa50b"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q08",
+      "lesson": "forensic.file-signatures",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "94b1b19902d08aeda068c8476254d2ad332cf2b7086ad12964247e8c781f00d0"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q09",
+      "lesson": "forensic.file-signatures",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "b468af3366077fe3ee48e3e7cd2a8e57cdb98da58f0a0937b64bdc265c33a162"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q10",
+      "lesson": "forensic.file-signatures",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "f00fd599acee6b31590531582fea7cf4cb5beb583480c18d45165bd6c88cd63a"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q11",
+      "lesson": "forensic.file-signatures",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "04879b02d7224340638a5886703a3768d90887150a08924965ce83997aa616eb"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q12",
+      "lesson": "forensic.file-signatures",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "3618a8746077020672bd85d8bf09a97a91b1da51bb58677f9c2a2a75b0f60633"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q13",
+      "lesson": "forensic.file-signatures",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "654e7d7e81ce6e3409d50249f142af571f15bf37ada1e56220891db9109db450"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q14",
+      "lesson": "forensic.file-signatures",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "cde413f8b106f4e6610b0d125b1067614f18afc8ecbfc3b4370dc935e4c66133"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q15",
+      "lesson": "forensic.file-signatures",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "066ce607cacd2b56a5e2839924b1e64fa82e3f35326e903f147a656c7c8a0593"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q16",
+      "lesson": "forensic.log-correlation",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "17bb8fba5f31cf5530e15fc29581b4917a8b7d34e46d2ca7410fc514e8eee958"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q17",
+      "lesson": "forensic.log-correlation",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "db6c724f459cd92b414fc313d4795d290f548943a2e8492995d672c3a1466829"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q18",
+      "lesson": "forensic.log-correlation",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "2b5647dca2ddfd6dfeaa2c8a0a49819923ef103e0eb526c86e69ff6f67d3a4f7"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q19",
+      "lesson": "forensic.log-correlation",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e8bf926e889f003b863707ca39185dfc2490e2e56af789ce47baf8b73f53ba3a"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q20",
+      "lesson": "forensic.log-correlation",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "3d9bbae556651b14873c11601ce456233812535c5e96745cccadd62c42491ffc"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q21",
+      "lesson": "forensic.incident-response",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "a554e516f4faf289014ed9d09035e7958f4e8c53bbba7ff0770b7c84ff33d129"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q22",
+      "lesson": "forensic.incident-response",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "657d8a9ed53f3131ec3b4fe93e7d3734e8e2e4fea980da30474952adb9fa2d79"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q23",
+      "lesson": "forensic.incident-response",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "61a71b4ed7082f263674c4ffabf94d05cc3a241f4576f3e96a6ba6e27a279ba3"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q24",
+      "lesson": "forensic.incident-response",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "1d5d4d2bf871c1731d29c9b7e10f30bf09ff2f301a2756923883c7c195250737"
+    },
+    {
+      "exam": "forensic-04",
+      "question": "forensic-m04-q25",
+      "lesson": "forensic.incident-response",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "081a22487b31100198c1c7a586b479aa8df02ac0cb8f6b188c9efc4996cb4110"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q01",
+      "lesson": "forensic.windows-events",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "da5ee4d6bda6611000ba313410097cd5eb6c1baea5a1bb9b51fe4eaa947b8d35"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q02",
+      "lesson": "forensic.windows-events",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e8869354c6771447b701489f305b34601a85d3b4b580f074636a8d21c62b70b4"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q03",
+      "lesson": "forensic.windows-events",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "99963635c4e20d7ecd7e0f92d3ea44080f48adb0bcbf84ab8da9b23f4afff107"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q04",
+      "lesson": "forensic.windows-events",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "daedb2168965896e5d750623327e8ec96872ec0770ebf305658f346ed6bd204e"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q05",
+      "lesson": "forensic.windows-events",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e7615d18341300c4686c5c31ae85a190461fe2c1321c52ae7d21fd53478e1bef"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q06",
+      "lesson": "forensic.windows-events",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "37b5777adb0066823d3e0ce6803ae7fb77c15d417e3009292480b8c51d1fa20e"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q07",
+      "lesson": "forensic.windows-events",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "11843dd23c4e5a63092abcbee8d9867d8934eefdbba20f6e3671aadbbdac27ea"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q08",
+      "lesson": "forensic.windows-events",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "41816fb228632a8665a714bf64a3d8d0c63ffcc1c4292769256b9096fff2b7b7"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q09",
+      "lesson": "forensic.windows-events",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "97bc43ff80b4093eb2b8daf3563f337306b1917da590ae45459c846da4a36d7a"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q10",
+      "lesson": "forensic.linux-auth",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "8739d55c09b725ca6ebe7d8bd768855f167499731106717c7f13ec7758e268b6"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q11",
+      "lesson": "forensic.linux-auth",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "22dc3156722d0557d70e78045fa75b255e111513517232cc1b349b3e1968eeca"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q12",
+      "lesson": "forensic.linux-auth",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "32b50e904956d9c788321abecf17c3d7bf027dcd0ca47de608e59a4b8d476579"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q13",
+      "lesson": "forensic.linux-auth",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "42c79dbd6255243e05eeb18837096ef9c11043b6d53d9532c83a8c7e7124a455"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q14",
+      "lesson": "forensic.linux-auth",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "7cc48b43497aa54b78c2fd063a59d74f5651068124fd0f6cfe8224c082c3fa7e"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q15",
+      "lesson": "forensic.linux-auth",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "4be19ddfffcb5fa9bddb6837226283c571aead56846cd42954344aae6fba9dc1"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q16",
+      "lesson": "forensic.linux-auth",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "edd20092298efa296f751145285574b2c13643219087e911579cc441c454e450"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q17",
+      "lesson": "forensic.linux-auth",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "0c0c07b43b5790e8498b7ad3e8219515deaa76b866549e516793db4bfaf6feb8"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q18",
+      "lesson": "forensic.filesystem-records",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "54cf5a16107ac7b05b3bc0d262e3e8e2664271ea6e9f2030ed9025b918c71a87"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q19",
+      "lesson": "forensic.filesystem-records",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "fd670870f3386536997206911da852b9ff97adc73ab821ba1ece5dcd81bcac21"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q20",
+      "lesson": "forensic.filesystem-records",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "294a21a64c7f5f4d825841877620005bdd78dbaae69a08cd4c36a235b24fc22d"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q21",
+      "lesson": "forensic.filesystem-records",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "a3367e3e1b44b8c2c5f121178405a4407df7319a429b3b8c63a72b5082ec835d"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q22",
+      "lesson": "forensic.filesystem-records",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "84149ffd6423501830f05acc23cf7bffc90df38dc8148b77de3d0ef268175b95"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q23",
+      "lesson": "forensic.filesystem-records",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "6e137067e7fe22304d9ae8edc95395adf93a611c9181cbdb62ca003a5459ace9"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q24",
+      "lesson": "forensic.filesystem-records",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "33ec7fc67db289a7eb794a09fe71c8ecb0d073e100936860ac054cfe65c53897"
+    },
+    {
+      "exam": "forensic-05",
+      "question": "forensic-m05-q25",
+      "lesson": "forensic.filesystem-records",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "62cc8e32322e37780ce83759efaecc5011df0598fe44d2137a9ced381ea6a44d"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q01",
+      "lesson": "forensic.memory-triage",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "f642894b8e7a01e7776db0d90db7d442d0c53c241562c9441f9ddca65a7e0780"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q02",
+      "lesson": "forensic.memory-triage",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "2ba313e9e09ad815669932cafd35a2772975b4e07a5ad4347e68cf8d3692fb15"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q03",
+      "lesson": "forensic.memory-triage",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "4ecf91a202f343321fe843f8d76046e0fd666a55f5cdb80067acdffc9d304c41"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q04",
+      "lesson": "forensic.memory-triage",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "88c4f1fd93b4ed18eb2b8839066006878ddacdc99dd04f08614e93d0d8ed60c4"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q05",
+      "lesson": "forensic.memory-triage",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "fe14b424acdd8e25061fe1db79bb8c038da4e25dd23059605105fab6d8737ba3"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q06",
+      "lesson": "forensic.memory-triage",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "394314d020eee76a278dc945b0f524c55afabd725a1f924e7134f47dce25237a"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q07",
+      "lesson": "forensic.memory-triage",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "17f86d1164db2be00752edfd6dc478b81a9ff2be2da07cf0d73a5e065d0bc820"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q08",
+      "lesson": "forensic.memory-triage",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "67143d5696ba0a683f732cb9940fedd62e27861cc7add5020cf45ab28ebda303"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q09",
+      "lesson": "forensic.memory-triage",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "34b1085a0f5dc7710392d56b3afdca83bb0b003d15f723b1363e8e4a9be7205b"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q10",
+      "lesson": "forensic.memory-triage",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "2f710c3570f620805a21579b9b6f59a039ed9e69a47f9b1671bcca75679c5109"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q11",
+      "lesson": "forensic.memory-triage",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "48509b2b9d19b507f499b25ae6153dffdcf58275dfc45ec447192b841478d703"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q12",
+      "lesson": "forensic.memory-triage",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "ce28f927cfc64b5c23481077c3423d23417e62626330eb78fd12c560114d4b7b"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q13",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "fae1ea6fe18ffd07206d4233c45a93edb49b9905e6f9e7dd1a554e71d770a225"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q14",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "4dd18b637fda78c9b216bf87940203b5ad7c7f38799b80f291e30bb4aa677cc8"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q15",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e3fe814924b291862d6bd8e3d793ed834378ee656120a9b694a1fcfd8f2b563e"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q16",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "e637f125be9f90449ff339e45d8e9d467212d3f8dc6e4a07ffad1a25dda2c4ad"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q17",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 1,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c218e30169dbb595367adc9e020fba096e8ce46f6c5aee4edba88d0c7813e636"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q18",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "2a5fa9d054d741c2468d9c79e7176008fcf05c5e99967d30d0f59c09e6124ba2"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q19",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "25c0571c3f0bd93e1176481c3c65b9a42dd0629a49d871056debb6a1ca6292f0"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q20",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "7afc4c91bb71af86c5e68bdb92b3489b2d792aa2feeab7bb2a1bc6e24bea7e6f"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q21",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 3,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "8453bfa50af5a06c5486530a22fdd0f1cad11da051c73d43f676d9dd75a8904f"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q22",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "bb2fe839f8e608410928fd235562513933b21a41362a40ae65505bc3df23988d"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q23",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "c4c6511b1652f4ea342c9085761c0f5373fe718839e88a8927a5cb251faac08f"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q24",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 0,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "640d66129a9c1b4182cc9edf823f905003a9a8a1b96b723048a7cd7745e07598"
+    },
+    {
+      "exam": "forensic-06",
+      "question": "forensic-m06-q25",
+      "lesson": "forensic.evidence-coverage",
+      "answer": 2,
+      "status": "reviewed",
+      "reviewed_items": [
+        "scope",
+        "stem",
+        "correct_option",
+        "distractors",
+        "explanation"
+      ],
+      "question_sha256": "12fa5735c2edef0bc5b5006be6fe4b3fcd2a4f81b07adb5c0313fdf018ada3d0"
+    }
+  ],
+  "snapshot_status": "historical_pre_v2_local_review",
+  "superseded_by": "exam-release-review-2026-11-06.json"
+}

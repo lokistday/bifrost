@@ -35,7 +35,7 @@ class SystemExamTest(unittest.TestCase):
         for n, bank in enumerate(self.banks, 1):
             module = self.course['modules'][n - 1]
             lessons = {l['id']: l for l in module['lessons']}
-            self.assertEqual((bank['course'], bank['module'], bank['version']), ('pwn', n, 1))
+            self.assertEqual((bank['course'], bank['module'], bank['version']), ('pwn', n, 2))
             self.assertEqual(len(bank['questions']), 25)
             counts = collections.Counter(q['lesson'] for q in bank['questions'])
             self.assertEqual(set(counts), set(lessons))

@@ -70,7 +70,7 @@ class ForensicExamTest(unittest.TestCase):
         expected_counts = [[8, 9, 8], [13, 12], [8, 8, 9], [15, 5, 5], [9, 8, 8], [12, 13]]
         for number, bank in enumerate(self.banks, 1):
             lessons = {l['id']: l for l in self.course['modules'][number - 1]['lessons']}
-            self.assertEqual((bank['course'], bank['module'], bank['version']), ('forensic', number, 1))
+            self.assertEqual((bank['course'], bank['module'], bank['version']), ('forensic', number, 2))
             self.assertEqual(len(bank['questions']), 25)
             counts = collections.Counter(q['lesson'] for q in bank['questions'])
             self.assertEqual(set(counts), set(lessons))

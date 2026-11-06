@@ -97,6 +97,12 @@ def load_courses(strict=True):
         assert 'exam' not in module, 'Duplicate exam for a module'
         module_ids = {l['id'] for l in module['lessons']}
         questions = exam['questions']
+        if 'previousVersion' in exam:
+            assert type(exam['previousVersion']) is int and 0 < exam['previousVersion'] < exam['version'], 'Invalid previous exam version'
+            migration = exam.get('previousAnswerMap', {})
+            assert set(migration) == {q['id'] for q in questions}, 'Incomplete exam answer migration'
+            assert all(isinstance(order, list) and len(order) == 4 and all(type(n) is int for n in order)
+                       and sorted(order) == [0, 1, 2, 3] for order in migration.values()), 'Invalid option permutation'
         assert len(questions) == 25 and len({q['id'] for q in questions}) == 25, eid
         assert len({q['prompt'] for q in questions}) == 25, 'Duplicate exam prompt'
         assert {q['lesson'] for q in questions} == module_ids, 'Exam must cover every lesson in its module'

@@ -137,4 +137,39 @@ for(const file of examFiles){
     assert.ok(doc.querySelector('#materials a[download]'));
   }
 }
-console.log('PASS: 49-module catalog, 25-question exam, drafts, mixed/perfect/zero scores, feedback, retry, reload, storage failure and preserved practice.');
+const previousBanks=JSON.parse(read('tests/exam-v1-options.json'));
+for(const file of examFiles){
+  const updated=JSON.parse(read('content/exams/'+file)), previous=previousBanks[updated.id];
+  const oldKey=`bifrost_exam_${updated.id}_v1`, newKey=`bifrost_exam_${updated.id}_v2`;
+  const legacyAnswers=Object.fromEntries(updated.questions.map((q,i)=>[q.id,i<20?previous[q.id].answer:(previous[q.id].answer+1)%4]));
+  const legacy=JSON.stringify({answers:legacyAnswers,submitted:true,attempts:3,best:25});
+  const migrated=load({[oldKey]:legacy},false,updated.id);migrated.click('startExam');
+  assert.match(migrated.document.getElementById('examScore').textContent,/80점 · 20 \/ 25/);
+  assert.match(migrated.document.getElementById('examHistory').textContent,/3회 · 최고 100점/);
+  assert.equal(migrated.map.get(oldKey),legacy,'The original v1 record is never overwritten');
+  const converted=JSON.parse(migrated.map.get(newKey));
+  for(const q of updated.questions)assert.equal(converted.answers[q.id],updated.previousAnswerMap[q.id][legacyAnswers[q.id]]);
+  const again=load(Object.fromEntries(migrated.map),false,updated.id);again.click('startExam');
+  assert.match(again.document.getElementById('examScore').textContent,/80점/);
+  assert.equal(again.map.get(newKey),migrated.map.get(newKey),'Reload must not translate the answers twice');
+  const draftAnswers=Object.fromEntries(updated.questions.slice(0,3).map(q=>[q.id,previous[q.id].answer]));
+  const oldDraft=JSON.stringify({answers:draftAnswers,submitted:false,attempts:1,best:10});
+  const recovered=load({[oldKey]:oldDraft},false,updated.id);recovered.click('startExam');
+  assert.equal([...recovered.document.querySelectorAll('input')].filter(input=>input.checked).length,3);
+  for(const q of updated.questions.slice(0,3))assert.ok(recovered.document.querySelector(`input[name="${q.id}"][value="${q.answer}"]`).checked);
+  const blockedMigration=load({[oldKey]:legacy},true,updated.id);blockedMigration.click('startExam');
+  assert.match(blockedMigration.document.getElementById('examScore').textContent,/80점/);
+  assert.equal(blockedMigration.map.has(newKey),false);
+  assert.equal(blockedMigration.map.get(oldKey),legacy);
+  assert.match(blockedMigration.document.getElementById('examStorage').textContent,/이번 화면/);
+  const current=JSON.stringify({answers:{[updated.questions[0].id]:updated.questions[0].answer},submitted:false,attempts:1,best:2});
+  const preferred=load({[oldKey]:legacy,[newKey]:current},false,updated.id);preferred.click('startExam');
+  assert.ok(preferred.document.getElementById('examResult').hidden);
+  assert.equal(preferred.map.get(newKey),current,'Current-version work takes priority over a legacy result');
+  const invalidLegacy=load({[oldKey]:'{broken'},false,updated.id);
+  assert.equal(invalidLegacy.map.has(newKey),false);
+  assert.equal(invalidLegacy.map.get(oldKey),'{broken');
+  const invalidCurrent=load({[oldKey]:legacy,[newKey]:'{broken'},false,updated.id);
+  assert.equal(invalidCurrent.map.get(newKey),'{broken','Corrupt current work is preserved instead of silently replaced');
+}
+console.log('PASS: all module exams, scoring/drafts/retry, 17-bank v1 migrations, preserved legacy data, reload idempotence, quota/corrupt storage and preserved practice.');

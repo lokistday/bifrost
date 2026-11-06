@@ -1,0 +1,281 @@
+[
+  {
+    "exam": "foundation-01",
+    "question": "env-03",
+    "lesson": "foundation.environment",
+    "old_option_index": 2,
+    "before": "ZIP 압축 해제 도구",
+    "after": "PowerShell의 자체 문법 해석기",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "foundation-01",
+    "question": "env-05",
+    "lesson": "foundation.environment",
+    "old_option_index": 0,
+    "before": "Python을 즉시 삭제하고 재설치한다",
+    "after": "실행 파일 위치는 확인하지 않고 hello.py 내부의 변수와 출력문부터 수정한다",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "foundation-01",
+    "question": "env-07",
+    "lesson": "foundation.environment",
+    "old_option_index": 1,
+    "before": "모든 Python 문자열을 숫자로 바꾼다",
+    "after": "실행 경로는 확인하지 않고 출력이 예전과 같으므로 캐시 파일만 삭제한다",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "foundation-01",
+    "question": "env-09",
+    "lesson": "foundation.environment",
+    "old_option_index": 1,
+    "before": "반드시 GDB와 C 컴파일러를 먼저 모두 설치한다",
+    "after": "터미널이 켜지면 Python도 설치됐다고 보고 버전 확인 없이 코드만 작성한다",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "foundation-01",
+    "question": "env-11",
+    "lesson": "foundation.environment",
+    "old_option_index": 2,
+    "before": "편집기 테마 색상만 남긴다",
+    "after": "Python 버전과 성공 여부만 남기고 파일 위치·실행 명령·실제 출력은 생략한다",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "foundation-01",
+    "question": "paths-13",
+    "lesson": "foundation.paths",
+    "old_option_index": 0,
+    "before": "파일 이름에 copy가 들어 있는지만 확인한다",
+    "after": "사본의 수정 시각만 원본과 맞추면 내용을 비교하지 않아도 원본 보존이 입증된다",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "foundation-03",
+    "question": "m3-q24",
+    "lesson": "foundation.git",
+    "old_option_index": 1,
+    "before": "편집기 테마와 바탕화면 색만 기록",
+    "after": "정상 출력만 남기고 입력 파일·실행 명령·환경은 README 분량을 줄이기 위해 생략한다.",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "pwn-01",
+    "question": "pwn-m01-q04",
+    "lesson": "pwn.build",
+    "old_option_index": 3,
+    "before": "소스 주석의 줄 수와 편집기 글꼴",
+    "after": "실행 권한 비트만 고치면 OS 형식과 CPU가 달라도 같은 실행 파일을 항상 실행할 수 있다는 가정",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "pwn-01",
+    "question": "pwn-m01-q07",
+    "lesson": "pwn.build",
+    "old_option_index": 2,
+    "before": "성공했다는 문장과 편집기 색상",
+    "after": "컴파일러 버전과 마지막 출력만 남기고 실행한 바이너리 형식과 정확한 빌드 옵션은 생략한 기록",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "pwn-02",
+    "question": "pwn-m02-q06",
+    "lesson": "pwn.debugger",
+    "old_option_index": 0,
+    "before": "편집기 글꼴과 창 크기만",
+    "after": "변수 주소와 정상 출력만 남기고 중단 위치와 대입을 실행한 시점은 생략한 기록",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "pwn-02",
+    "question": "pwn-m02-q11",
+    "lesson": "pwn.errors",
+    "old_option_index": 0,
+    "before": "보고서의 총 글자 수만",
+    "after": "라이브러리 프레임의 주소만 기록하고 사용자 코드의 최초 접근 줄과 배열의 유효 범위는 비교하지 않는 방법",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "pwn-02",
+    "question": "pwn-m02-q13",
+    "lesson": "pwn.errors",
+    "old_option_index": 1,
+    "before": "실행 파일 이름이 짧아졌는지",
+    "after": "기존 출력 기능은 확인하지 않고, 진단이 없다는 사실만으로 수정 완료 처리",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "pwn-02",
+    "question": "pwn-m02-q16",
+    "lesson": "pwn.errors",
+    "old_option_index": 1,
+    "before": "가장 긴 주소가 나온 줄만 수정한다.",
+    "after": "항상 라이브러리 첫 줄을 원인으로 정하고 사용자 코드의 접근 범위와 실제 실행 위치는 확인하지 않는 것",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "pwn-02",
+    "question": "pwn-m02-q23",
+    "lesson": "pwn.mitigations",
+    "old_option_index": 2,
+    "before": "소스 파일 이름에 secure가 있으면 활성이라고 본다.",
+    "after": "GNU_STACK의 실행 플래그 유무만으로 ASLR과 모든 함수의 Canary 활성까지 동시에 결론 내린다.",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "pwn-05",
+    "question": "pwn-m05-q09",
+    "lesson": "pwn.struct-layout",
+    "old_option_index": 1,
+    "before": "padding 바이트 수만 비교한다.",
+    "after": "왕복만 통과하면 인코더와 디코더가 같은 오류를 공유할 가능성도 사라지므로 고정 Hex 검사는 생략한다.",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "forensic-01",
+    "question": "forensic-m01-q02",
+    "lesson": "forensic.integrity",
+    "old_option_index": 1,
+    "before": "도구 화면의 색상과 창 크기만",
+    "after": "수집 후 해시만 기록하고 수집 시각·출처·담당자는 해시가 같으면 필요 없다고 보는 기준",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "forensic-01",
+    "question": "forensic-m01-q15",
+    "lesson": "forensic.logs",
+    "old_option_index": 3,
+    "before": "CSV의 글꼴과 열 색상 변경",
+    "after": "같은 계정·IP의 로그만 다시 시간순으로 정렬하고 MFA·장치·사용자 확인은 생략하는 것",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "forensic-02",
+    "question": "forensic-m02-q14",
+    "lesson": "forensic.report",
+    "old_option_index": 1,
+    "before": "그래프와 침해 확정 문장만",
+    "after": "타임라인과 최종 결론만 포함하고 자료 목록·해시·분석 절차·대안 가설은 생략한 구성",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "forensic-02",
+    "question": "forensic-m02-q15",
+    "lesson": "forensic.report",
+    "old_option_index": 3,
+    "before": "파일 아이콘과 표시 색상",
+    "after": "분석 결론과 도구 이름만 연결하고 어느 파일의 어느 행인지 찾을 증거 ID는 생략한 설명",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "forensic-02",
+    "question": "forensic-m02-q19",
+    "lesson": "forensic.report",
+    "old_option_index": 3,
+    "before": "파일 이름을 바꾼 뒤 같은 결론을 반복한다.",
+    "after": "IP가 같다는 관찰만 반복 확인하고 세션·장치·전송 자료는 요청하지 않는다.",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "forensic-02",
+    "question": "forensic-m02-q25",
+    "lesson": "forensic.report",
+    "old_option_index": 3,
+    "before": "도구 이름과 실행 날짜만",
+    "after": "UTC 정렬 결과와 공격 추정만 제시하고 원본 보존 방법과 반증 가능한 추가 확인은 생략한 보고서",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "forensic-03",
+    "question": "forensic-m03-q01",
+    "lesson": "forensic.collection-plan",
+    "old_option_index": 1,
+    "before": "파일 확장자 길이만",
+    "after": "가장 휘발성 높은 자료부터 무조건 수집하고 목적·승인 범위·업무 영향은 수집이 끝난 뒤 정한다는 계획",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "forensic-03",
+    "question": "forensic-m03-q04",
+    "lesson": "forensic.collection-plan",
+    "old_option_index": 1,
+    "before": "해시를 빼고 인계자 별명만",
+    "after": "파일명과 최종 해시만 연결하고 수집자·보관 위치·인계 이력은 내용 해시가 같으면 생략하는 기록",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "forensic-03",
+    "question": "forensic-m03-q14",
+    "lesson": "forensic.host-triage",
+    "old_option_index": 1,
+    "before": "프로세스 이름의 글자 수와 UI 색상",
+    "after": "프로세스 이름과 원격 포트만 대조하고 실행 파일 출처·명령줄·전송량의 별도 확인은 생략한 자료",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "forensic-03",
+    "question": "forensic-m03-q16",
+    "lesson": "forensic.host-triage",
+    "old_option_index": 2,
+    "before": "PID의 홀수·짝수 여부",
+    "after": "PID와 프로세스 이름만 같으면 호스트와 시점이 달라도 항상 같은 프로세스로 연결하는 기준",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "forensic-05",
+    "question": "forensic-m05-q01",
+    "lesson": "forensic.windows-events",
+    "old_option_index": 0,
+    "before": "화면에서 번역된 설명의 글자 수만",
+    "after": "EventID만 일치하면 Provider·채널·버전의 차이는 무시하고 서로 같은 의미로 해석한다는 가정",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "forensic-05",
+    "question": "forensic-m05-q02",
+    "lesson": "forensic.windows-events",
+    "old_option_index": 1,
+    "before": "Data의 화면 색상",
+    "after": "첫 이벤트의 필드 순서를 모든 기록에 적용하고 Name이 달라도 같은 위치의 값을 선택하는 방법",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "forensic-05",
+    "question": "forensic-m05-q04",
+    "lesson": "forensic.windows-events",
+    "old_option_index": 3,
+    "before": "파일 확장자 길이",
+    "after": "네임스페이스를 보지 않고 요소의 로컬 이름만 같으면 언제나 지원 레코드라고 보는 가정",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "forensic-05",
+    "question": "forensic-m05-q10",
+    "lesson": "forensic.linux-auth",
+    "old_option_index": 3,
+    "before": "JSONL이면 실제 journal 바이너리 파싱이 이미 끝난 것이다.",
+    "after": "JSONL로 변환된 자료이면 배포판별 기록 정책과 원본 형식 차이는 이미 검증됐다는 가정",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "forensic-05",
+    "question": "forensic-m05-q15",
+    "lesson": "forensic.linux-auth",
+    "old_option_index": 2,
+    "before": "요청 문자열의 길이만",
+    "after": "sudo 요청의 allow만 다시 확인하고 실제 프로그램의 시작·종료 코드·출력은 요청하지 않는 것",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  },
+  {
+    "exam": "forensic-06",
+    "question": "forensic-m06-q10",
+    "lesson": "forensic.memory-triage",
+    "old_option_index": 1,
+    "before": "영역 ID 글자의 색상만",
+    "after": "private-WX 일치 수와 영역 주소만 반복 수집하고 실제 바이트·실행 출처·스레드 관계는 확인하지 않는 자료",
+    "reason": "Use a relevant misconception instead of an unrelated visual/editor/filename cue; correct answer meaning stays unchanged."
+  }
+]
