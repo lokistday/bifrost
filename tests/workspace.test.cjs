@@ -8,8 +8,13 @@ const fields=parseHTML(read('fields/index.html')).document;
 assert.equal(entry.querySelectorAll('.entry-choice').length,2);
 assert.equal(entry.querySelector('#startFoundation').getAttribute('href'),'tracks/foundation/');
 assert.equal(entry.querySelector('#chooseFields').getAttribute('href'),'fields/');
+assert.equal(entry.querySelector('#entry-title').tagName,'H1');
+assert.equal(entry.querySelector('.brand-wireframe,.hero-terrain'),null);
+assert.equal(entry.querySelector('script[src*="wordmark-motion.js"]'),null);
 assert.equal(entry.querySelector('.subject-directory,.workspace-rail,.workspace-preview,.workspace-actions'),null);
 assert.equal(fields.querySelector('.workspace-rail,.workspace-preview,.workspace-actions,#homeProgressCount'),null);
+assert.ok(fields.querySelector('.brand-wireframe,.hero-terrain'));
+assert.ok(fields.querySelector('script[src*="wordmark-motion.js"]'));
 assert.equal(fields.querySelector('.entry-back').getAttribute('href'),'../');
 const courses=JSON.parse(read('content/site.json')).courses;
 assert.equal(fields.querySelectorAll('[data-map-track]').length,courses.length);
@@ -19,8 +24,6 @@ for(const course of courses){
   assert.ok(fs.existsSync(path.join(root,'tracks',course.id,'index.html')));
 }
 for(const [name,doc] of [['index.html',entry],['fields/index.html',fields]]){
-  assert.ok(doc.querySelector('.brand-wireframe'));
-  assert.ok(doc.querySelector('script[src*="wordmark-motion.js"]'));
   assert.equal(doc.querySelector('script[src*="catalog.js"],script[src*="progress.js"],script[src*="learning-paths.js"]'),null);
   assert.equal(doc.querySelector('[role="search"],#workspaceSearch,.hero-search-link'),null);
   assert.match(doc.querySelector('link[href*="workspace.css"]').getAttribute('href'),/\?v=home-[a-f0-9]{12}$/);

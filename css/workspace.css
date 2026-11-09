@@ -15,6 +15,7 @@
 .workspace-brand>span { margin-left:6px; font:8px/1.55 Consolas,monospace; letter-spacing:1.1px; color:var(--muted); }
 .guided-home { width:100%; flex:1 0 auto; }
 .workspace-hero { overflow:clip; width:min(100%,1100px); margin:0 auto; padding:30px 28px 48px; box-sizing:border-box; }
+.entry-hero { min-height:calc(100svh - 136px); display:grid; align-items:center; }
 .guided-brand { width:min(100%,490px); min-width:0; margin:0 auto 20px; position:relative; isolation:isolate; }
 .workspace-hero h1 { margin:0; line-height:1; }
 .brand-wireframe { display:block; width:100%; height:auto; overflow:visible; }
@@ -26,14 +27,14 @@
 .terrain-facet { stroke:none; fill:var(--accent); }
 .terrain-tone-0 { opacity:.025; }.terrain-tone-1 { opacity:.01; }.terrain-tone-2 { fill:var(--ink); opacity:.018; }.terrain-tone-3 { opacity:.045; }
 .terrain-edges { fill:none; stroke:var(--accent); stroke-width:.8; stroke-linejoin:round; opacity:.14; }
-.entry-guide { max-width:740px; margin:auto; text-align:center; }
+.entry-guide { width:100%; max-width:740px; margin:auto; text-align:center; }
 .entry-steps { display:flex; align-items:center; justify-content:center; gap:16px; margin:0 auto 22px; color:var(--muted); font-size:12px; }
 .entry-steps>span:not(.entry-connector) { display:flex; align-items:center; gap:9px; }
 .entry-steps i { display:block; width:9px; height:9px; border:1px solid var(--muted); border-radius:50%; }
 .entry-steps [aria-current] { color:var(--accent); }
 .entry-steps [aria-current] i { border-color:var(--accent); background:var(--accent); }
 .entry-connector { width:100px; height:1px; background:var(--line); }
-.entry-guide h2 { margin:0; font-size:clamp(26px,3.2vw,36px); font-weight:750; letter-spacing:-.045em; line-height:1.4; }
+.entry-guide h1 { margin:0; font-size:clamp(26px,3.2vw,36px); font-weight:750; letter-spacing:-.045em; line-height:1.4; }
 .entry-description { margin:10px 0 28px; color:var(--muted); font-size:15px; }
 .entry-choices { display:grid; gap:12px; text-align:left; }
 .entry-choice { display:flex; align-items:center; gap:20px; min-height:100px; padding:20px 26px; border:1px solid var(--line); border-radius:8px; background:linear-gradient(110deg,var(--surface),var(--paper)); transition:border-color .15s,background .15s; }
@@ -43,8 +44,8 @@
 .entry-choice-copy strong { font-size:21px; letter-spacing:-.035em; font-weight:700; }
 .entry-choice-copy>span { color:var(--muted); font-size:13px; }
 .entry-choice>.ui-icon { margin-left:auto; color:var(--accent); width:22px; }
-.fields-hero { padding-top:34px; padding-bottom:16px; }
-.fields-hero .guided-brand { width:min(100%,570px); margin-bottom:0; }
+.fields-hero { padding-top:42px; padding-bottom:56px; }
+.fields-hero .guided-brand { width:min(100%,760px); margin-bottom:0; }
 .subject-directory { width:min(100%,1240px); margin:0 auto; padding:0 28px 48px; box-sizing:border-box; scroll-margin-top:24px; }
 .directory-header { display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:22px; }
 .field-step { display:flex; align-items:center; gap:10px; color:var(--muted); font-size:11px; margin:0 0 6px; }
@@ -78,11 +79,12 @@
   .workspace-brand strong { font-size:21px; }
   .workspace-logo { width:29px; height:29px; }
   .workspace-hero { padding:24px 20px 34px; }
+  .entry-hero { min-height:calc(100svh - 118px); }
   .guided-brand { width:min(100%,380px); margin-bottom:24px; }
   .hero-terrain { inset:-20px 0; width:100%; height:calc(100% + 40px); }
   .entry-steps { margin-bottom:24px; font-size:11px; gap:12px; }
   .entry-connector { width:60px; }
-  .entry-guide h2 { font-size:27px; }
+  .entry-guide h1 { font-size:27px; }
   .entry-description { font-size:13px; margin:10px 0 24px; }
   .entry-choice { min-height:104px; padding:18px 16px; gap:13px; }
   .entry-choice-symbol { width:36px; height:36px; }
@@ -90,7 +92,8 @@
   .entry-choice-copy strong { font-size:18px; }
   .entry-choice-copy>span { font-size:12px; }
   .entry-choice>.ui-icon { width:18px; }
-  .fields-hero { padding-bottom:16px; }
+  .fields-hero { padding-top:32px; padding-bottom:42px; }
+  .fields-hero .guided-brand { width:min(100%,460px); }
   .subject-directory { padding:0 20px 36px; }
   .directory-header { align-items:flex-start; flex-direction:column; gap:10px; margin-bottom:18px; }
   .directory-header h2 { font-size:23px; }

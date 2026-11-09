@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const {parseHTML}=require('linkedom');
-const {document,Event}=parseHTML(fs.readFileSync('index.html','utf8'));
+const {document,Event}=parseHTML(fs.readFileSync('fields/index.html','utf8'));
 let hidden=false,id=0,change;
 Object.defineProperty(document,'hidden',{get:()=>hidden});
 const queue=new Map(),motion={matches:false,addEventListener:(name,fn)=>change=fn};
