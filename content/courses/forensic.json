@@ -1449,14 +1449,19 @@
           "title": "파일 이름·링크·시간 기록의 의미",
           "goal": "한 파일시스템 스냅샷의 이름과 객체 식별자를 구분하고 시간·삭제 추론의 한계를 기록합니다.",
           "concepts": [
-            "경로 이름은 파일 객체 자체와 같지 않습니다. 같은 파일시스템에서 여러 이름이 하나의 inode를 가리키는 하드링크가 있을 수 있습니다. 이 표본은 하나의 합성 파일시스템·한 시점에 한정하며 실제 NTFS/ext4나 디스크 이미지 구조를 읽지 않습니다.",
+            "경로 이름은 파일 객체 자체와 같지 않습니다. 같은 파일시스템에서 여러 이름이 하나의 inode를 가리키는 하드링크가 있을 수 있습니다. 앞부분 fs-records.json은 한 시점의 합성 기록이며 실제 NTFS/ext4 구조를 읽지 않습니다. 뒤에서는 별도의 실제 FAT12 볼륨을 만들어 구조를 읽습니다. FAT 디렉터리/클러스터를 Linux inode·하드링크와 동일시하지 않습니다.",
             "R1의 notes.txt와 R2의 alias.txt는 inode42를 공유하고 links=2입니다. 따라서 관찰한 이름 두 개와 객체 한 개를 구분합니다. 서로 다른 장치의 inode 번호는 같을 수 있고 시간이 지나 재사용될 수도 있으므로 실제 분석은 장치/파일시스템·스냅샷 범위를 함께 식별해야 합니다.",
             "Linux 계열의 ctime은 일반적으로 메타데이터 상태 변경 시각이며 생성 시각이라고 고정하지 않습니다. birth가 제공되지 않으면 UNKNOWN으로 남깁니다. mtime과 ctime의 차이는 권한·링크 등 여러 변화로 생길 수 있어 이 표만으로 특정 명령이나 조작을 단정하지 않습니다.",
-            "수집 목록에서 이름 하나가 빠졌다고 파일 내용이 삭제되거나 복구 불가능함이 증명되지 않습니다. 관찰 누락과 실제 unlink는 다른 주장입니다. 실제 마지막 하드링크 삭제도 열린 참조·파일시스템·덮어쓰기에 따라 후속 상태가 달라집니다. 이 실습은 자료 해석을 연습하며 실제 파일을 삭제하지 않습니다."
+            "수집 목록에서 이름 하나가 빠졌다고 파일 내용이 삭제되거나 복구 불가능함이 증명되지 않습니다. 관찰 누락과 실제 unlink는 다른 주장입니다. 실제 마지막 하드링크 삭제도 열린 참조·파일시스템·덮어쓰기에 따라 후속 상태가 달라집니다. 이 실습은 자료 해석을 연습하며 실제 파일을 삭제하지 않습니다.",
+            "새 fat12_lab.py 실습은 1,474,560바이트의 실제 FAT12 형식 볼륨을 생성합니다. MBR 파티션 테이블이 없는 단일 볼륨으로 바이트 0부터 부트 섹터입니다. 제공된 교육 파일만 들어 있으며 실제 사용자의 물리 디스크를 획득한 자료가 아닙니다. 마운트나 관리자 권한 없이 읽습니다.",
+            "BPB의 little-endian 섹터 크기·예약 섹터·FAT 수·루트 엔트리 수로 위치를 계산합니다. 이 표본은 섹터 0=부트, 1~9/10~18=두 FAT, 19~32=루트 디렉터리, 33부터=데이터입니다. 클러스터 c의 위치는 (33+c-2)×512바이트이며 첫 데이터 클러스터는 2입니다.",
+            "루트 엔트리는 32바이트이며 짧은 8.3 이름·첫 클러스터·파일 크기 등을 담습니다. README.TXT의 연결은 2→5→3입니다. 물리적으로 연속한 바이트를 복사하는 carving과 파일시스템의 연결을 따라 읽는 과정은 다릅니다. FAT12 엔트리는 12비트씩 압축되고 EOC는 다음 클러스터 번호가 아닙니다.",
+            "README는 세 클러스터의 1536바이트 공간 중 논리 크기 1100바이트만 추출합니다. 마지막 436바이트 슬랙을 파일 본문에 붙이지 않습니다. 삭제 엔트리 E5와 비할당 클러스터의 잔여 바이트는 단서이며 원래 이름·사람·시각·완전 복구를 확정하지 않습니다. FAT 시각에는 UTC 오프셋 정보가 없으므로 임의 UTC로 단정하지 않습니다.",
+            "검사기는 제공된 FAT12 형식 프로필의 루트·ASCII 8.3 파일만 지원합니다. 순환·짧은 연결·FAT 사본 불일치·잘림을 거부하고 기존 추출 파일을 덮어쓰지 않습니다. LFN·하위 디렉터리·FAT16/32·NTFS/ext4·삭제 복구·전체 파일시스템 검증은 범위 밖입니다. 선택적으로 Sleuth Kit의 독립 목록/추출 결과와 대조합니다."
           ],
           "code": "python3 artifacts_round2.py filesystem",
           "expected": "inode=42 observed-names=2 declared-links=2 paths=/work/notes.txt,/work/alias.txt\ninode=77 observed-names=1 declared-links=1 paths=/work/report.txt\nbirth-unknown=2 ctime-is-creation=False",
-          "task": "사본 목록에서 R2 행만 빼고 links 값은 그대로 두세요. 관찰 이름 수와 선언 링크 수가 다를 때 왜 실제 삭제를 단정할 수 없는지 쓰고, 추가 확인 자료를 제안하세요.",
+          "task": "사본 목록에서 R2 행만 빼고 links 값은 그대로 두세요. 관찰 이름 수와 선언 링크 수가 다를 때 왜 실제 삭제를 단정할 수 없는지 쓰고, 추가 확인 자료를 제안하세요. FAT12의 BPB·엔트리·클러스터 연결 위치를 직접 계산하고 README를 추출하세요. 연속 복사와 연결 추출, 정상/손상 판정, 슬랙·삭제 단서의 한계를 보고합니다.",
           "hint": "입력 목록 편집은 실제 파일시스템 명령이 아닙니다. inode 번호의 비교 범위도 적으세요.",
           "prerequisites": [
             "forensic.metadata",
@@ -1464,7 +1469,9 @@
           ],
           "files": [
             "artifacts_round2.py",
-            "fs-records.json"
+            "fs-records.json",
+            "fat12_lab.py",
+            "FAT12-GUIDE.md"
           ],
           "walkthrough": [
             {
@@ -1484,15 +1491,42 @@
               "explanation": "별도 사본에서 R3의 birth를 null로 바꿉니다. ctime을 생성 시각으로 대체하지 않습니다.",
               "code": "python3 artifacts_round2.py filesystem --source fs-no-birth.json",
               "expected": "birth-unknown=3 ctime-is-creation=False. inode별 이름 수는 원본과 같습니다."
+            },
+            {
+              "title": "4. JSON 모형에서 실제 볼륨 구조로 연결",
+              "explanation": "FAT12-GUIDE.md의 오프셋 표를 보고 섹터 0, 두 FAT, 루트, 데이터 위치를 먼저 계산합니다. setup은 새 폴더만 만들며 원본과 손상 사본을 분리합니다.",
+              "code": "python3 fat12_lab.py setup disk-work\npython3 fat12_lab.py inspect disk-work/volume.img",
+              "expected": "root_sector=19, data_sector=33, cluster_count=2847. README.TXT size=1100, chain=[2,5,3]."
+            },
+            {
+              "title": "5. 연결을 따라 추출하고 논리 크기 대조",
+              "explanation": "클러스터 2/5/3의 물리 섹터 33/36/34를 표로 적습니다. 마지막 클러스터는 76바이트만 포함합니다. 같은 이름의 기존 출력은 거부됩니다.",
+              "code": "python3 fat12_lab.py extract disk-work/volume.img README.TXT disk-work/recovered.txt",
+              "expected": "1100바이트와 SHA-256. OUTSIDE_FILE_SIZE 슬랙 표식은 추출 결과에 포함되지 않습니다."
+            },
+            {
+              "title": "6. 손상 반례를 판정 근거로 기록",
+              "explanation": "각 명령은 별도로 실행합니다. 가이드에 따라 FAT 불일치와 잘림도 비교합니다. 실패 출력을 정상 추출이나 완전 복구로 보고하지 않습니다.",
+              "code": "python3 fat12_lab.py inspect disk-work/loop.img\npython3 fat12_lab.py inspect disk-work/early-end.img",
+              "expected": "순환/짧은 연결은 UNVERIFIED, 종료 2. 원본 해시는 그대로 유지됩니다."
+            },
+            {
+              "title": "7. 선택: 다른 도구로 목록과 추출 비교",
+              "explanation": "Ubuntu/WSL에서 Sleuth Kit가 있으면 아래를 수행합니다. fls의 README 번호를 읽어 가이드의 icat 추출과 해시·바이트를 대조합니다. 기본 Python 과정에는 외부 패키지가 필요 없습니다.",
+              "code": "fsstat -f fat12 disk-work/volume.img\nfls -f fat12 disk-work/volume.img",
+              "expected": "실제 FAT12와 같은 배치·파일 목록. TSK 메타데이터 번호를 클러스터 번호나 Linux inode로 읽지 않습니다."
             }
           ],
           "solution": {
             "approach": [
               "R2를 목록에서 제거하면 관찰 이름은 한 개지만 선언 links는 2이므로 부분 수집 가능성을 적습니다.",
               "동일 스냅샷의 전체 디렉터리 목록·파일시스템 식별자·삭제/변경 기록과 수집 범위를 추가로 확인합니다.",
-              "birth 부재는 UNKNOWN으로 두며 ctime을 생성 시각으로 채우거나 특정 사용자의 삭제로 단정하지 않습니다."
+              "birth 부재는 UNKNOWN으로 두며 ctime을 생성 시각으로 채우거나 특정 사용자의 삭제로 단정하지 않습니다.",
+              "실제 볼륨의 루트 시작은 (1+2×9)×512=9728, 데이터 시작은 33×512=16896입니다. JSON inode 모형과 별도 형식으로 설명합니다.",
+              "README의 첫 클러스터 2에서 FAT의 5,3,EOC를 따라 33/36/34 섹터를 읽고 1100바이트로 자릅니다. 연속 1100바이트 복사는 같은 결과가 아닙니다.",
+              "손상 네 사례는 거부하고 삭제 엔트리의 원래 첫 글자를 확정하지 않습니다. 독립 도구를 실행한 경우 icat 결과와 바이트·SHA-256을 대조하고 원본 해시를 보존합니다."
             ],
-            "expected": "이름·객체·링크 선언·관찰 범위와 ctime/birth의 의미가 분리되어야 합니다."
+            "expected": "이름·객체·링크 선언·관찰 범위와 ctime/birth의 의미가 분리되어야 합니다. 실제 볼륨 실습은 루트 9728/데이터 16896바이트, README 연결 2→5→3, 추출 1100바이트와 정상/거부 근거가 남아야 합니다."
           },
           "questions": [
             {
@@ -1534,11 +1568,21 @@
             [
               "Linux man-pages · link",
               "https://man7.org/linux/man-pages/man2/link.2.html"
+            ],
+            [
+              "Microsoft · FAT Specification",
+              "https://www.scs.stanford.edu/~zyedidia/docs/_other/fat.pdf"
+            ],
+            [
+              "Sleuth Kit · commands",
+              "https://github.com/sleuthkit/sleuthkit/wiki/The_Sleuth_Kit_commands"
             ]
           ],
           "checks": [
             "이름과 객체의 동일성을 구분했다.",
-            "시간과 누락의 추론 한계를 적었다."
+            "시간과 누락의 추론 한계를 적었다.",
+            "BPB에서 실제 FAT12 루트/데이터 위치를 계산했다.",
+            "조각난 할당 파일과 슬랙·삭제 엔트리를 구분하고 추출을 대조했다."
           ],
           "environment": {
             "label": "오프라인 · Python 3.10 이상 · 표준 라이브러리",

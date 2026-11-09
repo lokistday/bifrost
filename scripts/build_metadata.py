@@ -22,7 +22,7 @@ def build(courses):
     # Project motion and newly published exam/course bundles use scoped fingerprints.
     # Preserve the published cache ID at this migration baseline so unrelated
     # HTML does not change merely because the fingerprint scope gets narrower.
-    cache_aliases = {'25ade21506a666e42b538691652644ac31331484fa2c12584c17e8d0e6fff1c4': 'learning-df5000eecc77', 'c27d15bf1768a086e5a7b04831997e86b0232484f3bed8df27a0e5dde77fa954': 'learning-df5000eecc77', 'f9af35cc0b464c5adc48f4bb2d8786ca7330a66f9d911868ae661fea8025cd3e': 'learning-df5000eecc77', '739d91a7d8f8789025773fbcde51ab72e7a682a8bd082fbe4768cdda848b5b4e': 'learning-df5000eecc77'}
+    cache_aliases = {'a96994af08713d06306c0911cb1e6b6e64988a2093f2b2c3c48b7a4437723bf8': 'learning-df5000eecc77', '25ade21506a666e42b538691652644ac31331484fa2c12584c17e8d0e6fff1c4': 'learning-df5000eecc77', 'c27d15bf1768a086e5a7b04831997e86b0232484f3bed8df27a0e5dde77fa954': 'learning-df5000eecc77', 'f9af35cc0b464c5adc48f4bb2d8786ca7330a66f9d911868ae661fea8025cd3e': 'learning-df5000eecc77', '739d91a7d8f8789025773fbcde51ab72e7a682a8bd082fbe4768cdda848b5b4e': 'learning-df5000eecc77'}
     key = digest.hexdigest()
     metrics['contentVersion']=cache_aliases.get(key, 'learning-'+key[:12])
     (ROOT/'content/site-metrics.json').write_text(json.dumps(metrics,indent=2)+'\n',encoding='utf-8',newline='\n')

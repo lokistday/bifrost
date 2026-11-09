@@ -80,7 +80,9 @@
     "timeline.py",
     "signature_lab.py",
     "signature-fixtures.json",
-    "SIGNATURE-GUIDE.md"
+    "SIGNATURE-GUIDE.md",
+    "fat12_lab.py",
+    "FAT12-GUIDE.md"
   ],
   "foundation": [
     "LAB-GUIDE.md",

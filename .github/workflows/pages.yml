@@ -30,7 +30,7 @@ jobs:
       - name: Install development tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y gdb
+          sudo apt-get install -y gdb sleuthkit
           npm install --global pnpm@10.11.0
           pnpm install --frozen-lockfile
           python -m pip install -r labs/crypto/requirements.txt
@@ -43,6 +43,7 @@ jobs:
           pnpm test
           python tests/exam_answers_test.py
           python tests/forensic_signatures_test.py
+          python tests/forensic_disk_test.py
           python tests/http_policy_workshop_test.py
           python tests/labs_test.py
           python -m unittest discover -s tests -p '*_expansion_test.py' -v
