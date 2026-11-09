@@ -48,7 +48,7 @@ function page(course, lesson, legacy = false, learningPath = null) {
   const courseVersion = scoped ? 'course-' + crypto.createHash('sha256').update(read(`js/courses/${course.id}.js`)).digest('hex').slice(0,12) : contentVersion;
   return html.replace(`js/courses/${course.id}.js?v=${contentVersion}`, `js/courses/${course.id}.js?v=${courseVersion}`);
 }
-const routes = ['', 'guides/linux.html'];
+const routes = ['', 'fields/', 'guides/linux.html'];
 routes.push(...require('./render_learning_tools.cjs')({ ROOT, courses, site, fill, write }));
 routes.push(...require('./render_study.cjs')({ ROOT, courses, site, fill, write }));
 routes.push(...require('./render_exams.cjs')({ ROOT, courses, site, fill, write }));
@@ -76,10 +76,14 @@ for (const course of Object.values(courses)) {
   }
 }
 const home = require('./render_home.cjs')({ courses, paths: learningPaths });
-write('index.html', fill(read('templates/index.html'), {
-  ...home, SITE_URL: esc(site.url), COURSE_COUNT: Object.keys(courses).length,
-  LESSON_COUNT: count, CONTENT_VERSION: contentVersion
-}));
+const homeVersion = 'home-' + crypto.createHash('sha256')
+  .update(read('css/workspace.css')).update(read('js/workspace.js'))
+  .update(read('js/wordmark-motion.js')).digest('hex').slice(0,12);
+const homeValues = { ...home, SITE_URL: esc(site.url), COURSE_COUNT: Object.keys(courses).length,
+  LESSON_COUNT: count, CONTENT_VERSION: contentVersion, HOME_VERSION: homeVersion };
+write('index.html', fill(read('templates/index.html'), homeValues));
+fs.mkdirSync(path.join(ROOT,'fields'),{recursive:true});
+write('fields/index.html', fill(read('templates/fields.html'), homeValues));
 write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
   routes.map(route => `  <url><loc>${esc(site.url + route)}</loc></url>`).join('\n') + '\n</urlset>\n');
 console.log(`Generated ${count} complete lesson pages, 9 course pages, 9 compatible query entries and homepage.`);

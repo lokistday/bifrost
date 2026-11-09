@@ -112,7 +112,7 @@ const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/site.json')
 const lessonRegistry = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/lesson-ids.json'), 'utf8'));
 const learningPaths = JSON.parse(fs.readFileSync(path.join(ROOT,'content/generated-paths.json'),'utf8'));
 const examCount=fs.readdirSync(path.join(ROOT,'content/exams')).filter(f=>f.endsWith('.json')).length;
-check((sitemap.match(/<loc>/g) || []).length === 6 + examCount + 2 * manifest.courses.length + lessonRegistry.length + learningPaths.reduce((sum,r)=>sum+r.sequence.length+2,0), 'Sitemap includes module exams, standalone learning paths, route lessons/projects and permanent course pages');
+check((sitemap.match(/<loc>/g) || []).length === 7 + examCount + 2 * manifest.courses.length + lessonRegistry.length + learningPaths.reduce((sum,r)=>sum+r.sequence.length+2,0), 'Sitemap includes subject chooser, exams, paths and permanent course pages');
 check(!sitemap.includes('lesson.html?id='), 'Sitemap uses permanent static pages');
 check(!sitemap.includes('/wargame/'), 'Deferred wargame routes are absent from sitemap');
 check(!fs.existsSync(path.join(ROOT,'wargame'))&&!fs.existsSync(path.join(ROOT,'js/wargame.js'))&&!fs.existsSync(path.join(ROOT,'js/wargames.js')), 'Retired pages and grading scripts are removed');
@@ -121,6 +121,6 @@ check(fs.existsSync(path.join(ROOT,'developer-notes/wargame-design.md')), 'Futur
 const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/pages.yml'), 'utf8');
 check(workflow.includes('needs: verify') && workflow.includes('pnpm test') && workflow.includes('python tests/labs_test.py'), 'Deployment requires teaching and lab verification');
 check(workflow.includes('path: _site') && !workflow.includes("path: '.'"), 'Deploy only packaged runtime assets');
-const template = fs.readFileSync(path.join(ROOT, 'templates/index.html'), 'utf8');
-check((template.match(/\{\{MAP_NODES\}\}/g) || []).length === 1, 'Homepage has one authored map placeholder');
+const template = fs.readFileSync(path.join(ROOT, 'templates/fields.html'), 'utf8');
+check((template.match(/\{\{MAP_NODES\}\}/g) || []).length === 1, 'Field chooser has one authored map placeholder');
 console.log(`PASS: ${checks} static asset, link, CSS, metadata and deployment contract checks.`);

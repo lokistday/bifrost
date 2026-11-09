@@ -24,7 +24,7 @@ function openPage(relative, search = '', storage = new Storage()) {
   };
   window.parent = window;
   const context = vm.createContext({ window, document, localStorage: storage, location: { search, origin: 'https://example.test' }, Event, CustomEvent, URLSearchParams, URL, Blob, console, setTimeout: () => 0, navigator: { clipboard: { writeText: async () => {} } } });
-  for (const file of ['theme.js', 'curriculum.js', 'progress.js', ...(relative === 'index.html' ? [] : ['visual-data.js', 'visuals.js', 'learning-view.js', 'learning.js'])]) vm.runInContext(fs.readFileSync(path.join(ROOT, 'js', file), 'utf8'), context, { filename: file });
+  for (const file of ['theme.js', 'curriculum.js', 'progress.js', ...(['index.html','fields/index.html'].includes(relative) ? [] : ['visual-data.js', 'visuals.js', 'learning-view.js', 'learning.js'])]) vm.runInContext(fs.readFileSync(path.join(ROOT, 'js', file), 'utf8'), context, { filename: file });
   return { document, window, storage, context, Event, progress: window.BifrostProgress, courses: window.BifrostCourses, relative };
 }
 function verifyLocalLinks(page) {
@@ -47,14 +47,16 @@ function verifyLocalLinks(page) {
     }
   }
 }
-const home = openPage('index.html');
+const entry = openPage('index.html');
+const home = openPage('fields/index.html');
 const courses = Object.values(home.courses);
 check(courses.length === 9, 'Nine courses');
 check(home.document.querySelectorAll('a[data-map-track]').length === 9, 'Nine semantic map links');
 check(!home.document.getElementById('roadmap') && !home.document.getElementById('study'), 'Homepage has no Roadmap or Study Tracks sections');
 check(!home.document.querySelector('.catalog-card') && !home.document.getElementById('catalogSummary'), 'Duplicate field catalogue and summary removed');
 check(!home.document.querySelector('script[src="js/app.js"]'), 'Removed catalogue controller is not loaded');
-check(home.document.querySelector('#mindmap').nextElementSibling.id === 'practice', 'Subject directory leads to learning guidance');
+check(entry.document.querySelector('#chooseFields').getAttribute('href') === 'fields/', 'Interest choice opens the dedicated subject directory');
+verifyLocalLinks(entry);
 verifyLocalLinks(home);
 const fieldGuides = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/fields.json'), 'utf8'));
 const clockwise = ['foundation', 'pwn', 'forensic', 'misc', 'cloud', 'network', 'crypto', 'rev', 'web'];
@@ -100,12 +102,12 @@ for (const course of courses) {
 const registeredIDs = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/lesson-ids.json'), 'utf8'));
 assert.deepEqual([...ids].sort(), registeredIDs, 'Every registered lesson has a navigable page');
 check(lessonCount === registeredIDs.length, 'Complete authored lesson count');
-check(home.document.querySelector('#directory-title').textContent.includes(`${lessonCount}개 차시`), 'Homepage count is generated from the curriculum');
+check(home.document.querySelectorAll('[data-map-track]').length === courses.length, 'Directory includes every authored course');
 
 // The former radial geometry contract was retired with the workspace redesign.
 check(home.document.querySelector('.subject-grid') && !home.document.querySelector('.mindmap-stage'), 'One semantic subject directory replaces the radial map');
-check(home.document.querySelector('.workspace-primary').getAttribute('href') === 'learn/', 'Primary action opens the learning path catalog');
-check(!home.document.querySelector('.code-window') && home.document.querySelector('.workspace-preview > .progress-window'), 'Progress replaces the decorative code preview');
+check(entry.document.querySelector('#startFoundation').getAttribute('href') === 'tracks/foundation/', 'Beginner choice opens common foundations directly');
+check(!home.document.querySelector('.workspace-rail,.workspace-preview,.workspace-actions'), 'Subject chooser removes the marked rail, progress and old start button');
 
 const store = new Storage();
 const lesson = openPage('tracks/foundation/lesson.html', '?id=foundation.python-values', store);

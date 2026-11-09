@@ -31,12 +31,9 @@
 <link rel="stylesheet" href="css/theme.css?v={{CONTENT_VERSION}}">
 <link rel="stylesheet" href="css/pointer-trail.css?v={{CONTENT_VERSION}}">
 
-<link rel="stylesheet" href="css/workspace.css?v={{CONTENT_VERSION}}">
-<script src="js/catalog.js?v={{CONTENT_VERSION}}" defer></script>
-<script src="js/progress.js?v={{CONTENT_VERSION}}" defer></script>
-<script src="js/learning-paths.js?v={{CONTENT_VERSION}}" defer></script>
-<script src="js/workspace.js?v={{CONTENT_VERSION}}" defer></script>
-<script src="js/wordmark-motion.js?v={{CONTENT_VERSION}}" defer></script>
+<link rel="stylesheet" href="css/workspace.css?v={{HOME_VERSION}}">
+<script src="js/workspace.js?v={{HOME_VERSION}}" defer></script>
+<script src="js/wordmark-motion.js?v={{HOME_VERSION}}" defer></script>
 <script src="js/pointer-trail.js?v={{CONTENT_VERSION}}" defer></script>
 </head>
 <body class="workspace-page">
@@ -52,33 +49,24 @@
 <header class="workspace-header">
   <a class="workspace-brand" href="./" aria-label="Bifrost 홈"><img class="workspace-logo" src="assets/logo.svg?v={{CONTENT_VERSION}}" width="36" height="36" alt=""><strong>BIFROST</strong><span>CYBERSECURITY<br>LEARNING PLATFORM</span></a>
 </header>
-<aside class="workspace-rail" aria-label="빠른 이동">
-  <nav aria-label="주 메뉴"><a href="./" aria-current="page">{{ICON_HOME}}<span>홈</span></a><a href="learn/">{{ICON_ROUTE}}<span>학습 경로</span></a><a href="projects/">{{ICON_BOX}}<span>프로젝트</span></a><a href="exams/">{{ICON_EXAM}}<span>모의고사</span></a></nav>
-</aside>
-<main id="home" tabindex="-1">
-  <section class="workspace-hero" aria-labelledby="workspace-title">
-    <div class="hero-copy">
+<main id="home" class="guided-home" tabindex="-1">
+  <section class="workspace-hero entry-hero" aria-labelledby="entry-title">
+    <div class="hero-copy guided-brand">
       {{BRAND_BACKDROP}}
       <h1 id="workspace-title" aria-label="BIFROST.">{{BRAND_WIREFRAME}}</h1>
-      <div class="workspace-actions"><a class="workspace-primary" href="learn/">학습 시작하기 {{ICON_ARROW}}</a></div>
     </div>
-    <div class="workspace-preview">
-        <section class="progress-window" aria-label="보안 입문 경로 진도">
-          <div class="progress-heading"><strong>내 진도</strong><a href="paths/start/">처음 시작하는 보안 학습 ›</a><span id="homeProgressCount" aria-live="polite">0 / {{START_COUNT}}</span></div>
-          <ol class="home-lessons">{{START_LESSONS}}</ol>
-          <div class="progress-bottom"><span id="homeProgressNote">이 브라우저에 저장됩니다</span><a id="homeContinue" href="paths/start/">시작하기 →</a></div>
-          <noscript><p class="progress-bottom">진도 표시에는 JavaScript가 필요합니다.</p></noscript>
-        </section>
-
+    <div class="entry-guide">
+      <div class="entry-steps" aria-label="학습 시작 순서"><span aria-current="step"><i aria-hidden="true"></i>출발점 선택</span><span class="entry-connector" aria-hidden="true"></span><span><i aria-hidden="true"></i>학습 시작</span></div>
+      <h2 id="entry-title">어디서부터 시작할까요?</h2>
+      <p class="entry-description">지금 나에게 맞는 출발점 하나만 골라주세요.</p>
+      <div class="entry-choices" id="mindmap" aria-label="출발점 선택">
+        <a class="entry-choice" id="startFoundation" href="tracks/foundation/"><span class="entry-choice-symbol" aria-hidden="true">{{ICON_BOOK}}</span><span class="entry-choice-copy"><strong>기초부터 배울게요.</strong><span>공통 기초에서 차근차근 시작해요.</span></span>{{ICON_ARROW}}</a>
+        <a class="entry-choice" id="chooseFields" href="fields/"><span class="entry-choice-symbol" aria-hidden="true">{{ICON_GLOBE}}</span><span class="entry-choice-copy"><strong>관심 분야부터 볼게요.</strong><span>궁금한 분야를 골라 바로 들어가요.</span></span>{{ICON_ARROW}}</a>
+      </div>
     </div>
   </section>
-  <section class="subject-directory" id="mindmap" aria-labelledby="directory-title">
-    <div class="directory-header"><div><div class="workspace-eyebrow">SUBJECT DIRECTORY</div><h2 id="directory-title">분야 탐색 <em>{{COURSE_COUNT}}개 분야 · {{LESSON_COUNT}}개 차시</em></h2></div></div>
-    <div class="subject-grid">{{MAP_NODES}}</div>
-  </section>
-  <section class="workspace-guide" id="practice" aria-labelledby="practice-title"><div><h2 id="practice-title">이해하고, 실행하고, 근거를 남기기.</h2><p>실습은 소유하거나 허가받은 환경에서 진행합니다.</p></div><nav class="workspace-resources" id="resources" aria-label="외부 참고 자료"><a href="https://dreamhack.io/" target="_blank" rel="noopener">Dreamhack ↗</a><a href="https://ctftime.org/" target="_blank" rel="noopener">CTFtime ↗</a><a href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP ↗</a></nav></section>
 </main>
-<footer class="workspace-footer"><strong>BIFROST <small>/ by. Loki</small></strong><span>LEARN THE CONCEPT. PRACTICE WITH INTENT. DOCUMENT WHAT YOU DISCOVER.</span><button class="theme-toggle" id="themeToggle" type="button" aria-label="라이트 모드로 전환" aria-pressed="true">테마 전환</button></footer>
+<footer class="workspace-footer"><strong>BIFROST <small>/ by. Loki</small></strong><details class="entry-resources" id="resources"><summary>참고 자료</summary><nav aria-label="외부 참고 자료"><a href="https://dreamhack.io/" target="_blank" rel="noopener">Dreamhack ↗</a><a href="https://ctftime.org/" target="_blank" rel="noopener">CTFtime ↗</a><a href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP ↗</a></nav></details><button class="theme-toggle" id="themeToggle" type="button" aria-label="라이트 모드로 전환" aria-pressed="true">테마 전환</button></footer>
 
 </body>
 </html>

@@ -1,34 +1,50 @@
-/* Integration boundaries introduced by the workspace: layout and shared progress. */
-const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
-const vm = require('node:vm');
-const { parseHTML } = require('linkedom');
-const root = path.resolve(__dirname,'..');
-const read = name => fs.readFileSync(path.join(root,name),'utf8');
-function open(seed) {
-  const {document,Event,CustomEvent} = parseHTML(read('index.html'));
-  const listeners = new Map(), saved = new Map(seed ? [['bifrost_progress_v2',seed]] : []);
-  let destination;
-  const window = { addEventListener(type, fn) { const list=listeners.get(type)||[];list.push(fn);listeners.set(type,list); }, dispatchEvent(event) { (listeners.get(event.type)||[]).forEach(fn=>fn(event)); } };
-  const context = {document,window,Event,CustomEvent,URL,location:{href:'https://example.test/bifrost/',assign:value=>destination=value},localStorage:{getItem:key=>saved.get(key)||null,setItem:(key,value)=>saved.set(key,value)}};
-  for (const file of ['catalog.js','learning-paths.js','progress.js','workspace.js']) vm.runInNewContext(read('js/'+file),context);
-  return {document,window,Event,saved,destination:()=>destination};
+/* Entry routes, no-JS navigation, legacy links and preserved browser progress. */
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
+const {parseHTML}=require('linkedom');
+const root=path.resolve(__dirname,'..');
+const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const entry=parseHTML(read('index.html')).document;
+const fields=parseHTML(read('fields/index.html')).document;
+assert.equal(entry.querySelectorAll('.entry-choice').length,2);
+assert.equal(entry.querySelector('#startFoundation').getAttribute('href'),'tracks/foundation/');
+assert.equal(entry.querySelector('#chooseFields').getAttribute('href'),'fields/');
+assert.equal(entry.querySelector('.subject-directory,.workspace-rail,.workspace-preview,.workspace-actions'),null);
+assert.equal(fields.querySelector('.workspace-rail,.workspace-preview,.workspace-actions,#homeProgressCount'),null);
+assert.equal(fields.querySelector('.entry-back').getAttribute('href'),'../');
+const courses=JSON.parse(read('content/site.json')).courses;
+assert.equal(fields.querySelectorAll('[data-map-track]').length,courses.length);
+for(const course of courses){
+  const link=fields.querySelector(`[data-map-track="${course.id}"]`);
+  assert.equal(link.getAttribute('href'),`../tracks/${course.id}/`);
+  assert.ok(fs.existsSync(path.join(root,'tracks',course.id,'index.html')));
 }
-const page=open(), doc=page.document, route=page.window.BifrostPaths.start, progress=page.window.BifrostProgress;
-assert.equal(doc.getElementById('homeProgressCount').textContent,`0 / ${route.sequence.length}`);
-assert.equal(doc.getElementById('homeContinue').getAttribute('href'),`paths/start/${route.sequence[0]}.html`);
-progress.set(route.sequence[0],true);
-assert.equal(doc.getElementById('homeProgressCount').textContent,`1 / ${route.sequence.length}`);
-assert.equal(doc.getElementById('homeContinue').getAttribute('href'),`paths/start/${route.sequence[1]}.html`);
-const reopened=open(page.saved.get('bifrost_progress_v2'));
-assert.equal(reopened.document.getElementById('homeProgressCount').textContent,`1 / ${route.sequence.length}`);
-route.sequence.forEach(id=>progress.set(id,true));
-assert.equal(doc.getElementById('homeContinue').getAttribute('href'),'paths/start/project.html');
-const malformed=open('{invalid');
-assert.match(malformed.document.getElementById('homeProgressNote').textContent,/저장할 수 없는/);
-assert.equal(malformed.saved.get('bifrost_progress_v2'),'{invalid');
-assert.equal(doc.querySelectorAll('.code-window,.terrain-window').length,0);
-assert.ok(doc.querySelector('.workspace-preview > .progress-window'));
-assert.equal(doc.querySelector('[role="search"], #workspaceSearch, .hero-search-link'),null);
-console.log('PASS: workspace progress, reload, completed route, corrupt storage and layout.');
+for(const [name,doc] of [['index.html',entry],['fields/index.html',fields]]){
+  assert.ok(doc.querySelector('.brand-wireframe'));
+  assert.ok(doc.querySelector('script[src*="wordmark-motion.js"]'));
+  assert.equal(doc.querySelector('script[src*="catalog.js"],script[src*="progress.js"],script[src*="learning-paths.js"]'),null);
+  assert.equal(doc.querySelector('[role="search"],#workspaceSearch,.hero-search-link'),null);
+  assert.match(doc.querySelector('link[href*="workspace.css"]').getAttribute('href'),/\?v=home-[a-f0-9]{12}$/);
+  for(const link of doc.querySelectorAll('a[href]')){
+    const href=link.getAttribute('href');
+    if(href.startsWith('#')||/^https?:/.test(href))continue;
+    const url=new URL(href,'https://example.test/bifrost/'+name);
+    assert.ok(url.pathname.startsWith('/bifrost/'));
+    let relative=decodeURIComponent(url.pathname.slice('/bifrost/'.length));
+    if(relative.endsWith('/'))relative+='index.html';
+    assert.ok(fs.existsSync(path.join(root,relative)),href);
+  }
+}
+function visit(hash,filename=''){
+  let destination=null;
+  vm.runInNewContext(read('js/workspace.js'),{
+    URL,location:{hash,href:'https://example.test/bifrost/'+filename+hash,replace:url=>destination=url},
+    localStorage:{getItem(){throw Error('Entry must not read progress');},setItem(){throw Error('Entry must not write progress');}}
+  });
+  return destination;
+}
+assert.equal(visit(''),null);
+assert.equal(visit('#home'),null);
+assert.equal(visit('#mindmap'),'https://example.test/bifrost/fields/');
+assert.equal(visit('#fields','index.html'),'https://example.test/bifrost/fields/');
+assert.ok(read('scripts/package_site.py').includes("'fields'"));
+console.log('PASS: two direct entry choices, nine-field page, back link, no-JS subdirectory links, legacy bookmarks, untouched progress and scoped assets.');

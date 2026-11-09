@@ -84,6 +84,6 @@ for(const route of routes)check(library.querySelector(`#path-${route.id} > a`).g
 const projects=parseHTML(read('projects/index.html')).document;
 check(!library.querySelector('#projects') && projects.querySelectorAll('#projects .project-panel').length===9 && !projects.querySelector('#projects details'),'Projects have a separate page with all nine cards always expanded');
 const home=parseHTML(read('index.html')).document;
-check(home.querySelectorAll('.subject-card').length === 9 && home.querySelector('.workspace-primary[href="learn/"]'),'Workspace preserves all fields and opens the learning path catalog');
+check(home.querySelector('#chooseFields[href="fields/"]') && parseHTML(read('fields/index.html')).document.querySelectorAll('.subject-card').length===9,'Guided home opens a separate chooser preserving all nine fields');
 check(!home.querySelector('link[href*="editorial.css"]'),'Cancelled redesign is not loaded');
 console.log(`PASS: ${checks} path navigation, reload, shared progress and information density checks.`);
