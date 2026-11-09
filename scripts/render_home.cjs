@@ -32,7 +32,7 @@ module.exports = function home({ courses, paths }) {
     ['rev','code','리버스 엔지니어링','프로그램의 실행 흐름과 동작을 분석합니다.',['Reverse','정적 분석','디버깅']],
     ['misc','grid','문제 해결 · 자동화','데이터에서 단서를 찾고 반복 작업을 자동화합니다.',['데이터','인코딩','자동화']]
   ];
-  const nodes = data.map(([id, symbol, title, description, tags], index) => `<a class="subject-card" data-map-track="${id}" href="../tracks/${id}/"><span class="subject-number">${String(index+1).padStart(2,'0')}</span>${icon(symbol)}<div class="subject-copy"><div class="subject-title"><h3>${esc(title)}</h3><span>${all(courses[id]).length}개 차시</span></div></div><span class="subject-arrow" aria-hidden="true">›</span></a>`).join('\n');
+  const nodes = data.map(([id, symbol, title, description, tags], index) => `<a class="subject-card" data-map-track="${id}" href="../tracks/${id}/"><span class="subject-number">${String(index+1).padStart(2,'0')}</span>${icon(symbol)}<div class="subject-copy"><div class="subject-title"><h3>${esc(title)}</h3><span>${all(courses[id]).length}개 차시</span></div></div>${icon('arrow','subject-arrow')}</a>`).join('\n');
   return { MAP_NODES:nodes,
     BRAND_WIREFRAME:require('./render_wordmark.cjs')(),
     BRAND_BACKDROP:require('./render_backdrop.cjs')(),

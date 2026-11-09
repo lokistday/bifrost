@@ -19,6 +19,7 @@ assert.equal(fields.querySelector('.fields-scroll-cue'),null);
 assert.equal(fields.querySelector('.entry-back').getAttribute('href'),'../');
 const courses=JSON.parse(read('content/site.json')).courses;
 assert.equal(fields.querySelectorAll('[data-map-track]').length,courses.length);
+assert.equal(fields.querySelectorAll('.subject-card>.subject-arrow').length,courses.length);
 for(const course of courses){
   const link=fields.querySelector(`[data-map-track="${course.id}"]`);
   assert.equal(link.getAttribute('href'),`../tracks/${course.id}/`);

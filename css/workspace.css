@@ -63,7 +63,8 @@
 .subject-title { display:flex; flex-direction:column; gap:3px; }
 .subject-title h3 { margin:0; font-size:15px; line-height:1.4; letter-spacing:-.035em; }
 .subject-title>span { color:var(--muted); font-size:10px; }
-.subject-arrow { margin-left:auto; font-size:22px; color:var(--muted); }
+.subject-card>.subject-arrow { width:30px; height:30px; margin-left:auto; color:var(--accent); stroke-width:2.2; transition:transform .15s; }
+.subject-card:hover>.subject-arrow { transform:translateX(3px); }
 .workspace-footer { margin:0 clamp(24px,5vw,84px); padding:17px 0; border-top:1px solid var(--line); display:flex; align-items:center; gap:16px; color:var(--muted); font-size:11px; }
 .workspace-footer strong { font:12px Consolas,monospace; color:var(--ink-soft); }
 .workspace-footer>span { display:none; }
