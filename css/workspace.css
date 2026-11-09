@@ -47,6 +47,9 @@
 .fields-hero { position:relative; display:grid; place-items:center; width:min(100%,1400px); min-height:calc(100svh - 64px); padding:48px 28px; }
 .fields-hero .guided-brand { width:min(100%,1320px); margin-bottom:0; }
 .fields-hero .hero-terrain { inset:-18% -8%; width:116%; height:136%; }
+.fields-scroll-cue { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); display:flex; align-items:center; justify-content:center; gap:12px; min-height:54px; padding:0 22px; border:1px solid var(--accent); border-radius:999px; background:var(--surface); color:var(--accent)!important; font-size:14px; font-weight:700; white-space:nowrap; transition:background .15s,transform .15s; }
+.fields-scroll-cue:hover { background:var(--surface-soft); transform:translate(-50%,3px); }
+.fields-scroll-icon { font-size:28px; line-height:1; font-weight:400; }
 .subject-directory { width:min(100%,1240px); margin:0 auto; padding:0 28px 48px; box-sizing:border-box; scroll-margin-top:24px; }
 .directory-header { display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:22px; }
 .field-step { display:flex; align-items:center; gap:10px; color:var(--muted); font-size:11px; margin:0 0 6px; }
@@ -96,6 +99,7 @@
   .entry-choice>.ui-icon { width:18px; }
   .fields-hero { min-height:calc(100svh - 58px); padding:32px 20px; }
   .fields-hero .guided-brand { width:100%; }
+  .fields-scroll-cue { bottom:22px; min-height:50px; padding:0 18px; font-size:13px; }
   .subject-directory { padding:0 20px 36px; }
   .directory-header { align-items:flex-start; flex-direction:column; gap:10px; margin-bottom:18px; }
   .directory-header h2 { font-size:23px; }

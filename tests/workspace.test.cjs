@@ -15,7 +15,8 @@ assert.equal(entry.querySelector('.subject-directory,.workspace-rail,.workspace-
 assert.equal(fields.querySelector('.workspace-rail,.workspace-preview,.workspace-actions,#homeProgressCount'),null);
 assert.ok(fields.querySelector('.brand-wireframe,.hero-terrain'));
 assert.ok(fields.querySelector('script[src*="wordmark-motion.js"]'));
-assert.equal(fields.querySelector('.fields-scroll-cue'),null);
+assert.equal(fields.querySelector('.fields-scroll-cue').getAttribute('href'),'#mindmap');
+assert.match(fields.querySelector('.fields-scroll-cue').textContent,/9개 분야 보기/);
 assert.equal(fields.querySelector('.entry-back').getAttribute('href'),'../');
 const courses=JSON.parse(read('content/site.json')).courses;
 assert.equal(fields.querySelectorAll('[data-map-track]').length,courses.length);
