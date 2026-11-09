@@ -44,7 +44,7 @@ function page(course, lesson, legacy = false, learningPath = null) {
     VISUAL_SCRIPTS: legacy ? `<script src="../../js/visual-data.js?v=${contentVersion}" defer></script>\n<script src="../../js/visuals.js?v=${contentVersion}" defer></script>` : ''
   });
   // New subject exams change their course bundle without invalidating every page.
-  const scoped = course.id !== 'foundation' && course.modules.some(m => m.exam);
+  const scoped = ['foundation', 'pwn', 'rev'].includes(course.id) || course.modules.some(m => m.exam);
   const courseVersion = scoped ? 'course-' + crypto.createHash('sha256').update(read(`js/courses/${course.id}.js`)).digest('hex').slice(0,12) : contentVersion;
   return html.replace(`js/courses/${course.id}.js?v=${contentVersion}`, `js/courses/${course.id}.js?v=${courseVersion}`);
 }

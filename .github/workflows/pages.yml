@@ -29,6 +29,8 @@ jobs:
           python-version: '3.12'
       - name: Install development tools
         run: |
+          sudo apt-get update
+          sudo apt-get install -y gdb
           npm install --global pnpm@10.11.0
           pnpm install --frozen-lockfile
           python -m pip install -r labs/crypto/requirements.txt
@@ -45,6 +47,7 @@ jobs:
           python tests/labs_test.py
           python -m unittest discover -s tests -p '*_expansion_test.py' -v
           python tests/learning_revision_test.py
+          python tests/learning_bridges_test.py
           sh tests/c_labs.sh
       - name: Require generated files to match committed sources
         run: |

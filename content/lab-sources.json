@@ -102,7 +102,14 @@
     "record.json",
     "summarize.py",
     "test_data_tools.py",
-    "workflow.py"
+    "workflow.py",
+    "collections_predict.py",
+    "collections_practice.py",
+    "collections_reference.py",
+    "collections_check.py",
+    "COLLECTIONS-GUIDE.md",
+    "c_basics.c",
+    "C-BASICS-GUIDE.md"
   ],
   "misc": [
     "LAB-GUIDE.md",
@@ -173,7 +180,9 @@
     "project-report.md",
     "project_reference.py",
     "stream_chunks.c",
-    "struct_wire.c"
+    "struct_wire.c",
+    "call_bridge.c",
+    "CALL-STACK-GUIDE.md"
   ],
   "rev": [
     "LAB-GUIDE.md",
@@ -198,7 +207,12 @@
     "project-report.md",
     "project_reference.py",
     "state_machine.py",
-    "switches.c"
+    "switches.c",
+    "trace_steps.s",
+    "trace_driver.c",
+    "build_blind.py",
+    "blind_reference.c",
+    "ASSEMBLY-BRIDGE.md"
   ],
   "web": [
     "LAB-GUIDE.md",

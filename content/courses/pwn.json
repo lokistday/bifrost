@@ -336,18 +336,25 @@
             "main 시작 시점에는 아직 초기화되지 않은 변수도 있습니다. 값을 읽기 전에 해당 대입 줄이 실행됐는지 확인하세요. 주소는 ASLR 등에 따라 바뀌므로 같은 주소 숫자가 나온다는 것을 완료 기준으로 삼지 않습니다.",
             "GDB에서 멈춘 줄은 보통 다음에 실행할 위치입니다. 줄이 화면에 보인다는 이유만으로 그 줄의 대입이 이미 수행됐다고 생각하면 초기화 전 값을 읽을 수 있습니다. list로 소스를 보고 next 실행 전후 위치와 값을 묶어 기록합니다.",
             "print heap은 포인터 값이고 print *heap은 그 위치의 정수입니다. malloc 성공과 *heap 초기화가 끝난 시점을 먼저 확인해야 대상 내용을 유효하게 해석할 수 있습니다. 현재 스택 프레임에서 보이는 변수라는 조건도 필요합니다.",
-            "디버거는 전체 프로그램을 증명하는 도구가 아니라 멈춘 실행의 상태를 관찰하는 도구입니다. 보고서에는 사용한 입력·빌드 옵션·중단 위치·실행한 스텝·관찰값을 남깁니다. 주소 숫자가 달라도 같은 대입과 값 관계를 재현할 수 있습니다."
+            "디버거는 전체 프로그램을 증명하는 도구가 아니라 멈춘 실행의 상태를 관찰하는 도구입니다. 보고서에는 사용한 입력·빌드 옵션·중단 위치·실행한 스텝·관찰값을 남깁니다. 주소 숫자가 달라도 같은 대입과 값 관계를 재현할 수 있습니다.",
+            "call_bridge.c는 seed=7을 main.value로 읽고 adjust에 값으로 넘깁니다. adjust의 base=7 → bumped=10 → result=20 → main.answer=20을 먼저 표로 적습니다. 초기화 전 지역변수에 보이는 숫자는 관찰 근거로 사용하지 않습니다.",
+            "bt의 #0 adjust와 #1 main은 다른 호출 프레임입니다. frame은 관찰 대상을 바꾸고 next/finish는 실행을 진행합니다. finish로 돌아간 위치가 반환값을 받는 대입 전인지 후인지는 현재 명령·소스 위치로 확인합니다.",
+            "추가 레지스터 실습은 x86-64 System V AMD64의 -O0 -fno-omit-frame-pointer 빌드 기준입니다. 진입 인자 RDI, 반환 직후 EAX, 스택 위치 RSP, 프레임 기준 RBP, 명령 위치 RIP를 같은 호출에서 비교합니다. 레지스터는 함수 내부에서 재사용될 수 있습니다.",
+            "가이드의 rbp+8은 해당 프레임 포인터 빌드의 프로로그 뒤에서 저장된 복귀 주소를 읽는 위치입니다. 다른 ABI·최적화·멈춤 위치로 일반화하지 않습니다. 지역변수는 최적화에 따라 레지스터에 있거나 사라질 수 있습니다. 주소 숫자 일치보다 값·호출 관계를 근거로 남깁니다."
           ],
           "code": "gcc -g -O0 memory.c -o memory\ngdb ./memory\n# 아래는 GDB 프롬프트에서\nbreak main\nrun\nlist\nnext\nprint local\ncontinue\nquit",
           "expected": "local = 7 대입 줄을 실행한 뒤 print local은 7을 보여 줍니다. main 첫 줄에서의 next 횟수는 컴파일러에 따라 다릅니다.",
-          "task": "local 초기화 전과 후에 멈춘 위치를 비교하고 heap에 값을 넣은 뒤 print *heap을 확인하세요.",
+          "task": "local 초기화 전과 후에 멈춘 위치를 비교하고 heap에 값을 넣은 뒤 print *heap을 확인하세요. call_bridge의 호출 전후 상태표·bt·인자/반환 레지스터·저장된 복귀 주소와 +4 변경 결과를 보고하세요.",
           "hint": "No symbol 오류면 -g 옵션과 현재 프레임을 확인합니다. list로 현재 줄을 먼저 찾으세요.",
           "checks": [
             "현재 줄과 변수의 초기화 시점을 함께 기록했다.",
-            "중단 후 계속 실행해 정상 종료했다."
+            "중단 후 계속 실행해 정상 종료했다.",
+            "call_bridge의 호출 전후 상태표·bt·인자/반환 레지스터·저장된 복귀 주소와 +4 변경 결과를 보고하세요."
           ],
           "files": [
-            "memory.c"
+            "memory.c",
+            "call_bridge.c",
+            "CALL-STACK-GUIDE.md"
           ],
           "prerequisites": [
             "pwn.build",
@@ -378,15 +385,36 @@
               "explanation": "list와 next로 malloc 검사와 *heap = 9가 끝난 위치까지 진행합니다. 그때 print heap과 print *heap을 비교하고 continue로 정상 종료시킵니다.",
               "code": "print heap\nprint *heap\ncontinue\nquit",
               "expected": "유효한 주소와 역참조 값 9를 관찰하며 정상 출력 뒤 프로그램이 종료합니다."
+            },
+            {
+              "title": "4. 호출 전후 상태를 한 예제로 묶기",
+              "explanation": "CALL-STACK-GUIDE.md의 상자 그림과 4행 상태표를 먼저 채웁니다. uname -m을 확인합니다. 레지스터 명령은 x86-64 기준이며 다른 CPU에서는 C 값/프레임 관찰과 해당 ABI를 사용합니다.",
+              "code": "uname -m\ngcc -std=c11 -Wall -Wextra -Werror -g -O0 -fno-omit-frame-pointer call_bridge.c -o call-bridge\n./call-bridge",
+              "expected": "BIFROST value=7 answer=20"
+            },
+            {
+              "title": "5. 프레임·메모리·복귀 주소 관찰",
+              "explanation": "아래는 GDB 안의 명령입니다. 두 번 next 후 지역값과 프레임을 확인하고, 가이드의 info registers·x/gx·finish로 이어갑니다. main의 answer는 대입 완료를 확인한 뒤 읽습니다.",
+              "code": "break adjust\nrun\ninfo args\nbt\nnext\nprint bumped\nnext\nprint result\ninfo frame\nfinish",
+              "expected": "base=7, bumped=10, result=20. bt에 adjust와 main. 반환 직후 EAX=20. 실제 주소·줄 번호는 환경에 따라 다릅니다."
+            },
+            {
+              "title": "6. 한 조건 변경 후 같은 관찰 반복",
+              "explanation": "사본에서 base+3을 base+4로 바꾸고 다시 빌드합니다. 동일한 중단점에서 상태표와 최종 출력을 비교합니다. 코드/정적 데이터는 readelf·info files·매핑, 힙은 기존 memory.c로 구분합니다.",
+              "code": "readelf -S call-bridge\n# CALL-STACK-GUIDE.md에 따라 GDB에서 주소·매핑과 상태표 기록",
+              "expected": "변경 후 bumped=11, result=22, 최종 answer=22. 프레임·주소의 구체적 배치는 달라도 값 관계를 확인합니다."
             }
           ],
           "solution": {
             "approach": [
               "local 초기화 전에는 줄 위치만 기록하고 초기화되지 않은 값에 의미를 부여하지 않습니다. 대입 후 print local = 7을 확인합니다.",
               "malloc 성공 검사와 초기화 뒤 heap 주소와 *heap=9를 별도로 적습니다.",
-              "마지막에 continue로 정상 종료하고, -g -O0 빌드와 사용한 GDB 명령 순서를 노트에 남깁니다."
+              "마지막에 continue로 정상 종료하고, -g -O0 빌드와 사용한 GDB 명령 순서를 노트에 남깁니다.",
+              "동일 호출에서 base 7, bumped 10, result 20을 대입 후 확인합니다. frame 1에서 main.value를 읽고 frame 0으로 돌아옵니다.",
+              "해당 x86-64 프레임 포인터 빌드에서 info frame과 rbp+8의 복귀 주소를 대조합니다. finish 직후 반환값을 확인하고 호출자 대입 완료 후 answer를 읽습니다.",
+              "base+4 사본은 22를 반환합니다. 원본/변경본의 빌드 명령·멈춘 위치·미확인 범위까지 함께 남깁니다."
             ],
-            "expected": "소스 위치·초기화 순서·local=7·*heap=9·정상 종료가 연결된 기록이어야 합니다. 포인터 주소의 고정값은 요구하지 않습니다."
+            "expected": "소스 위치·초기화 순서·local=7·*heap=9·정상 종료가 연결된 기록이어야 합니다. 포인터 주소의 고정값은 요구하지 않습니다. 추가 실습 원본 최종 answer=20, 변경본 answer=22입니다."
           },
           "questions": [
             {
