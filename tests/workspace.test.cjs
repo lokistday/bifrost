@@ -6,6 +6,8 @@ const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const entry=parseHTML(read('index.html')).document;
 const fields=parseHTML(read('fields/index.html')).document;
 assert.equal(entry.querySelectorAll('.entry-choice').length,2);
+assert.match(read('css/workspace.css'),/html:not\(\.splash-active\) \.entry-choice \{ animation:entry-choice-arrive/);
+assert.match(read('css/workspace.css'),/\.entry-choice \{ animation:none!important; \}/);
 assert.equal(entry.querySelector('#startFoundation').getAttribute('href'),'tracks/foundation/');
 assert.equal(entry.querySelector('#chooseFields').getAttribute('href'),'fields/');
 assert.equal(entry.querySelector('#entry-title').tagName,'H1');
