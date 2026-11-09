@@ -15,6 +15,7 @@ assert.equal(entry.querySelector('.subject-directory,.workspace-rail,.workspace-
 assert.equal(fields.querySelector('.workspace-rail,.workspace-preview,.workspace-actions,#homeProgressCount'),null);
 assert.ok(fields.querySelector('.brand-wireframe,.hero-terrain'));
 assert.ok(fields.querySelector('script[src*="wordmark-motion.js"]'));
+assert.equal(fields.querySelector('.fields-scroll-cue').getAttribute('href'),'#mindmap');
 assert.equal(fields.querySelector('.entry-back').getAttribute('href'),'../');
 const courses=JSON.parse(read('content/site.json')).courses;
 assert.equal(fields.querySelectorAll('[data-map-track]').length,courses.length);
