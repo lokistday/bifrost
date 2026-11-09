@@ -44,11 +44,9 @@
 .entry-choice-copy strong { font-size:21px; letter-spacing:-.035em; font-weight:700; }
 .entry-choice-copy>span { color:var(--muted); font-size:13px; }
 .entry-choice>.ui-icon { margin-left:auto; color:var(--accent); width:22px; }
-.fields-hero { position:relative; display:grid; place-items:center; width:min(100%,1400px); min-height:calc(100svh - 64px); padding:48px 28px 72px; }
+.fields-hero { position:relative; display:grid; place-items:center; width:min(100%,1400px); min-height:calc(100svh - 64px); padding:48px 28px; }
 .fields-hero .guided-brand { width:min(100%,1320px); margin-bottom:0; }
 .fields-hero .hero-terrain { inset:-18% -8%; width:116%; height:136%; }
-.fields-scroll-cue { position:absolute; bottom:22px; left:50%; transform:translateX(-50%); width:42px; height:42px; display:grid; place-items:center; border:1px solid var(--line); border-radius:50%; color:var(--accent)!important; font-size:22px; line-height:1; transition:border-color .15s,background .15s; }
-.fields-scroll-cue:hover { border-color:var(--accent); background:var(--surface-soft); }
 .subject-directory { width:min(100%,1240px); margin:0 auto; padding:0 28px 48px; box-sizing:border-box; scroll-margin-top:24px; }
 .directory-header { display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:22px; }
 .field-step { display:flex; align-items:center; gap:10px; color:var(--muted); font-size:11px; margin:0 0 6px; }
@@ -95,7 +93,7 @@
   .entry-choice-copy strong { font-size:18px; }
   .entry-choice-copy>span { font-size:12px; }
   .entry-choice>.ui-icon { width:18px; }
-  .fields-hero { min-height:calc(100svh - 58px); padding:32px 20px 72px; }
+  .fields-hero { min-height:calc(100svh - 58px); padding:32px 20px; }
   .fields-hero .guided-brand { width:100%; }
   .subject-directory { padding:0 20px 36px; }
   .directory-header { align-items:flex-start; flex-direction:column; gap:10px; margin-bottom:18px; }

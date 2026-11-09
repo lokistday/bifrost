@@ -21,9 +21,16 @@
     function project(x,y,z){
       const rx=x*c+z*s,rz=-x*s+z*c,ry=y*cp-rz*sp,zz=y*sp+rz*cp;
       const scale=1250/(1250-zz);
-      return[(width/2+rx*scale).toFixed(2),(82+ry*scale).toFixed(2)];
+      return[width/2+rx*scale,82+ry*scale];
     }
-    function point(g,p,z){return project(g.offset+p[0]-width/2,p[1]-50,z);}
+    let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity;
+    for(const g of glyphs)for(const contour of g.contours)for(const p of contour)for(const z of [-depth/2,depth/2]){
+      const [x,y]=project(g.offset+p[0]-width/2,p[1]-50,z);
+      minX=Math.min(minX,x);maxX=Math.max(maxX,x);
+      minY=Math.min(minY,y);maxY=Math.max(maxY,y);
+    }
+    const shiftX=width/2-(minX+maxX)/2,shiftY=76-(minY+maxY)/2;
+    function point(g,p,z){const [x,y]=project(g.offset+p[0]-width/2,p[1]-50,z);return[(x+shiftX).toFixed(2),(y+shiftY).toFixed(2)];}
     function outline(g,z){return g.contours.map(contour=>'M'+contour.map(p=>point(g,p,z).join(',')).join('L')+'Z').join('');}
     const order=[...glyphs].sort((a,b)=>(b.offset-a.offset)*s);
     for(const g of order){

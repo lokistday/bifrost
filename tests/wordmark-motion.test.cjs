@@ -8,6 +8,19 @@ const context={document,window:{matchMedia:()=>motion},requestAnimationFrame:fn=
 vm.runInNewContext(fs.readFileSync('js/wordmark-motion.js','utf8'),context);
 const svg=document.querySelector('.brand-wireframe'),front=document.querySelector('.brand-wire-front');
 const original=front.getAttribute('d'),initial=svg.dataset.rotation;
+function assertVisuallyCentered(){
+  let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity;
+  for(const path of svg.querySelectorAll('.brand-wire-front,[data-wire-back]')){
+    const coordinates=path.getAttribute('d').match(/-?\d+(?:\.\d+)?/g).map(Number);
+    for(let i=0;i<coordinates.length;i+=2){
+      minX=Math.min(minX,coordinates[i]);maxX=Math.max(maxX,coordinates[i]);
+      minY=Math.min(minY,coordinates[i+1]);maxY=Math.max(maxY,coordinates[i+1]);
+    }
+  }
+  assert.ok(Math.abs((minX+maxX)/2-Number(svg.dataset.brandWidth)/2)<.05,'The rotating outline stays horizontally centered');
+  assert.ok(Math.abs((minY+maxY)/2-76)<.05,'The rotating outline stays vertically centered');
+}
+assertVisuallyCentered();
 function step(t){const [key,fn]=queue.entries().next().value;queue.delete(key);fn(t);}
 step(0);
 let previous=Number(initial),travel=0,rearSeen=false;
@@ -18,6 +31,7 @@ for(let t=100;t<=24000;t+=100){
   assert.ok(delta>0&&delta<=9,'Rotation always advances without a speed jump');travel+=delta;
   if(before<45||before>315)frontDeltas.push(delta);
   if(before>140&&before<220){rearDeltas.push(delta);assert.equal(document.querySelectorAll('.is-back-facing').length,8);rearSeen=true;}
+  if(t%500===0)assertVisuallyCentered();
   previous=current;
 }
 assert.ok(travel>360,'The title keeps rotating through complete revolutions');
