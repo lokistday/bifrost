@@ -19,6 +19,8 @@ const contentVersion = esc(site.contentVersion);
 const view = create(courses, context.window.BifrostVisuals);
 const star = `<img class="brand-logo" src="../../assets/logo.svg?v=${contentVersion}" width="34" height="34" alt="">`;
 const template = read('templates/learning.html');
+const entryVersion = 'entry-' + crypto.createHash('sha256')
+  .update(read('css/entry-transition.css')).update(read('js/entry-transition.js')).digest('hex').slice(0,12);
 function fill(source, values) {
   return source.replace(/\{\{([A-Z_]+)\}\}/g, (_, key) => {
     if (!(key in values)) throw new Error(`Missing template field: ${key}`);
@@ -46,7 +48,9 @@ function page(course, lesson, legacy = false, learningPath = null) {
   // New subject exams change their course bundle without invalidating every page.
   const scoped = ['foundation', 'pwn', 'rev'].includes(course.id) || course.modules.some(m => m.exam);
   const courseVersion = scoped ? 'course-' + crypto.createHash('sha256').update(read(`js/courses/${course.id}.js`)).digest('hex').slice(0,12) : contentVersion;
-  return html.replace(`js/courses/${course.id}.js?v=${contentVersion}`, `js/courses/${course.id}.js?v=${courseVersion}`);
+  const scopedHtml = html.replace(`js/courses/${course.id}.js?v=${contentVersion}`, `js/courses/${course.id}.js?v=${courseVersion}`);
+  if (course.id !== 'foundation' || lesson || legacy || learningPath) return scopedHtml;
+  return scopedHtml.replace('</head>', `<link rel="stylesheet" href="../../css/entry-transition.css?v=${entryVersion}">\n<script src="../../js/entry-transition.js?v=${entryVersion}"></script>\n</head>`);
 }
 const routes = ['', 'fields/', 'guides/linux.html'];
 routes.push(...require('./render_learning_tools.cjs')({ ROOT, courses, site, fill, write }));
@@ -78,7 +82,8 @@ for (const course of Object.values(courses)) {
 const home = require('./render_home.cjs')({ courses, paths: learningPaths });
 const homeVersion = 'home-' + crypto.createHash('sha256')
   .update(read('css/workspace.css')).update(read('js/workspace.js'))
-  .update(read('js/wordmark-motion.js')).digest('hex').slice(0,12);
+  .update(read('js/wordmark-motion.js')).update(read('css/entry-transition.css'))
+  .update(read('js/entry-transition.js')).digest('hex').slice(0,12);
 const homeValues = { ...home, SITE_URL: esc(site.url), COURSE_COUNT: Object.keys(courses).length,
   LESSON_COUNT: count, CONTENT_VERSION: contentVersion, HOME_VERSION: homeVersion };
 write('index.html', fill(read('templates/index.html'), homeValues));

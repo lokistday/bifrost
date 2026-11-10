@@ -6,6 +6,12 @@
   }
   if (typeof document === 'undefined') return;
   let navigating = false;
+  window.addEventListener('pageshow', event => {
+    if (!event.persisted) return;
+    navigating = false;
+    document.documentElement.classList.remove('entry-navigating');
+    document.querySelectorAll('.entry-choice.is-selected').forEach(link => link.classList.remove('is-selected'));
+  });
   for (const link of document.querySelectorAll('.entry-choice[href]')) {
     link.addEventListener('click', event => {
       if (navigating) { event.preventDefault(); return; }
@@ -20,7 +26,10 @@
       root.style.setProperty('--entry-exit-y', `${bounds.top + bounds.height / 2}px`);
       link.classList.add('is-selected');
       root.classList.add('entry-navigating');
-      window.setTimeout(() => window.location.assign(link.href), 480);
+      window.setTimeout(() => {
+        try { sessionStorage.setItem('bifrost-entry-arrival', '1'); } catch (_) { /* Navigation still works when storage is blocked. */ }
+        window.location.assign(link.href);
+      }, 480);
     });
   }
 })();
