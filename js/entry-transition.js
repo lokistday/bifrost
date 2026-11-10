@@ -1,12 +1,24 @@
-/* Continue the guided entry transition after the destination document loads. */
+/* Match the selected pictogram to the destination heading for this navigation. */
 (() => {
   'use strict';
-  try {
-    if (sessionStorage.getItem('bifrost-entry-arrival') !== '1') return;
-    sessionStorage.removeItem('bifrost-entry-arrival');
-  } catch (_) { return; }
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const root = document.documentElement;
-  root.classList.add('entry-arriving');
-  window.setTimeout(() => root.classList.remove('entry-arriving'), 850);
+  let selected = false;
+  try {
+    selected = sessionStorage.getItem('bifrost-entry-route') === location.pathname;
+    sessionStorage.removeItem('bifrost-entry-route');
+  } catch (_) { /* Direct visits render normally. */ }
+  if (selected && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    root.classList.add('entry-destination');
+  }
+  window.addEventListener('pagereveal', event => {
+    const transition = event.viewTransition;
+    if (!transition) return;
+    if (!root.classList.contains('entry-destination')) {
+      transition.skipTransition();
+      return;
+    }
+    root.classList.add('entry-morph');
+    transition.finished.finally(() => root.classList.remove('entry-morph', 'entry-destination'));
+  });
+  window.addEventListener('pagehide', () => root.classList.remove('entry-destination', 'entry-morph'));
 })();

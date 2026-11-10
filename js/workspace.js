@@ -5,31 +5,19 @@
     location.replace(new URL('fields/', location.href).href);
   }
   if (typeof document === 'undefined') return;
-  let navigating = false;
-  window.addEventListener('pageshow', event => {
-    if (!event.persisted) return;
-    navigating = false;
-    document.documentElement.classList.remove('entry-navigating');
-    document.querySelectorAll('.entry-choice.is-selected').forEach(link => link.classList.remove('is-selected'));
-  });
+
+  const root = document.documentElement;
   for (const link of document.querySelectorAll('.entry-choice[href]')) {
     link.addEventListener('click', event => {
-      if (navigating) { event.preventDefault(); return; }
-      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey ||
-          link.target && link.target !== '_self' || link.hasAttribute('download') ||
-          window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      event.preventDefault();
-      navigating = true;
-      const bounds = link.getBoundingClientRect();
-      const root = document.documentElement;
-      root.style.setProperty('--entry-exit-x', `${bounds.left + bounds.width / 2}px`);
-      root.style.setProperty('--entry-exit-y', `${bounds.top + bounds.height / 2}px`);
-      link.classList.add('is-selected');
-      root.classList.add('entry-navigating');
-      window.setTimeout(() => {
-        try { sessionStorage.setItem('bifrost-entry-arrival', '1'); } catch (_) { /* Navigation still works when storage is blocked. */ }
-        window.location.assign(link.href);
-      }, 480);
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey ||
+          event.shiftKey || event.altKey || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      root.querySelector('.entry-origin')?.classList.remove('entry-origin');
+      link.classList.add('entry-origin');
+      try {
+        sessionStorage.setItem('bifrost-entry-route', new URL(link.href).pathname);
+      } catch (_) { /* The anchor still navigates normally. */ }
     });
   }
+  window.addEventListener('pageshow', () => root.querySelector('.entry-origin')?.classList.remove('entry-origin'));
+  window.addEventListener('pagereveal', event => event.viewTransition?.skipTransition());
 })();

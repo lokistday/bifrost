@@ -50,12 +50,6 @@ html:not(.splash-active) .entry-choice:nth-child(2)::after { animation-delay:150
 }
 @keyframes entry-choice-trail { 0% { opacity:0; transform:translateY(66px) scale(.96); } 28% { opacity:.55; transform:translateY(50px) scale(.98); } 72% { opacity:.18; transform:translateY(18px); } 100% { opacity:0; transform:translateY(0); } }
 .entry-choice:hover,.entry-choice:focus-visible { border-color:var(--accent); background:var(--surface-soft); }
-html.entry-navigating .entry-choice { animation:none!important; transition:opacity .28s,transform .28s,border-color .28s; }
-html.entry-navigating .entry-choice:not(.is-selected) { opacity:0; transform:translateY(-18px) scale(.97); }
-html.entry-navigating .entry-choice.is-selected { border-color:var(--accent); transform:scale(1.035); }
-html.entry-navigating .entry-choice::after { animation:none!important; opacity:0; }
-html.entry-navigating .workspace-page::after { content:""; position:fixed; inset:0; z-index:9999; pointer-events:none; background:radial-gradient(circle at var(--entry-exit-x) var(--entry-exit-y),var(--teal-soft),var(--paper) 55%); clip-path:circle(0 at var(--entry-exit-x) var(--entry-exit-y)); animation:entry-exit-iris 480ms cubic-bezier(.66,0,.34,1) both; }
-@keyframes entry-exit-iris { to { clip-path:circle(150vmax at var(--entry-exit-x) var(--entry-exit-y)); } }
 .entry-choice-symbol { display:grid; place-items:center; width:46px; height:46px; flex:0 0 auto; border-radius:50%; color:var(--accent); background:var(--teal-soft); }
 .entry-choice-copy { display:flex; flex-direction:column; gap:3px; min-width:0; }
 .entry-choice-copy strong { font-size:21px; letter-spacing:-.035em; font-weight:700; }
