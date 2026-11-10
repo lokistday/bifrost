@@ -57,7 +57,7 @@ html:not(.splash-active) .entry-choice:nth-child(2)::after { animation-delay:150
 .entry-choice>.ui-icon { margin-left:auto; color:var(--accent); width:22px; }
 .fields-hero { position:relative; isolation:isolate; display:grid; place-items:center; width:100%; min-height:calc(100svh - 64px); padding:48px 28px; }
 .fields-hero .guided-brand { width:min(100%,1320px); margin-bottom:0; }
-.fields-hero .hero-terrain { inset:0; width:100%; height:100%; mask-image:none; }
+.fields-hero .hero-terrain { inset:0; width:100%; height:100%; opacity:.6; mask-image:radial-gradient(ellipse 55% 54% at 50% 50%,#000 30%,transparent 100%); }
 .fields-scroll-cue { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); display:flex; align-items:center; justify-content:center; gap:12px; min-height:54px; padding:0 22px; border:1px solid var(--accent); border-radius:999px; background:var(--surface); color:var(--accent)!important; font-size:14px; font-weight:700; white-space:nowrap; transition:background .15s,transform .15s; }
 .fields-scroll-cue:hover { background:var(--surface-soft); transform:translate(-50%,3px); }
 .fields-scroll-icon { font-size:28px; line-height:1; font-weight:400; }
