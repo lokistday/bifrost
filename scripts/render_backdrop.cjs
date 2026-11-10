@@ -15,5 +15,5 @@ module.exports=function backdrop(){
     if((x+y)%2){triangle(a,b,c);triangle(b,d,c);}else{triangle(a,b,d);triangle(a,d,c);}
   }
   const wire=[...edges].map(edge=>{const [a,b]=edge.split(':').map(Number);return'M'+points[a].join(',')+'L'+points[b].join(',');}).join('');
-  return `<svg class="hero-terrain" viewBox="0 0 900 370" preserveAspectRatio="none" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">${facets.join('')}<path class="terrain-edges" d="${wire}"/></svg>`;
+  return `<svg class="hero-terrain" viewBox="0 0 900 370" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">${facets.join('')}<path class="terrain-edges" d="${wire}"/></svg>`;
 };
