@@ -33,6 +33,8 @@
 
 <link rel="stylesheet" href="css/workspace.css?v={{HOME_VERSION}}">
 <link rel="stylesheet" href="css/entry-transition.css?v={{HOME_VERSION}}">
+<script src="js/catalog.js?v={{CONTENT_VERSION}}" defer></script>
+<script src="js/progress.js?v={{CONTENT_VERSION}}" defer></script>
 <script src="js/workspace.js?v={{HOME_VERSION}}" defer></script>
 <script src="js/pointer-trail.js?v={{CONTENT_VERSION}}" defer></script>
 </head>
@@ -52,12 +54,16 @@
 <main id="home" class="guided-home" tabindex="-1">
   <section class="workspace-hero entry-hero" aria-labelledby="entry-title">
     <div class="entry-guide">
-      <div class="entry-steps" aria-label="학습 시작 순서"><span aria-current="step"><i aria-hidden="true"></i>출발점 선택</span><span class="entry-connector" aria-hidden="true"></span><span><i aria-hidden="true"></i>학습 시작</span></div>
-      <h1 id="entry-title">어디서부터 시작할까요?</h1>
-      <p class="entry-description">지금 나에게 맞는 출발점 하나만 골라주세요.</p>
+      <div class="entry-intro">
+        <h1 id="entry-title">어디서부터<br>시작할까요?</h1>
+        <p class="entry-description">코드를 실행하고, 기록을 읽고, 직접 찾은 근거로 답하는 보안 실습.</p>
+      </div>
+      <div class="entry-menu">
+      <a class="resume-choice" id="resumeChoice" hidden><span>이어서 학습하기</span><strong></strong>{{ICON_ARROW}}</a>
       <div class="entry-choices" id="mindmap" aria-label="출발점 선택">
-        <a class="entry-choice" id="startFoundation" href="tracks/foundation/"><span class="entry-choice-symbol" aria-hidden="true">{{ICON_BOOK}}</span><span class="entry-choice-copy"><strong>기초부터 배울게요.</strong><span>공통 기초에서 차근차근 시작해요.</span></span>{{ICON_ARROW}}</a>
-        <a class="entry-choice" id="chooseFields" href="fields/"><span class="entry-choice-symbol" aria-hidden="true">{{ICON_GLOBE}}</span><span class="entry-choice-copy"><strong>관심 분야부터 볼게요.</strong><span>궁금한 분야를 골라 바로 들어가요.</span></span>{{ICON_ARROW}}</a>
+        <a class="entry-choice" id="startFoundation" href="tracks/foundation/environment.html"><span class="entry-choice-symbol" aria-hidden="true">{{ICON_BOOK}}</span><span class="entry-choice-copy"><strong>기초부터 시작하기</strong><span>Python 파일을 고쳐 첫 출력을 만들어 보세요.</span></span>{{ICON_ARROW}}</a>
+        <a class="entry-choice" id="chooseFields" href="fields/"><span class="entry-choice-symbol" aria-hidden="true">{{ICON_GLOBE}}</span><span class="entry-choice-copy"><strong>관심 분야 고르기</strong><span>로그로 사건을 추적하는 포렌식 등 9개 분야를 탐색하세요.</span></span>{{ICON_ARROW}}</a>
+      </div>
       </div>
     </div>
   </section>

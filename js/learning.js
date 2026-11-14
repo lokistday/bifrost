@@ -82,6 +82,25 @@
     }
   }
   root.querySelectorAll('.js-only').forEach(element => { element.hidden = false; });
+  const steps = [...root.querySelectorAll('.article-steps a')];
+  if (steps.length) {
+    const sections = steps.map(link => document.getElementById(link.getAttribute('href').slice(1)));
+    let scheduled = false;
+    function markCurrentStep() {
+      scheduled = false;
+      const current = sections.filter(section => section && section.getBoundingClientRect().top <= 160).at(-1);
+      steps.forEach((link, index) => {
+        if (current && current === sections[index]) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }
+    window.addEventListener('scroll', () => {
+      if (!scheduled) {
+        scheduled = true;
+        window.requestAnimationFrame(markCurrentStep);
+      }
+    }, {passive:true});
+  }
   function updateProgress() {
     document.querySelectorAll('[data-count]').forEach(el => {
       const c = courses[el.dataset.count], ls = all(c), count = progress.count(ls);
