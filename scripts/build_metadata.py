@@ -15,7 +15,7 @@ def build(courses):
            *sorted((ROOT/'templates').glob('*')),
            *sorted((ROOT/'assets/projects').glob('*.webp')),
            ROOT/'scripts/render_wordmark.cjs', ROOT/'scripts/render_backdrop.cjs', ROOT/'js/wordmark-motion.js', ROOT/'js/pointer-trail.js', ROOT/'css/pointer-trail.css', ROOT/'js/exam-catalog.js', ROOT/'css/exams.css',
-           *[ROOT/n for n in ('js/progress.js','scripts/render_learning_tools.cjs','js/learning-view.js','js/learning.js','js/path-progress.js','css/study.css','css/theme.css','js/theme.js','assets/logo.svg','assets/logo-mark.svg','css/splash.css','css/main.css','css/workspace.css','js/workspace.js','scripts/render_home.cjs','scripts/learning_design.py','scripts/site_security.cjs')]]
+           *[ROOT/n for n in ('js/progress.js','scripts/render_learning_tools.cjs','js/learning-view.js','js/learning.js','js/path-progress.js','css/study.css','css/learning.css','css/theme.css','js/theme.js','assets/logo.svg','assets/logo-mark.svg','css/splash.css','css/main.css','css/workspace.css','js/workspace.js','scripts/render_home.cjs','scripts/learning_design.py','scripts/site_security.cjs')]]
     home_only={'templates/index.html','templates/fields.html','css/workspace.css','js/workspace.js',
                'scripts/render_home.cjs','scripts/render_wordmark.cjs','scripts/render_backdrop.cjs','js/wordmark-motion.js'}
     files=[file for file in files if file.relative_to(ROOT).as_posix() not in home_only]

@@ -117,6 +117,16 @@
         ${step.code ? codeBlock(step.code, '', step.context || `부분 예제 · ${lesson.environment.label} · 앞 단계의 변수·폴더 유지`) : ''}${step.expected ? `<div class="step-observation"><strong>관찰할 결과</strong><pre>${esc(step.expected)}</pre></div>` : ''}</li>`).join('')}</ol>`;
     }
 
+    function firstExperiment() {
+      return `<section class="first-experiment" aria-labelledby="first-experiment-title">
+        <div class="experiment-intro"><h2 id="first-experiment-title">25를 입력하면 몇 분이 나올까요?</h2>
+        <p><a href="../../labs/foundation/hello.py" download>hello.py 내려받기 ↓</a> 파일을 열어 <code>minutes = 15</code>를 <code>minutes = 25</code>로 바꾸고 저장하세요.</p></div>
+        <div class="experiment-run"><h3>파일을 저장한 폴더에서 실행</h3>
+        <div class="run-commands"><div><span>Windows · PowerShell</span><code>py -3 hello.py</code></div><div><span>macOS · Linux</span><code>python3 hello.py</code></div></div>
+        <details><summary>내 출력과 비교하기</summary><pre>Hello, Bifrost\nStudy: 50 minutes</pre><p>둘째 줄은 <code>minutes * 2</code>를 출력합니다. 이번에는 20을 넣고 결과를 먼저 예상해 보세요.</p></details>
+        <details><summary>Python 설치 또는 실행이 막혔어요</summary><p><a href="https://www.python.org/downloads/" target="_blank" rel="noopener">Python 3 설치 안내 ↗</a> · 설치 후 터미널을 새로 여세요. 명령은 인식되는데 파일을 못 찾으면 터미널을 연 폴더에 hello.py가 있는지 확인하세요.</p></details></div></section>`;
+    }
+
     function learningPlan(lesson) {
       const plan = lesson.learning;
       if (!plan) return '';
@@ -128,7 +138,7 @@
     function transfer(lesson) {
       if (!lesson.learning) return '';
       const plan = lesson.learning;
-      return `<section class="transfer-panel" id="transfer"><div class="overline">INDEPENDENT PRACTICE</div><h3>도움 없이, 조건을 바꿔 보기</h3>
+      return `<section class="transfer-panel" id="transfer"><h3>도움 없이, 조건을 바꿔 보기</h3>
         <p class="caption">${plan.support === "independent" ? "빈 파일 또는 최소 입력에서 시작하세요. 해설·기준 예제는 시도 후에 열고, 새 입력으로 다시 확인합니다." : "처음에는 예제를 사용해도 됩니다. 다음에는 해설을 닫고 같은 조건을 다시 만드세요."}</p><p>${esc(plan.challenge)}</p><ol><li>위 해설을 닫고 예상 결과와 근거를 먼저 적습니다.</li><li>코드·원시 자료·문서 근거로 확인하고 예상과 실제 차이를 설명합니다.</li><li>새 반례 하나를 만들고 무엇까지 확인했는지 기록합니다.</li></ol>
         <details class="hint"><summary>시도한 뒤 판단 기준 읽기</summary><p>${esc(plan.answer)}</p></details>
         <div class="rubric-table-wrap"><table class="rubric-table"><caption>이 차시의 자기 평가 · 체크 여부는 실력 인증이 아닙니다</caption><thead><tr><th scope="col">확인할 역량</th><th scope="col">남길 근거</th></tr></thead><tbody>
@@ -142,7 +152,7 @@
 
     function questions(lesson, exam = null) {
       return `<div class="self-check"><h3>이해한 내용을 점검하기</h3>${exam ? '' : '<p>답을 고른 뒤 이유까지 확인하세요. 점수는 저장하지 않습니다.</p>'}
-        ${exam ? `<p class="module-exam-link">이 모듈의 확인 문제는 별도 모의고사에서 풀어보세요. <a href="../../exams/${esc(exam.id)}.html">${esc(exam.title)} · 25문항 모의고사 →</a></p>` : (lesson.questions || []).map((question, index) => `<fieldset class="question" data-question="${index}">
+        ${exam ? `<p class="module-exam-link">이 모듈을 마친 뒤 모의고사로 복습할 수 있습니다. <a href="../../exams/${esc(exam.id)}.html">${esc(exam.title)} · 25문항 모의고사 →</a></p>` : (lesson.questions || []).map((question, index) => `<fieldset class="question" data-question="${index}">
           <legend>${index + 1}. ${esc(question.prompt)}</legend>
           ${question.options.map((option, n) => `<label class="question-option"><input type="radio" name="question-${index}" value="${n}"><span>${esc(option)}</span></label>`).join('')}
           <button class="learning-button small js-only" hidden type="button" data-check-question="${index}">답 확인</button>
@@ -169,20 +179,20 @@
         <div class="lesson-layout">${outline(course, id)}<article class="lesson-article">
           ${route?`<nav class="path-location" aria-label="현재 학습 경로"><a href="./">${esc(route.label)}</a><strong>${index+1} / ${lessons.length}단계</strong><a href="./#pathOutline">경로 목차 ↗</a></nav>`:''}
           <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/${key}.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">${esc(route?course.title+' · '+module.title:module.title)} · ${index + 1} / ${lessons.length}</div><h1>${esc(lesson.title)}</h1><p class="lesson-objective">${esc(lesson.goal)}</p></div></header>
-          ${learningPlan(lesson)}${lesson.learning?.troubleshooting ? `<details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl>${lesson.learning.troubleshooting.map(item=>`<dt>${esc(item.symptom)}</dt><dd>${esc(item.check)}</dd>`).join('')}</dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>` : ''}
+          ${id === 'foundation.environment' ? firstExperiment() : ''}${learningPlan(lesson)}${lesson.learning?.troubleshooting ? `<details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl>${lesson.learning.troubleshooting.map(item=>`<dt>${esc(item.symptom)}</dt><dd>${esc(item.check)}</dd>`).join('')}</dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>` : ''}
           <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          ${lesson.environment ? `<details class="lesson-preparation" aria-label="이 차시 준비" ${id==='foundation.environment'?'open':''}><summary>준비 환경과 선행 학습 확인</summary><p><strong>${esc(lesson.environment.label)}</strong></p><ul>${lesson.environment.details.map(detail => `<li>${esc(detail)}</li>`).join('')}</ul>${prerequisites(lesson.prerequisites || [], key, true)}
+          ${lesson.environment ? `<details class="lesson-preparation" aria-label="이 차시 준비"><summary>준비 환경과 선행 학습 확인</summary><p><strong>${esc(lesson.environment.label)}</strong></p><ul>${lesson.environment.details.map(detail => `<li>${esc(detail)}</li>`).join('')}</ul>${prerequisites(lesson.prerequisites || [], key, true)}
             ${id === 'foundation.environment' ? '<a href="../../guides/linux.html">C·Linux 차시에서 사용할 WSL 준비 안내 ↗</a>' : ''}</details>` : ''}
-          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2>${lesson.concepts.map((paragraph, i) => `<p>${esc(paragraph)}</p>${i === 0 ? visuals.renderLesson(id) : ''}`).join('')}
+          <section id="concept" class="article-section"><h2>먼저 이해하기</h2>${lesson.concepts.map((paragraph, i) => `<p>${esc(paragraph)}</p>${i === 0 ? visuals.renderLesson(id) : ''}`).join('')}
             ${lesson.pitfalls?.length ? `<aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl>${lesson.pitfalls.map(pitfall => `<dt>${esc(pitfall.mistake)}</dt><dd>${esc(pitfall.correction)}</dd>`).join('')}</dl></aside>` : ''}</section>
           ${files(course, lesson)}
-          <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
+          <section id="worked" class="article-section"><h2>따라 하며 관찰하기</h2>
             <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
             <h3>처음 상태의 전체 예제</h3>${codeBlock(lesson.code, 'exampleCode', lesson.learning?.codeContext || lesson.environment.label, true)}<div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>${esc(lesson.expected)}</pre></div>
             <h3>이제 단계별로 바꾸고 관찰하기</h3>${walkthrough(lesson)}</section>
-          <section id="practice" class="article-section"><div class="overline">03 / TRY IT YOURSELF</div><h2>직접 바꾸고 확인하기</h2><p>${esc(lesson.task)}</p>
+          <section id="practice" class="article-section"><h2>직접 바꾸고 확인하기</h2><p>${esc(lesson.task)}</p>
             <details class="hint"><summary>막혔을 때 힌트 보기</summary><p>${esc(lesson.hint)}</p></details>${solution(lesson)}<p class="record-prompt">학습 기록: 사용한 환경과 명령 → 바꾸기 전 예상 → 실제 결과 → 차이의 이유를 남기세요.</p>${transfer(lesson)}</section>
-          <section id="verify" class="article-section completion-panel"><div class="overline">05 / VERIFY</div><h2>이 정도면 다음으로</h2>${questions(lesson, module.exam)}<section class="mastery-panel js-only" hidden><h3>지금 혼자 할 수 있는 수준 기록</h3><p>완료 표시와 별개입니다. 답을 보면서 푼 경우는 ‘따라 함’으로 기록하세요.</p><div class="mastery-actions">${[["read","읽음"],["guided","따라 함"],["independent","독립 해결"],["review","재도전 필요"]].map(([value,label])=>`<button type="button" class="learning-button small" data-mastery="${value}" aria-pressed="false">${label}</button>`).join('')}</div><p id="masteryFeedback" role="status"></p></section>
+          <section id="verify" class="article-section completion-panel"><h2>이 정도면 다음으로</h2>${questions(lesson, module.exam)}<section class="mastery-panel js-only" hidden><h3>지금 혼자 할 수 있는 수준 기록</h3><p>완료 표시와 별개입니다. 답을 보면서 푼 경우는 ‘따라 함’으로 기록하세요.</p><div class="mastery-actions">${[["read","읽음"],["guided","따라 함"],["independent","독립 해결"],["review","재도전 필요"]].map(([value,label])=>`<button type="button" class="learning-button small" data-mastery="${value}" aria-pressed="false">${label}</button>`).join('')}</div><p id="masteryFeedback" role="status"></p></section>
             <h3>내 결과물 확인하기</h3><ul class="evidence-list">${lesson.checks.map(check => `<li>${esc(check)}</li>`).join('')}</ul>
             <p>위 기준을 결과물로 확인한 뒤 완료로 표시하세요. 다음 차시를 잠그지 않습니다.</p><button type="button" class="learning-button primary js-only" hidden id="completeLesson" aria-pressed="false">이 차시 완료로 표시</button><p class="feedback" role="status" id="completionFeedback"></p></section>
           <nav class="lesson-pagination" aria-label="${route?'경로의 이전·다음 단계':'이전·다음 차시'}">${index > 0 ? `<a href="${lessonHref(lessons[index - 1].id, key)}"><small>← 이전 ${route?'단계':'차시'}</small>${esc(lessons[index - 1].title)}</a>` : `<a href="./"><small>← ${route?'학습 경로':'전체 과정'}</small>${route?'경로':'분야'} 목차로</a>`}

@@ -9,7 +9,7 @@ assert.equal(entry.querySelectorAll('.entry-choice').length,2);
 assert.match(read('css/workspace.css'),/html:not\(\.splash-active\) \.entry-choice \{ animation:entry-choice-arrive/);
 assert.match(read('css/workspace.css'),/\.entry-choice::after \{ animation:entry-choice-trail/);
 assert.match(read('css/workspace.css'),/\.entry-choice,\.entry-choice::after,\.workspace-page::after \{ animation:none!important; \}/);
-assert.equal(entry.querySelector('#startFoundation').getAttribute('href'),'tracks/foundation/');
+assert.equal(entry.querySelector('#startFoundation').getAttribute('href'),'tracks/foundation/environment.html');
 assert.equal(entry.querySelector('#chooseFields').getAttribute('href'),'fields/');
 assert.equal(entry.querySelector('#entry-title').tagName,'H1');
 assert.equal(entry.querySelector('.brand-wireframe,.hero-terrain'),null);
@@ -33,7 +33,9 @@ for(const course of courses){
   assert.ok(fs.existsSync(path.join(root,'tracks',course.id,'index.html')));
 }
 for(const [name,doc] of [['index.html',entry],['fields/index.html',fields]]){
-  assert.equal(doc.querySelector('script[src*="catalog.js"],script[src*="progress.js"],script[src*="learning-paths.js"]'),null);
+  assert.equal(!!doc.querySelector('script[src*="progress.js"]'),doc===entry);
+  assert.equal(!!doc.querySelector('script[src*="catalog.js"]'),doc===entry);
+  assert.equal(doc.querySelector('script[src*="learning-paths.js"]'),null);
   assert.equal(doc.querySelector('[role="search"],#workspaceSearch,.hero-search-link'),null);
   assert.match(doc.querySelector('link[href*="workspace.css"]').getAttribute('href'),/\?v=home-[a-f0-9]{12}$/);
   for(const link of doc.querySelectorAll('a[href]')){

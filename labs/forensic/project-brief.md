@@ -1,5 +1,5 @@
 # 같은 계정, 다른 호스트: 근거를 추적하는 조사
-합성 이벤트를 실제 SQLite DB 파일로 만들고 조사하세요. 같은 session 값만으로 다른 호스트의 사건을 연결하면 잘못된 결론에 도달합니다.
+두 호스트의 기록에서 같은 세션 값이 발견됐습니다. 어떤 이벤트를 연결할 수 있으며, 실제 행위자는 어디까지 특정할 수 있을까요?
 
 ## 준비
 원본 ZIP 폴더를 보관하고 전체 폴더의 작업용 사본에서 진행하세요. Python 3.10 이상,
@@ -8,7 +8,7 @@ Crypto는 별도 가상 환경과 requirements.txt가 필요합니다. C/GDB 프
 예상 180~270분(설치 제외, 저자 추정). 여러 번 나누어 진행해도 됩니다.
 
 ## 출력 계약
-project-build-db.py가 A/B DB를 생성합니다. host=lab-1, session=S7인 행만 조사 범위입니다. timeline은 UTC 시각순 ID, reads는 그 범위의 read ID입니다. 시각 동률은 ID순입니다. suspect_actor는 자료만으로 실제 행위자를 확정할 수 없어 UNKNOWN입니다.
+project-build-db.py가 A/B DB를 생성합니다. host=lab-1, session=S7인 행만 조사 범위입니다. timeline은 UTC 시각순 ID, reads는 그 범위의 read ID입니다. 시각 동률은 ID순입니다. suspect_actor는 문자열입니다. 식별할 수 있다면 식별자를, 근거가 부족하다면 UNKNOWN을 입력하세요. 판단에 사용한 이벤트와 부족한 증거를 보고서에 적으세요.
 project-answer-template.json의 키·타입을 유지하고 실제 계산 결과를 새 JSON에 저장합니다.
 값은 결과로 채우세요. 템플릿의 0과 빈 목록은 정답이 아닙니다.
 

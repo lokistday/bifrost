@@ -21,18 +21,8 @@ const drawings = {
 };
 const icon = (name, cls = '') => `<svg class="ui-icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${drawings[name]}</svg>`;
 module.exports = function home({ courses, paths }) {
-  const data = [
-    ['foundation','book','공통 기초','보안 학습을 위한 필수 개념과 도구, 환경을 익힙니다.',['Linux','Python','네트워크','명령어']],
-    ['web','globe','웹 해킹','웹 서비스의 동작과 인증·권한 경계를 이해합니다.',['Web','HTTP','SQL','인증']],
-    ['pwn','chip','Pwn / 시스템','메모리를 관찰하고 시스템의 경계를 검증합니다.',['Binary','Memory','GDB','Linux']],
-    ['forensic','file','디지털 포렌식','디지털 증거를 분석하고 판단의 근거를 남깁니다.',['Forensic','증거 분석','타임라인']],
-    ['network','network','네트워크 보안','통신 흐름을 읽고 네트워크 정책을 검증합니다.',['Network','패킷 분석','탐지']],
-    ['cloud','cloud','클라우드 보안','클라우드의 신원·권한·감사·복구를 연결합니다.',['Cloud','IAM','컨테이너','복구']],
-    ['crypto','lock','암호학','암호 기술의 원리와 안전한 사용 조건을 배웁니다.',['암호 이론','해시','대칭키','공개키']],
-    ['rev','code','리버스 엔지니어링','프로그램의 실행 흐름과 동작을 분석합니다.',['Reverse','정적 분석','디버깅']],
-    ['misc','grid','문제 해결 · 자동화','데이터에서 단서를 찾고 반복 작업을 자동화합니다.',['데이터','인코딩','자동화']]
-  ];
-  const nodes = data.map(([id, symbol, title, description, tags], index) => `<a class="subject-card" data-map-track="${id}" href="../tracks/${id}/"><span class="subject-number">${String(index+1).padStart(2,'0')}</span>${icon(symbol)}<div class="subject-copy"><div class="subject-title"><h3>${esc(title)}</h3><span>${all(courses[id]).length}개 차시</span></div></div>${icon('arrow','subject-arrow')}</a>`).join('\n');
+  const order = ['foundation', 'web', 'pwn', 'forensic', 'network', 'cloud', 'crypto', 'rev', 'misc'];
+  const nodes = order.map(id => `<a class="subject-card" data-map-track="${id}" href="../tracks/${id}/"><img src="../assets/illustrations/${id}.webp" alt="" width="64" height="64"><div class="subject-copy"><div class="subject-title"><h3>${esc(courses[id].label)}</h3><span>${all(courses[id]).length}개 차시</span></div><p>${esc(courses[id].introduction.question)}</p></div>${icon('arrow','subject-arrow')}</a>`).join('\n');
   return { MAP_NODES:nodes,
     BRAND_WIREFRAME:require('./render_wordmark.cjs')(),
     BRAND_BACKDROP:require('./render_backdrop.cjs')(),

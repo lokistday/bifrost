@@ -61,9 +61,9 @@ verifyLocalLinks(home);
 const fieldGuides = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/fields.json'), 'utf8'));
 const clockwise = ['foundation', 'pwn', 'forensic', 'misc', 'cloud', 'network', 'crypto', 'rev', 'web'];
 const directoryOrder = ['foundation','web','pwn','forensic','network','cloud','crypto','rev','misc'];
-directoryOrder.forEach((key,index)=> {
+directoryOrder.forEach(key=> {
   const card = home.document.querySelector(`[data-map-track="${key}"]`);
-  check(card.querySelector('.subject-number').textContent === String(index+1).padStart(2,'0'), 'Subject numbering follows visual reading order');
+  check(card.querySelector('.subject-copy p').textContent === fieldGuides[key].question, 'Each subject previews its research question');
   check(card.querySelector('.subject-title > span').textContent === `${home.courses[key].modules.flatMap(m=>m.lessons).length}개 차시`, 'Subject count uses the curriculum');
 });
 const ids = new Set();
@@ -106,7 +106,7 @@ check(home.document.querySelectorAll('[data-map-track]').length === courses.leng
 
 // The former radial geometry contract was retired with the workspace redesign.
 check(home.document.querySelector('.subject-grid') && !home.document.querySelector('.mindmap-stage'), 'One semantic subject directory replaces the radial map');
-check(entry.document.querySelector('#startFoundation').getAttribute('href') === 'tracks/foundation/', 'Beginner choice opens common foundations directly');
+check(entry.document.querySelector('#startFoundation').getAttribute('href') === 'tracks/foundation/environment.html', 'Beginner choice opens the first experiment directly');
 check(!home.document.querySelector('.workspace-rail,.workspace-preview,.workspace-actions'), 'Subject chooser removes the marked rail, progress and old start button');
 
 const store = new Storage();
