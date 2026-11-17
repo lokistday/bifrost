@@ -1,78 +1,8 @@
-/* Shared theme controller for every Bifrost page and embedded guide. */
+/* Fixed dark appearance, including cached pages and embedded guides. */
 (() => {
-  const STORAGE_KEY = 'bifrost_theme_v1';
   const root = document.documentElement;
-  let button = null;
+  root.dataset.theme = 'dark';
+  root.style.colorScheme = 'dark';
   const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-
-  function readSavedTheme() {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved === 'dark' || saved === 'light') return saved;
-    } catch (_) { /* Storage can be disabled; use system preference instead. */ }
-    if (root.dataset.defaultTheme === 'dark') return 'dark';
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-
-  function updateTheme(theme, { persist = false, notifyParent = false } = {}) {
-    const selected = theme === 'dark' ? 'dark' : 'light';
-    root.dataset.theme = selected;
-    root.style.colorScheme = selected;
-    if (button) {
-      const dark = selected === 'dark';
-      button.setAttribute('aria-pressed', String(dark));
-      button.setAttribute('aria-label', dark ? '라이트 모드로 전환' : '다크 모드로 전환');
-      button.innerHTML = dark
-        ? '<span class="theme-icon" aria-hidden="true">☀</span><span class="theme-label">라이트 모드</span>'
-        : '<span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">다크 모드</span>';
-    }
-    if (metaThemeColor) metaThemeColor.content = selected === 'dark' ? '#0c1012' : '#f6f8fb';
-    if (persist) {
-      try { localStorage.setItem(STORAGE_KEY, selected); } catch (_) { /* Theme still applies for this visit. */ }
-    }
-    if (notifyParent) {
-      const frame = document.getElementById('linuxGuideFrame');
-      if (frame && frame.contentWindow) {
-        frame.contentWindow.postMessage({ type: 'bifrost-theme-change', theme: selected }, location.origin);
-      }
-    }
-  }
-
-  updateTheme(readSavedTheme());
-
-  // Apply the saved palette in the head, then bind controls after they exist.
-  function bindThemeToggle() {
-    button = document.getElementById('themeToggle');
-    updateTheme(root.dataset.theme || readSavedTheme());
-    if (button) button.addEventListener('click', () => {
-      updateTheme(root.dataset.theme === 'dark' ? 'light' : 'dark', { persist: true, notifyParent: true });
-    });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', bindThemeToggle, { once: true });
-  } else {
-    bindThemeToggle();
-  }
-
-  /* Keep a page or iframe in sync if another same-origin Bifrost page changes the saved preference. */
-  window.addEventListener('storage', event => {
-    if (event.key === STORAGE_KEY && (event.newValue === 'dark' || event.newValue === 'light')) {
-      updateTheme(event.newValue, { notifyParent: true });
-    }
-  });
-
-  window.addEventListener('message', event => {
-    if (event.origin !== location.origin || !event.data || event.data.type !== 'bifrost-theme-change') return;
-    if (event.data.theme === 'dark' || event.data.theme === 'light') updateTheme(event.data.theme);
-  });
-
-  /* Parent can read the current preference after an iframe finishes loading. */
-  if (window.parent !== window) {
-    try { window.parent.postMessage({ type: 'bifrost-theme-ready', theme: root.dataset.theme }, location.origin); } catch (_) { /* No-op for standalone contexts. */ }
-  }
-  window.addEventListener('message', event => {
-    if (event.origin !== location.origin || !event.data || event.data.type !== 'bifrost-theme-ready') return;
-    const frame = document.getElementById('linuxGuideFrame');
-    if (frame && frame.contentWindow) frame.contentWindow.postMessage({ type: 'bifrost-theme-change', theme: root.dataset.theme || 'light' }, location.origin);
-  });
+  if (metaThemeColor) metaThemeColor.content = '#080b17';
 })();

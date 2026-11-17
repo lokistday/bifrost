@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko" data-default-theme="dark">
+<html lang="ko" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#101a30">
+<meta name="theme-color" content="#080b17">
 <meta name="description" content="BIFROST는 보안의 기초부터 분야별 실습과 프로젝트까지 이어지는 학습 플랫폼입니다.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BIFROST">
@@ -23,8 +23,6 @@
 <meta name="twitter:image" content="{{SITE_URL}}og-image.png?v=20261105-bifrost">
 <title>분야 선택 · BIFROST</title>
 <script src="../js/theme.js?v={{CONTENT_VERSION}}"></script>
-<link rel="stylesheet" href="../css/splash.css?v={{CONTENT_VERSION}}">
-<script src="../js/splash.js?v=20261024-logo1"></script>
 <link rel="icon" type="image/svg+xml" href="../assets/logo.svg?v={{CONTENT_VERSION}}">
 
 <link rel="stylesheet" href="../css/main.css?v={{CONTENT_VERSION}}">
@@ -38,14 +36,6 @@
 <script src="../js/pointer-trail.js?v={{CONTENT_VERSION}}" defer></script>
 </head>
 <body class="workspace-page fields-page">
-<div class="startup-splash" id="startupSplash" hidden aria-hidden="true">
-  <div class="startup-splash__zoom">
-    <div class="startup-splash__identity">
-      <img class="startup-splash__star" src="../assets/logo-mark.svg?v={{CONTENT_VERSION}}" width="176" height="176" alt="">
-      <div class="startup-splash__name">BIFROST</div>
-    </div>
-  </div>
-</div>
 <a class="workspace-skip" href="#home">학습 본문으로 건너뛰기</a>
 <header class="workspace-header">
   <a class="workspace-brand" href="../" aria-label="Bifrost 홈"><img class="workspace-logo" src="../assets/logo.svg?v={{CONTENT_VERSION}}" width="36" height="36" alt=""><strong>BIFROST</strong><span>CYBERSECURITY<br>LEARNING PLATFORM</span></a>
@@ -59,13 +49,11 @@
     <a class="fields-scroll-cue" href="#mindmap"><span>9개 분야 보기</span><span class="fields-scroll-icon" aria-hidden="true">↓</span></a>
   </section>
   <section class="subject-directory" id="mindmap" aria-labelledby="directory-title">
-    <div class="directory-header"><div><p class="field-step">출발점 선택 <span aria-hidden="true">/</span> <strong>분야 선택</strong></p><h2 id="directory-title">어떤 분야가 궁금하세요?</h2></div><a class="entry-back" href="../"><span aria-hidden="true">←</span> 출발점 다시 선택</a></div>
-    <div class="case-preview"><div><strong>포렌식 실습 미리보기</strong><p>세션 값이 같은 두 이벤트를 하나의 사건으로 묶어도 될까요?</p><a href="../projects/forensic.html">조사 과제 열기 →</a></div><figure><figcaption>교육용 표본 A · UTC</figcaption><pre>00:00:00   lab-1   S7   login
-00:01:00   lab-2   S7   read</pre></figure></div>
+    <div class="directory-header"><div><p class="field-step">출발점 선택 <span aria-hidden="true">/</span> <strong>분야 선택</strong></p><h2 id="directory-title">어떤 분야가 궁금하세요?</h2></div><a class="entry-back" href="../index.html#home"><span aria-hidden="true">←</span> 출발점 다시 선택</a></div>
     <div class="subject-grid">{{MAP_NODES}}</div>
   </section>
 </main>
-<footer class="workspace-footer"><strong>BIFROST <small>/ by. Loki</small></strong><details class="entry-resources" id="resources"><summary>참고 자료</summary><nav aria-label="외부 참고 자료"><a href="https://dreamhack.io/" target="_blank" rel="noopener">Dreamhack ↗</a><a href="https://ctftime.org/" target="_blank" rel="noopener">CTFtime ↗</a><a href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP ↗</a></nav></details><button class="theme-toggle" id="themeToggle" type="button" aria-label="라이트 모드로 전환" aria-pressed="true">테마 전환</button></footer>
+<footer class="workspace-footer"><strong>BIFROST <small>/ by. Loki</small></strong><details class="entry-resources" id="resources"><summary>참고 자료</summary><nav aria-label="외부 참고 자료"><a href="https://dreamhack.io/" target="_blank" rel="noopener">Dreamhack ↗</a><a href="https://ctftime.org/" target="_blank" rel="noopener">CTFtime ↗</a><a href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP ↗</a></nav></details></footer>
 
 </body>
 </html>

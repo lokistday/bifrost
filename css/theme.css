@@ -1,84 +1,44 @@
-/* Single shared light/dark palette for homepage, courses and Linux guide. */
+/* One cosmic dark palette for entry, courses, projects, exams and guides. */
 :root {
-  color-scheme: light;
-  --ink: #172235;
-  --muted: #66758a;
-  --line: #e1e7ef;
-  --paper: #f7f8fd;
-  --surface: #ffffff;
-  --surface-raised: #ffffff;
-  --surface-soft: #f0f4f8;
-  --ink-soft: #344b61;
-  --teal: #087f8c;
-  --teal-soft: #e3f7f8;
-  --blue: #5b63c7;
-  --blue-soft: #eeedff;
-  --amber: #93631b;
-  --amber-soft: #fff4dc;
-  --purple: #7561b8;
-  --purple-soft: #f2edff;
-  --navy: #101a30;
-  --navy2: #1a2942;
-  --white: #ffffff;
-  --radius: 18px;
-  --shadow: 0 12px 35px rgba(25,43,70,.07);
-  --atlas-haze: #9896e710;
-  --atlas-side: #b9d9f812;
-  --atlas-lines: .30;
-  --atlas-card-shadow: 0 7px 24px #35457508;
-  --map-node-surface: #ffffff;
-  --map-core-surface: #f0f7fa;
-  --map-muted: #5b6b80;
-  --map-cyan: #066e77;
-  --map-blue: #275eac;
-  --map-green: #217448;
-  --map-violet: #7151b3;
-  --map-red: #bb3651;
-  --map-pink: #a73780;
-  --map-amber: #865507;
-  --map-orange: #9a4b21;
-  --map-sky: #176a91;
-}
-
-html[data-theme="dark"] {
   color-scheme: dark;
-  --ink: #eff2f3;
-  --muted: #9aa7b4;
-  --line: #283138;
-  --paper: #0c1012;
-  --surface: #101619;
-  --surface-raised: #171e22;
-  --surface-soft: #1c252b;
-  --ink-soft: #bfc9d3;
-  --teal: #c9f76a;
-  --teal-soft: #1a2319;
-  --blue: #a9b2ff;
-  --blue-soft: #252b49;
-  --amber: #f0c579;
-  --amber-soft: #382d1f;
-  --purple: #c2b3ff;
-  --purple-soft: #302747;
-  --navy: #0c1012;
-  --navy2: #12191d;
-  --white: #101619;
+  --ink: #eef1fc;
+  --muted: #a4afca;
+  --line: #2a324c;
+  --paper: #080b17;
+  --surface: #101426;
+  --surface-raised: #171c32;
+  --surface-soft: #1a2038;
+  --ink-soft: #c2cce4;
+  --teal: #79dfed;
+  --teal-soft: #112d3c;
+  --blue: #9aaef9;
+  --blue-soft: #1b2543;
+  --amber: #e8c38a;
+  --amber-soft: #332b25;
+  --purple: #b4a4f4;
+  --purple-soft: #2b2143;
+  --navy: #070b18;
+  --navy2: #131a2e;
+  --white: #101426;
   --radius: 18px;
   --shadow: 0 12px 35px rgba(0,0,0,.28);
-  --atlas-haze: #8593ff12;
-  --atlas-side: #6d76ca0c;
+  --page-haze: radial-gradient(ellipse 1000px 560px at 8% 0%, #a582e914, transparent 74%), radial-gradient(ellipse 900px 620px at 100% 18%, #5da6df0c, transparent 78%);
+  --atlas-haze: #ad8bf218;
+  --atlas-side: #75bfd610;
   --atlas-lines: .38;
   --atlas-card-shadow: 0 10px 30px #00000018;
-  --map-node-surface: #111b30;
-  --map-core-surface: #14213a;
-  --map-muted: #9aa7b4;
-  --map-cyan: #5ce1e6;
-  --map-blue: #73b5ff;
-  --map-green: #67d6a0;
-  --map-violet: #9b8cff;
-  --map-red: #ff526d;
-  --map-pink: #ff4db8;
-  --map-amber: #ffc247;
-  --map-orange: #f5a875;
-  --map-sky: #85d2ff;
+  --map-node-surface: #11172b;
+  --map-core-surface: #1a213b;
+  --map-muted: #a4afca;
+  --map-cyan: #7fdfed;
+  --map-blue: #99bafb;
+  --map-green: #8fd7b8;
+  --map-violet: #b6a1f6;
+  --map-red: #f38fa8;
+  --map-pink: #e79bd8;
+  --map-amber: #e9c583;
+  --map-orange: #edae8d;
+  --map-sky: #91cde9;
 }
 
 html {
@@ -87,12 +47,13 @@ html {
 }
 
 body {
-  background: var(--paper);
+  background: var(--page-haze), var(--paper);
+  background-repeat: no-repeat;
   color: var(--ink);
 }
 
 html[data-theme="dark"] .topbar {
-  background: rgba(12,16,18,.96);
+  background: rgba(8,11,23,.96);
   border-color: var(--line);
 }
 
@@ -157,12 +118,6 @@ html[data-theme="dark"] table, html[data-theme="dark"] table th, html[data-theme
 
 html[data-theme="dark"] table th {
   background: var(--surface-soft);
-}
-
-html[data-theme="dark"] .theme-toggle {
-  background: var(--surface-soft);
-  color: var(--ink);
-  border-color: var(--line);
 }
 
 html[data-theme="dark"] .btn.primary, html[data-theme="dark"] .hero-actions .btn.primary {
@@ -247,9 +202,3 @@ body, .learning-canvas, .topbar, .card, .resource, .practice-card, #linuxGuideOv
   }
 }
 
-/* Syntax and action contrast when the user chooses the light palette. */
-html[data-theme="light"] .workspace-primary { color: #fff; }
-html[data-theme="light"] .syntax-pink { color: #a02f70; }
-html[data-theme="light"] .syntax-purple { color: #6c42a1; }
-html[data-theme="light"] .syntax-cyan { color: #1b667d; }
-html[data-theme="light"] .syntax-green { color: #35702b; }

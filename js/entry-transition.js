@@ -13,12 +13,13 @@
   window.addEventListener('pagereveal', event => {
     const transition = event.viewTransition;
     if (!transition) return;
+    transition.ready.catch(() => {});
     if (!root.classList.contains('entry-destination')) {
       transition.skipTransition();
       return;
     }
     root.classList.add('entry-morph');
-    transition.finished.finally(() => root.classList.remove('entry-morph', 'entry-destination'));
+    transition.finished.finally(() => root.classList.remove('entry-morph', 'entry-destination')).catch(() => {});
   });
   window.addEventListener('pagehide', () => root.classList.remove('entry-destination', 'entry-morph'));
 })();

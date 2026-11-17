@@ -1,0 +1,17 @@
+Source asset: lightform-v2.png
+Generation: built-in image_gen tool, transparent_background=true.
+Use: source alpha, broad shading and particle distribution for the BIFROST entrance.
+
+Generation prompt (verbatim):
+Use case: stylized-concept. Asset type: high-detail transparent portrait PNG texture for a WebGL holographic human particle installation on a dark nebula website. Create ONE exquisitely detailed full-body adult human traveler, seen from behind at a very subtle three-quarter angle, suspended in zero gravity. Natural believable adult proportions, head gently turned just enough to see a little profile, shoulders relaxed. Arms extend loosely outward and down about 30 degrees from the body, elbows gently bent, hands relaxed with five anatomically distinct fingers. Legs separated slightly, one knee gently flexed and one foot a little lower, an elegant weightless pose rather than a rigid T-pose. Entire figure including all fingers and both feet must be inside the image, about 86 percent of image height, centered with generous clean margin. The person wears a very close-fitting refined dark charcoal technical suit with incredibly fine silver threads and fine fabric seams tracing the shoulder blades, back, spine, waist, elbows, knees and wrists; elegant smooth fabric, minimal garment bulk, no armor or backpack, unhelmeted short dark hair with distinct individual strands. Render the person as a beautiful high-end monochrome 3D scan / finely engraved silver sculpture, exquisitely modeled anatomy and natural cloth micro-folds, hair strands, neck and knuckle detail, NOT a generic smooth mannequin. Dense microscopic silver stippling and subtle contour-following fibers across surfaces give a rich luminous structural texture. Preserve deep charcoal shadows and sculptural midtone grays between delicate silver highlights so the form remains extremely legible without any glow. Soft cool-silver side lighting defines volume with delicate edge highlights. Restrained elegant mysterious science-fiction art direction, nearly grayscale with a hint of cool lavender, richly detailed but not noisy. Crisp clean cutout edge. Output genuinely transparent alpha outside the person. No background, no scenery, no floor, no stars, no fog, no exterior aura, no blue outline, no bloom, no white filled silhouette, no lightning veins, no skeleton, no visible internal organs, no text, no logo, no extra limbs or objects. This is a source texture: all atmospheric glow, color cycling, moving particles, and luminous trails will be added later in WebGL; avoid baking those effects into this image.
+
+Subsequent user direction:
+Keep the human proportions and sense of volume, but do not depict individual hair,
+skin wrinkles or hand wrinkles. Express the person through light and particles.
+
+Implementation of that direction:
+The source image itself is not displayed as a photograph. The renderer suppresses
+fine texture using a softened luminance field, then constructs a restrained
+cyan/lavender particle form from its alpha and broad shading. Surface and particles
+share a subtly deforming 2.5D mesh. This is not a freely orbitable 3D character.
+Motion uses the existing welcome.js clock and its hidden-page/reduced-motion rules.

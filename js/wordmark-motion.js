@@ -3,7 +3,7 @@
   'use strict';
   const svg=document.querySelector('.brand-wireframe');
   if(!svg)return;
-  const width=Number(svg.dataset.brandWidth),depth=14,frontSpeed=Math.PI*2/18000;
+  const width=Number(svg.dataset.brandWidth),depth=21,frontSpeed=Math.PI*2/18000;
   const glyphs=[...svg.querySelectorAll('[data-wire-glyph]')].map(group=>({
     group,offset:Number(group.dataset.offset),contours:JSON.parse(group.dataset.contours),
     front:group.querySelector('.brand-wire-front'),back:group.querySelector('[data-wire-back]'),ties:group.querySelector('[data-wire-ties]')

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko" data-default-theme="dark">
+<html lang="ko" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#101a30">
+<meta name="theme-color" content="#080b17">
 <meta name="description" content="BIFROST는 보안의 기초부터 분야별 실습과 프로젝트까지 이어지는 학습 플랫폼입니다.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BIFROST">
@@ -23,8 +23,6 @@
 <meta name="twitter:image" content="{{SITE_URL}}og-image.png?v=20261105-bifrost">
 <title>BIFROST — 보안 학습 플랫폼</title>
 <script src="js/theme.js?v={{CONTENT_VERSION}}"></script>
-<link rel="stylesheet" href="css/splash.css?v={{CONTENT_VERSION}}">
-<script src="js/splash.js?v=20261024-logo1"></script>
 <link rel="icon" type="image/svg+xml" href="assets/logo.svg?v={{CONTENT_VERSION}}">
 
 <link rel="stylesheet" href="css/main.css?v={{CONTENT_VERSION}}">
@@ -33,20 +31,28 @@
 
 <link rel="stylesheet" href="css/workspace.css?v={{HOME_VERSION}}">
 <link rel="stylesheet" href="css/entry-transition.css?v={{HOME_VERSION}}">
-<script src="js/catalog.js?v={{CONTENT_VERSION}}" defer></script>
-<script src="js/progress.js?v={{CONTENT_VERSION}}" defer></script>
+<link rel="stylesheet" href="css/welcome.css?v={{HOME_VERSION}}">
+<script src="js/nebula-scene.js?v={{HOME_VERSION}}" defer></script>
+<script src="js/raven-flight.js?v={{HOME_VERSION}}" defer></script>
+<script src="js/traveler.js?v={{HOME_VERSION}}" defer></script>
+<script src="js/welcome.js?v={{HOME_VERSION}}" defer></script>
 <script src="js/workspace.js?v={{HOME_VERSION}}" defer></script>
 <script src="js/pointer-trail.js?v={{CONTENT_VERSION}}" defer></script>
 </head>
-<body class="workspace-page">
-<div class="startup-splash" id="startupSplash" hidden aria-hidden="true">
-  <div class="startup-splash__zoom">
-    <div class="startup-splash__identity">
-      <img class="startup-splash__star" src="assets/logo-mark.svg?v={{CONTENT_VERSION}}" width="176" height="176" alt="">
-      <div class="startup-splash__name">BIFROST</div>
-    </div>
+<body class="workspace-page welcome-page">
+<section class="welcome-scene" id="welcome" aria-labelledby="welcome-title">
+  <div class="welcome-art" aria-hidden="true">
+    <div class="welcome-atmosphere"></div>
+    <canvas class="welcome-cosmos" id="welcomeNebula"></canvas>
+    <canvas class="welcome-particles" id="welcomeParticles"></canvas>
+    <canvas class="welcome-traveler" id="welcomeTraveler"></canvas>
   </div>
-</div>
+  <a class="welcome-raven-link" id="welcomeStart" href="#home" aria-label="까마귀를 클릭하여 시작" aria-describedby="welcomeHint"></a>
+  <div class="welcome-brand">
+    <h1 id="welcome-title">BIFROST</h1>
+  </div>
+  <p class="welcome-hint" id="welcomeHint">까마귀를 클릭하세요.</p>
+</section>
 <a class="workspace-skip" href="#home">학습 본문으로 건너뛰기</a>
 <header class="workspace-header">
   <a class="workspace-brand" href="./" aria-label="Bifrost 홈"><img class="workspace-logo" src="assets/logo.svg?v={{CONTENT_VERSION}}" width="36" height="36" alt=""><strong>BIFROST</strong><span>CYBERSECURITY<br>LEARNING PLATFORM</span></a>
@@ -54,21 +60,17 @@
 <main id="home" class="guided-home" tabindex="-1">
   <section class="workspace-hero entry-hero" aria-labelledby="entry-title">
     <div class="entry-guide">
-      <div class="entry-intro">
-        <h1 id="entry-title">어디서부터<br>시작할까요?</h1>
-        <p class="entry-description">코드를 실행하고, 기록을 읽고, 직접 찾은 근거로 답하는 보안 실습.</p>
-      </div>
-      <div class="entry-menu">
-      <a class="resume-choice" id="resumeChoice" hidden><span>이어서 학습하기</span><strong></strong>{{ICON_ARROW}}</a>
+      <div class="entry-steps" aria-label="학습 시작 순서"><span aria-current="step"><i aria-hidden="true"></i>출발점 선택</span><span class="entry-connector" aria-hidden="true"></span><span><i aria-hidden="true"></i>학습 시작</span></div>
+      <h1 id="entry-title">어디서부터 시작할까요?</h1>
+      <p class="entry-description">지금 나에게 맞는 출발점 하나만 골라주세요.</p>
       <div class="entry-choices" id="mindmap" aria-label="출발점 선택">
-        <a class="entry-choice" id="startFoundation" href="tracks/foundation/environment.html"><span class="entry-choice-symbol" aria-hidden="true">{{ICON_BOOK}}</span><span class="entry-choice-copy"><strong>기초부터 시작하기</strong><span>Python 파일을 고쳐 첫 출력을 만들어 보세요.</span></span>{{ICON_ARROW}}</a>
-        <a class="entry-choice" id="chooseFields" href="fields/"><span class="entry-choice-symbol" aria-hidden="true">{{ICON_GLOBE}}</span><span class="entry-choice-copy"><strong>관심 분야 고르기</strong><span>로그로 사건을 추적하는 포렌식 등 9개 분야를 탐색하세요.</span></span>{{ICON_ARROW}}</a>
-      </div>
+        <a class="entry-choice" id="startFoundation" href="tracks/foundation/"><span class="entry-choice-symbol" aria-hidden="true">{{ICON_BOOK}}</span><span class="entry-choice-copy"><strong>기초부터 배울게요.</strong><span>공통 기초에서 차근차근 시작해요.</span></span>{{ICON_ARROW}}</a>
+        <a class="entry-choice" id="chooseFields" href="fields/#mindmap"><span class="entry-choice-symbol" aria-hidden="true">{{ICON_GLOBE}}</span><span class="entry-choice-copy"><strong>관심 분야부터 볼게요.</strong><span>궁금한 분야를 골라 바로 들어가요.</span></span>{{ICON_ARROW}}</a>
       </div>
     </div>
   </section>
 </main>
-<footer class="workspace-footer"><strong>BIFROST <small>/ by. Loki</small></strong><details class="entry-resources" id="resources"><summary>참고 자료</summary><nav aria-label="외부 참고 자료"><a href="https://dreamhack.io/" target="_blank" rel="noopener">Dreamhack ↗</a><a href="https://ctftime.org/" target="_blank" rel="noopener">CTFtime ↗</a><a href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP ↗</a></nav></details><button class="theme-toggle" id="themeToggle" type="button" aria-label="라이트 모드로 전환" aria-pressed="true">테마 전환</button></footer>
+<footer class="workspace-footer"><strong>BIFROST <small>/ by. Loki</small></strong><details class="entry-resources" id="resources"><summary>참고 자료</summary><nav aria-label="외부 참고 자료"><a href="https://dreamhack.io/" target="_blank" rel="noopener">Dreamhack ↗</a><a href="https://ctftime.org/" target="_blank" rel="noopener">CTFtime ↗</a><a href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP ↗</a></nav></details></footer>
 
 </body>
 </html>

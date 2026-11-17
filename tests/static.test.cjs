@@ -97,12 +97,9 @@ function displayFromStyles(element, files) {
   return winner.value;
 }
 const homeStyles = [...home.querySelectorAll('link[rel="stylesheet"]')].map(link => link.getAttribute('href'));
-const splash = home.getElementById('startupSplash');
-check(displayFromStyles(splash, homeStyles) === 'none', 'Skipped intro is actually hidden');
-home.documentElement.classList.add('splash-active');
-check(displayFromStyles(splash, homeStyles) === 'grid', 'Active intro is actually displayed by the complete homepage stylesheet stack');
-check(displayFromStyles(splash, [...homeStyles, 'css/learning.css']) === 'grid', 'Course hidden rules cannot hide the homepage intro even if loaded again');
-home.documentElement.classList.remove('splash-active');
+check(home.getElementById('welcome'), 'The cosmic entrance is the homepage opening screen');
+check(home.getElementById('welcomeStart').getAttribute('href') === '#home', 'Start opens the existing learning choices without JavaScript');
+check(!home.getElementById('startupSplash') && !home.querySelector('script[src*="splash.js"]'), 'The welcome artwork replaces the automatic logo intro on the homepage');
 const courseDocument = documents.get(path.join(ROOT, 'tracks/web/sessions.html'));
 const courseStyles = [...courseDocument.querySelectorAll('link[rel="stylesheet"]')].map(link => path.join('tracks/web', link.getAttribute('href')));
 check(displayFromStyles(courseDocument.getElementById('completeLesson'), courseStyles) === 'none', 'Learning controls remain hidden before JavaScript enhancement');

@@ -11,7 +11,7 @@ module.exports = function wordmark() {
     {w:18,c:[[[0,82],[18,82],[18,100],[0,100]]]}
   ];
   let x=8, body='';
-  const dx=10,dy=-11;
+  const dx=15,dy=-16.5;
   for (const [i,glyph] of letters.entries()) {
     const d=glyph.c.map(c=>'M'+c.map(([a,b])=>`${a},${b}`).join('L')+'Z').join('');
     let ties='';

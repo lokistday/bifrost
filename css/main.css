@@ -41,7 +41,7 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(255,255,255,.94);
+  background: rgba(8,11,23,.96);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--line);
 }
@@ -490,45 +490,6 @@ h1 span {
   font-size: 14px;
   color: var(--ink);
 }
-
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  padding: 9px 12px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--white);
-  color: var(--ink);
-  font: inherit;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.theme-toggle:hover {
-  border-color: var(--purple);
-}
-
-.theme-toggle:focus-visible {
-  outline: 3px solid var(--purple);
-  outline-offset: 2px;
-}
-
-@media (max-width:600px) {
-  .theme-toggle {
-    padding: 8px 9px;
-    font-size: 11px;
-    gap: 5px;
-  }
-
-  .theme-label {
-    display: none;
-  }
-}
-
 
 /* Shared geometric B mark on course and study pages. */
 .brand-mark:has(.brand-logo) { background: transparent; border-radius: 7px; }

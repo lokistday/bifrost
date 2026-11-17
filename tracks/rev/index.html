@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="ko" data-default-theme="dark">
+<html lang="ko" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b1220">
+<meta name="theme-color" content="#080b17">
 <meta name="description" content="직접 만든 프로그램과 바이트 형식으로 호출 규약·제어 및 데이터 흐름·차등 검증을 익힙니다.">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Bifrost">
@@ -17,33 +17,33 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/rev/">
 <title>Reverse Engineering — Bifrost</title>
-<script src="../../js/theme.js?v=learning-c79e7ba0502c"></script>
-<script src="../../js/pointer-trail.js?v=learning-c79e7ba0502c" defer></script>
-<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-c79e7ba0502c">
-<link rel="icon" href="../../assets/logo.svg?v=learning-c79e7ba0502c" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-c79e7ba0502c">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-c79e7ba0502c">
-<link rel="stylesheet" href="../../css/learning.css?v=learning-c79e7ba0502c">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-c79e7ba0502c">
-<link rel="stylesheet" href="../../css/study.css?v=learning-c79e7ba0502c">
-<script src="../../js/catalog.js?v=learning-c79e7ba0502c" defer></script>
+<script src="../../js/theme.js?v=learning-d027f06d8b67"></script>
+<script src="../../js/pointer-trail.js?v=learning-d027f06d8b67" defer></script>
+<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-d027f06d8b67">
+<link rel="icon" href="../../assets/logo.svg?v=learning-d027f06d8b67" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-d027f06d8b67">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-d027f06d8b67">
+<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-d027f06d8b67">
+<link rel="stylesheet" href="../../css/study.css?v=learning-d027f06d8b67">
+<script src="../../js/catalog.js?v=learning-d027f06d8b67" defer></script>
 <script src="../../js/courses/rev.js?v=course-6b7c2a46f580" defer></script>
-<script src="../../js/progress.js?v=learning-c79e7ba0502c" defer></script>
+<script src="../../js/progress.js?v=learning-d027f06d8b67" defer></script>
 
 
-<script src="../../js/learning-view.js?v=learning-c79e7ba0502c" defer></script>
-<script src="../../js/learning.js?v=learning-c79e7ba0502c" defer></script>
+<script src="../../js/learning-view.js?v=learning-d027f06d8b67" defer></script>
+<script src="../../js/learning.js?v=learning-d027f06d8b67" defer></script>
 </head>
 <body class="learning-page" data-course="rev" data-course-number="07" data-view="course" data-lesson-id="" data-path="" style="--course-accent:var(--map-red)">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-c79e7ba0502c" width="34" height="34" alt=""></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../index.html#mindmap">모든 분야</a><a href="../../learn/">학습 경로</a><a href="./#courseModules">리버싱 목차</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
-  <button class="theme-toggle" id="themeToggle" type="button" aria-label="다크 모드로 전환" aria-pressed="false">테마 전환</button>
-  <a class="nav-cta" href="../../index.html#mindmap">학습 지도 ↗</a>
+  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-d027f06d8b67" width="34" height="34" alt=""></span><span>BIFROST</span></a>
+  <nav class="navlinks" aria-label="주 메뉴"><a href="../../fields/#mindmap">모든 분야</a><a href="../../learn/">학습 경로</a><a href="./#courseModules">리버싱 목차</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
+  
+  <a class="nav-cta" href="../../fields/#mindmap">학습 지도 ↗</a>
 </div></header>
 <main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="course">
-<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../index.html#mindmap">학습 지도</a><span aria-hidden="true">/</span><span aria-current="page">Reverse Engineering</span></nav>
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../fields/#mindmap">학습 지도</a><span aria-hidden="true">/</span><span aria-current="page">Reverse Engineering</span></nav>
         <section class="course-hero"><div class="course-hero-intro"><div class="course-hero-copy"><div class="overline">07 / LEARNING PATH</div><h1>Reverse Engineering</h1>
           <p class="course-lead">직접 만든 프로그램과 바이트 형식으로 호출 규약·제어 및 데이터 흐름·차등 검증을 익힙니다.</p><div class="course-chips"><span>기초 필요</span><span>6개 모듈 · 15개 차시</span><span>설명 → 실습 → 검증</span></div></div><img class="course-hero-art" src="../../assets/illustrations/rev.webp" width="480" height="480" alt="" decoding="async"></div>
           <div class="continue-panel"><div class="overline">YOUR PROGRESS</div><div class="course-stats"><span data-count="rev"></span>
@@ -111,6 +111,6 @@
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
         <p class="feedback" role="status" id="backupFeedback"></p></details>
 </main>
-<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../index.html#mindmap">다른 분야 탐색 ↗</a></div></footer>
+<footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../fields/#mindmap">다른 분야 탐색 ↗</a></div></footer>
 </body>
 </html>

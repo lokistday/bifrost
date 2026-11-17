@@ -8,7 +8,8 @@
   }
   ::view-transition-group(entry-header) { z-index: 2; }
   .entry-origin .entry-choice-symbol > svg,
-  .entry-destination :is(.guided-brand, .course-hero-copy) h1 {
+  .entry-destination .course-hero-copy h1,
+  .entry-destination .fields-page #directory-title {
     view-transition-name: entry-heading;
   }
   ::view-transition-group(entry-heading) {

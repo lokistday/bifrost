@@ -55,15 +55,15 @@ check(home.document.querySelectorAll('a[data-map-track]').length === 9, 'Nine se
 check(!home.document.getElementById('roadmap') && !home.document.getElementById('study'), 'Homepage has no Roadmap or Study Tracks sections');
 check(!home.document.querySelector('.catalog-card') && !home.document.getElementById('catalogSummary'), 'Duplicate field catalogue and summary removed');
 check(!home.document.querySelector('script[src="js/app.js"]'), 'Removed catalogue controller is not loaded');
-check(entry.document.querySelector('#chooseFields').getAttribute('href') === 'fields/', 'Interest choice opens the dedicated subject directory');
+check(entry.document.querySelector('#chooseFields').getAttribute('href') === 'fields/#mindmap', 'Interest choice opens the dedicated subject directory');
 verifyLocalLinks(entry);
 verifyLocalLinks(home);
 const fieldGuides = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/fields.json'), 'utf8'));
 const clockwise = ['foundation', 'pwn', 'forensic', 'misc', 'cloud', 'network', 'crypto', 'rev', 'web'];
 const directoryOrder = ['foundation','web','pwn','forensic','network','cloud','crypto','rev','misc'];
-directoryOrder.forEach(key=> {
+directoryOrder.forEach((key,index)=> {
   const card = home.document.querySelector(`[data-map-track="${key}"]`);
-  check(card.querySelector('.subject-copy p').textContent === fieldGuides[key].question, 'Each subject previews its research question');
+  check(card.querySelector('.subject-number').textContent === String(index+1).padStart(2,'0'), 'Subject numbering follows visual reading order');
   check(card.querySelector('.subject-title > span').textContent === `${home.courses[key].modules.flatMap(m=>m.lessons).length}개 차시`, 'Subject count uses the curriculum');
 });
 const ids = new Set();
@@ -106,7 +106,7 @@ check(home.document.querySelectorAll('[data-map-track]').length === courses.leng
 
 // The former radial geometry contract was retired with the workspace redesign.
 check(home.document.querySelector('.subject-grid') && !home.document.querySelector('.mindmap-stage'), 'One semantic subject directory replaces the radial map');
-check(entry.document.querySelector('#startFoundation').getAttribute('href') === 'tracks/foundation/environment.html', 'Beginner choice opens the first experiment directly');
+check(entry.document.querySelector('#startFoundation').getAttribute('href') === 'tracks/foundation/', 'Beginner choice opens common foundations directly');
 check(!home.document.querySelector('.workspace-rail,.workspace-preview,.workspace-actions'), 'Subject chooser removes the marked rail, progress and old start button');
 
 const store = new Storage();
@@ -184,10 +184,10 @@ for (const search of ['', '?id=unknown', '?id=%3Cscript%3Ealert(1)%3C/script%3E'
   check(!!missing.document.querySelector('.not-found') && !missing.document.querySelector('script:not([src])'), 'Invalid/cross-course ID gives safe recovery');
 }
 const theme = openPage('tracks/cloud/index.html','',new Storage({'bifrost_theme_v1':'light'}));
-theme.document.getElementById('themeToggle').click();
-check(theme.document.documentElement.dataset.theme === 'dark', 'Shared theme works on course pages');
+check(!theme.document.getElementById('themeToggle'), 'Theme switching controls are removed');
+check(theme.document.documentElement.dataset.theme === 'dark', 'Saved light preference cannot change the fixed dark course theme');
 const guide = parseHTML(fs.readFileSync(path.join(ROOT, 'guides/linux.html'), 'utf8')).document;
-const returns = guide.querySelectorAll('a[href="../index.html#mindmap"]');
+const returns = guide.querySelectorAll('a[href="../fields/#mindmap"]');
 check(returns.length === 2, 'Standalone Linux guide has working return links');
 for (const a of returns) {
   check(a.hasAttribute('data-return-guide') && !a.hasAttribute('onclick'), 'Guide link has CSP-compatible behavior hook');
