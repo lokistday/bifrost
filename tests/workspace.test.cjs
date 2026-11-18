@@ -6,9 +6,6 @@ const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const entry=parseHTML(read('index.html')).document;
 const fields=parseHTML(read('fields/index.html')).document;
 assert.equal(entry.querySelectorAll('.entry-choice').length,2);
-assert.match(read('css/workspace.css'),/\.welcome-flight-complete \.entry-choice \{ animation:entry-choice-arrive/);
-assert.match(read('css/workspace.css'),/\.entry-choice::after \{ animation:entry-choice-trail/);
-assert.match(read('css/workspace.css'),/\.entry-choice,\.entry-choice::after,\.workspace-page::after \{ animation:none!important; \}/);
 assert.equal(entry.querySelector('#startFoundation').getAttribute('href'),'tracks/foundation/');
 assert.equal(entry.querySelector('#chooseFields').getAttribute('href'),'fields/#mindmap');
 assert.equal(entry.querySelector('#entry-title').tagName,'H1');
@@ -61,22 +58,4 @@ assert.equal(visit('#home'),null);
 assert.equal(visit('#mindmap'),'https://example.test/bifrost/fields/#mindmap');
 assert.equal(visit('#fields','index.html'),'https://example.test/bifrost/fields/#mindmap');
 assert.ok(read('scripts/package_site.py').includes("'fields'"));
-(async () => {
-  for (const cancelled of [false, true]) {
-    const document = parseHTML(read('fields/index.html')).document;
-    const handlers = {};
-    vm.runInNewContext(read('js/entry-transition.js'), {
-      document, location: { pathname: '/bifrost/fields/' }, matchMedia: () => ({ matches: false }),
-      sessionStorage: { getItem: () => '/bifrost/fields/', removeItem() {} },
-      window: { addEventListener: (name, handler) => { handlers[name] = handler; } }
-    });
-    assert.ok(document.documentElement.classList.contains('entry-destination'));
-    const result = cancelled ? Promise.reject(Error('Navigation interrupted')) : Promise.resolve();
-    handlers.pagereveal({ viewTransition: { ready: result, finished: result } });
-    await result.catch(() => {});
-    await Promise.resolve();
-    assert.ok(!document.documentElement.classList.contains('entry-morph'));
-    assert.ok(!document.documentElement.classList.contains('entry-destination'));
-  }
-  console.log('PASS: direct directory choices, no-JS links, legacy bookmarks, untouched progress and completed/cancelled entry transitions.');
-})().catch(error => { console.error(error); process.exitCode = 1; });
+console.log('PASS: direct directory choices, no-JS links, legacy bookmarks and untouched progress.');

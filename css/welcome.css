@@ -118,8 +118,6 @@ html:has(#home:target) .welcome-page { background:var(--paper); }
   transition:none;
 }
 .welcome-opening .welcome-atmosphere { opacity:var(--flight-nebula-opacity,1); }
-.welcome-flight-complete .entry-guide { animation:welcome-choices-reveal 550ms ease-out both; }
-@keyframes welcome-choices-reveal { from { opacity:0; } to { opacity:1; } }
 @media(prefers-reduced-motion:no-preference) {
   .welcome-brand h1 { animation:welcome-moonlight 2s ease-in-out infinite; }
   .welcome-hint { animation:welcome-press-start 2.4s ease-in-out infinite; }
@@ -134,5 +132,4 @@ html:has(#home:target) .welcome-page { background:var(--paper); }
 }
 @media(prefers-reduced-motion:reduce) {
   .welcome-cosmos { transition:none; }
-  .welcome-flight-complete .entry-guide { animation:none; }
 }

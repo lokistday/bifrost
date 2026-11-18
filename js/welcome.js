@@ -69,10 +69,9 @@
       radius:1.5+Math.pow(random(),.7)*30,width:.6+random()*1.5,
       color:random()>.55?'159,221,255':'208,174,245'
     }));
-    function revealChoices(animate = false) {
+    function revealChoices() {
       root.classList.remove('welcome-opening');
       root.classList.add('welcome-entered');
-      root.classList.toggle('welcome-flight-complete', animate);
       scene.setAttribute('aria-hidden', 'true');
       entering = false;
       departure=null;
@@ -84,7 +83,7 @@
     }
     function finishEntry(){
       history.pushState(null,'','#home');
-      revealChoices(departure !== null);
+      revealChoices();
       window.scrollTo(0,0);
       document.getElementById('home').focus({preventScroll:true});
     }
@@ -92,7 +91,7 @@
       if (location.hash === '#home') {
         revealChoices();
       } else if (!location.hash || location.hash === '#welcome') {
-        root.classList.remove('welcome-entered', 'welcome-opening', 'welcome-flight-complete');
+        root.classList.remove('welcome-entered', 'welcome-opening');
         scene.removeAttribute('aria-hidden');
         entering = false;
         departure=null;

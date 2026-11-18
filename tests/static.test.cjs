@@ -47,7 +47,7 @@ for (const file of illustratedAssets) {
   artBytes += bytes.length;
 }
 check(artBytes < 1000000, 'The complete illustration collection stays under 1 MB');
-for (const file of ['main.css', 'theme.css', 'mindmap.css', 'learning.css', 'visuals.css', 'linux-guide.css', 'splash.css', 'overlays.css', 'study.css', 'workspace.css', 'exams.css', 'projects.css', 'pointer-trail.css']) {
+for (const file of ['main.css', 'theme.css', 'mindmap.css', 'learning.css', 'visuals.css', 'linux-guide.css', 'overlays.css', 'study.css', 'workspace.css', 'exams.css', 'projects.css', 'pointer-trail.css']) {
   const source = fs.readFileSync(path.join(ROOT, 'css', file), 'utf8');
   check(!/var\([^)]*\)[\da-f]{2,}/i.test(source), `No malformed color suffix: ${file}`);
   check(CSSOM.parse(source).cssRules.length > 0, `Stylesheet parses: ${file}`);
@@ -99,7 +99,10 @@ function displayFromStyles(element, files) {
 const homeStyles = [...home.querySelectorAll('link[rel="stylesheet"]')].map(link => link.getAttribute('href'));
 check(home.getElementById('welcome'), 'The cosmic entrance is the homepage opening screen');
 check(home.getElementById('welcomeStart').getAttribute('href') === '#home', 'Start opens the existing learning choices without JavaScript');
-check(!home.getElementById('startupSplash') && !home.querySelector('script[src*="splash.js"]'), 'The welcome artwork replaces the automatic logo intro on the homepage');
+for (const file of ['js/splash.js', 'css/splash.css', 'js/entry-transition.js', 'css/entry-transition.css']) {
+  check(!fs.existsSync(path.join(ROOT, file)), `Retired entrance asset is removed: ${file}`);
+}
+check(!home.getElementById('startupSplash'), 'The homepage has no automatic logo intro');
 const courseDocument = documents.get(path.join(ROOT, 'tracks/web/sessions.html'));
 const courseStyles = [...courseDocument.querySelectorAll('link[rel="stylesheet"]')].map(link => path.join('tracks/web', link.getAttribute('href')));
 check(displayFromStyles(courseDocument.getElementById('completeLesson'), courseStyles) === 'none', 'Learning controls remain hidden before JavaScript enhancement');
