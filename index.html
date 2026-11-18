@@ -24,6 +24,12 @@
 <meta name="twitter:description" content="보안을 이해하고, 직접 실습하고, 나만의 결과물로.">
 <meta name="twitter:image" content="https://lokistday.github.io/bifrost/og-image.png?v=20261105-bifrost">
 <title>BIFROST — 보안 학습 플랫폼</title>
+<style>
+  /* Pick the entrance or the choice screen before loading the scene assets. */
+  html:not(.welcome-entered):not(:has(#home:target)) .welcome-page > :is(.workspace-header,.guided-home,.workspace-footer,.workspace-skip,.pointer-trail) { display:none; }
+  .welcome-entered .welcome-scene,
+  html:has(#home:target) .welcome-scene { display:none; }
+</style>
 <script src="js/theme.js?v=learning-d027f06d8b67"></script>
 <link rel="icon" type="image/svg+xml" href="assets/logo.svg?v=learning-d027f06d8b67">
 
@@ -31,14 +37,14 @@
 <link rel="stylesheet" href="css/theme.css?v=learning-d027f06d8b67">
 <link rel="stylesheet" href="css/pointer-trail.css?v=learning-d027f06d8b67">
 
-<link rel="stylesheet" href="css/workspace.css?v=home-6fe8021fc291">
-<link rel="stylesheet" href="css/entry-transition.css?v=home-6fe8021fc291">
-<link rel="stylesheet" href="css/welcome.css?v=home-6fe8021fc291">
-<script src="js/nebula-scene.js?v=home-6fe8021fc291" defer></script>
-<script src="js/raven-flight.js?v=home-6fe8021fc291" defer></script>
-<script src="js/traveler.js?v=home-6fe8021fc291" defer></script>
-<script src="js/welcome.js?v=home-6fe8021fc291" defer></script>
-<script src="js/workspace.js?v=home-6fe8021fc291" defer></script>
+<link rel="stylesheet" href="css/workspace.css?v=home-1ad6d5a88dc9">
+<link rel="stylesheet" href="css/entry-transition.css?v=home-1ad6d5a88dc9">
+<link rel="stylesheet" href="css/welcome.css?v=home-1ad6d5a88dc9">
+<script src="js/nebula-scene.js?v=home-1ad6d5a88dc9" defer></script>
+<script src="js/raven-flight.js?v=home-1ad6d5a88dc9" defer></script>
+<script src="js/traveler.js?v=home-1ad6d5a88dc9" defer></script>
+<script src="js/welcome.js?v=home-1ad6d5a88dc9" defer></script>
+<script src="js/workspace.js?v=home-1ad6d5a88dc9" defer></script>
 <script src="js/pointer-trail.js?v=learning-d027f06d8b67" defer></script>
 </head>
 <body class="workspace-page welcome-page">

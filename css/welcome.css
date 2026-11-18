@@ -1,10 +1,7 @@
 /* A live volumetric nebula is the entire desktop entrance. */
 .welcome-page { background:#050309; }
-html:not(.welcome-entered):not(:has(#home:target)) .welcome-page > :is(.workspace-header,.guided-home,.workspace-footer,.workspace-skip,.pointer-trail) { display:none; }
 .welcome-entered .welcome-page,
 html:has(#home:target) .welcome-page { background:var(--paper); }
-.welcome-entered .welcome-scene,
-html:has(#home:target) .welcome-scene { display:none; }
 .welcome-scene {
   position:relative;
   isolation:isolate;
@@ -121,7 +118,7 @@ html:has(#home:target) .welcome-scene { display:none; }
   transition:none;
 }
 .welcome-opening .welcome-atmosphere { opacity:var(--flight-nebula-opacity,1); }
-.welcome-entered .entry-guide { animation:welcome-choices-reveal 550ms ease-out both; }
+.welcome-flight-complete .entry-guide { animation:welcome-choices-reveal 550ms ease-out both; }
 @keyframes welcome-choices-reveal { from { opacity:0; } to { opacity:1; } }
 @media(prefers-reduced-motion:no-preference) {
   .welcome-brand h1 { animation:welcome-moonlight 2s ease-in-out infinite; }
@@ -137,5 +134,5 @@ html:has(#home:target) .welcome-scene { display:none; }
 }
 @media(prefers-reduced-motion:reduce) {
   .welcome-cosmos { transition:none; }
-  .welcome-entered .entry-guide { animation:none; }
+  .welcome-flight-complete .entry-guide { animation:none; }
 }

@@ -6,7 +6,7 @@ const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const entry=parseHTML(read('index.html')).document;
 const fields=parseHTML(read('fields/index.html')).document;
 assert.equal(entry.querySelectorAll('.entry-choice').length,2);
-assert.match(read('css/workspace.css'),/html:not\(\.splash-active\) \.entry-choice \{ animation:entry-choice-arrive/);
+assert.match(read('css/workspace.css'),/\.welcome-flight-complete \.entry-choice \{ animation:entry-choice-arrive/);
 assert.match(read('css/workspace.css'),/\.entry-choice::after \{ animation:entry-choice-trail/);
 assert.match(read('css/workspace.css'),/\.entry-choice,\.entry-choice::after,\.workspace-page::after \{ animation:none!important; \}/);
 assert.equal(entry.querySelector('#startFoundation').getAttribute('href'),'tracks/foundation/');

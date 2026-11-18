@@ -10,7 +10,7 @@ class Channel {
     for (const other of channels) if (other !== this) other.onmessage?.({data});
   }
 }
-function open() {
+function open(initialHash = '') {
   const {document, Event} = parseHTML(fs.readFileSync('index.html','utf8'));
   const frames = new Map();
   const timers = new Map();
@@ -29,7 +29,7 @@ function open() {
     moveTo(){},quadraticCurveTo(){},stroke(){},createLinearGradient(){return {addColorStop(){}};}};
   document.getElementById('welcomeParticles').getContext = ()=>paint;
   document.getElementById('home').focus = ()=>{};
-  const location = {hash:''};
+  const location = {hash:initialHash};
   const window = {
     devicePixelRatio:1,
     createBifrostNebula:()=>({resize(){},render(){renders++;},observeFrame(){}}),
@@ -100,8 +100,10 @@ first.step(304100);
 assert.equal(first.document.getElementById('welcome').dataset.flightProgress,pausedProgress,'Returning after a long pause does not skip the dive');
 for(let i=1;i<=280&&first.frames.size;i++)first.step(304100+i*1000/60);
 assert.equal(first.location.hash,'#home','The learning page opens only after the complete flight');
+assert.ok(first.document.documentElement.classList.contains('welcome-flight-complete'),'Completing a flight enables the choice animation');
 assert.equal(first.frames.size,0,'Starting learning stops entrance rendering');
 first.location.hash='';first.events.hashchange();
+assert.ok(!first.document.documentElement.classList.contains('welcome-flight-complete'),'Returning to the entrance resets the flight completion state');
 assert.equal(first.document.getElementById('welcomeStart').getAttribute('aria-disabled'),null,'History return re-enables the raven');
 assert.equal(first.frames.size,1);
 const third=open();third.media.matches=true;third.events.motion();
@@ -109,4 +111,7 @@ const reducedClick=new third.Event('click',{cancelable:true});reducedClick.butto
 third.document.getElementById('welcomeStart').dispatchEvent(reducedClick);
 assert.equal(third.location.hash,'#home','Reduced motion bypasses flight immediately');
 assert.equal(third.frames.size,0);
+const reloaded = open('#home');
+assert.ok(reloaded.document.documentElement.classList.contains('welcome-entered'),'Reload leaves the choice screen selected');
+assert.ok(!reloaded.document.documentElement.classList.contains('welcome-flight-complete'),'Reload does not replay the flight or choice animation');
 console.log('PASS: pacing, one active renderer, complete click flight, duplicate activation, hidden-flight pause, history return and reduced-motion entry.');

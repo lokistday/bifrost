@@ -22,6 +22,12 @@
 <meta name="twitter:description" content="보안을 이해하고, 직접 실습하고, 나만의 결과물로.">
 <meta name="twitter:image" content="{{SITE_URL}}og-image.png?v=20261105-bifrost">
 <title>BIFROST — 보안 학습 플랫폼</title>
+<style>
+  /* Pick the entrance or the choice screen before loading the scene assets. */
+  html:not(.welcome-entered):not(:has(#home:target)) .welcome-page > :is(.workspace-header,.guided-home,.workspace-footer,.workspace-skip,.pointer-trail) { display:none; }
+  .welcome-entered .welcome-scene,
+  html:has(#home:target) .welcome-scene { display:none; }
+</style>
 <script src="js/theme.js?v={{CONTENT_VERSION}}"></script>
 <link rel="icon" type="image/svg+xml" href="assets/logo.svg?v={{CONTENT_VERSION}}">
 
