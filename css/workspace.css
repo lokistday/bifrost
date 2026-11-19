@@ -17,17 +17,6 @@
 .guided-home { width:100%; flex:1 0 auto; }
 .workspace-hero { overflow:clip; width:min(100%,1100px); margin:0 auto; padding:30px 28px 48px; box-sizing:border-box; }
 .entry-hero { min-height:calc(100svh - 136px); display:grid; align-items:center; }
-.guided-brand { width:min(100%,490px); min-width:0; margin:0 auto 20px; position:relative; isolation:isolate; }
-.workspace-hero h1 { margin:0; line-height:1; }
-.brand-wireframe { display:block; width:100%; height:auto; overflow:visible; }
-.brand-wireframe path { fill:none; stroke-linecap:round; stroke-linejoin:round; }
-.brand-wire-depth { stroke:var(--accent); stroke-width:.65; opacity:.48; }
-.brand-wireframe .brand-wire-front { fill:var(--ink); stroke:var(--ink); stroke-width:1.1; }
-.brand-wireframe .brand-wire-front.is-back-facing { fill:none; stroke:var(--accent); stroke-width:.8; opacity:.65; }
-.hero-terrain { position:absolute; inset:-25px -50px; width:calc(100% + 100px); height:calc(100% + 50px); z-index:-1; pointer-events:none; mask-image:radial-gradient(ellipse 68% 64% at 49% 48%,#000 18%,transparent 86%); }
-.terrain-facet { stroke:none; fill:var(--accent); }
-.terrain-tone-0 { opacity:.025; }.terrain-tone-1 { opacity:.01; }.terrain-tone-2 { fill:var(--ink); opacity:.018; }.terrain-tone-3 { opacity:.045; }
-.terrain-edges { fill:none; stroke:var(--accent); stroke-width:.8; stroke-linejoin:round; opacity:.14; }
 .entry-guide { width:100%; max-width:740px; margin:auto; text-align:center; }
 .entry-steps { display:flex; align-items:center; justify-content:center; gap:16px; margin:0 auto 22px; color:var(--muted); font-size:12px; }
 .entry-steps>span:not(.entry-connector) { display:flex; align-items:center; gap:9px; }
@@ -46,21 +35,28 @@
 .entry-choice-copy strong { font-size:21px; letter-spacing:-.035em; font-weight:700; }
 .entry-choice-copy>span { color:var(--muted); font-size:13px; }
 .entry-choice>.ui-icon { margin-left:auto; color:var(--accent); width:22px; }
-.fields-hero { position:relative; isolation:isolate; display:grid; place-items:center; width:100%; min-height:calc(100svh - 64px); padding:48px 28px; }
-.fields-hero .guided-brand { width:min(100%,1320px); margin-bottom:0; }
-.fields-hero .hero-terrain { inset:0; width:100%; height:100%; opacity:.6; mask-image:radial-gradient(ellipse 55% 54% at 50% 50%,#000 30%,transparent 100%); }
-.fields-scroll-cue { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); display:flex; align-items:center; justify-content:center; gap:12px; min-height:54px; padding:0 22px; border:1px solid var(--accent); border-radius:999px; background:var(--surface); color:var(--accent)!important; font-size:14px; font-weight:700; white-space:nowrap; transition:background .15s,transform .15s; }
-.fields-scroll-cue:hover { background:var(--surface-soft); transform:translate(-50%,3px); }
-.fields-scroll-icon { font-size:28px; line-height:1; font-weight:400; }
-.subject-directory { width:min(100%,1240px); margin:0 auto; padding:0 28px 48px; box-sizing:border-box; scroll-margin-top:24px; }
-/* A direct directory visit presents the cards as a complete screen, including without JS. */
-.fields-page:has(#mindmap:target) .fields-hero { display:none; }
-.fields-page:has(#mindmap:target) .guided-home { display:grid; align-items:center; }
-.fields-page:has(#mindmap:target) .subject-directory { padding-top:48px; padding-bottom:64px; }
+@media(prefers-reduced-motion:no-preference) {
+  .entry-page .entry-choice { animation:entry-choice-arrive 760ms cubic-bezier(.16,1,.3,1) both; }
+  .entry-page .entry-choice::after { content:""; position:absolute; z-index:-1; pointer-events:none; inset:0; border:1px solid var(--line); border-radius:inherit; background:linear-gradient(110deg,var(--surface),var(--paper)); filter:blur(12px); opacity:0; animation:entry-choice-trail 760ms ease-out both; }
+  .entry-page .entry-choice:nth-child(2), .entry-page .entry-choice:nth-child(2)::after { animation-delay:150ms; }
+  @keyframes entry-choice-arrive {
+    from { opacity:0; transform:translate3d(0,90px,0) scale(.96); }
+    55% { opacity:1; }
+    to { opacity:1; transform:translate3d(0,0,0) scale(1); }
+  }
+  @keyframes entry-choice-trail {
+    0% { opacity:0; transform:translateY(66px) scale(.96); }
+    28% { opacity:.55; transform:translateY(50px) scale(.98); }
+    72% { opacity:.18; transform:translateY(18px); }
+    100% { opacity:0; transform:translateY(0); }
+  }
+}
+.fields-page .guided-home { display:grid; align-items:center; }
+.subject-directory { width:min(100%,1240px); margin:0 auto; padding:48px 28px 64px; box-sizing:border-box; scroll-margin-top:24px; }
 .directory-header { display:flex; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:22px; }
 .field-step { display:flex; align-items:center; gap:10px; color:var(--muted); font-size:11px; margin:0 0 6px; }
 .field-step strong { color:var(--accent); font-weight:500; }
-.directory-header h2 { font-size:25px; letter-spacing:-.04em; margin:0; line-height:1.4; }
+.directory-header h1 { font-size:25px; letter-spacing:-.04em; margin:0; line-height:1.4; }
 .entry-back { color:var(--muted)!important; font-size:12px; padding:8px 0; white-space:nowrap; }
 .entry-back:hover { color:var(--accent)!important; }
 .subject-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
@@ -90,8 +86,6 @@
   .workspace-logo { width:29px; height:29px; }
   .workspace-hero { padding:24px 20px 34px; }
   .entry-hero { min-height:calc(100svh - 118px); }
-  .guided-brand { width:min(100%,380px); margin-bottom:24px; }
-  .hero-terrain { inset:-20px 0; width:100%; height:calc(100% + 40px); }
   .entry-steps { margin-bottom:24px; font-size:11px; gap:12px; }
   .entry-connector { width:60px; }
   .entry-guide h1 { font-size:27px; }
@@ -102,12 +96,9 @@
   .entry-choice-copy strong { font-size:18px; }
   .entry-choice-copy>span { font-size:12px; }
   .entry-choice>.ui-icon { width:18px; }
-  .fields-hero { min-height:calc(100svh - 58px); padding:32px 20px; }
-  .fields-hero .guided-brand { width:100%; }
-  .fields-scroll-cue { bottom:22px; min-height:50px; padding:0 18px; font-size:13px; }
-  .subject-directory { padding:0 20px 36px; }
+  .subject-directory { padding:48px 20px 64px; }
   .directory-header { align-items:flex-start; flex-direction:column; gap:10px; margin-bottom:18px; }
-  .directory-header h2 { font-size:23px; }
+  .directory-header h1 { font-size:23px; }
   .entry-back { padding:0; }
   .subject-grid { grid-template-columns:1fr; gap:10px; }
   .subject-card { min-height:84px; padding:16px; }

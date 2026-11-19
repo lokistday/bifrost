@@ -78,7 +78,6 @@ for (const course of Object.values(courses)) {
 const home = require('./render_home.cjs')({ courses, paths: learningPaths });
 const homeVersion = 'home-' + crypto.createHash('sha256')
   .update(read('css/workspace.css')).update(read('js/workspace.js'))
-  .update(read('js/wordmark-motion.js'))
   .digest('hex').slice(0,12);
 const homeValues = { ...home, SITE_URL: esc(site.url), COURSE_COUNT: Object.keys(courses).length,
   LESSON_COUNT: count, CONTENT_VERSION: contentVersion, HOME_VERSION: homeVersion };

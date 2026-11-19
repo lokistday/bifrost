@@ -34,7 +34,5 @@ module.exports = function home({ courses, paths }) {
   ];
   const nodes = data.map(([id, symbol, title, description, tags], index) => `<a class="subject-card" data-map-track="${id}" href="../tracks/${id}/"><span class="subject-number">${String(index+1).padStart(2,'0')}</span>${icon(symbol)}<div class="subject-copy"><div class="subject-title"><h3>${esc(title)}</h3><span>${all(courses[id]).length}개 차시</span></div></div>${icon('arrow','subject-arrow')}</a>`).join('\n');
   return { MAP_NODES:nodes,
-    BRAND_WIREFRAME:require('./render_wordmark.cjs')(),
-    BRAND_BACKDROP:require('./render_backdrop.cjs')(),
     ICON_HOME:icon('home'), ICON_BOOK:icon('book'), ICON_ROUTE:icon('route'), ICON_BOX:icon('box'), ICON_ARROW:icon('arrow'), ICON_GLOBE:icon('globe'), ICON_EXAM:icon('exam'), ICON_FLAG:icon('flag'), ICON_REVIEW:icon('review') };
 };
