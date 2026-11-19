@@ -24,12 +24,6 @@
 <meta name="twitter:description" content="보안을 이해하고, 직접 실습하고, 나만의 결과물로.">
 <meta name="twitter:image" content="https://lokistday.github.io/bifrost/og-image.png?v=20261105-bifrost">
 <title>BIFROST — 보안 학습 플랫폼</title>
-<style>
-  /* Pick the entrance or the choice screen before loading the scene assets. */
-  html:not(.welcome-entered):not(:has(#home:target)) .welcome-page > :is(.workspace-header,.guided-home,.workspace-footer,.workspace-skip,.pointer-trail) { display:none; }
-  .welcome-entered .welcome-scene,
-  html:has(#home:target) .welcome-scene { display:none; }
-</style>
 <script src="js/theme.js?v=learning-d027f06d8b67"></script>
 <link rel="icon" type="image/svg+xml" href="assets/logo.svg?v=learning-d027f06d8b67">
 
@@ -37,29 +31,11 @@
 <link rel="stylesheet" href="css/theme.css?v=learning-d027f06d8b67">
 <link rel="stylesheet" href="css/pointer-trail.css?v=learning-d027f06d8b67">
 
-<link rel="stylesheet" href="css/workspace.css?v=home-37fe0e069075">
-<link rel="stylesheet" href="css/welcome.css?v=home-37fe0e069075">
-<script src="js/nebula-scene.js?v=home-37fe0e069075" defer></script>
-<script src="js/raven-flight.js?v=home-37fe0e069075" defer></script>
-<script src="js/traveler.js?v=home-37fe0e069075" defer></script>
-<script src="js/welcome.js?v=home-37fe0e069075" defer></script>
-<script src="js/workspace.js?v=home-37fe0e069075" defer></script>
+<link rel="stylesheet" href="css/workspace.css?v=home-4ea7fed24766">
+<script src="js/workspace.js?v=home-4ea7fed24766" defer></script>
 <script src="js/pointer-trail.js?v=learning-d027f06d8b67" defer></script>
 </head>
-<body class="workspace-page welcome-page">
-<section class="welcome-scene" id="welcome" aria-labelledby="welcome-title">
-  <div class="welcome-art" aria-hidden="true">
-    <div class="welcome-atmosphere"></div>
-    <canvas class="welcome-cosmos" id="welcomeNebula"></canvas>
-    <canvas class="welcome-particles" id="welcomeParticles"></canvas>
-    <canvas class="welcome-traveler" id="welcomeTraveler"></canvas>
-  </div>
-  <a class="welcome-raven-link" id="welcomeStart" href="#home" aria-label="까마귀를 클릭하여 시작" aria-describedby="welcomeHint"></a>
-  <div class="welcome-brand">
-    <h1 id="welcome-title">BIFROST</h1>
-  </div>
-  <p class="welcome-hint" id="welcomeHint">까마귀를 클릭하세요.</p>
-</section>
+<body class="workspace-page entry-page">
 <a class="workspace-skip" href="#home">학습 본문으로 건너뛰기</a>
 <header class="workspace-header">
   <a class="workspace-brand" href="./" aria-label="Bifrost 홈"><img class="workspace-logo" src="assets/logo.svg?v=learning-d027f06d8b67" width="36" height="36" alt=""><strong>BIFROST</strong><span>CYBERSECURITY<br>LEARNING PLATFORM</span></a>

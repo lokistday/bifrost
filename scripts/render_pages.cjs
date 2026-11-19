@@ -79,11 +79,6 @@ const home = require('./render_home.cjs')({ courses, paths: learningPaths });
 const homeVersion = 'home-' + crypto.createHash('sha256')
   .update(read('css/workspace.css')).update(read('js/workspace.js'))
   .update(read('js/wordmark-motion.js'))
-  .update(read('css/welcome.css')).update(read('js/welcome.js'))
-  .update(read('js/nebula-scene.js'))
-  .update(read('js/raven-flight.js'))
-  .update(read('js/traveler.js'))
-  .update(fs.readFileSync(path.join(ROOT,'assets/traveler/raven.png')))
   .digest('hex').slice(0,12);
 const homeValues = { ...home, SITE_URL: esc(site.url), COURSE_COUNT: Object.keys(courses).length,
   LESSON_COUNT: count, CONTENT_VERSION: contentVersion, HOME_VERSION: homeVersion };

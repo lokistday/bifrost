@@ -97,8 +97,10 @@ function displayFromStyles(element, files) {
   return winner.value;
 }
 const homeStyles = [...home.querySelectorAll('link[rel="stylesheet"]')].map(link => link.getAttribute('href'));
-check(home.getElementById('welcome'), 'The cosmic entrance is the homepage opening screen');
-check(home.getElementById('welcomeStart').getAttribute('href') === '#home', 'Start opens the existing learning choices without JavaScript');
+check(home.querySelector('main#home .entry-guide h1') && home.querySelectorAll('main#home .entry-choice').length === 2,
+  'The homepage contains both choices in its main content on first load');
+check(!home.querySelector('#welcome, #welcomeStart, canvas, link[href*="welcome.css"], script[src*="welcome.js"], script[src*="nebula-scene.js"], script[src*="raven-flight.js"], script[src*="traveler.js"]'),
+  'The homepage contains no entrance screen or renderer');
 for (const file of ['js/splash.js', 'css/splash.css', 'js/entry-transition.js', 'css/entry-transition.css']) {
   check(!fs.existsSync(path.join(ROOT, file)), `Retired entrance asset is removed: ${file}`);
 }
