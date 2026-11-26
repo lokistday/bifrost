@@ -34,5 +34,5 @@ module.exports = function home({ courses }) {
       ${icon('arrow', 'subject-arrow')}
     </a>`;
   }).join('\n');
-  return { MAP_NODES: nodes, ICON_ARROW: icon('arrow') };
+  return { MAP_NODES: nodes };
 };

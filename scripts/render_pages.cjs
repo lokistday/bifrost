@@ -91,10 +91,15 @@ for (const course of Object.values(courses)) {
 }
 const home = require('./render_home.cjs')({ courses });
 const homeVersion = `home-${textFingerprint('css/workspace.css', 'js/workspace.js')}`;
+const prismVersion = `prism-${fingerprint(
+  read('css/prism-home.css'),
+  fs.readFileSync(path.join(ROOT, 'assets/prism-gateway.webp')),
+  fs.readFileSync(path.join(ROOT, 'assets/prism-gateway-720.webp'))
+)}`;
 const homeValues = { ...home, SITE_URL: esc(site.url), COURSE_COUNT: Object.keys(courses).length,
   LESSON_COUNT: count, CONTENT_VERSION: contentVersion, HOME_VERSION: homeVersion,
-  EDITORIAL_VERSION: editorialVersion, ART_VERSION: fingerprint(fs.readFileSync(path.join(ROOT, 'assets/charcoal-wing.webp'))) };
-write('index.html', fill(read('templates/index.html'), { ...homeValues, HEADER: header('./') }));
+  EDITORIAL_VERSION: editorialVersion, PRISM_VERSION: prismVersion };
+write('index.html', fill(read('templates/index.html'), homeValues));
 fs.mkdirSync(path.join(ROOT,'fields'),{recursive:true});
 write('fields/index.html', fill(read('templates/fields.html'), { ...homeValues, HEADER: header('../', 'fields') }));
 write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +

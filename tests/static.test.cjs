@@ -48,7 +48,7 @@ for (const file of illustratedAssets) {
   artBytes += bytes.length;
 }
 check(artBytes < 1000000, 'The complete illustration collection stays under 1 MB');
-for (const file of ['main.css', 'theme.css', 'mindmap.css', 'learning.css', 'visuals.css', 'linux-guide.css', 'overlays.css', 'study.css', 'workspace.css', 'charcoal.css', 'exams.css', 'projects.css', 'pointer-trail.css']) {
+for (const file of ['main.css', 'theme.css', 'mindmap.css', 'learning.css', 'visuals.css', 'linux-guide.css', 'overlays.css', 'study.css', 'workspace.css', 'charcoal.css', 'prism-home.css', 'exams.css', 'projects.css', 'pointer-trail.css']) {
   const source = fs.readFileSync(path.join(ROOT, 'css', file), 'utf8');
   check(!/var\([^)]*\)[\da-f]{2,}/i.test(source), `No malformed color suffix: ${file}`);
   check(CSSOM.parse(source).cssRules.length > 0, `Stylesheet parses: ${file}`);

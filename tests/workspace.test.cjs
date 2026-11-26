@@ -9,6 +9,16 @@ assert.equal(entry.querySelectorAll('.entry-choice').length,2);
 assert.equal(entry.querySelector('#startFoundation').getAttribute('href'),'tracks/foundation/');
 assert.equal(entry.querySelector('#chooseFields').getAttribute('href'),'fields/#mindmap');
 assert.equal(entry.querySelector('#entry-title').tagName,'H1');
+assert.equal(entry.querySelector('.prism-terminal a').getAttribute('href'),'tracks/foundation/environment.html');
+assert.ok(entry.querySelector('#explore a[href="fields/#mindmap"]'));
+const homeArt = entry.querySelector('.prism-art');
+const homeStyle = entry.querySelector('link[href*="prism-home.css"]').getAttribute('href');
+for (const asset of [homeArt.querySelector('img').getAttribute('src'), homeArt.querySelector('source').getAttribute('srcset')]) {
+  const [file, version] = asset.split('?');
+  assert.match(version,/^v=prism-[a-f0-9]{12}$/);
+  assert.equal(version,homeStyle.split('?')[1]);
+  assert.equal(fs.readFileSync(path.join(root,file)).toString('ascii',8,12),'WEBP');
+}
 assert.ok(entry.querySelector('.entry-resources nav#resources a'),'The resource fragment targets content inside the disclosure');
 assert.equal(entry.querySelector('.brand-wireframe,.hero-terrain'),null);
 assert.equal(entry.querySelector('script[src*="wordmark-motion.js"]'),null);

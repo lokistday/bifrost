@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="dark" data-palette="charcoal">
+<html lang="ko" class="prism-document" data-theme="dark" data-palette="charcoal">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,26 +30,96 @@
 <link rel="stylesheet" href="css/charcoal.css?v={{EDITORIAL_VERSION}}">
 
 <link rel="stylesheet" href="css/workspace.css?v={{HOME_VERSION}}">
+<link rel="stylesheet" href="css/prism-home.css?v={{PRISM_VERSION}}">
 <script src="js/workspace.js?v={{HOME_VERSION}}" defer></script>
 </head>
-<body class="workspace-page entry-page">
+<body class="workspace-page prism-home">
 <a class="workspace-skip" href="#home">학습 본문으로 건너뛰기</a>
-{{HEADER}}
-<main id="home" class="guided-home" tabindex="-1">
-  <section class="entry-hero" aria-labelledby="entry-title">
-    <img class="entry-art" src="assets/charcoal-wing.webp?v={{ART_VERSION}}" width="1536" height="1024" alt="" fetchpriority="high" decoding="async">
-    <div class="editorial-frame entry-guide">
-      <p class="entry-kicker">실습형 보안 학습</p>
-      <h1 id="entry-title">보안을 배우고<br>직접 실습하세요</h1>
-      <p class="entry-description">기초 명령어부터 분야별 프로젝트까지,<br class="desktop-break"> 손으로 익히는 보안 학습.</p>
-      <div class="entry-choices" id="mindmap" aria-label="출발점 선택">
-        <a class="entry-choice editorial-button primary" id="startFoundation" href="tracks/foundation/">공통 기초 시작 {{ICON_ARROW}}</a>
-        <a class="entry-choice editorial-button" id="chooseFields" href="fields/#mindmap">분야 둘러보기</a>
-      </div>
+  <header class="editorial-header prism-header">
+    <div class="prism-frame prism-header-inner">
+      <a class="prism-brand" href="./" aria-label="BIFROST 처음으로">
+        <img src="assets/bifrost-mark.svg?v={{EDITORIAL_VERSION}}" width="27" height="27" alt="">
+        <span>BIFROST</span>
+      </a>
+      <nav aria-label="주 메뉴">
+        <a href="#learn">학습 흐름</a>
+        <a href="#explore">분야</a>
+        <a href="projects/">프로젝트</a>
+      </nav>
     </div>
-  </section>
-</main>
-<footer class="editorial-frame workspace-footer"><strong>BIFROST <small>/ by. Loki</small></strong><details class="entry-resources"><summary>참고 자료</summary><nav id="resources" aria-label="외부 참고 자료" tabindex="-1"><a href="https://dreamhack.io/" target="_blank" rel="noopener">Dreamhack ↗</a><a href="https://ctftime.org/" target="_blank" rel="noopener">CTFtime ↗</a><a href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP ↗</a></nav></details></footer>
+  </header>
 
+  <main id="home" class="guided-home" tabindex="-1">
+    <section class="prism-hero" aria-labelledby="entry-title">
+      <div class="prism-frame prism-intro entry-guide">
+        <p class="prism-topic">실습형 보안 학습</p>
+        <h1 id="entry-title">보안, 직접 해보면<br>이해됩니다.</h1>
+        <p class="prism-lead">터미널에서 첫 명령을 실행하는 순간부터<br class="prism-desktop-break"> 분야별 프로젝트를 완성하는 날까지.</p>
+        <div class="prism-actions">
+          <a class="entry-choice prism-button prism-button-primary" id="startFoundation" href="tracks/foundation/">공통 기초 시작 <span aria-hidden="true">↗</span></a>
+          <a class="entry-choice prism-text-action" id="chooseFields" href="fields/#mindmap">관심 분야 보기 <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <figure class="prism-stage" aria-hidden="true">
+        <div class="prism-halo"></div>
+        <picture class="prism-art">
+          <source media="(max-width: 600px)" srcset="assets/prism-gateway-720.webp?v={{PRISM_VERSION}}">
+          <img src="assets/prism-gateway.webp?v={{PRISM_VERSION}}" width="1440" height="960" alt="" fetchpriority="high" decoding="async">
+        </picture>
+      </figure>
+    </section>
+
+    <section class="prism-method" id="learn" aria-labelledby="method-title">
+      <div class="prism-frame">
+        <div class="prism-section-heading">
+          <h2 id="method-title">첫 명령부터<br>내가 설명할 수 있게.</h2>
+          <p>원리를 읽고, 예제를 실행하고, 조건을 바꿔 확인합니다. 공통 기초의 첫 차시는 내가 쓸 Python을 확인하는 데서 시작합니다.</p>
+        </div>
+        <div class="prism-method-layout">
+          <ol class="prism-steps">
+            <li><span class="prism-step-index" aria-hidden="true">01</span><div><h3>원리 이해하기</h3><p>명령과 입력, 결과가 어떻게 연결되는지 먼저 배웁니다.</p></div></li>
+            <li><span class="prism-step-index" aria-hidden="true">02</span><div><h3>예제 실행하기</h3><p>제공된 자료로 같은 결과를 직접 확인합니다.</p></div></li>
+            <li><span class="prism-step-index" aria-hidden="true">03</span><div><h3>조건 바꾸기</h3><p>입력을 바꾸고 무엇이 달라졌는지 기록합니다.</p></div></li>
+          </ol>
+          <div class="prism-terminal">
+            <div class="prism-terminal-header">
+              <span class="prism-terminal-symbol" aria-hidden="true">&gt;_</span>
+              <h3>첫 차시에서 쓰는 명령</h3>
+            </div>
+            <pre><code><span aria-hidden="true">$ </span>python3 --version</code></pre>
+            <details>
+              <summary>예상 출력 보기</summary>
+              <p>예를 들어 <code>Python 3.12.4</code>가 표시됩니다. 버전 번호는 환경에 따라 달라집니다.</p>
+            </details>
+            <a href="tracks/foundation/environment.html">첫 차시에서 해보기 <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="prism-fields" id="explore" aria-labelledby="fields-title">
+      <div class="prism-frame">
+        <div class="prism-section-heading">
+          <h2 id="fields-title">무엇을 살펴보고 싶나요?</h2>
+          <p>관심 있는 문제부터 골라 시작할 수 있습니다.</p>
+        </div>
+        <div class="prism-field-links">
+          <a href="tracks/web/"><span><strong>웹 보안</strong><small>웹 요청과 응답을 읽고 인증과 권한을 이해합니다.</small></span><span aria-hidden="true">↗</span></a>
+          <a href="tracks/forensic/"><span><strong>디지털 포렌식</strong><small>파일과 기록에서 사건의 단서를 찾아봅니다.</small></span><span aria-hidden="true">↗</span></a>
+          <a href="tracks/network/"><span><strong>네트워크 보안</strong><small>패킷에서 통신 흐름이 어떻게 이어지는지 관찰합니다.</small></span><span aria-hidden="true">↗</span></a>
+        </div>
+        <a class="prism-button prism-button-outline" href="fields/#mindmap">{{COURSE_COUNT}}개 분야 모두 보기 <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+
+<footer class="prism-frame prism-footer">
+  <strong>BIFROST <small>/ by. Loki</small></strong>
+  <div class="prism-footer-links">
+    <a href="learn/">학습 경로</a>
+    <a href="exams/">모의고사</a>
+    <details class="entry-resources"><summary>참고 자료</summary><nav id="resources" aria-label="외부 참고 자료" tabindex="-1"><a href="https://dreamhack.io/" target="_blank" rel="noopener">Dreamhack ↗</a><a href="https://ctftime.org/" target="_blank" rel="noopener">CTFtime ↗</a><a href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP ↗</a></nav></details>
+  </div>
+</footer>
 </body>
 </html>
