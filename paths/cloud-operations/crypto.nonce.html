@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="ko" data-theme="dark">
+<html lang="ko" data-theme="dark" data-palette="charcoal">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080b17">
+<meta name="theme-color" content="#181819">
 <meta name="description" content="같은 키 아래 nonce 제약을 어겼을 때 보장이 깨질 수 있음을 설명합니다.">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Bifrost">
@@ -17,35 +17,39 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/paths/cloud-operations/crypto.nonce.html">
 <title>난수·nonce와 재사용 — 클라우드 방어와 복구 검증 · Bifrost</title>
-<script src="../../js/theme.js?v=learning-d027f06d8b67"></script>
-<script src="../../js/pointer-trail.js?v=learning-d027f06d8b67" defer></script>
-<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-d027f06d8b67">
-<link rel="icon" href="../../assets/logo.svg?v=learning-d027f06d8b67" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="../../css/study.css?v=learning-d027f06d8b67">
-<script src="../../js/catalog.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/courses/crypto.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/progress.js?v=learning-d027f06d8b67" defer></script>
+<script src="../../js/theme.js?v=learning-2ac3a8931abc"></script>
+<link rel="icon" href="../../assets/bifrost-mark.svg?v=editorial-968df953fec1" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/learning.css?v=course-style-fa797c0dc5e4">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/study.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/charcoal.css?v=editorial-968df953fec1">
+<script src="../../js/catalog.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/courses/crypto.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/progress.js?v=learning-2ac3a8931abc" defer></script>
 
-<script src="../../js/learning-paths.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/path-progress.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/learning-view.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/learning.js?v=learning-d027f06d8b67" defer></script>
+<script src="../../js/learning-paths.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/path-progress.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/learning-view.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/learning.js?v=learning-2ac3a8931abc" defer></script>
 </head>
-<body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.nonce" data-path="cloud-operations" style="--course-accent:var(--map-pink)">
+<body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.nonce" data-path="cloud-operations">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
-<header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-d027f06d8b67" width="34" height="34" alt=""></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../fields/#mindmap">모든 분야</a><a href="../../learn/">학습 경로</a><a href="./#pathOutline">클라우드 보안 목차</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
-  
-  <a class="nav-cta" href="../../fields/#mindmap">학습 지도 ↗</a>
-</div></header>
+<header class="editorial-header"><div class="editorial-frame editorial-header-inner">
+    <a class="editorial-brand" href="../../" aria-label="BIFROST 홈"><img src="../../assets/bifrost-mark.svg?v=editorial-968df953fec1" width="36" height="36" alt=""><span>BIFROST</span></a>
+    <nav class="editorial-nav" aria-label="주 메뉴"><a href="../../fields/#mindmap">분야 둘러보기</a><a href="../../learn/">학습 경로</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
+  </div></header>
 <main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="crypto.nonce">
-<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../learn/">학습 경로</a><span aria-hidden="true">/</span><a href="./">클라우드 방어와 복구 검증</a><span aria-hidden="true">/</span><span aria-current="page">47단계</span></nav>
-        <div class="lesson-layout"><aside class="course-sidebar path-sidebar"><a class="back-link" href="./">← 클라우드 방어와 복구 검증 목차</a>
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../learn/">학습 경로</a><span aria-hidden="true">/</span><a href="./">클라우드 방어와 복구 검증</a><span aria-hidden="true">/</span><span aria-current="page">47 단계</span></nav>
+        <article class="lesson-layout" aria-labelledby="lesson-title">
+          <header class="lesson-heading">
+            <h1 id="lesson-title">난수·nonce와 재사용</h1>
+            <p class="lesson-objective">같은 키 아래 nonce 제약을 어겼을 때 보장이 깨질 수 있음을 설명합니다.</p>
+            <div class="lesson-facts"><p>약 45–75분</p><p class="path-location">경로 진행 · 47 / 52단계</p>
+            </div>
+          </header>
+          <aside class="course-sidebar path-sidebar"><nav class="reader-steps" aria-label="본문 바로가기"><p>이 차시에서</p><ol><li><a href="#concept" aria-current="location"><span>01</span>먼저 이해하기</a></li><li><a href="#worked"><span>02</span>예제 따라 하기</a></li><li><a href="#practice"><span>03</span>직접 바꾸기</a></li><li><a href="#transfer"><span>04</span>독립 과제</a></li><li><a href="#verify"><span>05</span>검증</a></li></ol></nav><a class="back-link" href="./#pathOutline">← 경로 목차로</a><details class="reader-outline"><summary>경로의 다른 차시</summary>
         <div class="course-stats"><span data-path-count></span><div class="course-meter" role="progressbar" aria-label="클라우드 방어와 복구 검증 차시 완료 진도" aria-valuemin="0" aria-valuemax="100" data-path-meter><span></span></div></div>
         <nav aria-label="클라우드 방어와 복구 검증 경로 목차"><details ><summary>Foundation<span class="caption">1–3단계</span></summary><ol><li><a class="side-lesson" href="foundation.environment.html" >
           <span class="path-step-number">1</span><span><small>공통 기초 · 권장 선행</small>실습 환경 준비와 첫 실행<small class="completion-label" data-completion="foundation.environment"></small></span></a></li><li><a class="side-lesson" href="foundation.network.html" >
@@ -121,18 +125,16 @@
           <span class="path-step-number">51</span><span><small>암호학 · 권장 선행</small>메시지 경계와 인증할 바이트<small class="completion-label" data-completion="crypto.message-encoding"></small></span></a></li><li><a class="side-lesson" href="crypto.aad-record-binding.html" >
           <span class="path-step-number">52</span><span><small>암호학 · 경로 핵심</small>AEAD와 레코드 문맥의 결합<small class="completion-label" data-completion="crypto.aad-record-binding"></small></span></a></li>
           </ol></details><a class="side-lesson path-project-link" href="project.html"><span class="path-step-number">✦</span><span>마지막 · 종합 프로젝트</span></a></nav>
-        <a class="back-link" href="../../learn/">다른 학습 경로 보기 ↗</a></aside><article class="lesson-article">
-          <nav class="path-location" aria-label="현재 학습 경로"><a href="./">클라우드 보안</a><strong>47 / 52단계</strong><a href="./#pathOutline">경로 목차 ↗</a></nav>
-          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/crypto.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">Cryptography · 03 · 현대 암호 설계와 키 수명 · 47 / 52</div><h1>난수·nonce와 재사용</h1><p class="lesson-objective">같은 키 아래 nonce 제약을 어겼을 때 보장이 깨질 수 있음을 설명합니다.</p></div></header>
-          <div class="lesson-meta"><span>응용</span><span>학습 45–75분</span><span>처음 준비 0–10분</span></div>
+        <a class="back-link" href="../../learn/">다른 학습 경로 보기 ↗</a></details></aside>
+          <div class="lesson-article">
+          <section id="concept" class="article-section"><h2>먼저 이해하기</h2><p>nonce는 해당 알고리즘이 요구하는 재사용 방지 조건을 만족해야 합니다. 비밀일 필요는 없지만 같은 키에서 유일해야 하는 경우가 많습니다. 구체적인 길이와 생성 규칙은 알고리즘과 라이브러리 문서를 따라야 합니다.</p><figure class="learning-visual" data-visual-id="crypto.nonce"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교도</span><h3>키스트림을 재사용하면 숨긴 내용끼리 관계가 드러납니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="키스트림을 재사용하면 숨긴 내용끼리 관계가 드러납니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" role="img" aria-labelledby="visual-crypto-nonce-title visual-crypto-nonce-desc" focusable="false"><title id="visual-crypto-nonce-title">키스트림을 재사용하면 숨긴 내용끼리 관계가 드러납니다</title><desc id="visual-crypto-nonce-desc">교육용 XOR 모형에서 C1 = P1 XOR S, C2 = P2 XOR S처럼 같은 키스트림 S를 사용하면 C1 XOR C2 = P1 XOR P2가 됩니다. 실습의 True는 이 관계를 확인한 결과입니다. 실제 알고리즘에서는 같은 키 아래 nonce 유일성 등 지정된 제약을 지켜야 합니다.</desc><defs><marker id="visual-crypto-nonce-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone danger"><rect class="v-node" x="28" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="29" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="45" y="55">같은 키스트림 재사용</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="84">첫 암호문</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="107">C1 = P1 XOR S</tspan></text><path class="v-separator" d="M45 128H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="148">둘째 암호문</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="171">C2 = P2 XOR S</tspan></text><path class="v-separator" d="M45 192H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="212">서로 XOR하면</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="235">C1 XOR C2 = P1 XOR P2</tspan></text></g><g class="v-tone positive"><rect class="v-node" x="392" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="393" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="409" y="55">설계에서 확인할 것</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="84">범위</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="107">같은 키 아래의 nonce 제약</tspan></text><path class="v-separator" d="M409 128H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="148">생성·보관</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="171">알고리즘 규격과 충돌·재시작 관리</tspan></text><path class="v-separator" d="M409 192H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="212">수명</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="235">키 교체와 카운터·사용량 한계</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">난수로 보인다는 인상 대신 알고리즘의 nonce 길이·유일성·재시작 시 관리 조건을 확인하세요.</span><small class="visual-note">XOR 모형은 재사용 위험을 보이는 장난감 예제이며 배포용 암호가 아닙니다. nonce 요구사항은 알고리즘마다 다릅니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>교육용 XOR 모형에서 C1 = P1 XOR S, C2 = P2 XOR S처럼 같은 키스트림 S를 사용하면 C1 XOR C2 = P1 XOR P2가 됩니다. 실습의 True는 이 관계를 확인한 결과입니다. 실제 알고리즘에서는 같은 키 아래 nonce 유일성 등 지정된 제약을 지켜야 합니다.</p></details></figure><p>lab.py nonce는 같은 XOR 스트림을 두 메시지에 쓰면 암호문끼리 XOR한 값이 평문끼리 XOR한 값과 같아지는 장난감 모델입니다. 실제 AES-GCM 구현이나 완전한 공격 실습은 아닙니다. 난수 생성에는 일반 random 대신 보안용 생성기를 사용합니다.</p><p>nonce의 유일성과 예측 불가능성은 같은 조건이 아닙니다. 알고리즘이 요구하는 조건에 따라 카운터나 난수 생성 등 방식을 선택합니다. AES-GCM에서는 동일 키에 nonce 재사용을 피해야 하며 길이·사용량 제한은 라이브러리·규격을 확인합니다.</p><p>XOR는 같은 값으로 두 번 연산하면 상쇄됩니다. C1=P1 XOR S, C2=P2 XOR S이면 C1 XOR C2=P1 XOR P2입니다. 키 스트림이 재사용되면 암호문 사이에 평문 관계가 새어 나온다는 핵심을 작은 예제로 관찰합니다.</p><p>난수를 쓴다고 중복 확률이 수학적으로 0인 것은 아닙니다. 생성량과 공간 크기를 고려하고, 카운터라면 재시작·동시 프로세스·백업 복원에서 되감기지 않게 관리합니다. 키를 바꾸면 중복 관리 범위도 그 키 식별자와 연결해야 합니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>secrets로 생성하면 무한히 생성해도 중복은 절대 없다고 한다.</dt><dd>안전한 난수 생성과 중복 확률·알고리즘 사용량 제한을 함께 고려합니다.</dd><dt>nonce를 숨기면 재사용해도 괜찮다고 한다.</dt><dd>비밀 여부가 아니라 해당 키에서의 재사용 조건을 지켜야 합니다.</dd></dl></aside></section>
+          <div class="lesson-meta"><span>응용</span><span>처음 준비 0–10분</span></div>
         <p class="caption">개념 수·도구 전환·독립 과제를 고려한 편집자 추정이며 학습자 실측 전입니다.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>AES-GCM nonce의 핵심 조건은?</p><fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend><label><input type="radio" name="readiness" value="0"> 항상 비밀이어야 하므로 저장하면 안 된다.</label><label><input type="radio" name="readiness" value="1"> 같은 키에서 재사용하지 않아야 한다.</label><label><input type="radio" name="readiness" value="2"> 암호문과 같은 길이여야 한다.</label><button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset><details><summary>판단 기준과 보충 자료</summary><p>nonce는 암호문 옆에 저장할 수 있지만 같은 키에서 중복되면 안전성이 손상됩니다. 구체적 길이·사용 제한은 규격을 따릅니다.</p></details></details><details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl><dt>명령 실행 또는 입력 파일 찾기에서 막힘</dt><dd>재사용 원리 · Python 3인지 확인합니다. lab.py이 있는 작업 사본 폴더에서 실행하고 원본과 편집한 파일의 위치를 비교하세요.</dd><dt>secrets로 생성하면 무한히 생성해도 중복은 절대 없다고 한다.</dt><dd>안전한 난수 생성과 중복 확률·알고리즘 사용량 제한을 함께 고려합니다.</dd></dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>
-          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>재사용 원리 · Python 3</strong></p><ul><li>기본 lab.py nonce는 표준 라이브러리로 실행하는 장난감 XOR 모델입니다. AES-GCM 구현이 아닙니다.</li><li>실제 AEAD의 변조·nonce 불일치 검증은 aead.py를 비교 참고합니다. 공개 교육 키로 새 데이터를 보호하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비"><summary>준비 환경과 선행 학습 확인</summary><p><strong>재사용 원리 · Python 3</strong></p><ul><li>기본 lab.py nonce는 표준 라이브러리로 실행하는 장난감 XOR 모델입니다. AES-GCM 구현이 아닙니다.</li><li>실제 AEAD의 변조·nonce 불일치 검증은 aead.py를 비교 참고합니다. 공개 교육 키로 새 데이터를 보호하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="crypto.symmetric.html">암호학 · 대칭키·AEAD·인증 태그 ↗</a></li><li><a href="foundation.python-flow.html">공통 기초 · 조건·반복·함수 ↗</a></li></ul>
             </details>
-          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>nonce는 해당 알고리즘이 요구하는 재사용 방지 조건을 만족해야 합니다. 비밀일 필요는 없지만 같은 키에서 유일해야 하는 경우가 많습니다. 구체적인 길이와 생성 규칙은 알고리즘과 라이브러리 문서를 따라야 합니다.</p><figure class="learning-visual" data-visual-id="crypto.nonce"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교도</span><h3>키스트림을 재사용하면 숨긴 내용끼리 관계가 드러납니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="키스트림을 재사용하면 숨긴 내용끼리 관계가 드러납니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" role="img" aria-labelledby="visual-crypto-nonce-title visual-crypto-nonce-desc" focusable="false"><title id="visual-crypto-nonce-title">키스트림을 재사용하면 숨긴 내용끼리 관계가 드러납니다</title><desc id="visual-crypto-nonce-desc">교육용 XOR 모형에서 C1 = P1 XOR S, C2 = P2 XOR S처럼 같은 키스트림 S를 사용하면 C1 XOR C2 = P1 XOR P2가 됩니다. 실습의 True는 이 관계를 확인한 결과입니다. 실제 알고리즘에서는 같은 키 아래 nonce 유일성 등 지정된 제약을 지켜야 합니다.</desc><defs><marker id="visual-crypto-nonce-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone danger"><rect class="v-node" x="28" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="29" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="45" y="55">같은 키스트림 재사용</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="84">첫 암호문</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="107">C1 = P1 XOR S</tspan></text><path class="v-separator" d="M45 128H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="148">둘째 암호문</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="171">C2 = P2 XOR S</tspan></text><path class="v-separator" d="M45 192H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="212">서로 XOR하면</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="235">C1 XOR C2 = P1 XOR P2</tspan></text></g><g class="v-tone positive"><rect class="v-node" x="392" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="393" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="409" y="55">설계에서 확인할 것</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="84">범위</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="107">같은 키 아래의 nonce 제약</tspan></text><path class="v-separator" d="M409 128H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="148">생성·보관</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="171">알고리즘 규격과 충돌·재시작 관리</tspan></text><path class="v-separator" d="M409 192H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="212">수명</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="235">키 교체와 카운터·사용량 한계</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">난수로 보인다는 인상 대신 알고리즘의 nonce 길이·유일성·재시작 시 관리 조건을 확인하세요.</span><small class="visual-note">XOR 모형은 재사용 위험을 보이는 장난감 예제이며 배포용 암호가 아닙니다. nonce 요구사항은 알고리즘마다 다릅니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>교육용 XOR 모형에서 C1 = P1 XOR S, C2 = P2 XOR S처럼 같은 키스트림 S를 사용하면 C1 XOR C2 = P1 XOR P2가 됩니다. 실습의 True는 이 관계를 확인한 결과입니다. 실제 알고리즘에서는 같은 키 아래 nonce 유일성 등 지정된 제약을 지켜야 합니다.</p></details></figure><p>lab.py nonce는 같은 XOR 스트림을 두 메시지에 쓰면 암호문끼리 XOR한 값이 평문끼리 XOR한 값과 같아지는 장난감 모델입니다. 실제 AES-GCM 구현이나 완전한 공격 실습은 아닙니다. 난수 생성에는 일반 random 대신 보안용 생성기를 사용합니다.</p><p>nonce의 유일성과 예측 불가능성은 같은 조건이 아닙니다. 알고리즘이 요구하는 조건에 따라 카운터나 난수 생성 등 방식을 선택합니다. AES-GCM에서는 동일 키에 nonce 재사용을 피해야 하며 길이·사용량 제한은 라이브러리·규격을 확인합니다.</p><p>XOR는 같은 값으로 두 번 연산하면 상쇄됩니다. C1=P1 XOR S, C2=P2 XOR S이면 C1 XOR C2=P1 XOR P2입니다. 키 스트림이 재사용되면 암호문 사이에 평문 관계가 새어 나온다는 핵심을 작은 예제로 관찰합니다.</p><p>난수를 쓴다고 중복 확률이 수학적으로 0인 것은 아닙니다. 생성량과 공간 크기를 고려하고, 카운터라면 재시작·동시 프로세스·백업 복원에서 되감기지 않게 관리합니다. 키를 바꾸면 중복 관리 범위도 그 키 식별자와 연결해야 합니다.</p>
-            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>secrets로 생성하면 무한히 생성해도 중복은 절대 없다고 한다.</dt><dd>안전한 난수 생성과 중복 확률·알고리즘 사용량 제한을 함께 고려합니다.</dd><dt>nonce를 숨기면 재사용해도 괜찮다고 한다.</dt><dd>비밀 여부가 아니라 해당 키에서의 재사용 조건을 지켜야 합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
         <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
         <a class="learning-button" href="../../labs/crypto.zip" download>전체 실습 ZIP 받기 ↓</a>
@@ -140,7 +142,7 @@
       </section>
           <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
             <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
-            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 재사용 원리 · Python 3</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 lab.py nonce
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 재사용 원리 · Python 3</span><button class="js-only" hidden type="button" id="copyExample" data-copy-code="exampleCode">복사</button></div><pre><code id="exampleCode">python3 lab.py nonce
 python3 -c &quot;import secrets; print(len(secrets.token_bytes(16)))&quot;</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>True
 16</pre></div>
             <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>상쇄되는 XOR를 따라가기</h3><p>lab.py의 a·b·stream으로 각 암호문을 만들고 두 암호문 XOR가 두 평문 XOR와 같아지는지 봅니다. 이것은 평문 관계 누출 예시입니다.</p>
@@ -193,7 +195,7 @@ print(xor(xor(a,s1),xor(b,s2)) == xor(a,b))</code></pre></div><div class="step-o
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
         <p class="feedback" role="status" id="backupFeedback"></p></details>
-        </article></div>
+        </div></article>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../fields/#mindmap">다른 분야 탐색 ↗</a></div></footer>
 </body>

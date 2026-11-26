@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="dark">
+<html lang="ko" data-theme="dark" data-palette="charcoal">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080b17">
+<meta name="theme-color" content="#181819">
 <meta name="description" content="BIFROST는 보안의 기초부터 분야별 실습과 프로젝트까지 이어지는 학습 플랫폼입니다.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BIFROST">
@@ -24,36 +24,37 @@
 <meta name="twitter:description" content="보안을 이해하고, 직접 실습하고, 나만의 결과물로.">
 <meta name="twitter:image" content="https://lokistday.github.io/bifrost/og-image.png?v=20261105-bifrost">
 <title>BIFROST — 보안 학습 플랫폼</title>
-<script src="js/theme.js?v=learning-d027f06d8b67"></script>
-<link rel="icon" type="image/svg+xml" href="assets/logo.svg?v=learning-d027f06d8b67">
+<script src="js/theme.js?v=learning-2ac3a8931abc"></script>
+<link rel="icon" type="image/svg+xml" href="assets/bifrost-mark.svg?v=editorial-968df953fec1">
 
-<link rel="stylesheet" href="css/main.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="css/theme.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="css/pointer-trail.css?v=learning-d027f06d8b67">
+<link rel="stylesheet" href="css/main.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="css/theme.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="css/charcoal.css?v=editorial-968df953fec1">
 
-<link rel="stylesheet" href="css/workspace.css?v=home-3a9aa839b207">
-<script src="js/workspace.js?v=home-3a9aa839b207" defer></script>
-<script src="js/pointer-trail.js?v=learning-d027f06d8b67" defer></script>
+<link rel="stylesheet" href="css/workspace.css?v=home-3ddd92265985">
+<script src="js/workspace.js?v=home-3ddd92265985" defer></script>
 </head>
 <body class="workspace-page entry-page">
 <a class="workspace-skip" href="#home">학습 본문으로 건너뛰기</a>
-<header class="workspace-header">
-  <a class="workspace-brand" href="./" aria-label="Bifrost 홈"><img class="workspace-logo" src="assets/logo.svg?v=learning-d027f06d8b67" width="36" height="36" alt=""><strong>BIFROST</strong><span>CYBERSECURITY<br>LEARNING PLATFORM</span></a>
-</header>
+<header class="editorial-header"><div class="editorial-frame editorial-header-inner">
+    <a class="editorial-brand" href="./" aria-label="BIFROST 홈"><img src="./assets/bifrost-mark.svg?v=editorial-968df953fec1" width="36" height="36" alt=""><span>BIFROST</span></a>
+    <nav class="editorial-nav" aria-label="주 메뉴"><a href="./fields/#mindmap">분야 둘러보기</a><a href="./learn/">학습 경로</a><a href="./projects/">프로젝트</a><a href="./exams/">모의고사</a></nav>
+  </div></header>
 <main id="home" class="guided-home" tabindex="-1">
-  <section class="workspace-hero entry-hero" aria-labelledby="entry-title">
-    <div class="entry-guide">
-      <div class="entry-steps" aria-label="학습 시작 순서"><span aria-current="step"><i aria-hidden="true"></i>출발점 선택</span><span class="entry-connector" aria-hidden="true"></span><span><i aria-hidden="true"></i>학습 시작</span></div>
-      <h1 id="entry-title">어디서부터 시작할까요?</h1>
-      <p class="entry-description">지금 나에게 맞는 출발점 하나만 골라주세요.</p>
+  <section class="entry-hero" aria-labelledby="entry-title">
+    <img class="entry-art" src="assets/charcoal-wing.webp?v=46e2cd1bd181" width="1536" height="1024" alt="" fetchpriority="high" decoding="async">
+    <div class="editorial-frame entry-guide">
+      <p class="entry-kicker">실습형 보안 학습</p>
+      <h1 id="entry-title">보안을 배우고<br>직접 실습하세요</h1>
+      <p class="entry-description">기초 명령어부터 분야별 프로젝트까지,<br class="desktop-break"> 손으로 익히는 보안 학습.</p>
       <div class="entry-choices" id="mindmap" aria-label="출발점 선택">
-        <a class="entry-choice" id="startFoundation" href="tracks/foundation/"><span class="entry-choice-symbol" aria-hidden="true"><svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16M12 5C9 2 5 3 2 4v15c4-1 7-1 10 2 3-3 6-3 10-2V4c-3-1-7-2-10 1Z"/></svg></span><span class="entry-choice-copy"><strong>기초부터 배울게요.</strong><span>공통 기초에서 차근차근 시작해요.</span></span><svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-        <a class="entry-choice" id="chooseFields" href="fields/#mindmap"><span class="entry-choice-symbol" aria-hidden="true"><svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 6h14M5 18h14"/></svg></span><span class="entry-choice-copy"><strong>관심 분야부터 볼게요.</strong><span>궁금한 분야를 골라 바로 들어가요.</span></span><svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+        <a class="entry-choice editorial-button primary" id="startFoundation" href="tracks/foundation/">공통 기초 시작 <svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h17m-6-6 6 6-6 6"/></svg></a>
+        <a class="entry-choice editorial-button" id="chooseFields" href="fields/#mindmap">분야 둘러보기</a>
       </div>
     </div>
   </section>
 </main>
-<footer class="workspace-footer"><strong>BIFROST <small>/ by. Loki</small></strong><details class="entry-resources" id="resources"><summary>참고 자료</summary><nav aria-label="외부 참고 자료"><a href="https://dreamhack.io/" target="_blank" rel="noopener">Dreamhack ↗</a><a href="https://ctftime.org/" target="_blank" rel="noopener">CTFtime ↗</a><a href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP ↗</a></nav></details></footer>
+<footer class="editorial-frame workspace-footer"><strong>BIFROST <small>/ by. Loki</small></strong><details class="entry-resources"><summary>참고 자료</summary><nav id="resources" aria-label="외부 참고 자료" tabindex="-1"><a href="https://dreamhack.io/" target="_blank" rel="noopener">Dreamhack ↗</a><a href="https://ctftime.org/" target="_blank" rel="noopener">CTFtime ↗</a><a href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP ↗</a></nav></details></footer>
 
 </body>
 </html>

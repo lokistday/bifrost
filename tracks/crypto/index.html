@@ -1,99 +1,150 @@
 <!doctype html>
-<html lang="ko" data-theme="dark">
+<html lang="ko" data-theme="dark" data-palette="charcoal">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080b17">
+<meta name="theme-color" content="#181819">
 <meta name="description" content="표현·수학·암호 기능에서 키 관리와 프로토콜 검증의 경계까지 배웁니다.">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Bifrost">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="Cryptography — Bifrost">
+<meta property="og:title" content="암호학 — Bifrost">
 <meta property="og:description" content="표현·수학·암호 기능에서 키 관리와 프로토콜 검증의 경계까지 배웁니다.">
 <meta property="og:url" content="https://lokistday.github.io/bifrost/tracks/crypto/">
 <meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png?v=20261105-bifrost">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/crypto/">
-<title>Cryptography — Bifrost</title>
-<script src="../../js/theme.js?v=learning-d027f06d8b67"></script>
-<script src="../../js/pointer-trail.js?v=learning-d027f06d8b67" defer></script>
-<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-d027f06d8b67">
-<link rel="icon" href="../../assets/logo.svg?v=learning-d027f06d8b67" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="../../css/study.css?v=learning-d027f06d8b67">
-<script src="../../js/catalog.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/courses/crypto.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/progress.js?v=learning-d027f06d8b67" defer></script>
+<title>암호학 — Bifrost</title>
+<script src="../../js/theme.js?v=learning-2ac3a8931abc"></script>
+<link rel="icon" href="../../assets/bifrost-mark.svg?v=editorial-968df953fec1" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/learning.css?v=course-style-fa797c0dc5e4">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/study.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/charcoal.css?v=editorial-968df953fec1">
+<script src="../../js/catalog.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/courses/crypto.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/progress.js?v=learning-2ac3a8931abc" defer></script>
 
 
-<script src="../../js/learning-view.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/learning.js?v=learning-d027f06d8b67" defer></script>
+<script src="../../js/learning-view.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/learning.js?v=learning-2ac3a8931abc" defer></script>
 </head>
-<body class="learning-page" data-course="crypto" data-course-number="06" data-view="course" data-lesson-id="" data-path="" style="--course-accent:var(--map-pink)">
+<body class="learning-page" data-course="crypto" data-course-number="06" data-view="course" data-lesson-id="" data-path="">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
-<header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-d027f06d8b67" width="34" height="34" alt=""></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../fields/#mindmap">모든 분야</a><a href="../../learn/">학습 경로</a><a href="./#courseModules">암호학 목차</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
-  
-  <a class="nav-cta" href="../../fields/#mindmap">학습 지도 ↗</a>
-</div></header>
+<header class="editorial-header"><div class="editorial-frame editorial-header-inner">
+    <a class="editorial-brand" href="../../" aria-label="BIFROST 홈"><img src="../../assets/bifrost-mark.svg?v=editorial-968df953fec1" width="36" height="36" alt=""><span>BIFROST</span></a>
+    <nav class="editorial-nav" aria-label="주 메뉴"><a href="../../fields/#mindmap">분야 둘러보기</a><a href="../../learn/">학습 경로</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
+  </div></header>
 <main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="course">
-<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../fields/#mindmap">학습 지도</a><span aria-hidden="true">/</span><span aria-current="page">Cryptography</span></nav>
-        <section class="course-hero"><div class="course-hero-intro"><div class="course-hero-copy"><div class="overline">06 / LEARNING PATH</div><h1>Cryptography</h1>
-          <p class="course-lead">표현·수학·암호 기능에서 키 관리와 프로토콜 검증의 경계까지 배웁니다.</p><div class="course-chips"><span>입문 → 중급</span><span>5개 모듈 · 19개 차시</span><span>설명 → 실습 → 검증</span></div></div><img class="course-hero-art" src="../../assets/illustrations/crypto.webp" width="480" height="480" alt="" decoding="async"></div>
-          <div class="continue-panel"><div class="overline">YOUR PROGRESS</div><div class="course-stats"><span data-count="crypto"></span>
-        <div class="course-meter" role="progressbar" aria-label="Cryptography 완료 진도" aria-valuemin="0" aria-valuemax="100" data-meter="crypto"><span></span></div>
-      </div><a class="learning-button primary" id="continueLearning" href="representation.html">첫 차시 시작하기 →</a><p class="caption">완료 표시는 직접 합니다. 학습 속도와 설치 시간은 환경에 따라 다릅니다.</p></div>
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../fields/#mindmap">분야 둘러보기</a><span aria-hidden="true">/</span><span aria-current="page">암호학</span></nav>
+        <section class="course-hero">
+          <div class="course-hero-copy"><h1>암호학</h1><p class="course-lead">표현·수학·암호 기능에서 키 관리와 프로토콜 검증의 경계까지 배웁니다.</p>
+            <p class="course-meta">입문 → 중급 · 5개 모듈 · 19개 차시</p>
+            <a class="editorial-button primary" id="continueLearning" href="representation.html">첫 차시 시작 →</a>
+          </div>
+          <div class="course-stats"><span data-count="crypto">0 / 19 완료</span>
+        <div class="course-meter" role="progressbar" aria-label="암호학 완료 진도" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-meter="crypto"><span></span></div>
+      </div>
         </section>
-        <nav class="course-jump-links" aria-label="과정 안내 바로가기"><a href="#courseIntroduction">분야 소개 ↓</a><a href="#courseModules">강의 목차 바로 보기 ↓</a></nav>
+        <section class="module-directory" id="courseModules" aria-labelledby="module-title">
+          <h2 id="module-title">차시 목차</h2>
+          <nav class="module-picker" aria-label="과정 모듈"><a href="#module-1"><span class="module-number">01</span><span>표현·수학·고전 암호</span></a><a href="#module-2"><span class="module-number">02</span><span>무결성과 진위</span></a><a href="#module-3"><span class="module-number">03</span><span>현대 암호 설계와 키 수명</span></a><a href="#module-4"><span class="module-number">04</span><span>키 수명과 프로토콜 검증</span></a><a href="#module-5"><span class="module-number">05</span><span>암호 레코드와 안전한 사용</span></a></nav>
+          <div class="module-list">
+            <section class="module-card" id="module-1" tabindex="-1">
+              <div class="module-heading"><h3>표현·수학·고전 암호</h3><span class="caption" data-module-count="0"></span></div>
+              <ol><li><a class="lesson-row" href="representation.html">
+                <span class="module-number" aria-hidden="true">01</span>
+                <span><strong>바이트·Hex·Base64</strong><small>표현을 바꾸는 인코딩과 비밀을 지키는 암호화를 구분합니다.</small><small class="completion-label" data-completion="crypto.representation"></small></span>
+                <span class="lesson-row-action" aria-hidden="true"><span>학습 시작</span> →</span></a></li><li><a class="lesson-row" href="modular.html">
+                <span class="module-number" aria-hidden="true">02</span>
+                <span><strong>나머지와 모듈러 역원</strong><small>순환하는 값의 연산과 역원이 존재하는 조건을 확인합니다.</small><small class="completion-label" data-completion="crypto.modular"></small></span>
+                <span class="lesson-row-action" aria-hidden="true">→</span></a></li><li><a class="lesson-row" href="classical.html">
+                <span class="module-number" aria-hidden="true">03</span>
+                <span><strong>치환과 작은 키 공간</strong><small>시저 이동의 암·복호를 구현하고 실제 보호에 부적합한 이유를 설명합니다.</small><small class="completion-label" data-completion="crypto.classical"></small></span>
+                <span class="lesson-row-action" aria-hidden="true">→</span></a></li></ol>
+              <p class="module-note">고전 암호는 원리 관찰용입니다. 직접 만든 암호를 실제 보호 기능에 쓰지 않습니다.</p>
+            </section>
+            <section class="module-card" id="module-2" tabindex="-1">
+              <div class="module-heading"><h3>무결성과 진위</h3><span class="caption" data-module-count="1"></span></div>
+              <ol><li><a class="lesson-row" href="hash.html">
+                <span class="module-number" aria-hidden="true">01</span>
+                <span><strong>SHA-256과 파일 무결성</strong><small>해시의 길이와 입력 변경 효과를 확인합니다.</small><small class="completion-label" data-completion="crypto.hash"></small></span>
+                <span class="lesson-row-action" aria-hidden="true"><span>학습 시작</span> →</span></a></li><li><a class="lesson-row" href="mac.html">
+                <span class="module-number" aria-hidden="true">02</span>
+                <span><strong>HMAC과 태그 검증</strong><small>공유 키가 있는 변경 검출과 단순 해시를 비교합니다.</small><small class="completion-label" data-completion="crypto.mac"></small></span>
+                <span class="lesson-row-action" aria-hidden="true">→</span></a></li></ol>
+              <p class="module-note">해시와 MAC을 분리합니다. 변경 검출과 신뢰할 수 있는 발신자 확인은 같은 보장이 아닙니다.</p>
+            </section>
+            <section class="module-card" id="module-3" tabindex="-1">
+              <div class="module-heading"><h3>현대 암호 설계와 키 수명</h3><span class="caption" data-module-count="2"></span></div>
+              <ol><li><a class="lesson-row" href="symmetric.html">
+                <span class="module-number" aria-hidden="true">01</span>
+                <span><strong>대칭키·AEAD·인증 태그</strong><small>실제 AES-GCM 자료의 정상 복호와 암호문·태그·AAD·nonce·키 변경 거부를 비교합니다.</small><small class="completion-label" data-completion="crypto.symmetric"></small></span>
+                <span class="lesson-row-action" aria-hidden="true"><span>학습 시작</span> →</span></a></li><li><a class="lesson-row" href="public-key.html">
+                <span class="module-number" aria-hidden="true">02</span>
+                <span><strong>공개키 암호화와 서명</strong><small>실제 Ed25519 서명의 정상·변조·잘못된 공개키 검증을 비교하고 키 소유자 신뢰와 구분합니다.</small><small class="completion-label" data-completion="crypto.public-key"></small></span>
+                <span class="lesson-row-action" aria-hidden="true">→</span></a></li><li><a class="lesson-row" href="nonce.html">
+                <span class="module-number" aria-hidden="true">03</span>
+                <span><strong>난수·nonce와 재사용</strong><small>같은 키 아래 nonce 제약을 어겼을 때 보장이 깨질 수 있음을 설명합니다.</small><small class="completion-label" data-completion="crypto.nonce"></small></span>
+                <span class="lesson-row-action" aria-hidden="true">→</span></a></li><li><a class="lesson-row" href="password.html">
+                <span class="module-number" aria-hidden="true">04</span>
+                <span><strong>비밀번호 KDF·salt·비용</strong><small>비밀번호 저장을 일반 해시·암호화와 구분합니다.</small><small class="completion-label" data-completion="crypto.password"></small></span>
+                <span class="lesson-row-action" aria-hidden="true">→</span></a></li></ol>
+              <p class="module-note">목적과 키 역할을 구분한 뒤 검증된 cryptography 라이브러리의 AES-GCM·Ed25519 API로 정상·변조·잘못된 키를 비교합니다. 표준 라이브러리 기초 실습과 선택 패키지 실습의 준비 환경을 나누어 안내합니다.</p>
+            </section>
+            <section class="module-card" id="module-4" tabindex="-1">
+              <div class="module-heading"><h3>키 수명과 프로토콜 검증</h3><span class="caption" data-module-count="3"></span></div>
+              <ol><li><a class="lesson-row" href="key-lifecycle.html">
+                <span class="module-number" aria-hidden="true">01</span>
+                <span><strong>키 상태·교체·침해 대응</strong><small>키의 생성·사용·퇴역·침해·폐기를 구분하고 데이터 복구 영향까지 검토합니다.</small><small class="completion-label" data-completion="crypto.key-lifecycle"></small></span>
+                <span class="lesson-row-action" aria-hidden="true"><span>학습 시작</span> →</span></a></li><li><a class="lesson-row" href="hkdf-context.html">
+                <span class="module-number" aria-hidden="true">02</span>
+                <span><strong>HKDF 추출·확장과 용도 분리</strong><small>공통 비밀에서 서로 다른 용도의 키를 유도하고 표준 시험 벡터로 확인합니다.</small><small class="completion-label" data-completion="crypto.hkdf-context"></small></span>
+                <span class="lesson-row-action" aria-hidden="true">→</span></a></li><li><a class="lesson-row" href="certificate-trust.html">
+                <span class="module-number" aria-hidden="true">03</span>
+                <span><strong>인증서 이름·기간·신뢰 경로</strong><small>서버 이름 확인과 인증서 경로 검증의 역할을 구분합니다.</small><small class="completion-label" data-completion="crypto.certificate-trust"></small></span>
+                <span class="lesson-row-action" aria-hidden="true">→</span></a></li><li><a class="lesson-row" href="message-encoding.html">
+                <span class="module-number" aria-hidden="true">04</span>
+                <span><strong>메시지 경계와 인증할 바이트</strong><small>필드의 모호한 결합을 찾고 인증할 메시지 표현을 명확히 만듭니다.</small><small class="completion-label" data-completion="crypto.message-encoding"></small></span>
+                <span class="lesson-row-action" aria-hidden="true">→</span></a></li><li><a class="lesson-row" href="replay-protection.html">
+                <span class="module-number" aria-hidden="true">05</span>
+                <span><strong>유효한 태그와 재전송 방지</strong><small>메시지 진위 확인과 한 번만 처리할 상태 관리를 구분합니다.</small><small class="completion-label" data-completion="crypto.replay-protection"></small></span>
+                <span class="lesson-row-action" aria-hidden="true">→</span></a></li></ol>
+              <p class="module-note">키의 생애와 문맥 분리에서 인증서·재전송·메시지 표현의 함정까지 연결합니다.</p>
+            </section>
+            <section class="module-card" id="module-5" tabindex="-1">
+              <div class="module-heading"><h3>암호 레코드와 안전한 사용</h3><span class="caption" data-module-count="4"></span></div>
+              <ol><li><a class="lesson-row" href="aad-record-binding.html">
+                <span class="module-number" aria-hidden="true">01</span>
+                <span><strong>AEAD와 레코드 문맥의 결합</strong><small>암호문을 테넌트·문서·버전에 연결하고 인증 실패 시 평문을 사용하지 않습니다.</small><small class="completion-label" data-completion="crypto.aad-record-binding"></small></span>
+                <span class="lesson-row-action" aria-hidden="true"><span>학습 시작</span> →</span></a></li><li><a class="lesson-row" href="verifier-migration.html">
+                <span class="module-number" aria-hidden="true">02</span>
+                <span><strong>비밀번호 검증값의 버전과 재해시</strong><small>저장 형식을 검증하고 성공한 후보만 새 정책으로 이전합니다.</small><small class="completion-label" data-completion="crypto.verifier-migration"></small></span>
+                <span class="lesson-row-action" aria-hidden="true">→</span></a></li><li><a class="lesson-row" href="envelope-keywrap.html">
+                <span class="module-number" aria-hidden="true">03</span>
+                <span><strong>봉투 암호화와 DEK 재포장</strong><small>데이터 키와 포장 키를 분리하고 키 교체와 데이터 재암호화의 차이를 검증합니다.</small><small class="completion-label" data-completion="crypto.envelope-keywrap"></small></span>
+                <span class="lesson-row-action" aria-hidden="true">→</span></a></li><li><a class="lesson-row" href="signature-authorization.html">
+                <span class="module-number" aria-hidden="true">04</span>
+                <span><strong>서명 문맥과 업무 권한</strong><small>서명된 행동·자원·문맥과 현재 요청의 인가를 각각 확인합니다.</small><small class="completion-label" data-completion="crypto.signature-authorization"></small></span>
+                <span class="lesson-row-action" aria-hidden="true">→</span></a></li><li><a class="lesson-row" href="unbiased-randomness.html">
+                <span class="module-number" aria-hidden="true">05</span>
+                <span><strong>난수의 예측 가능성과 나머지 편향</strong><small>보안용 난수와 시험용 입력을 구분하고 균등 선택의 바이트 경계를 계산합니다.</small><small class="completion-label" data-completion="crypto.unbiased-randomness"></small></span>
+                <span class="lesson-row-action" aria-hidden="true">→</span></a></li></ol>
+              <p class="module-note">레코드 문맥·저장값 이전·키 포장·서명 인가·난수 변환을 실제 연산과 경계 사례로 검증합니다.</p>
+            </section></div>
+        </section>
         <section class="course-introduction" id="courseIntroduction" aria-label="분야 소개">
-        <div class="field-guide-card"><div class="field-guide-top"><span class="field-index">06</span><h2>Cryptography</h2></div>
+        <div class="field-guide-card"><h2>분야 소개</h2>
           <p class="field-question">데이터의 비밀과 진위를 어떤 보장으로 지킬 수 있을까?</p><dl><dt>주로 다루는 문제</dt><dd>기밀성·무결성·인증, 암호 프로토콜과 키 관리</dd><dt>만나는 개념</dt><dd>모듈러 연산, 해시·MAC, AEAD·서명, HKDF, 인증서 신뢰, 재전송 방지, 키 수명</dd><dt>잘 맞을 수 있는 관심</dt><dd>규칙을 찾고 가설을 시험하거나, 작은 도구를 만들어 문제를 해결하는 것이 재미있다.</dd><dt>도움 되는 기초</dt><dd>기초 수학과 Python이 유용하지만, 처음에는 Base64와 간단한 치환 문제부터 시작할 수 있다.</dd><dt>첫 실습</dt><dd>인코딩과 암호화의 차이를 확인하고, 쉬운 교육용 문제 하나를 풀이 과정과 검증 방법까지 기록한다.</dd></dl>
           <div class="field-path"><b>학습 경로</b> 표현·수학·현대 암호 → 키·신뢰·재전송 → AAD·봉투 암호·서명 문맥 → 검증자 이전과 안전한 난수</div>
         </div></section><figure class="learning-visual course-visual" data-visual-id="crypto"><header class="visual-heading"><span class="visual-kicker">이 분야의 학습 흐름 · 흐름도</span><h3>표현과 수학에서 키 수명과 검증으로</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="표현과 수학에서 키 수명과 검증으로 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 222" width="760" height="222" role="img" aria-labelledby="visual-course-crypto-title visual-course-crypto-desc" focusable="false"><title id="visual-course-crypto-title">표현과 수학에서 키 수명과 검증으로</title><desc id="visual-course-crypto-desc">표현·수학·현대 암호에서 키·신뢰·재전송 조건으로 이어집니다. 실제 라이브러리의 AAD·봉투 암호·서명 검증을 관찰하고 비밀번호 검증자 이전과 난수 선택의 조건을 구분합니다.</desc><defs><marker id="visual-course-crypto-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><circle class="v-step-circle" cx="42" cy="27" r="13"/><text class="v-step-number" x="42" y="31" text-anchor="middle">1</text><g class="v-tone "><rect class="v-node" x="28" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="29" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="82">기초 구분</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="113">표현·연산</tspan><tspan x="45" y="133">고전 암호</tspan></text></g><circle class="v-step-circle" cx="188.8" cy="27" r="13"/><text class="v-step-number" x="188.8" y="31" text-anchor="middle">2</text><g class="v-tone "><rect class="v-node" x="174.8" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="175.8" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="191.8" y="82">무결성과</tspan><tspan x="191.8" y="104">진위</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="191.8" y="135">해시·MAC</tspan><tspan x="191.8" y="155">키와 태그</tspan></text></g><path class="v-edge " d="M148.8 126H169.8" marker-end="url(#visual-course-crypto-arrow)"/><circle class="v-step-circle" cx="335.6" cy="27" r="13"/><text class="v-step-number" x="335.6" y="31" text-anchor="middle">3</text><g class="v-tone "><rect class="v-node" x="321.6" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="322.6" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="338.6" y="82">현대 설계</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="338.6" y="113">AEAD·서명</tspan><tspan x="338.6" y="133">nonce·KDF</tspan></text></g><path class="v-edge " d="M295.6 126H316.6" marker-end="url(#visual-course-crypto-arrow)"/><circle class="v-step-circle" cx="482.40000000000003" cy="27" r="13"/><text class="v-step-number" x="482.40000000000003" y="31" text-anchor="middle">4</text><g class="v-tone "><rect class="v-node" x="468.40000000000003" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="469.40000000000003" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="485.40000000000003" y="82">프로토콜</tspan><tspan x="485.40000000000003" y="104">조건</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="485.40000000000003" y="135">키 분리</tspan><tspan x="485.40000000000003" y="155">신뢰·재전송</tspan></text></g><path class="v-edge " d="M442.40000000000003 126H463.40000000000003" marker-end="url(#visual-course-crypto-arrow)"/><circle class="v-step-circle" cx="629.2" cy="27" r="13"/><text class="v-step-number" x="629.2" y="31" text-anchor="middle">5</text><g class="v-tone "><rect class="v-node" x="615.2" y="54" width="116.8" height="144" rx="12"/><rect class="v-accent" x="616.2" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="632.2" y="82">조합 검증</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="632.2" y="113">문맥·봉투</tspan><tspan x="632.2" y="133">교체·난수</tspan></text></g><path class="v-edge " d="M589.2 126H610.2" marker-end="url(#visual-course-crypto-arrow)"/></svg></div><figcaption><span class="visual-takeaway">각 단계에서 만든 기록과 결과물을 다음 차시의 판단 근거로 이어가세요.</span><small class="visual-note">학습의 큰 흐름입니다. 차시는 목차에서 자유롭게 선택하고 필요한 기초로 돌아갈 수 있습니다.</small></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>표현·수학·현대 암호에서 키·신뢰·재전송 조건으로 이어집니다. 실제 라이브러리의 AAD·봉투 암호·서명 검증을 관찰하고 비밀번호 검증자 이전과 난수 선택의 조건을 구분합니다.</p></details></figure>
-        <section class="learning-path-panel"><div><span class="overline">LEARN → APPLY → EXPLAIN</span><h2>이 과정의 완주 기준</h2><p>차시별 독립 과제에서 조건을 바꿔 보고, 마지막에는 두 표본을 분석한 결과와 근거 보고서를 완성합니다.</p></div><a class="learning-button" href="../../learn/">차시 검색 · 목표별 경로 ↗</a></section>
+        <section class="learning-path-panel"><div><h2>이 과정의 완주 기준</h2><p>차시별 독립 과제에서 조건을 바꿔 보고, 마지막에는 두 표본을 분석한 결과와 근거 보고서를 완성합니다.</p></div><a class="learning-button" href="../../learn/">목표별 학습 경로 보기 ↗</a></section>
         <div class="overview-layout"><div>
-          <section class="outcome-panel"><div class="overline">WHAT YOU WILL BUILD</div><h2>이 과정을 마치면</h2><p>키 수명·유도 문맥·서버 신뢰·신선도·인증할 바이트를 구분하고 표준 시험값과 반례로 설계를 검토합니다.</p></section>
-          <section class="module-list" id="courseModules" aria-label="모듈별 차시">
-            <section class="module-card"><div class="module-heading"><h2>01 · 표현·수학·고전 암호</h2><span class="caption" data-module-count="0"></span></div><p>고전 암호는 원리 관찰용입니다. 직접 만든 암호를 실제 보호 기능에 쓰지 않습니다.</p>
-              <ol><li><a class="lesson-row" href="representation.html"><span class="lesson-dot" data-dot="crypto.representation" aria-hidden="true"></span>
-                <span><strong>바이트·Hex·Base64</strong><small>표현을 바꾸는 인코딩과 비밀을 지키는 암호화를 구분합니다.</small><small class="completion-label" data-completion="crypto.representation"></small></span><span aria-hidden="true">↗</span></a></li><li><a class="lesson-row" href="modular.html"><span class="lesson-dot" data-dot="crypto.modular" aria-hidden="true"></span>
-                <span><strong>나머지와 모듈러 역원</strong><small>순환하는 값의 연산과 역원이 존재하는 조건을 확인합니다.</small><small class="completion-label" data-completion="crypto.modular"></small></span><span aria-hidden="true">↗</span></a></li><li><a class="lesson-row" href="classical.html"><span class="lesson-dot" data-dot="crypto.classical" aria-hidden="true"></span>
-                <span><strong>치환과 작은 키 공간</strong><small>시저 이동의 암·복호를 구현하고 실제 보호에 부적합한 이유를 설명합니다.</small><small class="completion-label" data-completion="crypto.classical"></small></span><span aria-hidden="true">↗</span></a></li></ol>
-            </section>
-            <section class="module-card"><div class="module-heading"><h2>02 · 무결성과 진위</h2><span class="caption" data-module-count="1"></span></div><p>해시와 MAC을 분리합니다. 변경 검출과 신뢰할 수 있는 발신자 확인은 같은 보장이 아닙니다.</p>
-              <ol><li><a class="lesson-row" href="hash.html"><span class="lesson-dot" data-dot="crypto.hash" aria-hidden="true"></span>
-                <span><strong>SHA-256과 파일 무결성</strong><small>해시의 길이와 입력 변경 효과를 확인합니다.</small><small class="completion-label" data-completion="crypto.hash"></small></span><span aria-hidden="true">↗</span></a></li><li><a class="lesson-row" href="mac.html"><span class="lesson-dot" data-dot="crypto.mac" aria-hidden="true"></span>
-                <span><strong>HMAC과 태그 검증</strong><small>공유 키가 있는 변경 검출과 단순 해시를 비교합니다.</small><small class="completion-label" data-completion="crypto.mac"></small></span><span aria-hidden="true">↗</span></a></li></ol>
-            </section>
-            <section class="module-card"><div class="module-heading"><h2>03 · 현대 암호 설계와 키 수명</h2><span class="caption" data-module-count="2"></span></div><p>목적과 키 역할을 구분한 뒤 검증된 cryptography 라이브러리의 AES-GCM·Ed25519 API로 정상·변조·잘못된 키를 비교합니다. 표준 라이브러리 기초 실습과 선택 패키지 실습의 준비 환경을 나누어 안내합니다.</p>
-              <ol><li><a class="lesson-row" href="symmetric.html"><span class="lesson-dot" data-dot="crypto.symmetric" aria-hidden="true"></span>
-                <span><strong>대칭키·AEAD·인증 태그</strong><small>실제 AES-GCM 자료의 정상 복호와 암호문·태그·AAD·nonce·키 변경 거부를 비교합니다.</small><small class="completion-label" data-completion="crypto.symmetric"></small></span><span aria-hidden="true">↗</span></a></li><li><a class="lesson-row" href="public-key.html"><span class="lesson-dot" data-dot="crypto.public-key" aria-hidden="true"></span>
-                <span><strong>공개키 암호화와 서명</strong><small>실제 Ed25519 서명의 정상·변조·잘못된 공개키 검증을 비교하고 키 소유자 신뢰와 구분합니다.</small><small class="completion-label" data-completion="crypto.public-key"></small></span><span aria-hidden="true">↗</span></a></li><li><a class="lesson-row" href="nonce.html"><span class="lesson-dot" data-dot="crypto.nonce" aria-hidden="true"></span>
-                <span><strong>난수·nonce와 재사용</strong><small>같은 키 아래 nonce 제약을 어겼을 때 보장이 깨질 수 있음을 설명합니다.</small><small class="completion-label" data-completion="crypto.nonce"></small></span><span aria-hidden="true">↗</span></a></li><li><a class="lesson-row" href="password.html"><span class="lesson-dot" data-dot="crypto.password" aria-hidden="true"></span>
-                <span><strong>비밀번호 KDF·salt·비용</strong><small>비밀번호 저장을 일반 해시·암호화와 구분합니다.</small><small class="completion-label" data-completion="crypto.password"></small></span><span aria-hidden="true">↗</span></a></li></ol>
-            </section>
-            <section class="module-card"><div class="module-heading"><h2>04 · 키 수명과 프로토콜 검증</h2><span class="caption" data-module-count="3"></span></div><p>키의 생애와 문맥 분리에서 인증서·재전송·메시지 표현의 함정까지 연결합니다.</p>
-              <ol><li><a class="lesson-row" href="key-lifecycle.html"><span class="lesson-dot" data-dot="crypto.key-lifecycle" aria-hidden="true"></span>
-                <span><strong>키 상태·교체·침해 대응</strong><small>키의 생성·사용·퇴역·침해·폐기를 구분하고 데이터 복구 영향까지 검토합니다.</small><small class="completion-label" data-completion="crypto.key-lifecycle"></small></span><span aria-hidden="true">↗</span></a></li><li><a class="lesson-row" href="hkdf-context.html"><span class="lesson-dot" data-dot="crypto.hkdf-context" aria-hidden="true"></span>
-                <span><strong>HKDF 추출·확장과 용도 분리</strong><small>공통 비밀에서 서로 다른 용도의 키를 유도하고 표준 시험 벡터로 확인합니다.</small><small class="completion-label" data-completion="crypto.hkdf-context"></small></span><span aria-hidden="true">↗</span></a></li><li><a class="lesson-row" href="certificate-trust.html"><span class="lesson-dot" data-dot="crypto.certificate-trust" aria-hidden="true"></span>
-                <span><strong>인증서 이름·기간·신뢰 경로</strong><small>서버 이름 확인과 인증서 경로 검증의 역할을 구분합니다.</small><small class="completion-label" data-completion="crypto.certificate-trust"></small></span><span aria-hidden="true">↗</span></a></li><li><a class="lesson-row" href="message-encoding.html"><span class="lesson-dot" data-dot="crypto.message-encoding" aria-hidden="true"></span>
-                <span><strong>메시지 경계와 인증할 바이트</strong><small>필드의 모호한 결합을 찾고 인증할 메시지 표현을 명확히 만듭니다.</small><small class="completion-label" data-completion="crypto.message-encoding"></small></span><span aria-hidden="true">↗</span></a></li><li><a class="lesson-row" href="replay-protection.html"><span class="lesson-dot" data-dot="crypto.replay-protection" aria-hidden="true"></span>
-                <span><strong>유효한 태그와 재전송 방지</strong><small>메시지 진위 확인과 한 번만 처리할 상태 관리를 구분합니다.</small><small class="completion-label" data-completion="crypto.replay-protection"></small></span><span aria-hidden="true">↗</span></a></li></ol>
-            </section>
-            <section class="module-card"><div class="module-heading"><h2>05 · 암호 레코드와 안전한 사용</h2><span class="caption" data-module-count="4"></span></div><p>레코드 문맥·저장값 이전·키 포장·서명 인가·난수 변환을 실제 연산과 경계 사례로 검증합니다.</p>
-              <ol><li><a class="lesson-row" href="aad-record-binding.html"><span class="lesson-dot" data-dot="crypto.aad-record-binding" aria-hidden="true"></span>
-                <span><strong>AEAD와 레코드 문맥의 결합</strong><small>암호문을 테넌트·문서·버전에 연결하고 인증 실패 시 평문을 사용하지 않습니다.</small><small class="completion-label" data-completion="crypto.aad-record-binding"></small></span><span aria-hidden="true">↗</span></a></li><li><a class="lesson-row" href="verifier-migration.html"><span class="lesson-dot" data-dot="crypto.verifier-migration" aria-hidden="true"></span>
-                <span><strong>비밀번호 검증값의 버전과 재해시</strong><small>저장 형식을 검증하고 성공한 후보만 새 정책으로 이전합니다.</small><small class="completion-label" data-completion="crypto.verifier-migration"></small></span><span aria-hidden="true">↗</span></a></li><li><a class="lesson-row" href="envelope-keywrap.html"><span class="lesson-dot" data-dot="crypto.envelope-keywrap" aria-hidden="true"></span>
-                <span><strong>봉투 암호화와 DEK 재포장</strong><small>데이터 키와 포장 키를 분리하고 키 교체와 데이터 재암호화의 차이를 검증합니다.</small><small class="completion-label" data-completion="crypto.envelope-keywrap"></small></span><span aria-hidden="true">↗</span></a></li><li><a class="lesson-row" href="signature-authorization.html"><span class="lesson-dot" data-dot="crypto.signature-authorization" aria-hidden="true"></span>
-                <span><strong>서명 문맥과 업무 권한</strong><small>서명된 행동·자원·문맥과 현재 요청의 인가를 각각 확인합니다.</small><small class="completion-label" data-completion="crypto.signature-authorization"></small></span><span aria-hidden="true">↗</span></a></li><li><a class="lesson-row" href="unbiased-randomness.html"><span class="lesson-dot" data-dot="crypto.unbiased-randomness" aria-hidden="true"></span>
-                <span><strong>난수의 예측 가능성과 나머지 편향</strong><small>보안용 난수와 시험용 입력을 구분하고 균등 선택의 바이트 경계를 계산합니다.</small><small class="completion-label" data-completion="crypto.unbiased-randomness"></small></span><span aria-hidden="true">↗</span></a></li></ol>
-            </section></section>
+          <section class="outcome-panel"><h2>이 과정을 마치면</h2><p>키 수명·유도 문맥·서버 신뢰·신선도·인증할 바이트를 구분하고 표준 시험값과 반례로 설계를 검토합니다.</p></section>
           <section class="project-callout" id="finalProject"><span class="overline">FINAL PROJECT</span><h2>레코드 이동·재전송·키 교체의 검증 계획</h2><p>실제 AES-GCM 표본을 문서별 문맥에 묶고 재전송 상태와 함께 검사합니다. 유효한 암호문이라는 사실과 지금 처리해도 된다는 결정을 분리하세요.</p><p class="caption">180–270분 · 설치 제외 저자 추정 · A/B 표본 + 결과 검사 + 보고서 평가</p><a class="learning-button primary" href="../../projects/crypto.html">종합 프로젝트 시작하기 →</a></section></div>
           <aside class="overview-aside"><section class="prereq-panel"><div class="overline">BEFORE YOU START</div><h2>막히면 연결해서 볼 기초</h2><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="../foundation/python-values.html">공통 기초 · 변수·문자열·자료형 ↗</a></li><li><a href="../foundation/python-flow.html">공통 기초 · 조건·반복·함수 ↗</a></li></ul>

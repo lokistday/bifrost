@@ -4,5 +4,5 @@
   root.dataset.theme = 'dark';
   root.style.colorScheme = 'dark';
   const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-  if (metaThemeColor) metaThemeColor.content = '#080b17';
+  if (metaThemeColor) metaThemeColor.content = root.dataset.palette === 'charcoal' ? '#181819' : '#080b17';
 })();

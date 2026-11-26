@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="ko" data-theme="dark">
+<html lang="ko" data-theme="dark" data-palette="charcoal">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080b17">
+<meta name="theme-color" content="#181819">
 <meta name="description" content="로그인 전후 식별자 교체와 로그아웃·만료의 서버 측 상태 변화를 추적합니다.">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Bifrost">
@@ -17,35 +17,39 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/paths/web-defense/web.session-lifecycle.html">
 <title>세션 갱신·만료·서버 무효화 — 웹의 동작부터 안전한 상태 관리까지 · Bifrost</title>
-<script src="../../js/theme.js?v=learning-d027f06d8b67"></script>
-<script src="../../js/pointer-trail.js?v=learning-d027f06d8b67" defer></script>
-<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-d027f06d8b67">
-<link rel="icon" href="../../assets/logo.svg?v=learning-d027f06d8b67" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="../../css/study.css?v=learning-d027f06d8b67">
-<script src="../../js/catalog.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/courses/web.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/progress.js?v=learning-d027f06d8b67" defer></script>
+<script src="../../js/theme.js?v=learning-2ac3a8931abc"></script>
+<link rel="icon" href="../../assets/bifrost-mark.svg?v=editorial-968df953fec1" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/learning.css?v=course-style-fa797c0dc5e4">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/study.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/charcoal.css?v=editorial-968df953fec1">
+<script src="../../js/catalog.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/courses/web.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/progress.js?v=learning-2ac3a8931abc" defer></script>
 
-<script src="../../js/learning-paths.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/path-progress.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/learning-view.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/learning.js?v=learning-d027f06d8b67" defer></script>
+<script src="../../js/learning-paths.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/path-progress.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/learning-view.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/learning.js?v=learning-2ac3a8931abc" defer></script>
 </head>
-<body class="learning-page" data-course="web" data-course-number="08" data-view="lesson" data-lesson-id="web.session-lifecycle" data-path="web-defense" style="--course-accent:var(--map-blue)">
+<body class="learning-page" data-course="web" data-course-number="08" data-view="lesson" data-lesson-id="web.session-lifecycle" data-path="web-defense">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
-<header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-d027f06d8b67" width="34" height="34" alt=""></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../fields/#mindmap">모든 분야</a><a href="../../learn/">학습 경로</a><a href="./#pathOutline">웹 보안 목차</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
-  
-  <a class="nav-cta" href="../../fields/#mindmap">학습 지도 ↗</a>
-</div></header>
+<header class="editorial-header"><div class="editorial-frame editorial-header-inner">
+    <a class="editorial-brand" href="../../" aria-label="BIFROST 홈"><img src="../../assets/bifrost-mark.svg?v=editorial-968df953fec1" width="36" height="36" alt=""><span>BIFROST</span></a>
+    <nav class="editorial-nav" aria-label="주 메뉴"><a href="../../fields/#mindmap">분야 둘러보기</a><a href="../../learn/">학습 경로</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
+  </div></header>
 <main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="web.session-lifecycle">
-<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../learn/">학습 경로</a><span aria-hidden="true">/</span><a href="./">웹의 동작부터 안전한 상태 관리까지</a><span aria-hidden="true">/</span><span aria-current="page">25단계</span></nav>
-        <div class="lesson-layout"><aside class="course-sidebar path-sidebar"><a class="back-link" href="./">← 웹의 동작부터 안전한 상태 관리까지 목차</a>
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../learn/">학습 경로</a><span aria-hidden="true">/</span><a href="./">웹의 동작부터 안전한 상태 관리까지</a><span aria-hidden="true">/</span><span aria-current="page">25 단계</span></nav>
+        <article class="lesson-layout" aria-labelledby="lesson-title">
+          <header class="lesson-heading">
+            <h1 id="lesson-title">세션 갱신·만료·서버 무효화</h1>
+            <p class="lesson-objective">로그인 전후 식별자 교체와 로그아웃·만료의 서버 측 상태 변화를 추적합니다.</p>
+            <div class="lesson-facts"><p>약 45–75분</p><p class="path-location">경로 진행 · 25 / 31단계</p>
+            </div>
+          </header>
+          <aside class="course-sidebar path-sidebar"><nav class="reader-steps" aria-label="본문 바로가기"><p>이 차시에서</p><ol><li><a href="#concept" aria-current="location"><span>01</span>먼저 이해하기</a></li><li><a href="#worked"><span>02</span>예제 따라 하기</a></li><li><a href="#practice"><span>03</span>직접 바꾸기</a></li><li><a href="#transfer"><span>04</span>독립 과제</a></li><li><a href="#verify"><span>05</span>검증</a></li></ol></nav><a class="back-link" href="./#pathOutline">← 경로 목차로</a><details class="reader-outline"><summary>경로의 다른 차시</summary>
         <div class="course-stats"><span data-path-count></span><div class="course-meter" role="progressbar" aria-label="웹의 동작부터 안전한 상태 관리까지 차시 완료 진도" aria-valuemin="0" aria-valuemax="100" data-path-meter><span></span></div></div>
         <nav aria-label="웹의 동작부터 안전한 상태 관리까지 경로 목차"><details ><summary>Foundation<span class="caption">1–3단계</span></summary><ol><li><a class="side-lesson" href="foundation.environment.html" >
           <span class="path-step-number">1</span><span><small>공통 기초 · 권장 선행</small>실습 환경 준비와 첫 실행<small class="completion-label" data-completion="foundation.environment"></small></span></a></li><li><a class="side-lesson" href="foundation.network.html" >
@@ -89,18 +93,16 @@
           <span class="path-step-number">30</span><span><small>웹 보안 · 권장 선행</small>수정·반례·회귀 테스트<small class="completion-label" data-completion="web.regression"></small></span></a></li><li><a class="side-lesson" href="web.idempotency.html" >
           <span class="path-step-number">31</span><span><small>웹 보안 · 경로 핵심</small>거래 불변 조건·트랜잭션·재시도<small class="completion-label" data-completion="web.idempotency"></small></span></a></li>
           </ol></details><a class="side-lesson path-project-link" href="project.html"><span class="path-step-number">✦</span><span>마지막 · 종합 프로젝트</span></a></nav>
-        <a class="back-link" href="../../learn/">다른 학습 경로 보기 ↗</a></aside><article class="lesson-article">
-          <nav class="path-location" aria-label="현재 학습 경로"><a href="./">웹 보안</a><strong>25 / 31단계</strong><a href="./#pathOutline">경로 목차 ↗</a></nav>
-          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/web.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">Web Hacking · 05 · 요청 계약과 제한된 권한 · 25 / 31</div><h1>세션 갱신·만료·서버 무효화</h1><p class="lesson-objective">로그인 전후 식별자 교체와 로그아웃·만료의 서버 측 상태 변화를 추적합니다.</p></div></header>
-          <div class="lesson-meta"><span>응용</span><span>학습 45–75분</span><span>처음 준비 0–10분</span></div>
+        <a class="back-link" href="../../learn/">다른 학습 경로 보기 ↗</a></details></aside>
+          <div class="lesson-article">
+          <section id="concept" class="article-section"><h2>먼저 이해하기</h2><p>세션 식별자는 브라우저와 서버의 상태를 연결하는 값입니다. 로그인 전에 쓰던 식별자를 인증 후에도 그대로 쓰면 누군가 미리 알던 식별자가 인증 상태와 연결될 수 있습니다. 로그인처럼 신뢰 수준이 바뀔 때 새 식별자로 갱신하고 이전 식별자를 무효화하는 이유입니다.</p><figure class="learning-visual" data-visual-id="web.session-lifecycle"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 타임라인</span><h3>신뢰 수준이 바뀌면 식별자도 갱신합니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="신뢰 수준이 바뀌면 식별자도 갱신합니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" width="760" height="460" role="img" aria-labelledby="visual-web-session-lifecycle-title visual-web-session-lifecycle-desc" focusable="false"><title id="visual-web-session-lifecycle-title">신뢰 수준이 바뀌면 식별자도 갱신합니다</title><desc id="visual-web-session-lifecycle-desc">고정 시각 90에서 S-OLD를 제거하고 S-NEW에 alice와 expires=140을 연결합니다. 유효 기간 중 로그아웃하면 즉시 제거되고, 별도 표본에서 140 도달도 무효입니다.</desc><defs><marker id="visual-web-session-lifecycle-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><path class="v-edge " d="M166 40V434" marker-end="url(#visual-web-session-lifecycle-arrow)"/><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="57">인증 후</tspan></text><circle class="v-point" cx="166" cy="52" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="26" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="39" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="54">ID 교체</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="85">S-OLD 제거</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="163">유효</tspan></text><circle class="v-point" cx="166" cy="158" r="6"/><g class="v-tone positive"><rect class="v-node" x="202" y="132" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="145" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="160">S-NEW 조회</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="191">91 → alice</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="269">경로 A</tspan></text><circle class="v-point" cx="166" cy="264" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="238" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="251" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="266">로그아웃</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="297">91에서도 None</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="375">경로 B</tspan></text><circle class="v-point" cx="166" cy="370" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="344" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="357" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="372">만료 경계</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="403">140 → None</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">쿠키 삭제와 서버 무효화는 각각 확인하세요.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>고정 시각 90에서 S-OLD를 제거하고 S-NEW에 alice와 expires=140을 연결합니다. 유효 기간 중 로그아웃하면 즉시 제거되고, 별도 표본에서 140 도달도 무효입니다.</p></details></figure><p>rotate_after_verified_login은 인증 검증이 이미 끝났다는 전제에서 old ID를 제거하고 새 ID에 user와 만료값을 저장합니다. 이 함수는 비밀번호를 검사하지 않습니다. S-OLD·S-NEW는 공개 표본이고 실제 세션 ID는 충분히 예측 불가능한 값으로 발급해야 합니다.</p><p>로그아웃은 브라우저 쿠키를 지우는 일과 서버가 식별자를 더 이상 인정하지 않는 일을 구분해야 합니다. 쿠키만 없애면 이미 복사된 식별자가 서버에서 계속 유효할 수 있습니다. 이 모형의 logout은 메모리 저장소에서 ID를 제거해 다음 조회를 실패시킵니다.</p><p>만료 조건은 now&gt;=expires입니다. 고정 now=90에서 새 수명을 50으로 정했으므로 139는 아직 유효하고 140부터 무효입니다. 실제 설계에서는 절대 수명과 유휴 수명, 시계 정책, 다른 기기의 세션·권한 변경 후 무효화 등을 별도로 정합니다.</p><p>이 실습은 한 프로세스의 상태 전이를 관찰합니다. 쿠키 속성·TLS·분산 저장소의 원자성·세션 탈취 방지·CSRF 검증을 구현하지 않습니다. ID 교체와 만료 검증이 있더라도 사용자별 자원 인가와 계정 복구 절차는 그대로 필요합니다.</p><p>다시 로그인하면 기존 세션 ID는 서버에서 폐기되고 새 ID가 발급됩니다. 세션은 5분 후 만료됩니다. 두 탭은 쿠키를 공유하므로 계정 비교에는 별도 프로필이나 명시적인 로그아웃을 사용합니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>브라우저 쿠키만 지우면 서버의 복사된 세션 ID도 자동 무효라고 생각한다.</dt><dd>서버 저장소에서 유효성을 끝내야 합니다. 쿠키 제거와 서버 무효화를 별도로 확인합니다.</dd><dt>새 ID 발급과 비밀번호 검증을 같은 함수의 보장으로 해석한다.</dt><dd>이 모형의 전제는 인증 검증 완료입니다. 실제 신원 검증은 별도의 작업입니다.</dd></dl></aside></section>
+          <div class="lesson-meta"><span>응용</span><span>처음 준비 0–10분</span></div>
         <p class="caption">개념 수·도구 전환·독립 과제를 고려한 편집자 추정이며 학습자 실측 전입니다.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>쿠키는 지웠지만 서버에 ID가 남아 있습니다. 복사된 ID는 어떻게 되나요?</p><fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend><label><input type="radio" name="readiness" value="0"> 항상 자동 무효가 된다.</label><label><input type="radio" name="readiness" value="1"> 서버 정책에 따라 여전히 유효할 수 있어 서버 무효화가 필요하다.</label><label><input type="radio" name="readiness" value="2"> 쿠키 삭제가 DB 전체를 지운다.</label><button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset><details><summary>판단 기준과 보충 자료</summary><p>클라이언트 보관과 서버 유효성은 다른 상태입니다. 로그아웃의 두 경계를 함께 설계합니다.</p></details></details><details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl><dt>명령 실행 또는 입력 파일 찾기에서 막힘</dt><dd>Python 3.10 이상 · 오프라인 상태 모형 · Web ZIP인지 확인합니다. web_state.py이 있는 작업 사본 폴더에서 실행하고 원본과 편집한 파일의 위치를 비교하세요.</dd><dt>브라우저 쿠키만 지우면 서버의 복사된 세션 ID도 자동 무효라고 생각한다.</dt><dd>서버 저장소에서 유효성을 끝내야 합니다. 쿠키 제거와 서버 무효화를 별도로 확인합니다.</dd></dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>
-          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>Python 3.10 이상 · 오프라인 상태 모형 · Web ZIP</strong></p><ul><li>web 폴더에서 web_state.py를 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. Checkout 차시는 Python 배포판에 포함된 sqlite3를 사용합니다.</li><li>공개 표본 ID·토큰과 고정 시각을 사용하는 독립 실습입니다. 실제 계정·로그인·이메일·결제·HTTP 서버를 만들거나 사이트의 진도 저장 방식을 바꾸지 않습니다. 소스를 바꿀 때는 사본을 사용합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비"><summary>준비 환경과 선행 학습 확인</summary><p><strong>Python 3.10 이상 · 오프라인 상태 모형 · Web ZIP</strong></p><ul><li>web 폴더에서 web_state.py를 실행합니다. Linux/WSL/macOS는 python3, Windows PowerShell은 py -3를 사용합니다. Checkout 차시는 Python 배포판에 포함된 sqlite3를 사용합니다.</li><li>공개 표본 ID·토큰과 고정 시각을 사용하는 독립 실습입니다. 실제 계정·로그인·이메일·결제·HTTP 서버를 만들거나 사이트의 진도 저장 방식을 바꾸지 않습니다. 소스를 바꿀 때는 사본을 사용합니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="web.sessions.html">웹 보안 · 쿠키·세션·인증 ↗</a></li><li><a href="web.csrf.html">웹 보안 · CSRF와 상태 변경 요청 ↗</a></li><li><a href="foundation.config-precedence.html">공통 기초 · 설정 우선순위와 출처 추적 ↗</a></li></ul>
             </details>
-          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>세션 식별자는 브라우저와 서버의 상태를 연결하는 값입니다. 로그인 전에 쓰던 식별자를 인증 후에도 그대로 쓰면 누군가 미리 알던 식별자가 인증 상태와 연결될 수 있습니다. 로그인처럼 신뢰 수준이 바뀔 때 새 식별자로 갱신하고 이전 식별자를 무효화하는 이유입니다.</p><figure class="learning-visual" data-visual-id="web.session-lifecycle"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 타임라인</span><h3>신뢰 수준이 바뀌면 식별자도 갱신합니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="신뢰 수준이 바뀌면 식별자도 갱신합니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" width="760" height="460" role="img" aria-labelledby="visual-web-session-lifecycle-title visual-web-session-lifecycle-desc" focusable="false"><title id="visual-web-session-lifecycle-title">신뢰 수준이 바뀌면 식별자도 갱신합니다</title><desc id="visual-web-session-lifecycle-desc">고정 시각 90에서 S-OLD를 제거하고 S-NEW에 alice와 expires=140을 연결합니다. 유효 기간 중 로그아웃하면 즉시 제거되고, 별도 표본에서 140 도달도 무효입니다.</desc><defs><marker id="visual-web-session-lifecycle-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><path class="v-edge " d="M166 40V434" marker-end="url(#visual-web-session-lifecycle-arrow)"/><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="57">인증 후</tspan></text><circle class="v-point" cx="166" cy="52" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="26" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="39" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="54">ID 교체</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="85">S-OLD 제거</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="163">유효</tspan></text><circle class="v-point" cx="166" cy="158" r="6"/><g class="v-tone positive"><rect class="v-node" x="202" y="132" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="145" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="160">S-NEW 조회</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="191">91 → alice</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="269">경로 A</tspan></text><circle class="v-point" cx="166" cy="264" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="238" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="251" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="266">로그아웃</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="297">91에서도 None</tspan></text></g><text class="v-text v-secondary" font-size="12" text-anchor="end"><tspan x="140" y="375">경로 B</tspan></text><circle class="v-point" cx="166" cy="370" r="6"/><g class="v-tone "><rect class="v-node" x="202" y="344" width="502" height="90" rx="12"/><rect class="v-accent" x="203" y="357" width="3" height="64" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="219" y="372">만료 경계</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="219" y="403">140 → None</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">쿠키 삭제와 서버 무효화는 각각 확인하세요.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>고정 시각 90에서 S-OLD를 제거하고 S-NEW에 alice와 expires=140을 연결합니다. 유효 기간 중 로그아웃하면 즉시 제거되고, 별도 표본에서 140 도달도 무효입니다.</p></details></figure><p>rotate_after_verified_login은 인증 검증이 이미 끝났다는 전제에서 old ID를 제거하고 새 ID에 user와 만료값을 저장합니다. 이 함수는 비밀번호를 검사하지 않습니다. S-OLD·S-NEW는 공개 표본이고 실제 세션 ID는 충분히 예측 불가능한 값으로 발급해야 합니다.</p><p>로그아웃은 브라우저 쿠키를 지우는 일과 서버가 식별자를 더 이상 인정하지 않는 일을 구분해야 합니다. 쿠키만 없애면 이미 복사된 식별자가 서버에서 계속 유효할 수 있습니다. 이 모형의 logout은 메모리 저장소에서 ID를 제거해 다음 조회를 실패시킵니다.</p><p>만료 조건은 now&gt;=expires입니다. 고정 now=90에서 새 수명을 50으로 정했으므로 139는 아직 유효하고 140부터 무효입니다. 실제 설계에서는 절대 수명과 유휴 수명, 시계 정책, 다른 기기의 세션·권한 변경 후 무효화 등을 별도로 정합니다.</p><p>이 실습은 한 프로세스의 상태 전이를 관찰합니다. 쿠키 속성·TLS·분산 저장소의 원자성·세션 탈취 방지·CSRF 검증을 구현하지 않습니다. ID 교체와 만료 검증이 있더라도 사용자별 자원 인가와 계정 복구 절차는 그대로 필요합니다.</p><p>다시 로그인하면 기존 세션 ID는 서버에서 폐기되고 새 ID가 발급됩니다. 세션은 5분 후 만료됩니다. 두 탭은 쿠키를 공유하므로 계정 비교에는 별도 프로필이나 명시적인 로그아웃을 사용합니다.</p>
-            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>브라우저 쿠키만 지우면 서버의 복사된 세션 ID도 자동 무효라고 생각한다.</dt><dd>서버 저장소에서 유효성을 끝내야 합니다. 쿠키 제거와 서버 무효화를 별도로 확인합니다.</dd><dt>새 ID 발급과 비밀번호 검증을 같은 함수의 보장으로 해석한다.</dt><dd>이 모형의 전제는 인증 검증 완료입니다. 실제 신원 검증은 별도의 작업입니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
         <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
         <a class="learning-button" href="../../labs/web.zip" download>전체 실습 ZIP 받기 ↓</a>
@@ -108,7 +110,7 @@
       </section>
           <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
             <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
-            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Python 3.10 이상 · 오프라인 상태 모형 · Web ZIP</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 web_state.py sessions</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>old ID 무효·새 ID 유효·만료 경계 무효·만료 전 로그아웃 무효를 구분합니다.</pre></div>
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Python 3.10 이상 · 오프라인 상태 모형 · Web ZIP</span><button class="js-only" hidden type="button" id="copyExample" data-copy-code="exampleCode">복사</button></div><pre><code id="exampleCode">python3 web_state.py sessions</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>old ID 무효·새 ID 유효·만료 경계 무효·만료 전 로그아웃 무효를 구분합니다.</pre></div>
             <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>식별자 교체와 독립 만료 표본 보기</h3><p>sessions 모드는 교체 뒤 old/new를 비교합니다. at_expiry는 별도 동일 초기 조건의 표본으로 140을 검사하고, 원래 표본에서는 살아 있는 세션을 92에 로그아웃한 결과를 봅니다.</p>
         <div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · Python 3.10 이상 · 오프라인 상태 모형 · Web ZIP</span></div><pre><code>python3 web_state.py sessions</code></pre></div><div class="step-observation"><strong>관찰할 결과</strong><pre>old_after_rotate=None
 new_after_rotate=alice
@@ -163,7 +165,7 @@ None</pre></div></li><li><h3>갱신·만료·폐기를 실제 요청으로 · �
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
         <p class="feedback" role="status" id="backupFeedback"></p></details>
-        </article></div>
+        </div></article>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../fields/#mindmap">다른 분야 탐색 ↗</a></div></footer>
 </body>

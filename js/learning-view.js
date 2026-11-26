@@ -4,6 +4,8 @@
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const all = course => course.modules.flatMap(module => module.lessons);
   const slug = id => id.slice(id.indexOf('.') + 1);
+  const ordinal = index => String(index + 1).padStart(2, '0');
+  const moduleTitle = module => module.title.replace(/^\d+\s*·\s*/, '');
 
   function create(courses, visuals, route = null) {
     const lookup = Object.fromEntries(Object.values(courses).flatMap(course =>
@@ -22,8 +24,8 @@
     }
 
     function stats(course) {
-      return `<div class="course-stats"><span data-count="${course.id}"></span>
-        <div class="course-meter" role="progressbar" aria-label="${esc(course.title)} 완료 진도" aria-valuemin="0" aria-valuemax="100" data-meter="${course.id}"><span></span></div>
+      return `<div class="course-stats"><span data-count="${course.id}">0 / ${all(course).length} 완료</span>
+        <div class="course-meter" role="progressbar" aria-label="${esc(course.label)} 완료 진도" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-meter="${course.id}"><span></span></div>
       </div>`;
     }
 
@@ -45,7 +47,7 @@
     function introduction(course) {
       const field = course.introduction;
       return `<section class="course-introduction" id="courseIntroduction" aria-label="분야 소개">
-        <div class="field-guide-card"><div class="field-guide-top"><span class="field-index">${course.number}</span><h2>${esc(course.title)}</h2></div>
+        <div class="field-guide-card"><h2>분야 소개</h2>
           <p class="field-question">${esc(field.question)}</p><dl>${field.items.map(item => `<dt>${esc(item.label)}</dt><dd>${esc(item.text)}</dd>`).join('')}</dl>
           <div class="field-path"><b>학습 경로</b> ${esc(field.path)}</div>
         </div></section>`;
@@ -59,46 +61,60 @@
       </section>`;
     }
 
-    function outline(course, current) {
+    function outline(course, current, steps) {
+      const localNav = `<nav class="reader-steps" aria-label="본문 바로가기"><p>이 차시에서</p><ol>${steps.map(([target, label], index) =>
+        `<li><a href="#${target}"${index === 0 ? ' aria-current="location"' : ''}><span>${ordinal(index)}</span>${label}</a></li>`).join('')}</ol></nav>`;
       const groups = [];
       if (route) route.sequence.forEach((id,index)=>{
         const owner=lookup[id].course;
         if (groups.at(-1)?.course!==owner) groups.push({course:owner,items:[]});
         groups.at(-1).items.push({id,index});
       });
-      if (route) return `<aside class="course-sidebar path-sidebar"><a class="back-link" href="./">← ${esc(route.title)} 목차</a>
+      if (route) return `<aside class="course-sidebar path-sidebar">${localNav}<a class="back-link" href="./#pathOutline">← 경로 목차로</a><details class="reader-outline"><summary>경로의 다른 차시</summary>
         <div class="course-stats"><span data-path-count></span><div class="course-meter" role="progressbar" aria-label="${esc(route.title)} 차시 완료 진도" aria-valuemin="0" aria-valuemax="100" data-path-meter><span></span></div></div>
         <nav aria-label="${esc(route.title)} 경로 목차">${groups.map(group=>`<details ${group.items.some(item=>item.id===current)?'open':''}><summary>${esc(group.course.title)}<span class="caption">${group.items[0].index+1}–${group.items.at(-1).index+1}단계</span></summary><ol>${group.items.map(({id,index})=>`<li><a class="side-lesson" href="${lessonHref(id)}" ${current===id?'aria-current="page"':''}>
           <span class="path-step-number">${index+1}</span><span><small>${esc(lookup[id].course.label)} · ${route.lessons.includes(id)?'경로 핵심':'권장 선행'}</small>${esc(lookup[id].lesson.title)}<small class="completion-label" data-completion="${id}"></small></span></a></li>`).join('')}
           </ol></details>`).join('')}<a class="side-lesson path-project-link" href="project.html"><span class="path-step-number">✦</span><span>마지막 · 종합 프로젝트</span></a></nav>
-        <a class="back-link" href="../../learn/">다른 학습 경로 보기 ↗</a></aside>`;
-      return `<aside class="course-sidebar"><a class="back-link" href="./">← ${esc(course.title)} 전체 과정</a>${stats(course)}
+        <a class="back-link" href="../../learn/">다른 학습 경로 보기 ↗</a></details></aside>`;
+      return `<aside class="course-sidebar">${localNav}<a class="back-link" href="./#courseModules">← ${esc(course.label)} 목차로</a><details class="reader-outline"><summary>과정의 다른 차시</summary>${stats(course)}
         <nav aria-label="차시 목차">${course.modules.map((module, index) => `
           <details ${module.lessons.some(lesson => lesson.id === current) ? 'open' : ''}>
             <summary>${esc(module.title)}<span class="caption" data-module-count="${index}"></span></summary>
             <ol>${module.lessons.map(lesson => `<li><a class="side-lesson" href="${lessonHref(lesson.id, course.id)}" ${current === lesson.id ? 'aria-current="page"' : ''}>
               <span class="lesson-dot" data-dot="${lesson.id}" aria-hidden="true"></span><span>${esc(lesson.title)}<small class="completion-label" data-completion="${lesson.id}"></small></span></a></li>`).join('')}</ol>
-          </details>`).join('')}</nav><a class="back-link" href="../../fields/#mindmap">모든 분야 보기 ↗</a>
+          </details>`).join('')}</nav></details>
       </aside>`;
     }
 
     function overview(key) {
       const course = courses[key], lessons = all(course);
-      return `<nav class="breadcrumb" aria-label="현재 위치"><a href="../../fields/#mindmap">학습 지도</a><span aria-hidden="true">/</span><span aria-current="page">${esc(course.title)}</span></nav>
-        <section class="course-hero"><div class="course-hero-intro"><div class="course-hero-copy"><div class="overline">${course.number} / LEARNING PATH</div><h1>${esc(course.title)}</h1>
-          <p class="course-lead">${esc(course.subtitle)}</p><div class="course-chips"><span>${esc(course.level)}</span><span>${course.modules.length}개 모듈 · ${lessons.length}개 차시</span><span>설명 → 실습 → 검증</span></div></div><img class="course-hero-art" src="../../assets/illustrations/${key}.webp" width="480" height="480" alt="" decoding="async"></div>
-          <div class="continue-panel"><div class="overline">YOUR PROGRESS</div>${stats(course)}<a class="learning-button primary" id="continueLearning" href="${lessonHref(lessons[0].id, key)}">첫 차시 시작하기 →</a><p class="caption">완료 표시는 직접 합니다. 학습 속도와 설치 시간은 환경에 따라 다릅니다.</p></div>
+      const lead = key === 'foundation' ? '명령어를 익히고, 코드를 실행하고, 결과를 기록합니다.' : course.subtitle;
+      return `<nav class="breadcrumb" aria-label="현재 위치"><a href="../../fields/#mindmap">분야 둘러보기</a><span aria-hidden="true">/</span><span aria-current="page">${esc(course.label)}</span></nav>
+        <section class="course-hero">
+          <div class="course-hero-copy"><h1>${esc(course.label)}</h1><p class="course-lead">${esc(lead)}</p>
+            <p class="course-meta">${esc(course.level)} · ${course.modules.length}개 모듈 · ${lessons.length}개 차시</p>
+            <a class="editorial-button primary" id="continueLearning" href="${lessonHref(lessons[0].id, key)}">첫 차시 시작 →</a>
+          </div>
+          ${stats(course)}
         </section>
-        <nav class="course-jump-links" aria-label="과정 안내 바로가기"><a href="#courseIntroduction">분야 소개 ↓</a><a href="#courseModules">강의 목차 바로 보기 ↓</a></nav>
+        <section class="module-directory" id="courseModules" aria-labelledby="module-title">
+          <h2 id="module-title">차시 목차</h2>
+          <nav class="module-picker" aria-label="과정 모듈">${course.modules.map((module, index) =>
+            `<a href="#module-${index + 1}"><span class="module-number">${ordinal(index)}</span><span>${esc(moduleTitle(module))}</span></a>`).join('')}</nav>
+          <div class="module-list">${course.modules.map((module, index) => `
+            <section class="module-card" id="module-${index + 1}" tabindex="-1">
+              <div class="module-heading"><h3>${esc(moduleTitle(module))}</h3><span class="caption" data-module-count="${index}"></span></div>
+              <ol>${module.lessons.map((lesson, lessonIndex) => `<li><a class="lesson-row" href="${lessonHref(lesson.id, key)}">
+                <span class="module-number" aria-hidden="true">${ordinal(lessonIndex)}</span>
+                <span><strong>${esc(lesson.title)}</strong><small>${esc(lesson.goal)}</small><small class="completion-label" data-completion="${lesson.id}"></small></span>
+                <span class="lesson-row-action" aria-hidden="true">${lessonIndex === 0 ? '<span>학습 시작</span> ' : ''}→</span></a></li>`).join('')}</ol>
+              <p class="module-note">${esc(module.intro)}</p>${module.exam ? `<p><a class="learning-button small" href="../../exams/${esc(module.exam.id)}.html">모듈 모의고사 · 25문항 →</a></p>` : ''}
+            </section>`).join('')}</div>
+        </section>
         ${introduction(course)}${visuals.renderCourse(key)}
-        <section class="learning-path-panel"><div><span class="overline">LEARN → APPLY → EXPLAIN</span><h2>이 과정의 완주 기준</h2><p>차시별 독립 과제에서 조건을 바꿔 보고, 마지막에는 두 표본을 분석한 결과와 근거 보고서를 완성합니다.</p></div><a class="learning-button" href="../../learn/">차시 검색 · 목표별 경로 ↗</a></section>
+        <section class="learning-path-panel"><div><h2>이 과정의 완주 기준</h2><p>차시별 독립 과제에서 조건을 바꿔 보고, 마지막에는 두 표본을 분석한 결과와 근거 보고서를 완성합니다.</p></div><a class="learning-button" href="../../learn/">목표별 학습 경로 보기 ↗</a></section>
         <div class="overview-layout"><div>
-          <section class="outcome-panel"><div class="overline">WHAT YOU WILL BUILD</div><h2>이 과정을 마치면</h2><p>${esc(course.outcome)}</p></section>
-          <section class="module-list" id="courseModules" aria-label="모듈별 차시">${course.modules.map((module, index) => `
-            <section class="module-card"><div class="module-heading"><h2>${esc(module.title)}</h2><span class="caption" data-module-count="${index}"></span></div><p>${esc(module.intro)}</p>
-              ${module.exam ? `<p><a class="learning-button small" href="../../exams/${esc(module.exam.id)}.html">모듈 모의고사 · 25문항 →</a></p>` : ''}<ol>${module.lessons.map(lesson => `<li><a class="lesson-row" href="${lessonHref(lesson.id, key)}"><span class="lesson-dot" data-dot="${lesson.id}" aria-hidden="true"></span>
-                <span><strong>${esc(lesson.title)}</strong><small>${esc(lesson.goal)}</small><small class="completion-label" data-completion="${lesson.id}"></small></span><span aria-hidden="true">↗</span></a></li>`).join('')}</ol>
-            </section>`).join('')}</section>
+          <section class="outcome-panel"><h2>이 과정을 마치면</h2><p>${esc(course.outcome)}</p></section>
           ${course.project ? `<section class="project-callout" id="finalProject"><span class="overline">FINAL PROJECT</span><h2>${esc(course.project.title)}</h2><p>${esc(course.project.problem)}</p><p class="caption">${course.project.minutes.join('–')}분 · 설치 제외 저자 추정 · A/B 표본 + 결과 검사 + 보고서 평가</p><a class="learning-button primary" href="../../projects/${key}.html">종합 프로젝트 시작하기 →</a></section>` : ''}</div>
           <aside class="overview-aside"><section class="prereq-panel"><div class="overline">BEFORE YOU START</div><h2>막히면 연결해서 볼 기초</h2>${prerequisites(course.prereqs, key)}
             ${key === 'foundation' ? '<a href="../../guides/linux.html">C·Linux 차시에서 사용할 WSL 준비 안내 ↗</a>' : ''}</section>
@@ -108,7 +124,7 @@
     }
 
     function codeBlock(code, id, label = '예제 · 명령 또는 관찰 절차', copy = false) {
-      return `<div class="code-shell"><div class="code-toolbar"><span>${esc(label)}</span>${copy ? '<button class="js-only" hidden type="button" id="copyExample">복사</button>' : ''}</div><pre><code${id ? ` id="${id}"` : ''}>${esc(code)}</code></pre></div>`;
+      return `<div class="code-shell"><div class="code-toolbar"><span>${esc(label)}</span>${copy ? `<button class="js-only" hidden type="button" id="copyExample" data-copy-code="${id}">복사</button>` : ''}</div><pre><code${id ? ` id="${id}"` : ''}>${esc(code)}</code></pre></div>`;
     }
 
     function walkthrough(lesson) {
@@ -120,7 +136,7 @@
     function learningPlan(lesson) {
       const plan = lesson.learning;
       if (!plan) return '';
-      return `<div class="lesson-meta"><span>${esc(plan.level)}</span><span>학습 ${plan.minutes.join('–')}분</span><span>처음 준비 ${plan.setup.join('–')}분</span></div>
+      return `<div class="lesson-meta"><span>${esc(plan.level)}</span><span>처음 준비 ${plan.setup.join('–')}분</span></div>
         <p class="caption">${esc(plan.estimateBasis || "설치 제외 저자 추정입니다.")}</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>${esc(plan.readiness)}</p>${plan.diagnostic ? `<fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend>${plan.diagnostic.options.map((option,i)=>`<label><input type="radio" name="readiness" value="${i}"> ${esc(option)}</label>`).join('')}<button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset>` : ''}<details><summary>판단 기준과 보충 자료</summary><p>${esc(plan.readinessAnswer)}</p></details></details>`;
     }
@@ -160,21 +176,49 @@
       </div></details>`;
     }
 
+    function firstRun() {
+      return `<section id="python-version" class="article-section first-run" aria-labelledby="python-version-title">
+        <h2 id="python-version-title">1. Python 버전 확인하기</h2>
+        <p>터미널을 열고 아래 명령을 입력하세요.</p>
+        <div class="code-shell">
+          <div class="code-toolbar"><span>터미널 · Linux/macOS</span><button class="js-only" hidden type="button" data-copy-code="versionCommand">복사</button></div>
+          <pre><code><span aria-hidden="true" class="terminal-prompt">$ </span><span id="versionCommand">python3 --version</span>
+<span class="terminal-output">Python 3.12.4</span></code></pre>
+        </div>
+        <p class="platform-command">Windows PowerShell에서는 <code>py -3 --version</code>을 입력하세요.</p>
+        <aside class="run-result"><span aria-hidden="true">✓</span><div><h3>이렇게 보이면 성공</h3><p>Python 3으로 시작하는 버전 번호가 표시됩니다.</p></div></aside>
+      </section>
+      <section id="first-example" class="article-section first-example">
+        <h2>2. 첫 예제 실행하기</h2>
+        <p>실습 자료에서 <code>hello.py</code>를 내려받고, 파일을 저장한 폴더에서 실행하세요.</p>
+        <ul class="first-run-links"><li><a href="#materials">실습 파일 받기 ↓</a></li><li><a href="#worked">실행 방법과 결과 보기 ↓</a></li></ul>
+      </section>`;
+    }
+
     function lessonView(key, id) {
       const course = courses[key], lessons = route ? route.sequence.map(item=>lookup[item].lesson) : all(course), lesson = all(course).find(item => item.id === id);
-      if (!lesson) return `<section class="not-found"><div class="overline">LESSON NOT FOUND</div><h1>차시를 찾을 수 없습니다</h1><p>주소의 차시 ID를 확인하거나 전체 목차에서 다시 선택하세요.</p><a class="learning-button primary" href="./">${esc(course.title)} 목차로 →</a></section>`;
+      if (!lesson) return `<section class="not-found"><h1>차시를 찾을 수 없습니다</h1><p>주소의 차시 ID를 확인하거나 전체 목차에서 다시 선택하세요.</p><a class="editorial-button primary" href="./#courseModules">${esc(course.label)} 목차로 →</a></section>`;
       const index = lessons.indexOf(lesson), module = course.modules.find(item => item.lessons.includes(lesson));
       if (route && index<0) throw new Error('Lesson does not belong to this learning path');
-      return `<nav class="breadcrumb" aria-label="현재 위치"><a href="../../${route?'learn/':'fields/#mindmap'}">${route?'학습 경로':'학습 지도'}</a><span aria-hidden="true">/</span><a href="./">${esc(route?route.title:course.title)}</a><span aria-hidden="true">/</span><span aria-current="page">${index + 1}${route?'단계':'차시'}</span></nav>
-        <div class="lesson-layout">${outline(course, id)}<article class="lesson-article">
-          ${route?`<nav class="path-location" aria-label="현재 학습 경로"><a href="./">${esc(route.label)}</a><strong>${index+1} / ${lessons.length}단계</strong><a href="./#pathOutline">경로 목차 ↗</a></nav>`:''}
-          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/${key}.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">${esc(route?course.title+' · '+module.title:module.title)} · ${index + 1} / ${lessons.length}</div><h1>${esc(lesson.title)}</h1><p class="lesson-objective">${esc(lesson.goal)}</p></div></header>
-          ${learningPlan(lesson)}${lesson.learning?.troubleshooting ? `<details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl>${lesson.learning.troubleshooting.map(item=>`<dt>${esc(item.symptom)}</dt><dd>${esc(item.check)}</dd>`).join('')}</dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>` : ''}
-          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          ${lesson.environment ? `<details class="lesson-preparation" aria-label="이 차시 준비" ${id==='foundation.environment'?'open':''}><summary>준비 환경과 선행 학습 확인</summary><p><strong>${esc(lesson.environment.label)}</strong></p><ul>${lesson.environment.details.map(detail => `<li>${esc(detail)}</li>`).join('')}</ul>${prerequisites(lesson.prerequisites || [], key, true)}
-            ${id === 'foundation.environment' ? '<a href="../../guides/linux.html">C·Linux 차시에서 사용할 WSL 준비 안내 ↗</a>' : ''}</details>` : ''}
-          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2>${lesson.concepts.map((paragraph, i) => `<p>${esc(paragraph)}</p>${i === 0 ? visuals.renderLesson(id) : ''}`).join('')}
+      const gettingStarted = id === 'foundation.environment';
+      const steps = gettingStarted
+        ? [['python-version','환경 확인'], ['first-example','예제 실행'], ['worked','결과 확인'], ['practice','연습하기'], ['verify','검증']]
+        : [['concept','먼저 이해하기'], ['worked','예제 따라 하기'], ['practice','직접 바꾸기'], ...(lesson.learning ? [['transfer','독립 과제']] : []), ['verify','검증']];
+      return `<nav class="breadcrumb" aria-label="현재 위치"><a href="../../${route?'learn/':'fields/#mindmap'}">${route?'학습 경로':'분야 둘러보기'}</a><span aria-hidden="true">/</span><a href="./">${esc(route?route.title:course.label)}</a><span aria-hidden="true">/</span><span aria-current="page">${ordinal(index)} ${route?'단계':'차시'}</span></nav>
+        <article class="lesson-layout" aria-labelledby="lesson-title">
+          <header class="lesson-heading">
+            <h1 id="lesson-title">${esc(lesson.title)}</h1>
+            <p class="lesson-objective">${esc(gettingStarted ? '터미널에서 Python 버전을 확인하고 예제를 한 번 실행합니다.' : lesson.goal)}</p>
+            <div class="lesson-facts">${lesson.learning ? `<p>약 ${lesson.learning.minutes.join('–')}분</p>` : ''}${route ? `<p class="path-location">경로 진행 · ${index + 1} / ${lessons.length}단계</p>` : ''}
+            </div>
+          </header>
+          ${outline(course, id, steps)}
+          <div class="lesson-article">${gettingStarted ? firstRun() : ''}
+          <section id="concept" class="article-section"><h2>먼저 이해하기</h2>${lesson.concepts.map((paragraph, i) => `<p>${esc(paragraph)}</p>${i === 0 ? visuals.renderLesson(id) : ''}`).join('')}
             ${lesson.pitfalls?.length ? `<aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl>${lesson.pitfalls.map(pitfall => `<dt>${esc(pitfall.mistake)}</dt><dd>${esc(pitfall.correction)}</dd>`).join('')}</dl></aside>` : ''}</section>
+          ${learningPlan(lesson)}${lesson.learning?.troubleshooting ? `<details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl>${lesson.learning.troubleshooting.map(item=>`<dt>${esc(item.symptom)}</dt><dd>${esc(item.check)}</dd>`).join('')}</dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>` : ''}
+          ${lesson.environment ? `<details class="lesson-preparation" aria-label="이 차시 준비"><summary>준비 환경과 선행 학습 확인</summary><p><strong>${esc(lesson.environment.label)}</strong></p><ul>${lesson.environment.details.map(detail => `<li>${esc(detail)}</li>`).join('')}</ul>${prerequisites(lesson.prerequisites || [], key, true)}
+            ${id === 'foundation.environment' ? '<a href="../../guides/linux.html">C·Linux 차시에서 사용할 WSL 준비 안내 ↗</a>' : ''}</details>` : ''}
           ${files(course, lesson)}
           <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
             <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
@@ -189,7 +233,7 @@
             ${index < lessons.length - 1 ? `<a href="${lessonHref(lessons[index + 1].id, key)}"><small>다음 ${route?'단계':'차시'} →</small>${esc(lessons[index + 1].title)}</a>` : `<a href="${route?'project.html':`../../projects/${key}.html`}"><small>다음 단계 →</small>${route?'경로':'분야'} 종합 프로젝트</a>`}</nav>
           ${route?`<p class="caption"><a href="../../tracks/${key}/${slug(id)}.html">이 차시를 ${esc(course.title)} 분야 과정으로 보기 ↗</a></p>`:''}
           <section class="reference-panel"><h2>이 차시의 참고 문서</h2>${sources(lesson.references || course.sources)}</section>${backup()}
-        </article></div>`;
+        </div></article>`;
     }
 
     return Object.freeze({ overview, lesson: lessonView, lessonHref });

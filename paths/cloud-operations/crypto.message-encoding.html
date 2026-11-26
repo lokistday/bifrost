@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="ko" data-theme="dark">
+<html lang="ko" data-theme="dark" data-palette="charcoal">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080b17">
+<meta name="theme-color" content="#181819">
 <meta name="description" content="필드의 모호한 결합을 찾고 인증할 메시지 표현을 명확히 만듭니다.">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Bifrost">
@@ -17,35 +17,39 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/paths/cloud-operations/crypto.message-encoding.html">
 <title>메시지 경계와 인증할 바이트 — 클라우드 방어와 복구 검증 · Bifrost</title>
-<script src="../../js/theme.js?v=learning-d027f06d8b67"></script>
-<script src="../../js/pointer-trail.js?v=learning-d027f06d8b67" defer></script>
-<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-d027f06d8b67">
-<link rel="icon" href="../../assets/logo.svg?v=learning-d027f06d8b67" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="../../css/study.css?v=learning-d027f06d8b67">
-<script src="../../js/catalog.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/courses/crypto.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/progress.js?v=learning-d027f06d8b67" defer></script>
+<script src="../../js/theme.js?v=learning-2ac3a8931abc"></script>
+<link rel="icon" href="../../assets/bifrost-mark.svg?v=editorial-968df953fec1" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/learning.css?v=course-style-fa797c0dc5e4">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/study.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/charcoal.css?v=editorial-968df953fec1">
+<script src="../../js/catalog.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/courses/crypto.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/progress.js?v=learning-2ac3a8931abc" defer></script>
 
-<script src="../../js/learning-paths.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/path-progress.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/learning-view.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/learning.js?v=learning-d027f06d8b67" defer></script>
+<script src="../../js/learning-paths.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/path-progress.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/learning-view.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/learning.js?v=learning-2ac3a8931abc" defer></script>
 </head>
-<body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.message-encoding" data-path="cloud-operations" style="--course-accent:var(--map-pink)">
+<body class="learning-page" data-course="crypto" data-course-number="06" data-view="lesson" data-lesson-id="crypto.message-encoding" data-path="cloud-operations">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
-<header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-d027f06d8b67" width="34" height="34" alt=""></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../fields/#mindmap">모든 분야</a><a href="../../learn/">학습 경로</a><a href="./#pathOutline">클라우드 보안 목차</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
-  
-  <a class="nav-cta" href="../../fields/#mindmap">학습 지도 ↗</a>
-</div></header>
+<header class="editorial-header"><div class="editorial-frame editorial-header-inner">
+    <a class="editorial-brand" href="../../" aria-label="BIFROST 홈"><img src="../../assets/bifrost-mark.svg?v=editorial-968df953fec1" width="36" height="36" alt=""><span>BIFROST</span></a>
+    <nav class="editorial-nav" aria-label="주 메뉴"><a href="../../fields/#mindmap">분야 둘러보기</a><a href="../../learn/">학습 경로</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
+  </div></header>
 <main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="crypto.message-encoding">
-<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../learn/">학습 경로</a><span aria-hidden="true">/</span><a href="./">클라우드 방어와 복구 검증</a><span aria-hidden="true">/</span><span aria-current="page">51단계</span></nav>
-        <div class="lesson-layout"><aside class="course-sidebar path-sidebar"><a class="back-link" href="./">← 클라우드 방어와 복구 검증 목차</a>
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../learn/">학습 경로</a><span aria-hidden="true">/</span><a href="./">클라우드 방어와 복구 검증</a><span aria-hidden="true">/</span><span aria-current="page">51 단계</span></nav>
+        <article class="lesson-layout" aria-labelledby="lesson-title">
+          <header class="lesson-heading">
+            <h1 id="lesson-title">메시지 경계와 인증할 바이트</h1>
+            <p class="lesson-objective">필드의 모호한 결합을 찾고 인증할 메시지 표현을 명확히 만듭니다.</p>
+            <div class="lesson-facts"><p>약 45–75분</p><p class="path-location">경로 진행 · 51 / 52단계</p>
+            </div>
+          </header>
+          <aside class="course-sidebar path-sidebar"><nav class="reader-steps" aria-label="본문 바로가기"><p>이 차시에서</p><ol><li><a href="#concept" aria-current="location"><span>01</span>먼저 이해하기</a></li><li><a href="#worked"><span>02</span>예제 따라 하기</a></li><li><a href="#practice"><span>03</span>직접 바꾸기</a></li><li><a href="#transfer"><span>04</span>독립 과제</a></li><li><a href="#verify"><span>05</span>검증</a></li></ol></nav><a class="back-link" href="./#pathOutline">← 경로 목차로</a><details class="reader-outline"><summary>경로의 다른 차시</summary>
         <div class="course-stats"><span data-path-count></span><div class="course-meter" role="progressbar" aria-label="클라우드 방어와 복구 검증 차시 완료 진도" aria-valuemin="0" aria-valuemax="100" data-path-meter><span></span></div></div>
         <nav aria-label="클라우드 방어와 복구 검증 경로 목차"><details ><summary>Foundation<span class="caption">1–3단계</span></summary><ol><li><a class="side-lesson" href="foundation.environment.html" >
           <span class="path-step-number">1</span><span><small>공통 기초 · 권장 선행</small>실습 환경 준비와 첫 실행<small class="completion-label" data-completion="foundation.environment"></small></span></a></li><li><a class="side-lesson" href="foundation.network.html" >
@@ -121,18 +125,16 @@
           <span class="path-step-number">51</span><span><small>암호학 · 권장 선행</small>메시지 경계와 인증할 바이트<small class="completion-label" data-completion="crypto.message-encoding"></small></span></a></li><li><a class="side-lesson" href="crypto.aad-record-binding.html" >
           <span class="path-step-number">52</span><span><small>암호학 · 경로 핵심</small>AEAD와 레코드 문맥의 결합<small class="completion-label" data-completion="crypto.aad-record-binding"></small></span></a></li>
           </ol></details><a class="side-lesson path-project-link" href="project.html"><span class="path-step-number">✦</span><span>마지막 · 종합 프로젝트</span></a></nav>
-        <a class="back-link" href="../../learn/">다른 학습 경로 보기 ↗</a></aside><article class="lesson-article">
-          <nav class="path-location" aria-label="현재 학습 경로"><a href="./">클라우드 보안</a><strong>51 / 52단계</strong><a href="./#pathOutline">경로 목차 ↗</a></nav>
-          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/crypto.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">Cryptography · 04 · 키 수명과 프로토콜 검증 · 51 / 52</div><h1>메시지 경계와 인증할 바이트</h1><p class="lesson-objective">필드의 모호한 결합을 찾고 인증할 메시지 표현을 명확히 만듭니다.</p></div></header>
-          <div class="lesson-meta"><span>응용</span><span>학습 45–75분</span><span>처음 준비 0–10분</span></div>
+        <a class="back-link" href="../../learn/">다른 학습 경로 보기 ↗</a></details></aside>
+          <div class="lesson-article">
+          <section id="concept" class="article-section"><h2>먼저 이해하기</h2><p>암호 도구는 의미가 아니라 바이트를 입력받습니다. [ab, c]와 [a, bc]를 단순 연결하면 둘 다 abc가 됩니다. HMAC이 같은 결과를 내도 암호학적 충돌을 찾은 것이 아니라 애초에 동일한 입력 바이트를 준 것입니다.</p><figure class="learning-visual" data-visual-id="crypto.message-encoding"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교도</span><h3>같은 abc에도 필드 경계는 다릅니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="같은 abc에도 필드 경계는 다릅니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" role="img" aria-labelledby="visual-crypto-message-encoding-title visual-crypto-message-encoding-desc" focusable="false"><title id="visual-crypto-message-encoding-title">같은 abc에도 필드 경계는 다릅니다</title><desc id="visual-crypto-message-encoding-desc">[ab,c]와 [a,bc]를 그냥 붙이면 abc입니다. 각 필드 길이를 앞에 두면 2·1과 1·2가 달라져 인증할 바이트도 구분됩니다.</desc><defs><marker id="visual-crypto-message-encoding-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone "><rect class="v-node" x="28" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="29" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="45" y="55">단순 연결</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="84">입력 A</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="107">ab + c</tspan></text><path class="v-separator" d="M45 128H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="148">입력 B</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="171">a + bc</tspan></text><path class="v-separator" d="M45 192H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="212">결과</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="235">같은 abc</tspan></text></g><g class="v-tone positive"><rect class="v-node" x="392" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="393" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="409" y="55">길이 접두사</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="84">입력 A</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="107">2:ab · 1:c</tspan></text><path class="v-separator" d="M409 128H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="148">입력 B</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="171">1:a · 2:bc</tspan></text><path class="v-separator" d="M409 192H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="212">결과</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="235">서로 다른 바이트</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">암호 검증 전에 메시지 표현을 합의합니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>[ab,c]와 [a,bc]를 그냥 붙이면 abc입니다. 각 필드 길이를 앞에 두면 2·1과 1·2가 달라져 인증할 바이트도 구분됩니다.</p></details></figure><p>길이를 필드 앞에 넣으면 경계를 보존할 수 있습니다. 실습은 각 바이트 필드 앞에 4바이트 big-endian 길이를 넣어 두 목록을 서로 다른 메시지로 만듭니다. 실제 구조에는 타입·필드 순서·인코딩·버전과 허용 길이도 함께 정의해야 합니다.</p><p>문자열은 UTF-8 같은 인코딩을 정하고 길이를 문자 수가 아닌 인코딩 뒤 바이트 수로 계산합니다. JSON의 키 순서·공백·중복 키·숫자 표현, URL의 정규화처럼 생산자와 검증자의 해석이 다르면 올바른 태그도 다른 의미에 재사용될 수 있습니다.</p><p>프로토콜 레이블을 포함하면 같은 키를 쓰는 다른 문맥의 메시지와 구분하는 데 도움이 됩니다. 다만 임의의 길이 접두사만 추가해 완전한 프로토콜이 되지는 않습니다. 이 교육 표현은 HTTP Message Signatures의 표준 정규화 구현이 아니며 운영에서는 해당 프로토콜과 검증된 라이브러리를 사용합니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>태그가 같으면 해시 함수부터 교체한다.</dt><dd>먼저 양쪽이 어떤 바이트와 필드 경계를 인증했는지 확인합니다.</dd><dt>각 언어의 기본 JSON 출력이 항상 같다.</dt><dd>정규화·중복 키·숫자·문자 인코딩 규칙과 표준 시험 벡터를 정합니다.</dd></dl></aside></section>
+          <div class="lesson-meta"><span>응용</span><span>처음 준비 0–10분</span></div>
         <p class="caption">개념 수·도구 전환·독립 과제를 고려한 편집자 추정이며 학습자 실측 전입니다.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>[ab,c]와 [a,bc]의 단순 결합 태그가 같으면 무엇을 뜻하나요?</p><fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend><label><input type="radio" name="readiness" value="0"> HMAC 충돌 공격 성공</label><label><input type="radio" name="readiness" value="1"> 같은 abc 바이트를 인증했음</label><label><input type="radio" name="readiness" value="2"> 두 필드의 의미가 항상 같음</label><button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset><details><summary>판단 기준과 보충 자료</summary><p>경계가 사라져 동일 입력이 된 것입니다. 암호학적 서로 다른 메시지 충돌과 구분합니다.</p></details></details><details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl><dt>명령 실행 또는 입력 파일 찾기에서 막힘</dt><dd>오프라인 모델 실습 · Python 3.10 이상인지 확인합니다. design_checks.py이 있는 작업 사본 폴더에서 실행하고 원본과 편집한 파일의 위치를 비교하세요.</dd><dt>태그가 같으면 해시 함수부터 교체한다.</dt><dd>먼저 양쪽이 어떤 바이트와 필드 경계를 인증했는지 확인합니다.</dd></dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>
-          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>오프라인 모델 실습 · Python 3.10 이상</strong></p><ul><li>crypto ZIP을 풀고 design_checks.py와 design-records.json가 있는 폴더에서 실행합니다. 추가 패키지나 외부 계정이 필요하지 않습니다.</li><li>Linux/WSL/macOS 명령은 python3입니다. Windows PowerShell에서는 python3 부분을 py -3로 바꿉니다.</li><li>파일 변경 과제는 복사본과 --input 옵션을 사용합니다. 결과는 교육 모형에 한정하며 운영 보안 검증을 대신하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비"><summary>준비 환경과 선행 학습 확인</summary><p><strong>오프라인 모델 실습 · Python 3.10 이상</strong></p><ul><li>crypto ZIP을 풀고 design_checks.py와 design-records.json가 있는 폴더에서 실행합니다. 추가 패키지나 외부 계정이 필요하지 않습니다.</li><li>Linux/WSL/macOS 명령은 python3입니다. Windows PowerShell에서는 python3 부분을 py -3로 바꿉니다.</li><li>파일 변경 과제는 복사본과 --input 옵션을 사용합니다. 결과는 교육 모형에 한정하며 운영 보안 검증을 대신하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="crypto.mac.html">암호학 · HMAC과 태그 검증 ↗</a></li><li><a href="crypto.representation.html">암호학 · 바이트·Hex·Base64 ↗</a></li><li><a href="crypto.hkdf-context.html">암호학 · HKDF 추출·확장과 용도 분리 ↗</a></li></ul>
             </details>
-          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>암호 도구는 의미가 아니라 바이트를 입력받습니다. [ab, c]와 [a, bc]를 단순 연결하면 둘 다 abc가 됩니다. HMAC이 같은 결과를 내도 암호학적 충돌을 찾은 것이 아니라 애초에 동일한 입력 바이트를 준 것입니다.</p><figure class="learning-visual" data-visual-id="crypto.message-encoding"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 비교도</span><h3>같은 abc에도 필드 경계는 다릅니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="같은 abc에도 필드 경계는 다릅니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" width="760" height="280" role="img" aria-labelledby="visual-crypto-message-encoding-title visual-crypto-message-encoding-desc" focusable="false"><title id="visual-crypto-message-encoding-title">같은 abc에도 필드 경계는 다릅니다</title><desc id="visual-crypto-message-encoding-desc">[ab,c]와 [a,bc]를 그냥 붙이면 abc입니다. 각 필드 길이를 앞에 두면 2·1과 1·2가 달라져 인증할 바이트도 구분됩니다.</desc><defs><marker id="visual-crypto-message-encoding-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><g class="v-tone "><rect class="v-node" x="28" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="29" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="45" y="55">단순 연결</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="84">입력 A</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="107">ab + c</tspan></text><path class="v-separator" d="M45 128H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="148">입력 B</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="171">a + bc</tspan></text><path class="v-separator" d="M45 192H351"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="212">결과</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="45" y="235">같은 abc</tspan></text></g><g class="v-tone positive"><rect class="v-node" x="392" y="20" width="340" height="244" rx="12"/><rect class="v-accent" x="393" y="21" width="338" height="5" rx="2"/><text class="v-text v-heading" font-size="16" text-anchor="start"><tspan x="409" y="55">길이 접두사</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="84">입력 A</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="107">2:ab · 1:c</tspan></text><path class="v-separator" d="M409 128H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="148">입력 B</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="171">1:a · 2:bc</tspan></text><path class="v-separator" d="M409 192H715"/><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="409" y="212">결과</tspan></text><text class="v-text " font-size="14" text-anchor="start"><tspan x="409" y="235">서로 다른 바이트</tspan></text></g></svg></div><figcaption><span class="visual-takeaway">암호 검증 전에 메시지 표현을 합의합니다.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>[ab,c]와 [a,bc]를 그냥 붙이면 abc입니다. 각 필드 길이를 앞에 두면 2·1과 1·2가 달라져 인증할 바이트도 구분됩니다.</p></details></figure><p>길이를 필드 앞에 넣으면 경계를 보존할 수 있습니다. 실습은 각 바이트 필드 앞에 4바이트 big-endian 길이를 넣어 두 목록을 서로 다른 메시지로 만듭니다. 실제 구조에는 타입·필드 순서·인코딩·버전과 허용 길이도 함께 정의해야 합니다.</p><p>문자열은 UTF-8 같은 인코딩을 정하고 길이를 문자 수가 아닌 인코딩 뒤 바이트 수로 계산합니다. JSON의 키 순서·공백·중복 키·숫자 표현, URL의 정규화처럼 생산자와 검증자의 해석이 다르면 올바른 태그도 다른 의미에 재사용될 수 있습니다.</p><p>프로토콜 레이블을 포함하면 같은 키를 쓰는 다른 문맥의 메시지와 구분하는 데 도움이 됩니다. 다만 임의의 길이 접두사만 추가해 완전한 프로토콜이 되지는 않습니다. 이 교육 표현은 HTTP Message Signatures의 표준 정규화 구현이 아니며 운영에서는 해당 프로토콜과 검증된 라이브러리를 사용합니다.</p>
-            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>태그가 같으면 해시 함수부터 교체한다.</dt><dd>먼저 양쪽이 어떤 바이트와 필드 경계를 인증했는지 확인합니다.</dd><dt>각 언어의 기본 JSON 출력이 항상 같다.</dt><dd>정규화·중복 키·숫자·문자 인코딩 규칙과 표준 시험 벡터를 정합니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
         <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
         <a class="learning-button" href="../../labs/crypto.zip" download>전체 실습 ZIP 받기 ↓</a>
@@ -140,7 +142,7 @@
       </section>
           <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
             <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
-            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 오프라인 모델 실습 · Python 3.10 이상</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">python3 design_checks.py encoding</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>naive_same=True
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 오프라인 모델 실습 · Python 3.10 이상</span><button class="js-only" hidden type="button" id="copyExample" data-copy-code="exampleCode">복사</button></div><pre><code id="exampleCode">python3 design_checks.py encoding</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>naive_same=True
 framed_same=False
 framed_tag_same=False</pre></div>
             <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>경계 모호함 관찰</h3><p>단순 결합은 같지만 길이와 함께 인코딩하면 바이트와 태그가 모두 달라집니다.</p>
@@ -194,7 +196,7 @@ framed_tag_same=False</pre></div></li><li><h3>실제 프레임 바이트 읽기<
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
         <p class="feedback" role="status" id="backupFeedback"></p></details>
-        </article></div>
+        </div></article>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../fields/#mindmap">다른 분야 탐색 ↗</a></div></footer>
 </body>

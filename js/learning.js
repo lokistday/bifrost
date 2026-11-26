@@ -26,8 +26,31 @@
   } else if (!isLesson && root.dataset.rendered !== 'course') {
     root.innerHTML = view.overview(key);
   }
+
+  const moduleLinks = [...root.querySelectorAll('.module-picker a')];
+  if (moduleLinks.length) {
+    const modules = moduleLinks.map(link => ({ link, hash: link.getAttribute('href') }));
+    for (const module of modules) module.panel = document.getElementById(module.hash.slice(1));
+    const selectModule = selected => {
+      for (const { link, panel, hash } of modules) {
+        const active = hash === selected;
+        panel.hidden = !active;
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      }
+    };
+    const syncModule = () => selectModule(modules.find(module => module.hash === location.hash)?.hash || modules[0].hash);
+    for (const { link, hash } of modules) {
+      link.addEventListener('click', event => {
+        if (!event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) selectModule(hash);
+      });
+    }
+    window.addEventListener('hashchange', syncModule);
+    syncModule();
+  }
+
   if (isLesson) {
-    document.title = lesson ? `${lesson.title} — ${route ? route.title : course.title} · Bifrost` : '차시를 찾을 수 없습니다 — Bifrost';
+    document.title = lesson ? `${lesson.title} — ${route ? route.title : course.label} · Bifrost` : '차시를 찾을 수 없습니다 — Bifrost';
     if (lesson) {
       document.querySelector('meta[name="description"]').content = lesson.goal;
       const canonical = document.querySelector('link[rel="canonical"]');
@@ -54,9 +77,12 @@
         const q = lesson.learning.diagnostic;
         feedback.textContent = (Number(selected.value) === q.answer ? '이미 알고 있는 개념입니다. 독립 과제로 바로 확인해도 됩니다. ' : '본문과 선행 차시에서 이 개념을 먼저 확인하세요. ') + q.explanation;
       });
-      document.getElementById('copyExample').addEventListener('click', async event => {
-        try { await navigator.clipboard.writeText(lesson.code); event.target.textContent = '복사됨'; }
-        catch (_) { event.target.textContent = '코드를 선택해 복사하세요'; }
+      root.querySelectorAll('[data-copy-code]').forEach(button => {
+        button.addEventListener('click', async () => {
+          const code = document.getElementById(button.dataset.copyCode).textContent;
+          try { await navigator.clipboard.writeText(code); button.textContent = '복사됨'; }
+          catch (_) { button.textContent = '코드를 선택해 복사하세요'; }
+        });
       });
       document.querySelectorAll('[data-check-question]').forEach(button => {
         const index = Number(button.dataset.checkQuestion);
@@ -81,6 +107,31 @@
       });
     }
   }
+  const stepLinks = [...root.querySelectorAll('.reader-steps a')];
+  if (stepLinks.length) {
+    const steps = stepLinks.map(link => ({ link, target: document.getElementById(link.getAttribute('href').slice(1)) }));
+    const selectStep = selected => {
+      for (const { link } of steps) {
+        if (link === selected) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      }
+    };
+    for (const { link } of steps) link.addEventListener('click', () => selectStep(link));
+    if ('IntersectionObserver' in window) {
+      let observer;
+      const watchReadingPosition = () => {
+        observer?.disconnect();
+        const readingLine = Math.min(145, window.innerHeight * .3);
+        observer = new window.IntersectionObserver(() => {
+          const current = steps.findLast(({ target }) => target.getBoundingClientRect().top <= readingLine);
+          selectStep(current?.link || stepLinks[0]);
+        }, { rootMargin: `0px 0px -${window.innerHeight - readingLine}px 0px` });
+        for (const { target } of steps) observer.observe(target);
+      };
+      watchReadingPosition();
+      window.addEventListener('resize', watchReadingPosition);
+    }
+  }
   root.querySelectorAll('.js-only').forEach(element => { element.hidden = false; });
   function updateProgress() {
     document.querySelectorAll('[data-count]').forEach(el => {
@@ -97,13 +148,19 @@
       el.textContent = `${progress.count(ls)} / ${ls.length} 완료`;
     });
     document.querySelectorAll('[data-dot]').forEach(el => el.classList.toggle('is-complete', progress.has(el.dataset.dot)));
-    document.querySelectorAll('[data-completion]').forEach(el => { el.textContent = progress.has(el.dataset.completion) ? '완료' : '미완료'; });
+    document.querySelectorAll('[data-completion]').forEach(el => {
+      const done = progress.has(el.dataset.completion);
+      el.textContent = done ? '완료' : '미완료';
+      el.toggleAttribute('data-done', done);
+    });
     const continueLink = document.getElementById('continueLearning');
     if (continueLink) {
       const last = lessons.find(l => l.id === progress.last() && !progress.has(l.id));
       const next = last || firstIncomplete();
       continueLink.href = lessonHref(next ? next.id : lessons[0].id);
-      continueLink.textContent = next ? `${progress.count(lessons) || last ? '이어서' : '첫 차시'} 학습하기 →` : '완료한 과정 다시 보기 →';
+      continueLink.textContent = next
+        ? (progress.count(lessons) || (last && last.id !== lessons[0].id) ? '이어서 학습하기 →' : '첫 차시 시작 →')
+        : '완료한 과정 다시 보기 →';
     }
     const mastery = progress.mastery(currentId);
     const labels = {read:'읽음',guided:'따라 함',independent:'독립 해결',review:'재도전 필요'};

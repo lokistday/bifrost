@@ -1,51 +1,55 @@
 <!doctype html>
-<html lang="ko" data-theme="dark">
+<html lang="ko" data-theme="dark" data-palette="charcoal">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080b17">
+<meta name="theme-color" content="#181819">
 <meta name="description" content="문제의 입력·목표·제약을 먼저 정리합니다.">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Bifrost">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="문제 분류와 가설 세우기 — Misc · Bifrost">
+<meta property="og:title" content="문제 분류와 가설 세우기 — 문제 해결·자동화 · Bifrost">
 <meta property="og:description" content="문제의 입력·목표·제약을 먼저 정리합니다.">
 <meta property="og:url" content="https://lokistday.github.io/bifrost/tracks/misc/triage.html">
 <meta property="og:image" content="https://lokistday.github.io/bifrost/og-image.png?v=20261105-bifrost">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/misc/triage.html">
-<title>문제 분류와 가설 세우기 — Misc · Bifrost</title>
-<script src="../../js/theme.js?v=learning-d027f06d8b67"></script>
-<script src="../../js/pointer-trail.js?v=learning-d027f06d8b67" defer></script>
-<link rel="stylesheet" href="../../css/pointer-trail.css?v=learning-d027f06d8b67">
-<link rel="icon" href="../../assets/logo.svg?v=learning-d027f06d8b67" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="../../css/learning.css?v=20261024-atlas1">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="../../css/study.css?v=learning-d027f06d8b67">
-<script src="../../js/catalog.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/courses/misc.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/progress.js?v=learning-d027f06d8b67" defer></script>
+<title>문제 분류와 가설 세우기 — 문제 해결·자동화 · Bifrost</title>
+<script src="../../js/theme.js?v=learning-2ac3a8931abc"></script>
+<link rel="icon" href="../../assets/bifrost-mark.svg?v=editorial-968df953fec1" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/learning.css?v=course-style-fa797c0dc5e4">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/study.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../../css/charcoal.css?v=editorial-968df953fec1">
+<script src="../../js/catalog.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/courses/misc.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/progress.js?v=learning-2ac3a8931abc" defer></script>
 
 
-<script src="../../js/learning-view.js?v=learning-d027f06d8b67" defer></script>
-<script src="../../js/learning.js?v=learning-d027f06d8b67" defer></script>
+<script src="../../js/learning-view.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/learning.js?v=learning-2ac3a8931abc" defer></script>
 </head>
-<body class="learning-page" data-course="misc" data-course-number="03" data-view="lesson" data-lesson-id="misc.triage" data-path="" style="--course-accent:var(--map-orange)">
+<body class="learning-page" data-course="misc" data-course-number="03" data-view="lesson" data-lesson-id="misc.triage" data-path="">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
-<header class="topbar"><div class="wrap nav">
-  <a class="brand" href="../../index.html"><span class="brand-mark"><img class="brand-logo" src="../../assets/logo.svg?v=learning-d027f06d8b67" width="34" height="34" alt=""></span><span>BIFROST</span></a>
-  <nav class="navlinks" aria-label="주 메뉴"><a href="../../fields/#mindmap">모든 분야</a><a href="../../learn/">학습 경로</a><a href="./#courseModules">문제 해결·자동화 목차</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
-  
-  <a class="nav-cta" href="../../fields/#mindmap">학습 지도 ↗</a>
-</div></header>
+<header class="editorial-header"><div class="editorial-frame editorial-header-inner">
+    <a class="editorial-brand" href="../../" aria-label="BIFROST 홈"><img src="../../assets/bifrost-mark.svg?v=editorial-968df953fec1" width="36" height="36" alt=""><span>BIFROST</span></a>
+    <nav class="editorial-nav" aria-label="주 메뉴"><a href="../../fields/#mindmap">분야 둘러보기</a><a href="../../learn/">학습 경로</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
+  </div></header>
 <main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="misc.triage">
-<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../fields/#mindmap">학습 지도</a><span aria-hidden="true">/</span><a href="./">Misc</a><span aria-hidden="true">/</span><span aria-current="page">1차시</span></nav>
-        <div class="lesson-layout"><aside class="course-sidebar"><a class="back-link" href="./">← Misc 전체 과정</a><div class="course-stats"><span data-count="misc"></span>
-        <div class="course-meter" role="progressbar" aria-label="Misc 완료 진도" aria-valuemin="0" aria-valuemax="100" data-meter="misc"><span></span></div>
+<noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../fields/#mindmap">분야 둘러보기</a><span aria-hidden="true">/</span><a href="./">문제 해결·자동화</a><span aria-hidden="true">/</span><span aria-current="page">01 차시</span></nav>
+        <article class="lesson-layout" aria-labelledby="lesson-title">
+          <header class="lesson-heading">
+            <h1 id="lesson-title">문제 분류와 가설 세우기</h1>
+            <p class="lesson-objective">문제의 입력·목표·제약을 먼저 정리합니다.</p>
+            <div class="lesson-facts"><p>약 25–40분</p>
+            </div>
+          </header>
+          <aside class="course-sidebar"><nav class="reader-steps" aria-label="본문 바로가기"><p>이 차시에서</p><ol><li><a href="#concept" aria-current="location"><span>01</span>먼저 이해하기</a></li><li><a href="#worked"><span>02</span>예제 따라 하기</a></li><li><a href="#practice"><span>03</span>직접 바꾸기</a></li><li><a href="#transfer"><span>04</span>독립 과제</a></li><li><a href="#verify"><span>05</span>검증</a></li></ol></nav><a class="back-link" href="./#courseModules">← 문제 해결·자동화 목차로</a><details class="reader-outline"><summary>과정의 다른 차시</summary><div class="course-stats"><span data-count="misc">0 / 14 완료</span>
+        <div class="course-meter" role="progressbar" aria-label="문제 해결·자동화 완료 진도" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-meter="misc"><span></span></div>
       </div>
         <nav aria-label="차시 목차">
           <details open>
@@ -85,19 +89,17 @@
             <ol><li><a class="side-lesson" href="bounded-decompression.html" >
               <span class="lesson-dot" data-dot="misc.bounded-decompression" aria-hidden="true"></span><span>해제 출력 한도와 스트림 경계 검증<small class="completion-label" data-completion="misc.bounded-decompression"></small></span></a></li><li><a class="side-lesson" href="resumable-batch.html" >
               <span class="lesson-dot" data-dot="misc.resumable-batch" aria-hidden="true"></span><span>배치 출처와 재개 체크포인트 검증<small class="completion-label" data-completion="misc.resumable-batch"></small></span></a></li></ol>
-          </details></nav><a class="back-link" href="../../fields/#mindmap">모든 분야 보기 ↗</a>
-      </aside><article class="lesson-article">
-          
-          <header class="lesson-heading"><img class="lesson-field-art" src="../../assets/illustrations/misc.webp" width="480" height="480" alt="" decoding="async"><div class="lesson-heading-copy"><div class="overline">01 · 단서와 데이터 파이프라인 · 1 / 14</div><h1>문제 분류와 가설 세우기</h1><p class="lesson-objective">문제의 입력·목표·제약을 먼저 정리합니다.</p></div></header>
-          <div class="lesson-meta"><span>기초</span><span>학습 25–40분</span><span>처음 준비 0–10분</span></div>
+          </details></nav></details>
+      </aside>
+          <div class="lesson-article">
+          <section id="concept" class="article-section"><h2>먼저 이해하기</h2><p>Misc를 모든 남은 주제의 잡동사니로 다루기보다, 낯선 입력을 분해하는 방법을 연습합니다. 파일 이름·확장자는 단서일 뿐 형식의 증거는 아닙니다. 텍스트인지 바이트인지, 필드가 있는지, 출력 목표가 무엇인지부터 확인합니다.</p><figure class="learning-visual" data-visual-id="misc.triage"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 흐름도</span><h3>모양을 보고 가설을 세우되, 바로 결론 내리지 않습니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="모양을 보고 가설을 세우되, 바로 결론 내리지 않습니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 222" width="760" height="222" role="img" aria-labelledby="visual-misc-triage-title visual-misc-triage-desc" focusable="false"><title id="visual-misc-triage-title">모양을 보고 가설을 세우되, 바로 결론 내리지 않습니다</title><desc id="visual-misc-triage-desc">payload UW1sbWNtOXpkQT09의 문자 집합과 길이를 먼저 기록합니다. Base64처럼 보인다는 것은 관찰에서 세운 가설입니다. 변환을 시도해 중간값을 읽고 형식과 목표에 맞는지 검증해야 합니다. 입력의 출처와 문제의 제약도 함께 남깁니다.</desc><defs><marker id="visual-misc-triage-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><circle class="v-step-circle" cx="42" cy="27" r="13"/><text class="v-step-number" x="42" y="31" text-anchor="middle">1</text><g class="v-tone "><rect class="v-node" x="28" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="29" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="82">관찰</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="113">입력 길이·문자</tspan><tspan x="45" y="133">집합</tspan><tspan x="45" y="153">출처와 목표 기록</tspan></text></g><circle class="v-step-circle" cx="225.5" cy="27" r="13"/><text class="v-step-number" x="225.5" y="31" text-anchor="middle">2</text><g class="v-tone warning"><rect class="v-node" x="211.5" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="212.5" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="228.5" y="82">가설</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="228.5" y="113">Base64처럼 보임</tspan><tspan x="228.5" y="133">다른 가능성은?</tspan></text></g><path class="v-edge " d="M185.5 126H206.5" marker-end="url(#visual-misc-triage-arrow)"/><circle class="v-step-circle" cx="409" cy="27" r="13"/><text class="v-step-number" x="409" y="31" text-anchor="middle">3</text><g class="v-tone "><rect class="v-node" x="395" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="396" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="412" y="82">실험</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="412" y="113">한 단계만 변환</tspan><tspan x="412" y="133">중간 결과 보관</tspan></text></g><path class="v-edge " d="M369 126H390" marker-end="url(#visual-misc-triage-arrow)"/><circle class="v-step-circle" cx="592.5" cy="27" r="13"/><text class="v-step-number" x="592.5" y="31" text-anchor="middle">4</text><g class="v-tone positive"><rect class="v-node" x="578.5" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="579.5" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="595.5" y="82">검증</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="595.5" y="113">형식·길이·목표</tspan><tspan x="595.5" y="133">확인</tspan><tspan x="595.5" y="153">반례와 역변환</tspan></text></g><path class="v-edge " d="M552.5 126H573.5" marker-end="url(#visual-misc-triage-arrow)"/></svg></div><figcaption><span class="visual-takeaway">가능한 형식 하나를 찾았다고 풀이가 끝난 것은 아닙니다. 관찰·가설·실험·검증을 구분하세요.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>payload UW1sbWNtOXpkQT09의 문자 집합과 길이를 먼저 기록합니다. Base64처럼 보인다는 것은 관찰에서 세운 가설입니다. 변환을 시도해 중간값을 읽고 형식과 목표에 맞는지 검증해야 합니다. 입력의 출처와 문제의 제약도 함께 남깁니다.</p></details></figure><p>puzzle.txt에는 label, payload, noise가 있습니다. =를 경계로 보되 payload 내부의 Base64 패딩도 =일 수 있습니다. 따라서 첫 =에서만 나누어 키와 값을 보존해야 합니다.</p><p>분류는 바로 정답 변환을 고르는 일이 아니라 입력과 목표를 줄이는 과정입니다. 이 자료의 입력은 키=값 줄들이고 목표는 payload의 의미를 재현 가능한 단계로 설명하는 것입니다. label과 noise를 왜 처리 대상에서 제외하는지도 근거를 남깁니다.</p><p>payload의 문자가 Base64 알파벳처럼 보인다는 것은 가설의 출발점입니다. 문자 집합·길이·패딩·디코딩 결과를 확인해야 형식 주장을 보강할 수 있습니다. 길이가 4의 배수라는 조건만으로 Base64라고 확정할 수는 없습니다.</p><p>한 줄에 여러 =가 있을 수 있으므로 split(&quot;=&quot;,1)로 첫 경계만 나눕니다. 정상 예제 하나가 우연히 통과했다고 파서가 모든 입력을 처리한다고 생각하지 말고 빈 줄·중복 키·필드 누락을 다음 실험 항목으로 기록합니다.</p>
+            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>확장자가 txt이므로 모든 바이트가 정상 UTF-8이라고 가정한다.</dt><dd>이 자료는 UTF-8 텍스트로 제공되지만 일반 입력은 인코딩 오류를 구분해 처리합니다.</dd><dt>결과가 나오는 변환을 무작위로 계속 시도하고 기록하지 않는다.</dt><dd>한 번에 한 가설을 시험하고 중간값과 실패 이유를 남깁니다.</dd></dl></aside></section>
+          <div class="lesson-meta"><span>기초</span><span>처음 준비 0–10분</span></div>
         <p class="caption">개념 수·도구 전환·독립 과제를 고려한 편집자 추정이며 학습자 실측 전입니다.</p>
         <details class="readiness"><summary>시작 전, 내 준비 상태 확인하기</summary><p>&quot;payload=Qmlmcm9zdA==&quot;를 안전하게 키와 값으로 나누는 방법은?</p><fieldset class="readiness-diagnostic"><legend>알고 있는지 먼저 확인하고 학습량을 정하세요.</legend><label><input type="radio" name="readiness" value="0"> 모든 =로 나누고 마지막 조각만 남긴다.</label><label><input type="radio" name="readiness" value="1"> 첫 =에서 한 번만 나눈다.</label><label><input type="radio" name="readiness" value="2"> 패딩 =를 모두 삭제한다.</label><button class="learning-button small js-only" hidden type="button" id="checkReadiness">준비 상태 확인</button><p id="readinessFeedback" role="status"></p></fieldset><details><summary>판단 기준과 보충 자료</summary><p>=는 키·값 구분자이면서 Base64 값 내부의 패딩일 수 있습니다. 첫 구분자 뒤 값 전체를 보존해야 합니다.</p></details></details><details class="support-panel troubleshooting"><summary>막혔을 때: 증상별 확인 순서</summary><dl><dt>명령 실행 또는 입력 파일 찾기에서 막힘</dt><dd>입력 분류 · 편집기와 Python 3인지 확인합니다. puzzle.txt이 있는 작업 사본 폴더에서 실행하고 원본과 편집한 파일의 위치를 비교하세요.</dd><dt>확장자가 txt이므로 모든 바이트가 정상 UTF-8이라고 가정한다.</dt><dd>이 자료는 UTF-8 텍스트로 제공되지만 일반 입력은 인코딩 오류를 구분해 처리합니다.</dd></dl><a href="../../guides/troubleshooting.html">환경·문법·개념 오류 구분하기 ↗</a></details>
-          <nav class="article-steps" aria-label="본문 바로가기"><a href="#concept">01 이해</a><a href="#worked">02 따라하기</a><a href="#practice">03 직접 변경</a><a href="#transfer">04 독립 과제</a><a href="#verify">05 검증</a></nav>
-          <details class="lesson-preparation" aria-label="이 차시 준비" ><summary>준비 환경과 선행 학습 확인</summary><p><strong>입력 분류 · 편집기와 Python 3</strong></p><ul><li>misc 폴더의 puzzle.txt를 실행하지 않고 텍스트로 읽습니다. 외부 파일 분석 도구나 계정은 필요하지 않습니다.</li><li>관찰·가설·반증 실험을 writeup.md에 나누어 씁니다. 파일 확장자만으로 형식을 확정하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
+          <details class="lesson-preparation" aria-label="이 차시 준비"><summary>준비 환경과 선행 학습 확인</summary><p><strong>입력 분류 · 편집기와 Python 3</strong></p><ul><li>misc 폴더의 puzzle.txt를 실행하지 않고 텍스트로 읽습니다. 외부 파일 분석 도구나 계정은 필요하지 않습니다.</li><li>관찰·가설·반증 실험을 writeup.md에 나누어 씁니다. 파일 확장자만으로 형식을 확정하지 않습니다.</li></ul><p class="caption">막히는 개념만 연결해서 복습하세요. 선행 차시 완료 여부로 강의를 잠그지 않습니다.</p>
         <ul><li><a href="../foundation/paths.html">공통 기초 · 경로와 작업용 사본 ↗</a></li><li><a href="../foundation/python-files.html">공통 기초 · CSV 읽기와 오류 좁히기 ↗</a></li><li><a href="../crypto/representation.html">암호학 · 바이트·Hex·Base64 ↗</a></li></ul>
             </details>
-          <section id="concept" class="article-section"><div class="overline">01 / UNDERSTAND</div><h2>먼저 이해하기</h2><p>Misc를 모든 남은 주제의 잡동사니로 다루기보다, 낯선 입력을 분해하는 방법을 연습합니다. 파일 이름·확장자는 단서일 뿐 형식의 증거는 아닙니다. 텍스트인지 바이트인지, 필드가 있는지, 출력 목표가 무엇인지부터 확인합니다.</p><figure class="learning-visual" data-visual-id="misc.triage"><header class="visual-heading"><span class="visual-kicker">그림으로 이해하기 · 흐름도</span><h3>모양을 보고 가설을 세우되, 바로 결론 내리지 않습니다</h3></header><div class="visual-viewport" tabindex="0" role="region" aria-label="모양을 보고 가설을 세우되, 바로 결론 내리지 않습니다 그림. 화면이 좁으면 좌우로 스크롤할 수 있습니다."><svg class="teaching-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 222" width="760" height="222" role="img" aria-labelledby="visual-misc-triage-title visual-misc-triage-desc" focusable="false"><title id="visual-misc-triage-title">모양을 보고 가설을 세우되, 바로 결론 내리지 않습니다</title><desc id="visual-misc-triage-desc">payload UW1sbWNtOXpkQT09의 문자 집합과 길이를 먼저 기록합니다. Base64처럼 보인다는 것은 관찰에서 세운 가설입니다. 변환을 시도해 중간값을 읽고 형식과 목표에 맞는지 검증해야 합니다. 입력의 출처와 문제의 제약도 함께 남깁니다.</desc><defs><marker id="visual-misc-triage-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="v-arrow-head" d="M1 1L9 5L1 9Z"/></marker></defs><circle class="v-step-circle" cx="42" cy="27" r="13"/><text class="v-step-number" x="42" y="31" text-anchor="middle">1</text><g class="v-tone "><rect class="v-node" x="28" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="29" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="45" y="82">관찰</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="45" y="113">입력 길이·문자</tspan><tspan x="45" y="133">집합</tspan><tspan x="45" y="153">출처와 목표 기록</tspan></text></g><circle class="v-step-circle" cx="225.5" cy="27" r="13"/><text class="v-step-number" x="225.5" y="31" text-anchor="middle">2</text><g class="v-tone warning"><rect class="v-node" x="211.5" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="212.5" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="228.5" y="82">가설</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="228.5" y="113">Base64처럼 보임</tspan><tspan x="228.5" y="133">다른 가능성은?</tspan></text></g><path class="v-edge " d="M185.5 126H206.5" marker-end="url(#visual-misc-triage-arrow)"/><circle class="v-step-circle" cx="409" cy="27" r="13"/><text class="v-step-number" x="409" y="31" text-anchor="middle">3</text><g class="v-tone "><rect class="v-node" x="395" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="396" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="412" y="82">실험</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="412" y="113">한 단계만 변환</tspan><tspan x="412" y="133">중간 결과 보관</tspan></text></g><path class="v-edge " d="M369 126H390" marker-end="url(#visual-misc-triage-arrow)"/><circle class="v-step-circle" cx="592.5" cy="27" r="13"/><text class="v-step-number" x="592.5" y="31" text-anchor="middle">4</text><g class="v-tone positive"><rect class="v-node" x="578.5" y="54" width="153.5" height="144" rx="12"/><rect class="v-accent" x="579.5" y="67" width="3" height="118" rx="1"/><text class="v-text v-heading" font-size="15" text-anchor="start"><tspan x="595.5" y="82">검증</tspan></text><text class="v-text v-secondary" font-size="13" text-anchor="start"><tspan x="595.5" y="113">형식·길이·목표</tspan><tspan x="595.5" y="133">확인</tspan><tspan x="595.5" y="153">반례와 역변환</tspan></text></g><path class="v-edge " d="M552.5 126H573.5" marker-end="url(#visual-misc-triage-arrow)"/></svg></div><figcaption><span class="visual-takeaway">가능한 형식 하나를 찾았다고 풀이가 끝난 것은 아닙니다. 관찰·가설·실험·검증을 구분하세요.</span></figcaption><details class="visual-description"><summary>그림 설명 읽기</summary><p>payload UW1sbWNtOXpkQT09의 문자 집합과 길이를 먼저 기록합니다. Base64처럼 보인다는 것은 관찰에서 세운 가설입니다. 변환을 시도해 중간값을 읽고 형식과 목표에 맞는지 검증해야 합니다. 입력의 출처와 문제의 제약도 함께 남깁니다.</p></details></figure><p>puzzle.txt에는 label, payload, noise가 있습니다. =를 경계로 보되 payload 내부의 Base64 패딩도 =일 수 있습니다. 따라서 첫 =에서만 나누어 키와 값을 보존해야 합니다.</p><p>분류는 바로 정답 변환을 고르는 일이 아니라 입력과 목표를 줄이는 과정입니다. 이 자료의 입력은 키=값 줄들이고 목표는 payload의 의미를 재현 가능한 단계로 설명하는 것입니다. label과 noise를 왜 처리 대상에서 제외하는지도 근거를 남깁니다.</p><p>payload의 문자가 Base64 알파벳처럼 보인다는 것은 가설의 출발점입니다. 문자 집합·길이·패딩·디코딩 결과를 확인해야 형식 주장을 보강할 수 있습니다. 길이가 4의 배수라는 조건만으로 Base64라고 확정할 수는 없습니다.</p><p>한 줄에 여러 =가 있을 수 있으므로 split(&quot;=&quot;,1)로 첫 경계만 나눕니다. 정상 예제 하나가 우연히 통과했다고 파서가 모든 입력을 처리한다고 생각하지 말고 빈 줄·중복 키·필드 누락을 다음 실험 항목으로 기록합니다.</p>
-            <aside class="misconceptions"><h3>자주 헷갈리는 지점</h3><dl><dt>확장자가 txt이므로 모든 바이트가 정상 UTF-8이라고 가정한다.</dt><dd>이 자료는 UTF-8 텍스트로 제공되지만 일반 입력은 인코딩 오류를 구분해 처리합니다.</dd><dt>결과가 나오는 변환을 무작위로 계속 시도하고 기록하지 않는다.</dt><dd>한 번에 한 가설을 시험하고 중간값과 실패 이유를 남깁니다.</dd></dl></aside></section>
           <section id="materials" class="materials">
         <div><div class="overline">PRACTICE FILES</div><h2>실습 자료</h2><p>ZIP을 먼저 풀고 README를 확인하세요. 같은 폴더의 파일을 함께 유지합니다.</p></div>
         <a class="learning-button" href="../../labs/misc.zip" download>전체 실습 ZIP 받기 ↓</a>
@@ -105,7 +107,7 @@
       </section>
           <section id="worked" class="article-section"><div class="overline">02 / WORKED EXAMPLE</div><h2>따라 하며 관찰하기</h2>
             <p class="baseline-note">먼저 수정하지 않은 원본으로 아래 기준 예제를 확인하세요. 원본 폴더를 보관하고 전체 폴더의 작업 사본에서 다음 변경 단계를 진행합니다. 아래 예상 결과는 변경 전 기준입니다.</p>
-            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 입력 분류 · 편집기와 Python 3</span><button class="js-only" hidden type="button" id="copyExample">복사</button></div><pre><code id="exampleCode">cat puzzle.txt
+            <h3>처음 상태의 전체 예제</h3><div class="code-shell"><div class="code-toolbar"><span>터미널 명령 · 이 분야의 작업 사본 폴더 · 입력 분류 · 편집기와 Python 3</span><button class="js-only" hidden type="button" id="copyExample" data-copy-code="exampleCode">복사</button></div><pre><code id="exampleCode">cat puzzle.txt
 # payload의 형식과 길이를 기록하고 바로 변환하기 전 가설을 적습니다.</code></pre></div><div class="expected-output"><h3>변경 전 예상 결과와 해석</h3><pre>payload는 UW1sbWNtOXpkQT09이며, 해독 전에는 Base64처럼 보이는 표현이라는 관찰까지만 할 수 있습니다.</pre></div>
             <h3>이제 단계별로 바꾸고 관찰하기</h3><ol class="walkthrough"><li><h3>입력·목표·제약 쓰기</h3><p>puzzle.txt의 세 필드를 읽고 입력은 텍스트, 처리할 필드는 payload, 원본 보존이 제약이라고 적습니다. 아직 Bifrost를 결과로 가정하지 않습니다.</p>
         <div class="step-observation"><strong>관찰할 결과</strong><pre>관찰과 추측이 나뉜 문제 정의가 생깁니다.</pre></div></li><li><h3>첫 구분자만 분리</h3><p>패딩 =가 값에 들어가도 손실되지 않는지 작은 한 줄로 확인합니다.</p>
@@ -156,7 +158,7 @@ print(key, value)</code></pre></div><div class="step-observation"><strong>관찰
           <label class="learning-button small import-label">백업 합쳐서 가져오기<input type="file" id="importProgress" accept="application/json,.json"></label></div>
         <p class="caption">같은 사이트·브라우저에서 공유합니다. 다른 기기와 자동 동기화되지 않습니다. 가져오기는 완료 기록을 합치며 현재 완료 기록을 지우지 않습니다.</p>
         <p class="feedback" role="status" id="backupFeedback"></p></details>
-        </article></div>
+        </div></article>
 </main>
 <footer class="learning-footer"><div class="wrap">BIFROST · 이해하고, 실행하고, 근거를 남기기. <a href="../../fields/#mindmap">다른 분야 탐색 ↗</a></div></footer>
 </body>

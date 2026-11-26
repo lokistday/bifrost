@@ -14,7 +14,8 @@ for (const name of pages) {
   const document = parseHTML(read(name)).document;
   assert.equal(document.documentElement.dataset.theme, 'dark', `${name}: dark before JavaScript runs`);
   assert.equal(document.querySelector('#themeToggle,.theme-toggle,.project-theme-toggle'), null, `${name}: no theme control`);
-  assert.equal(document.querySelector('meta[name="theme-color"]').getAttribute('content'), '#080b17', `${name}: browser chrome matches`);
+  const expectedColor = document.querySelector('.editorial-header') ? '#181819' : '#080b17';
+  assert.equal(document.querySelector('meta[name="theme-color"]').getAttribute('content'), expectedColor, `${name}: browser chrome matches`);
   assert.match(document.querySelector('script[src*="/theme.js"]').getAttribute('src'), /\?v=/, `${name}: cached theme controller is replaced`);
 }
 for (const embedded of [false, true]) {

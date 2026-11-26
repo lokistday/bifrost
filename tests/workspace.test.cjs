@@ -9,6 +9,7 @@ assert.equal(entry.querySelectorAll('.entry-choice').length,2);
 assert.equal(entry.querySelector('#startFoundation').getAttribute('href'),'tracks/foundation/');
 assert.equal(entry.querySelector('#chooseFields').getAttribute('href'),'fields/#mindmap');
 assert.equal(entry.querySelector('#entry-title').tagName,'H1');
+assert.ok(entry.querySelector('.entry-resources nav#resources a'),'The resource fragment targets content inside the disclosure');
 assert.equal(entry.querySelector('.brand-wireframe,.hero-terrain'),null);
 assert.equal(entry.querySelector('script[src*="wordmark-motion.js"]'),null);
 assert.equal(entry.querySelector('.subject-directory,.workspace-rail,.workspace-preview,.workspace-actions'),null);
@@ -16,7 +17,7 @@ assert.equal(fields.querySelector('.workspace-rail,.workspace-preview,.workspace
 assert.equal(fields.querySelector('main').firstElementChild.id,'mindmap');
 assert.equal(fields.querySelector('#directory-title').tagName,'H1');
 assert.equal(fields.querySelector('.fields-hero,.brand-wireframe,.hero-terrain,script[src*="wordmark-motion.js"]'),null);
-assert.equal(fields.querySelector('.entry-back').getAttribute('href'),'../');
+assert.equal(fields.querySelector('.editorial-brand').getAttribute('href'),'../');
 const courses=JSON.parse(read('content/site.json')).courses;
 assert.equal(fields.querySelectorAll('[data-map-track]').length,courses.length);
 assert.equal(fields.querySelectorAll('.subject-card>.subject-arrow').length,courses.length);

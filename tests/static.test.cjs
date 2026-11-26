@@ -16,8 +16,9 @@ for (const [file, doc] of documents) {
   check(!doc.querySelector('a[href$="/review.html"], script[src*="/review.js"], a[href*="learn/search.html"], [role="search"], script[src*="study-search.js"]'), `${file}: removed review and search stay absent`);
   check(!doc.querySelector('a[href*="guides/bridges.html"]'), `${file}: retired bridge page is not linked`);
   check(!doc.querySelector('a[href*="wargame/"], script[src*="wargame"]'), `${file}: deferred wargame is not exposed`);
-  check([...doc.querySelectorAll('script[src]')].filter(e=>e.getAttribute('src').split('?')[0].endsWith('/pointer-trail.js')).length===1, `${file}: exactly one shared pointer trail`);
-  check([...doc.querySelectorAll('link[rel="stylesheet"]')].filter(e=>e.getAttribute('href').split('?')[0].endsWith('/pointer-trail.css')).length===1, `${file}: shared trail styling`);
+  const expectedTrails = doc.documentElement.dataset.palette === 'charcoal' ? 0 : 1;
+  check([...doc.querySelectorAll('script[src]')].filter(e=>e.getAttribute('src').split('?')[0].endsWith('/pointer-trail.js')).length===expectedTrails, `${file}: pointer trail matches its palette`);
+  check([...doc.querySelectorAll('link[rel="stylesheet"]')].filter(e=>e.getAttribute('href').split('?')[0].endsWith('/pointer-trail.css')).length===expectedTrails, `${file}: trail styling matches its palette`);
   for (const element of doc.querySelectorAll('[href],[src]')) {
     const value = element.getAttribute('href') || element.getAttribute('src');
     if (!value || /^(https?:|data:|mailto:)/.test(value)) continue;
@@ -47,7 +48,7 @@ for (const file of illustratedAssets) {
   artBytes += bytes.length;
 }
 check(artBytes < 1000000, 'The complete illustration collection stays under 1 MB');
-for (const file of ['main.css', 'theme.css', 'mindmap.css', 'learning.css', 'visuals.css', 'linux-guide.css', 'overlays.css', 'study.css', 'workspace.css', 'exams.css', 'projects.css', 'pointer-trail.css']) {
+for (const file of ['main.css', 'theme.css', 'mindmap.css', 'learning.css', 'visuals.css', 'linux-guide.css', 'overlays.css', 'study.css', 'workspace.css', 'charcoal.css', 'exams.css', 'projects.css', 'pointer-trail.css']) {
   const source = fs.readFileSync(path.join(ROOT, 'css', file), 'utf8');
   check(!/var\([^)]*\)[\da-f]{2,}/i.test(source), `No malformed color suffix: ${file}`);
   check(CSSOM.parse(source).cssRules.length > 0, `Stylesheet parses: ${file}`);

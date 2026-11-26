@@ -59,26 +59,25 @@ check(entry.document.querySelector('#chooseFields').getAttribute('href') === 'fi
 verifyLocalLinks(entry);
 verifyLocalLinks(home);
 const fieldGuides = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/fields.json'), 'utf8'));
-const clockwise = ['foundation', 'pwn', 'forensic', 'misc', 'cloud', 'network', 'crypto', 'rev', 'web'];
 const directoryOrder = ['foundation','web','pwn','forensic','network','cloud','crypto','rev','misc'];
-directoryOrder.forEach((key,index)=> {
+assert.deepEqual([...home.document.querySelectorAll('[data-map-track]')].map(card => card.dataset.mapTrack), directoryOrder);
+directoryOrder.forEach(key => {
   const card = home.document.querySelector(`[data-map-track="${key}"]`);
-  check(card.querySelector('.subject-number').textContent === String(index+1).padStart(2,'0'), 'Subject numbering follows visual reading order');
-  check(card.querySelector('.subject-title > span').textContent === `${home.courses[key].modules.flatMap(m=>m.lessons).length}개 차시`, 'Subject count uses the curriculum');
+  check(!!card.querySelector('.subject-copy p').textContent.trim(), 'Subject describes a learning activity');
+  check(card.querySelector('.subject-count').textContent === `${home.courses[key].modules.flatMap(m=>m.lessons).length}개 차시`, 'Subject count uses the curriculum');
 });
 const ids = new Set();
 let lessonCount = 0;
 for (const course of courses) {
   const overview = openPage(`tracks/${course.id}/index.html`);
-  const number = String(clockwise.indexOf(course.id)).padStart(2, '0');
-  check(overview.document.querySelector('.course-hero .overline').textContent === `${number} / LEARNING PATH`, 'Course heading matches map number');
-  check(overview.document.querySelector('.field-index').textContent === number, 'Field introduction matches map number');
+  check(overview.document.querySelector('.course-hero h1').textContent === course.label, 'Course heading matches the directory label');
+  check(overview.document.querySelectorAll('.module-picker a').length === course.modules.length, 'All modules are available from the picker');
   check(overview.document.querySelectorAll('.course-visual').length === 1, 'One course-specific visual learning path');
   check(overview.document.querySelectorAll('.module-card').length === course.modules.length, 'All modules render');
   check(!overview.document.querySelector('#roadmap, .phase, .field-choice, .field-guide-intro'), 'Common roadmap stages and field selection advice removed');
   check(overview.document.querySelectorAll('#courseIntroduction .field-guide-card').length === 1, 'Exactly one field introduction card appears');
   check(overview.document.querySelector('.field-question').textContent === fieldGuides[course.id].question, 'Structured field introduction preserved');
-  check(overview.document.querySelector('.field-guide-card h2').textContent === course.title, 'Correct field description on course');
+  check(overview.document.querySelector('.field-guide-card h2').textContent === '분야 소개', 'Field description has a distinct heading');
   check(!overview.document.querySelector('#courseIntroduction [onclick]'), 'Field introduction uses working standalone links');
   check(!!overview.document.getElementById('courseModules'), 'Direct jump to teaching modules');
   verifyLocalLinks(overview);
@@ -99,6 +98,17 @@ for (const course of courses) {
     lessonCount++;
   }
 }
+const modulePage = openPage('tracks/foundation/index.html');
+const moduleLinks = modulePage.document.querySelectorAll('.module-picker a');
+const modulePanels = modulePage.document.querySelectorAll('.module-card');
+check(moduleLinks[0].getAttribute('aria-current') === 'location' && modulePanels[1].hidden, 'The course starts with its first module selected');
+moduleLinks[1].click();
+check(moduleLinks[1].getAttribute('aria-current') === 'location' && modulePanels[0].hidden && !modulePanels[1].hidden, 'Module links reveal the selected lesson list');
+modulePage.context.location.hash = '#module-3';
+modulePage.window.dispatchEvent({ type: 'hashchange' });
+check(!modulePanels[2].hidden && modulePanels[1].hidden, 'Changing the fragment restores the matching module');
+const staticCourse = parseHTML(fs.readFileSync(path.join(ROOT, 'tracks/foundation/index.html'), 'utf8')).document;
+check(!staticCourse.querySelector('.module-card[hidden]'), 'All module links also work without JavaScript');
 const registeredIDs = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/lesson-ids.json'), 'utf8'));
 assert.deepEqual([...ids].sort(), registeredIDs, 'Every registered lesson has a navigable page');
 check(lessonCount === registeredIDs.length, 'Complete authored lesson count');

@@ -17,8 +17,26 @@ for (const file of ['curriculum.js', 'visual-data.js', 'visuals.js']) {
 const courses = context.window.BifrostCourses;
 const contentVersion = esc(site.contentVersion);
 const view = create(courses, context.window.BifrostVisuals);
-const star = `<img class="brand-logo" src="../../assets/logo.svg?v=${contentVersion}" width="34" height="34" alt="">`;
 const template = read('templates/learning.html');
+const fingerprint = (...files) => {
+  const hash = crypto.createHash('sha256');
+  for (const file of files) hash.update(fs.readFileSync(path.join(ROOT, file)));
+  return hash.digest('hex').slice(0, 12);
+};
+const editorialVersion = `editorial-${fingerprint('css/charcoal.css', 'assets/bifrost-mark.svg')}`;
+const learningStyleVersion = `course-style-${fingerprint('css/learning.css')}`;
+function header(prefix, current) {
+  const links = [
+    ['fields', 'fields/#mindmap', '분야 둘러보기'],
+    ['paths', 'learn/', '학습 경로'],
+    ['projects', 'projects/', '프로젝트'],
+    ['exams', 'exams/', '모의고사']
+  ];
+  return `<header class="editorial-header"><div class="editorial-frame editorial-header-inner">
+    <a class="editorial-brand" href="${prefix}" aria-label="BIFROST 홈"><img src="${prefix}assets/bifrost-mark.svg?v=${editorialVersion}" width="36" height="36" alt=""><span>BIFROST</span></a>
+    <nav class="editorial-nav" aria-label="주 메뉴">${links.map(([id, href, label]) => `<a href="${prefix}${href}"${id === current ? ' aria-current="page"' : ''}>${label}</a>`).join('')}</nav>
+  </div></header>`;
+}
 function fill(source, values) {
   return source.replace(/\{\{([A-Z_]+)\}\}/g, (_, key) => {
     if (!(key in values)) throw new Error(`Missing template field: ${key}`);
@@ -26,7 +44,7 @@ function fill(source, values) {
   });
 }
 function page(course, lesson, legacy = false, learningPath = null) {
-  const title = lesson ? `${lesson.title} — ${learningPath ? learningPath.title : course.title} · Bifrost` : `${course.title} — Bifrost`;
+  const title = lesson ? `${lesson.title} — ${learningPath ? learningPath.title : course.label} · Bifrost` : `${course.label} — Bifrost`;
   const route = learningPath ? `paths/${learningPath.id}/${lesson.id}.html` : `tracks/${course.id}/${lesson ? `${slug(lesson.id)}.html` : ''}`;
   const lessonView = learningPath ? create(courses,context.window.BifrostVisuals,learningPath) : view;
   const content = lesson ? lessonView.lesson(course.id, lesson.id) : view.overview(course.id);
@@ -37,8 +55,8 @@ function page(course, lesson, legacy = false, learningPath = null) {
     TITLE: esc(title), DESCRIPTION: esc(lesson ? lesson.goal : course.subtitle),
     CANONICAL: esc(site.url + route), SITE_URL: esc(site.url), CONTENT_VERSION: contentVersion,
     COURSE: course.id, NUMBER: course.number, VIEW: lesson || legacy ? 'lesson' : 'course',
-    LESSON_ID: lesson?.id || '', ACCENT: course.accent, LABEL: esc(learningPath ? learningPath.label : course.label), STAR: star,
-    PATH_ID: learningPath?.id || '', OUTLINE_HREF: learningPath ? './#pathOutline' : './#courseModules',
+    LESSON_ID: lesson?.id || '', HEADER: header('../../'), PATH_ID: learningPath?.id || '',
+    EDITORIAL_VERSION: editorialVersion, LEARNING_STYLE_VERSION: learningStyleVersion,
     PATH_SCRIPTS: learningPath ? `<script src="../../js/learning-paths.js?v=${contentVersion}" defer></script>\n<script src="../../js/path-progress.js?v=${contentVersion}" defer></script>` : '',
     RENDERED: legacy ? 'legacy' : lesson?.id || 'course', CONTENT: note + content,
     VISUAL_SCRIPTS: legacy ? `<script src="../../js/visual-data.js?v=${contentVersion}" defer></script>\n<script src="../../js/visuals.js?v=${contentVersion}" defer></script>` : ''
@@ -75,15 +93,14 @@ for (const course of Object.values(courses)) {
     count++;
   }
 }
-const home = require('./render_home.cjs')({ courses, paths: learningPaths });
-const homeVersion = 'home-' + crypto.createHash('sha256')
-  .update(read('css/workspace.css')).update(read('js/workspace.js'))
-  .digest('hex').slice(0,12);
+const home = require('./render_home.cjs')({ courses });
+const homeVersion = `home-${fingerprint('css/workspace.css', 'js/workspace.js')}`;
 const homeValues = { ...home, SITE_URL: esc(site.url), COURSE_COUNT: Object.keys(courses).length,
-  LESSON_COUNT: count, CONTENT_VERSION: contentVersion, HOME_VERSION: homeVersion };
-write('index.html', fill(read('templates/index.html'), homeValues));
+  LESSON_COUNT: count, CONTENT_VERSION: contentVersion, HOME_VERSION: homeVersion,
+  EDITORIAL_VERSION: editorialVersion, ART_VERSION: fingerprint('assets/charcoal-wing.webp') };
+write('index.html', fill(read('templates/index.html'), { ...homeValues, HEADER: header('./') }));
 fs.mkdirSync(path.join(ROOT,'fields'),{recursive:true});
-write('fields/index.html', fill(read('templates/fields.html'), homeValues));
+write('fields/index.html', fill(read('templates/fields.html'), { ...homeValues, HEADER: header('../', 'fields') }));
 write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
   routes.map(route => `  <url><loc>${esc(site.url + route)}</loc></url>`).join('\n') + '\n</urlset>\n');
 console.log(`Generated ${count} complete lesson pages, 9 course pages, 9 compatible query entries and homepage.`);

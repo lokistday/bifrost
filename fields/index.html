@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="dark">
+<html lang="ko" data-theme="dark" data-palette="charcoal">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080b17">
+<meta name="theme-color" content="#181819">
 <meta name="description" content="BIFROST는 보안의 기초부터 분야별 실습과 프로젝트까지 이어지는 학습 플랫폼입니다.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BIFROST">
@@ -24,36 +24,84 @@
 <meta name="twitter:description" content="보안을 이해하고, 직접 실습하고, 나만의 결과물로.">
 <meta name="twitter:image" content="https://lokistday.github.io/bifrost/og-image.png?v=20261105-bifrost">
 <title>분야 선택 · BIFROST</title>
-<script src="../js/theme.js?v=learning-d027f06d8b67"></script>
-<link rel="icon" type="image/svg+xml" href="../assets/logo.svg?v=learning-d027f06d8b67">
+<script src="../js/theme.js?v=learning-2ac3a8931abc"></script>
+<link rel="icon" type="image/svg+xml" href="../assets/bifrost-mark.svg?v=editorial-968df953fec1">
 
-<link rel="stylesheet" href="../css/main.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="../css/theme.css?v=learning-d027f06d8b67">
-<link rel="stylesheet" href="../css/pointer-trail.css?v=learning-d027f06d8b67">
+<link rel="stylesheet" href="../css/main.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../css/theme.css?v=learning-2ac3a8931abc">
+<link rel="stylesheet" href="../css/charcoal.css?v=editorial-968df953fec1">
 
-<link rel="stylesheet" href="../css/workspace.css?v=home-3a9aa839b207">
-<script src="../js/pointer-trail.js?v=learning-d027f06d8b67" defer></script>
+<link rel="stylesheet" href="../css/workspace.css?v=home-3ddd92265985">
 </head>
 <body class="workspace-page fields-page">
 <a class="workspace-skip" href="#home">학습 본문으로 건너뛰기</a>
-<header class="workspace-header">
-  <a class="workspace-brand" href="../" aria-label="Bifrost 홈"><img class="workspace-logo" src="../assets/logo.svg?v=learning-d027f06d8b67" width="36" height="36" alt=""><strong>BIFROST</strong><span>CYBERSECURITY<br>LEARNING PLATFORM</span></a>
-</header>
+<header class="editorial-header"><div class="editorial-frame editorial-header-inner">
+    <a class="editorial-brand" href="../" aria-label="BIFROST 홈"><img src="../assets/bifrost-mark.svg?v=editorial-968df953fec1" width="36" height="36" alt=""><span>BIFROST</span></a>
+    <nav class="editorial-nav" aria-label="주 메뉴"><a href="../fields/#mindmap" aria-current="page">분야 둘러보기</a><a href="../learn/">학습 경로</a><a href="../projects/">프로젝트</a><a href="../exams/">모의고사</a></nav>
+  </div></header>
 <main id="home" class="guided-home" tabindex="-1">
-  <section class="subject-directory" id="mindmap" aria-labelledby="directory-title">
-    <div class="directory-header"><div><p class="field-step">출발점 선택 <span aria-hidden="true">/</span> <strong>분야 선택</strong></p><h1 id="directory-title">어떤 분야가 궁금하세요?</h1></div><a class="entry-back" href="../"><span aria-hidden="true">←</span> 출발점 다시 선택</a></div>
-    <div class="subject-grid"><a class="subject-card" data-map-track="foundation" href="../tracks/foundation/"><span class="subject-number">01</span><svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16M12 5C9 2 5 3 2 4v15c4-1 7-1 10 2 3-3 6-3 10-2V4c-3-1-7-2-10 1Z"/></svg><div class="subject-copy"><div class="subject-title"><h3>공통 기초</h3><span>20개 차시</span></div></div><svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-<a class="subject-card" data-map-track="web" href="../tracks/web/"><span class="subject-number">02</span><svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 6h14M5 18h14"/></svg><div class="subject-copy"><div class="subject-title"><h3>웹 해킹</h3><span>17개 차시</span></div></div><svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-<a class="subject-card" data-map-track="pwn" href="../tracks/pwn/"><span class="subject-number">03</span><svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 1v4m6-4v4M9 19v4m6-4v4M1 9h4m-4 6h4m14-6h4m-4 6h4"/><path d="M9 9h6v6H9z"/></svg><div class="subject-copy"><div class="subject-title"><h3>Pwn / 시스템</h3><span>16개 차시</span></div></div><svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-<a class="subject-card" data-map-track="forensic" href="../tracks/forensic/"><span class="subject-number">04</span><svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 2h10l4 4v16H5ZM14 2v5h5M9 11h6m-6 4h6m-6 4h4"/></svg><div class="subject-copy"><div class="subject-title"><h3>디지털 포렌식</h3><span>16개 차시</span></div></div><svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-<a class="subject-card" data-map-track="network" href="../tracks/network/"><span class="subject-number">05</span><svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4" r="3"/><circle cx="4" cy="19" r="3"/><circle cx="20" cy="19" r="3"/><path d="M12 7v5m0 0-7 4m7-4 7 4"/></svg><div class="subject-copy"><div class="subject-title"><h3>네트워크 보안</h3><span>19개 차시</span></div></div><svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-<a class="subject-card" data-map-track="cloud" href="../tracks/cloud/"><span class="subject-number">06</span><svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 19a5 5 0 1 1 .2-10A7 7 0 0 1 21 11a4 4 0 0 1-1 8Z"/></svg><div class="subject-copy"><div class="subject-title"><h3>클라우드 보안</h3><span>17개 차시</span></div></div><svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-<a class="subject-card" data-map-track="crypto" href="../tracks/crypto/"><span class="subject-number">07</span><svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="12" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4m-4 5v3"/></svg><div class="subject-copy"><div class="subject-title"><h3>암호학</h3><span>19개 차시</span></div></div><svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-<a class="subject-card" data-map-track="rev" href="../tracks/rev/"><span class="subject-number">08</span><svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 6-5 6 5 6m10-12 5 6-5 6M14 3l-4 18"/></svg><div class="subject-copy"><div class="subject-title"><h3>리버스 엔지니어링</h3><span>15개 차시</span></div></div><svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
-<a class="subject-card" data-map-track="misc" href="../tracks/misc/"><span class="subject-number">09</span><svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h6v6H3zm12 0h6v6h-6zM3 15h6v6H3zm12 0h6v6h-6z"/></svg><div class="subject-copy"><div class="subject-title"><h3>문제 해결 · 자동화</h3><span>14개 차시</span></div></div><svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a></div>
+  <section class="editorial-frame subject-directory" id="mindmap" aria-labelledby="directory-title">
+    <div class="directory-header">
+      <h1 id="directory-title">어떤 분야가 궁금하세요?</h1>
+      <p>직접 해보고 싶은 일부터 골라보세요.</p>
+    </div>
+    <div class="subject-grid"><a class="subject-card subject-featured" data-map-track="foundation" href="../tracks/foundation/">
+      <svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m6 8 4 4-4 4m7 0h5"/></svg>
+      <div class="subject-copy"><h2>공통 기초</h2><p>명령어를 익히고 첫 Python 예제를 실행해요.</p></div>
+      <span class="subject-count">20개 차시</span><span class="subject-action" aria-hidden="true">공통 기초 열기</span>
+      <svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h17m-6-6 6 6-6 6"/></svg>
+    </a>
+<a class="subject-card" data-map-track="web" href="../tracks/web/">
+      <svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 9h20M6 6h.1M9 6h.1M12 6h.1"/></svg>
+      <div class="subject-copy"><h2>웹 해킹</h2><p>웹 요청과 응답 살펴보기</p></div>
+      <span class="subject-count">17개 차시</span>
+      <svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h17m-6-6 6 6-6 6"/></svg>
+    </a>
+<a class="subject-card" data-map-track="pwn" href="../tracks/pwn/">
+      <svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 1v4m6-4v4M9 19v4m6-4v4M1 9h4m-4 6h4m14-6h4m-4 6h4"/><path d="M9 9h6v6H9z"/></svg>
+      <div class="subject-copy"><h2>Pwn / 시스템</h2><p>메모리와 프로그램 구조 읽기</p></div>
+      <span class="subject-count">16개 차시</span>
+      <svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h17m-6-6 6 6-6 6"/></svg>
+    </a>
+<a class="subject-card" data-map-track="forensic" href="../tracks/forensic/">
+      <svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 2h10l4 4v16H5ZM14 2v5h5M9 11h6m-6 4h6m-6 4h4"/></svg>
+      <div class="subject-copy"><h2>디지털 포렌식</h2><p>파일에서 사건의 단서 찾기</p></div>
+      <span class="subject-count">16개 차시</span>
+      <svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h17m-6-6 6 6-6 6"/></svg>
+    </a>
+<a class="subject-card" data-map-track="network" href="../tracks/network/">
+      <svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4" r="3"/><circle cx="4" cy="19" r="3"/><circle cx="20" cy="19" r="3"/><path d="M12 7v5m0 0-7 4m7-4 7 4"/></svg>
+      <div class="subject-copy"><h2>네트워크 보안</h2><p>패킷에서 통신 흐름 읽기</p></div>
+      <span class="subject-count">19개 차시</span>
+      <svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h17m-6-6 6 6-6 6"/></svg>
+    </a>
+<a class="subject-card" data-map-track="cloud" href="../tracks/cloud/">
+      <svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 19a5 5 0 1 1 .2-10A7 7 0 0 1 21 11a4 4 0 0 1-1 8Z"/></svg>
+      <div class="subject-copy"><h2>클라우드 보안</h2><p>클라우드 권한과 설정 점검하기</p></div>
+      <span class="subject-count">17개 차시</span>
+      <svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h17m-6-6 6 6-6 6"/></svg>
+    </a>
+<a class="subject-card" data-map-track="crypto" href="../tracks/crypto/">
+      <svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="12" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4m-4 5v3"/></svg>
+      <div class="subject-copy"><h2>암호학</h2><p>암호화와 서명의 원리 이해하기</p></div>
+      <span class="subject-count">19개 차시</span>
+      <svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h17m-6-6 6 6-6 6"/></svg>
+    </a>
+<a class="subject-card" data-map-track="rev" href="../tracks/rev/">
+      <svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 6-5 6 5 6m10-12 5 6-5 6M14 3l-4 18"/></svg>
+      <div class="subject-copy"><h2>리버스 엔지니어링</h2><p>프로그램의 동작 원리 추적하기</p></div>
+      <span class="subject-count">15개 차시</span>
+      <svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h17m-6-6 6 6-6 6"/></svg>
+    </a>
+<a class="subject-card" data-map-track="misc" href="../tracks/misc/">
+      <svg class="ui-icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h6v6H3zm12 0h6v6h-6zM3 15h6v6H3zm12 0h6v6h-6z"/></svg>
+      <div class="subject-copy"><h2>문제 해결 · 자동화</h2><p>반복 작업을 코드로 줄이기</p></div>
+      <span class="subject-count">14개 차시</span>
+      <svg class="ui-icon subject-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h17m-6-6 6 6-6 6"/></svg>
+    </a></div>
   </section>
 </main>
-<footer class="workspace-footer"><strong>BIFROST <small>/ by. Loki</small></strong><details class="entry-resources" id="resources"><summary>참고 자료</summary><nav aria-label="외부 참고 자료"><a href="https://dreamhack.io/" target="_blank" rel="noopener">Dreamhack ↗</a><a href="https://ctftime.org/" target="_blank" rel="noopener">CTFtime ↗</a><a href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP ↗</a></nav></details></footer>
+<footer class="editorial-frame workspace-footer"><strong>BIFROST <small>/ by. Loki</small></strong><details class="entry-resources" id="resources"><summary>참고 자료</summary><nav aria-label="외부 참고 자료"><a href="https://dreamhack.io/" target="_blank" rel="noopener">Dreamhack ↗</a><a href="https://ctftime.org/" target="_blank" rel="noopener">CTFtime ↗</a><a href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP ↗</a></nav></details></footer>
 
 </body>
 </html>
