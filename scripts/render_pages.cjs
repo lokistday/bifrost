@@ -2,7 +2,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
-const crypto = require('node:crypto');
+const fingerprint = require('./fingerprint.cjs');
 const ROOT = path.resolve(__dirname, '..');
 const { create, esc, all, slug } = require('../js/learning-view.js');
 const site = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/site.json'), 'utf8'));
@@ -18,13 +18,9 @@ const courses = context.window.BifrostCourses;
 const contentVersion = esc(site.contentVersion);
 const view = create(courses, context.window.BifrostVisuals);
 const template = read('templates/learning.html');
-const fingerprint = (...files) => {
-  const hash = crypto.createHash('sha256');
-  for (const file of files) hash.update(fs.readFileSync(path.join(ROOT, file)));
-  return hash.digest('hex').slice(0, 12);
-};
-const editorialVersion = `editorial-${fingerprint('css/charcoal.css', 'assets/bifrost-mark.svg')}`;
-const learningStyleVersion = `course-style-${fingerprint('css/learning.css')}`;
+const textFingerprint = (...files) => fingerprint(...files.map(read));
+const editorialVersion = `editorial-${textFingerprint('css/charcoal.css', 'assets/bifrost-mark.svg')}`;
+const learningStyleVersion = `course-style-${textFingerprint('css/learning.css')}`;
 function header(prefix, current) {
   const links = [
     ['fields', 'fields/#mindmap', '분야 둘러보기'],
@@ -63,7 +59,7 @@ function page(course, lesson, legacy = false, learningPath = null) {
   });
   // New subject exams change their course bundle without invalidating every page.
   const scoped = ['foundation', 'pwn', 'rev'].includes(course.id) || course.modules.some(m => m.exam);
-  const courseVersion = scoped ? 'course-' + crypto.createHash('sha256').update(read(`js/courses/${course.id}.js`)).digest('hex').slice(0,12) : contentVersion;
+  const courseVersion = scoped ? 'course-' + textFingerprint(`js/courses/${course.id}.js`) : contentVersion;
   return html.replace(`js/courses/${course.id}.js?v=${contentVersion}`, `js/courses/${course.id}.js?v=${courseVersion}`);
 }
 const routes = ['', 'fields/', 'guides/linux.html'];
@@ -94,10 +90,10 @@ for (const course of Object.values(courses)) {
   }
 }
 const home = require('./render_home.cjs')({ courses });
-const homeVersion = `home-${fingerprint('css/workspace.css', 'js/workspace.js')}`;
+const homeVersion = `home-${textFingerprint('css/workspace.css', 'js/workspace.js')}`;
 const homeValues = { ...home, SITE_URL: esc(site.url), COURSE_COUNT: Object.keys(courses).length,
   LESSON_COUNT: count, CONTENT_VERSION: contentVersion, HOME_VERSION: homeVersion,
-  EDITORIAL_VERSION: editorialVersion, ART_VERSION: fingerprint('assets/charcoal-wing.webp') };
+  EDITORIAL_VERSION: editorialVersion, ART_VERSION: fingerprint(fs.readFileSync(path.join(ROOT, 'assets/charcoal-wing.webp'))) };
 write('index.html', fill(read('templates/index.html'), { ...homeValues, HEADER: header('./') }));
 fs.mkdirSync(path.join(ROOT,'fields'),{recursive:true});
 write('fields/index.html', fill(read('templates/fields.html'), { ...homeValues, HEADER: header('../', 'fields') }));

@@ -1,11 +1,11 @@
 /* Static, account-free study library, final projects and prerequisite bridges. */
 const fs = require('node:fs');
 const path = require('node:path');
-const crypto = require('node:crypto');
+const fingerprint = require('./fingerprint.cjs');
 const { esc, all, slug } = require('../js/learning-view.js');
 
 module.exports = function renderStudy({ ROOT, courses, site, fill, write }) {
-  const projectVersion = 'project-' + crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,'css/projects.css'))).update(fs.readFileSync(path.join(ROOT,'js/project-motion.js'))).digest('hex').slice(0,12);
+  const projectVersion = 'project-' + fingerprint(fs.readFileSync(path.join(ROOT,'css/projects.css'), 'utf8'), fs.readFileSync(path.join(ROOT,'js/project-motion.js'), 'utf8'));
   const template = fs.readFileSync(path.join(ROOT, 'templates/study.html'), 'utf8');
   const routes = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/generated-paths.json'), 'utf8'));
   const lookup = Object.fromEntries(Object.values(courses).flatMap(c => all(c).map(l => [l.id, { course:c, lesson:l }])));
