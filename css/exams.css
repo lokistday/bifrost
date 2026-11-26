@@ -42,3 +42,19 @@
 .is-review .exam-solving-layout{display:block}.is-review .exam-answer-sheet{display:none}.is-review .exam-question-pane{padding:0;border:0;background:transparent}.is-review .exam-question{padding:24px;border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-bottom:18px}
 @media(max-width:900px){.exam-library-layout{grid-template-columns:155px minmax(0,1fr);gap:18px}.exam-solving-layout{grid-template-columns:minmax(0,1fr) 220px;gap:16px}.exam-question-pane{padding:20px}.exam-answer-sheet{padding:16px;top:150px}}
 @media(max-width:650px){.exam-library-layout{display:block}.exam-field-nav{position:static;flex-direction:row;overflow:auto;flex-wrap:nowrap;margin-bottom:24px}.exam-field-nav a{white-space:nowrap}.exam-solving-layout{display:flex;flex-direction:column}.exam-question-pane,.exam-answer-sheet{width:100%}.exam-answer-sheet{position:static}.exam-question-pane{min-height:0}.exam-module-card{padding:16px;grid-template-columns:minmax(0,1fr)}.exam-module-card>.learning-button,.exam-module-card>.exam-pending{grid-column:1;grid-row:auto;justify-self:start;margin-top:10px}.exam-prompt{font-size:16px}}
+/* The exam runner shares the site chrome while retaining a focused workspace. */
+.study-page .exam-library-layout { grid-template-columns: minmax(155px, .72fr) minmax(0, 3fr); }
+.study-page .exam-field-nav { top: calc(var(--shell-height) + 16px); border-color: var(--line-soft); padding: 9px; }
+.study-page .exam-field-nav a { color: var(--muted); }
+.study-page .exam-field-nav a[aria-current] { color: var(--teal); box-shadow: inset 2px 0 var(--teal); }
+.study-page .exam-course-heading h2 { font-size: clamp(24px, 2.9vw, 36px); }
+.study-page .exam-module-card.is-ready { border-color: var(--line); }
+.study-page .exam-module-card.is-ready:focus-within { border-color: var(--teal); }
+.study-page .exam-module-card h3 { font-size: clamp(18px, 1.85vw, 24px); }
+.study-page .exam-module-card > p, .study-page .exam-module-card details { font-size: 14px; }
+.study-page .exam-toolbar, .study-page .exam-answer-sheet { top: calc(var(--shell-height) + 16px); }
+.study-page :is(.exam-solving-layout, .exam-result, .exam-question) { scroll-margin-top: 0; }
+.study-page .exam-question-pane { min-height: 0; }
+.study-page .exam-prompt { font-size: clamp(16px, 1.75vw, 21px); }
+.study-page .exam-option { font-size: clamp(14px, 1.35vw, 16px); }
+.study-page .exam-answer-sheet .exam-toolbar { top: auto; }

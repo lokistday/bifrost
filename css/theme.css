@@ -1,36 +1,37 @@
-/* One cosmic dark palette for entry, courses, projects, exams and guides. */
+/* Fixed dark palette based on the prism homepage. */
 :root {
   color-scheme: dark;
-  --ink: #eef1fc;
-  --muted: #a4afca;
-  --line: #2a324c;
-  --paper: #080b17;
-  --surface: #101426;
-  --surface-raised: #171c32;
-  --surface-soft: #1a2038;
-  --ink-soft: #c2cce4;
-  --teal: #79dfed;
-  --teal-soft: #112d3c;
-  --blue: #9aaef9;
-  --blue-soft: #1b2543;
-  --amber: #e8c38a;
-  --amber-soft: #332b25;
-  --purple: #b4a4f4;
-  --purple-soft: #2b2143;
-  --navy: #070b18;
-  --navy2: #131a2e;
-  --white: #101426;
+  --ink: #f5f7fc;
+  --muted: #a7b0c1;
+  --line-soft: #252e3e;
+  --line: #34415a;
+  --paper: #06070a;
+  --surface: #101725;
+  --surface-raised: #172133;
+  --surface-soft: #1d2a40;
+  --ink-soft: #c9d2e4;
+  --teal: #b3ccff;
+  --teal-soft: #202f48;
+  --blue: #a8caff;
+  --blue-soft: #1b2e4c;
+  --amber: #f0cca3;
+  --amber-soft: #362d26;
+  --purple: #c6bcfa;
+  --purple-soft: #2c2846;
+  --navy: #090e19;
+  --navy2: #101725;
+  --white: #101725;
   --radius: 18px;
   --shadow: 0 12px 35px rgba(0,0,0,.28);
-  --page-haze: radial-gradient(ellipse 1000px 560px at 8% 0%, #a582e914, transparent 74%), radial-gradient(ellipse 900px 620px at 100% 18%, #5da6df0c, transparent 78%);
-  --atlas-haze: #ad8bf218;
-  --atlas-side: #75bfd610;
+  --page-haze: none;
+  --atlas-haze: #638cf915;
+  --atlas-side: #a8caff15;
   --atlas-lines: .38;
   --atlas-card-shadow: 0 10px 30px #00000018;
-  --map-node-surface: #11172b;
-  --map-core-surface: #1a213b;
-  --map-muted: #a4afca;
-  --map-cyan: #7fdfed;
+  --map-node-surface: #101725;
+  --map-core-surface: #1b2d4a;
+  --map-muted: #a7b0c1;
+  --map-cyan: #b3ccff;
   --map-blue: #99bafb;
   --map-green: #8fd7b8;
   --map-violet: #b6a1f6;
@@ -53,7 +54,7 @@ body {
 }
 
 html[data-theme="dark"] .topbar {
-  background: rgba(8,11,23,.96);
+  background: #06070af5;
   border-color: var(--line);
 }
 
@@ -101,7 +102,7 @@ html[data-theme="dark"] :where(body:not(.workspace-page)) a {
 }
 
 html[data-theme="dark"] .footer a {
-  color: #9bdbff;
+  color: var(--teal);
 }
 
 html[data-theme="dark"] input, html[data-theme="dark"] textarea, html[data-theme="dark"] select, html[data-theme="dark"] option, html[data-theme="dark"] pre, html[data-theme="dark"] code {
@@ -180,7 +181,7 @@ html[data-theme="dark"] .footer {
 }
 
 html[data-theme="dark"] .footer a {
-  color: #9bdbff;
+  color: var(--teal);
 }
 
 html {

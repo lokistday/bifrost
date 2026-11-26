@@ -2,15 +2,15 @@
 const fs=require('node:fs');
 const path=require('node:path');
 const {esc}=require('../js/learning-view.js');
-module.exports=({ROOT,courses,site,fill,write})=>{
+module.exports=({ROOT,courses,site,fill,write,studyShell})=>{
   const template=fs.readFileSync(path.join(ROOT,'templates/study.html'),'utf8');
   const paths=[];
   function emit(route,title,content,scripts='') {
     fs.mkdirSync(path.dirname(path.join(ROOT,route)),{recursive:true});
-    write(route,fill(template,{TITLE:esc(title+' · Bifrost'),DESCRIPTION:esc(title),CANONICAL:esc(site.url+route.replace(/index\.html$/,'')),SITE_URL:esc(site.url),CONTENT_VERSION:esc(site.contentVersion),CONTENT:content,SCRIPTS:scripts}));
+    write(route,fill(template,{...studyShell(), TITLE:esc(title+' · Bifrost'),DESCRIPTION:esc(title),CANONICAL:esc(site.url+route.replace(/index\.html$/,'')),SITE_URL:esc(site.url),CONTENT_VERSION:esc(site.contentVersion),CONTENT:content,SCRIPTS:scripts}));
     paths.push(route.replace(/index\.html$/,''));
   }
-  emit('guides/troubleshooting.html','막혔을 때 확인 순서',`<header class="study-hero"><div class="overline">FIND THE BLOCKER</div><h1>막힌 지점부터 구분하세요.</h1><p>재설치하기 전에 오류 메시지와 실행한 위치를 기록합니다.</p></header>${[
+  emit('guides/troubleshooting.html','막혔을 때 확인 순서',`<header class="study-hero catalog-hero"><h1>막힌 지점부터 구분하세요.</h1><p>재설치하기 전에 오류 메시지와 실행한 위치를 기록합니다.</p></header>${[
     ['명령을 찾을 수 없음','command not found, python3 또는 gcc를 인식할 수 없음','자신의 OS와 셸을 확인하고 버전 명령부터 실행하세요. Windows Python은 py -3 --version, Linux/macOS는 python3 --version입니다. 설치 후 터미널을 다시 열고 필요한 도구만 설치합니다.'],
     ['입력 파일을 찾을 수 없음',"No such file, can’t open file",'현재 폴더의 파일 목록을 봅니다. PowerShell: Get-Location / Get-ChildItem. Linux/macOS: pwd / ls. ZIP 안에서 직접 실행하지 말고 압축을 푼 작업 사본으로 이동합니다.'],
     ['문법·들여쓰기 오류','SyntaxError, IndentationError, 컴파일 오류','오류 줄과 바로 앞 줄의 괄호·따옴표·들여쓰기를 확인합니다. 셸 명령을 Python에 넣거나 C 조각을 터미널에 넣지 않았는지 코드 상자의 실행 문맥을 확인합니다.'],

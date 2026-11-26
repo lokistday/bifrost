@@ -1010,7 +1010,7 @@
   .lesson-heading { gap: 12px; }
 }
 /* Editorial course directory and reader. */
-.learning-page { --course-accent: var(--ink); }
+.learning-page { --course-accent: var(--teal); }
 .learning-page .learning-wrap {
   width: min(var(--editorial-width), calc(100% - var(--editorial-gutter) * 2));
   padding-top: clamp(14px, 1.8vw, 25px);
@@ -1036,10 +1036,10 @@
   position: absolute;
   inset: -55px calc(-1 * var(--editorial-gutter)) 0 46%;
   z-index: -1;
-  background: var(--editorial-art) center 50% / cover no-repeat;
+  background: var(--editorial-art) right 35% / min(540px, 100%) auto no-repeat;
   mask-image: linear-gradient(90deg, transparent, #000 50%), linear-gradient(#000 35%, transparent);
   mask-composite: intersect;
-  opacity: .54;
+  opacity: .37;
   pointer-events: none;
 }
 .learning-page .course-hero h1 {
@@ -1100,7 +1100,7 @@
   text-decoration: none;
 }
 .learning-page .module-picker a[aria-current] {
-  border-inline-start-color: var(--ink);
+  border-inline-start-color: var(--teal);
   font-weight: 720;
 }
 .module-number { font: 600 .85em/1.5 var(--editorial-mono); color: var(--muted); }
@@ -1141,8 +1141,8 @@
 }
 .learning-page .course-sidebar {
   grid-area: sidebar;
-  top: 26px;
-  max-height: calc(100dvh - 52px);
+  top: calc(var(--shell-height) + 19px);
+  max-height: calc(100dvh - var(--shell-height) - 35px);
   padding: 0 clamp(14px, 1.6vw, 26px) 6px 0;
   border-inline-end: 1px solid var(--line);
 }
@@ -1166,7 +1166,7 @@
 }
 .reader-steps a > span { font: 600 .85em/1.5 var(--editorial-mono); color: var(--muted); }
 .learning-page .reader-steps a:is(:hover, [aria-current]) { background: var(--surface-soft); color: var(--ink); text-decoration: none; }
-.learning-page .reader-steps a[aria-current] { border-inline-start-color: var(--ink); font-weight: 750; }
+.learning-page .reader-steps a[aria-current] { border-inline-start-color: var(--teal); font-weight: 750; }
 .learning-page .course-sidebar > .back-link {
   margin: 21px 0 12px;
   padding-top: 16px;
@@ -1206,7 +1206,7 @@
 .learning-page .code-shell code { font: 500 clamp(13px, 1.4vw, 17px)/1.7 var(--editorial-mono); }
 .learning-page .code-toolbar { font-size: 14px; }
 .learning-page .code-toolbar button { padding: 6px 11px; }
-.learning-page .code-shell pre { background: #1a1a1b; }
+.learning-page .code-shell pre { background: var(--navy); }
 .learning-page .code-shell pre code { background: transparent; }
 .first-run .code-shell pre { padding-block: 16px; }
 .learning-page .first-run { margin-top: clamp(23px, 2.55vw, 37px); }
@@ -1223,7 +1223,7 @@
   border-radius: 12px;
   background: var(--surface);
 }
-.run-result > span { display: grid; place-items: center; width: 26px; height: 26px; flex: 0 0 auto; border: 1px solid var(--ink); border-radius: 50%; }
+.run-result > span { color: var(--teal); display: grid; place-items: center; width: 26px; height: 26px; flex: 0 0 auto; border: 1px solid var(--teal); border-radius: 50%; }
 .run-result h3 { margin: 0; font-size: 16px; }
 .run-result p { margin: 3px 0 0; font-size: 15px; }
 .first-run-links { display: flex; flex-wrap: wrap; gap: 9px 20px; padding: 0; list-style: none; }

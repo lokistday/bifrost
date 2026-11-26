@@ -16,9 +16,7 @@ for (const [file, doc] of documents) {
   check(!doc.querySelector('a[href$="/review.html"], script[src*="/review.js"], a[href*="learn/search.html"], [role="search"], script[src*="study-search.js"]'), `${file}: removed review and search stay absent`);
   check(!doc.querySelector('a[href*="guides/bridges.html"]'), `${file}: retired bridge page is not linked`);
   check(!doc.querySelector('a[href*="wargame/"], script[src*="wargame"]'), `${file}: deferred wargame is not exposed`);
-  const expectedTrails = doc.documentElement.dataset.palette === 'charcoal' ? 0 : 1;
-  check([...doc.querySelectorAll('script[src]')].filter(e=>e.getAttribute('src').split('?')[0].endsWith('/pointer-trail.js')).length===expectedTrails, `${file}: pointer trail matches its palette`);
-  check([...doc.querySelectorAll('link[rel="stylesheet"]')].filter(e=>e.getAttribute('href').split('?')[0].endsWith('/pointer-trail.css')).length===expectedTrails, `${file}: trail styling matches its palette`);
+  check(!doc.querySelector('script[src*="pointer-trail.js"],link[href*="pointer-trail.css"]'), `${file}: the shared shell has no pointer trail`);
   for (const element of doc.querySelectorAll('[href],[src]')) {
     const value = element.getAttribute('href') || element.getAttribute('src');
     if (!value || /^(https?:|data:|mailto:)/.test(value)) continue;

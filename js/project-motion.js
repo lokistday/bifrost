@@ -7,8 +7,7 @@
   const fine = window.matchMedia('(hover: hover) and (pointer: fine)');
   let frame = 0, pending = null;
   const reset = panel => {
-    panel.classList.remove('is-tracking');
-    for (const key of ['--art-x','--art-y','--light-x','--light-y']) panel.style.removeProperty(key);
+    for (const key of ['--art-x','--art-y']) panel.style.removeProperty(key);
   };
   function cancel() {
     if (frame) cancelAnimationFrame(frame);
@@ -19,11 +18,8 @@
     frame = 0;
     if (!pending || reduced.matches || !fine.matches || document.hidden) return;
     const {panel,x,y} = pending;
-    panel.classList.add('is-tracking');
     panel.style.setProperty('--art-x', `${((x-.5)*12).toFixed(2)}px`);
     panel.style.setProperty('--art-y', `${((y-.5)*8).toFixed(2)}px`);
-    panel.style.setProperty('--light-x', `${(x*100).toFixed(2)}%`);
-    panel.style.setProperty('--light-y', `${(y*100).toFixed(2)}%`);
   }
   for (const panel of panels) {
     panel.addEventListener('pointermove', event => {

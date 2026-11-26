@@ -23,16 +23,17 @@ const editorialVersion = `editorial-${textFingerprint('css/charcoal.css', 'asset
 const learningStyleVersion = `course-style-${textFingerprint('css/learning.css')}`;
 function header(prefix, current) {
   const links = [
-    ['fields', 'fields/#mindmap', '분야 둘러보기'],
+    ['fields', 'fields/#mindmap', '분야'],
     ['paths', 'learn/', '학습 경로'],
     ['projects', 'projects/', '프로젝트'],
     ['exams', 'exams/', '모의고사']
   ];
   return `<header class="editorial-header"><div class="editorial-frame editorial-header-inner">
-    <a class="editorial-brand" href="${prefix}" aria-label="BIFROST 홈"><img src="${prefix}assets/bifrost-mark.svg?v=${editorialVersion}" width="36" height="36" alt=""><span>BIFROST</span></a>
-    <nav class="editorial-nav" aria-label="주 메뉴">${links.map(([id, href, label]) => `<a href="${prefix}${href}"${id === current ? ' aria-current="page"' : ''}>${label}</a>`).join('')}</nav>
+    <a class="editorial-brand" href="${prefix}" aria-label="BIFROST 홈"><img src="${prefix}assets/bifrost-mark.svg?v=${editorialVersion}" width="28" height="28" alt=""><span>BIFROST</span></a>
+    <nav class="editorial-nav" aria-label="주 메뉴">${links.map(([id, href, label]) => `<a href="${prefix}${href}"${id === current ? ' aria-current="location"' : ''}>${label}</a>`).join('')}</nav>
   </div></header>`;
 }
+const studyShell = current => ({ HEADER: header('../', current), EDITORIAL_VERSION: editorialVersion });
 function fill(source, values) {
   return source.replace(/\{\{([A-Z_]+)\}\}/g, (_, key) => {
     if (!(key in values)) throw new Error(`Missing template field: ${key}`);
@@ -51,7 +52,7 @@ function page(course, lesson, legacy = false, learningPath = null) {
     TITLE: esc(title), DESCRIPTION: esc(lesson ? lesson.goal : course.subtitle),
     CANONICAL: esc(site.url + route), SITE_URL: esc(site.url), CONTENT_VERSION: contentVersion,
     COURSE: course.id, NUMBER: course.number, VIEW: lesson || legacy ? 'lesson' : 'course',
-    LESSON_ID: lesson?.id || '', HEADER: header('../../'), PATH_ID: learningPath?.id || '',
+    LESSON_ID: lesson?.id || '', HEADER: header('../../', learningPath ? 'paths' : 'fields'), PATH_ID: learningPath?.id || '',
     EDITORIAL_VERSION: editorialVersion, LEARNING_STYLE_VERSION: learningStyleVersion,
     PATH_SCRIPTS: learningPath ? `<script src="../../js/learning-paths.js?v=${contentVersion}" defer></script>\n<script src="../../js/path-progress.js?v=${contentVersion}" defer></script>` : '',
     RENDERED: legacy ? 'legacy' : lesson?.id || 'course', CONTENT: note + content,
@@ -63,9 +64,9 @@ function page(course, lesson, legacy = false, learningPath = null) {
   return html.replace(`js/courses/${course.id}.js?v=${contentVersion}`, `js/courses/${course.id}.js?v=${courseVersion}`);
 }
 const routes = ['', 'fields/', 'guides/linux.html'];
-routes.push(...require('./render_learning_tools.cjs')({ ROOT, courses, site, fill, write }));
-routes.push(...require('./render_study.cjs')({ ROOT, courses, site, fill, write }));
-routes.push(...require('./render_exams.cjs')({ ROOT, courses, site, fill, write }));
+routes.push(...require('./render_learning_tools.cjs')({ ROOT, courses, site, fill, write, studyShell }));
+routes.push(...require('./render_study.cjs')({ ROOT, courses, site, fill, write, studyShell }));
+routes.push(...require('./render_exams.cjs')({ ROOT, courses, site, fill, write, studyShell }));
 const learningPaths = JSON.parse(read('content/generated-paths.json'));
 const lookup = Object.fromEntries(Object.values(courses).flatMap(c=>all(c).map(l=>[l.id,{course:c,lesson:l}])));
 for (const route of learningPaths) {
@@ -99,7 +100,8 @@ const prismVersion = `prism-${fingerprint(
 const homeValues = { ...home, SITE_URL: esc(site.url), COURSE_COUNT: Object.keys(courses).length,
   LESSON_COUNT: count, CONTENT_VERSION: contentVersion, HOME_VERSION: homeVersion,
   EDITORIAL_VERSION: editorialVersion, PRISM_VERSION: prismVersion };
-write('index.html', fill(read('templates/index.html'), homeValues));
+write('index.html', fill(read('templates/index.html'), { ...homeValues, HEADER: header('./') }));
+write('guides/linux.html', fill(read('templates/linux.html'), { ...studyShell(), CONTENT_VERSION: contentVersion }));
 fs.mkdirSync(path.join(ROOT,'fields'),{recursive:true});
 write('fields/index.html', fill(read('templates/fields.html'), { ...homeValues, HEADER: header('../', 'fields') }));
 write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +

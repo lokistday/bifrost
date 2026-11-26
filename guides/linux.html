@@ -5,18 +5,28 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080b17">
+<meta name="theme-color" content="#06070a">
 <title>Windows에서 Linux 시작하기 | Bifrost</title>
-<script src="../js/theme.js?v=cosmic-dark-20261117"></script>
-<script src="../js/pointer-trail.js?v=20261105" defer></script>
-<link rel="stylesheet" href="../css/pointer-trail.css?v=20261105">
-<link rel="stylesheet" href="../css/theme.css?v=cosmic-dark-20261117">
-<link rel="stylesheet" href="../css/linux-guide.css?v=cosmic-dark-20261117">
+<script src="../js/theme.js?v=learning-bb06cf12b226"></script>
+<link rel="stylesheet" href="../css/theme.css?v=learning-bb06cf12b226">
+<link rel="stylesheet" href="../css/linux-guide.css?v=learning-bb06cf12b226">
+<link rel="icon" href="../assets/bifrost-mark.svg?v=editorial-2ed6a12f469e" type="image/svg+xml">
+<link rel="stylesheet" href="../css/charcoal.css?v=editorial-2ed6a12f469e">
 <script src="../js/linux-guide-page.js" defer></script>
 </head>
-<body>
-<header class="hero"><div class="wrap"><div class="brand">Bifrost</div><div class="eyebrow">WINDOWS → LINUX · BEGINNER GUIDE</div><h1>Windows에서 Linux 시작하기</h1><p>Windows를 지우거나 컴퓨터를 새로 설치할 필요 없이 Linux 명령어와 보안 학습 도구를 익힐 수 있습니다. 처음 시작한다면 대부분의 경우 WSL 2와 Ubuntu 조합이 가장 간단합니다.</p><div class="hero-actions"><a class="btn" href="../fields/#mindmap" data-return-guide>← 학습 지도로 돌아가기</a><a class="btn secondary" href="#wsl-install">WSL 설치 단계 보기 ↓</a></div></div></header>
-<main class="wrap">
+<body class="guide-page">
+<a class="workspace-skip" href="#guideContent">가이드 본문으로 건너뛰기</a>
+<header class="editorial-header"><div class="editorial-frame editorial-header-inner">
+    <a class="editorial-brand" href="../" aria-label="BIFROST 홈"><img src="../assets/bifrost-mark.svg?v=editorial-2ed6a12f469e" width="28" height="28" alt=""><span>BIFROST</span></a>
+    <nav class="editorial-nav" aria-label="주 메뉴"><a href="../fields/#mindmap">분야</a><a href="../learn/">학습 경로</a><a href="../projects/">프로젝트</a><a href="../exams/">모의고사</a></nav>
+  </div></header>
+<main class="wrap" id="guideContent" tabindex="-1">
+<header class="guide-hero">
+  <p class="guide-context">Windows 실습 환경</p>
+  <h1>Windows에서 Linux 시작하기</h1>
+  <p class="guide-lead">Windows를 지우거나 컴퓨터를 새로 설치할 필요 없이 Linux 명령어와 보안 학습 도구를 익힐 수 있습니다. 처음 시작한다면 대부분의 경우 WSL 2와 Ubuntu 조합이 가장 간단합니다.</p>
+  <div class="guide-actions"><a class="editorial-button primary" href="#wsl-install">WSL 설치 단계 ↓</a><a class="editorial-button" href="../fields/#mindmap" data-return-guide>분야 둘러보기</a></div>
+</header>
 <section class="section"><div class="section-head"><div class="kicker">01 / CHOOSE YOUR ENVIRONMENT</div><h2>어떤 방법으로 시작하면 좋을까?</h2><p class="muted">처음에는 복잡한 구성을 만들기보다, 터미널을 열고 기본 명령어를 실행할 수 있는 환경부터 준비하세요.</p></div>
 <div class="grid"><article class="card"><span class="tag">초보자 추천</span><h3>WSL 2 + Ubuntu</h3><p>Windows 안에서 Linux 환경을 실행합니다. Windows와 Linux 도구를 함께 사용하기 편하고, 기초 터미널·Python·Git·네트워크 학습에 적합합니다.</p><p><b>추천 상황:</b> Windows를 주 운영체제로 유지하면서 Linux 명령어부터 배우고 싶을 때.</p></article><article class="card"><span class="tag" style="background:var(--blue-soft);color:var(--blue)">별도 환경 필요</span><h3>가상 머신(Virtual Machine)</h3><p>VirtualBox 같은 프로그램 안에 Ubuntu 전체 운영체제를 설치합니다. 데스크톱 환경이나 가상 네트워크 구성이 필요한 실습에 유용하지만 메모리와 디스크 공간이 더 필요합니다.</p><p><b>추천 상황:</b> 별도 Linux 데스크톱이나 격리된 실습용 VM이 필요할 때.</p></article></div>
 <div class="callout"><b>추천 경로:</b> WSL 2 설치 → Ubuntu 터미널 익숙해지기 → Python/Git → 필요해질 때 가상 머신 추가. 처음부터 듀얼 부팅을 구성할 필요는 없습니다.</div></section>

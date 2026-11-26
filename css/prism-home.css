@@ -1,36 +1,7 @@
-:root.prism-document {
-  color-scheme: dark;
-  --night: #06070a;
-  --white: #f5f7fc;
-  --muted: #a7b0c1;
-  --cold: #b3ccff;
-  --button-ink: #0d1422;
-  --method-surface: #101725;
-  --line: #292f3b;
-  --gutter: clamp(20px, 6vw, 86px);
-  --mono: "JetBrains Mono", "Cascadia Code", ui-monospace, Consolas, monospace;
-  font-family: "Pretendard Variable", Pretendard, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", system-ui, sans-serif;
-  background: var(--night);
-  color: var(--white);
-  scroll-padding-top: 74px;
-}
-*, *::before, *::after { box-sizing: border-box; }
-body.prism-home { background: var(--night); margin: 0; word-break: keep-all; overflow-wrap: anywhere; line-height: 1.55; }
-a { color: inherit; text-decoration: none; }
-h1, h2, h3, p, figure { margin: 0; }
-:focus-visible { outline: 3px solid #638cf9; outline-offset: 5px; }
-.prism-frame { width: min(1160px, calc(100% - var(--gutter) * 2)); margin-inline: auto; }
-.prism-header { position: sticky; z-index: 4; top: 0; background: #06070af5; border-bottom: 1px solid #ffffff15; }
-.prism-header-inner { min-height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
-.prism-brand { display: inline-flex; align-items: center; gap: 7px; font: 700 17px/1 var(--mono); letter-spacing: .075em; white-space: nowrap; }
-.prism-brand img { display: block; }
-.prism-header-inner nav { display: flex; align-items: center; gap: clamp(13px, 3.2vw, 42px); }
-.prism-header-inner nav a { display: flex; align-items: center; min-height: 42px; padding-inline: 3px; font-size: 14px; font-weight: 650; color: var(--muted); white-space: nowrap; }
-.prism-header-inner nav a:hover, .prism-text-action:hover { color: var(--white); text-decoration: underline; text-underline-offset: 5px; }
-
-.prism-hero { min-height: calc(100svh - 66px); display: flex; flex-direction: column; position: relative; isolation: isolate; overflow: clip; border-bottom: 1px solid #ffffff20; }
+/* Landing page prism motion and sections. Site chrome comes from charcoal.css. */
+.prism-hero { min-height: calc(100svh - var(--shell-height)); display: flex; flex-direction: column; position: relative; isolation: isolate; overflow: clip; border-bottom: 1px solid #ffffff20; }
 .prism-intro { padding-top: clamp(48px, 5vw, 77px); text-align: center; z-index: 2; }
-.prism-document .prism-topic { color: var(--cold); font-size: clamp(13px, 1.15vw, 15px); font-weight: 750; }
+.prism-document .prism-topic { color: var(--teal); font-size: clamp(13px, 1.15vw, 15px); font-weight: 750; }
 .prism-hero h1 {
   margin: 13px 0 15px;
   font-size: clamp(45px, 6.15vw, 88px);
@@ -41,17 +12,17 @@ h1, h2, h3, p, figure { margin: 0; }
 }
 .prism-lead { color: var(--muted); font-size: clamp(16px, 1.7vw, 21px); line-height: 1.6; }
 .prism-actions { margin-top: 25px; display: flex; justify-content: center; flex-wrap: wrap; align-items: center; gap: 10px 21px; }
-.prism-button { min-height: 47px; padding: 10px 18px; border: 1px solid transparent; border-radius: 11px; display: inline-flex; justify-content: center; align-items: center; gap: 10px; font-size: 15px; font-weight: 750; transition: background-color .18s; }
-.prism-button-primary { color: var(--button-ink); background: var(--white); }
+.prism-home .prism-button { min-height: 47px; padding: 10px 18px; border: 1px solid transparent; border-radius: 11px; display: inline-flex; justify-content: center; align-items: center; gap: 10px; font-size: 15px; font-weight: 750; transition: background-color .18s; }
+.prism-button-primary { color: var(--paper); background: var(--ink); }
 .prism-button-primary:hover { background: #dce7ff; }
-.prism-text-action { min-height: 44px; display: inline-flex; align-items: center; gap: 9px; color: var(--cold); font-size: 15px; font-weight: 700; }
+.prism-text-action { min-height: 44px; display: inline-flex; align-items: center; gap: 9px; color: var(--teal); font-size: 15px; font-weight: 700; }
 .prism-stage { margin: 42px auto 0; position: relative; width: min(100%, 1000px); height: clamp(245px, 32vw, 535px); flex: 0 0 auto; display: grid; place-items: center; overflow: visible; }
 .prism-halo { position: absolute; inset: 12% 2% -17%; background: radial-gradient(ellipse at center, #27468253, #0f1c391f 44%, transparent 68%); }
 .prism-art { position: absolute; inset: 0; display: grid; place-items: center; }
 .prism-art img { display: block; width: min(87%, 820px); height: 122%; min-height: 0; object-fit: contain; position: absolute; top: -11%; filter: drop-shadow(0 22px 26px #5277ed26); }
 
 .prism-method, .prism-fields { padding-block: clamp(62px, 9vw, 132px); }
-.prism-method { background: var(--method-surface); color: var(--white); border-bottom: 1px solid #ffffff18; }
+.prism-method { background: var(--surface); color: var(--ink); border-bottom: 1px solid #ffffff18; }
 .prism-section-heading { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .72fr); gap: 14px 46px; align-items: end; margin-bottom: clamp(30px, 5vw, 62px); }
 .prism-section-heading h2 { font-size: clamp(34px, 4.75vw, 65px); line-height: 1.12; letter-spacing: -.075em; font-weight: 820; }
 .prism-section-heading > p { font-size: clamp(16px, 1.6vw, 20px); line-height: 1.75; padding-bottom: 2px; }
@@ -60,21 +31,21 @@ h1, h2, h3, p, figure { margin: 0; }
 .prism-steps { list-style: none; margin: 0; padding: 0; }
 .prism-steps li { display: flex; align-items: baseline; gap: clamp(14px, 3vw, 31px); padding-block: 19px; border-top: 1px solid #334057; }
 .prism-steps li:last-child { border-bottom: 1px solid #334057; }
-.prism-step-index { font: 650 14px var(--mono); color: #acc7ff; }
+.prism-step-index { font: 650 14px var(--editorial-mono); color: #acc7ff; }
 .prism-steps h3 { font-size: clamp(20px, 2.05vw, 26px); letter-spacing: -.055em; line-height: 1.3; }
 .prism-steps p { font-size: 15px; margin-top: 4px; }
-.prism-terminal { padding: clamp(17px, 3vw, 29px); border-radius: 17px; border: 1px solid #334057; background: #090e19; color: var(--white); }
+.prism-terminal { padding: clamp(17px, 3vw, 29px); border-radius: 17px; border: 1px solid #334057; background: #090e19; color: var(--ink); }
 .prism-terminal-header { display: flex; align-items: center; gap: 10px; }
 .prism-terminal-header h3 { font-size: 14px; font-weight: 650; }
-.prism-terminal-symbol { color: var(--cold); font: 700 17px var(--mono); }
-.prism-document .prism-terminal pre { overflow: auto; margin: 16px 0; padding: 14px 12px; border-radius: 8px; background: #070b14; font: 600 clamp(13px, 1.45vw, 17px)/1.6 var(--mono); }
+.prism-terminal-symbol { color: var(--teal); font: 700 17px var(--editorial-mono); }
+.prism-document .prism-terminal pre { overflow: auto; margin: 16px 0; padding: 14px 12px; border-radius: 8px; background: #070b14; font: 600 clamp(13px, 1.45vw, 17px)/1.6 var(--editorial-mono); }
 .prism-document .prism-terminal code { background: transparent; }
 .prism-terminal pre code { font: inherit; }
 .prism-terminal pre span { color: #91b6ff; }
 .prism-terminal details { color: #bdc9dc; font-size: 14px; }
 .prism-terminal summary { cursor: pointer; width: fit-content; padding: 7px 0; }
 .prism-terminal details p { margin-top: 6px; line-height: 1.65; }
-.prism-terminal a { color: var(--cold); display: inline-flex; gap: 7px; margin-top: 14px; padding-block: 5px; font-size: 14px; font-weight: 730; }
+.prism-terminal a { color: var(--teal); display: inline-flex; gap: 7px; margin-top: 14px; padding-block: 5px; font-size: 14px; font-weight: 730; }
 .prism-terminal a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
 .prism-fields .prism-section-heading > p { color: var(--muted); }
@@ -83,8 +54,8 @@ h1, h2, h3, p, figure { margin: 0; }
 .prism-field-links a:hover { background: #111827; }
 .prism-field-links strong { display: block; font-size: clamp(20px, 2.6vw, 30px); letter-spacing: -.045em; }
 .prism-field-links small { display: block; margin-top: 3px; color: var(--muted); font-size: 15px; }
-.prism-field-links a > span:last-child { font-size: 22px; color: var(--cold); }
-.prism-button-outline { color: var(--white); border-color: #3b4864; }
+.prism-field-links a > span:last-child { font-size: 22px; color: var(--teal); }
+.prism-button-outline { color: var(--ink); border-color: #3b4864; }
 .prism-button-outline:hover { background: #111827; }
 .prism-footer { display: flex; gap: 20px; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); padding-block: 24px; color: var(--muted); }
 .prism-footer-links > a { font-size: 13px; }
@@ -107,11 +78,6 @@ h1, h2, h3, p, figure { margin: 0; }
 }
 
 @media (max-width: 690px) {
-  .prism-header-inner { min-height: 59px; }
-  .prism-header-inner nav { gap: 9px; }
-  .prism-header-inner nav a { font-size: 12px; }
-  .prism-brand { font-size: 14px; gap: 4px; }
-  .prism-brand img { width: 22px; height: 22px; }
   .prism-hero { min-height: auto; }
   .prism-intro { padding-top: 47px; }
   .prism-hero h1 { font-size: clamp(41px, 10.8vw, 64px); }
@@ -121,13 +87,9 @@ h1, h2, h3, p, figure { margin: 0; }
   .prism-section-heading, .prism-method-layout { grid-template-columns: minmax(0, 1fr); }
   .prism-desktop-break { display: none; }
 }
-@media (max-width: 365px) {
-  .prism-header-inner nav { gap: 4px; }
-  .prism-header-inner nav a { font-size: 11px; }
-}
 
 .prism-footer-links { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 20px; }
-.prism-footer strong { font: 700 14px var(--mono); white-space: nowrap; }
+.prism-footer strong { font: 700 14px var(--editorial-mono); white-space: nowrap; }
 .prism-footer .entry-resources nav { right: 0; left: auto; }
 @media (max-width: 540px) {
   .prism-footer { gap: 9px; flex-wrap: wrap; }

@@ -15,22 +15,23 @@ const drawings = {
 const icon = (name, cls = '') => `<svg class="ui-icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${drawings[name]}</svg>`;
 module.exports = function home({ courses }) {
   const data = [
-    ['foundation','terminal','공통 기초','명령어를 익히고 첫 Python 예제를 실행해요.'],
-    ['web','browser','웹 해킹','웹 요청과 응답 살펴보기'],
-    ['pwn','chip','Pwn / 시스템','메모리와 프로그램 구조 읽기'],
-    ['forensic','file','디지털 포렌식','파일에서 사건의 단서 찾기'],
-    ['network','network','네트워크 보안','패킷에서 통신 흐름 읽기'],
-    ['cloud','cloud','클라우드 보안','클라우드 권한과 설정 점검하기'],
-    ['crypto','lock','암호학','암호화와 서명의 원리 이해하기'],
-    ['rev','code','리버스 엔지니어링','프로그램의 동작 원리 추적하기'],
-    ['misc','grid','문제 해결 · 자동화','반복 작업을 코드로 줄이기']
+    ['foundation','terminal','명령어를 익히고 첫 Python 예제를 실행해요.'],
+    ['web','browser','웹 요청과 응답 살펴보기'],
+    ['pwn','chip','메모리와 프로그램 구조 읽기'],
+    ['forensic','file','파일에서 사건의 단서 찾기'],
+    ['network','network','패킷에서 통신 흐름 읽기'],
+    ['cloud','cloud','클라우드 권한과 설정 점검하기'],
+    ['crypto','lock','암호화와 서명의 원리 이해하기'],
+    ['rev','code','프로그램의 동작 원리 추적하기'],
+    ['misc','grid','반복 작업을 코드로 줄이기']
   ];
-  const nodes = data.map(([id, symbol, title, description]) => {
+  const nodes = data.map(([id, symbol, description]) => {
+    const course = courses[id];
     const featured = id === 'foundation';
     return `<a class="subject-card${featured ? ' subject-featured' : ''}" data-map-track="${id}" href="../tracks/${id}/">
       ${icon(symbol)}
-      <div class="subject-copy"><h2>${esc(title)}</h2><p>${esc(description)}</p></div>
-      <span class="subject-count">${all(courses[id]).length}개 차시</span>${featured ? '<span class="subject-action" aria-hidden="true">공통 기초 열기</span>' : ''}
+      <div class="subject-copy"><h2>${esc(course.label)}</h2><p>${esc(description)}</p></div>
+      <span class="subject-count">${all(course).length}개 차시</span>${featured ? '<span class="subject-action" aria-hidden="true">공통 기초 열기</span>' : ''}
       ${icon('arrow', 'subject-arrow')}
     </a>`;
   }).join('\n');

@@ -109,3 +109,60 @@ button:disabled { cursor:wait; opacity:.65; }
 @media(max-width:600px) { .flag-panel { padding:18px; } .flag-panel form { display:block; } .flag-panel button { margin-top:14px; width:100%; } }
 
 .support-panel { margin:16px 0; padding:14px 18px; border:1px solid var(--line); border-radius:8px; }
+/* Reading and catalog surfaces use the same scale and panel spacing. */
+.study-page .study-wrap {
+  width: min(var(--editorial-width), calc(100% - var(--editorial-gutter) * 2));
+  max-width: none;
+  padding: clamp(28px, 5vw, 58px) 0 74px;
+}
+.study-page { --course-accent: var(--teal); }
+.study-page .study-hero {
+  max-width: none;
+  padding: clamp(18px, 3.3vw, 39px) 0 clamp(25px, 4.7vw, 53px);
+  border-bottom: 1px solid var(--line-soft);
+  margin-bottom: clamp(22px, 3.5vw, 37px);
+}
+.study-page .catalog-hero { position: relative; isolation: isolate; }
+.study-page .catalog-hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -24px 0 0 49%;
+  background: var(--editorial-art) right 32% / min(425px, 100%) auto no-repeat;
+  mask-image: linear-gradient(90deg, transparent 12%, #000 55%), linear-gradient(#000 45%, transparent);
+  mask-composite: intersect;
+  opacity: .32;
+  pointer-events: none;
+}
+.study-page .study-hero h1 {
+  max-width: 19ch;
+  margin: 0 0 11px;
+  font-size: clamp(36px, 5.5vw, 73px);
+  line-height: 1.14;
+  letter-spacing: -.075em;
+}
+.study-page .study-hero p { max-width: 61ch; margin: 0; font-size: clamp(16px, 1.48vw, 20px); color: var(--muted); }
+.study-page .study-hero .overline { margin-bottom: 9px; }
+.study-page .overline { font-family: var(--editorial-mono); }
+.study-page .study-section { scroll-margin-top: 0; }
+.study-page .study-section h2 { font-size: clamp(26px, 3.3vw, 41px); line-height: 1.22; letter-spacing: -.055em; }
+.study-page .study-section :is(p, li) { font-size: clamp(15px, 1.35vw, 18px); }
+.study-page .study-section > p { max-width: 74ch; }
+.study-page :is(.lesson-meta, .study-jumps) { gap: 9px; }
+.study-page .study-jumps a:hover { background: var(--surface-soft); text-decoration: none; }
+.study-page .path-card { display: flex; flex-direction: column; align-items: flex-start; padding: clamp(20px, 2.7vw, 32px); }
+.study-page .path-card h3 { font-size: clamp(20px, 2.3vw, 28px); line-height: 1.25; letter-spacing: -.045em; }
+.study-page .path-card p { margin-top: 0; color: var(--muted); }
+.study-page .path-card .learning-button { margin-top: auto; }
+.study-page .path-context-banner { padding: clamp(18px, 3.15vw, 30px); background: var(--surface); }
+.study-page .path-step-number { font-family: var(--editorial-mono); }
+.study-page .path-stage > summary:hover { color: var(--teal); }
+.study-page .project-flow li { background: var(--surface); }
+.study-page .project-flow b { font: 650 13px/1.5 var(--editorial-mono); }
+.study-page .bridge-card { padding: clamp(19px, 3vw, 32px); }
+.study-page .bridge-card h2 { margin-bottom: 11px; font-size: clamp(21px, 2.3vw, 29px); letter-spacing: -.045em; }
+.study-page .code-shell pre:has(code) { background: var(--navy); }
+@media (max-width: 620px) {
+  .study-page .catalog-hero::before { inset-inline-start: 33%; opacity: .24; }
+  .study-page .study-hero { padding-top: 16px; }
+}

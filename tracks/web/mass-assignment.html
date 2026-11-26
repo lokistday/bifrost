@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="ko" data-theme="dark" data-palette="charcoal">
+<html lang="ko" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'self'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#181819">
+<meta name="theme-color" content="#06070a">
 <meta name="description" content="클라이언트가 수정할 필드와 서버가 관리하는 필드를 나누고 임의 필드 덮어쓰기를 거부합니다.">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Bifrost">
@@ -17,27 +17,27 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://lokistday.github.io/bifrost/tracks/web/mass-assignment.html">
 <title>요청 계약과 Mass Assignment — 웹 보안 · Bifrost</title>
-<script src="../../js/theme.js?v=learning-2ac3a8931abc"></script>
-<link rel="icon" href="../../assets/bifrost-mark.svg?v=editorial-ec4e54ed3c06" type="image/svg+xml">
-<link rel="stylesheet" href="../../css/main.css?v=learning-2ac3a8931abc">
-<link rel="stylesheet" href="../../css/theme.css?v=learning-2ac3a8931abc">
-<link rel="stylesheet" href="../../css/learning.css?v=course-style-ca0fb02e8d8c">
-<link rel="stylesheet" href="../../css/visuals.css?v=learning-2ac3a8931abc">
-<link rel="stylesheet" href="../../css/study.css?v=learning-2ac3a8931abc">
-<link rel="stylesheet" href="../../css/charcoal.css?v=editorial-ec4e54ed3c06">
-<script src="../../js/catalog.js?v=learning-2ac3a8931abc" defer></script>
-<script src="../../js/courses/web.js?v=learning-2ac3a8931abc" defer></script>
-<script src="../../js/progress.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/theme.js?v=learning-bb06cf12b226"></script>
+<link rel="icon" href="../../assets/bifrost-mark.svg?v=editorial-2ed6a12f469e" type="image/svg+xml">
+<link rel="stylesheet" href="../../css/main.css?v=learning-bb06cf12b226">
+<link rel="stylesheet" href="../../css/theme.css?v=learning-bb06cf12b226">
+<link rel="stylesheet" href="../../css/learning.css?v=course-style-13645bce29d6">
+<link rel="stylesheet" href="../../css/visuals.css?v=learning-bb06cf12b226">
+<link rel="stylesheet" href="../../css/study.css?v=learning-bb06cf12b226">
+<link rel="stylesheet" href="../../css/charcoal.css?v=editorial-2ed6a12f469e">
+<script src="../../js/catalog.js?v=learning-bb06cf12b226" defer></script>
+<script src="../../js/courses/web.js?v=learning-bb06cf12b226" defer></script>
+<script src="../../js/progress.js?v=learning-bb06cf12b226" defer></script>
 
 
-<script src="../../js/learning-view.js?v=learning-2ac3a8931abc" defer></script>
-<script src="../../js/learning.js?v=learning-2ac3a8931abc" defer></script>
+<script src="../../js/learning-view.js?v=learning-bb06cf12b226" defer></script>
+<script src="../../js/learning.js?v=learning-bb06cf12b226" defer></script>
 </head>
 <body class="learning-page" data-course="web" data-course-number="08" data-view="lesson" data-lesson-id="web.mass-assignment" data-path="">
 <a class="skip-link" href="#learningContent">학습 본문으로 건너뛰기</a>
 <header class="editorial-header"><div class="editorial-frame editorial-header-inner">
-    <a class="editorial-brand" href="../../" aria-label="BIFROST 홈"><img src="../../assets/bifrost-mark.svg?v=editorial-ec4e54ed3c06" width="36" height="36" alt=""><span>BIFROST</span></a>
-    <nav class="editorial-nav" aria-label="주 메뉴"><a href="../../fields/#mindmap">분야 둘러보기</a><a href="../../learn/">학습 경로</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
+    <a class="editorial-brand" href="../../" aria-label="BIFROST 홈"><img src="../../assets/bifrost-mark.svg?v=editorial-2ed6a12f469e" width="28" height="28" alt=""><span>BIFROST</span></a>
+    <nav class="editorial-nav" aria-label="주 메뉴"><a href="../../fields/#mindmap" aria-current="location">분야</a><a href="../../learn/">학습 경로</a><a href="../../projects/">프로젝트</a><a href="../../exams/">모의고사</a></nav>
   </div></header>
 <main class="learning-wrap" id="learningContent" tabindex="-1" data-rendered="web.mass-assignment">
 <noscript><p class="environment-note">본문·도식·해설은 그대로 읽을 수 있습니다. 진도 표시와 복사·답 확인 버튼에는 JavaScript가 필요합니다. 문제의 정답과 이유는 펼쳐서 읽으세요.</p></noscript><nav class="breadcrumb" aria-label="현재 위치"><a href="../../fields/#mindmap">분야 둘러보기</a><span aria-hidden="true">/</span><a href="./">웹 보안</a><span aria-hidden="true">/</span><span aria-current="page">13 차시</span></nav>

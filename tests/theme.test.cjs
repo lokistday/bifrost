@@ -14,7 +14,9 @@ for (const name of pages) {
   const document = parseHTML(read(name)).document;
   assert.equal(document.documentElement.dataset.theme, 'dark', `${name}: dark before JavaScript runs`);
   assert.equal(document.querySelector('#themeToggle,.theme-toggle,.project-theme-toggle'), null, `${name}: no theme control`);
-  const expectedColor = document.querySelector('.editorial-header') ? '#181819' : '#080b17';
+  assert.equal(document.querySelectorAll('.editorial-header .editorial-nav').length, 1, `${name}: one shared site menu`);
+  assert.ok(document.querySelector('link[href*="/charcoal.css"]'), `${name}: shared palette and styling are linked`);
+  const expectedColor = '#06070a';
   assert.equal(document.querySelector('meta[name="theme-color"]').getAttribute('content'), expectedColor, `${name}: browser chrome matches`);
   assert.match(document.querySelector('script[src*="/theme.js"]').getAttribute('src'), /\?v=/, `${name}: cached theme controller is replaced`);
 }
@@ -34,6 +36,7 @@ for (const embedded of [false, true]) {
   handlers.message?.({ data: { type: 'bifrost-theme-change', theme: 'light' } });
   assert.equal(document.documentElement.dataset.theme, 'dark');
   assert.equal(document.documentElement.style.colorScheme, 'dark');
+  assert.equal(document.querySelector('meta[name="theme-color"]').content, '#06070a');
 }
 const CSSOM = require(require.resolve('cssom', { paths: [path.dirname(require.resolve('linkedom'))] }));
 const sheet = CSSOM.parse(read('css/theme.css'));

@@ -4,7 +4,7 @@ const path = require('node:path');
 const fingerprint = require('./fingerprint.cjs');
 const { esc, all, slug } = require('../js/learning-view.js');
 
-module.exports = function renderStudy({ ROOT, courses, site, fill, write }) {
+module.exports = function renderStudy({ ROOT, courses, site, fill, write, studyShell }) {
   const projectVersion = 'project-' + fingerprint(fs.readFileSync(path.join(ROOT,'css/projects.css'), 'utf8'), fs.readFileSync(path.join(ROOT,'js/project-motion.js'), 'utf8'));
   const template = fs.readFileSync(path.join(ROOT, 'templates/study.html'), 'utf8');
   const routes = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/generated-paths.json'), 'utf8'));
@@ -18,24 +18,22 @@ module.exports = function renderStudy({ ROOT, courses, site, fill, write }) {
   function emit(route, title, description, content, scripts='', activePath=null) {
     fs.mkdirSync(path.dirname(path.join(ROOT, route)), {recursive:true});
     if (activePath) scripts += `\n<script src="../js/catalog.js?v=${esc(site.contentVersion)}" defer></script><script src="../js/learning-paths.js?v=${esc(site.contentVersion)}" defer></script><script src="../js/progress.js?v=${esc(site.contentVersion)}" defer></script><script src="../js/path-progress.js?v=${esc(site.contentVersion)}" defer></script>`;
-    let html = fill(template, {TITLE:esc(`${title} · Bifrost`), DESCRIPTION:esc(description),
+    const current = route.startsWith('projects/') ? 'projects' : 'paths';
+    let html = fill(template, { ...studyShell(current), TITLE:esc(`${title} · Bifrost`), DESCRIPTION:esc(description),
       CANONICAL:esc(site.url+route.replace(/index\.html$/,'')), SITE_URL:esc(site.url),
       CONTENT_VERSION:esc(site.contentVersion), CONTENT:content, SCRIPTS:scripts});
     if (activePath) html = html.replace(/(href|src)="\.\.\//g, '$1="../../')
       .replace('<body class="learning-page study-page">', `<body class="learning-page study-page" data-path="${activePath.id}">`);
     if (route === 'projects/index.html') {
-      const icons = { home:'<path d="m3 10 9-7 9 7v11h-6v-7H9v7H3z"/>', paths:'<circle cx="6" cy="5" r="3"/><circle cx="18" cy="19" r="3"/><path d="M6 8v7a4 4 0 0 0 4 4h5M9 5h9"/>', projects:'<path d="m12 2 9 5v10l-9 5-9-5V7zM3 7l9 5 9-5M12 12v10M7.5 4.5l9 5"/>', exams:'<rect x="5" y="4" width="14" height="18" rx="2"/><path d="M9 4V2h6v2M8 12l3 3 5-6"/>' };
-      const entries = [['home','../','홈'],['paths','../learn/','학습 경로'],['projects','./','프로젝트'],['exams','../exams/','모의고사']];
-      const rail = `<aside class="project-rail" aria-label="빠른 이동"><a class="project-rail-brand" href="../" aria-label="Bifrost 홈"><img src="../assets/logo.svg?v=${esc(site.contentVersion)}" width="34" height="34" alt=""><span>BIFROST</span></a><nav aria-label="주 메뉴">${entries.map(([id,url,label])=>`<a href="${url}"${id==='projects'?' aria-current="page"':''}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true">${icons[id]}</svg><span>${label}</span></a>`).join('')}</nav></aside>`;
-      html = html.replace('class="learning-page study-page"','class="learning-page study-page project-catalog-page"').replace(/<header class="topbar">[\s\S]*?<\/header>/,rail);
+      html = html.replace('class="learning-page study-page"', 'class="learning-page study-page project-catalog-page"');
     }
     write(route,html);
     pages.push(route.replace(/index\.html$/,''));
   }
   emit('learn/index.html','학습 경로', '목표에 맞는 경로를 선택하고 순서대로 학습하세요.', `
-    <header class="study-hero"><div class="overline">LEARNING PATHS</div><h1>학습 경로</h1><p>목표에 맞는 경로를 고르고, 기초부터 순서대로 학습하세요.</p></header>
-    <section class="study-section" id="paths"><h2>목표가 있으면, 이 순서로</h2><p>각 경로에는 필요한 선행 차시를 먼저 배치했습니다. 경로 핵심과 권장 선행을 구분하되 강의를 잠그지는 않습니다. 목표 밖의 차시는 선택해서 더 공부하세요.</p><div class="path-grid">${routes.map(route => `
-      <article class="path-card" id="path-${esc(route.id)}"><span class="overline">${route.sequence.length}단계 · 종합 프로젝트</span><h3>${esc(route.title)}</h3><p>${esc(route.description)}</p><a class="learning-button small" href="../paths/${route.id}/">과정 살펴보기 →</a></article>`).join('')}</div></section>`);
+    <header class="study-hero catalog-hero"><h1>목표에 맞는 학습 경로</h1><p>목표에 맞는 경로를 고르고, 기초부터 순서대로 학습하세요.</p></header>
+    <section class="study-section" id="paths"><h2>어떤 결과를 만들고 싶나요?</h2><p>각 경로는 선행 차시부터 종합 프로젝트까지 이어집니다. 이미 아는 차시는 건너뛸 수 있습니다.</p><div class="path-grid">${routes.map(route => `
+      <article class="path-card" id="path-${esc(route.id)}"><span class="overline">${route.sequence.length}단계 · 종합 프로젝트</span><h3>${esc(route.title)}</h3><p>${esc(route.description)}</p><a class="learning-button" href="../paths/${route.id}/">과정 살펴보기 →</a></article>`).join('')}</div></section>`);
 
   const projectPresentation = {
     foundation: ['로그 요약기', 'CSV 기록을 분석하고, 잘못된 입력의 근거까지 남기는 도구를 만드세요.'],
@@ -50,11 +48,11 @@ module.exports = function renderStudy({ ROOT, courses, site, fill, write }) {
   };
   emit('projects/index.html','프로젝트', '분야별 종합 프로젝트로 배운 내용을 결과물로 연결하세요.', `
     <div class="project-catalog">
-      <header class="project-catalog-hero"><div class="project-overline">FINAL PROJECTS</div><h1>프로젝트</h1><p>배운 내용을 결과물로.</p></header>
+      <header class="study-hero catalog-hero"><h1>분야별 프로젝트</h1><p>학습한 내용을 실제 결과물로 연결하세요. 표본으로 검증하고, 결과를 판단한 근거를 남깁니다.</p></header>
       <section class="project-showcase" id="projects" aria-label="분야별 종합 프로젝트">
         ${Object.entries(projectPresentation).map(([id,[title,description]],i)=>{const c=courses[id];return `<article class="project-panel" aria-labelledby="project-${id}">
           <div class="project-panel-art"><img src="../assets/projects/${id}.webp?v=${esc(site.contentVersion)}" width="960" height="640" alt="" ${i>1?'loading="lazy"':'loading="eager"'} decoding="async"></div>
-          <div class="project-panel-copy"><span class="project-subject">${esc(c.label)}</span><h2 id="project-${id}">${esc(title)}</h2><p>${esc(description)}</p><div class="project-panel-meta"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg><span>${c.project.minutes.join('–')}분 <span aria-hidden="true">·</span> A/B 검증</span></div><a class="project-open" href="${id}.html" aria-label="프로젝트 살펴보기 · ${esc(title)}">프로젝트 살펴보기 <span aria-hidden="true">→</span></a></div>
+          <div class="project-panel-copy"><span class="project-subject">${esc(c.label)}</span><h2 id="project-${id}">${esc(title)}</h2><p>${esc(description)}</p><div class="project-panel-meta"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg><span>${c.project.minutes.join('–')}분 <span aria-hidden="true">·</span> A/B 검증</span></div><a class="learning-button project-open" href="${id}.html" aria-label="프로젝트 살펴보기 · ${esc(title)}">프로젝트 살펴보기 <span aria-hidden="true">→</span></a></div>
         </article>`;}).join('')}
       </section>
       <p class="project-catalog-note">9개 분야의 종합 과제 · 예상 시간은 설치를 제외한 저자 추정입니다.</p>

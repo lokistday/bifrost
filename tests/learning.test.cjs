@@ -197,10 +197,10 @@ const theme = openPage('tracks/cloud/index.html','',new Storage({'bifrost_theme_
 check(!theme.document.getElementById('themeToggle'), 'Theme switching controls are removed');
 check(theme.document.documentElement.dataset.theme === 'dark', 'Saved light preference cannot change the fixed dark course theme');
 const guide = parseHTML(fs.readFileSync(path.join(ROOT, 'guides/linux.html'), 'utf8')).document;
-const returns = guide.querySelectorAll('a[href="../fields/#mindmap"]');
+const returns = guide.querySelectorAll('a[data-return-guide]');
 check(returns.length === 2, 'Standalone Linux guide has working return links');
 for (const a of returns) {
-  check(a.hasAttribute('data-return-guide') && !a.hasAttribute('onclick'), 'Guide link has CSP-compatible behavior hook');
+  check(a.getAttribute('href') === '../fields/#mindmap' && !a.hasAttribute('onclick'), 'Guide link has CSP-compatible behavior hook');
   for (const mode of ['standalone','embedded','cross-origin']) {
     let handler, closed=false, prevented=false;
     const window = {};
